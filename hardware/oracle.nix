@@ -12,6 +12,16 @@
   boot.initrd.kernelModules = [ "dm-snapshot" ];
   boot.kernelModules = [ "kvm-amd" ];
   boot.extraModulePackages = [ ];
+  
+  fileSystems."/" =
+    { device = "/dev/sda2";
+      fsType = "ext4";
+    };
+
+  fileSystems."/boot" =
+    { device = "/dev/sda1";
+      fsType = "vfat";
+    };
 
   swapDevices = [ ];
 
