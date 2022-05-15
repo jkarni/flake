@@ -1,0 +1,3 @@
+[submodule "key"]
+	path = key
+	url = https://github.com/mlyxshi/key
