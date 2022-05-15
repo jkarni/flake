@@ -18,6 +18,8 @@
 
   environment.variables.EDITOR = "vim";
 
+  time.timeZone = "America/Los_Angeles";
+
   i18n.defaultLocale = "en_US.UTF-8";
   fonts.fonts = with pkgs; [
     (nerdfonts.override { fonts = [ "Hack" ]; })
