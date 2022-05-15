@@ -20,10 +20,27 @@
             home-manager.useUserPackages = true;
             home-manager.users.dominic = import ./home/common.nix;
             home-manager.users.root = import ./home/common.nix;
-            
         }
       ];
     };
+
+    nixosConfigurations."oracle-amd-1c1g" = nixpkgs.lib.nixosSystem {
+      system = "x86_64-linux";
+      modules = [
+        ./hardware/oracle.nix
+        ./configuration/server.nix
+        ./program/server.nix
+        ./service/server.nix
+        home-manager.nixosModules.home-manager{
+            home-manager.useGlobalPkgs = true;
+            home-manager.useUserPackages = true;
+            home-manager.users.root = import ./home/common.nix;
+        }
+      ];
+    };
+
+
+    
 
 
 
