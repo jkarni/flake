@@ -24,8 +24,8 @@
       ];
     };
 
-    nixosConfigurations."oracle-amd-1c1g" = nixpkgs.lib.nixosSystem {
-      system = "x86_64-linux";
+    nixosConfigurations."oracle" = nixpkgs.lib.nixosSystem {
+      system = "aarch64-linux";
       modules = [
         ./hardware/oracle.nix
         ./configuration/server.nix

@@ -7,7 +7,7 @@
   networking = {
     useNetworkd = true;
     useDHCP = false;
-    interfaces.ens3.useDHCP = true;
+    interfaces.enp0s3.useDHCP = true;
     firewall.enable = false;
     hostName = "nixos";
   };
