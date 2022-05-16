@@ -12,13 +12,6 @@
     hostName = "nixos";
   };
 
-  systemd.network.networks = {
-    dhcp = {
-      name = "eno1";
-      DHCP = "yes";
-    };
-  };
-
 
   sound.enable = true;
   hardware.pulseaudio.enable = true;

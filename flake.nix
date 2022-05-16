@@ -12,7 +12,7 @@
       system = "x86_64-linux";
       modules = [
         ./hardware/hx90.nix
-        ./configuration/desktop.nix
+        ./configuration/hx90.nix
         ./program/desktop.nix
         ./service/desktop.nix
         home-manager.nixosModules.home-manager{
@@ -28,7 +28,7 @@
       system = "aarch64-linux";
       modules = [
         ./hardware/oracle.nix
-        ./configuration/server.nix
+        ./configuration/oracle.nix
         ./program/server.nix
         ./service/server.nix
         home-manager.nixosModules.home-manager{
