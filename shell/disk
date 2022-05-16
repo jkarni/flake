@@ -1,8 +1,0 @@
-#!/usr/bin/env bash
-
-mkfs.ext4 /dev/nvme0n1p3 
-
-mount /dev/nvme0n1p3 /mnt
-mkdir /mnt/boot
-mount /dev/nvme0n1p1 /mnt/boot
-
