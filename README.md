@@ -22,9 +22,7 @@ Rebuild NixOS
 nix-env -iA nixos.vim nixos.git
 <write private key>
 git clone --recurse-submodules  git@github.com:mlyxshi/flake.git  /etc/flake
-nix-env -iA nixos.nixUnstable
-nix --experimental-features 'nix-command flakes' flake update
-nixos-install --flake /etc/flake#oracle 
+nixos-rebuild switch --flake /etc/flake#oracle
 ```
 
 ## First Install (private repo: github token)
