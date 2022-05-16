@@ -7,11 +7,17 @@ nixos-rebuild switch --flake /etc/nixos#hx90
 
 ## NixInject
 
-Reinstall OS to debian(fixed partition)
+Reinstall OS to Debian(fixed partition)
 ```
 bash <(wget -qO- https://raw.githubusercontent.com/bohanyang/debi/master/debi.sh) --user root --password 12345 --authorized-keys-url https://github.com/mlyxshi.keys --version stable --filesystem ext4 --esp 538 && reboot
 ```
 
+Reinstall OS to NixOS
+```
+wget -qO- https://raw.githubusercontent.com/elitak/nixos-infect/master/nixos-infect | NIX_CHANNEL=nixos-unstable  bash -x
+```
+
+Rebuild NixOS
 ```
 nix-env -iA nixos.vim nixos.git
 <write private key>
