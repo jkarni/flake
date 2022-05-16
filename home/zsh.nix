@@ -23,6 +23,9 @@
     
     sessionVariables={
        EDITOR="nvim";
+       NNN_OPTS="eU";
+       NNN_FIFO="/tmp/nnn.fifo"
+       NNN_PLUG="p:preview-tui;"
     };
 
 

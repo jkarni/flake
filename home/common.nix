@@ -8,6 +8,6 @@
     ./git.nix
     ./zsh.nix
     ./nvim/nvim.nix
-    ./nnn/nnn.nix
+    ./nnn.nix
   ];
 }
