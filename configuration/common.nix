@@ -17,7 +17,6 @@
   users.defaultUserShell = pkgs.zsh;
   users.users.root.hashedPassword = "$6$fwJZwHNLE640VkQd$SrYMjayP9fofIncuz3ehVLpfwGlpUj0NFZSssSy8GcIXIbDKI4JnrgfMZxSw5vxPkXkAEL/ktm3UZOyPMzA.p0";
 
-  environment.variables.EDITOR = "vim";
 
   time.timeZone = "America/Los_Angeles";
 

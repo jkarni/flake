@@ -5,6 +5,7 @@
 
     shellAliases = {
       ll = "ls -al";
+      vim = "nvim";
     };
 
     enableAutosuggestions = true;
@@ -18,6 +19,15 @@
         "man"
       ];
     };
+
+    
+    sessionVariables={
+       EDITOR="nvim";
+    };
+
+
+
+
   };
 
 

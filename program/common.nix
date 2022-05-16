@@ -1,12 +1,12 @@
 {pkgs, ...}:{
   environment.systemPackages = with pkgs; [
-    vim
     git
     wget
     tree
     htop
     neofetch
-    ranger
+    nnn
+    nvim
     unzip
   ];
 }

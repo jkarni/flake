@@ -22,7 +22,7 @@ Rebuild NixOS
 nix-env -iA nixos.vim nixos.git nixos.tree
 <write private key>
 git clone --recurse-submodules  git@github.com:mlyxshi/flake.git  /etc/flake
-rm -rf /boot
+rm -rf /boot/*
 bootctl install
 nixos-rebuild switch --flake /etc/flake#oracle
 ```
