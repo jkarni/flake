@@ -1,11 +1,11 @@
-##1. Normal[PC]
+## 1. Normal[PC]
 ```
 nixos-rebuild switch --flake /etc/nixos#hx90
 ```
 
 
 
-##2. NixInject(Server)
+## 2. NixInject(Server)
 
 Reinstall OS to Debian(fixed partition)
 ```
@@ -25,7 +25,7 @@ git clone --recurse-submodules  git@github.com:mlyxshi/flake.git  /etc/flake
 nixos-rebuild switch --flake /etc/flake#oracle
 ```
 
-##3. First Install[PC]
+## 3. First Install[PC]
 ```
 <write private key>
 git clone --recurse-submodules  git@github.com:mlyxshi/flake.git  /mnt/etc/nixos

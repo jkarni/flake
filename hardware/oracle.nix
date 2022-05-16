@@ -5,6 +5,8 @@
     [ (modulesPath + "/profiles/qemu-guest.nix")
     ];
 
+  boot.initrd.kernelModules = [ "nvme" ];
+  
   fileSystems."/" =
     { device = "/dev/sda2";
       fsType = "ext4";
@@ -15,6 +17,5 @@
       fsType = "vfat";
     };
 
-  hardware.cpu.amd.updateMicrocode = lib.mkDefault config.hardware.enableRedistributableFirmware;
 }
 
