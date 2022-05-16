@@ -9,10 +9,6 @@
        inputs.nixpkgs.follows = "nixpkgs";
     };
 
-    nnn-plugins = {
-      url = "github:jarun/nnn";
-      flake = false;
-    };
 
   };
 
