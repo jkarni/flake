@@ -24,7 +24,7 @@ nix-env -iA nixos.vim nixos.git nixos.tree
 git clone --recurse-submodules  git@github.com:mlyxshi/flake.git  /etc/flake
 rm -rf /boot
 bootctl install
-nixos-rebuild switch --flake /etc/flake#oracle-server
+nixos-rebuild switch --flake /etc/flake#oracle
 ```
 
 ## 3. First Install[PC]
