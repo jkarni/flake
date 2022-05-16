@@ -24,7 +24,7 @@
       ];
     };
 
-    nixosConfigurations."oracle" = nixpkgs.lib.nixosSystem {
+    nixosConfigurations."oracle-server" = nixpkgs.lib.nixosSystem {
       system = "aarch64-linux";
       modules = [
         ./hardware/oracle.nix
@@ -40,7 +40,26 @@
     };
 
 
-    
+    nixosConfigurations."oracle-desktop" = nixpkgs.lib.nixosSystem {
+      system = "aarch64-linux";
+      modules = [
+        ./hardware/oracle.nix
+        ./configuration/oracle.nix
+        ./configuration/desktop.nix
+        ./program/server.nix
+        ./program/desktop.nix
+        ./service/server.nix
+        ./service/desktop.nix
+        home-manager.nixosModules.home-manager{
+            home-manager.useGlobalPkgs = true;
+            home-manager.useUserPackages = true;
+            home-manager.users.dominic = import ./home/common.nix;
+            home-manager.users.root = import ./home/common.nix;
+        }
+      ];
+    };
+
+
 
 
 
