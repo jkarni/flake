@@ -1,4 +1,4 @@
-{pkgs, ...}:{
+{ pkgs, ... }: {
   environment.systemPackages = with pkgs; [
     wget
     vim
@@ -8,7 +8,9 @@
     htop
     neofetch
     unzip
-    
-    gcc
-    ];
+
+
+    clang
+
+  ];
 }
