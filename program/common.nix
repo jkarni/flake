@@ -5,8 +5,10 @@
     neovim
     ranger
     clang
+    fd
+    ripgrep 
     #clang-tools
-    # clangStdenv
+    #clangStdenv
     nix-tree
     tree
     htop
