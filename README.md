@@ -31,5 +31,6 @@ nixos-rebuild switch --flake /etc/flake#oracle
 ```
 <write private key>
 git clone --recurse-submodules  git@github.com:mlyxshi/flake.git  /mnt/etc/flake
+nix-env -iA nixos.nixUnstable
 nixos-install --flake /mnt/etc/flake#hx90 
 ```
