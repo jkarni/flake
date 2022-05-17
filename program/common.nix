@@ -9,8 +9,5 @@
     neofetch
     unzip
 
-
-    clang
-
   ];
 }
