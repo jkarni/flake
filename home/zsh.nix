@@ -4,8 +4,8 @@
     enable = true;
 
     shellAliases = {
-      ll = "ls -al";
-      vim = "nvim";
+      l = "ls -al";
+      v = "nvim";
     };
 
     enableAutosuggestions = true;
@@ -22,9 +22,7 @@
 
     
     sessionVariables={
-       EDITOR="nvim";
-       NNN_OPTS="eU";
-       NNN_FIFO="/tmp/nnn.fifo";
+      EDITOR="nvim";
     };
 
 
