@@ -1,6 +1,6 @@
 ## 1. Normal[PC]
 ```
-nixos-rebuild switch --flake /etc/nixos#hx90
+nixos-rebuild switch --flake /etc/flake#hx90
 ```
 
 
@@ -30,6 +30,6 @@ nixos-rebuild switch --flake /etc/flake#oracle
 ## 3. First Install[PC]
 ```
 <write private key>
-git clone --recurse-submodules  git@github.com:mlyxshi/flake.git  /mnt/etc/nixos
-nixos-install --flake /mnt/etc/nixos#hx90 
+git clone --recurse-submodules  git@github.com:mlyxshi/flake.git  /mnt/etc/flake
+nixos-install --flake /mnt/etc/flake#hx90 
 ```
