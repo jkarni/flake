@@ -1,41 +1,67 @@
-{pkgs,...}:{
+{ pkgs, ... }: {
 
- xdg.configFile."nvim/lua".source=./lua;
+  xdg.configFile."nvim/lua".source = ./lua;
 
-programs.neovim = {
+  programs.neovim = {
     enable = true;
     plugins = with pkgs.vimPlugins; [
-       tokyonight-nvim
-       bufferline-nvim
-       nvim-tree-lua
-       lualine-nvim
-       lualine-lsp-progress
-       dashboard-nvim
-       telescope-nvim
-       project-nvim
-       nvim-autopairs
-       indent-blankline-nvim
-			
-			(nvim-treesitter.withPlugins (
+
+      nvim-web-devicons
+      plenary-nvim
+
+      tokyonight-nvim
+      bufferline-nvim
+      nvim-tree-lua
+      lualine-nvim
+      lualine-lsp-progress
+      dashboard-nvim
+      telescope-nvim
+      project-nvim
+      nvim-autopairs
+      indent-blankline-nvim
+
+      (nvim-treesitter.withPlugins (
         plugins: with plugins; [
           tree-sitter-bash
-					tree-sitter-json
-					tree-sitter-typescript
-					tree-sitter-c
-					tree-sitter-cpp
-					tree-sitter-nix
+          tree-sitter-json
+          tree-sitter-typescript
+          tree-sitter-c
+          tree-sitter-cpp
+          tree-sitter-nix
           tree-sitter-lua
           tree-sitter-rust
           tree-sitter-python
         ]
       ))
 
+
+
+      nvim-lspconfig
+      nvim-cmp
+      cmp-nvim-lsp
+      cmp-buffer
+      cmp-path
+      cmp-cmdline
+      vim-vsnip
     ];
-   
+
 
     extraPackages = with pkgs; [
-     # gcc         
-     # tree-sitter 
+      #LSP Server
+      rnix-lsp #Nix
+      sumneko-lua-language-server #Lua
+      nodePackages.bash-language-server #Bash
+      nodePackages.pyright #Python
+      nodePackages.vscode-json-languageserver #JSON
+      nodePackages.typescript-language-server #Tpyescript
+      rust-analyzer #Rust
+      cargo #Rust
+      clang #C,C++
+
+      #Optional Dependency
+      #fd
+      #ripgrep
+
     ];
 
 
@@ -49,7 +75,7 @@ programs.neovim = {
       lua require('basic')
       lua require('colorscheme')  
       lua require('keybindings')      
-
+      lua require('autocmds')
 
       lua require('plugin-config/bufferline')
       lua require('plugin-config/nvim-tree')      
@@ -59,10 +85,13 @@ programs.neovim = {
       lua require('plugin-config/nvim-treesitter')
       lua require('plugin-config/indent-blankline')
       lua require('plugin-config/autopair')
-
-
+      
+      lua require('lsp')
+      lua require('lsp/ui')
+      lua require('lsp/cmp')
+      
    ";
-};
+  };
 
 
 
