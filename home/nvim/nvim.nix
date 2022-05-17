@@ -20,20 +20,21 @@
       nvim-autopairs
       indent-blankline-nvim
 
-      (nvim-treesitter.withPlugins (
-        plugins: with plugins; [
-          tree-sitter-bash
-          tree-sitter-json
-          tree-sitter-typescript
-          tree-sitter-c
-          tree-sitter-cpp
-          tree-sitter-nix
-          tree-sitter-lua
-          tree-sitter-rust
-          tree-sitter-python
-        ]
-      ))
-
+      (nvim-treesitter.withPlugins
+        (
+          plugins: with plugins; [
+            tree-sitter-bash
+            tree-sitter-json
+            tree-sitter-typescript
+            tree-sitter-c
+            tree-sitter-cpp
+            tree-sitter-nix
+            tree-sitter-lua
+            tree-sitter-rust
+            tree-sitter-python
+          ]
+        )
+      )
 
 
       nvim-lspconfig
@@ -68,8 +69,8 @@
 
 
 
-    # homemanager current not support lua.init
-    # workround
+    # homemanager current not support init.lua 
+    # workaround
     # create ~/.config/nvim/init.vim
     extraConfig = "
       lua require('basic')
