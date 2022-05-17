@@ -53,15 +53,16 @@
       sumneko-lua-language-server #Lua
       nodePackages.bash-language-server #Bash
       nodePackages.pyright #Python
+
       rust-analyzer #Rust
       cargo #Rust
 
-      #need fix
+      clang #C,C++
+      clang-tools #C,C++
+
+      #LSP server need fix
       nodePackages.vscode-json-languageserver #JSON
       nodePackages.typescript-language-server #Tpyescript
-
-      #Todo 
-      #clangd??? #C,C++
 
       #Optional Dependency
       #fd
