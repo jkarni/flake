@@ -1,17 +1,17 @@
-{pkgs, ...}:{
+{ pkgs, ... }: {
 
 
-programs.git ={
- enable =true;
- userName = "mlyxshi";
- userEmail = "mlyxdev@gmail.com";
- 
-  extraConfig = {
-    init.defaultBranch = "main";
+  programs.git = {
+    enable = true;
+    userName = "mlyxshi";
+    userEmail = "mlyxdev@gmail.com";
+
+    extraConfig = {
+      init.defaultBranch = "main";
+    };
+
+
   };
-
-
-};
 
 
 }

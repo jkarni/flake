@@ -19,14 +19,13 @@
       modules = [
         ./hardware/hx90.nix
         ./configuration/hx90.nix
-        ./program/desktop.nix
         ./service/desktop.nix
         home-manager.nixosModules.home-manager
         {
           home-manager.useGlobalPkgs = true;
           home-manager.useUserPackages = true;
-          home-manager.users.dominic = import ./home/common.nix;
-          home-manager.users.root = import ./home/common.nix;
+          home-manager.users.dominic = import ./home/desktop.nix;
+          home-manager.users.root = import ./home/desktop.nix;
         }
       ];
     };
@@ -36,13 +35,12 @@
       modules = [
         ./hardware/oracle.nix
         ./configuration/oracle.nix
-        ./program/server.nix
         ./service/server.nix
         home-manager.nixosModules.home-manager
         {
           home-manager.useGlobalPkgs = true;
           home-manager.useUserPackages = true;
-          home-manager.users.root = import ./home/common.nix;
+          home-manager.users.root = import ./home/server.nix;
         }
       ];
     };
