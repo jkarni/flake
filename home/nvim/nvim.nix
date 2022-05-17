@@ -13,14 +13,27 @@ programs.neovim = {
        dashboard-nvim
        telescope-nvim
        project-nvim
-       nvim-treesitter
        nvim-autopairs
-       indent-blankline.nvim
+       indent-blankline-nvim
+			
+			(nvim-treesitter.withPlugins (
+        plugins: with plugins; [
+          tree-sitter-bash
+					tree-sitter-json
+					tree-sitter-typescript
+					tree-sitter-c
+					tree-sitter-cpp
+					tree-sitter-nix
+          tree-sitter-lua
+          tree-sitter-rust
+          tree-sitter-python
+        ]
+      ))
 
     ];
    
 
-    programs.neovim.extraPackages = with pkgs; [
+    extraPackages = with pkgs; [
      # gcc         
      # tree-sitter 
     ];
