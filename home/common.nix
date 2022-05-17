@@ -7,5 +7,6 @@
   imports = [
     ./git.nix
     ./zsh.nix
+    ./nvim/nvim.nix
   ];
 }
