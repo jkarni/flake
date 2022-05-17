@@ -11,7 +11,6 @@
     htop
     neofetch
     unzip
-
 		gcc
   ];
 }
