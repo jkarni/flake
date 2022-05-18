@@ -5,6 +5,8 @@ local opt = {
 
 local map = vim.api.nvim_set_keymap
 
+map("n", "Q", ":qa<CR>", opt)
+
 --分屏快捷键[WINDOW]
 map("n", "<A-v>", ":vsp<CR>", opt)
 map("n", "<A-h>", ":sp<CR>", opt)
