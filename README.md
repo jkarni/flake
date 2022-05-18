@@ -14,7 +14,8 @@ bash <(wget -qO- https://raw.githubusercontent.com/bohanyang/debi/master/debi.sh
 
 Reinstall OS to NixOS
 ```
-apt install -y wget && wget -qO- https://raw.githubusercontent.com/elitak/nixos-infect/master/nixos-infect | NIX_CHANNEL=nixos-unstable  bash -x
+apt install -y wget 
+wget -qO- https://raw.githubusercontent.com/elitak/nixos-infect/master/nixos-infect | NIX_CHANNEL=nixos-unstable  bash -x
 ```
 
 Rebuild NixOS

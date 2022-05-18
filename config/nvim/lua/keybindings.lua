@@ -104,15 +104,15 @@ end
 
 
 -- 命令行下cmp
-map("c", "<A-Up>", "<C-p>", { noremap = false })
-map("c", "<A-Down>", "<C-n>", { noremap = false })
+map("c", "<Up>", "<C-p>", { noremap = false })
+map("c", "<Down>", "<C-n>", { noremap = false })
 
 pluginKeys.cmp = function(cmp)
   return {
     -- 上一个
-    ["<A-Up>"] = cmp.mapping.select_prev_item(),
+    ["<Up>"] = cmp.mapping.select_prev_item(),
     -- 下一个
-    ["<A-Down>"] = cmp.mapping.select_next_item(),
+    ["<Down>"] = cmp.mapping.select_next_item(),
     -- 确认
     ['<CR>'] = cmp.mapping.confirm({ select = true })
   }
