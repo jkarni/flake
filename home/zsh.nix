@@ -4,8 +4,9 @@
     enable = true;
 
     shellAliases = {
-      l = "ls -al";
+      l = "ls -alh";
       v = "nvim";
+      r = "ranger";
     };
 
     enableAutosuggestions = true;
