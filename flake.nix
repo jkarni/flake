@@ -24,8 +24,8 @@
         {
           home-manager.useGlobalPkgs = true;
           home-manager.useUserPackages = true;
-          home-manager.users.dominic = import ./home/desktop.nix;
           home-manager.users.root = import ./home/desktop.nix;
+          home-manager.users.dominic = import ./home/desktop.nix;
         }
       ];
     };
