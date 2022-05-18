@@ -10,13 +10,13 @@ cmp.setup({
   -- 补全源
   sources = cmp.config.sources(
     {
-       { name = "nvim_lsp" },
-       { name = "vsnip" },
+      { name = "nvim_lsp" },
+      { name = "vsnip" },
     },
     {
-       { name = "buffer" },
-       { name = "path" }
-    }
+    { name = "buffer" },
+    { name = "path" }
+  }
   ),
 
   -- 快捷键设置
@@ -25,6 +25,7 @@ cmp.setup({
 
 -- / 查找模式使用 buffer 源
 cmp.setup.cmdline("/", {
+  mapping = cmp.mapping.preset.cmdline(),
   sources = {
     { name = "buffer" },
   },
@@ -32,6 +33,7 @@ cmp.setup.cmdline("/", {
 
 -- : 命令行模式中使用 path 和 cmdline 源.
 cmp.setup.cmdline(":", {
+  mapping = cmp.mapping.preset.cmdline(),
   sources = cmp.config.sources({
     { name = "path" },
   }, {
@@ -41,8 +43,8 @@ cmp.setup.cmdline(":", {
 
 
 
-for lsp,_ in pairs(require("lsp/servers")) do
-    require('lspconfig')[lsp].setup {
-        capabilities = require('cmp_nvim_lsp').update_capabilities(vim.lsp.protocol.make_client_capabilities())
-    }
+for lsp, _ in pairs(require("lsp/servers")) do
+  require('lspconfig')[lsp].setup {
+    capabilities = require('cmp_nvim_lsp').update_capabilities(vim.lsp.protocol.make_client_capabilities())
+  }
 end

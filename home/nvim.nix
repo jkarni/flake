@@ -28,7 +28,7 @@
             tree-sitter-typescript
             tree-sitter-c
             tree-sitter-cpp
-            # tree-sitter-nix
+            #tree-sitter-nix
             tree-sitter-lua
             tree-sitter-rust
             tree-sitter-python
