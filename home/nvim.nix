@@ -18,8 +18,6 @@
         src = args.${name};
       })
 
-
-
       plenary-nvim
       nvim-web-devicons
 
@@ -34,23 +32,6 @@
       nvim-autopairs
       indent-blankline-nvim
 
-      (nvim-treesitter.withPlugins
-        (
-          plugins: with plugins; [
-            tree-sitter-bash
-            tree-sitter-json
-            tree-sitter-typescript
-            tree-sitter-c
-            tree-sitter-cpp
-            #tree-sitter-nix
-            tree-sitter-lua
-            tree-sitter-rust
-            tree-sitter-python
-          ]
-        )
-      )
-
-
       nvim-lspconfig
       nvim-cmp
       cmp-nvim-lsp
@@ -58,28 +39,24 @@
       cmp-path
       cmp-cmdline
       vim-vsnip
+
+      # Many tree-sitter language parsers are outdated or buggy in Nixpkg
+      # Therefore, I prefer install by treesitter.setup({  ensure_installed ={"nix"} })
+      # config/nvim/lua/plugin-config/nvim-treesitter.lua  
+      nvim-treesitter
+
     ];
 
 
     extraPackages = with pkgs; [
-      #LSP Server
-      rnix-lsp #Nix
-      sumneko-lua-language-server #Lua
-      nodePackages.bash-language-server #Bash
-      nodePackages.pyright #Python
+      #Many LSP servers in Nixpkg are buggy 
+      #Therefore, I prefer install LSP server by nvim-lsp-installer automaticallly
+      #config/nvim/lua/lsp/install.lua
 
-      rust-analyzer #Rust
-      cargo #Rust
-
-      clang #C,C++
-      clang-tools #C,C++
-
-      #LSP server need fix
-      #Manually install by nvim-lsp-installer
-      nodejs #nvim-lsp-installer Dependency
-
-      #nodePackages.vscode-json-languageserver #JSON
-      #nodePackages.typescript-language-server #Tpyescript
+      #nvim-lsp-installer Dependency
+      nodejs # LSP server in npm 
+      cargo # Nix LSP build Dependency
+      gcc # Nix LSP build Dependency
 
       #Optional Dependency
       #fd
@@ -89,11 +66,9 @@
 
 
 
-
-
     # homemanager current not support init.lua 
     # workaround
-    # create ~/.config/nvim/init.vim
+    # add extraConfig to  ~/.config/nvim/init.vim
     extraConfig = "
       lua require('basic')
       lua require('colorscheme')  

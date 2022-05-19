@@ -4,17 +4,6 @@ if not status then
   return
 end
 
---local function get_keys(t)
---  local keys = {}
---  for key, _ in pairs(t) do
---    table.insert(keys, key)
---  end
---  return keys
---end
-
 lsp_installer.setup {
-  -- ensure_installed = get_keys(require("lsp/servers"))
-
-  -- Fix NixPKG Bug LSP servers
-  ensure_installed = { "tsserver", "jsonls" }
+  automatic_installation = true,
 }
