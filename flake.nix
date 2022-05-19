@@ -8,11 +8,19 @@
       url = "github:nix-community/home-manager";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+    modes-nvim = {
+      url = "github:mvllow/modes.nvim";
+      flake = false;
+    };
 
+    nvim-lsp-installer = {
+      url = "github:williamboman/nvim-lsp-installer";
+      flake = false;
+    };
 
   };
 
-  outputs = { nixpkgs, home-manager, ... }: {
+  outputs = { nixpkgs, home-manager, ... }@args: {
 
     nixosConfigurations."hx90" = nixpkgs.lib.nixosSystem {
       system = "x86_64-linux";
@@ -26,6 +34,7 @@
           home-manager.useUserPackages = true;
           home-manager.users.root = import ./home/desktop.nix;
           home-manager.users.dominic = import ./home/desktop.nix;
+          home-manager.extraSpecialArgs = args;
         }
       ];
     };
@@ -41,6 +50,7 @@
           home-manager.useGlobalPkgs = true;
           home-manager.useUserPackages = true;
           home-manager.users.root = import ./home/server.nix;
+          home-manager.extraSpecialArgs = args;
         }
       ];
     };

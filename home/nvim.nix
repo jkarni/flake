@@ -1,13 +1,27 @@
-{ pkgs, ... }: {
+{ pkgs, ... }@args: {
 
   xdg.configFile."nvim/lua".source = ../config/nvim/lua;
+
 
   programs.neovim = {
     enable = true;
     plugins = with pkgs.vimPlugins; [
 
-      nvim-web-devicons
+
+      (pkgs.vimUtils.buildVimPluginFrom2Nix rec {
+        name = "modes-nvim";
+        src = args.${name};
+      })
+
+      (pkgs.vimUtils.buildVimPluginFrom2Nix rec {
+        name = "nvim-lsp-installer";
+        src = args.${name};
+      })
+
+
+
       plenary-nvim
+      nvim-web-devicons
 
       tokyonight-nvim
       bufferline-nvim
@@ -61,8 +75,11 @@
       clang-tools #C,C++
 
       #LSP server need fix
-      nodePackages.vscode-json-languageserver #JSON
-      nodePackages.typescript-language-server #Tpyescript
+      #Manually install by nvim-lsp-installer
+      nodejs #nvim-lsp-installer Dependency
+
+      #nodePackages.vscode-json-languageserver #JSON
+      #nodePackages.typescript-language-server #Tpyescript
 
       #Optional Dependency
       #fd
@@ -91,7 +108,8 @@
       lua require('plugin-config/nvim-treesitter')
       lua require('plugin-config/indent-blankline')
       lua require('plugin-config/autopair')
-      
+      lua require('plugin-config/modes')
+
       lua require('lsp')
       lua require('lsp/ui')
       lua require('lsp/cmp')
