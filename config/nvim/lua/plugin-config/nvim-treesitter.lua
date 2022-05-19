@@ -7,7 +7,7 @@ end
 treesitter.setup({
   -- :TSInstallInfo 命令查看支持的语言
   -- Manually install latest tree-sitter if NixOS/pkgs have bug version
-  ensure_installed = { "nix" },
+  ensure_installed = {"bash", "json", "typescript", "c","cpp","lua","nix" ,"rust","python" },
 
   highlight = {
     enable = true,

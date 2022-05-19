@@ -40,7 +40,7 @@
       cmp-cmdline
       vim-vsnip
 
-      # Many tree-sitter language parsers are outdated or buggy in Nixpkg
+      # Some tree-sitter language parsers are outdated or buggy in Nixpkg
       # Therefore, I prefer install by treesitter.setup({  ensure_installed ={"nix"} })
       # config/nvim/lua/plugin-config/nvim-treesitter.lua  
       nvim-treesitter
@@ -49,14 +49,26 @@
 
 
     extraPackages = with pkgs; [
-      #Many LSP servers in Nixpkg are buggy 
-      #Therefore, I prefer install LSP server by nvim-lsp-installer automaticallly
-      #config/nvim/lua/lsp/install.lua
+      rnix-lsp #Nix
+      sumneko-lua-language-server #Lua
+      nodePackages.bash-language-server #Bash
+      nodePackages.pyright #Python
+
+      rust-analyzer #Rust
+      cargo #Rust
+
+      clang #C,C++
+      clang-tools #C,C++
+
+      # Some LSP servers in Nixpkg are buggy  
+      # nodePackages.vscode-json-languageserver #JSON
+      # nodePackages.typescript-language-server #Tpyescript
+
+      # install buggy LSP server by nvim-lsp-installer automaticallly
+      # config/nvim/lua/lsp/install.lua
 
       #nvim-lsp-installer Dependency
-      nodejs # LSP server in npm 
-      cargo # Nix LSP build Dependency
-      gcc # Nix LSP build Dependency
+      nodejs # LSP server in NPM
 
       #Optional Dependency
       #fd

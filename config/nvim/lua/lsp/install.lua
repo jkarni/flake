@@ -5,5 +5,7 @@ if not status then
 end
 
 lsp_installer.setup {
-  automatic_installation = true,
+  --automatic_installation = true,
+  --Buggy LSP Server in Nixpkg
+  ensure_installed = { "tsserver", "jsonls" },
 }
