@@ -1,7 +1,7 @@
 { pkgs, ... }@args: {
 
   xdg.configFile."nvim/lua".source = ../config/nvim/lua;
-
+  xdg.configFile."nvim/.luarc.json".source = ../config/nvim/.luarc.json;
 
   programs.neovim = {
     enable = true;
