@@ -1,19 +1,20 @@
 { config, lib, pkgs, modulesPath, ... }:
-
 {
   imports =
-    [ (modulesPath + "/profiles/qemu-guest.nix")
+    [
+      (modulesPath + "/profiles/qemu-guest.nix")
     ];
-  
+
   fileSystems."/" =
-    { device = "/dev/sda2";
+    {
+      device = "/dev/sda2";
       fsType = "ext4";
     };
 
   fileSystems."/boot" =
-    { device = "/dev/sda1";
+    {
+      device = "/dev/sda1";
       fsType = "vfat";
     };
 
 }
-

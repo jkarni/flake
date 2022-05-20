@@ -1,8 +1,8 @@
-{ config, pkgs, ... }:
-
 {
   imports = [
-    ./desktop.nix
+    ./hardware.nix
+    ../../nixos/desktop.nix
+    ../../service/desktop.nix
   ];
 
 

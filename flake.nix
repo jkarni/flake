@@ -8,6 +8,7 @@
       url = "github:nix-community/home-manager";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+
     modes-nvim = {
       url = "github:mvllow/modes.nvim";
       flake = false;
@@ -25,15 +26,13 @@
     nixosConfigurations."hx90" = nixpkgs.lib.nixosSystem {
       system = "x86_64-linux";
       modules = [
-        ./hardware/hx90.nix
-        ./nixos/hx90.nix
-        ./service/desktop.nix
+        ./host/hx90/module.nix
         home-manager.nixosModules.home-manager
         {
           home-manager.useGlobalPkgs = true;
           home-manager.useUserPackages = true;
-          home-manager.users.root = import ./home/desktop.nix;
-          home-manager.users.dominic = import ./home/desktop.nix;
+          home-manager.users.root = import ./host/hx90/home.nix;
+          home-manager.users.dominic = import ./host/hx90/home.nix;
           home-manager.extraSpecialArgs = args;
         }
       ];
