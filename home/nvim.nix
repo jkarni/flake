@@ -43,8 +43,21 @@
       # Some tree-sitter language parsers are outdated or buggy in Nixpkg
       # Therefore, I prefer install by treesitter.setup({  ensure_installed ={"nix"} })
       # config/nvim/lua/plugin-config/nvim-treesitter.lua  
-      nvim-treesitter
-
+      (nvim-treesitter.withPlugins
+        (
+          plugins: with plugins; [
+            tree-sitter-bash
+            tree-sitter-json
+            tree-sitter-typescript
+            tree-sitter-c
+            tree-sitter-cpp
+            #tree-sitter-nix
+            tree-sitter-lua
+            tree-sitter-rust
+            tree-sitter-python
+          ]
+        )
+      )
     ];
 
 
