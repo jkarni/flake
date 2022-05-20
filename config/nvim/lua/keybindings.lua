@@ -1,9 +1,13 @@
+--default noremap=true(no recusive mapping), for replace nvim-buildin commands
+--https://vonheikemen.github.io/devlog/tools/configuring-neovim-using-lua/
+
 local opt = {
   noremap = true,
   silent = true,
 }
 
 local map = vim.api.nvim_set_keymap
+
 
 map("n", "Q", ":qa<CR>", opt)
 
@@ -104,8 +108,9 @@ pluginKeys.mapLSP = function(mapbuf)
   -- mapbuf('n', '<space>D', '<cmd>lua vim.lsp.buf.type_definition()<CR>', opt)
 end
 
-
 -- 命令行下cmp
+-- <C-p>,<C-n> is cmp plguin keymapping(not nvim build-in)
+-- Therefore, we need recusive mapping
 map("c", "<Up>", "<C-p>", { noremap = false })
 map("c", "<Down>", "<C-n>", { noremap = false })
 
@@ -120,4 +125,19 @@ pluginKeys.cmp = function(cmp)
   }
 end
 
+pluginKeys.comment = {
+  -- Normal 模式快捷键
+  toggler = {
+    line = "gcc", -- 行注释
+  },
+  -- Visual 模式
+  opleader = {
+    line = "gc",
+    bock = "gb",
+  },
+}
+
+
+
 return pluginKeys
+

@@ -7,7 +7,7 @@
     enable = true;
     plugins = with pkgs.vimPlugins; [
 
-
+      # Build unavailbale vimPlugins
       (pkgs.vimUtils.buildVimPluginFrom2Nix rec {
         name = "modes-nvim";
         src = args.${name};
@@ -18,10 +18,14 @@
         src = args.${name};
       })
 
+      # Plugin Dependency
       plenary-nvim
       nvim-web-devicons
 
+      # ColorScheme
       tokyonight-nvim
+
+      # UI
       bufferline-nvim
       nvim-tree-lua
       lualine-nvim
@@ -29,9 +33,14 @@
       dashboard-nvim
       telescope-nvim
       project-nvim
+
+      # Code
       nvim-autopairs
       indent-blankline-nvim
+      nvim-comment
+      gitsigns-nvim
 
+      # LSP
       nvim-lspconfig
       nvim-cmp
       cmp-nvim-lsp
@@ -40,18 +49,20 @@
       cmp-cmdline
       vim-vsnip
 
+
+      # TreeSitter
       # Some tree-sitter language parsers are outdated or buggy in Nixpkg
       # Therefore, I prefer install by treesitter.setup({  ensure_installed ={"nix"} })
       # config/nvim/lua/plugin-config/nvim-treesitter.lua  
       (nvim-treesitter.withPlugins
         (
           plugins: with plugins; [
+            #tree-sitter-nix
             tree-sitter-bash
             tree-sitter-json
             tree-sitter-typescript
             tree-sitter-c
             tree-sitter-cpp
-            #tree-sitter-nix
             tree-sitter-lua
             tree-sitter-rust
             tree-sitter-python
@@ -111,6 +122,9 @@
       lua require('plugin-config/indent-blankline')
       lua require('plugin-config/autopair')
       lua require('plugin-config/modes')
+      lua require('plugin-config/comment')
+      lua require('plugin-config/gitsigns')
+
 
       lua require('lsp')
       lua require('lsp/ui')
