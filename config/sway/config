@@ -18,9 +18,6 @@ output HDMI-A-1 scale 3
 
 seat * xcursor_theme $xcursor_theme $xcursor_size
 
-assign [class="foot"] 1
-assign [class="firefox"] 2
-
 exec swayidle -w \
           timeout 3000 'swaylock -f -c 000000' \
           timeout 3005 'swaymsg "output * dpms off"' resume 'swaymsg "output * dpms on"' \
@@ -138,4 +135,9 @@ bar {
    swaybar_command waybar
 }
 
-include /etc/sway/config.d/*
+
+# Automatically Start terminal and broswer
+assign [app_id="foot"] 1
+assign [app_id="firefox"] 2
+exec foot
+exec firefox
