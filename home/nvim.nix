@@ -97,8 +97,10 @@
       nodejs # LSP server in NPM
 
       #Optional Dependency
-      #fd
-      #ripgrep
+
+      # Telescope
+      fd
+      ripgrep
 
     ];
 
