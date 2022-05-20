@@ -1,14 +1,14 @@
-{ config, pkgs, ... }:
-
 {
   imports = [
-    ./server.nix
+    ./hardware.nix
+    ../../nixos/desktop.nix
+    ../../service/gnome.nix
   ];
 
 
   systemd.network.networks = {
     dhcp = {
-      name = "enp0s3";
+      name = "eno1";
       DHCP = "yes";
     };
   };

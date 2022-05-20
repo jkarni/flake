@@ -2,7 +2,7 @@
   imports = [
     ./hardware.nix
     ../../nixos/desktop.nix
-    ../../service/desktop.nix
+    ../../service/sway.nix
   ];
 
 

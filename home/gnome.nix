@@ -1,8 +1,4 @@
-{ config
-, lib
-, pkgs
-, ...
-}: {
+{ pkgs, ... }: {
   imports = [
     ./common.nix
   ];
@@ -14,8 +10,5 @@
     vscode-fhs
     mpv
     firefox-wayland
-
   ];
-
-
 }
