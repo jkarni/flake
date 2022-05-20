@@ -41,23 +41,17 @@
     nixosConfigurations."oracle" = nixpkgs.lib.nixosSystem {
       system = "aarch64-linux";
       modules = [
-        ./hardware/oracle.nix
-        ./nixos/oracle.nix
-        ./service/server.nix
+        ./host/oracle/module.nix
         home-manager.nixosModules.home-manager
         {
           home-manager.useGlobalPkgs = true;
           home-manager.useUserPackages = true;
-          home-manager.users.root = import ./home/server.nix;
+          home-manager.users.root = import ./host/oracle/home.nix;
           home-manager.extraSpecialArgs = args;
         }
       ];
     };
 
-
-
-
   };
-
 
 }
