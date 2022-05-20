@@ -102,10 +102,9 @@
       lua require('lsp/cmp')
       
    ";
+
+
   };
-
-
-
 
 
 }

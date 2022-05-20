@@ -10,15 +10,23 @@ set $mod Mod4
 set $term foot
 set $menu bemenu-run --no-exec | xargs swaymsg exec --
 
+set $xcursor_theme Adwaita
+set $xcursor_size 80
+
 # waymsg -t get_outputs
 output HDMI-A-1 scale 3
+
+seat * xcursor_theme $xcursor_theme $xcursor_size
+
+assign [class="foot"] 1
+assign [class="firefox"] 2
 
 exec swayidle -w \
           timeout 3000 'swaylock -f -c 000000' \
           timeout 3005 'swaymsg "output * dpms off"' resume 'swaymsg "output * dpms on"' \
           before-sleep 'swaylock -f -c 000000'
 
-# This will lock your screen after 3000 seconds of inactivity, then turn off
+# This will lock your screen after 3000 seconds/50 minus of inactivity, then turn off
 # your displays after another 5 seconds, and turn your screens back on when
 # resumed. It will also lock your screen before your computer goes to sleep.
 

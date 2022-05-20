@@ -20,6 +20,7 @@
       mako
       waybar
       foot
+      pavucontrol
       bemenu
       mpv
       firefox-wayland
