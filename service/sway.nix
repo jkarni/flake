@@ -3,7 +3,6 @@
     ./common.nix
   ];
 
-
   # Apple Keyboard
   # control->control
   # option->Alt_L->Mod1
@@ -23,6 +22,7 @@
       pavucontrol
       bemenu
       mpv
+      baobab
       firefox-wayland
 
       xorg.xlsclients #debug xorg.xev xorg.xmodmap 
