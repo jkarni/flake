@@ -1,7 +1,6 @@
 { pkgs, ... }@args: {
 
   xdg.configFile."nvim/lua".source = ../config/nvim/lua;
-  xdg.configFile."nvim/.luarc.json".source = ../config/nvim/.luarc.json;
 
   programs.neovim = {
     enable = true;
@@ -34,12 +33,13 @@
       telescope-nvim
       project-nvim
       toggleterm-nvim
+      which-key-nvim
 
       # Code
       nvim-autopairs
       indent-blankline-nvim
-      nvim-comment
       gitsigns-nvim
+      comment-nvim
 
       # LSP
       nvim-lspconfig
@@ -49,7 +49,8 @@
       cmp-path
       cmp-cmdline
       vim-vsnip
-
+      lspkind-nvim
+      lua-dev-nvim
 
       # TreeSitter
       # Some tree-sitter language parsers are outdated or buggy in Nixpkg
@@ -110,32 +111,7 @@
     # homemanager current not support init.lua 
     # workaround
     # add extraConfig to  ~/.config/nvim/init.vim
-    extraConfig = "
-      lua require('basic')
-      lua require('colorscheme')  
-      lua require('keybindings')      
-      lua require('autocmds')
-
-      lua require('plugin-config/bufferline')
-      lua require('plugin-config/nvim-tree')      
-      lua require('plugin-config/lualine')
-      lua require('plugin-config/dashboard')
-      lua require('plugin-config/project')
-      lua require('plugin-config/nvim-treesitter')
-      lua require('plugin-config/indent-blankline')
-      lua require('plugin-config/autopair')
-      lua require('plugin-config/modes')
-      lua require('plugin-config/comment')
-      lua require('plugin-config/gitsigns')
-      lua require('plugin-config/toggleterm')
-
-
-      lua require('lsp')
-      lua require('lsp/ui')
-      lua require('lsp/cmp')
-      
-   ";
-
+    extraConfig = "lua require('start')";
 
   };
 

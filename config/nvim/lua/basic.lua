@@ -5,7 +5,6 @@
 vim.o.mouse = "a"
 vim.wo.number = true
 
-
 vim.o.splitbelow = true
 vim.o.splitright = true
 
@@ -17,6 +16,7 @@ vim.bo.autoread = true
 vim.o.backup = false
 vim.o.writebackup = false
 vim.o.swapfile = false
+
 
 -- 缩进2个空格等于一个Tab
 vim.o.tabstop = 2

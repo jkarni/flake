@@ -1,4 +1,20 @@
-local cmp = require("cmp")
+local status, cmp = pcall(require, "cmp")
+if not status then
+  vim.notify("Cmp Not Found")
+  return
+end
+
+local status, lspconfig = pcall(require, "lspconfig")
+if not status then
+  vim.notify("LSP Config Not Found")
+  return
+end
+
+local status, lua_dev = pcall(require, "lua-dev")
+if not status then
+  vim.notify("lua-dev Not Found")
+  return
+end
 
 cmp.setup({
   -- 指定 snippet 引擎
@@ -14,12 +30,12 @@ cmp.setup({
       { name = "vsnip" },
     },
     {
-    { name = "buffer" },
-    { name = "path" }
-  }
+      { name = "buffer" },
+      { name = "path" }
+    }
   ),
 
-  -- 快捷键设置
+  formatting = require('lsp/ui').formatting,
   mapping = require("keybindings").cmp(cmp),
 })
 
@@ -42,9 +58,14 @@ cmp.setup.cmdline(":", {
 })
 
 
-
-for lsp, _ in pairs(require("lsp/servers")) do
-  require('lspconfig')[lsp].setup {
-    capabilities = require('cmp_nvim_lsp').update_capabilities(vim.lsp.protocol.make_client_capabilities())
-  }
+--SetUp LSP
+for lsp, config in pairs(require("lang-config.lsp.servers")) do
+  --lua-dev for Nvim Extra Setup
+  if (lsp == "sumneko_lua") then
+    lspconfig[lsp].setup(
+      lua_dev.setup({ lspconfig = config })
+    )
+  else
+    lspconfig[lsp].setup(config)
+  end
 end

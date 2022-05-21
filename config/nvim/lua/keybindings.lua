@@ -10,22 +10,38 @@ local map = vim.api.nvim_set_keymap
 local pluginKeys = {}
 
 --Remap space as leader key
-map("", "<Space>", "<Nop>", opt)
+map("n", "<Space>", "<Nop>", opt)
 vim.g.mapleader = " "
 vim.g.maplocalleader = " "
 
 map("n", "Q", ":qa<CR>", opt)
 
 --Window Split
-map("n", "<C-v>", ":vsp<CR>", opt)
-map("n", "<C-h>", ":sp<CR>", opt)
---Window Close
+map("n", "<leader>v", ":vsp<CR>", opt)
+map("n", "<leader>h", ":sp<CR>", opt)
+--Window Close Focus
 map("n", "<C-w>", "<C-w>c", opt)
+--Window Close Other
+map("n", "<C-o>", "<C-w>o", opt)
 --Window Jump
 map("n", "<C-Left>", "<C-w>h", opt)
 map("n", "<C-Down>", "<C-w>j", opt)
 map("n", "<C-Up>", "<C-w>k", opt)
 map("n", "<C-Right>", "<C-w>l", opt)
+-- Windows Resize
+-- h 上下方向 +
+-- j 上下方向 -
+map("n", "<C-h>", ":resize +2<CR>", opt)
+map("n", "<C-j>", ":resize -2<CR>", opt)
+-- k 左右方向 +
+-- l 左右方向 -
+map("n", "<C-k>", ":vertical resize +2<CR>", opt)
+map("n", "<C-l>", ":vertical resize -2<CR>", opt)
+
+map("t", "<C-h>", ":resize +2<CR>", opt)
+map("t", "<C-j>", ":resize -2<CR>", opt)
+map("t", "<C-k>", ":vertical resize +2<CR>", opt)
+map("t", "<C-l>", ":vertical resize -2<CR>", opt)
 
 
 --Buffer Jump in Window
@@ -35,28 +51,20 @@ map("n", "<A-Right>", ":BufferLineCycleNext<CR>", opt)
 map("n", "<A-w>", ":bdelete!<CR>", opt)
 
 
--- Windows Resize
--- 记不住了，摆烂，直接鼠标拖
--- map("n", "<C-Left>", ":vertical resize -2<CR>", opt)
--- map("n", "<C-Right>", ":vertical resize +2<CR>", opt)
--- map("n", "<C-Down>", ":resize +2<CR>", opt)
--- map("n", "<C-Up>", ":resize -2<CR>", opt)
-
-
 -- Basic Terminal
---map("n", "<C-t>", ":belowright split |resize 10 |terminal<CR>i", opt)
+--map("n", "<C-t>", ":belowright split |resize 15 |terminal<CR>i", opt)
 
 -- ESC Terminal
 map("t", "<Esc>", "<C-\\><C-n>", opt)
 
 -- Warpper Terminal
-pluginKeys.toggleTerm = [[<C-\>]]
+pluginKeys.toggleTerm = "<leader>\\"
 
 -- Telescope
 -- Find File Base On Path
-map("n", "<C-p>", ":Telescope find_files<CR>", opt)
+map("n", "<leader>p", ":Telescope find_files<CR>", opt)
 -- Find Code
-map("n", "<C-f>", ":Telescope live_grep<CR>", opt)
+map("n", "<leader>f", ":Telescope live_grep<CR>", opt)
 
 
 
@@ -87,29 +95,23 @@ pluginKeys.nvimTreeList = {
 
 
 
-pluginKeys.mapLSP = function(mapbuf)
-  -- rename
-  mapbuf("n", "<leader>rn", "<cmd>lua vim.lsp.buf.rename()<CR>", opt)
-  -- code action
-  mapbuf("n", "<leader>ca", "<cmd>lua vim.lsp.buf.code_action()<CR>", opt)
-  -- go xx
-  mapbuf("n", "gd", "<cmd>lua vim.lsp.buf.definition()<CR>", opt)
-  mapbuf("n", "gh", "<cmd>lua vim.lsp.buf.hover()<CR>", opt)
-  mapbuf("n", "gD", "<cmd>lua vim.lsp.buf.declaration()<CR>", opt)
-  mapbuf("n", "gi", "<cmd>lua vim.lsp.buf.implementation()<CR>", opt)
-  mapbuf("n", "gr", "<cmd>lua vim.lsp.buf.references()<CR>", opt)
-  -- diagnostic
-  mapbuf("n", "gp", "<cmd>lua vim.diagnostic.open_float()<CR>", opt)
-  mapbuf("n", "gk", "<cmd>lua vim.diagnostic.goto_prev()<CR>", opt)
-  mapbuf("n", "gj", "<cmd>lua vim.diagnostic.goto_next()<CR>", opt)
-  mapbuf("n", "<leader>f", "<cmd>lua vim.lsp.buf.formatting()<CR>", opt)
-  -- 没用到
-  -- mapbuf('n', '<leader>q', '<cmd>lua vim.diagnostic.setloclist()<CR>', opt)
-  -- mapbuf("n", "<C-k>", "<cmd>lua vim.lsp.buf.signature_help()<CR>", opt)
-  -- mapbuf('n', '<space>wa', '<cmd>lua vim.lsp.buf.add_workspace_folder()<CR>', opt)
-  -- mapbuf('n', '<space>wr', '<cmd>lua vim.lsp.buf.remove_workspace_folder()<CR>', opt)
-  -- mapbuf('n', '<space>wl', '<cmd>lua print(vim.inspect(vim.lsp.buf.list_workspace_folders()))<CR>', opt)
-  -- mapbuf('n', '<space>D', '<cmd>lua vim.lsp.buf.type_definition()<CR>', opt)
+pluginKeys.LSP_on_attach = function(client, bufnr)
+  vim.api.nvim_set_keymap('n', '<leader>e', '<cmd>lua vim.diagnostic.open_float()<CR>', opt)
+  vim.api.nvim_set_keymap('n', '<leader>[', '<cmd>lua vim.diagnostic.goto_prev()<CR>', opt)
+  vim.api.nvim_set_keymap('n', '<leader>]', '<cmd>lua vim.diagnostic.goto_next()<CR>', opt)
+  vim.api.nvim_set_keymap('n', '<leader>l', '<cmd>lua vim.diagnostic.setloclist()<CR>', opt)
+
+  -- Mappings.
+  -- See `:help vim.lsp.*` for documentation on any of the below functions
+  vim.api.nvim_buf_set_keymap(bufnr, 'n', 'gD', '<cmd>lua vim.lsp.buf.declaration()<CR>', opt)
+  vim.api.nvim_buf_set_keymap(bufnr, 'n', 'gd', '<cmd>lua vim.lsp.buf.definition()<CR>', opt)
+  vim.api.nvim_buf_set_keymap(bufnr, 'n', 'gh', '<cmd>lua vim.lsp.buf.hover()<CR>', opt)
+  vim.api.nvim_buf_set_keymap(bufnr, 'n', 'gi', '<cmd>lua vim.lsp.buf.implementation()<CR>', opt)
+  vim.api.nvim_buf_set_keymap(bufnr, 'n', 'gr', '<cmd>lua vim.lsp.buf.references()<CR>', opt)
+  --vim.api.nvim_buf_set_keymap(bufnr, 'n', '<C-k>', '<cmd>lua vim.lsp.buf.signature_help()<CR>', opt)
+  --vim.api.nvim_buf_set_keymap(bufnr, 'n', '<space>D', '<cmd>lua vim.lsp.buf.type_definition()<CR>', opt)
+  vim.api.nvim_buf_set_keymap(bufnr, 'n', '<leader>rn', '<cmd>lua vim.lsp.buf.rename()<CR>', opt)
+  vim.api.nvim_buf_set_keymap(bufnr, 'n', '<leader>ca', '<cmd>lua vim.lsp.buf.code_action()<CR>', opt)
 end
 
 -- 命令行下cmp
@@ -144,4 +146,3 @@ pluginKeys.comment = {
 
 
 return pluginKeys
-

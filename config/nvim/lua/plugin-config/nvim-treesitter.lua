@@ -1,14 +1,14 @@
 local status, treesitter = pcall(require, "nvim-treesitter.configs")
 if not status then
-  vim.notify("nvim-treesitter Not Find")
-  return
+    vim.notify("nvim-treesitter Not Find")
+    return
 end
 
 treesitter.setup({
+  -- 安装 language parser
   -- :TSInstallInfo 命令查看支持的语言
-  -- Manually install latest tree-sitter if NixOS/pkgs have bug version
-  ensure_installed = {"bash", "json", "typescript", "c","cpp","lua","nix" ,"rust","python" },
-
+  ensure_installed = require("lang-config.treesitter.parsers"),
+  -- 启用代码高亮模块
   highlight = {
     enable = true,
     additional_vim_regex_highlighting = false,

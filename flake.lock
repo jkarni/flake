@@ -7,11 +7,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1652996682,
-        "narHash": "sha256-7ZWyd5W2tM/uxXGn16AJUXenlGPUt/r6zitEcorz5j0=",
+        "lastModified": 1653153149,
+        "narHash": "sha256-8B/tWWZziFq4DqnAm9uO7M4Z4PNfllYg5+teX1e5yDQ=",
         "owner": "nix-community",
         "repo": "home-manager",
-        "rev": "02b15de8ad714409358cffdc6ed518ade03402c4",
+        "rev": "94780dd888881bf35165dfdd334a57ef6b14ead8",
         "type": "github"
       },
       "original": {
@@ -55,11 +55,11 @@
     "nvim-lsp-installer": {
       "flake": false,
       "locked": {
-        "lastModified": 1652962033,
-        "narHash": "sha256-21smz/gD48hOvFayIzL/QNGq6KUw3bfazL+VgxHSESw=",
+        "lastModified": 1653147702,
+        "narHash": "sha256-gC91dBNfbtfsQq26EC5z0NEDjZuC+RsEWqydkNzddBc=",
         "owner": "williamboman",
         "repo": "nvim-lsp-installer",
-        "rev": "a3323f26a57cf07d354f8d5967cb37a241f41bcb",
+        "rev": "63f950401c666e18a82d93a7e6e1b0d7044f0432",
         "type": "github"
       },
       "original": {
