@@ -7,57 +7,61 @@ local opt = {
 }
 
 local map = vim.api.nvim_set_keymap
+local pluginKeys = {}
 
+--Remap space as leader key
+map("", "<Space>", "<Nop>", opt)
+vim.g.mapleader = " "
+vim.g.maplocalleader = " "
 
 map("n", "Q", ":qa<CR>", opt)
 
---分屏快捷键[WINDOW]
-map("n", "<A-v>", ":vsp<CR>", opt)
-map("n", "<A-h>", ":sp<CR>", opt)
---关闭当前
-map("n", "<A-q>", "<C-w>c", opt)
---关闭其他
-map("n", "<A-o>", "<C-w>o", opt)
---窗口之间跳转
--- map("n", "<A-h>", "<C-w>h", opt)
--- map("n", "<A-j>", "<C-w>j", opt)
--- map("n", "<A-k>", "<C-w>k", opt)
--- map("n", "<A-l>", "<C-w>l", opt)
+--Window Split
+map("n", "<C-v>", ":vsp<CR>", opt)
+map("n", "<C-h>", ":sp<CR>", opt)
+--Window Close
+map("n", "<C-w>", "<C-w>c", opt)
+--Window Jump
+map("n", "<C-Left>", "<C-w>h", opt)
+map("n", "<C-Down>", "<C-w>j", opt)
+map("n", "<C-Up>", "<C-w>k", opt)
+map("n", "<C-Right>", "<C-w>l", opt)
 
 
---bufferline  [TAB]
--- 左右Tab切换
+--Buffer Jump in Window
 map("n", "<A-Left>", ":BufferLineCyclePrev<CR>", opt)
 map("n", "<A-Right>", ":BufferLineCycleNext<CR>", opt)
--- 关闭
+--Buffer Close
 map("n", "<A-w>", ":bdelete!<CR>", opt)
 
 
 -- Windows Resize
+-- 记不住了，摆烂，直接鼠标拖
 -- map("n", "<C-Left>", ":vertical resize -2<CR>", opt)
 -- map("n", "<C-Right>", ":vertical resize +2<CR>", opt)
 -- map("n", "<C-Down>", ":resize +2<CR>", opt)
 -- map("n", "<C-Up>", ":resize -2<CR>", opt)
 
 
--- Terminal
-map("n", "<A-t>", ":belowright split |resize 10 |terminal<CR>i", opt)
+-- Basic Terminal
+--map("n", "<C-t>", ":belowright split |resize 10 |terminal<CR>i", opt)
+
+-- ESC Terminal
 map("t", "<Esc>", "<C-\\><C-n>", opt)
 
+-- Warpper Terminal
+pluginKeys.toggleTerm = [[<C-\>]]
 
 -- Telescope
--- 查找文件
+-- Find File Base On Path
 map("n", "<C-p>", ":Telescope find_files<CR>", opt)
--- 全局搜索
+-- Find Code
 map("n", "<C-f>", ":Telescope live_grep<CR>", opt)
 
 
 
 -- Vimtree
-local pluginKeys = {}
-
--- nvim-tree
--- alt + m 键打开关闭tree
+-- alt + b 键打开关闭tree [VScode]
 map("n", "<A-b>", ":NvimTreeToggle<CR>", opt)
 
 -- 列表快捷键

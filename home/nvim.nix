@@ -33,6 +33,7 @@
       dashboard-nvim
       telescope-nvim
       project-nvim
+      toggleterm-nvim
 
       # Code
       nvim-autopairs
@@ -126,6 +127,7 @@
       lua require('plugin-config/modes')
       lua require('plugin-config/comment')
       lua require('plugin-config/gitsigns')
+      lua require('plugin-config/toggleterm')
 
 
       lua require('lsp')
