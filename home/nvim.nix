@@ -28,7 +28,7 @@
       bufferline-nvim
       nvim-tree-lua
       lualine-nvim
-      lualine-lsp-progress
+      fidget-nvim
       dashboard-nvim
       telescope-nvim
       project-nvim

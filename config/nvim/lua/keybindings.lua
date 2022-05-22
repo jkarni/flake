@@ -2,7 +2,7 @@
 --https://vonheikemen.github.io/devlog/tools/configuring-neovim-using-lua/
 
 local opt = {
-  noremap = true,
+  noremap = true, --default
   silent = true,
 }
 
@@ -10,9 +10,9 @@ local map = vim.api.nvim_set_keymap
 local pluginKeys = {}
 
 --Remap space as leader key
-map("n", "<Space>", "<Nop>", opt)
-vim.g.mapleader = " "
-vim.g.maplocalleader = " "
+vim.keymap.set({ 'n', 'v' }, '<Space>', '<Nop>', { silent = true })
+vim.g.mapleader = ' '
+vim.g.maplocalleader = ' '
 
 map("n", "Q", ":qa<CR>", opt)
 
@@ -96,22 +96,21 @@ pluginKeys.nvimTreeList = {
 
 
 pluginKeys.LSP_on_attach = function(client, bufnr)
-  vim.api.nvim_set_keymap('n', '<leader>e', '<cmd>lua vim.diagnostic.open_float()<CR>', opt)
-  vim.api.nvim_set_keymap('n', '<leader>[', '<cmd>lua vim.diagnostic.goto_prev()<CR>', opt)
-  vim.api.nvim_set_keymap('n', '<leader>]', '<cmd>lua vim.diagnostic.goto_next()<CR>', opt)
-  vim.api.nvim_set_keymap('n', '<leader>l', '<cmd>lua vim.diagnostic.setloclist()<CR>', opt)
-
+  --New keymap Api
+  --https://github.com/neovim/neovim/commit/6d41f65aa45f10a93ad476db01413abaac21f27d
+  vim.keymap.set('n', '<leader>e', vim.diagnostic.open_float)
+  vim.keymap.set('n', '<leader>[', vim.diagnostic.goto_prev)
+  vim.keymap.set('n', '<leader>]', vim.diagnostic.goto_next)
+  vim.keymap.set('n', '<leader>l', vim.diagnostic.setloclist)
   -- Mappings.
   -- See `:help vim.lsp.*` for documentation on any of the below functions
-  vim.api.nvim_buf_set_keymap(bufnr, 'n', 'gD', '<cmd>lua vim.lsp.buf.declaration()<CR>', opt)
-  vim.api.nvim_buf_set_keymap(bufnr, 'n', 'gd', '<cmd>lua vim.lsp.buf.definition()<CR>', opt)
-  vim.api.nvim_buf_set_keymap(bufnr, 'n', 'gh', '<cmd>lua vim.lsp.buf.hover()<CR>', opt)
-  vim.api.nvim_buf_set_keymap(bufnr, 'n', 'gi', '<cmd>lua vim.lsp.buf.implementation()<CR>', opt)
-  vim.api.nvim_buf_set_keymap(bufnr, 'n', 'gr', '<cmd>lua vim.lsp.buf.references()<CR>', opt)
-  --vim.api.nvim_buf_set_keymap(bufnr, 'n', '<C-k>', '<cmd>lua vim.lsp.buf.signature_help()<CR>', opt)
-  --vim.api.nvim_buf_set_keymap(bufnr, 'n', '<space>D', '<cmd>lua vim.lsp.buf.type_definition()<CR>', opt)
-  vim.api.nvim_buf_set_keymap(bufnr, 'n', '<leader>rn', '<cmd>lua vim.lsp.buf.rename()<CR>', opt)
-  vim.api.nvim_buf_set_keymap(bufnr, 'n', '<leader>ca', '<cmd>lua vim.lsp.buf.code_action()<CR>', opt)
+  vim.keymap.set('n', 'gD', vim.lsp.buf.declaration, { buffer = bufnr })
+  vim.keymap.set('n', 'gd', vim.lsp.buf.definition, { buffer = bufnr })
+  vim.keymap.set('n', 'gh', vim.lsp.buf.hover, { buffer = bufnr })
+  vim.keymap.set('n', 'gi', vim.lsp.buf.implementation, { buffer = bufnr })
+  vim.keymap.set('n', 'gr', vim.lsp.buf.references, { buffer = bufnr })
+  vim.keymap.set('n', '<leader>rn', vim.lsp.buf.rename, { buffer = bufnr })
+  vim.keymap.set('n', '<leader>ca', vim.lsp.buf.code_action, { buffer = bufnr })
 end
 
 -- 命令行下cmp
@@ -119,6 +118,7 @@ end
 -- Therefore, we need recusive mapping
 map("c", "<Up>", "<C-p>", { noremap = false })
 map("c", "<Down>", "<C-n>", { noremap = false })
+
 
 pluginKeys.cmp = function(cmp)
   return {
@@ -131,6 +131,7 @@ pluginKeys.cmp = function(cmp)
   }
 end
 
+--Only for show info, not for setting
 pluginKeys.comment = {
   -- Normal 模式快捷键
   toggler = {
