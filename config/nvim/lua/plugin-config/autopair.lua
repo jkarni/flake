@@ -3,6 +3,7 @@ if not status then
   vim.notify("nvim-autopairs Not Found")
   return
 end
+
 autopairs.setup({
   check_ts = true,
   ts_config = {
@@ -15,3 +16,4 @@ autopairs.setup({
 -- local cmp_autopairs = require("nvim-autopairs.completion.cmp")
 -- local cmp = require("cmp")
 -- cmp.event:on("confirm_done", cmp_autopairs.on_confirm_done({ map_char = { tex = "" } }))
+

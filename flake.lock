@@ -20,29 +20,13 @@
         "type": "github"
       }
     },
-    "modes-nvim": {
-      "flake": false,
-      "locked": {
-        "lastModified": 1651978714,
-        "narHash": "sha256-djxxLbzXhBoYg/S/5TkmCbWtPxmNGkCLP9ImiH6gJvs=",
-        "owner": "mvllow",
-        "repo": "modes.nvim",
-        "rev": "1086d94b1f7d6ba105593a1dd21e2cb02ab92fc0",
-        "type": "github"
-      },
-      "original": {
-        "owner": "mvllow",
-        "repo": "modes.nvim",
-        "type": "github"
-      }
-    },
     "nixpkgs": {
       "locked": {
-        "lastModified": 1652885393,
-        "narHash": "sha256-YIgvvlk4iQ1Hi7KD9o5gsojc+ApB+jiH1d5stK8uXiw=",
+        "lastModified": 1653060744,
+        "narHash": "sha256-kfRusllRumpt33J1hPV+CeCCylCXEU7e0gn2/cIM7cY=",
         "owner": "nixos",
         "repo": "nixpkgs",
-        "rev": "48037fd90426e44e4bf03e6479e88a11453b9b66",
+        "rev": "dfd82985c273aac6eced03625f454b334daae2e8",
         "type": "github"
       },
       "original": {
@@ -52,28 +36,10 @@
         "type": "github"
       }
     },
-    "nvim-lsp-installer": {
-      "flake": false,
-      "locked": {
-        "lastModified": 1653147702,
-        "narHash": "sha256-gC91dBNfbtfsQq26EC5z0NEDjZuC+RsEWqydkNzddBc=",
-        "owner": "williamboman",
-        "repo": "nvim-lsp-installer",
-        "rev": "63f950401c666e18a82d93a7e6e1b0d7044f0432",
-        "type": "github"
-      },
-      "original": {
-        "owner": "williamboman",
-        "repo": "nvim-lsp-installer",
-        "type": "github"
-      }
-    },
     "root": {
       "inputs": {
         "home-manager": "home-manager",
-        "modes-nvim": "modes-nvim",
-        "nixpkgs": "nixpkgs",
-        "nvim-lsp-installer": "nvim-lsp-installer"
+        "nixpkgs": "nixpkgs"
       }
     }
   },

@@ -9,16 +9,6 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
-    modes-nvim = {
-      url = "github:mvllow/modes.nvim";
-      flake = false;
-    };
-
-    nvim-lsp-installer = {
-      url = "github:williamboman/nvim-lsp-installer";
-      flake = false;
-    };
-
   };
 
   outputs = { nixpkgs, home-manager, ... }@args: {

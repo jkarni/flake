@@ -1,1 +1,11 @@
-return { "*.lua", "*.nix", "*.sh", "*.py", "*.c", "*.cpp", "*.rs", "*.ts", "*.json" };
+return {
+    "*.lua",
+    "*.nix",
+    "*.sh",
+    "*.py",
+    "*.c",
+    "*.cpp",
+    "*.rs",
+    "*.ts",
+    "*.json"
+}

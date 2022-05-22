@@ -15,6 +15,7 @@ vim.g.mapleader = ' '
 vim.g.maplocalleader = ' '
 
 map("n", "Q", ":qa<CR>", opt)
+map("n", "W", ":wqa<CR>", opt)
 
 --Window Split
 map("n", "<leader>v", ":vsp<CR>", opt)
@@ -48,7 +49,7 @@ map("t", "<C-l>", ":vertical resize -2<CR>", opt)
 map("n", "<A-Left>", ":BufferLineCyclePrev<CR>", opt)
 map("n", "<A-Right>", ":BufferLineCycleNext<CR>", opt)
 --Buffer Close
-map("n", "<A-w>", ":bdelete!<CR>", opt)
+map("n", "<A-w>", ":Bdelete!<CR>", opt)
 
 
 -- Basic Terminal
@@ -104,9 +105,10 @@ pluginKeys.LSP_on_attach = function(client, bufnr)
   vim.keymap.set('n', '<leader>l', vim.diagnostic.setloclist)
   -- Mappings.
   -- See `:help vim.lsp.*` for documentation on any of the below functions
+  vim.keymap.set('n', 'gh', vim.lsp.buf.hover, { buffer = bufnr })
   vim.keymap.set('n', 'gD', vim.lsp.buf.declaration, { buffer = bufnr })
   vim.keymap.set('n', 'gd', vim.lsp.buf.definition, { buffer = bufnr })
-  vim.keymap.set('n', 'gh', vim.lsp.buf.hover, { buffer = bufnr })
+  vim.keymap.set('n', 'gs', vim.lsp.buf.signature_help, { buffer = bufnr })
   vim.keymap.set('n', 'gi', vim.lsp.buf.implementation, { buffer = bufnr })
   vim.keymap.set('n', 'gr', vim.lsp.buf.references, { buffer = bufnr })
   vim.keymap.set('n', '<leader>rn', vim.lsp.buf.rename, { buffer = bufnr })
@@ -118,7 +120,8 @@ end
 -- Therefore, we need recusive mapping
 map("c", "<Up>", "<C-p>", { noremap = false })
 map("c", "<Down>", "<C-n>", { noremap = false })
-
+-- vim.keymap.set('c',"<Up>", "<C-p>", { silent = true })
+-- vim.keymap.set('c',"<Down>", "<C-n>", { silent = true })
 
 pluginKeys.cmp = function(cmp)
   return {

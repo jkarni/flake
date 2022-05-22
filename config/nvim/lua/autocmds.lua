@@ -1,11 +1,65 @@
-local myAutoGroup = vim.api.nvim_create_augroup("myAutoGroup", {
-  clear = true,
-})
-
+local myAutoGroup = vim.api.nvim_create_augroup("myAutoGroup", { clear = true })
 local autocmd = vim.api.nvim_create_autocmd
 
+-- Format on Save
 autocmd("BufWritePre", {
+  callback = vim.lsp.buf.formatting_sync,
   group = myAutoGroup,
   pattern = require("lang-config.treesitter.autoformat"),
-  callback = vim.lsp.buf.formatting_sync,
+})
+
+-- Highlight on Yank
+autocmd("TextYankPost", {
+  callback = function()
+    vim.highlight.on_yank({ higroup = "Visual", timeout = 700 })
+  end,
+  group = myAutoGroup,
+  pattern = "*",
+})
+
+--Packer
+autocmd("BufWritePost", {
+  group = myAutoGroup,
+  pattern = "*.lua",
+  callback = function()
+    if vim.fn.expand("<afile>") == "lua/plugins.lua" then
+      vim.api.nvim_command("source lua/plugins.lua")
+      vim.api.nvim_command("PackerSync")
+    end
+  end,
+})
+
+--LSP Server
+autocmd("BufWritePost", {
+  group = myAutoGroup,
+  pattern = "*.lua",
+  callback = function()
+    if vim.fn.expand("<afile>") == "lua/lang-config/lsp/servers.lua" then
+      vim.api.nvim_command("source lua/lang-config/lsp/servers.lua")
+      vim.api.nvim_command("LspInstallInfo")
+    end
+  end,
+})
+
+--Treesitter
+autocmd("BufWritePost", {
+  group = myAutoGroup,
+  pattern = "*.lua",
+  callback = function()
+    if vim.fn.expand("<afile>") == "lua/lang-config/treesitter/parsers.lua" then
+      vim.api.nvim_command("source lua/lang-config/treesitter/parsers.lua")
+      vim.api.nvim_command("TSUpdate")
+    end
+  end,
+})
+
+-- 用o换行不要延续注释
+autocmd("BufEnter", {
+  group = myAutoGroup,
+  pattern = "*",
+  callback = function()
+    vim.opt.formatoptions = vim.opt.formatoptions
+        - "o" -- O and o, don't continue comments
+        + "r" -- But do continue when pressing enter.
+  end,
 })
