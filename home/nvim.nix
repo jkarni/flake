@@ -29,6 +29,7 @@
 
 
     extraPackages = with pkgs; [
+      rnix-lsp
       cargo #Rust
       clang #C,C++
       clang-tools #C,C++
