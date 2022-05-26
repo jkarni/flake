@@ -1,4 +1,4 @@
- pkgs, ... }@args: {
+ {pkgs, ... }@args: {
 
   xdg.configFile."nvim/lua".source = ../config/nvim/lua;
 
