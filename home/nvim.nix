@@ -63,40 +63,38 @@
     # workaround
     # add extraConfig to  ~/.config/nvim/init.vim
     extraConfig = "
-      require("options")
-      require("plugins")
-      require("colorscheme")
-      require("keybindings")
-      require("autocmds")
+      lua require('options')
+      lua require('plugins')
+      lua require('colorscheme')
+      lua require('keybindings')
+      lua require('autocmds')
+ 
+ 
+      lua require('lsp')
+      lua require('lsp.ui')
+      lua require('lsp.cmp')
+
+      lua require('plugin-config.bufferline')
+      lua require('plugin-config.feline')
+      lua require('plugin-config.nvim-tree')
+      lua require('plugin-config.telescope')
+      lua require('plugin-config.fidget')
+      lua require('plugin-config.alpha')
+      lua require('plugin-config.project')
+      lua require('plugin-config.nvim-treesitter')
+      lua require('plugin-config.indent-blankline')
+      lua require('plugin-config.autopair')
+      lua require('plugin-config.modes')
+      lua require('plugin-config.comment')
+      lua require('plugin-config.gitsigns')
+      lua require('plugin-config.toggleterm')
+      lua require('plugin-config.whichkey')
+      lua require('plugin-config.gps')
+      lua require('plugin-config.autosession')
+      lua require('plugin-config.reverse')
 
 
-      require("lsp")
-      require("lsp.ui")
-      require("lsp.cmp")
-
-      require("plugin-config.bufferline")
-      require("plugin-config.feline")
-      require("plugin-config.nvim-tree")
-      require("plugin-config.telescope")
-      require("plugin-config.fidget")
-      require("plugin-config.alpha")
-      require("plugin-config.project")
-      require("plugin-config.nvim-treesitter")
-      require("plugin-config.indent-blankline")
-      require("plugin-config.autopair")
-      require("plugin-config.modes")
-      require("plugin-config.comment")
-      require("plugin-config.gitsigns")
-      require("plugin-config.toggleterm")
-      require("plugin-config.whichkey")
-      require("plugin-config.gps")
-      require("plugin-config.autosession")
-      require("plugin-config.reverse")
-
-      --After
-      require("plugin-config.colorizer")
-
-      
+      lua require('plugin-config.colorizer')    
    ";
 
 
