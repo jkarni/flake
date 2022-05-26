@@ -10,7 +10,7 @@
       (nvim-treesitter.withPlugins
         (
           plugins: with plugins; [
-            tree-sitter-nix
+            #tree-sitter-nix
             tree-sitter-bash
             tree-sitter-json
             tree-sitter-typescript
@@ -29,7 +29,7 @@
 
 
     extraPackages = with pkgs; [
-      rnix-lsp
+      sumneko-lua-language-server #Lua
       cargo #Rust
       clang #C,C++
       clang-tools #C,C++
