@@ -13,7 +13,6 @@
   home.packages = with pkgs;  [
     wget
     vim
-    neovim
     ranger
     nix-tree
     tree
