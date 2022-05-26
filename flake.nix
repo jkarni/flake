@@ -4,6 +4,8 @@
 
     nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
 
+    neovim-nightly.url = "github:nix-community/neovim-nightly-overlay";
+
     home-manager = {
       url = "github:nix-community/home-manager";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -11,7 +13,7 @@
 
   };
 
-  outputs = { nixpkgs, home-manager, ... }@args: {
+  outputs = { nixpkgs, home-manager, neovim-nightly, ... }@args: {
 
     nixosConfigurations."hx90-sway" = nixpkgs.lib.nixosSystem {
       system = "x86_64-linux";
@@ -23,6 +25,9 @@
           home-manager.useUserPackages = true;
           home-manager.users.root = import ./host/hx90/home-sway.nix;
           home-manager.users.dominic = import ./host/hx90/home-sway.nix;
+          nixpkgs.overlays = [
+            neovim-nightly.overlay
+          ];
           home-manager.extraSpecialArgs = args;
         }
       ];
