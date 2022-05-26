@@ -25,9 +25,9 @@
           home-manager.useUserPackages = true;
           home-manager.users.root = import ./host/hx90/home-sway.nix;
           home-manager.users.dominic = import ./host/hx90/home-sway.nix;
-          # nixpkgs.overlays = [
-          #   neovim-nightly.overlay
-          # ];
+          nixpkgs.overlays = [
+            neovim-nightly.overlay
+          ];
           home-manager.extraSpecialArgs = args;
         }
       ];

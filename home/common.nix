@@ -6,11 +6,9 @@
   imports = [
     ./git.nix
     ./zsh.nix
-    ./ranger.nix
+   # ./ranger.nix
     ./nvim.nix
   ];
-
-  xdg.configFile."nvim".source = ../config/nvim;
 
   home.packages = with pkgs;  [
     wget
