@@ -29,33 +29,14 @@
 
 
     extraPackages = with pkgs; [
-      rnix-lsp #Nix
-      sumneko-lua-language-server #Lua
-      nodePackages.bash-language-server #Bash
-      nodePackages.pyright #Python
-
-      rust-analyzer #Rust
       cargo #Rust
-
       clang #C,C++
       clang-tools #C,C++
-
-      # Some LSP servers in Nixpkg are buggy  
-      # nodePackages.vscode-json-languageserver #JSON
-      # nodePackages.typescript-language-server #Tpyescript
-
-      # install buggy LSP server by nvim-lsp-installer automaticallly
-      # config/nvim/lua/lsp/install.lua
-
-      #nvim-lsp-installer Dependency
-      nodejs # LSP server in NPM
-
-      #Optional Dependency
+      nodejs # LSP Installer
 
       # Telescope
       fd
       ripgrep
-
     ];
 
 
