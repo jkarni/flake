@@ -1,5 +1,9 @@
 https://missing.csail.mit.edu/2020/editors/
+
+http://vimcasts.org/episodes/
+
 https://pragprog.com/titles/dnvim2/practical-vim-second-edition/
+
 
 # Normal Mode
 
@@ -82,15 +86,16 @@ O  open line above
 ?   backward search
 n   search next
 N   search opposite next
+//default
 CTRL_O  go back 
 CTRL_I  go forward
-
+//self reverse
 
 ## sed
-:s/old/new   substitute old to new(Once)
-:s/old/new/g whole line
+:s/old/new     substitute old to new(Once)
+:s/old/new/g   g:whole line
 
-:%s/old/new/gc whole file with confirm
+:%s/old/new/gc  %:whole file,  g:whole file with confirm
 
 
 ## execute external command
@@ -111,6 +116,19 @@ v         select
 shift+v   line select
 CTRL_V    select block
 
+under visual mode, run normal mode command
+: norm <COMMAND>
 
 # Case
 ~ 
+
+## Macros
+q{character} to start recording a macro in register {character}
+
+q to stop recording
+
+@{character} replays the macro
+
+{number}@{character} executes a macro {number} times
+
+:reg show 

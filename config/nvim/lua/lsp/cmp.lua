@@ -38,7 +38,7 @@ cmp.setup({
       { name = "path" }
     }
   ),
-  formatting = require('lsp/ui').formatting,
+  formatting = require('lsp.ui').formatting,
   mapping = require("keybindings").cmp(cmp),
 })
 
@@ -59,14 +59,17 @@ cmp.setup.cmdline(":", {
 })
 
 
---SetUp LSP
-for lsp, config in pairs(require("lang-config.lsp.servers")) do
-  --lua-dev for Nvim Extra Setup
-  if (lsp == "sumneko_lua") then
-    lspconfig[lsp].setup(
-      lua_dev.setup({ lspconfig = config })
-    )
+
+for server_name, lang_config in pairs(require("lang-config.lsp.servers")) do
+  local config = {
+    on_attach = require("keybindings").LSP_on_attach,
+    capabilities = require('cmp_nvim_lsp').update_capabilities(vim.lsp.protocol.make_client_capabilities()),
+  }
+  config.settings = lang_config
+  --lua extra config for nvim api
+  if (server_name == "sumneko_lua") then
+    lspconfig[server_name].setup(lua_dev.setup({ lspconfig = config }))
   else
-    lspconfig[lsp].setup(config)
+    lspconfig[server_name].setup(config)
   end
 end

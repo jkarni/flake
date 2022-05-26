@@ -7,6 +7,7 @@
     ./git.nix
     ./zsh.nix
     ./ranger.nix
+    ./nvim.nix
   ];
 
   xdg.configFile."nvim".source = ../config/nvim;
@@ -21,12 +22,6 @@
     htop
     neofetch
     unzip
-    ripgrep
-    fd
-
-    gcc #Tree-Sitter
-    cargo
-    nodejs
   ];
 
 }

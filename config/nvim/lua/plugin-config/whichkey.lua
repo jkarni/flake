@@ -4,5 +4,10 @@ if not status then
   return
 end
 
-whichkey.setup {}
-
+whichkey.setup {
+  plugins = {
+    presets = {
+      operators = false, -- disable help for operators like d, y, ... and registers them for motion / text object completion
+    }
+  }
+}

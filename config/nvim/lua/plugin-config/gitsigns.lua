@@ -5,7 +5,7 @@ if not status then
 end
 
 gitsigns.setup({
-  -- 字母图标 A 增加，C修改，D 删除
+
   signs = {
     add = { hl = "GitSignsAdd", text = "+", numhl = "GitSignsAddNr", linehl = "GitSignsAddLn" },
     change = { hl = "GitSignsChange", text = "~", numhl = "GitSignsChangeNr", linehl = "GitSignsChangeLn" },
@@ -16,7 +16,7 @@ gitsigns.setup({
   -- 显示图标
   signcolumn = true, -- Toggle with `:Gitsigns toggle_signs`
   -- 行数高亮
-  numhl = false, -- Toggle with `:Gitsigns toggle_numhl`
+  numhl = true, -- Toggle with `:Gitsigns toggle_numhl`
   linehl = false, -- Toggle with `:Gitsigns toggle_linehl`
   word_diff = true, -- Toggle with `:Gitsigns toggle_word_diff`
   keymaps = require("keybindings").gitsigns,
@@ -52,3 +52,10 @@ gitsigns.setup({
   },
   -- on_attach = require("keybindings").gitsigns_on_attach,
 })
+
+
+vim.api.nvim_exec([[
+highlight GitSignsAdd    guifg=#009900 
+highlight GitSignsChange guifg=#bbbb00 
+highlight GitSignsDelete guifg=#ff2222
+]], false)

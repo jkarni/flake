@@ -1,7 +1,6 @@
+-- https://github.com/sumneko/lua-language-server/blob/master/locale/en-us/setting.lua
+-- Format indent follow shiftwidth
 return {
-  on_attach = require("keybindings").LSP_on_attach,
-  capabilities = require('cmp_nvim_lsp').update_capabilities(vim.lsp.protocol.make_client_capabilities()),
-  settings = {
     Lua = {
       runtime = {
         version = 'LuaJIT',
@@ -16,6 +15,5 @@ return {
         enable = false,
       },
     },
-  },
 }
 

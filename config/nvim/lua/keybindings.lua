@@ -1,80 +1,98 @@
---default noremap=true(no recusive mapping), for replace nvim-buildin commands
+--I like Arrow Keys
+--I am extremely uncomfortable with hjkl due to the games I played in my childhood
+
+
 --https://vonheikemen.github.io/devlog/tools/configuring-neovim-using-lua/
+-- Deprecated: vim.api.nvim_set_keymap | default : noremap = false |(which is only for plugin recusive mapping)
+-- New: vim.keymap.set | default : noremap = true |(No-recursive is for most of time)
 
-local opt = {
-  noremap = true, --default
-  silent = true,
-}
-
-local map = vim.api.nvim_set_keymap
-local pluginKeys = {}
+local keymap = vim.keymap.set
+local opts = { silent = true }
+local M = {}
 
 --Remap space as leader key
 vim.keymap.set({ 'n', 'v' }, '<Space>', '<Nop>', { silent = true })
 vim.g.mapleader = ' '
 vim.g.maplocalleader = ' '
 
-map("n", "Q", ":qa<CR>", opt)
-map("n", "W", ":wqa<CR>", opt)
+-- Consistent with Ranger exit
+-- ZQ Quit Without Save
+-- ZZ Quit With Save
+keymap("n", "Q", ":qa<CR>")
+
+-- Reverse CTRL-O and CTRL_I, I prefer left is previous and right is next
+keymap("n", "<C-o>", "<C-i>")
+keymap("n", "<C-i>", "<C-o>")
+
+--Better Line Movement
+keymap({ 'n', 'v' }, "-", "_")
+keymap({ 'n', 'v' }, "_", "-")
+keymap({ 'n', 'v' }, "=", "$")
 
 --Window Split
-map("n", "<leader>v", ":vsp<CR>", opt)
-map("n", "<leader>h", ":sp<CR>", opt)
+keymap("n", "<leader>v", ":vsp<CR>")
+keymap("n", "<leader>h", ":sp<CR>")
+
 --Window Close Focus
-map("n", "<C-w>", "<C-w>c", opt)
+keymap("n", "<C-w>", "<C-w>c")
+
 --Window Close Other
-map("n", "<C-o>", "<C-w>o", opt)
+keymap("n", "<C-q>", "<C-w>o")
+
 --Window Jump
-map("n", "<C-Left>", "<C-w>h", opt)
-map("n", "<C-Down>", "<C-w>j", opt)
-map("n", "<C-Up>", "<C-w>k", opt)
-map("n", "<C-Right>", "<C-w>l", opt)
+keymap("n", "<C-Left>", "<C-w>h")
+keymap("n", "<C-Down>", "<C-w>j")
+keymap("n", "<C-Up>", "<C-w>k")
+keymap("n", "<C-Right>", "<C-w>l")
+
 -- Windows Resize
 -- h 上下方向 +
 -- j 上下方向 -
-map("n", "<C-h>", ":resize +2<CR>", opt)
-map("n", "<C-j>", ":resize -2<CR>", opt)
+keymap("n", "<C-h>", ":resize +2<CR>")
+keymap("n", "<C-j>", ":resize -2<CR>")
 -- k 左右方向 +
 -- l 左右方向 -
-map("n", "<C-k>", ":vertical resize +2<CR>", opt)
-map("n", "<C-l>", ":vertical resize -2<CR>", opt)
-
-map("t", "<C-h>", ":resize +2<CR>", opt)
-map("t", "<C-j>", ":resize -2<CR>", opt)
-map("t", "<C-k>", ":vertical resize +2<CR>", opt)
-map("t", "<C-l>", ":vertical resize -2<CR>", opt)
+keymap("n", "<C-k>", ":vertical resize +2<CR>")
+keymap("n", "<C-l>", ":vertical resize -2<CR>")
 
 
---Buffer Jump in Window
-map("n", "<A-Left>", ":BufferLineCyclePrev<CR>", opt)
-map("n", "<A-Right>", ":BufferLineCycleNext<CR>", opt)
+--Buffer in Window
+keymap("n", "<A-Left>", ":bp<CR>", opts)
+keymap("n", "<A-Right>", ":bn<CR>", opts)
 --Buffer Close
-map("n", "<A-w>", ":Bdelete!<CR>", opt)
+keymap("n", "<A-w>", ":Bdelete!<CR>")
+
+--Reverse Common Value
+keymap("n", "<leader>r", ":ToggleAlternate<CR>")
+
+--Show Dashboard
+keymap("n", "<leader>a", ":Alpha<CR>")
 
 
--- Basic Terminal
---map("n", "<C-t>", ":belowright split |resize 15 |terminal<CR>i", opt)
+
+-- Indent with Tab and Shift-Tab
+keymap('v', '<Tab>', '>')
+keymap('v', '<S-Tab>', '<')
 
 -- ESC Terminal
-map("t", "<Esc>", "<C-\\><C-n>", opt)
+keymap("t", "<Esc>", "<C-\\><C-n>")
 
 -- Warpper Terminal
-pluginKeys.toggleTerm = "<leader>\\"
+M.toggleTerm = "<leader>\\"
 
 -- Telescope
 -- Find File Base On Path
-map("n", "<leader>p", ":Telescope find_files<CR>", opt)
+keymap("n", "<leader>p", ":Telescope find_files<CR>")
 -- Find Code
-map("n", "<leader>f", ":Telescope live_grep<CR>", opt)
-
+keymap("n", "<leader>f", ":Telescope live_grep<CR>")
 
 
 -- Vimtree
 -- alt + b 键打开关闭tree [VScode]
-map("n", "<A-b>", ":NvimTreeToggle<CR>", opt)
+keymap("n", "<A-b>", ":NvimTreeToggle<CR>", opts)
 
 -- 列表快捷键
-pluginKeys.nvimTreeList = {
+M.nvimTreeList = {
   -- 打开文件或文件夹
   { key = { "<CR>" }, action = "edit" },
   -- 分屏打开文件
@@ -93,37 +111,46 @@ pluginKeys.nvimTreeList = {
   { key = "o", action = "open" },
 }
 
+-- Clipboard
+keymap("n", '<leader>d', ":Telescope neoclip<CR>", opts)
 
-
-
-pluginKeys.LSP_on_attach = function(client, bufnr)
-  --New keymap Api
-  --https://github.com/neovim/neovim/commit/6d41f65aa45f10a93ad476db01413abaac21f27d
-  vim.keymap.set('n', '<leader>e', vim.diagnostic.open_float)
-  vim.keymap.set('n', '<leader>[', vim.diagnostic.goto_prev)
-  vim.keymap.set('n', '<leader>]', vim.diagnostic.goto_next)
-  vim.keymap.set('n', '<leader>l', vim.diagnostic.setloclist)
+M.LSP_on_attach = function(_, bufnr)
+  vim.keymap.set('n', '<leader>e', vim.diagnostic.open_float, { desc = 'Open diagnostics window' })
+  vim.keymap.set('n', '<leader>[', vim.diagnostic.goto_prev, { desc = 'diagnostic.goto_prev' })
+  vim.keymap.set('n', '<leader>]', vim.diagnostic.goto_next, { desc = 'diagnostic.goto_next' })
+  vim.keymap.set('n', '<leader>l', vim.diagnostic.setloclist, { desc = 'List all diagnostics' })
   -- Mappings.
   -- See `:help vim.lsp.*` for documentation on any of the below functions
   vim.keymap.set('n', 'gh', vim.lsp.buf.hover, { buffer = bufnr })
+  -- .h
   vim.keymap.set('n', 'gD', vim.lsp.buf.declaration, { buffer = bufnr })
+  -- .cpp
   vim.keymap.set('n', 'gd', vim.lsp.buf.definition, { buffer = bufnr })
+  -- Workflow gh, gd, gD
+  -- <C-t> return :help jumplist taglist
+
+  -- variable type
+  vim.keymap.set('n', 'gt', vim.lsp.buf.type_definition, { buffer = bufnr })
+  -- function parameter
   vim.keymap.set('n', 'gs', vim.lsp.buf.signature_help, { buffer = bufnr })
+  -- class implement stuff
   vim.keymap.set('n', 'gi', vim.lsp.buf.implementation, { buffer = bufnr })
+  -- find references/symbol
   vim.keymap.set('n', 'gr', vim.lsp.buf.references, { buffer = bufnr })
+  -- rename symbol(lsp based! Not regex)
   vim.keymap.set('n', '<leader>rn', vim.lsp.buf.rename, { buffer = bufnr })
+  -- auto import sth
   vim.keymap.set('n', '<leader>ca', vim.lsp.buf.code_action, { buffer = bufnr })
 end
 
--- 命令行下cmp
--- <C-p>,<C-n> is cmp plguin keymapping(not nvim build-in)
+-- commandline
+-- <C-p>,<C-n> is nvim-cmp plguin keymapping(not nvim build-in)
 -- Therefore, we need recusive mapping
-map("c", "<Up>", "<C-p>", { noremap = false })
-map("c", "<Down>", "<C-n>", { noremap = false })
--- vim.keymap.set('c',"<Up>", "<C-p>", { silent = true })
--- vim.keymap.set('c',"<Down>", "<C-n>", { silent = true })
+keymap("c", "<Up>", "<C-p>", { remap = true, silent = true })
+keymap("c", "<Down>", "<C-n>", { remap = true, silent = true })
 
-pluginKeys.cmp = function(cmp)
+
+M.cmp = function(cmp)
   return {
     -- 上一个
     ["<Up>"] = cmp.mapping.select_prev_item(),
@@ -135,7 +162,7 @@ pluginKeys.cmp = function(cmp)
 end
 
 --Only for show info, not for setting
-pluginKeys.comment = {
+M.comment = {
   -- Normal 模式快捷键
   toggler = {
     line = "gcc", -- 行注释
@@ -149,4 +176,4 @@ pluginKeys.comment = {
 
 
 
-return pluginKeys
+return M

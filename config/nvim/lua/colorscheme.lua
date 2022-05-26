@@ -1,4 +1,4 @@
-local status, tokyonight = pcall(require, "tokyonight")
+local status, _ = pcall(require, "tokyonight")
 if not status then
   vim.notify("tokyonight Not Find")
   return

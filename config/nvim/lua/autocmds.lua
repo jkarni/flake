@@ -3,19 +3,11 @@ local autocmd = vim.api.nvim_create_autocmd
 
 -- Format on Save
 autocmd("BufWritePre", {
-  callback = vim.lsp.buf.formatting_sync,
+  callback = vim.lsp.buf.format,
   group = myAutoGroup,
   pattern = require("lang-config.treesitter.autoformat"),
 })
 
--- Highlight on Yank
-autocmd("TextYankPost", {
-  callback = function()
-    vim.highlight.on_yank({ higroup = "Visual", timeout = 700 })
-  end,
-  group = myAutoGroup,
-  pattern = "*",
-})
 
 --Packer
 autocmd("BufWritePost", {

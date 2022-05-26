@@ -14,5 +14,6 @@ toggleterm.setup({
     end
   end,
   open_mapping = require('keybindings').toggleTerm,
+  insert_mappings = false, --Disable in insert mode
   direction = "horizontal",
 })

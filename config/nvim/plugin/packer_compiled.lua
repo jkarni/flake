@@ -84,6 +84,16 @@ _G.packer_plugins = {
     path = "/Users/dominic/.local/share/nvim/site/pack/packer/start/alpha-nvim",
     url = "https://github.com/goolord/alpha-nvim"
   },
+  ["alternate-toggler"] = {
+    loaded = true,
+    path = "/Users/dominic/.local/share/nvim/site/pack/packer/start/alternate-toggler",
+    url = "https://github.com/rmagatti/alternate-toggler"
+  },
+  ["auto-session"] = {
+    loaded = true,
+    path = "/Users/dominic/.local/share/nvim/site/pack/packer/start/auto-session",
+    url = "https://github.com/rmagatti/auto-session"
+  },
   ["bufdelete.nvim"] = {
     loaded = true,
     path = "/Users/dominic/.local/share/nvim/site/pack/packer/start/bufdelete.nvim",
@@ -164,6 +174,16 @@ _G.packer_plugins = {
     path = "/Users/dominic/.local/share/nvim/site/pack/packer/start/nvim-cmp",
     url = "https://github.com/hrsh7th/nvim-cmp"
   },
+  ["nvim-colorizer.lua"] = {
+    loaded = true,
+    path = "/Users/dominic/.local/share/nvim/site/pack/packer/start/nvim-colorizer.lua",
+    url = "https://github.com/norcalli/nvim-colorizer.lua"
+  },
+  ["nvim-gps"] = {
+    loaded = true,
+    path = "/Users/dominic/.local/share/nvim/site/pack/packer/start/nvim-gps",
+    url = "https://github.com/SmiteshP/nvim-gps"
+  },
   ["nvim-lsp-installer"] = {
     loaded = true,
     path = "/Users/dominic/.local/share/nvim/site/pack/packer/start/nvim-lsp-installer",
@@ -173,6 +193,11 @@ _G.packer_plugins = {
     loaded = true,
     path = "/Users/dominic/.local/share/nvim/site/pack/packer/start/nvim-lspconfig",
     url = "https://github.com/neovim/nvim-lspconfig"
+  },
+  ["nvim-neoclip.lua"] = {
+    loaded = true,
+    path = "/Users/dominic/.local/share/nvim/site/pack/packer/start/nvim-neoclip.lua",
+    url = "https://github.com/AckslD/nvim-neoclip.lua"
   },
   ["nvim-tree.lua"] = {
     loaded = true,
@@ -204,6 +229,16 @@ _G.packer_plugins = {
     path = "/Users/dominic/.local/share/nvim/site/pack/packer/start/project.nvim",
     url = "https://github.com/ahmedkhalf/project.nvim"
   },
+  ["session-lens"] = {
+    loaded = true,
+    path = "/Users/dominic/.local/share/nvim/site/pack/packer/start/session-lens",
+    url = "https://github.com/rmagatti/session-lens"
+  },
+  ["telescope-ui-select.nvim"] = {
+    loaded = true,
+    path = "/Users/dominic/.local/share/nvim/site/pack/packer/start/telescope-ui-select.nvim",
+    url = "https://github.com/nvim-telescope/telescope-ui-select.nvim"
+  },
   ["telescope.nvim"] = {
     loaded = true,
     path = "/Users/dominic/.local/share/nvim/site/pack/packer/start/telescope.nvim",
@@ -218,6 +253,11 @@ _G.packer_plugins = {
     loaded = true,
     path = "/Users/dominic/.local/share/nvim/site/pack/packer/start/tokyonight.nvim",
     url = "https://github.com/folke/tokyonight.nvim"
+  },
+  ["vim-surround"] = {
+    loaded = true,
+    path = "/Users/dominic/.local/share/nvim/site/pack/packer/start/vim-surround",
+    url = "https://github.com/tpope/vim-surround"
   },
   ["which-key.nvim"] = {
     loaded = true,
