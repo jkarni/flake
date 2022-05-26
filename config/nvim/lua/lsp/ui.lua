@@ -13,7 +13,12 @@ for type, icon in pairs(signs) do
 end
 
 -- lspkind
-local lspkind = require("lspkind")
+local status, lspkind = pcall(require, "lspkind")
+if not status then
+  vim.notify("lspkind Not Found")
+  return
+end
+
 lspkind.init({
   -- default: true
   -- with_text = true,

@@ -19,6 +19,7 @@
             tree-sitter-lua
             tree-sitter-rust
             tree-sitter-python
+            tree-sitter-markdown
           ]
         )
       )
