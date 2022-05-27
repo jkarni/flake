@@ -6,7 +6,7 @@
   imports = [
     ./git.nix
     ./zsh.nix
-   # ./ranger.nix
+    ./ranger.nix
     ./nvim.nix
   ];
 

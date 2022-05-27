@@ -9,7 +9,7 @@
 
 # In other OS, We can simply use nvim's plugin to automate download/compile/install{2,3}
 # NixOS needs patchelf, maybe? We can not simply download pre-build {2,3}
-# All in all, This is the way that I can reuse my modern nvim config in different with zero change. 
+# All in all, This is the way that I can reuse my modern nvim config in different OS with zero change. 
 
 # I don't like homemanager's nvim module.
 # It will create a init.vim file and mess up my config

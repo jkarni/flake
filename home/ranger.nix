@@ -1,4 +1,4 @@
-{ lib, ... }: {
+{ lib, config, ... }: {
 
   # ranger conf-path must have write permission.
   # However xdg.configFile."<DIR>".source = DIR will create a unwritable dir in nixstore
@@ -15,11 +15,5 @@
       fi
 
       ln -sfn /etc/flake/config/ranger  $HOME/.config/ranger
-
-
     '';
-
-
-
-
 }
