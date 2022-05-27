@@ -1,5 +1,5 @@
  {pkgs, ... }@args: {
-  xdg.configFile."nvim".source = ../config/nvim/;
+  xdg.configFile."nvim".source = ../config/nvim;
 
   home.packages = with pkgs;  [
     
