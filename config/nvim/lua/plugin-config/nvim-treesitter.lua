@@ -4,10 +4,12 @@ if not status then
   return
 end
 
+require 'nvim-treesitter.install'.compilers = { 'clang++' }
+
 treesitter.setup({
   -- 安装 language parser
   -- :TSInstallInfo 命令查看支持的语言
-  --ensure_installed = require("lang-config.treesitter.parsers"),
+  ensure_installed = require("lang-config.treesitter.parsers"),
   -- 启用代码高亮模块
   highlight = {
     enable = true,
