@@ -4,7 +4,7 @@ if not status then
   return
 end
 
-lsp_installer.setup {
-  automatic_installation = true,
-}
+-- lsp_installer.setup {
+--   automatic_installation = true,
+-- }
 
