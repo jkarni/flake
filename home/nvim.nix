@@ -5,31 +5,30 @@
 
   programs.neovim = {
     enable = true;
-    # plugins = with pkgs.vimPlugins; [
+    plugins = with pkgs.vimPlugins; [
 
-    #   (nvim-treesitter.withPlugins
-    #     (
-    #       plugins: with plugins; [
-    #         tree-sitter-nix
-    #         tree-sitter-bash
-    #         tree-sitter-json
-    #         tree-sitter-typescript
-      #       tree-sitter-c
-      #       tree-sitter-cpp
-      #       tree-sitter-lua
-      #       tree-sitter-rust
-      #       tree-sitter-python
-      #       tree-sitter-markdown
-      #     ]
-      #   )
-      # )
+      (nvim-treesitter.withPlugins
+        (
+          plugins: with plugins; [
+            #tree-sitter-nix
+            tree-sitter-bash
+            tree-sitter-json
+            tree-sitter-typescript
+            tree-sitter-c
+            tree-sitter-cpp
+            tree-sitter-lua
+            tree-sitter-rust
+            tree-sitter-python
+            tree-sitter-markdown
+          ]
+        )
+      )
 
 
-    # ];
+    ];
 
 
     extraPackages = with pkgs; [
-      tree-sitter
       sumneko-lua-language-server #Lua
       cargo #Rust
       clang #C,C++
