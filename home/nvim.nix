@@ -9,15 +9,10 @@
 
 # In other OS, We can simply use nvim's plugin to automate download/compile/install{2,3}
 # NixOS needs patchelf, maybe? We can not simply download pre-build {2,3}
-# All in all, This is the way that I can reuse my modern nvim config in different OS with tiny change. 
+# All in all, This is the way that I can reuse my modern nvim config in different with zero change. 
 
 # I don't like homemanager's nvim module.
 # It will create a init.vim file and mess up my config
-
-# diff
-# -- lsp_installer.setup {
-# --   automatic_installation = true,
-# -- }
 
 
 { pkgs, ... }: {
@@ -42,9 +37,8 @@
     nodePackages.pyright #python
     rust-analyzer #rust
 
-    #JSON and TS LSP might be buggy or need extra configuration
-    nodePackages.vscode-json-languageserver #JSON
-    nodePackages.typescript-language-server #Tpyescript
+    nodePackages.typescript
+    nodePackages.typescript-language-server #Typescript
 
     cargo #Rust
     nodejs # LSP Installer

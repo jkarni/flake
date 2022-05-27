@@ -7,12 +7,32 @@ local pload = function(path)
 end
 
 return {
-  sumneko_lua = pload("lang-config/lsp/setup/lua"),
-  clangd = pload("lang-config/lsp/setup/cpp"),
-  bashls = pload("lang-config/lsp/setup/bash"),
-  tsserver = pload("lang-config/lsp/setup/ts"),
-  pyright = pload("lang-config/lsp/setup/python"),
-  jsonls = pload("lang-config/lsp/setup/json"),
-  rust_analyzer = pload("lang-config/lsp/setup/rust"),
-  rnix = pload("lang-config/lsp/setup/nix")
+  sumneko_lua = {
+    exeName = "lua-language-server",
+    config = pload("lang-config/lsp/setup/lua")
+  },
+  clangd = {
+    exeName = "clangd",
+    config = pload("lang-config/lsp/setup/cpp"),
+  },
+  bashls = {
+    exeName = "bash-language-server",
+    config = pload("lang-config/lsp/setup/bash"),
+  },
+  tsserver = {
+    exeName = "typescript-language-server",
+    config = pload("lang-config/lsp/setup/ts"),
+  },
+  pyright = {
+    exeName = "pyright",
+    config = pload("lang-config/lsp/setup/python"),
+  },
+  rust_analyzer = {
+    exeName = "rust-analyzer",
+    config = pload("lang-config/lsp/setup/rust")
+  },
+  rnix = {
+    exeName = "rnix-lsp",
+    config = pload("lang-config/lsp/setup/nix")
+  }
 }
