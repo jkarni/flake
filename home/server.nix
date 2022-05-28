@@ -1,8 +1,5 @@
-{ config
-, lib
-, pkgs
-, ...
-}: {
+{ pkgs, ... }: {
+
   imports = [
     ./common.nix
   ];
@@ -11,5 +8,4 @@
     shadowsocks-libev
 
   ];
-
 }

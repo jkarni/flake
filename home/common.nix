@@ -1,8 +1,5 @@
-{ config
-, lib
-, pkgs
-, ...
-}: {
+{ pkgs, ... }: {
+
   imports = [
     ./git.nix
     ./zsh.nix
@@ -13,7 +10,6 @@
   home.packages = with pkgs;  [
     wget
     vim
-    ranger
     nix-tree
     tree
     htop

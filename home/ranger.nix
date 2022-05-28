@@ -1,4 +1,4 @@
-{ lib, config, ... }: {
+{ pkgs, lib, ... }: {
 
   # ranger conf-path must have write permission.
   # However xdg.configFile."<DIR>".source = DIR will create a unwritable dir in nixstore
@@ -6,6 +6,9 @@
   # We can utilize the activation scripts blocks to run when activating a Home Manager generation
   # Normally, we clone our flake repo under root. We need give all users permission to /etc/flake/config/ranger 
 
+  home.packages = with pkgs;  [
+    ranger
+  ];
 
   home.activation.linkDotfiles = lib.hm.dag.entryAfter [ "writeBoundary" ]
     ''
