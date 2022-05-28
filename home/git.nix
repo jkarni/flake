@@ -4,12 +4,12 @@
     userName = "mlyxshi";
     userEmail = "mlyxdev@gmail.com";
     ignores = [
-      ".DS_Store"     # macOS
-    ]
+      ".DS_Store" # macOS
+    ];
 
     extraConfig = {
       init.defaultBranch = "main";
-    }
+    };
 
-  }
+  };
 }
