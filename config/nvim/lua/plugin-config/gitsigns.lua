@@ -18,7 +18,7 @@ gitsigns.setup({
   -- 行数高亮
   numhl = true, -- Toggle with `:Gitsigns toggle_numhl`
   linehl = false, -- Toggle with `:Gitsigns toggle_linehl`
-  word_diff = true, -- Toggle with `:Gitsigns toggle_word_diff`
+  word_diff = false, -- Toggle with `:Gitsigns toggle_word_diff`
   keymaps = require("keybindings").gitsigns,
   watch_gitdir = {
     interval = 1000,
@@ -59,3 +59,4 @@ highlight GitSignsAdd    guifg=#009900
 highlight GitSignsChange guifg=#bbbb00 
 highlight GitSignsDelete guifg=#ff2222
 ]], false)
+

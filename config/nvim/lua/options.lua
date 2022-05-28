@@ -1,34 +1,40 @@
 --:help option_list 
 --:help vim_diff.txt
+local options = {
+  mouse = "a",
+  number = true,
 
-vim.opt.mouse = "a"
-vim.opt.number = true
+  splitbelow = true,
+  splitright = true,
 
-vim.opt.splitbelow = true
-vim.opt.splitright = true
+  --System Clipboard
+  clipboard = vim.opt.clipboard + 'unnamedplus',
+
+  writebackup = false,
+  swapfile = false,
+
+  -- RTFM :help tabstop
+  -- Why default is 8? http://web.mit.edu/ghudson/info/linus-coding-standard
+  -- Modern Indent is 2? https://google.github.io/styleguide/cppguide.html#Spaces_vs._Tabs
+  tabstop = 2,
+  shiftwidth = 2,
+  expandtab = true,
+
+  --Use TreeSitter Indent
+
+  --Smart search
+  ignorecase = true,
+  smartcase = true,
+
+  -- Global Statusline
+  laststatus = 3,
+
+  termguicolors = true,
+
+  helpheight = 35,
+}
 
 
-vim.opt.writebackup = false
-vim.opt.swapfile = false
-
--- RTFM :help tabstop
--- Why default is 8? http://web.mit.edu/ghudson/info/linus-coding-standard
--- Modern Indent is 2? https://google.github.io/styleguide/cppguide.html#Spaces_vs._Tabs
-vim.opt.tabstop = 2
-vim.opt.shiftwidth = 2
-vim.opt.expandtab = true
-
---Use TreeSitter Indent
-
---Smart search
-vim.opt.ignorecase = true
-vim.opt.smartcase = true
-
--- Global Statusline
-vim.opt.laststatus = 3
-
---vim.opt.winbar ='%=%m %f'
-
-vim.opt.helpheight =35
-
-vim.opt.cursorline = true
+for k, v in pairs(options) do
+  vim.opt[k] = v
+end

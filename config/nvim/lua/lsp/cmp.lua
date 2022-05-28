@@ -65,7 +65,7 @@ for server_name, lang_config in pairs(require("lang-config.lsp.servers")) do
     on_attach = require("keybindings").LSP_on_attach,
     capabilities = require('cmp_nvim_lsp').update_capabilities(vim.lsp.protocol.make_client_capabilities()),
   }
-  config.settings = lang_config
+  config.settings = lang_config.config
   --lua extra config for nvim api
   if (server_name == "sumneko_lua") then
     lspconfig[server_name].setup(lua_dev.setup({ lspconfig = config }))

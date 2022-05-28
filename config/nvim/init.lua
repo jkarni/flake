@@ -4,8 +4,6 @@ require("colorscheme")
 require("keybindings")
 require("autocmds")
 
-
-require("lsp")
 require("lsp.ui")
 require("lsp.cmp")
 
@@ -27,7 +25,7 @@ require("plugin-config.whichkey")
 require("plugin-config.gps")
 require("plugin-config.autosession")
 require("plugin-config.reverse")
+require("plugin-config.surround")
 
---After
+--Final Satge
 require("plugin-config.colorizer")
-

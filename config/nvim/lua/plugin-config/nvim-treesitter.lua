@@ -4,6 +4,7 @@ if not status then
   return
 end
 
+
 treesitter.setup({
 
   ensure_installed = require("lang-config.treesitter.parsers"),
@@ -18,4 +19,3 @@ treesitter.setup({
   },
 
 })
-

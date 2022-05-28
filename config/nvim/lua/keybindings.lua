@@ -11,7 +11,7 @@ local opts = { silent = true }
 local M = {}
 
 --Remap space as leader key
-vim.keymap.set({ 'n', 'v' }, '<Space>', '<Nop>', { silent = true })
+keymap({ 'n', 'v' }, '<Space>', '<Nop>', opts)
 vim.g.mapleader = ' '
 vim.g.maplocalleader = ' '
 

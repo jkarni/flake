@@ -8,7 +8,6 @@ autocmd("BufWritePre", {
   pattern = require("lang-config.treesitter.autoformat"),
 })
 
-
 --Packer
 autocmd("BufWritePost", {
   group = myAutoGroup,
@@ -17,18 +16,6 @@ autocmd("BufWritePost", {
     if vim.fn.expand("<afile>") == "lua/plugins.lua" then
       vim.api.nvim_command("source lua/plugins.lua")
       vim.api.nvim_command("PackerSync")
-    end
-  end,
-})
-
---LSP Server
-autocmd("BufWritePost", {
-  group = myAutoGroup,
-  pattern = "*.lua",
-  callback = function()
-    if vim.fn.expand("<afile>") == "lua/lang-config/lsp/servers.lua" then
-      vim.api.nvim_command("source lua/lang-config/lsp/servers.lua")
-      vim.api.nvim_command("LspInstallInfo")
     end
   end,
 })
