@@ -1,12 +1,12 @@
 --I like Arrow Keys
---I am extremely uncomfortable with hjkl due to the games I played in my childhood
+--I am extremely uncomfortable with hjkl due to the games I played in childhood
 
 
 --https://vonheikemen.github.io/devlog/tools/configuring-neovim-using-lua/
 -- Deprecated: vim.api.nvim_set_keymap | default : noremap = false |(which is only for plugin recusive mapping)
 -- New: vim.keymap.set | default : noremap = true |(No-recursive is for most of time)
 
-local keymap = vim.keymap.set
+local keymap = require("utils").keymap
 local opts = { silent = true }
 local M = {}
 
@@ -15,10 +15,15 @@ keymap({ 'n', 'v' }, '<Space>', '<Nop>', opts)
 vim.g.mapleader = ' '
 vim.g.maplocalleader = ' '
 
+--Create a new line
+keymap('n', '<leader><leader>', 'o<ESC>', opts)
+
 -- Consistent with Ranger exit
--- ZQ Quit Without Save
--- ZZ Quit With Save
+-- ZQ all Quit Without Save
+-- ZZ all Quit With Save
 keymap("n", "Q", ":qa<CR>")
+keymap("n", "ZQ", ":qa!<CR>")
+keymap("n", "ZZ", ":wa|:qa<CR>") --Fix toggleTerm capability issue
 
 -- Reverse CTRL-O and CTRL_I, I prefer left is previous and right is next
 keymap("n", "<C-o>", "<C-i>")
@@ -115,32 +120,32 @@ M.nvimTreeList = {
 keymap("n", '<leader>d', ":Telescope neoclip<CR>", opts)
 
 M.LSP_on_attach = function(_, bufnr)
-  vim.keymap.set('n', '<leader>e', vim.diagnostic.open_float, { desc = 'Open diagnostics window' })
-  vim.keymap.set('n', '<leader>[', vim.diagnostic.goto_prev, { desc = 'diagnostic.goto_prev' })
-  vim.keymap.set('n', '<leader>]', vim.diagnostic.goto_next, { desc = 'diagnostic.goto_next' })
-  vim.keymap.set('n', '<leader>l', vim.diagnostic.setloclist, { desc = 'List all diagnostics' })
+  keymap('n', '<leader>e', vim.diagnostic.open_float, { desc = 'Open diagnostics window' })
+  keymap('n', '<leader>[', vim.diagnostic.goto_prev, { desc = 'diagnostic.goto_prev' })
+  keymap('n', '<leader>]', vim.diagnostic.goto_next, { desc = 'diagnostic.goto_next' })
+  keymap('n', '<leader>l', vim.diagnostic.setloclist, { desc = 'List all diagnostics' })
   -- Mappings.
   -- See `:help vim.lsp.*` for documentation on any of the below functions
-  vim.keymap.set('n', 'gh', vim.lsp.buf.hover, { buffer = bufnr })
+  keymap('n', 'gh', vim.lsp.buf.hover, { buffer = bufnr })
   -- .h
-  vim.keymap.set('n', 'gD', vim.lsp.buf.declaration, { buffer = bufnr })
+  keymap('n', 'gD', vim.lsp.buf.declaration, { buffer = bufnr })
   -- .cpp
-  vim.keymap.set('n', 'gd', vim.lsp.buf.definition, { buffer = bufnr })
+  keymap('n', 'gd', vim.lsp.buf.definition, { buffer = bufnr })
   -- Workflow gh, gd, gD
   -- <C-t> return :help jumplist taglist
 
   -- variable type
-  vim.keymap.set('n', 'gt', vim.lsp.buf.type_definition, { buffer = bufnr })
+  keymap('n', 'gt', vim.lsp.buf.type_definition, { buffer = bufnr })
   -- function parameter
-  vim.keymap.set('n', 'gs', vim.lsp.buf.signature_help, { buffer = bufnr })
+  keymap('n', 'gs', vim.lsp.buf.signature_help, { buffer = bufnr })
   -- class implement stuff
-  vim.keymap.set('n', 'gi', vim.lsp.buf.implementation, { buffer = bufnr })
+  keymap('n', 'gi', vim.lsp.buf.implementation, { buffer = bufnr })
   -- find references/symbol
-  vim.keymap.set('n', 'gr', vim.lsp.buf.references, { buffer = bufnr })
+  keymap('n', 'gr', vim.lsp.buf.references, { buffer = bufnr })
   -- rename symbol(lsp based! Not regex)
-  vim.keymap.set('n', '<leader>rn', vim.lsp.buf.rename, { buffer = bufnr })
+  keymap('n', '<leader>rn', vim.lsp.buf.rename, { buffer = bufnr })
   -- auto import sth
-  vim.keymap.set('n', '<leader>ca', vim.lsp.buf.code_action, { buffer = bufnr })
+  keymap('n', '<leader>ca', vim.lsp.buf.code_action, { buffer = bufnr })
 end
 
 -- commandline

@@ -4,7 +4,7 @@
     enable = true;
 
     shellAliases = {
-      l = "ls -alh";
+      l = "exa -algh";
       v = "nvim";
       r = "ranger";
     };

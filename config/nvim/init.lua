@@ -1,8 +1,9 @@
 require("options")
 require("plugins")
 require("colorscheme")
-require("keybindings")
 require("autocmds")
+require("keybindings")
+
 
 require("lsp.ui")
 require("lsp.cmp")

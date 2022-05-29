@@ -30,8 +30,6 @@ local options = {
   laststatus = 3,
 
   termguicolors = true,
-
-  helpheight = 35,
 }
 
 

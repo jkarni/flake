@@ -1,5 +1,8 @@
 local myAutoGroup = vim.api.nvim_create_augroup("myAutoGroup", { clear = true })
-local autocmd = vim.api.nvim_create_autocmd
+
+local keymap = require("utils").keymap
+local cmd = require("utils").cmd
+local autocmd = require("utils").autocmd
 
 -- Format on Save
 autocmd("BufWritePre", {
@@ -8,14 +11,33 @@ autocmd("BufWritePre", {
   pattern = require("lang-config.treesitter.autoformat"),
 })
 
+--This setting is based on my keyboard(Apple Magic Keyboard) layout
+--open help in right window
+--q to quit
+--<CR> to jump in
+-- <HOME> <END> to jump previous / next
+--<PageUp> <PageDown> to move up and down
+autocmd("BufEnter", {
+  group = myAutoGroup,
+  pattern = vim.fn.expand('$VIMRUNTIME') .. "/doc/*.txt",
+  callback = function()
+    cmd('wincmd L|vert resize 82')
+    keymap('n', 'q', ":q<cr>", { silent = true, buffer = 0 })
+    keymap("n", "<cr>", "<C-]>", { silent = true, buffer = 0 })
+    keymap('n', '<HOME>', "<C-o>", { silent = true, buffer = 0 })
+    keymap('n', '<END>', "<C-i>", { silent = true, buffer = 0 })
+  end,
+})
+
+
 --Packer
 autocmd("BufWritePost", {
   group = myAutoGroup,
   pattern = "*.lua",
   callback = function()
     if vim.fn.expand("<afile>") == "lua/plugins.lua" then
-      vim.api.nvim_command("source lua/plugins.lua")
-      vim.api.nvim_command("PackerSync")
+      cmd("source lua/plugins.lua")
+      cmd("PackerSync")
     end
   end,
 })
@@ -26,8 +48,8 @@ autocmd("BufWritePost", {
   pattern = "*.lua",
   callback = function()
     if vim.fn.expand("<afile>") == "lua/lang-config/treesitter/parsers.lua" then
-      vim.api.nvim_command("source lua/lang-config/treesitter/parsers.lua")
-      vim.api.nvim_command("TSUpdate")
+      cmd("source lua/lang-config/treesitter/parsers.lua")
+      cmd("TSUpdate")
     end
   end,
 })
@@ -35,7 +57,6 @@ autocmd("BufWritePost", {
 -- 用o换行不要延续注释
 autocmd("BufEnter", {
   group = myAutoGroup,
-  pattern = "*",
   callback = function()
     vim.opt.formatoptions = vim.opt.formatoptions
         - "o" -- O and o, don't continue comments

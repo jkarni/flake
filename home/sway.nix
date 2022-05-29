@@ -30,7 +30,6 @@
     foot
     pavucontrol
     bemenu
-    mpv
     baobab
     firefox-wayland
 

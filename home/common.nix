@@ -15,6 +15,7 @@
     htop
     neofetch
     unzip
+    exa
   ];
 
 }

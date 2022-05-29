@@ -24,7 +24,6 @@ packer.startup(
     function(use)
       --Installer
       use 'wbthomason/packer.nvim'
-      use 'williamboman/nvim-lsp-installer'
 
       --Dependency
       use 'kyazdani42/nvim-web-devicons'
