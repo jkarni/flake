@@ -1,7 +1,7 @@
 ## 1. Normal[PC]
 ```
-nixos-rebuild switch --flake /etc/flake#hx90-sway
-```
+git clone --recurse-submodules  git@github.com:mlyxshi/flake.git  /etc/flake
+nixos-rebuild switch --flake /etc/flake#hx90
 
 
 
@@ -33,5 +33,5 @@ nixos-rebuild switch --flake /etc/flake#oracle
 <write private key>
 git clone --recurse-submodules  git@github.com:mlyxshi/flake.git  /mnt/etc/flake
 nix-env -iA nixos.nixUnstable
-nixos-install --flake /mnt/etc/flake#hx90-sway 
+nixos-install --flake /mnt/etc/flake#hx90
 ```

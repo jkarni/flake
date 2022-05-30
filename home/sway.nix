@@ -33,6 +33,6 @@
     baobab
     firefox-wayland
 
-    xorg.xlsclients #debug xorg.xev xorg.xmodmap 
+    xorg.xlsclients #debug wev xorg.xmodmap 
   ];
 }
