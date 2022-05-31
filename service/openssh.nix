@@ -11,9 +11,7 @@
         User root
         IdentityFile ${config.sops.secrets.ssh-private-key.path}
 
-      Host github
-        HostName github.com
-        User git
+      Host github.com
         IdentityFile ${config.sops.secrets.ssh-private-key.path}
     '';
   };
