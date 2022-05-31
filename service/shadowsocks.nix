@@ -1,8 +1,8 @@
-{
+{ config, ... }: {
   services.shadowsocks = {
     enable = true;
     port = 6666;
-    password = "12345";
+    passwordFile = config.sops.secrets.shadowsocks-password.path;
     extraConfig = {
       nameserver = "1.1.1.1";
     };

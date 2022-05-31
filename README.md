@@ -1,9 +1,11 @@
+## Pre: sops file
+write age private key to /var/lib/sops-nix/key.txt
+
 ## 1. Normal[PC]
 ```
-git clone --recurse-submodules  git@github.com:mlyxshi/flake.git  /etc/flake
+git clone git@github.com:mlyxshi/flake.git  /etc/flake
 nixos-rebuild switch --flake /etc/flake#hx90
-
-
+```
 
 ## 2. NixInject(Server)
 
@@ -22,7 +24,7 @@ Rebuild NixOS
 ```
 nix-env -iA nixos.vim nixos.git nixos.tree
 <write private key>
-git clone --recurse-submodules  git@github.com:mlyxshi/flake.git  /etc/flake
+git clone git@github.com:mlyxshi/flake.git  /etc/flake
 rm -rf /boot/*
 bootctl install
 nixos-rebuild switch --flake /etc/flake#oracle
@@ -31,7 +33,7 @@ nixos-rebuild switch --flake /etc/flake#oracle
 ## 3. First Install[PC]
 ```
 <write private key>
-git clone --recurse-submodules  git@github.com:mlyxshi/flake.git  /mnt/etc/flake
+git clone  git@github.com:mlyxshi/flake.git  /mnt/etc/flake
 nix-env -iA nixos.nixUnstable
 nixos-install --flake /mnt/etc/flake#hx90
 ```
