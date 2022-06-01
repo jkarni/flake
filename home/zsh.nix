@@ -16,8 +16,8 @@
       enable = true;
       theme = "agnoster";
       plugins = [
-        "git"
-        "man"
+        # "git"
+        # "man"
       ];
     };
 

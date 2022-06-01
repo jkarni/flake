@@ -15,7 +15,7 @@
 # It will create a init.vim file and mess up my config
 
 
-{ pkgs, ... }@args: {
+{ pkgs, neovim-nightly, ... }: {
 
   # Do not include Packer's dir -- nvim/plugin -- need write permission
   xdg.configFile."nvim/init.lua".source = ../config/nvim/init.lua;
@@ -26,9 +26,9 @@
 
     #If your machine is very slow, please use neovim offical overlay <-- binary cache
 
-    (pkgs.neovim-unwrapped.overrideAttrs (oldAttrs: {
+    (neovim-unwrapped.overrideAttrs (oldAttrs: {
       version = "nightly";
-      src = args.neovim-nightly;
+      src = neovim-nightly;
     }))
 
     #Compile Tree-Sitter parsers
