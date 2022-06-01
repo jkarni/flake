@@ -41,10 +41,10 @@ mount /dev/nvme0n1p2 /mnt
 mkdir /mnt/boot
 mount /dev/nvme0n1p1 /mnt/boot
 
-<!-- 
-nixos-generate-config --root /mnt
-vim /mnt/etc/nixos/configuration.nix 
--->
+ 
+# nixos-generate-config --root /mnt
+# vim /mnt/etc/nixos/configuration.nix 
+
 
 nix-env -iA nixos.vim nixos.git nixos.tree nixos.nixUnstable
 
@@ -52,12 +52,13 @@ git clone  https://github.com/mlyxshi/flake /mnt/etc/nixos
 nixos-install --flake /mnt/etc/flake#hx90
 ```
 
-第一次安装sops失败，不过没关系，ssh authorized_key是明文ed25519 public key，所以可以登录
+第一次安装, sops配置失败，不过没关系，ssh authorized_key是明文ed25519 public key，所以可以登录
+
 ssh登录后，配置sops
 
 ```
 mkdir -p /var/lib/sops-nix/
-echo "MY AGE PRIVATE KEY" > /mnt/var/lib/sops-nix/key.txt
+echo "MY AGE PRIVATE KEY" > /var/lib/sops-nix/key.txt
 ```
 
 ```
