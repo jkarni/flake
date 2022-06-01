@@ -9,6 +9,7 @@
 
   home.packages = with pkgs;  [
     wget
+    sops
     vim
     nix-tree
     tree
@@ -18,4 +19,5 @@
     exa
   ];
 
+  home.stateVersion = "22.05";
 }

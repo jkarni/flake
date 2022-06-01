@@ -12,11 +12,6 @@
     hostName = "nixos";
   };
 
-
-  sound.enable = true;
-  hardware.pulseaudio.enable = true;
-
-
   # Electron wayland
   # environment.sessionVariables.NIXOS_OZONE_WL = "1";
 

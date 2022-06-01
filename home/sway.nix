@@ -1,6 +1,8 @@
 { pkgs, ... }: {
   imports = [
     ./common.nix
+    ./ui.nix
+    ./firefox.nix
   ];
 
   # Apple Keyboard
@@ -10,15 +12,6 @@
   xdg.configFile."sway/config".source = ../config/sway/config;
   xdg.configFile."waybar/config".source = ../config/waybar/config;
   xdg.configFile."foot/foot.ini".source = ../config/foot/foot.ini;
-
-
-  # Fix Strange Cursor Size Under Sway
-  home.pointerCursor = {
-    package = pkgs.gnome.adwaita-icon-theme;
-    name = "Adwaita";
-    size = 24;
-    gtk.enable = true;
-  };
 
 
   home.packages = with pkgs; [
@@ -31,7 +24,6 @@
     pavucontrol
     bemenu
     baobab
-    firefox-wayland
 
     xorg.xlsclients #debug wev xorg.xmodmap 
   ];
