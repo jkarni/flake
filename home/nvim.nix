@@ -11,7 +11,7 @@
 # NixOS needs patchelf, maybe? We can not simply download pre-build {2,3}
 # All in all, This is the way that I can reuse my modern nvim config in different OS with zero change. 
 
-# I don't like homemanager's nvim module.
+# I don't like homemanager's nvim module. <-- It is not designed for modern lua config.
 # It will create a init.vim file and mess up my config
 
 

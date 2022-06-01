@@ -50,6 +50,7 @@ packer.startup(
       use 'rmagatti/auto-session'
       use 'rmagatti/session-lens'
       use 'AckslD/nvim-neoclip.lua'
+
       --Tree-Sitter
       use 'nvim-treesitter/nvim-treesitter'
 
@@ -77,6 +78,9 @@ packer.startup(
       use 'numToStr/Comment.nvim'
       use 'rmagatti/alternate-toggler'
       use 'ur4ltz/surround.nvim'
+
+      --Enhancement
+      use 'lewis6991/impatient.nvim'
 
       -- Automatically set up your configuration after cloning packer.nvim
       if packer_bootstrap then

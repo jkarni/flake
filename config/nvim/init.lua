@@ -1,3 +1,6 @@
+-- Begin Stage
+require("plugin-config.impatient")
+
 require("options")
 require("plugins")
 require("colorscheme")
