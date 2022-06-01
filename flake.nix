@@ -1,16 +1,18 @@
 {
-
   inputs = {
 
     nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
 
-    neovim-nightly.url = "github:nix-community/neovim-nightly-overlay";
-
-    sops-nix.url = "github:Mic92/sops-nix";
-
     home-manager = {
       url = "github:nix-community/home-manager";
       inputs.nixpkgs.follows = "nixpkgs";
+    };
+
+    sops-nix.url = "github:Mic92/sops-nix";
+
+    neovim-nightly = {
+      url = "github:neovim/neovim";
+      flake = false;
     };
 
   };
@@ -29,9 +31,6 @@
           home-manager.useUserPackages = true;
           home-manager.users.root = import ./host/hx90/home.nix;
           home-manager.users.dominic = import ./host/hx90/home.nix;
-          nixpkgs.overlays = [
-            neovim-nightly.overlay
-          ];
           home-manager.extraSpecialArgs = args;
         }
       ];

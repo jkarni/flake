@@ -1,7 +1,7 @@
 # It is hard that gcc and clang exist simultaneously.
 # Luckily, clangd does not need clang installed. <-- I prefer LLVM
 
-# In general, nvim has 3 kinds of executable
+# In general, nvim needs 3 kinds of executable
 # 1. nvim 
 # 2. tree-sitter parsers
 # 3. lsp servers
@@ -15,7 +15,7 @@
 # It will create a init.vim file and mess up my config
 
 
-{ pkgs, ... }: {
+{ pkgs, ... }@args: {
 
   # Do not include Packer's dir -- nvim/plugin -- need write permission
   xdg.configFile."nvim/init.lua".source = ../config/nvim/init.lua;
@@ -24,7 +24,12 @@
 
   home.packages = with pkgs;  [
 
-    neovim
+    #If your machine is very slow, please use neovim offical overlay <-- binary cache
+
+    (pkgs.neovim-unwrapped.overrideAttrs (oldAttrs: {
+      version = "nightly";
+      src = args.neovim-nightly;
+    }))
 
     #Compile Tree-Sitter parsers
     gcc
@@ -41,7 +46,7 @@
     nodePackages.typescript-language-server #Typescript
 
     cargo #Rust
-    nodejs # LSP Installer
+    nodejs # JavaScript
 
     # Telescope
     fd

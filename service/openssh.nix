@@ -1,9 +1,11 @@
 { config, ... }: {
+  # sshd (server)
   services.openssh = {
     enable = true;
     passwordAuthentication = false;
   };
 
+  # ssh (client)
   programs.ssh = {
     extraConfig = ''
       Host jp1
