@@ -18,21 +18,22 @@
         DisableFirefoxStudies = true;
         DisablePocket = true;
         DisableTelemetry = true;
-        DisableFirefoxAccounts = true;
 
-        FirefoxHome = {
-          SponsoredTopSites = false;
-          TopSites = false;
-          Pocket = false;
-        };
+        # FirefoxAccount only for Sync bookmarks
+        # DisableFirefoxAccounts = true;
 
         NoDefaultBookmarks = true;
         DontCheckDefaultBrowser = true;
 
+        FirefoxHome = {
+          Pocket = false;
+          SponsoredTopSites = false;
+        };
+
         # about:config
         # https://github.com/mozilla/policy-templates/#preferences
         Preferences = {
-          # Dark theme 
+          #Force Dark theme 
           "browser.theme.toolbar-theme" = 0;
           "browser.theme.content-theme" = 0;
 
@@ -41,8 +42,10 @@
 
           "browser.startup.page" = 3; # Restore previous session
 
+          # "media.ffmpeg.vaapi.enabled" = true;
 
-          "media.ffmpeg.vaapi.enabled" = true;
+          # Disable Amazon Search  
+          "browser.newtabpage.activity-stream.improvesearch.topSiteSearchShortcuts" = false;
 
           # Enable CustomCSS
           "toolkit.legacyUserProfileCustomizations.stylesheets" = true;
@@ -112,9 +115,10 @@
 
     profiles.default = {
       # https://github.com/Aris-t2/CustomCSSforFx
+      # https://firefox-source-docs.mozilla.org/devtools-user/browser_toolbox/index.html
       # Remove annoying "import bookmarks" button in PersonalToolbar 
       userChrome = "
-        #import-button {
+        #import-button, #fxa-toolbar-menu-button, #appMenu-passwords-button {
           display: none !important;
         }
       ";
@@ -122,5 +126,6 @@
     };
 
   };
+
 }
 
