@@ -15,10 +15,15 @@
     wireplumber.enable = true;
   };
 
-  environment.loginShellInit = ''
-    if [ -z $DISPLAY ] && [ "$(tty)" = "/dev/tty1" ]; then
-      exec sway
-    fi
-  '';
+  services.greetd = {
+    enable = true;
+    settings = rec {
+      initial_session = {
+        command = "sway";
+        user = "dominic";
+      };
+      default_session = initial_session;
+    };
+  };
 
 }
