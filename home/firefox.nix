@@ -33,7 +33,6 @@
         # https://github.com/mozilla/policy-templates/#preferences
         Preferences = {
           # Dark theme 
-          # "layout.css.prefers-color-scheme.content-override" = 0;
           "browser.theme.toolbar-theme" = 0;
           "browser.theme.content-theme" = 0;
 
@@ -42,13 +41,12 @@
 
           "browser.startup.page" = 3; # Restore previous session
 
-          "browser.bookmarks.addedImportButton" = false;
 
           "media.ffmpeg.vaapi.enabled" = true;
 
+          # Enable CustomCSS
+          "toolkit.legacyUserProfileCustomizations.stylesheets" = true;
 
-          # Disable bookmarks in toolbar-theme
-          # "browser.toolbars.bookmarks.visibility" = "never";
         };
 
         ManagedBookmarks = [
@@ -113,15 +111,13 @@
     };
 
     profiles.default = {
-      bookmarks = {
-        wikipedia = {
-          keyword = "wiki";
-          url = "https://en.wikipedia.org/wiki/Special:Search?search=%s&go=Go";
-        };
-        kernel = {
-          url = "https://www.kernel.org";
-        };
-      };
+      # https://github.com/Aris-t2/CustomCSSforFx
+      # Remove annoying "import bookmarks" button in PersonalToolbar 
+      userChrome = "
+        #import-button {
+          display: none !important;
+        }
+      ";
 
     };
 

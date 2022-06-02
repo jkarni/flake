@@ -41,6 +41,8 @@
       system = "aarch64-linux";
       modules = [
         ./host/oracle
+        sops-nix.nixosModules.sops
+        ./secrets
         home-manager.nixosModules.home-manager
         {
           home-manager.useGlobalPkgs = true;
