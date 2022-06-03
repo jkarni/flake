@@ -2,7 +2,7 @@
   inputs = {
 
     nixpkgs = {
-      url = "github:nixos/nixpkgs/nixos-unstable-small";
+      url = "github:nixos/nixpkgs/nixos-unstable";
     };
 
     home-manager = {
@@ -28,7 +28,7 @@
 
     darwinConfigurations."M1" = darwin.lib.darwinSystem {
       system = "aarch64-darwin";
-      modules = [ 
+      modules = [
         ./darwin
         home-manager.darwinModules.home-manager
         {

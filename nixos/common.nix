@@ -21,12 +21,13 @@
   time.timeZone = "America/Los_Angeles";
 
   i18n.defaultLocale = "en_US.UTF-8";
-  
+
   fonts.fonts = with pkgs; [
     (nerdfonts.override { fonts = [ "Hack" ]; })
     wqy_microhei
   ];
 
+  environment.sessionVariables.EDITOR = "nvim";
 
   boot.kernel.sysctl = {
     "net.core.default_qdisc" = "fq";
