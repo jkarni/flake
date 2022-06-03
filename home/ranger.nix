@@ -10,7 +10,7 @@
     ranger
   ];
 
-  home.activation.linkDotfiles = lib.hm.dag.entryAfter [ "writeBoundary" ]
+  home.activation.linkRanger = lib.hm.dag.entryAfter [ "writeBoundary" ]
     ''
       if [ $(whoami) = root ]
       then

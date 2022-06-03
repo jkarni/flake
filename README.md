@@ -67,3 +67,24 @@ nixos-rebuild switch --flake /etc/flake#hx90
 cd /etc/falke
 git remote set-url origin git@github.com:mlyxshi/flake.git
 ```
+
+
+# Darwin
+```
+# https://nixos.org/manual/nix/stable/installation/installing-binary.html
+sh <(curl -L https://nixos.org/nix/install)
+
+nix-env -iA nixpkgs.nixUnstable
+
+# bootstrap darwin-nix
+# nix build <Flake Floder PATH>#darwinConfigurations.<HOSTNAME>.system
+
+nix build ~/flake#darwinConfigurations.M1.system
+./result/sw/bin/darwin-rebuild switch --flake ~/flake#M1
+
+# https://github.com/LnL7/nix-darwin/issues/458
+sudo mv /etc/nix/nix.conf  /etc/nix/nix.conf.bkup 
+
+cd ~/flake
+darwin-rebuild switch --flake ~/flake#M1
+```
