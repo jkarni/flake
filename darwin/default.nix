@@ -14,14 +14,16 @@
 
   nixpkgs.config.allowUnfree = true;
 
-  fonts.fonts = with pkgs; [
-    (nerdfonts.override { fonts = [ "Hack" ]; })
-  ];
+  
+  fonts={
+    fontDir.enable =true;
+    fonts = [pkgs.meslo-lgs-nf];
+  };
 
-  # This must be enable <-- darwin system level
-  # Plus home manager zsh module  <-- user configuration level
-  programs.zsh.enable = true;
+
+  programs.zsh={
+    enable = true;
+  };
 
   services.nix-daemon.enable = true;
 }
-

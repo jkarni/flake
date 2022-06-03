@@ -9,7 +9,6 @@
       "mas"
     ];
     casks = [
-      "baidunetdisk"
       "calibre"
       "ipatool"
       "maczip"
@@ -42,6 +41,7 @@
       # "istat-menus"
       # "snipaste"
       # "paw"
+      # "iina"
     ];
 
     # Only for fresh installation

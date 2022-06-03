@@ -70,6 +70,18 @@ git remote set-url origin git@github.com:mlyxshi/flake.git
 
 
 # Darwin
+## pre
+```
+
+xcode-select --install
+
+#insatll homebrew
+/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install.sh)"
+
+# login appstore and uncomment brew mas section
+```
+
+## nix
 ```
 # https://nixos.org/manual/nix/stable/installation/installing-binary.html
 sh <(curl -L https://nixos.org/nix/install)
@@ -78,13 +90,13 @@ nix-env -iA nixpkgs.nixUnstable
 
 # bootstrap darwin-nix
 # nix build <Flake Floder PATH>#darwinConfigurations.<HOSTNAME>.system
-
+cd ~/flake
 nix build ~/flake#darwinConfigurations.M1.system
 ./result/sw/bin/darwin-rebuild switch --flake ~/flake#M1
 
 # https://github.com/LnL7/nix-darwin/issues/458
 sudo mv /etc/nix/nix.conf  /etc/nix/nix.conf.bkup 
 
-cd ~/flake
+# Finally rebuild
 darwin-rebuild switch --flake ~/flake#M1
 ```

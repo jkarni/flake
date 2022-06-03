@@ -23,8 +23,8 @@
   i18n.defaultLocale = "en_US.UTF-8";
 
   fonts.fonts = with pkgs; [
-    (nerdfonts.override { fonts = [ "Hack" ]; })
-    wqy_microhei
+    meslo-lgs-nf #powerline10k
+    wqy_microhei #Chinese, Japanese
   ];
 
   environment.sessionVariables.EDITOR = "nvim";
