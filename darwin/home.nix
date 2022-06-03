@@ -2,7 +2,7 @@
 
   imports = [
     ../home/git.nix
-    ./zsh.nix
+    ../home/zsh.nix
     ./ranger.nix
     ./nvim.nix
   ];

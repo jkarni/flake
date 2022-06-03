@@ -20,9 +20,12 @@
     fonts = [pkgs.meslo-lgs-nf];
   };
 
-
+  # System Level ZSH Enable
   programs.zsh={
     enable = true;
+    variables = {
+      EDITOR ="nvim";
+    };
   };
 
   services.nix-daemon.enable = true;
