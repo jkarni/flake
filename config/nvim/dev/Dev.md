@@ -3,6 +3,8 @@
 
 # Document
 :Telescope help_tags
+:Telescope highlights
+
 
 # Read help
 ## Jump

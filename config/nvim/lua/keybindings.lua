@@ -82,7 +82,7 @@ keymap('v', '<S-Tab>', '<')
 -- ESC Terminal
 keymap("t", "<Esc>", "<C-\\><C-n>")
 
--- Warpper Terminal
+-- Wrapper Terminal
 M.toggleTerm = "<leader>\\"
 
 -- Telescope

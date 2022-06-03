@@ -46,6 +46,7 @@
     nodePackages.typescript-language-server #Typescript
 
     cargo #Rust
+    rustc
     nodejs # JavaScript
 
     # Telescope

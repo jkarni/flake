@@ -24,7 +24,7 @@ Rebuild NixOS
 ```
 nix-env -iA nixos.vim nixos.git nixos.tree
 <write private key>
-git clone git@github.com:mlyxshi/flake.git  /etc/flake
+git clone https://github.com/mlyxshi/flake /etc/flake
 rm -rf /boot/*
 bootctl install
 nixos-rebuild switch --flake /etc/flake#oracle
@@ -48,7 +48,7 @@ mount /dev/nvme0n1p1 /mnt/boot
 
 nix-env -iA nixos.vim nixos.git nixos.tree nixos.nixUnstable
 
-git clone  https://github.com/mlyxshi/flake /mnt/etc/nixos 
+git clone  https://github.com/mlyxshi/flake /mnt/etc/flake 
 nixos-install --flake /mnt/etc/flake#hx90
 ```
 
