@@ -18,6 +18,8 @@
     htop
     unzip
 
+    lazygit
+    go
     rclone
     ideviceinstaller
   ];

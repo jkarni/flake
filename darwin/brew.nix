@@ -4,7 +4,6 @@
     autoUpdate = true;
     cleanup = "uninstall";
     brews = [
-      "hugo"
       "iproute2mac"
       "mas"
     ];

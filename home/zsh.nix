@@ -25,6 +25,11 @@
 
     dirHashes = if pkgs.stdenv.system == "aarch64-darwin" then { flake = "$HOME/flake"; } else { flake = "etc/flake"; };
 
+    initExtra = if pkgs.stdenv.system == "aarch64-darwin" then ''
+      path+=~/go/bin
+      path+=/Applications/Surge.app/Contents/Applications
+    '' else '' '';
+
   };
 
 }
