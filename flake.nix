@@ -24,7 +24,7 @@
 
   };
 
-  outputs = { nixpkgs, darwin, home-manager, sops-nix, neovim-nightly, ... }@args: {
+  outputs = { nixpkgs, darwin, home-manager, sops-nix, ... }@args: {
 
     darwinConfigurations."M1" = darwin.lib.darwinSystem {
       system = "aarch64-darwin";

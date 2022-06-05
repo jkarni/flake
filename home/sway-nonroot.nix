@@ -2,6 +2,7 @@
   imports = [
     ./common.nix
     ./ui.nix
+    ./mpv.nix
     ./firefox.nix
   ];
 
@@ -18,7 +19,6 @@
     swaylock
     swayidle
     wl-clipboard
-    mako
     waybar
     foot
     pavucontrol

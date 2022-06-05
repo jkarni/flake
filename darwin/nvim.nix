@@ -4,10 +4,9 @@
   # Therefore, I will not use {xdg.configFile."nvim/init.lua".source} to manage my nvim config  <-- Everytime I make a minor change, I have to rebuild my OS
   # Insteed, I decide to use the conventional and undeterministic way <-- Simple symbolic link
 
-  home.activation.linkNeovim = lib.hm.dag.entryAfter [ "writeBoundary" ]
-    ''
-      ln -sfn $HOME/flake/config/nvim  $HOME/.config/nvim
-    '';
+  home.activation.linkNeovim = lib.hm.dag.entryAfter [ "writeBoundary" ]''
+    ln -sfn $HOME/flake/config/nvim  $HOME/.config/nvim
+  '';
 
 
   home.packages = with pkgs;  [

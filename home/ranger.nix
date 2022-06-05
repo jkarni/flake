@@ -10,13 +10,12 @@
     ranger
   ];
 
-  home.activation.linkRanger = lib.hm.dag.entryAfter [ "writeBoundary" ]
-    ''
-      if [ $(whoami) = root ]
-      then
-        chmod -R 777 /etc/flake/config/ranger
-      fi
+  home.activation.linkRanger = lib.hm.dag.entryAfter [ "writeBoundary" ]''
+    if [ $(whoami) = root ]
+    then
+      chmod -R 777 /etc/flake/config/ranger
+    fi
 
-      ln -sfn /etc/flake/config/ranger  $HOME/.config/ranger
-    '';
+    ln -sfn /etc/flake/config/ranger  $HOME/.config/ranger
+  '';
 }

@@ -17,6 +17,7 @@
     neofetch
     unzip
     exa
+    lazygit
   ];
 
   home.stateVersion = "22.05";

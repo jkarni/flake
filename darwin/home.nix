@@ -3,8 +3,10 @@
   imports = [
     ../home/git.nix
     ../home/zsh.nix
+    ./mpv.nix
     ./ranger.nix
     ./nvim.nix
+
   ];
 
   home.packages = with pkgs;  [

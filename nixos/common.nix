@@ -22,10 +22,13 @@
 
   i18n.defaultLocale = "en_US.UTF-8";
 
-  fonts.fonts = with pkgs; [
-    meslo-lgs-nf #powerline10k
-    wqy_microhei #Chinese, Japanese
-  ];
+  fonts={
+    fontconfig.enable = true;  # mpv: libass fontconfig
+    fonts = with pkgs; [
+      meslo-lgs-nf #powerline10k
+      source-han-sans #Chinese, Japanese
+    ];
+  };
 
   environment.sessionVariables.EDITOR = "nvim";
 

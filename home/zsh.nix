@@ -7,12 +7,14 @@
   home.file.".p10k.zsh".source = ../config/.p10k.zsh;
 
   programs.zsh = {
+    
     enable = true;
 
     shellAliases = {
       l = "exa -algh";
       v = "nvim";
       r = "ranger";
+      g = "lazygit";
     };
 
     enableAutosuggestions = true;

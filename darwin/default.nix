@@ -17,7 +17,9 @@
   
   fonts={
     fontDir.enable =true;
-    fonts = [pkgs.meslo-lgs-nf];
+    fonts = with pkgs;[
+      meslo-lgs-nf
+    ];
   };
 
   # System Level ZSH Enable

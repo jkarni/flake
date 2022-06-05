@@ -8,6 +8,7 @@
       "mas"
     ];
     casks = [
+      "mpv"  # Don't use mpv from nixpkgs <-- Not optimized for macos
       "calibre"
       "ipatool"
       "maczip"
@@ -40,7 +41,6 @@
       # "istat-menus"
       # "snipaste"
       # "paw"
-      # "iina"
     ];
 
     # Only for fresh installation
