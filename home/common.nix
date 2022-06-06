@@ -3,7 +3,7 @@
   imports = [
     ./git.nix
     ./zsh.nix
-    ./ranger.nix
+    ./lf.nix
     ./nvim.nix
   ];
 
@@ -17,6 +17,7 @@
     neofetch
     unzip
     exa
+    procs
     lazygit
   ];
 

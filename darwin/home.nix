@@ -2,9 +2,9 @@
 
   imports = [
     ../home/git.nix
-    ../home/zsh.nix
+    ./zsh.nix
     ./mpv.nix
-    ./ranger.nix
+    ./lf.nix
     ./nvim.nix
 
   ];
@@ -18,12 +18,15 @@
     vim
     tree
     htop
+    procs
     unzip
 
     lazygit
     go
-    rclone
     ideviceinstaller
+    rclone  
+
+
   ];
 
   home.stateVersion = "22.05";

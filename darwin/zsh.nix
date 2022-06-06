@@ -26,7 +26,28 @@
       [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
     '';
 
-    dirHashes =  { flake = "etc/flake"; };
+    dirHashes =  { flake = "$HOME/flake"; };
+
+    initExtra = ''
+      path+=~/go/bin
+      path+=/Applications/Surge.app/Contents/Applications  # surge-cli
+      
+      lfcd () {
+        tmp="$(mktemp)"
+        lf -last-dir-path="$tmp" "$@"
+        if [ -f "$tmp" ]; then
+          dir="$(cat "$tmp")"
+          rm -f "$tmp"
+          if [ -d "$dir" ]; then
+            if [ "$dir" != "$(pwd)" ]; then
+              cd "$dir"
+            fi
+          fi
+        fi
+      }
+
+      bindkey -s '^f' 'lfcd\n'  # zsh
+    '';
 
   };
 
