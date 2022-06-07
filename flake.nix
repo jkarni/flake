@@ -19,8 +19,6 @@
 
     neovim-nightly.url = "github:nix-community/neovim-nightly-overlay";
 
-    SFMono-Patch.url = "github:mlyxshi/font";
-
   };
 
   outputs = { nixpkgs, darwin, home-manager, neovim-nightly, sops-nix,... }@args: {
@@ -76,10 +74,9 @@
           home-manager.useGlobalPkgs = true;
           home-manager.useUserPackages = true;
           home-manager.users.root = import ./home/server.nix;
-          # get nvim from binary cache
-          # nixpkgs.overlays = [
-          #   neovim-nightly.overlay
-          # ];
+          nixpkgs.overlays = [
+            neovim-nightly.overlay
+          ];
           home-manager.extraSpecialArgs = args;
         }
       ];

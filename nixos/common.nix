@@ -24,11 +24,9 @@
 
   fonts={
     fonts = with pkgs; [
-      SFMono-Patch
+      (nerdfonts.override { fonts = [ "Iosevka" ]; })
       source-han-sans #Chinese, Japanese
     ];
-
-    fontconfig.defaultFonts.monospace = [ "Liga SFMono Nerd Font" ];
   };
 
   environment.sessionVariables.EDITOR = "nvim";
