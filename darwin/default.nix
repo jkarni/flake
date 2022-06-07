@@ -18,7 +18,7 @@
   # fonts={
   #   fontDir.enable =true;
   #   fonts = with pkgs;[
-  #     meslo-lgs-nf
+  #     (nerdfonts.override { fonts = [ "Hack" ]; })
   #   ];
   # };
 

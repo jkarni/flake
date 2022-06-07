@@ -1,20 +1,17 @@
-{ pkgs, ... }: {
+{ pkgs, lib, ... }: {
 
-  home.packages = with pkgs;  [
-    zsh-powerlevel10k
-  ];
-
-  home.file.".p10k.zsh".source = ../config/.p10k.zsh;
-
+  # Rust autojump
   programs.zoxide.enable = true;
 
-  programs.bat = {
-    enable = true;
-    config.style = "plain";
-  };
+  #Rust prompt
+  programs.starship.enable = true;
+
+  home.activation.linkStarShip = lib.hm.dag.entryAfter [ "writeBoundary" ] ''
+    ln -sfn $HOME/flake/config/starship.toml  $HOME/.config/starship.toml
+  '';
 
   programs.zsh = {
-    
+
     enable = true;
 
     shellAliases = {
@@ -23,16 +20,11 @@
       r = "lf";
       p = "procs";
       g = "lazygit";
-      c ="bat";
+      c = "bat";
     };
 
     enableAutosuggestions = true;
     enableSyntaxHighlighting = true;
-
-    initExtraFirst = ''
-      source ${pkgs.zsh-powerlevel10k}/share/zsh-powerlevel10k/powerlevel10k.zsh-theme
-      [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
-    '';
 
 
     initExtra = ''

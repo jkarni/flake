@@ -18,6 +18,7 @@
     unzip
     exa
     procs
+    bat
     lazygit
   ];
 

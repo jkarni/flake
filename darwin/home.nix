@@ -19,6 +19,7 @@
     tree
     htop
     procs
+    bat
     delta
     unzip
 

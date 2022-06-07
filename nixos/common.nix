@@ -25,7 +25,7 @@
   fonts={
     fontconfig.enable = true;  # mpv: libass fontconfig
     fonts = with pkgs; [
-      meslo-lgs-nf #powerline10k
+      (nerdfonts.override { fonts = [ "Hack" ]; })
       source-han-sans #Chinese, Japanese
     ];
   };
