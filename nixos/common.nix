@@ -28,7 +28,7 @@
       source-han-sans #Chinese, Japanese
     ];
 
-    fontconfig.defaultFonts.monospace = [ "SFMono-Patch" ];
+    fontconfig.defaultFonts.monospace = [ "Liga SFMono Nerd Font" ];
   };
 
   environment.sessionVariables.EDITOR = "nvim";
