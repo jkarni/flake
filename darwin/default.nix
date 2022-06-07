@@ -15,12 +15,12 @@
   nixpkgs.config.allowUnfree = true;
 
   
-  fonts={
-    fontDir.enable =true;
-    fonts = with pkgs;[
-      meslo-lgs-nf
-    ];
-  };
+  # fonts={
+  #   fontDir.enable =true;
+  #   fonts = with pkgs;[
+  #     meslo-lgs-nf
+  #   ];
+  # };
 
   # System Level ZSH Enable
   programs.zsh={

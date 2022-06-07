@@ -6,6 +6,8 @@
 
   home.file.".p10k.zsh".source = ../config/.p10k.zsh;
 
+  programs.zoxide.enable = true;
+
   programs.zsh = {
     
     enable = true;
@@ -26,7 +28,6 @@
       [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
     '';
 
-    dirHashes =  { flake = "etc/flake"; };
 
   };
 

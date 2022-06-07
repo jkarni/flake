@@ -6,6 +6,13 @@
 
   home.file.".p10k.zsh".source = ../config/.p10k.zsh;
 
+  programs.zoxide.enable = true;
+
+  programs.bat = {
+    enable = true;
+    config.style = "plain";
+  };
+
   programs.zsh = {
     
     enable = true;
@@ -16,6 +23,7 @@
       r = "lf";
       p = "procs";
       g = "lazygit";
+      c ="bat";
     };
 
     enableAutosuggestions = true;
@@ -26,7 +34,6 @@
       [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
     '';
 
-    dirHashes =  { flake = "$HOME/flake"; };
 
     initExtra = ''
       path+=~/go/bin
