@@ -54,6 +54,9 @@
           home-manager.users.dominic = import ./home/sway-nonroot.nix;
           nixpkgs.overlays = [
             neovim-nightly.overlay
+            (final: prev: {
+                sf-mono-liga-bin = pkgs.callPackage ./pkgs/sf-mono-liga-bin { };
+            })
           ];
           home-manager.extraSpecialArgs = args;
         }

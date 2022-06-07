@@ -25,7 +25,7 @@
   fonts={
     fontconfig.enable = true;  # mpv: libass fontconfig
     fonts = with pkgs; [
-      pkgs.callPackage ../pkgs/sf-mono-liga-bin
+      sf-mono-liga-bin
       source-han-sans #Chinese, Japanese
     ];
   };
