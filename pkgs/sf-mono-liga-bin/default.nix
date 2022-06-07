@@ -9,8 +9,8 @@ in fetchFromGitHub rec {
   sha256 = "sha256-hH5pLXD1NWqpKuQSqfDn50u2NPJmLlqOqllo2j3x2ag=";
 
   postFetch = ''
-    mkdir -p $out/share/fonts/opentype
-    tar xf $downloadedFile -C $out/share/fonts/opentype
+    mkdir -p $out/share/fonts/opentype/
+    tar xvf $downloadedFile  $out/share/fonts/opentype/
   '';
 
   meta = with lib; {
