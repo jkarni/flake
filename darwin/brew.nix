@@ -3,11 +3,20 @@
     enable = true;
     autoUpdate = true;
     cleanup = "uninstall";
+    
     brews = [
       "iproute2mac"
       "mas"
     ];
+
+    taps = [
+      "homebrew/cask"
+      "homebrew/cask-fonts"
+      "majd/repo"
+    ];
+
     casks = [
+      "font-roboto-mono-nerd-font"
       "mpv"  # Don't use mpv from nixpkgs <-- Not optimized for macos
       "calibre"
       "ipatool"
@@ -73,11 +82,6 @@
     #   Infuse = 1136220934;
     #   Apple-Configurator = 1037126344;
     # };
-
-    taps = [
-      "homebrew/cask"
-      "majd/repo"
-    ];
 
   };
 }

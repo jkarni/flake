@@ -10,7 +10,6 @@
 
   nixpkgs.config.allowUnfree = true;
 
-
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
 
@@ -25,7 +24,7 @@
   fonts={
     fonts = with pkgs; [
       (nerdfonts.override { fonts = [ "RobotoMono" ]; })
-      source-han-sans #Chinese, Japanese
+      source-han-sans #Chinese Japanese
     ];
   };
 
@@ -35,7 +34,6 @@
     "net.core.default_qdisc" = "fq";
     "net.ipv4.tcp_congestion_control" = "bbr";
     "net.ipv4.tcp_fastopen" = "3";
-
   };
 
   system.stateVersion = "22.05";

@@ -12,9 +12,6 @@
     hostName = "nixos";
   };
 
-  # Electron wayland
-  # environment.sessionVariables.NIXOS_OZONE_WL = "1";
-
   users.mutableUsers = false;
   security.sudo.wheelNeedsPassword = false;
 
