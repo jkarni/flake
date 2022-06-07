@@ -1,4 +1,4 @@
-{ pkgs, lib, neovim-nightly, ... }: {
+{ pkgs, lib, ... }: {
 
   # Darwin is my main OS. 
   # Therefore, I will not use {xdg.configFile."nvim/init.lua".source} to manage my nvim config  <-- Everytime I make a minor change, I have to rebuild my OS
@@ -11,10 +11,7 @@
 
   home.packages = with pkgs;  [
 
-    (neovim-unwrapped.overrideAttrs (oldAttrs: {
-      version = "nightly";
-      src = neovim-nightly;
-    }))
+    neovim-unwrapped
 
     #Compile Tree-Sitter parsers
     # default clang

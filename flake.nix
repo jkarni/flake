@@ -17,14 +17,11 @@
 
     sops-nix.url = "github:Mic92/sops-nix";
 
-    neovim-nightly = {
-      url = "github:neovim/neovim";
-      flake = false;
-    };
+    neovim-nightly.url = "github:nix-community/neovim-nightly-overlay";
 
   };
 
-  outputs = { nixpkgs, darwin, home-manager, sops-nix, ... }@args: {
+  outputs = { nixpkgs, darwin, home-manager, neovim-nightly, sops-nix, ... }@args: {
 
     darwinConfigurations."M1" = darwin.lib.darwinSystem {
       system = "aarch64-darwin";
@@ -35,6 +32,9 @@
           home-manager.useGlobalPkgs = true;
           home-manager.useUserPackages = true;
           home-manager.users.dominic = import ./darwin/home.nix;
+          nixpkgs.overlays = [
+            neovim-nightly.overlay
+          ];
           home-manager.extraSpecialArgs = args;
         }
       ];
@@ -52,6 +52,9 @@
           home-manager.useUserPackages = true;
           home-manager.users.root = import ./home/sway-root.nix;
           home-manager.users.dominic = import ./home/sway-nonroot.nix;
+          nixpkgs.overlays = [
+            neovim-nightly.overlay
+          ];
           home-manager.extraSpecialArgs = args;
         }
       ];
@@ -69,6 +72,10 @@
           home-manager.useGlobalPkgs = true;
           home-manager.useUserPackages = true;
           home-manager.users.root = import ./home/server.nix;
+          # get nvim from binary cache
+          # nixpkgs.overlays = [
+          #   neovim-nightly.overlay
+          # ];
           home-manager.extraSpecialArgs = args;
         }
       ];
