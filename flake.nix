@@ -21,7 +21,7 @@
 
   };
 
-  outputs = { nixpkgs, darwin, home-manager, neovim-nightly, sops-nix, pkgs ,... }@args: {
+  outputs = { nixpkgs, darwin, home-manager, neovim-nightly, sops-nix ,... }@args: {
 
     darwinConfigurations."M1" = darwin.lib.darwinSystem {
       system = "aarch64-darwin";
@@ -52,14 +52,19 @@
           home-manager.useUserPackages = true;
           home-manager.users.root = import ./home/sway-root.nix;
           home-manager.users.dominic = import ./home/sway-nonroot.nix;
+          home-manager.extraSpecialArgs = args;
+        }
+
+        ({ config, pkgs, lib, ... }: {
           nixpkgs.overlays = [
             neovim-nightly.overlay
             (final: prev: {
                 sf-mono-liga-bin = pkgs.callPackage ./pkgs/sf-mono-liga-bin { };
             })
-          ];
-          home-manager.extraSpecialArgs = args;
-        }
+          ];       
+        })
+        
+
       ];
     };
 
