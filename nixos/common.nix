@@ -1,4 +1,4 @@
-{ config, pkgs, SFMono-Patch , ... }: {
+{ config, pkgs, SFMono-Patch, ... }: {
 
 
   nix = {
@@ -6,6 +6,22 @@
     extraOptions = ''
       experimental-features = nix-command flakes
     '';
+    # https://github.com/NixOS/nixpkgs/blob/master/nixos/modules/services/misc/nix-daemon.nix
+    # neovim binary cache
+    settings = {
+      substituters = [
+        "https://nix-community.cachix.org"
+      ];
+      trusted-public-keys = [
+        "nix-community.cachix.org-1:mB9FSh9qf2dCimDSUo8Zy7bkq5CX+/rkCWyvRCYg3Fs="
+      ];
+    };
+
+    gc = {
+      automatic = true;
+      dates = "weekly";
+      options = "--delete-older-than 7d";
+    };
   };
 
   nixpkgs.config.allowUnfree = true;
@@ -21,7 +37,7 @@
 
   i18n.defaultLocale = "en_US.UTF-8";
 
-  fonts={
+  fonts = {
     fonts = with pkgs; [
       (nerdfonts.override { fonts = [ "RobotoMono" ]; })
       source-han-sans #Chinese Japanese

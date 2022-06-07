@@ -18,6 +18,7 @@
     unzip
     exa
     delta
+    tldr
     procs
     bat
     lazygit
