@@ -23,11 +23,12 @@
   i18n.defaultLocale = "en_US.UTF-8";
 
   fonts={
-    # fontconfig.enable = true;  # mpv: libass fontconfig
     fonts = with pkgs; [
       SFMono-Patch
       source-han-sans #Chinese, Japanese
     ];
+
+    fontconfig.defaultFonts.monospace = [ "SFMono-Patch" ];
   };
 
   environment.sessionVariables.EDITOR = "nvim";
