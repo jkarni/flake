@@ -24,7 +24,7 @@
 
   fonts={
     fonts = with pkgs; [
-      (nerdfonts.override { fonts = [ "Iosevka" ]; })
+      (nerdfonts.override { fonts = [ "iosevka" ]; })
       source-han-sans #Chinese, Japanese
     ];
   };
