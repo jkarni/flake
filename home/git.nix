@@ -3,6 +3,9 @@
     enable = true;
     userName = "mlyxshi";
     userEmail = "mlyxdev@gmail.com";
+
+    delta.enable = true;
+    
     ignores = [
       ".DS_Store" # macOS
     ];

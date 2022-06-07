@@ -19,6 +19,7 @@
     tree
     htop
     procs
+    delta
     unzip
 
     lazygit
