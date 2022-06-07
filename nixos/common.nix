@@ -23,7 +23,7 @@
   i18n.defaultLocale = "en_US.UTF-8";
 
   fonts={
-    fontconfig.enable = true;  # mpv: libass fontconfig
+    # fontconfig.enable = true;  # mpv: libass fontconfig
     fonts = with pkgs; [
       sf-mono-liga-bin
       source-han-sans #Chinese, Japanese
