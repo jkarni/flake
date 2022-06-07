@@ -1,4 +1,4 @@
-{ config, pkgs, ... }: {
+{ config, pkgs, SF-Mono-Nerd-Font , ... }: {
 
 
   nix = {
@@ -25,7 +25,7 @@
   fonts={
     fontconfig.enable = true;  # mpv: libass fontconfig
     fonts = with pkgs; [
-      (nerdfonts.override { fonts = [ "Hack" ]; })
+      pkgs.callPackage ../pkgs/sf-mono-liga-bin
       source-han-sans #Chinese, Japanese
     ];
   };
