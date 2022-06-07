@@ -19,9 +19,11 @@
 
     neovim-nightly.url = "github:nix-community/neovim-nightly-overlay";
 
+    SFMono-Patch.url = "github:mlyxshi/font";
+
   };
 
-  outputs = { nixpkgs, darwin, home-manager, neovim-nightly, sops-nix ,... }@args: {
+  outputs = { nixpkgs, darwin, home-manager, neovim-nightly, sops-nix,... }@args: {
 
     darwinConfigurations."M1" = darwin.lib.darwinSystem {
       system = "aarch64-darwin";
@@ -54,17 +56,7 @@
           home-manager.users.dominic = import ./home/sway-nonroot.nix;
           home-manager.extraSpecialArgs = args;
         }
-
-        ({ config, pkgs, lib, ... }: {
-          nixpkgs.overlays = [
-            neovim-nightly.overlay
-            (final: prev: {
-                sf-mono-liga-bin = pkgs.callPackage ./pkgs/sf-mono-liga-bin { };
-            })
-          ];       
-        })
         
-
       ];
     };
 

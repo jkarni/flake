@@ -1,4 +1,4 @@
-{ config, pkgs, SF-Mono-Nerd-Font , ... }: {
+{ config, pkgs, SFMono-Patch , ... }: {
 
 
   nix = {
@@ -25,7 +25,7 @@
   fonts={
     # fontconfig.enable = true;  # mpv: libass fontconfig
     fonts = with pkgs; [
-      sf-mono-liga-bin
+      SFMono-Patch
       source-han-sans #Chinese, Japanese
     ];
   };
