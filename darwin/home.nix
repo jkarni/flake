@@ -2,9 +2,9 @@
 
   imports = [
     ../home/git.nix
-    ./zsh.nix
-    ./mpv.nix
-    ./lf.nix
+    ../home/zsh.nix
+    ../home/lf.nix
+    ../home/mpv.nix
     ./nvim.nix
 
   ];

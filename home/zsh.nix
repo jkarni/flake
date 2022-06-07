@@ -6,7 +6,15 @@
   #Rust prompt
   programs.starship.enable = true;
 
-  home.file."starship.toml".source = ../config/starship.toml;
+  home.file = lib.mkIf (pkgs.stdenv.system != "aarch64-darwin") {
+    "starship.toml".source = ../config/starship.toml;
+  };
+
+  home.activation = lib.mkIf (pkgs.stdenv.system == "aarch64-darwin") {
+    linkStarShip = lib.hm.dag.entryAfter [ "writeBoundary" ] ''
+      ln -sfn $HOME/flake/config/starship.toml  $HOME/.config/starship.toml
+    '';
+  };
 
   programs.zsh = {
 
@@ -26,6 +34,7 @@
 
 
     initExtra = ''
+      path+=~/go/bin
       
       lfcd () {
         tmp="$(mktemp)"
