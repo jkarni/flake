@@ -25,7 +25,7 @@
 
   home.activation = lib.mkIf (pkgs.stdenv.system == "aarch64-darwin") {
     linkNeovim = lib.hm.dag.entryAfter [ "writeBoundary" ] ''
-      ln -sfn $HOME/flake/config/nvim/  $HOME/.config/nvim/   
+      ln -sfn $HOME/flake/config/nvim  $HOME/.config/nvim   
     '';
   };
 
