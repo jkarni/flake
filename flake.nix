@@ -55,6 +55,9 @@
           home-manager.useUserPackages = true;
           home-manager.users.root = import ./home/sway-root.nix;
           home-manager.users.dominic = import ./home/sway-nonroot.nix;
+          nixpkgs.overlays = [
+            neovim-nightly.overlay
+          ];
           home-manager.extraSpecialArgs = args;
         }
         
