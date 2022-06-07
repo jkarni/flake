@@ -43,6 +43,7 @@
     };
 
     nixosConfigurations."hx90" = nixpkgs.lib.nixosSystem {
+      specialArgs = args;
       system = "x86_64-linux";
       modules = [
         ./host/hx90
