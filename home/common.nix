@@ -17,6 +17,7 @@
     neofetch
     unzip
     exa
+    delta
     procs
     bat
     lazygit

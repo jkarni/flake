@@ -15,19 +15,24 @@
 # It will create a init.vim file and mess up my config
 
 
-{ pkgs, ... }: {
+{ pkgs, lib, ... }: {
 
   # Do not include Packer's dir -- nvim/plugin -- need write permission
-  xdg.configFile."nvim/init.lua".source = ../config/nvim/init.lua;
-  xdg.configFile."nvim/lua".source = ../config/nvim/lua;
+  xdg.configFile = lib.mkIf (pkgs.stdenv.system != "aarch64-darwin") {
+    "nvim/init.lua".source = ../config/nvim/init.lua;
+    "nvim/lua".source = ../config/nvim/lua;
+  };
+
+  home.activation = lib.mkIf (pkgs.stdenv.system == "aarch64-darwin") {
+    linkNeovim = lib.hm.dag.entryAfter [ "writeBoundary" ] ''
+      ln -sfn $HOME/flake/config/nvim/  $HOME/.config/nvim/   
+    '';
+  };
 
 
   home.packages = with pkgs;  [
 
     neovim-unwrapped
-
-    #Compile Tree-Sitter parsers
-    gcc
 
     #LSP Server
     rnix-lsp #rnix-lsp
@@ -47,5 +52,8 @@
     # Telescope
     fd
     ripgrep
-  ];
+
+    # MacOS has Xcode Command Line Tools  <-- clang includes, Tree-Sitter will invoke clang to build language parsers
+    # NixOS does not have any cc by default. Tree-Sitter will invoke gcc to build language parsers
+  ]++ lib.optional (pkgs.stdenv.system != "aarch64-darwin") gcc;
 }

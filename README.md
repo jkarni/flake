@@ -100,3 +100,11 @@ sudo mv /etc/nix/nix.conf  /etc/nix/nix.conf.bkup
 # Finally rebuild
 darwin-rebuild switch --flake ~/flake#M1
 ```
+
+
+# FAQ
+```
+Darwin is my main OS. 
+Therefore, I will not use {xdg.configFile."file".source} to manage config  <-- Everytime I make a minor change, I have to rebuild my MacOS
+Insteed, I decide to use the conventional and undeterministic way in MacOS <-- Simple symbolic link
+```
