@@ -22,7 +22,6 @@ stdenvNoCC.mkDerivation rec{
 
   meta = with lib; {
     description = "PingFang <-- Apple default font for Chinese";
-    homepage = "https://developer.apple.com/fonts/";
     license = licenses.unfree;
     platforms = platforms.all;
     maintainers = with maintainers; [ mlyxshi ];

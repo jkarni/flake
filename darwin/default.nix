@@ -19,11 +19,11 @@
 
   nixpkgs.config.allowUnfree = true;
 
-  fonts = {
-    fonts = with pkgs; [
-      SF-Pro
-    ];
-  };
+  # fonts = {
+  #   fonts = with pkgs; [
+  #     SF-Pro
+  #   ];
+  # };
 
   # System Level ZSH Enable
   programs.zsh = {

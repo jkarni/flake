@@ -5,7 +5,7 @@ stdenvNoCC.mkDerivation rec{
   version = "apple";
 
   src = fetchurl {
-    url = "https://f002.backblazeb2.com/file/mlyxbucket/SF-Pro.zip";
+    url = "https://cdn.mlyxshi.com/SF-Pro.zip";
     sha256 = "RrKsAY0UFMjnGmrDD/L8kLTxcTzCksvsaM8hJ+fwPFo=";
   };
 

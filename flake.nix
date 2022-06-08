@@ -36,10 +36,10 @@
           home-manager.users.dominic = import ./darwin/home.nix;
           nixpkgs.overlays = [
             neovim-nightly.overlay
-            (final: prev: {
-              PingFang = prev.callPackage ./pkgs/fonts/PingFang { };
-              SF-Pro = prev.callPackage ./pkgs/fonts/SF-Pro { };
-            })
+            # (final: prev: {
+            #   PingFang = prev.callPackage ./pkgs/fonts/PingFang { };
+            #   SF-Pro = prev.callPackage ./pkgs/fonts/SF-Pro { };
+            # })
           ];
           home-manager.extraSpecialArgs = args;
         }
@@ -60,6 +60,10 @@
           home-manager.useUserPackages = true;
           home-manager.users.root = import ./home/sway-root.nix;
           home-manager.users.dominic = import ./home/sway-nonroot.nix;
+          home-manager.extraSpecialArgs = args;
+        }
+
+        ({ config, pkgs, lib, ... }: {
           nixpkgs.overlays = [
             neovim-nightly.overlay
             (final: prev: {
@@ -67,9 +71,7 @@
               SF-Pro = prev.callPackage ./pkgs/fonts/SF-Pro { };
             })
           ];
-          home-manager.extraSpecialArgs = args;
-        }
-
+        })
       ];
     };
 
