@@ -42,8 +42,8 @@
       (pkgs.nerdfonts.override { fonts = [ "RobotoMono" ]; }) # Terminal Font
     ] ++ lib.optionals (config.users.users ? dominic) [ # If desktop user dominic is defined, add desktop fonts
       # The essence of apple
-      SF-Pro # English
-      PingFang # Chinese/Japanese
+      pkgs.SF-Pro # English
+      pkgs.PingFang # Chinese/Japanese
     ];
   };
 
