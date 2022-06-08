@@ -12,10 +12,7 @@ bar:
     margin: 7
   # left: focus on modules
   left:
-    - alsa:
-        card: Default
-        mixer: Master
-        content: {string: {text: "{volume}"}}
+
     - backlight:
         name: intel_backlight
         content: {string: {text: "{percent}"}}
@@ -34,7 +31,7 @@ bar:
         host: 127.0.0.1
         content: {string: {text: "{state}"}}
     - network:
-        name: ldsjfdf
+        name: eno1
         content: {string: {text: "{name}"}}
     - removables:
         content: {string: {text: "{label}"}}
@@ -43,16 +40,7 @@ bar:
     # - xwindow:
     #     content: {string: {text: "{application}: {title}"}}
   # center: focus on particles
-  center:
-    - clock: {content: {empty: {}}}
-    - clock:
-        content: [string: {text: hello}, string: {text: world}]
-    - clock:
-        content:
-          list:
-            items:
-              - string: {text: hello}
-              - string: {text: world}
+
 
   # right: focus on decorations
   right:
