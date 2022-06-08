@@ -18,6 +18,8 @@ output HDMI-A-1 scale 3
 
 seat * xcursor_theme $xcursor_theme $xcursor_size
 
+gaps inner 5
+
 exec swayidle -w \
           timeout 3000 'swaylock -f -c 000000' \
           timeout 3005 'swaymsg "output * dpms off"' resume 'swaymsg "output * dpms on"' \
@@ -132,7 +134,7 @@ mode "resize" {
 bindsym $mod+r mode "resize"
 
 bar {
-   swaybar_command waybar
+   swaybar_command yambar
 }
 
 

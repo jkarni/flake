@@ -11,7 +11,7 @@
   # option->Alt_L->Mod1
   # command->Super_L->Mod4
   xdg.configFile."sway/config".source = ../config/sway/config;
-  xdg.configFile."waybar/config".source = ../config/waybar/config;
+  xdg.configFile."yambar/config.yml".source = ../config/yambar/config.yml;
   xdg.configFile."foot/foot.ini".source = ../config/foot/foot.ini;
 
 
@@ -19,11 +19,13 @@
     swaylock
     swayidle
     wl-clipboard
-    waybar
-    foot
     pavucontrol
-    fuzzel
     baobab
+
+    # https://codeberg.org/dnkl   <-- my favourite developer in wayland. Minimalism! 
+    foot
+    yambar
+    fuzzel
 
     xorg.xlsclients #debug wev xorg.xmodmap 
   ];
