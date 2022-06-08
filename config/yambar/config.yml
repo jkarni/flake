@@ -13,12 +13,6 @@ bar:
   # left: focus on modules
   left:
 
-    - backlight:
-        name: intel_backlight
-        content: {string: {text: "{percent}"}}
-    - battery:
-        name: BAT0
-        content: {string: {text: "{capacity}"}}
     - clock:
         content: {string: {text: "{date} {time}"}}
     - i3:
