@@ -57,8 +57,7 @@ bar:
         content:
           map:
             default: {string: {text: default value}}
-            conditions:
-              date == 1234: {string: {text: specific value}}
+
     - clock:
         content:
           progress-bar:
