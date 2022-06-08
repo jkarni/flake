@@ -9,6 +9,8 @@ stdenvNoCC.mkDerivation {
     sha256 = "1f96r4by67hzqpr4p2wkrfnpj9b7x9qrmwns0312w2l2rnp2qajx";
   };
 
+  dontUnpack = true;
+  
   installPhase = ''
     mkdir -p $out/share/fonts/truetype
     cp *.ttc $out/share/fonts/truetype
