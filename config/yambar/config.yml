@@ -1,58 +1,10 @@
 bar:
-  height: 20
+  height: 26
   location: top
-  spacing: 3
-  margin: 2
-  font: monospace
-  foreground: ffffffff
   background: 000000ff
-  border:
-    width: 1
-    color: 77777777
-    margin: 7
-  # left: focus on modules
-  left:
 
-    - clock:
-        content: {string: {text: "{date} {time}"}}
-    - i3:
-        content:
-          "": {string: {text: "{name}"}}
-          ws: {string: {text: WS}}
-    - label:
-        content: {string: {text: hello}}
-    - mpd:
-        host: 127.0.0.1
-        content: {string: {text: "{state}"}}
-    - network:
-        name: eno1
-        content: {string: {text: "{name}"}}
-    - removables:
-        content: {string: {text: "{label}"}}
-    # - xkb:
-    #     content: {string: {text: "{name}"}}
-    # - xwindow:
-    #     content: {string: {text: "{application}: {title}"}}
-  # center: focus on particles
-
-
-  # right: focus on decorations
   right:
     - clock:
         content:
-          string:
-            text: background deco
-            deco: {background: {color: ffffffff}}
-    - clock:
-        content:
-          string:
-            text: underline deco
-            deco: {underline: {size: 2, color: ffffffff}}
-    - clock:
-        content:
-          string:
-            text: stacked deco
-            deco:
-              stack:
-                - underline: {size: 2, color: ffffffff}
-                - background: {color: ffffffff}
+          - string: {text: "{date}", right-margin: 5}
+          - string: {text: "{time}"}
