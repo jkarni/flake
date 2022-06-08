@@ -19,9 +19,11 @@
 
     neovim-nightly.url = "github:nix-community/neovim-nightly-overlay";
 
+    nur.url = github:nix-community/NUR;
+
   };
 
-  outputs = { nixpkgs, darwin, home-manager, neovim-nightly, sops-nix,... }@args: {
+  outputs = { nixpkgs, darwin, home-manager, neovim-nightly, sops-nix, nur, ... }@args: {
 
     darwinConfigurations."M1" = darwin.lib.darwinSystem {
       system = "aarch64-darwin";
