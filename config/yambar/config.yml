@@ -53,10 +53,6 @@ bar:
             items:
               - string: {text: hello}
               - string: {text: world}
-    - clock:
-        content:
-          map:
-            default: {string: {text: default value}}
 
   # right: focus on decorations
   right:
