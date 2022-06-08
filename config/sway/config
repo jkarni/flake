@@ -54,7 +54,7 @@ exec swayidle -w \
     bindsym $mod+q kill
 
     # Start your launcher
-    bindsym Mod4+space  exec $menu
+    bindsym $mod+space  exec $menu
 
     # Reload the configuration file
     bindsym $mod+Shift+r reload
@@ -133,14 +133,6 @@ mode "resize" {
 }
 bindsym $mod+r mode "resize"
 
-# bar {
-#    swaybar_command yambar
-# }
-
-
-# Automatically Start terminal and broswer
-assign [app_id="foot"] 1
-assign [app_id="firefox"] 2
 exec foot
-exec firefox
-exec yambar
+# exec firefox
+# exec yambar
