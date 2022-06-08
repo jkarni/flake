@@ -39,12 +39,12 @@
 
   fonts = {
     fonts = with pkgs; [
+      # Steve Jobs and Apple
+      SF-Pro # English
+      PingFang #Chinese/Japanese
+
       # Terminal/Developer Font
       (nerdfonts.override { fonts = [ "RobotoMono" ]; })
-      
-      # Steve Jobs and Apple
-      config.nur.repos.sagikazarmark.sf-pro
-      PingFang #Chinese/Japanese
     ];
   };
 
