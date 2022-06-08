@@ -1,10 +1,12 @@
 bar:
-  height: 26
+  height: 50
   location: top
   background: 000000ff
 
   right:
     - clock:
         content:
-          - string: {text: "{date}", right-margin: 5}
-          - string: {text: "{time}"}
+          - string: {text: , font: "Monospace:size=50"}
+          - string: {text: "{date}", right-margin: 5, font: "Monospace:size=50"}
+          - string: {text: , font: "Monospace:size=50"}
+          - string: {text: "{time}", font: "Monospace:size=50"}
