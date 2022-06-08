@@ -5,15 +5,19 @@ stdenvNoCC.mkDerivation rec{
   version = "apple";
 
   src = fetchurl {
-    url = "https://cdn.mlyxshi.com/PingFang.ttc";
+    url = "https://cdn.mlyxshi.com/PingFang.zip";
     sha256 = "1f96r4by67hzqpr4p2wkrfnpj9b7x9qrmwns0312w2l2rnp2qajx";
   };
 
-  dontUnpack = true;
+  nativeBuildInputs = [ unzip ];
+
+  unpackPhase = ''
+    unzip $src
+  '';
 
   installPhase = ''
     mkdir -p $out/share/fonts/truetype
-    cp ${src} $out/share/fonts/truetype
+    cp *.ttf $out/share/fonts/truetype
   '';
 
   meta = with lib; {
