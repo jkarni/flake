@@ -3,7 +3,7 @@
   # Rust autojump
   programs.zoxide.enable = true;
 
-  #Rust prompt
+  # Rust prompt
   programs.starship.enable = true;
 
   home.file = lib.optionalAttrs pkgs.stdenv.isLinux {
