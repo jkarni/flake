@@ -5,7 +5,7 @@ stdenvNoCC.mkDerivation rec{
   version = "apple";
 
   src = fetchurl {
-    url = "https://f002.backblazeb2.com/file/mlyxbucket/PingFang.zip";
+    url = "https://cdn.mlyxshi.com/PingFang.zip";
     sha256 = "CeKYLtOlNLSOAg5Rd8iC/kYrw0cEvdK+isQV7fst4yU=";
   };
 
