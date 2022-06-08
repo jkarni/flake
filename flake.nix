@@ -58,9 +58,9 @@
           home-manager.users.dominic = import ./home/sway-nonroot.nix;
           nixpkgs.overlays = [
             neovim-nightly.overlay
-            final: prev: {
+            (final: prev: {
               PingFang = prev.callPackage ./pkgs/PingFang { };
-            }
+            })
           ];
           home-manager.extraSpecialArgs = args;
         }
