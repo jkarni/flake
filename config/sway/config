@@ -18,7 +18,7 @@ output HDMI-A-1 scale 3
 
 seat * xcursor_theme $xcursor_theme $xcursor_size
 
-gaps inner 5
+gaps inner 8
 
 exec swayidle -w \
           timeout 3000 'swaylock -f -c 000000' \
