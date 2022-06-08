@@ -41,7 +41,8 @@
     fonts = with pkgs; [
       (nerdfonts.override { fonts = [ "RobotoMono" ]; })
       config.nur.repos.sagikazarmark.sf-pro
-      source-han-sans #Chinese Japanese
+      PingFang
+      #source-han-sans #Chinese Japanese
     ];
   };
 
