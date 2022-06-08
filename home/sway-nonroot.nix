@@ -22,7 +22,6 @@
     waybar
     foot
     pavucontrol
-    bemenu
     fuzzel
     baobab
 
