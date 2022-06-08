@@ -24,7 +24,7 @@
 
     # https://codeberg.org/dnkl   <-- my favourite developer in wayland. Minimalism! 
     foot
-    yambar
+    yambar-wayland
     fuzzel
 
     xorg.xlsclients #debug wev xorg.xmodmap 
