@@ -44,6 +44,7 @@
       specialArgs = args;
       system = "x86_64-linux";
       modules = [
+        nur.nixosModules.nur
         ./host/hx90
         sops-nix.nixosModules.sops
         ./secrets

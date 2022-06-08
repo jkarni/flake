@@ -55,5 +55,5 @@
 
     # MacOS has Xcode Command Line Tools  <-- clang includes, Tree-Sitter will invoke clang to build language parsers
     # NixOS does not have any cc by default. Tree-Sitter will invoke gcc to build language parsers
-  ]++ lib.optional pkgs.stdenv.isLinux gcc;
+  ] ++ lib.optionals pkgs.stdenv.isLinux [ gcc ];
 }

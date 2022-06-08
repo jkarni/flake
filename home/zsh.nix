@@ -27,6 +27,7 @@
       p = "procs";
       g = "lazygit";
       c = "bat";
+      man = "batman";
     };
 
     enableAutosuggestions = true;

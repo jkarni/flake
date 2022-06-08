@@ -40,11 +40,15 @@
   fonts = {
     fonts = with pkgs; [
       (nerdfonts.override { fonts = [ "RobotoMono" ]; })
+      config.nur.repos.sagikazarmark.sf-pro
       source-han-sans #Chinese Japanese
     ];
   };
 
-  environment.sessionVariables.EDITOR = "nvim";
+  environment.sessionVariables={
+    EDITOR = "nvim";
+    PAGER = "bat";
+  };
 
   boot.kernel.sysctl = {
     "net.core.default_qdisc" = "fq";

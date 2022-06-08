@@ -1,4 +1,4 @@
-{ pkgs, lib,  ... }: {
+{ pkgs, lib, ... }: {
 
   xdg.configFile = lib.optionalAttrs pkgs.stdenv.isLinux {
     "mpv".source = ../config/mpv;
@@ -14,5 +14,5 @@
     ffmpeg
     yt-dlp
     # mpv is not optimized for MacOS, so I install mpv from homebrew in MacOS.
-  ]++ lib.optional pkgs.stdenv.isLinux mpv;
+  ] ++ lib.optionals pkgs.stdenv.isLinux [ mpv ];
 }

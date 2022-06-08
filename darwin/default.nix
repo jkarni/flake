@@ -24,6 +24,7 @@
     enable = true;
     variables = {
       EDITOR = "nvim";
+      PAGER = "bat";
     };
   };
 

@@ -12,6 +12,9 @@ map D   delete
 map Z   extract
 map <enter> open
 
+
+set previewer pistol
+
 cmd open ${{
     # ${f}  file
     # "${f}" prevent space in file name

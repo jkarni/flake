@@ -20,7 +20,9 @@
     delta
     tldr
     procs
+    bandwhich
     bat
+    bat-extras.batman
     lazygit
   ];
 
