@@ -34,6 +34,10 @@
           home-manager.useGlobalPkgs = true;
           home-manager.useUserPackages = true;
           home-manager.users.dominic = import ./darwin/home.nix;
+          home-manager.extraSpecialArgs = args;
+        }
+
+        ({ config, pkgs, lib, ... }: {
           nixpkgs.overlays = [
             neovim-nightly.overlay
             # (final: prev: {
@@ -41,8 +45,7 @@
             #   SF-Pro = prev.callPackage ./pkgs/fonts/SF-Pro { };
             # })
           ];
-          home-manager.extraSpecialArgs = args;
-        }
+        })
       ];
     };
 
@@ -87,11 +90,14 @@
           home-manager.useGlobalPkgs = true;
           home-manager.useUserPackages = true;
           home-manager.users.root = import ./home/server.nix;
+          home-manager.extraSpecialArgs = args;
+        }
+
+        ({ config, pkgs, lib, ... }: {
           nixpkgs.overlays = [
             neovim-nightly.overlay
           ];
-          home-manager.extraSpecialArgs = args;
-        }
+        })
       ];
     };
 
