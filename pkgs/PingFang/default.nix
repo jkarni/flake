@@ -1,6 +1,6 @@
 { lib, stdenvNoCC, fetchurl }:
 
-stdenvNoCC.mkDerivation {
+stdenvNoCC.mkDerivation rec{
   pname = "PingFang";
   version = "apple";
 
