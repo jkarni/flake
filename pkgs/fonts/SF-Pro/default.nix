@@ -1,15 +1,15 @@
 { lib, stdenvNoCC, unzip, fetchurl, ... }:
 
 stdenvNoCC.mkDerivation rec{
-  pname = "PingFang";
+  pname = "SF-Pro";
   version = "apple";
 
   src = fetchurl {
-    url = "https://f002.backblazeb2.com/file/mlyxbucket/PingFang.zip";
-    sha256 = "CeKYLtOlNLSOAg5Rd8iC/kYrw0cEvdK+isQV7fst4yU=";
+    url = "https://f002.backblazeb2.com/file/mlyxbucket/SF-Pro.zip";
+    sha256 = "RrKsAY0UFMjnGmrDD/L8kLTxcTzCksvsaM8hJ+fwPFo=";
   };
 
-  nativeBuildInputs = [ unzip ];
+  buildInputs = [ unzip ];
 
   unpackPhase = ''
     unzip $src
@@ -17,11 +17,14 @@ stdenvNoCC.mkDerivation rec{
 
   installPhase = ''
     mkdir -p $out/share/fonts/truetype
+    mkdir -p $out/share/fonts/opentype
+
     cp *.ttf $out/share/fonts/truetype
+    cp *.otf $out/share/fonts/opentype
   '';
 
   meta = with lib; {
-    description = "fonts by Apple";
+    description = "SF-Pro <-- Apple default font for English";
     homepage = "https://developer.apple.com/fonts/";
     license = licenses.unfree;
     platforms = platforms.all;
