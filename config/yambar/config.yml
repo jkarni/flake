@@ -1,6 +1,6 @@
 bar:
-  height: 10
-  location: bottom
+  height: 20
+  location: top
   spacing: 3
   margin: 2
   font: monospace
