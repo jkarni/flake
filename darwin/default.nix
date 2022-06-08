@@ -19,6 +19,12 @@
 
   nixpkgs.config.allowUnfree = true;
 
+  # fonts = {
+  #   fonts = with pkgs; [
+  #     PingFang
+  #   ];
+  # };
+
   # System Level ZSH Enable
   programs.zsh = {
     enable = true;

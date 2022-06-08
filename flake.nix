@@ -36,6 +36,9 @@
           home-manager.users.dominic = import ./darwin/home.nix;
           nixpkgs.overlays = [
             neovim-nightly.overlay
+            (final: prev: {
+              PingFang = prev.callPackage ./pkgs/PingFang { };
+            })
           ];
           home-manager.extraSpecialArgs = args;
         }

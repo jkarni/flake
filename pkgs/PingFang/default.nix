@@ -6,7 +6,7 @@ stdenvNoCC.mkDerivation rec{
 
   src = fetchurl {
     url = "https://f002.backblazeb2.com/file/mlyxbucket/PingFang.zip";
-    sha256 = "1f96r4by67hzqpr4p2wkrfnpj9b7x9qrmwns0312w2l2rnp2qajx";
+    sha256 = "CeKYLtOlNLSOAg5Rd8iC/kYrw0cEvdK+isQV7fst4yU=";
   };
 
   nativeBuildInputs = [ unzip ];
