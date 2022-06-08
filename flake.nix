@@ -37,7 +37,7 @@
           home-manager.extraSpecialArgs = args;
         }
 
-        ({ config, pkgs, lib, ... }: {
+        ({
           nixpkgs.overlays = [
             neovim-nightly.overlay
             # (final: prev: {
@@ -66,7 +66,7 @@
           home-manager.extraSpecialArgs = args;
         }
 
-        ({ config, pkgs, lib, ... }: {
+        ({
           nixpkgs.overlays = [
             neovim-nightly.overlay
             (final: prev: {
@@ -75,6 +75,7 @@
             })
           ];
         })
+        
       ];
     };
 
