@@ -58,21 +58,6 @@ bar:
           map:
             default: {string: {text: default value}}
 
-    - clock:
-        content:
-          progress-bar:
-            tag: date
-            length: 20
-            start: {string: {text: START}}
-            end: {string: {text: START}}
-            fill: {string: {text: FILL}}
-            empty: {string: {text: EMPTY}}
-            indicator: {string: {text: INDICATOR}}
-    - clock:
-        content:
-          ramp:
-            tag: date  # date isn't a range tag...
-            items: [string: {text: value}]
   # right: focus on decorations
   right:
     - clock:
