@@ -23,6 +23,7 @@
     foot
     pavucontrol
     bemenu
+    fuzzel
     baobab
 
     xorg.xlsclients #debug wev xorg.xmodmap 
