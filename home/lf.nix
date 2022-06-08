@@ -4,11 +4,11 @@
     lf
   ];
 
-  xdg.configFile = lib.mkIf (pkgs.stdenv.system != "aarch64-darwin") {
+  xdg.configFile = lib.optionalAttrs pkgs.stdenv.isLinux {
     "lf".source = ../config/lf;
   };
 
-  home.activation = lib.mkIf (pkgs.stdenv.system == "aarch64-darwin") {
+  home.activation = lib.optionalAttrs pkgs.stdenv.isDarwin {
     linklf = lib.hm.dag.entryAfter [ "writeBoundary" ] ''
       ln -sfn $HOME/flake/config/lf  $HOME/.config/lf
     '';

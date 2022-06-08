@@ -6,11 +6,11 @@
   #Rust prompt
   programs.starship.enable = true;
 
-  home.file = lib.mkIf (pkgs.stdenv.system != "aarch64-darwin") {
+  home.file = lib.optionalAttrs pkgs.stdenv.isLinux {
     "starship.toml".source = ../config/starship.toml;
   };
 
-  home.activation = lib.mkIf (pkgs.stdenv.system == "aarch64-darwin") {
+  home.activation = lib.optionalAttrs pkgs.stdenv.isDarwin {
     linkStarShip = lib.hm.dag.entryAfter [ "writeBoundary" ] ''
       ln -sfn $HOME/flake/config/starship.toml  $HOME/.config/starship.toml
     '';
@@ -33,9 +33,7 @@
     enableSyntaxHighlighting = true;
 
 
-    initExtra = ''
-      path+=~/go/bin
-      
+    initExtra = '' 
       lfcd () {
         tmp="$(mktemp)"
         lf -last-dir-path="$tmp" "$@"
@@ -51,6 +49,10 @@
       }
 
       bindkey -s '^f' 'lfcd\n'  # zsh
+
+    '' + lib.optionalString pkgs.stdenv.isDarwin ''
+      path+=~/go/bin
+      path+=/Applications/Surge.app/Contents/Applications
     '';
 
   };

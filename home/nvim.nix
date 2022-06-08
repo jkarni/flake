@@ -18,12 +18,12 @@
 { pkgs, lib, ... }: {
 
   # Do not include Packer's dir -- nvim/plugin -- need write permission
-  xdg.configFile = lib.mkIf (pkgs.stdenv.system != "aarch64-darwin") {
+  xdg.configFile = lib.optionalAttrs pkgs.stdenv.isLinux {
     "nvim/init.lua".source = ../config/nvim/init.lua;
     "nvim/lua".source = ../config/nvim/lua;
   };
 
-  home.activation = lib.mkIf (pkgs.stdenv.system == "aarch64-darwin") {
+  home.activation = lib.optionalAttrs pkgs.stdenv.isDarwin {
     linkNeovim = lib.hm.dag.entryAfter [ "writeBoundary" ] ''
       ln -sfn $HOME/flake/config/nvim  $HOME/.config/nvim   
     '';
@@ -55,5 +55,5 @@
 
     # MacOS has Xcode Command Line Tools  <-- clang includes, Tree-Sitter will invoke clang to build language parsers
     # NixOS does not have any cc by default. Tree-Sitter will invoke gcc to build language parsers
-  ]++ lib.optional (pkgs.stdenv.system != "aarch64-darwin") gcc;
+  ]++ lib.optional pkgs.stdenv.isLinux gcc;
 }
