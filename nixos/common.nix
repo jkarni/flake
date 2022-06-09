@@ -49,10 +49,10 @@
 
     # fc-list
     fontconfig.defaultFonts = {
-      monospace = [ "RobotoMono Nerd Font Mono" ];
+      monospace = [ "RobotoMono Nerd Font" ];
     } // lib.optionalAttrs (config.users.users ? dominic) {
-      sansSerif = [ "SF-Pro" ];
-      serif = [ "SF-Pro" ];
+      sansSerif = [ "SF Pro" ];
+      serif = [ "SF Pro" ];
     };
   };
 
