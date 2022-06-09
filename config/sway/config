@@ -16,7 +16,7 @@ seat * xcursor_theme $xcursor_theme $xcursor_size
 
 gaps inner 6
 
-default_border none
+default_border pixel
 
 exec swayidle -w \
           timeout 3000 'swaylock -f -c 000000' \
@@ -129,6 +129,7 @@ mode "resize" {
 }
 bindsym $mod+r mode "resize"
 
-exec foot
-# exec firefox
-# exec yambar
+exec foot  # default for non-root user
+exec swaymsg "workspace 2; exec firefox"
+exec swaymsg "workspace 3; exec foot"
+

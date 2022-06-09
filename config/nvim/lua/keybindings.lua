@@ -29,10 +29,11 @@ keymap("n", "ZZ", ":wa|:qa<CR>") --Fix toggleTerm capability issue
 keymap("n", "<C-o>", "<C-i>")
 keymap("n", "<C-i>", "<C-o>")
 
---Better Line Movement
-keymap({ 'n', 'v' }, "-", "_")
-keymap({ 'n', 'v' }, "_", "-")
-keymap({ 'n', 'v' }, "=", "$")
+-- Better Line Movement
+-- o: operator pending mode  <-- press d in normal mode
+keymap({ 'n', 'v', 'o' }, "-", "_")
+keymap({ 'n', 'v', 'o' }, "_", "-")
+keymap({ 'n', 'v', 'o' }, "=", "$")
 
 --Window Split
 keymap("n", "<leader>v", ":vsp<CR>")
