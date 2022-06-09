@@ -13,7 +13,6 @@
   };
 
   users.mutableUsers = false;
-  security.sudo.wheelNeedsPassword = false;
 
   users.users = {
     dominic = {
