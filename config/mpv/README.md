@@ -7,25 +7,27 @@ Print a list of the available properties.
 
 # Keymap
 Left   Right   backward/forward 5 seconds
+
 Up     Down    forward/backward 1 minute
 
 SPACE Pause 
 
 q/Q  quit 
  
-
 r  file browser <-- mp.add_key_binding('r','browse-files', toggle)
 
 9 0 Decrease/increase volume.
-m  mute
 
+m  mute
 
 L Toggle infinite looping.
 
 z Z Adjust subtitle delay by +/- 0.1 seconds
+
 h H subtitle up dan down
 
 [ ] Decrease/increase current playback speed by 10%.
+
 BACKSPACE Reset playback speed to normal.
 
 ` console
