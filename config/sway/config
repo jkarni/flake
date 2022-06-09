@@ -129,7 +129,7 @@ mode "resize" {
 }
 bindsym $mod+r mode "resize"
 
-exec foot     # default terminal
 exec swaymsg "workspace 2; exec firefox" 
 exec swaymsg "workspace 3; exec foot" # root terminal
+exec swaymsg "workspace 1; exec foot" # default terminal
 
