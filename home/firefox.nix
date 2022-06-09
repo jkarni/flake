@@ -42,8 +42,6 @@
 
           "browser.startup.page" = 3; # Restore previous session
 
-          # "media.ffmpeg.vaapi.enabled" = true;
-
           # Disable Amazon Search  
           "browser.newtabpage.activity-stream.improvesearch.topSiteSearchShortcuts" = false;
 

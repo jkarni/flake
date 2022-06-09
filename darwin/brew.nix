@@ -32,6 +32,7 @@
       "raycast"
       "visual-studio-code"
       "firefox"
+      "warp"
 
       # Already installed from offical website <-- Uncomment this when completely reinstall macos
       # "surge"
@@ -89,5 +90,4 @@
 # Other Application not in Homebrew/Nixpkgs/Appstore
 # Install Manually 
 
-# warp    https://app.warp.dev/download
 # Hopper-Disassembler https://www.hopperapp.com/

@@ -22,7 +22,7 @@ cmd open ${{
     case $(file --mime-type --brief "${f}") in
         text/*) $EDITOR "${f}";;
         inode/x-empty) $EDITOR "${f}";; # emply file
-        image/*) mpv "${f}" > /dev/null 2> /dev/null &;;
+        image/*) mpv --config-dir=$HOME/.config/mpi "${f}" > /dev/null 2> /dev/null &;;
         audio/*) mpv "${f}" > /dev/null 2> /dev/null &;;
         video/*) mpv "${f}" > /dev/null 2> /dev/null &;;
         *) ${OPENER} "${f}" > /dev/null 2> /dev/null &;;

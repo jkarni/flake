@@ -11,10 +11,10 @@ Up     Down    forward/backward 1 minute
 
 SPACE Pause 
 
-q quit without saving
-Q quit and store the current playback position.
+q/Q  quit 
+ 
 
-r open file browser
+r  file browser <-- mp.add_key_binding('r','browse-files', toggle)
 
 9 0 Decrease/increase volume.
 m  mute
