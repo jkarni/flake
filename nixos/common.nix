@@ -47,6 +47,8 @@
       pkgs.PingFang # Chinese/Japanese
     ];
 
+    enableDefaultFonts = lib.mkForce false; # If Sway is enabled, enableDefaultFonts is true by default <-- I don't need extra default fonts
+
     # fc-list
     fontconfig.defaultFonts = {
       monospace = [ "RobotoMono Nerd Font" ];
@@ -55,7 +57,6 @@
       serif = [ "SF Pro" ];
     };
 
-    enableDefaultFonts = lib.mkForce false; # If Sway is enabled, enableDefaultFonts is true by default
   };
 
   environment.sessionVariables = {
