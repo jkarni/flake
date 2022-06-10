@@ -65,7 +65,7 @@ echo "MY AGE PRIVATE KEY" > /var/lib/sops-nix/key.txt
 nixos-rebuild switch --flake /etc/flake#hx90
 
 cd /etc/falke
-git remote set-url origin git@github.com:mlyxshi/flake.git
+git remote set-url origin github.com:mlyxshi/flake.git
 ```
 
 
