@@ -29,6 +29,7 @@
       system = "aarch64-darwin";
       modules = [
         ./darwin
+        # sops-nix currently doesn't support aarch64-darwin
         home-manager.darwinModules.home-manager
         {
           home-manager.useGlobalPkgs = true;
