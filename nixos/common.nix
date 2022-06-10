@@ -54,6 +54,8 @@
       sansSerif = [ "SF Pro" ];
       serif = [ "SF Pro" ];
     };
+
+    fonts.enableDefaultFonts = mkForce false; # If Sway is enabled, enableDefaultFonts is true by default
   };
 
   environment.sessionVariables = {
