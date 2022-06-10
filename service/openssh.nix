@@ -1,5 +1,5 @@
-{ config, ... }: {
-  
+{ config, lib, ... }: {
+
   # sshd (server)
   services.openssh = {
     enable = true;
