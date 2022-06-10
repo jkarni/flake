@@ -8,9 +8,7 @@
 
   users.users = {
     root.openssh.authorizedKeys.keys = [ "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIMpaY3LyCW4HHqbp4SA4tnA+1Bkgwrtro2s/DEsBcPDe" ];
-  } // lib.optionalAttrs (config.users.users ? dominic) { dominic.openssh.authorizedKeys.keys = [ "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIMpaY3LyCW4HHqbp4SA4tnA+1Bkgwrtro2s/DEsBcPDe" ]; };
-
-
+  }; 
 
   # ssh (client)
   programs.ssh = {
