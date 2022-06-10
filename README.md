@@ -3,7 +3,7 @@ write age private key to /var/lib/sops-nix/key.txt
 
 ## 1. Normal[PC]
 ```
-git clone git@github.com:mlyxshi/flake.git  /etc/flake
+git clone github.com:mlyxshi/flake /etc/flake
 nixos-rebuild switch --flake /etc/flake#hx90
 ```
 
@@ -65,7 +65,7 @@ echo "MY AGE PRIVATE KEY" > /var/lib/sops-nix/key.txt
 nixos-rebuild switch --flake /etc/flake#hx90
 
 cd /etc/falke
-git remote set-url origin github.com:mlyxshi/flake.git
+git remote set-url origin github.com:mlyxshi/flake
 ```
 
 
