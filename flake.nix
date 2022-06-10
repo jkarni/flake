@@ -33,19 +33,8 @@
         ./darwin
 
         {
-          home-manager.useGlobalPkgs = true;
-          home-manager.useUserPackages = true;
-          home-manager.users.dominic = import ./darwin/home.nix;
-          home-manager.extraSpecialArgs = args;
-        }
-
-        {
           nixpkgs.overlays = [
             neovim-nightly.overlay
-            # (final: prev: {
-            #   PingFang = prev.callPackage ./pkgs/fonts/PingFang { };
-            #   SF-Pro = prev.callPackage ./pkgs/fonts/SF-Pro { };
-            # })
           ];
         }
       ];
@@ -61,14 +50,6 @@
         ./host/hx90    
         ./secrets
         
-        {
-          home-manager.useGlobalPkgs = true;
-          home-manager.useUserPackages = true;
-          home-manager.users.root = import ./home/sway-root.nix;
-          home-manager.users.dominic = import ./home/sway-nonroot.nix;
-          home-manager.extraSpecialArgs = args;
-        }
-
         {
           nixpkgs.overlays = [
             neovim-nightly.overlay
@@ -90,13 +71,6 @@
         home-manager.nixosModules.home-manager
         ./host/oracle
         ./secrets
-
-        {
-          home-manager.useGlobalPkgs = true;
-          home-manager.useUserPackages = true;
-          home-manager.users.root = import ./home/server.nix;
-          home-manager.extraSpecialArgs = args;
-        }
 
         {
           nixpkgs.overlays = [

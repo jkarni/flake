@@ -1,4 +1,8 @@
 {
+  home-manager.useGlobalPkgs = true;
+  home-manager.useUserPackages = true;
+  home-manager.users.root = import ../../home/server.nix;
+
   imports = [
     ./hardware.nix
     ../../nixos/server.nix
