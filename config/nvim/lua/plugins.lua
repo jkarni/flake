@@ -51,8 +51,8 @@ packer.startup(
       use 'rmagatti/session-lens'
       use 'AckslD/nvim-neoclip.lua'
 
-      --Tree-Sitter
-      use 'nvim-treesitter/nvim-treesitter'
+      --Tree-Sitter from nixpkgs
+      -- use 'nvim-treesitter/nvim-treesitter'
 
       --LSP
       use 'neovim/nvim-lspconfig'

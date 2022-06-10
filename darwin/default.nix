@@ -1,5 +1,9 @@
 { config, pkgs, ... }: {
 
+  home-manager.useGlobalPkgs = true;
+  home-manager.useUserPackages = true;
+  home-manager.users.dominic = import ./home.nix;
+
   imports = [
     ./brew.nix #For some packages in homebrew exclusively or Broken in nixpkgs
   ];
@@ -38,9 +42,5 @@
       };
     };
   };
-
-  home-manager.useGlobalPkgs = true;
-  home-manager.useUserPackages = true;
-  home-manager.users.dominic = import ./home.nix;
 
 }
