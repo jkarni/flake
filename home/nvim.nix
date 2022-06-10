@@ -22,13 +22,13 @@ in
   xdg.configFile = {
     "nvim/init.lua".text = ''
       
-      -- Append Treesitter Path
+      -- Prepend Treesitter Path
       vim.opt.packpath = vim.opt.packpath ^ "${TREESITTER}"
       vim.opt.runtimepath = vim.opt.runtimepath ^ "${TREESITTER}"
       
       -- Invoke Real Start
       require("start")
-      
+
     '';
   } // lib.optionalAttrs pkgs.stdenv.isLinux {
     "nvim/lua/".source = ../config/nvim/lua;
