@@ -19,7 +19,7 @@
 
     neovim-nightly.url = "github:nix-community/neovim-nightly-overlay";
 
-    nur.url = github:nix-community/NUR;
+    nur.url = "github:nix-community/NUR";
 
   };
 
@@ -28,9 +28,10 @@
     darwinConfigurations."M1" = darwin.lib.darwinSystem {
       system = "aarch64-darwin";
       modules = [
-        ./darwin
         # sops-nix currently doesn't support aarch64-darwin
         home-manager.darwinModules.home-manager
+        ./darwin
+
         {
           home-manager.useGlobalPkgs = true;
           home-manager.useUserPackages = true;
@@ -38,7 +39,7 @@
           home-manager.extraSpecialArgs = args;
         }
 
-        ({
+        {
           nixpkgs.overlays = [
             neovim-nightly.overlay
             # (final: prev: {
@@ -46,7 +47,7 @@
             #   SF-Pro = prev.callPackage ./pkgs/fonts/SF-Pro { };
             # })
           ];
-        })
+        }
       ];
     };
 
@@ -55,10 +56,11 @@
       system = "x86_64-linux";
       modules = [
         nur.nixosModules.nur
-        ./host/hx90
         sops-nix.nixosModules.sops
-        ./secrets
         home-manager.nixosModules.home-manager
+        ./host/hx90    
+        ./secrets
+        
         {
           home-manager.useGlobalPkgs = true;
           home-manager.useUserPackages = true;
@@ -67,15 +69,15 @@
           home-manager.extraSpecialArgs = args;
         }
 
-        ({
+        {
           nixpkgs.overlays = [
             neovim-nightly.overlay
             (final: prev: {
-              PingFang = prev.callPackage ./pkgs/fonts/PingFang {};
-              SF-Pro = prev.callPackage ./pkgs/fonts/SF-Pro {};
+              PingFang = prev.callPackage ./pkgs/fonts/PingFang { };
+              SF-Pro = prev.callPackage ./pkgs/fonts/SF-Pro { };
             })
           ];
-        })
+        }
 
       ];
     };
@@ -84,10 +86,11 @@
     nixosConfigurations."oracle" = nixpkgs.lib.nixosSystem {
       system = "aarch64-linux";
       modules = [
-        ./host/oracle
         sops-nix.nixosModules.sops
-        ./secrets
         home-manager.nixosModules.home-manager
+        ./host/oracle
+        ./secrets
+
         {
           home-manager.useGlobalPkgs = true;
           home-manager.useUserPackages = true;
@@ -95,11 +98,11 @@
           home-manager.extraSpecialArgs = args;
         }
 
-        ({
+        {
           nixpkgs.overlays = [
             neovim-nightly.overlay
           ];
-        })
+        }
       ];
     };
 

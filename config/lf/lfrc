@@ -5,6 +5,7 @@ set number true
 set drawbox true
 set dircounts true
 set incsearch true
+set period 1
 
 map q   quit
 map Q   quit

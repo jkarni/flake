@@ -8,21 +8,26 @@
   ];
 
   home.packages = with pkgs;  [
+    # basic
     wget
-    sops
     vim
-    nix-tree
     tree
     htop
     neofetch
     unzip
+    # nix
+    nix-tree
+    statix
+    sops
+    # rust
     exa
     delta
-    tldr
+    tealdeer
     procs
     bandwhich
     bat
     bat-extras.batman
+    # go
     lazygit
   ];
 

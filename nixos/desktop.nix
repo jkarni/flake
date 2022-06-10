@@ -12,8 +12,6 @@
     hostName = "nixos";
   };
 
-  users.mutableUsers = false;
-
   users.users = {
     dominic = {
       isNormalUser = true;

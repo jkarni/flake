@@ -6,6 +6,8 @@
   # Rust prompt
   programs.starship.enable = true;
 
+  programs.nix-index.enable = true;
+
   home.file = lib.optionalAttrs pkgs.stdenv.isLinux {
     "starship.toml".source = ../config/starship.toml;
   };
