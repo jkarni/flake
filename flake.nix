@@ -41,6 +41,20 @@
       ];
     };
 
+    darwinConfigurations."M1-Non-Homebrew" = darwin.lib.darwinSystem {
+      system = "aarch64-darwin";
+      modules = [
+        home-manager.darwinModules.home-manager
+        ./darwin
+
+        {
+          nixpkgs.overlays = [
+            neovim-nightly.overlay
+          ];
+        }
+      ];
+    };
+
     nixosConfigurations."hx90" = nixpkgs.lib.nixosSystem {
       specialArgs = args;
       system = "x86_64-linux";
@@ -81,20 +95,6 @@
       ];
     };
 
-  };
-
-  darwinConfigurations."M1-Non-Homebrew" = darwin.lib.darwinSystem {
-    system = "aarch64-darwin";
-    modules = [
-      home-manager.darwinModules.home-manager
-      ./darwin
-
-      {
-        nixpkgs.overlays = [
-          neovim-nightly.overlay
-        ];
-      }
-    ];
   };
 
 }
