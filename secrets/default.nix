@@ -5,6 +5,6 @@
 
   sops.secrets.ssh-private-key = { } // lib.optionalAttrs (config.users.users ? dominic) { owner = "dominic"; };
 
-  sops.secrets.shadowsocks-password = { };
+  sops.secrets.shadowsocks-config = { };
 }
 
