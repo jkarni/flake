@@ -4,7 +4,7 @@ write age private key to /var/lib/sops-nix/key.txt
 ## 1. Normal[PC]
 ```
 git clone github.com:mlyxshi/flake /etc/flake
-nixos-rebuild switch --flake /etc/flake#hx90
+nixos-rebuild switch --flake /etc/flake#hx90 -v
 ```
 
 ## 2. NixInject(Server)
@@ -23,11 +23,12 @@ wget -qO- https://raw.githubusercontent.com/elitak/nixos-infect/master/nixos-inf
 Rebuild NixOS
 ```
 nix-env -iA nixos.vim nixos.git nixos.tree
-<write private key>
+<write sops key>
 git clone https://github.com/mlyxshi/flake /etc/flake
 # delete default grub boot, use systemd-boot instead
 rm -rf /boot/*
 nixos-rebuild switch --flake /etc/flake#oracle --install-bootloader
+git remote set-url github.com:mlyxshi/flake -v
 ```
 
 ## 3. First Install[PC]
@@ -49,7 +50,7 @@ mount /dev/nvme0n1p1 /mnt/boot
 nix-env -iA nixos.vim nixos.git nixos.tree nixos.nixUnstable
 
 git clone  https://github.com/mlyxshi/flake /mnt/etc/flake 
-nixos-install --flake /mnt/etc/flake#hx90
+nixos-install --flake /mnt/etc/flake#hx90 -v
 ```
 
 第一次安装, sops配置失败，不过没关系，ssh authorized_key是明文ed25519 public key，所以可以登录
@@ -62,10 +63,10 @@ echo "MY AGE PRIVATE KEY" > /var/lib/sops-nix/key.txt
 ```
 
 ```
-nixos-rebuild switch --flake /etc/flake#hx90
+nixos-rebuild switch --flake /etc/flake#hx90 -v
 
 cd /etc/falke
-git remote set-url origin github.com:mlyxshi/flake
+git remote set-url origin github.com:mlyxshi/flake 
 ```
 
 
@@ -98,7 +99,7 @@ nix build ~/flake#darwinConfigurations.M1.system
 sudo mv /etc/nix/nix.conf  /etc/nix/nix.conf.bkup 
 
 # Finally rebuild
-darwin-rebuild switch --flake ~/flake#M1
+darwin-rebuild switch --flake ~/flake#M1 -v
 ```
 
 

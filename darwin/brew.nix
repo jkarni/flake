@@ -33,6 +33,7 @@
       "visual-studio-code"
       "firefox"
       "warp"
+      "qbittorrent"
 
       # Already installed from offical website <-- Uncomment this when completely reinstall macos
       # "surge"

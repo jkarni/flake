@@ -15,6 +15,7 @@
     htop
     neofetch
     unzip
+    ookla-speedtest
     # nix
     nix-tree
     statix
@@ -29,7 +30,6 @@
     bat-extras.batman
     # go
     lazygit
-    afetch
   ];
 
   # programs.direnv = {
