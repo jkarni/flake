@@ -31,6 +31,7 @@
         # sops-nix currently doesn't support aarch64-darwin
         home-manager.darwinModules.home-manager
         ./darwin
+        ./darwin/brew.nix
 
         {
           nixpkgs.overlays = [
@@ -47,9 +48,9 @@
         nur.nixosModules.nur
         sops-nix.nixosModules.sops
         home-manager.nixosModules.home-manager
-        ./host/hx90    
+        ./host/hx90
         ./secrets
-        
+
         {
           nixpkgs.overlays = [
             neovim-nightly.overlay
@@ -80,6 +81,20 @@
       ];
     };
 
+  };
+
+  darwinConfigurations."M1-Non-Homebrew" = darwin.lib.darwinSystem {
+    system = "aarch64-darwin";
+    modules = [
+      home-manager.darwinModules.home-manager
+      ./darwin
+
+      {
+        nixpkgs.overlays = [
+          neovim-nightly.overlay
+        ];
+      }
+    ];
   };
 
 }

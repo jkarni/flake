@@ -4,10 +4,6 @@
   home-manager.useUserPackages = true;
   home-manager.users.dominic = import ./home.nix;
 
-  imports = [
-    ./brew.nix #For some packages in homebrew exclusively or Broken in nixpkgs
-  ];
-
   nix = {
     extraOptions = ''
       experimental-features = nix-command flakes
