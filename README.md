@@ -27,8 +27,8 @@ nix-env -iA nixos.vim nixos.git nixos.tree
 git clone https://github.com/mlyxshi/flake /etc/flake
 # delete default grub boot, use systemd-boot instead
 rm -rf /boot/*
-nixos-rebuild switch --flake /etc/flake#oracle --install-bootloader
-git remote set-url github.com:mlyxshi/flake -v
+nixos-rebuild switch --flake /etc/flake#oracle --install-bootloader -v
+git remote set-url origin github.com:mlyxshi/flake
 ```
 
 ## 3. First Install[PC]

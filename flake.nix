@@ -64,12 +64,64 @@
     };
 
 
-    nixosConfigurations."oracle" = nixpkgs.lib.nixosSystem {
+    nixosConfigurations."oracle-jp2" = nixpkgs.lib.nixosSystem {
       system = "aarch64-linux";
       modules = [
         sops-nix.nixosModules.sops
         home-manager.nixosModules.home-manager
         ./host/oracle
+        ./host/oracle/jp2.nix
+        ./secrets
+
+        {
+          nixpkgs.overlays = [
+            neovim-nightly.overlay
+          ];
+        }
+      ];
+    };
+
+    nixosConfigurations."oracle-jp4" = nixpkgs.lib.nixosSystem {
+      system = "aarch64-linux";
+      modules = [
+        sops-nix.nixosModules.sops
+        home-manager.nixosModules.home-manager
+        ./host/oracle
+        ./host/oracle/jp4.nix
+        ./secrets
+
+        {
+          nixpkgs.overlays = [
+            neovim-nightly.overlay
+          ];
+        }
+      ];
+    };
+
+    nixosConfigurations."oracle-sw" = nixpkgs.lib.nixosSystem {
+      system = "aarch64-linux";
+      modules = [
+        sops-nix.nixosModules.sops
+        home-manager.nixosModules.home-manager
+        ./host/oracle
+        ./host/oracle/sw.nix
+        ./secrets
+
+        {
+          nixpkgs.overlays = [
+            neovim-nightly.overlay
+          ];
+        }
+      ];
+    };
+
+    nixosConfigurations."oracle-kr" = nixpkgs.lib.nixosSystem {
+      system = "aarch64-linux";
+      modules = [
+        sops-nix.nixosModules.sops
+        home-manager.nixosModules.home-manager
+        ./host/oracle
+        ./host/oracle/kr.nix
         ./secrets
 
         {
