@@ -5,14 +5,13 @@
     extraOptions = ''
       experimental-features = nix-command flakes
     '';
-    # https://github.com/NixOS/nixpkgs/blob/master/nixos/modules/services/misc/nix-daemon.nix
-    # neovim binary cache
+
     settings = {
       substituters = [
-        "https://nix-community.cachix.org"
+        "https://mlyxshi.cachix.org"
       ];
       trusted-public-keys = [
-        "nix-community.cachix.org-1:mB9FSh9qf2dCimDSUo8Zy7bkq5CX+/rkCWyvRCYg3Fs="
+        "mlyxshi.cachix.org-1:yc7GPiryyBn0HfiCXdmO1ECWKBhfwrjdIFnRSA4ct7s="
       ];
       auto-optimise-store = true;
     };

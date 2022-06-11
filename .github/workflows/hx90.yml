@@ -1,5 +1,5 @@
 
-name: "Test"
+name: "hx90 build"
 on:
   pull_request:
   push:
