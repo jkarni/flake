@@ -1,4 +1,4 @@
-name: "oracle 4C24G build"
+name: "Oracle 4C24G build"
 on:
   pull_request:
   push:
