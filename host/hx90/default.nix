@@ -33,8 +33,9 @@
     locations."/" = {
       proxyPass = "http://127.0.0.1:${toString config.services.grafana.port}";
       proxyWebsockets = true;
+      # workaround https://community.grafana.com/t/after-update-to-8-3-5-origin-not-allowed-behind-proxy/60598/7
       extraConfig =''
-      proxy_set_header Host 192.168.1.76;
+      proxy_set_header Host $http_host;
       '';
     };
   };
