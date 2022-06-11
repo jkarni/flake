@@ -12,4 +12,4 @@ jobs:
       with:
         name: mlyxshi
         authToken: '${{ secrets.CACHIX_AUTH_TOKEN }}'
-    - run: nix build .#nixosConfigurations.M1.config.system.build.toplevel
+    - run: darwin-rebuild build --flake .#M1
