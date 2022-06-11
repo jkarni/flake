@@ -32,21 +32,6 @@
         home-manager.darwinModules.home-manager
         ./darwin
         ./darwin/brew.nix
-
-        {
-          nixpkgs.overlays = [
-            neovim-nightly.overlay
-          ];
-        }
-      ];
-    };
-
-    darwinConfigurations."M1-Non-Homebrew" = darwin.lib.darwinSystem {
-      system = "aarch64-darwin";
-      modules = [
-        home-manager.darwinModules.home-manager
-        ./darwin
-
         {
           nixpkgs.overlays = [
             neovim-nightly.overlay
