@@ -29,6 +29,7 @@
     bat-extras.batman
     # go
     lazygit
+    afetch
   ];
 
   # programs.direnv = {
