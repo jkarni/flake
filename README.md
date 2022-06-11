@@ -25,9 +25,9 @@ Rebuild NixOS
 nix-env -iA nixos.vim nixos.git nixos.tree
 <write private key>
 git clone https://github.com/mlyxshi/flake /etc/flake
+# delete default grub boot, use systemd-boot instead
 rm -rf /boot/*
-bootctl install
-nixos-rebuild switch --flake /etc/flake#oracle
+nixos-rebuild switch --flake /etc/flake#oracle --install-bootloader
 ```
 
 ## 3. First Install[PC]
