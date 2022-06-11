@@ -16,4 +16,3 @@ jobs:
     - name: Build and switch to nix-darwin env
       run: |
         nix build .#darwinConfigurations.M1-Non-Homebrew.system
-        ./result/sw/bin/darwin-rebuild build --flake .#M1-Non-Homebrew
