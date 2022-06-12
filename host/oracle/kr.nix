@@ -31,7 +31,7 @@
     name = "CI";
     url = "https://github.com/mlyxshi/flake";
     tokenFile= "${config.sops.secrets.github-ci-token.path}";
-    extraLabels ="Linux-ARM64";
+    extraLabels = ["Linux-ARM64"];
 
   };
 
