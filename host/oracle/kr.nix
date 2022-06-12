@@ -21,6 +21,11 @@
     };
   };
 
+
+  environment.systemPackages = with pkgs; [
+    cachix
+  ];
+
   # https://github.com/NixOS/nixpkgs/blob/master/pkgs/development/tools/continuous-integration/github-runner/default.nix
   # https://www.reddit.com/r/NixOS/comments/cn6nt4/how_is_overrideattrs_different_from_override/
   # nodejs 12 is unsecure

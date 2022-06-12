@@ -8,8 +8,14 @@ jobs:
     steps:
     - uses: actions/checkout@v3
     - uses: cachix/install-nix-action@v17
+      with:
+        extra_nix_config: |
+          trusted-public-keys = mlyxshi.cachix.org-1:yc7GPiryyBn0HfiCXdmO1ECWKBhfwrjdIFnRSA4ct7s=
+          substituters = https://mlyxshi.cachix.org
     - uses: cachix/cachix-action@v10
       with:
         name: mlyxshi
         authToken: '${{ secrets.CACHIX_AUTH_TOKEN }}'
     - run: nix build .#nixosConfigurations.hx90.config.system.build.toplevel
+
+
