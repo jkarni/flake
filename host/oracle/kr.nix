@@ -21,5 +21,31 @@
     };
   };
 
+  services.prometheus = {
+    enable = true;
+    retentionTime = "7d";
+
+    globalConfig = {
+      scrape_interval = "1m";
+      evaluation_interval = "1m";
+    };
+
+    scrapeConfigs = [
+      {
+        job_name = "metrics";
+        static_configs = [{
+          targets = [
+            "kr.mlyxshi.com:9100"
+            "jp2.mlyxshi.com:9100"
+            "jp4.mlyxshi.com:9100"
+            "us.mlyxshi.com:9100"
+            "sw.mlyxshi.com:9100"
+          ];
+        }];
+      }
+    ];
+
+  };
+
 
 }
