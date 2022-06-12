@@ -1,4 +1,4 @@
-{ config, pkgs, ... }:{
+{ config, pkgs, ... }: {
   home-manager.useGlobalPkgs = true;
   home-manager.useUserPackages = true;
   home-manager.users.root = import ../../home/server.nix;
@@ -30,7 +30,7 @@
       {
         job_name = "prometheus_exporters_systemd";
         static_configs = [{
-          targets = [ "127.0.0.1:${config.services.prometheus.exporters.node.port}" ];
+          targets = [ "127.0.0.1:${toString config.services.prometheus.exporters.node.port}" ];
         }];
       }
     ];
