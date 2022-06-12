@@ -29,7 +29,7 @@
 
   services.github-runner = {
     enable = true;
-    packages = pkgs.github-runner.override{withNode12 = true;};
+    package = pkgs.github-runner.override{withNode12 = true;};
     url = "https://github.com/mlyxshi/flake";
     tokenFile = "${config.sops.secrets.github-ci-token.path}";
     extraLabels = [ "Linux-ARM64" ];
