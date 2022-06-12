@@ -38,7 +38,7 @@
             "kr.mlyxshi.com:9100"
             "jp2.mlyxshi.com:9100"
             "jp4.mlyxshi.com:9100"
-            "us.mlyxshi.com:9100"
+            "us1.mlyxshi.com:9100"
             "sw.mlyxshi.com:9100"
           ];
         }];
