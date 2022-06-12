@@ -17,6 +17,36 @@
     };
   };
 
+  services.prometheus = {
+    enable = true;
+    retentionTime = "7d";
+
+    globalConfig = {
+      scrape_interval = "1m";
+      evaluation_interval = "1m";
+    };
+
+    exporters = {
+      node = {
+        enable = true;
+        enabledCollectors = [ "systemd" ];
+        port = 9091;
+      };
+    };
+
+    scrapeConfigs = [
+      {
+        job_name = "metrics";
+        static_configs = [{
+          targets = [
+            "127.0.0.1:${toString config.services.prometheus.exporters.node.port}"
+          ];
+        }];
+      }
+    ];
+
+  };
+
 
 }
 

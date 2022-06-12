@@ -1,4 +1,5 @@
 { config, pkgs, ... }: {
+
   # grafana configuration
   services.grafana = {
     enable = true;
@@ -21,34 +22,16 @@
   };
 
 
-  services.prometheus = {
+  environment.systemPackages = with pkgs; [
+    github-runner
+  ];
+
+  services.github-runner ={
     enable = true;
-    retentionTime = "7d";
-
-    globalConfig = {
-      scrape_interval = "1m";
-      evaluation_interval = "1m";
-    };
-
-    exporters = {
-      node = {
-        enable = true;
-        enabledCollectors = [ "systemd" ];
-        port = 9091;
-      };
-    };
-
-    scrapeConfigs = [
-      {
-        job_name = "metrics";
-        static_configs = [{
-          targets = [
-            "127.0.0.1:${toString config.services.prometheus.exporters.node.port}"
-            "jp2.mlyxshi.com:${toString config.services.prometheus.exporters.node.port}"
-          ];
-        }];
-      }
-    ];
+    name = "CI";
+    url = "https://github.com/mlyxshi/flake";
+    tokenFile= ${config.sops.secrets.github-ci-token.path};
+    extraLabels ="Linux-ARM64";
 
   };
 
