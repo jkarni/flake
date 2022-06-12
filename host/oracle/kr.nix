@@ -25,7 +25,9 @@
   # https://www.reddit.com/r/NixOS/comments/cn6nt4/how_is_overrideattrs_different_from_override/
   # nodejs 12 is unsecure
 
-  nixpkgs.config.allowInsecure = true;
+  nixpkgs.config.permittedInsecurePackages = [
+    "nodejs-12.22.12"
+  ];
 
   # environment.systemPackages = with pkgs; [
   #   github-runner 
