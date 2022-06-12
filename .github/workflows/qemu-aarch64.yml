@@ -1,4 +1,4 @@
-# https://github.com/NickCao/flakes/blob/master/.github/workflows/nix.yml
+# https://github.com/NickCao/flakes/blob/master/.github/workflows/nix.yml   <--Orz
 # https://nixos.wiki/wiki/NixOS_on_ARM
 name: "aarch64 build"
 on:
@@ -9,7 +9,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v3
-    - uses: docker/setup-qemu-action@v1
+    - uses: docker/setup-qemu-action@v2
     - uses: cachix/install-nix-action@v17
       with:
         extra_nix_config: |

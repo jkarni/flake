@@ -22,28 +22,4 @@
   };
 
 
-  environment.systemPackages = with pkgs; [
-    cachix
-  ];
-
-  # https://github.com/NixOS/nixpkgs/blob/master/pkgs/development/tools/continuous-integration/github-runner/default.nix
-  # https://www.reddit.com/r/NixOS/comments/cn6nt4/how_is_overrideattrs_different_from_override/
-  # nodejs 12 is unsecure
-
-  # https://github.com/actions/runner/pull/1913
-
-  nixpkgs.config.permittedInsecurePackages = [
-    "nodejs-12.22.12"
-  ];
-
-  services.github-runner = {
-    enable = true;
-    package = pkgs.github-runner.override { withNode12 = true; };
-    url = "https://github.com/mlyxshi/flake";
-    tokenFile = "${config.sops.secrets.github-ci-token.path}";
-    extraLabels = [ "Linux-ARM64" ];
-
-  };
-
-
 }
