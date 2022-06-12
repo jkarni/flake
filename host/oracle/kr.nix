@@ -21,16 +21,18 @@
     };
   };
 
+  # https://github.com/NixOS/nixpkgs/blob/master/pkgs/development/tools/continuous-integration/github-runner/default.nix
+  # https://www.reddit.com/r/NixOS/comments/cn6nt4/how_is_overrideattrs_different_from_override/
+  # environment.systemPackages = with pkgs; [
+  #   github-runner 
+  # ];
 
-  environment.systemPackages = with pkgs; [
-    github-runner
-  ];
-
-  services.github-runner ={
+  services.github-runner = {
     enable = true;
+    packages = pkgs.github-runner.override{withNode12 = true;};
     url = "https://github.com/mlyxshi/flake";
-    tokenFile= "${config.sops.secrets.github-ci-token.path}";
-    extraLabels = ["Linux-ARM64"];
+    tokenFile = "${config.sops.secrets.github-ci-token.path}";
+    extraLabels = [ "Linux-ARM64" ];
 
   };
 
