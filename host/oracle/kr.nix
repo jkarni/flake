@@ -23,7 +23,12 @@
 
   services.prometheus = {
     enable = true;
-    port = 9001;
+    port = 9090;
+
+    globalConfig = {
+      scrape_interval = "1m";
+      evaluation_interval = "1m";
+    };
 
     scrapeConfigs = [
       {
@@ -34,16 +39,14 @@
       }
     ];
 
-  };
-
-  services.prometheus = {
     exporters = {
       node = {
         enable = true;
         enabledCollectors = [ "systemd" ];
-        port = 9002;
+        port = 9091;
       };
     };
+
   };
 
 
