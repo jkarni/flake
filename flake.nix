@@ -94,7 +94,7 @@
               ./host/oracle
               # https://nixos.wiki/wiki/Nix_Expression_Language
               # Coercing a relative path with interpolated variables to an absolute path (for imports)
-              (./hosts/oracle + "/${hostName}.nix")
+              (./host/oracle + "/${hostName}.nix")
               ./secrets
 
               {
