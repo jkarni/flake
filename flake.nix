@@ -34,7 +34,7 @@
       url = "github:nix-community/NUR";
       inputs.nixpkgs.follows = "nixpkgs";
     };
-    
+
   };
 
   outputs = { self, nixpkgs, darwin, home-manager, deploy-rs, sops-nix, nur, ... }@args: {
@@ -94,7 +94,7 @@
               ./host/oracle
               # https://nixos.wiki/wiki/Nix_Expression_Language
               # Coercing a relative path with interpolated variables to an absolute path (for imports)
-              (./. + "/host/oracle/${hostName}.nix")
+              (./hosts/oracle + "/${hostName}.nix")
               ./secrets
 
               {
