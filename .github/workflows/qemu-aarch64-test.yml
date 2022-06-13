@@ -1,7 +1,7 @@
 # For ordinary cache and test
 # https://github.com/NickCao/flakes/blob/master/.github/workflows/nix.yml   <--Orz
 # https://nixos.wiki/wiki/NixOS_on_ARM
-name: "aarch64 build"
+name: "aarch64 test"
 on:
   pull_request:
   push:
@@ -10,7 +10,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v3
-    - run: apt install -y qemu-user-static
+    - run: sudo apt install -y qemu-user-static
     - uses: cachix/install-nix-action@v17
       with:
         extra_nix_config: |
