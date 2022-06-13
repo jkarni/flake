@@ -28,7 +28,7 @@
 
   };
 
-  outputs = { self, nixpkgs, darwin, home-manager, neovim-nightly, deploy-rs, sops-nix, nur, ... }@args: {
+  outputs = { self, nixpkgs, darwin, home-manager, deploy-rs, sops-nix, nur, ... }@args: {
 
     darwinConfigurations = {
 
