@@ -9,7 +9,9 @@
     ../../service/server.nix
   ];
 
-  systemd.services.systemd-networkd-wait-online.serviceConfig.ExecStart = [ "" "${pkgs.systemd}/lib/systemd/systemd-networkd-wait-online --any" ];
+  # Workaround for fixing timeout issue
+  systemd.network.wait-online.anyInterface = true;
+
   systemd.network.networks = {
     dhcp = {
       name = "enp0s3";

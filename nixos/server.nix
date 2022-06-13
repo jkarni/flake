@@ -12,7 +12,10 @@
   };
 
   # systemd-resolved
-  services.resolved.enable = true;
-  services.resolved.dnssec = "false";
+  services.resolved = {
+    enable = true;
+    dnssec = "false";
+    llmnr = "false";
+  };
 
 }
