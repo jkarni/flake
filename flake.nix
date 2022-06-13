@@ -18,6 +18,7 @@
     deploy-rs.url = "github:serokell/deploy-rs";
 
     sops-nix.url = "github:Mic92/sops-nix";
+    sops-nix.inputs.nixpkgs.follows = "nixpkgs";
 
     neovim-nightly = {
       url = "github:neovim/neovim";
