@@ -13,5 +13,6 @@
 
   # systemd-resolved
   services.resolved.enable = true;
+  services.resolved.dnssec = "false";
 
 }
