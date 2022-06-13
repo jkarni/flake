@@ -25,48 +25,53 @@
 
   outputs = { nixpkgs, darwin, home-manager, neovim-nightly, sops-nix, nur, ... }@args: {
 
-    darwinConfigurations."M1" = darwin.lib.darwinSystem {
-      system = "aarch64-darwin";
-      modules = [
-        # sops-nix currently doesn't support aarch64-darwin
-        home-manager.darwinModules.home-manager
-        ./darwin
-        ./darwin/brew.nix
-        {
-          nixpkgs.overlays = [
-            neovim-nightly.overlay
-          ];
-        }
-      ];
-    };
+    darwinConfigurations = {
 
-    nixosConfigurations."hx90" = nixpkgs.lib.nixosSystem {
-      specialArgs = args;
-      system = "x86_64-linux";
-      modules = [
-        nur.nixosModules.nur
-        sops-nix.nixosModules.sops
-        home-manager.nixosModules.home-manager
-        ./host/hx90
-        ./secrets
+      "M1" = darwin.lib.darwinSystem {
+        system = "aarch64-darwin";
+        modules = [
+          # sops-nix currently doesn't support aarch64-darwin
+          home-manager.darwinModules.home-manager
+          ./darwin
+          ./darwin/brew.nix
+          {
+            nixpkgs.overlays = [
+              neovim-nightly.overlay
+            ];
+          }
+        ];
+      };
 
-        {
-          nixpkgs.overlays = [
-            neovim-nightly.overlay
-            (final: prev: {
-              PingFang = prev.callPackage ./pkgs/fonts/PingFang { };
-              SF-Pro = prev.callPackage ./pkgs/fonts/SF-Pro { };
-            })
-          ];
-        }
-
-      ];
     };
 
 
+    nixosConfigurations = {
 
+      "hx90" = nixpkgs.lib.nixosSystem {
+        specialArgs = args;
+        system = "x86_64-linux";
+        modules = [
+          nur.nixosModules.nur
+          sops-nix.nixosModules.sops
+          home-manager.nixosModules.home-manager
+          ./host/hx90
+          ./secrets
 
-    nixosConfigurations = builtins.listToAttrs (
+          {
+            nixpkgs.overlays = [
+              neovim-nightly.overlay
+              (final: prev: {
+                PingFang = prev.callPackage ./pkgs/fonts/PingFang { };
+                SF-Pro = prev.callPackage ./pkgs/fonts/SF-Pro { };
+              })
+            ];
+          }
+
+        ];
+
+      };
+
+    } // builtins.listToAttrs (
 
       builtins.map
         (name: {
@@ -82,70 +87,22 @@
               (./. + "/host/oracle/${name}.nix")
               ./secrets
 
+              {
+                nixpkgs.overlays = [
+                  neovim-nightly.overlay
+                ];
+              }
+
             ];
 
           };
-        }) [ "jp2" "jp4" ]
+        }) [ "jp2" "jp4" "sw" "us1" "kr" ]
 
-
-    );
-
-
+    ); # end of nixosConfigurations
 
 
 
-    nixosConfigurations."oracle-sw" = nixpkgs.lib.nixosSystem {
-      system = "aarch64-linux";
-      modules = [
-        sops-nix.nixosModules.sops
-        home-manager.nixosModules.home-manager
-        ./host/oracle
-        ./host/oracle/sw.nix
-        ./secrets
-
-        {
-          nixpkgs.overlays = [
-            neovim-nightly.overlay
-          ];
-        }
-      ];
-    };
-
-    nixosConfigurations."oracle-us1" = nixpkgs.lib.nixosSystem {
-      system = "aarch64-linux";
-      modules = [
-        sops-nix.nixosModules.sops
-        home-manager.nixosModules.home-manager
-        ./host/oracle
-        ./host/oracle/us1.nix
-        ./secrets
-
-        {
-          nixpkgs.overlays = [
-            neovim-nightly.overlay
-          ];
-        }
-      ];
-    };
-
-    nixosConfigurations."oracle-kr" = nixpkgs.lib.nixosSystem {
-      system = "aarch64-linux";
-      modules = [
-        sops-nix.nixosModules.sops
-        home-manager.nixosModules.home-manager
-        ./host/oracle
-        ./host/oracle/kr.nix
-        ./secrets
-
-        {
-          nixpkgs.overlays = [
-            neovim-nightly.overlay
-          ];
-        }
-      ];
-    };
-
-  };
+  }; #end of outputs
 
 }
 
