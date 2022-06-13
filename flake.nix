@@ -111,14 +111,23 @@
       user = "root";
       sshOpts = [ "-o" "StrictHostKeyChecking=no" ];
 
-      nodes = {
-        "test" = {
-          hostname = "sw.mlyxshi.com";
-          profiles.system = {
-            path = deploy-rs.lib.aarch64-linux.activate.nixos self.nixosConfigurations.sw;
-          };
-        };
-      };
+      magicRollback = false;
+      autoRollback = false;
+
+
+
+      nodes = builtins.listToAttrs (
+        builtins.map
+          (hostName: {
+            name = "${hostName}";
+            value = {
+              hostname = "${hostName}.mlyxshi.com";
+              profiles.system.path = deploy-rs.lib.aarch64-linux.activate.nixos self.nixosConfigurations.${hostName};
+            };
+
+          }) [ "jp4" "sw" "us1" ]  # jp2 and kr need test
+      );
+
     };
 
 

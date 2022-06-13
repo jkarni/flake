@@ -1,3 +1,4 @@
+# For ordinary cache and test
 # https://github.com/NickCao/flakes/blob/master/.github/workflows/nix.yml   <--Orz
 # https://nixos.wiki/wiki/NixOS_on_ARM
 name: "aarch64 build"
@@ -20,9 +21,4 @@ jobs:
       with:
         name: mlyxshi
         authToken: '${{ secrets.CACHIX_AUTH_TOKEN }}'
-    # - run: nix build .#nixosConfigurations.jp2.config.system.build.toplevel
-    - uses: shimataro/ssh-key-action@v2
-      with:
-        key: '${{ secrets.SSH_PRIVATE_KEY }}'
-        known_hosts: unnecessary
-    - run: nix run github:serokell/deploy-rs -- -s
+    - run: nix build .#nixosConfigurations.jp2.config.system.build.toplevel
