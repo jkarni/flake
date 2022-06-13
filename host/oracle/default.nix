@@ -9,7 +9,7 @@
     ../../service/server.nix
   ];
 
-
+  systemd.services.systemd-networkd-wait-online.serviceConfig.ExecStart = [ "" "${pkgs.systemd}/lib/systemd/systemd-networkd-wait-online --any" ];
   systemd.network.networks = {
     dhcp = {
       name = "enp0s3";
