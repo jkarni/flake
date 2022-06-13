@@ -15,6 +15,8 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
+    deploy-rs.url = "github:serokell/deploy-rs";
+
     sops-nix.url = "github:Mic92/sops-nix";
 
     neovim-nightly.url = "github:nix-community/neovim-nightly-overlay";
@@ -23,7 +25,7 @@
 
   };
 
-  outputs = { nixpkgs, darwin, home-manager, neovim-nightly, sops-nix, nur, ... }@args: {
+  outputs = { self, nixpkgs, darwin, home-manager, neovim-nightly, deploy-rs, sops-nix, nur, ... }@args: {
 
     darwinConfigurations = {
 
@@ -75,8 +77,8 @@
     } // builtins.listToAttrs (
 
       builtins.map
-        (name: {
-          name = "oracle-" + "${name}";
+        (hostName: {
+          name = "${hostName}";
           value = nixpkgs.lib.nixosSystem {
             system = "aarch64-linux";
             modules = [
@@ -85,14 +87,14 @@
               ./host/oracle
               # https://nixos.wiki/wiki/Nix_Expression_Language
               # Coercing a relative path with interpolated variables to an absolute path (for imports)
-              (./. + "/host/oracle/${name}.nix")
+              (./. + "/host/oracle/${hostName}.nix")
               ./secrets
 
               {
-                networking.hostName = "${name}";
+                networking.hostName = "${hostName}";
                 nixpkgs.overlays = [
                   neovim-nightly.overlay
-                ];           
+                ];
               }
 
             ];
@@ -101,6 +103,22 @@
         }) [ "jp2" "jp4" "sw" "us1" "kr" ]
 
     ); # end of nixosConfigurations
+
+
+
+    deploy = {
+      sshUser = "root";
+      user = "root";
+
+      nodes = {
+        "test" = {
+          hostname = "sw.mlyxshi.com";
+          profiles.system = {
+            path = deploy-rs.lib.aarch64-linux.activate.nixos self.nixosConfigurations.sw;
+          };
+        };
+      };
+    };
 
 
 
