@@ -109,6 +109,7 @@
     deploy = {
       sshUser = "root";
       user = "root";
+      sshOpts = [ "-o" "StrictHostKeyChecking=no" ];
 
       nodes = {
         "test" = {
