@@ -19,7 +19,7 @@
 
     sops-nix.url = "github:Mic92/sops-nix";
 
-    neovim-nightly.url = "github:nix-community/neovim-nightly-overlay";
+    neovim-nightly.url = "github:neovim/neovim?dir=contrib";
 
     nur.url = "github:nix-community/NUR";
 
@@ -36,12 +36,8 @@
           home-manager.darwinModules.home-manager
           ./darwin
           ./darwin/brew.nix
-          {
-            nixpkgs.overlays = [
-              neovim-nightly.overlay
-            ];
-          }
         ];
+        specialArgs = args;
       };
 
     };
@@ -49,8 +45,7 @@
 
     nixosConfigurations = {
 
-      "hx90" = nixpkgs.lib.nixosSystem {
-        specialArgs = args;
+      "hx90" = nixpkgs.lib.nixosSystem {    
         system = "x86_64-linux";
         modules = [
           nur.nixosModules.nur
@@ -62,7 +57,6 @@
           {
             networking.hostName = "hx90";
             nixpkgs.overlays = [
-              neovim-nightly.overlay
               (final: prev: {
                 PingFang = prev.callPackage ./pkgs/fonts/PingFang { };
                 SF-Pro = prev.callPackage ./pkgs/fonts/SF-Pro { };
@@ -71,6 +65,7 @@
           }
 
         ];
+        specialArgs = args;
 
       };
 
@@ -92,12 +87,10 @@
 
               {
                 networking.hostName = "${hostName}";
-                nixpkgs.overlays = [
-                  neovim-nightly.overlay
-                ];
               }
 
             ];
+            specialArgs = args;
 
           };
         }) [ "jp2" "jp4" "sw" "us1" "kr" ]

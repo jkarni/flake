@@ -29,6 +29,8 @@ local options = {
   -- Global Statusline
   laststatus = 3,
 
+  cmdheight = 0,
+
   termguicolors = true,
 }
 
