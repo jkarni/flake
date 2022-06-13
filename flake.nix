@@ -19,7 +19,10 @@
 
     sops-nix.url = "github:Mic92/sops-nix";
 
-    neovim-nightly.url = "github:neovim/neovim?dir=contrib";
+    neovim-nightly = {
+      url = "github:neovim/neovim";
+      flake = false;
+    };
 
     nur.url = "github:nix-community/NUR";
 
@@ -45,7 +48,7 @@
 
     nixosConfigurations = {
 
-      "hx90" = nixpkgs.lib.nixosSystem {    
+      "hx90" = nixpkgs.lib.nixosSystem {
         system = "x86_64-linux";
         modules = [
           nur.nixosModules.nur
