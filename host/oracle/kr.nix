@@ -23,7 +23,7 @@
 
   services.prometheus = {
     enable = true;
-    retentionTime = "7d";
+    retentionTime = "365d";
 
     globalConfig = {
       scrape_interval = "1m";

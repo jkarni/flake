@@ -21,6 +21,8 @@ in
 
   xdg.configFile = {
     "nvim/init.lua".text = ''
+      -- Begin Stage: Cache and Accelerate
+      require("plugin-config.impatient")
       
       -- Prepend Treesitter Path
       vim.opt.packpath = vim.opt.packpath ^ "${TREESITTER}"

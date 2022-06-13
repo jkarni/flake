@@ -8,12 +8,6 @@
     extraOptions = ''
       experimental-features = nix-command flakes
     '';
-    binaryCaches = [
-      "https://mlyxshi.cachix.org"
-    ];
-    binaryCachePublicKeys = [
-      "mlyxshi.cachix.org-1:yc7GPiryyBn0HfiCXdmO1ECWKBhfwrjdIFnRSA4ct7s="
-    ];
   };
 
   services.nix-daemon.enable = true;

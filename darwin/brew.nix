@@ -7,6 +7,7 @@
     brews = [
       "iproute2mac"
       "mas"
+      "qemu"
     ];
 
     taps = [

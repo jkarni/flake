@@ -64,39 +64,35 @@
     };
 
 
-    nixosConfigurations."oracle-jp2" = nixpkgs.lib.nixosSystem {
-      system = "aarch64-linux";
-      modules = [
-        sops-nix.nixosModules.sops
-        home-manager.nixosModules.home-manager
-        ./host/oracle
-        ./host/oracle/jp2.nix
-        ./secrets
 
-        {
-          nixpkgs.overlays = [
-            neovim-nightly.overlay
-          ];
-        }
-      ];
-    };
 
-    nixosConfigurations."oracle-jp4" = nixpkgs.lib.nixosSystem {
-      system = "aarch64-linux";
-      modules = [
-        sops-nix.nixosModules.sops
-        home-manager.nixosModules.home-manager
-        ./host/oracle
-        ./host/oracle/jp4.nix
-        ./secrets
+    nixosConfigurations = builtins.listToAttrs (
 
-        {
-          nixpkgs.overlays = [
-            neovim-nightly.overlay
-          ];
-        }
-      ];
-    };
+      builtins.map
+        (name: {
+          name = "oracle-" + "${name}";
+          value = nixpkgs.lib.nixosSystem {
+            system = "aarch64-linux";
+            modules = [
+              sops-nix.nixosModules.sops
+              home-manager.nixosModules.home-manager
+              ./host/oracle
+              # https://nixos.wiki/wiki/Nix_Expression_Language
+              # Coercing a relative path with interpolated variables to an absolute path (for imports)
+              (./. + "/host/oracle/${name}.nix")
+              ./secrets
+
+            ];
+
+          };
+        }) [ "jp2" "jp4" ]
+
+
+    );
+
+
+
+
 
     nixosConfigurations."oracle-sw" = nixpkgs.lib.nixosSystem {
       system = "aarch64-linux";
@@ -152,3 +148,5 @@
   };
 
 }
+
+
