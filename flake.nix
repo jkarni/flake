@@ -58,6 +58,7 @@
           ./secrets
 
           {
+            networking.hostName = "hx90";
             nixpkgs.overlays = [
               neovim-nightly.overlay
               (final: prev: {
@@ -88,9 +89,10 @@
               ./secrets
 
               {
+                networking.hostName = "${name}";
                 nixpkgs.overlays = [
                   neovim-nightly.overlay
-                ];
+                ];           
               }
 
             ];
@@ -105,5 +107,3 @@
   }; #end of outputs
 
 }
-
-

@@ -8,7 +8,6 @@
     useNetworkd = true;
     useDHCP = false;
     firewall.enable = false;
-    hostName = "nixos";
   };
 
 }
