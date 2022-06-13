@@ -1,5 +1,5 @@
-# After test, manually deploy
-# gh workflow run qemu-aarch64-deploy
+# After fully test on jp2 and kr, manually deploy
+# gh workflow run qemu-aarch64-deploy.yml
 name: "aarch64 deploy"
 on:
   workflow_dispatch

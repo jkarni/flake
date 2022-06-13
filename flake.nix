@@ -114,8 +114,6 @@
       magicRollback = false;
       autoRollback = false;
 
-
-
       nodes = builtins.listToAttrs (
         builtins.map
           (hostName: {
