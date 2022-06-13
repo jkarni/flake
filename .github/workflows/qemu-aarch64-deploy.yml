@@ -1,6 +1,8 @@
 # After test, manually deploy
 # gh workflow run qemu-aarch64-deploy
-name: "aarch64 build"
+name: "aarch64 deploy"
+on:
+  workflow_dispatch
 
 jobs:
   CI:
