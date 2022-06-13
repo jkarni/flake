@@ -15,18 +15,26 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
-    deploy-rs.url = "github:serokell/deploy-rs";
+    deploy-rs = {
+      url = "github:serokell/deploy-rs";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
 
-    sops-nix.url = "github:Mic92/sops-nix";
-    sops-nix.inputs.nixpkgs.follows = "nixpkgs";
+    sops-nix = {
+      url = "github:Mic92/sops-nix";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
 
     neovim-nightly = {
       url = "github:neovim/neovim";
       flake = false;
     };
 
-    nur.url = "github:nix-community/NUR";
-
+    nur = {
+      url = "github:nix-community/NUR";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+    
   };
 
   outputs = { self, nixpkgs, darwin, home-manager, deploy-rs, sops-nix, nur, ... }@args: {
