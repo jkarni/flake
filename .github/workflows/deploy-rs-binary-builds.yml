@@ -1,4 +1,4 @@
-name: "deploy-rs aarch64 build"
+name: "[Auto] deploy-rs build"
 on:
   push:
   schedule:
