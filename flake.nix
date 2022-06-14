@@ -6,12 +6,12 @@
     };
 
     home-manager = {
-      url = "github:nix-community/home-manager/935ecea67d59f2af9d9f56d18a8f0dc12fb18cfd";
+      url = "github:nix-community/home-manager/release-22.05";
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
     darwin = {
-      url = "github:LnL7/nix-darwin/master";
+      url = "github:LnL7/nix-darwin";
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
@@ -121,7 +121,7 @@
         nodes = builtins.listToAttrs (
           builtins.map
             (hostName: {
-              name = "${hostName}";
+              name = hostName;
               value = {
                 hostname = "${hostName}.mlyxshi.com";
                 profiles.system.path = deploy-rs.lib.aarch64-linux.activate.nixos self.nixosConfigurations.${hostName};
