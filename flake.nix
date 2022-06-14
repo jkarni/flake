@@ -36,6 +36,7 @@
     let
       stateVersion = "22.05";
       homeStateVersion = stateVersion;
+      oracleServer = [ "jp2" "jp4" "sw" "us1" "kr" ];
     in
     {
 
@@ -50,7 +51,7 @@
             ./darwin/brew.nix
             ./overlay/Neovim.nix
           ];
-          specialArgs = {inherit homeStateVersion neovim-nightly;};
+          specialArgs = { inherit homeStateVersion neovim-nightly; };
         };
 
       };
@@ -67,12 +68,12 @@
             ./overlay/Neovim.nix
             ./overlay/AppleFont.nix
 
-            { 
+            {
               system.stateVersion = stateVersion;
               networking.hostName = "hx90";
             }
           ];
-          specialArgs = {inherit homeStateVersion neovim-nightly;};
+          specialArgs = { inherit homeStateVersion neovim-nightly; };
         };
 
       } // builtins.listToAttrs (
@@ -95,9 +96,9 @@
                   networking.hostName = hostName;
                 }
               ];
-              specialArgs = {inherit homeStateVersion neovim-nightly;};
+              specialArgs = { inherit homeStateVersion neovim-nightly; };
             };
-          }) [ "jp2" "jp4" "sw" "us1" "kr" ]
+          }) oracleServer
 
       ); # end of nixosConfigurations
 
@@ -120,7 +121,7 @@
                 profiles.system.path = deploy-rs.lib.aarch64-linux.activate.nixos self.nixosConfigurations.${hostName};
               };
 
-            }) [ "jp2" "jp4" "kr" "us1" "sw" ]
+            }) oracleServer
         );
 
       }; # end of deploy
