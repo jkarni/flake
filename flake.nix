@@ -6,7 +6,7 @@
     };
 
     home-manager = {
-      url = "github:nix-community/home-manager";
+      url = "github:nix-community/home-manager/935ecea67d59f2af9d9f56d18a8f0dc12fb18cfd";
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
@@ -41,10 +41,10 @@
         });
       });
 
-      # AppleFontOverlay = (final: prev: {
-      #   PingFang = prev.callPackage ./pkgs/fonts/PingFang { };
-      #   SF-Pro = prev.callPackage ./pkgs/fonts/SF-Pro { };
-      # });
+      AppleFontOverlay = (final: prev: {
+        PingFang = prev.callPackage ./pkgs/fonts/PingFang { };
+        SF-Pro = prev.callPackage ./pkgs/fonts/SF-Pro { };
+      });
     in
     {
 
@@ -75,10 +75,7 @@
 
             {
               networking.hostName = "hx90";
-              nixpkgs.overlays = [
-                neovimOverlay
-                # AppleFontOverlay
-              ];
+              nixpkgs.overlays = [ neovimOverlay AppleFontOverlay];
             }
           ];
         };

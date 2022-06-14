@@ -35,30 +35,30 @@
 
   i18n.defaultLocale = "en_US.UTF-8";
 
-  # fonts = {
-  #   fonts = [
-  #     (pkgs.nerdfonts.override { fonts = [ "RobotoMono" ]; }) # Terminal Font
-  #   ] ++ lib.optionals (config.users.users ? dominic) [
-  #     # If desktop user dominic is defined, add desktop fonts
-  #     # The essence of Apple
-  #     pkgs.SF-Pro # English
-  #     pkgs.PingFang # Chinese/Japanese
-  #   ];
+  fonts = {
+    fonts = [
+      (pkgs.nerdfonts.override { fonts = [ "RobotoMono" ]; }) # Terminal Font
+    ] ++ lib.optionals (config.users.users ? dominic) [
+      # If desktop user dominic is defined, add desktop fonts
+      # The essence of Apple
+      pkgs.SF-Pro # English
+      pkgs.PingFang # Chinese/Japanese
+    ];
 
-  #   enableDefaultFonts = false; # If Sway is enabled, enableDefaultFonts is true by default <-- I don't need extra default fonts
+    enableDefaultFonts = false; # If Sway is enabled, enableDefaultFonts is true by default <-- I don't need extra default fonts
 
-  #   # fc-list
-  #   fontconfig = {
-  #     enable = true;
-  #     defaultFonts = {
-  #       monospace = [ "RobotoMono Nerd Font" ];
-  #     } // lib.optionalAttrs (config.users.users ? dominic) {
-  #       sansSerif = [ "SF Pro" ];
-  #       serif = [ "SF Pro" ];
-  #     };
-  #   };
+    # fc-list
+    fontconfig = {
+      enable = true;
+      defaultFonts = {
+        monospace = [ "RobotoMono Nerd Font" ];
+      } // lib.optionalAttrs (config.users.users ? dominic) {
+        sansSerif = [ "SF Pro" ];
+        serif = [ "SF Pro" ];
+      };
+    };
 
-  # };
+  };
 
   environment.sessionVariables = {
     EDITOR = "nvim";
