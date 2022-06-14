@@ -75,7 +75,10 @@
 
             {
               networking.hostName = "hx90";
-              nixpkgs.overlays = [ neovimOverlay AppleFontOverlay ];
+              nixpkgs.overlays = [
+                neovimOverlay
+                # AppleFontOverlay
+              ];
             }
           ];
         };
