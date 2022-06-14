@@ -45,7 +45,7 @@
       pkgs.PingFang # Chinese/Japanese
     ];
 
-    enableDefaultFonts = lib.mkForce false; # If Sway is enabled, enableDefaultFonts is true by default <-- I don't need extra default fonts
+    enableDefaultFonts = false; # If Sway is enabled, enableDefaultFonts is true by default <-- I don't need extra default fonts
 
     # fc-list
     fontconfig.defaultFonts = {
