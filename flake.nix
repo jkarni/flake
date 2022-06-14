@@ -76,28 +76,30 @@
           specialArgs = { inherit homeStateVersion neovim-nightly; };
         };
 
-      } // listToAttrs (map
-        (hostName: {
-          name = hostName;
-          value = nixpkgs.lib.nixosSystem {
-            system = "aarch64-linux";
-            modules = [
-              sops-nix.nixosModules.sops
-              home-manager.nixosModules.home-manager
-              # https://nixos.wiki/wiki/Nix_Expression_Language
-              # Coercing a relative path with interpolated variables to an absolute path (for imports)
-              (./host/oracle + "/${hostName}.nix")
-              ./overlay/Neovim.nix
+      } // builtins.listToAttrs (
 
-              {
-                system.stateVersion = stateVersion;
-                networking.hostName = hostName;
-              }
-            ];
-            specialArgs = { inherit homeStateVersion neovim-nightly; };
-          };
-        })
-        oracleServer
+        builtins.map
+          (hostName: {
+            name = hostName;
+            value = nixpkgs.lib.nixosSystem {
+              system = "aarch64-linux";
+              modules = [
+                sops-nix.nixosModules.sops
+                home-manager.nixosModules.home-manager
+                # https://nixos.wiki/wiki/Nix_Expression_Language
+                # Coercing a relative path with interpolated variables to an absolute path (for imports)
+                (./host/oracle + "/${hostName}.nix")
+                ./overlay/Neovim.nix
+
+                {
+                  system.stateVersion = stateVersion;
+                  networking.hostName = hostName;
+                }
+              ];
+              specialArgs = { inherit homeStateVersion neovim-nightly; };
+            };
+          })
+          oracleServer
 
       ); # end of nixosConfigurations
 
@@ -112,16 +114,17 @@
         autoRollback = false;
 
         #https://lantian.pub/article/modify-website/nixos-initial-config-flake-deploy.lantian/
-        nodes = listToAttrs (map
-          (hostName: {
-            name = hostName;
-            value = {
-              hostname = "${hostName}.mlyxshi.com";
-              profiles.system.path = deploy-rs.lib.aarch64-linux.activate.nixos self.nixosConfigurations.${hostName};
-            };
+        nodes = builtins.listToAttrs (
+          builtins.map
+            (hostName: {
+              name = hostName;
+              value = {
+                hostname = "${hostName}.mlyxshi.com";
+                profiles.system.path = deploy-rs.lib.aarch64-linux.activate.nixos self.nixosConfigurations.${hostName};
+              };
 
-          })
-          oracleServer
+            })
+            oracleServer
         );
 
       }; # end of deploy
