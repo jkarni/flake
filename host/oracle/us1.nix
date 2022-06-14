@@ -13,8 +13,6 @@
         "guest ok" = "yes";
         comment = "Public samba share.";
       };
-    
-    invalidUsers = lib.mkForce ["random"]; 
   };
 
 
