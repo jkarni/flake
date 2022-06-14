@@ -130,7 +130,14 @@
         magicRollback = false;
         autoRollback = false;
 
-        nodes = builtins.listToAttrs (
+        nodes = {
+          "ovh" = {
+            hostname = "ovh.mlyxshi.com";
+            profiles.system = {
+              path = deploy-rs.lib.x86_64-linux.activate.nixos self.nixosConfigurations."ovh";
+            };
+          };
+        } // builtins.listToAttrs (
           builtins.map
             (hostName: {
               name = hostName;
