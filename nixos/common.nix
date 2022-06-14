@@ -48,11 +48,14 @@
     enableDefaultFonts = false; # If Sway is enabled, enableDefaultFonts is true by default <-- I don't need extra default fonts
 
     # fc-list
-    fontconfig.defaultFonts = {
-      monospace = [ "RobotoMono Nerd Font" ];
-    } // lib.optionalAttrs (config.users.users ? dominic) {
-      sansSerif = [ "SF Pro" ];
-      serif = [ "SF Pro" ];
+    fontconfig = {
+      enable = true;
+      defaultFonts = {
+        monospace = [ "RobotoMono Nerd Font" ];
+      } // lib.optionalAttrs (config.users.users ? dominic) {
+        sansSerif = [ "SF Pro" ];
+        serif = [ "SF Pro" ];
+      };
     };
 
   };
