@@ -70,6 +70,5 @@
     "net.ipv4.tcp_congestion_control" = "bbr";
     "net.ipv4.tcp_fastopen" = "3";
   };
-
-  system.stateVersion = "22.05";
+  
 }

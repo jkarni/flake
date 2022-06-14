@@ -34,6 +34,8 @@
 
   outputs = { self, nixpkgs, darwin, home-manager, deploy-rs, neovim-nightly, sops-nix, ... }@args:
     let
+      stateVersion = "22.05";
+      
       neovimOverlay = (final: prev: {
         neovim-unwrapped = prev.neovim-unwrapped.overrideAttrs (oldAttrs: {
           version = "master";
@@ -73,7 +75,8 @@
             home-manager.nixosModules.home-manager
             ./host/hx90
 
-            {
+            { 
+              system.stateVersion = stateVersion;
               networking.hostName = "hx90";
               nixpkgs.overlays = [ neovimOverlay AppleFontOverlay];
             }
@@ -84,7 +87,7 @@
 
         builtins.map
           (hostName: {
-            name = "${hostName}";
+            name = hostName;
             value = nixpkgs.lib.nixosSystem {
               system = "aarch64-linux";
               modules = [
@@ -95,7 +98,8 @@
                 (./host/oracle + "/${hostName}.nix")
 
                 {
-                  networking.hostName = "${hostName}";
+                  system.stateVersion = stateVersion;
+                  networking.hostName = hostName;
                   nixpkgs.overlays = [ neovimOverlay ];
                 }
               ];
