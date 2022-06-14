@@ -1,4 +1,4 @@
-{ pkgs, ... }: {
+{ pkgs, homeStateVersion, ... }: {
 
   imports = [
     ./git.nix
@@ -38,4 +38,6 @@
   #     enable = true;
   #   };
   # };
+   
+  home.stateVersion = homeStateVersion;
 }

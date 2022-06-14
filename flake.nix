@@ -35,6 +35,7 @@
   outputs = { self, nixpkgs, darwin, home-manager, deploy-rs, neovim-nightly, sops-nix, ... }@args:
     let
       stateVersion = "22.05";
+      homeStateVersion = stateVersion;
       
       neovimOverlay = (final: prev: {
         neovim-unwrapped = prev.neovim-unwrapped.overrideAttrs (oldAttrs: {
@@ -77,11 +78,11 @@
 
             { 
               system.stateVersion = stateVersion;
-              home.stateVersion = stateVersion;
               networking.hostName = "hx90";
               nixpkgs.overlays = [ neovimOverlay AppleFontOverlay];
             }
           ];
+          specialArgs = {inherit homeStateVersion;};
         };
 
       } // builtins.listToAttrs (
@@ -100,11 +101,11 @@
 
                 {
                   system.stateVersion = stateVersion;
-                  home.stateVersion = stateVersion;
                   networking.hostName = hostName;
                   nixpkgs.overlays = [ neovimOverlay ];
                 }
               ];
+              specialArgs = {inherit homeStateVersion;};
             };
           }) [ "jp2" "jp4" "sw" "us1" "kr" ]
 
