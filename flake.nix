@@ -76,6 +76,23 @@
           specialArgs = { inherit homeStateVersion neovim-nightly; };
         };
 
+
+        "ovh" = nixpkgs.lib.nixosSystem {
+          system = "x86_64-linux";
+          modules = [
+            sops-nix.nixosModules.sops
+            home-manager.nixosModules.home-manager
+            ./host/ovh
+            ./overlay/Neovim.nix
+
+            {
+              system.stateVersion = stateVersion;
+              networking.hostName = "ovh";
+            }
+          ];
+          specialArgs = { inherit homeStateVersion neovim-nightly; };
+        };
+
       } // builtins.listToAttrs (
 
         builtins.map
@@ -98,7 +115,8 @@
               ];
               specialArgs = { inherit homeStateVersion neovim-nightly; };
             };
-          }) oracleServer
+          })
+          oracleServer
 
       ); # end of nixosConfigurations
 
@@ -121,7 +139,8 @@
                 profiles.system.path = deploy-rs.lib.aarch64-linux.activate.nixos self.nixosConfigurations.${hostName};
               };
 
-            }) oracleServer
+            })
+            oracleServer
         );
 
       }; # end of deploy

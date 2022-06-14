@@ -27,12 +27,12 @@
     root = "/var/www/myhost.org";
   };
 
-  # services.prometheus.exporters = {
-  #   node = {
-  #     enable = true;
-  #     enabledCollectors = [ "systemd" ];
-  #   };
-  # };
+  services.prometheus.exporters = {
+    node = {
+      enable = true;
+      enabledCollectors = [ "systemd" ];
+    };
+  };
 
 
 }

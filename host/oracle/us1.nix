@@ -1,19 +1,5 @@
-{ config, pkgs, lib, ... }: {
+{ config, pkgs, ... }: {
   imports = [
     ./default.nix
   ];
-
-  services.samba.enable = true;
-  services.samba.shares = {
-    public =
-      {
-        path = "/srv/public";
-        "read only" = true;
-        browseable = "yes";
-        "guest ok" = "yes";
-        comment = "Public samba share.";
-      };
-  };
-
-
 }
