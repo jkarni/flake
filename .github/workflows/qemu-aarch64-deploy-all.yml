@@ -1,6 +1,4 @@
-# After fully test on jp2 and kr, manually deploy
-# gh workflow run qemu-aarch64-deploy.yml
-name: "aarch64 deploy"
+name: "aarch64 deploy all"
 on:
   workflow_dispatch
 

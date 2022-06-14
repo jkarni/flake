@@ -1,4 +1,4 @@
-name: "aarch64 deploy"
+name: "aarch64 deploy us1"
 on:
   workflow_dispatch
 
