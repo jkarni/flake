@@ -38,13 +38,7 @@
       {
         job_name = "metrics";
         static_configs = [{
-          targets = [
-            "kr.mlyxshi.com:9100"
-            "jp2.mlyxshi.com:9100"
-            "jp4.mlyxshi.com:9100"
-            "us1.mlyxshi.com:9100"
-            "sw.mlyxshi.com:9100"
-          ];
+          targets = builtin.map (hostName: "${hostName}.mlyxshi.com:${toString config.services.prometheus.exporters.node.port}") [ "kr" "jp2" "jp4" "us1" "sw" ];
         }];
       }
     ];

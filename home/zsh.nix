@@ -31,9 +31,9 @@
       c = "bat";
       man = "batman";
     } // lib.optionalAttrs pkgs.stdenv.isDarwin {
-      update = "darwin-rebuild switch --flake ~/flake#M1";
+      update = "cd ~/flake; git add .; darwin-rebuild switch --flake ~/flake#M1";
     } // lib.optionalAttrs pkgs.stdenv.isLinux {
-      update = "cd /etc/flake; git pull; nixos-rebuild switch --flake /etc/flake#$(hostnamectl  hostname)";
+      update = "cd /etc/flake; git pull; nixos-rebuild switch --flake /etc/flake#";
     };
 
     enableAutosuggestions = true;
