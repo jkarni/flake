@@ -9,7 +9,6 @@ jobs:
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v3
-    - run: sudo apt install -y qemu-user-static
     - uses: cachix/install-nix-action@v17
       with:
         extra_nix_config: |
