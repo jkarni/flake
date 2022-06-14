@@ -1,4 +1,4 @@
-{ pkgs, neovim-nightly, lib, ... }:
+{ pkgs, lib, ... }:
 let
 
   TREESITTER = (pkgs.vimPlugins.nvim-treesitter.withPlugins (
@@ -44,12 +44,7 @@ in
 
   home.packages = with pkgs;  [
 
-    (neovim-unwrapped.overrideAttrs
-      (oa: {
-        version = "master";
-        src = neovim-nightly;
-      })
-    )
+    neovim-unwrapped
 
     TREESITTER
 

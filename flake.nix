@@ -30,111 +30,109 @@
       flake = false;
     };
 
-    nur = {
-      url = "github:nix-community/NUR";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
-
   };
 
-  outputs = { self, nixpkgs, darwin, home-manager, deploy-rs, sops-nix, nur, ... }@args: {
+  outputs = { self, nixpkgs, darwin, home-manager, deploy-rs, neovim-nightly, sops-nix, ... }@args:
+    let
+      neovimOverlay = (final: prev: {
+        neovim-unwrapped = prev.neovim-unwrapped.overrideAttrs (oldAttrs: {
+          version = "master";
+          src = neovim-nightly;
+        });
+      });
 
-    darwinConfigurations = {
+      AppleFontOverlay = (final: prev: {
+        PingFang = prev.callPackage ./pkgs/fonts/PingFang { };
+        SF-Pro = prev.callPackage ./pkgs/fonts/SF-Pro { };
+      });
+    in
+    {
 
-      "M1" = darwin.lib.darwinSystem {
-        system = "aarch64-darwin";
-        modules = [
-          # sops-nix currently doesn't support aarch64-darwin
-          home-manager.darwinModules.home-manager
-          ./darwin
-          ./darwin/brew.nix
-        ];
-        specialArgs = args;
-      };
+      darwinConfigurations = {
 
-    };
-
-
-    nixosConfigurations = {
-
-      "hx90" = nixpkgs.lib.nixosSystem {
-        system = "x86_64-linux";
-        modules = [
-          nur.nixosModules.nur
-          sops-nix.nixosModules.sops
-          home-manager.nixosModules.home-manager
-          ./host/hx90
-          ./secrets
-
-          {
-            networking.hostName = "hx90";
-            nixpkgs.overlays = [
-              (final: prev: {
-                PingFang = prev.callPackage ./pkgs/fonts/PingFang { };
-                SF-Pro = prev.callPackage ./pkgs/fonts/SF-Pro { };
-              })
-            ];
-          }
-
-        ];
-        specialArgs = args;
+        "M1" = darwin.lib.darwinSystem {
+          system = "aarch64-darwin";
+          modules = [
+            # sops-nix currently doesn't support aarch64-darwin
+            home-manager.darwinModules.home-manager
+            ./darwin
+            ./darwin/brew.nix
+            { nixpkgs.overlays = [ neovimOverlay ]; }
+          ];
+        };
 
       };
 
-    } // builtins.listToAttrs (
 
-      builtins.map
-        (hostName: {
-          name = "${hostName}";
-          value = nixpkgs.lib.nixosSystem {
-            system = "aarch64-linux";
-            modules = [
-              sops-nix.nixosModules.sops
-              home-manager.nixosModules.home-manager
-              ./host/oracle
-              # https://nixos.wiki/wiki/Nix_Expression_Language
-              # Coercing a relative path with interpolated variables to an absolute path (for imports)
-              (./host/oracle + "/${hostName}.nix")
-              ./secrets
+      nixosConfigurations = {
 
-              {
-                networking.hostName = "${hostName}";
-              }
+        "hx90" = nixpkgs.lib.nixosSystem {
+          system = "x86_64-linux";
+          modules = [
+            sops-nix.nixosModules.sops
+            home-manager.nixosModules.home-manager
+            ./host/hx90
+            ./secrets
 
-            ];
-            specialArgs = args;
+            {
+              networking.hostName = "hx90";
+              nixpkgs.overlays = [ neovimOverlay AppleFontOverlay ];
+            }
+          ];
+        };
 
-          };
-        }) [ "jp2" "jp4" "sw" "us1" "kr" ]
+      } // builtins.listToAttrs (
 
-    ); # end of nixosConfigurations
-
-
-
-    deploy = {
-      sshUser = "root";
-      user = "root";
-      sshOpts = [ "-o" "StrictHostKeyChecking=no" ];
-
-      magicRollback = false;
-      autoRollback = false;
-
-      nodes = builtins.listToAttrs (
         builtins.map
           (hostName: {
             name = "${hostName}";
-            value = {
-              hostname = "${hostName}.mlyxshi.com";
-              profiles.system.path = deploy-rs.lib.aarch64-linux.activate.nixos self.nixosConfigurations.${hostName};
+            value = nixpkgs.lib.nixosSystem {
+              system = "aarch64-linux";
+              modules = [
+                sops-nix.nixosModules.sops
+                home-manager.nixosModules.home-manager
+                ./host/oracle
+                # https://nixos.wiki/wiki/Nix_Expression_Language
+                # Coercing a relative path with interpolated variables to an absolute path (for imports)
+                (./host/oracle + "/${hostName}.nix")
+                ./secrets
+
+                {
+                  networking.hostName = "${hostName}";
+                  nixpkgs.overlays = [ neovimOverlay ];
+                }
+              ];
             };
+          }) [ "jp2" "jp4" "sw" "us1" "kr" ]
 
-          }) [ "jp4" "sw" "us1" ]  # jp2 and kr need test
-      );
-
-    };
+      ); # end of nixosConfigurations
 
 
 
-  }; #end of outputs
+      deploy = {
+        sshUser = "root";
+        user = "root";
+        sshOpts = [ "-o" "StrictHostKeyChecking=no" ];
+
+        magicRollback = false;
+        autoRollback = false;
+
+        nodes = builtins.listToAttrs (
+          builtins.map
+            (hostName: {
+              name = "${hostName}";
+              value = {
+                hostname = "${hostName}.mlyxshi.com";
+                profiles.system.path = deploy-rs.lib.aarch64-linux.activate.nixos self.nixosConfigurations.${hostName};
+              };
+
+            }) [ "jp4" "sw" "us1" ]  # jp2 and kr need test
+        );
+
+      };
+
+
+
+    }; #end of outputs
 
 }
