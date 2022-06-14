@@ -12,6 +12,7 @@
   ];
 
   # Workaround for fixing timeout issue
+  # manually reboot once
   systemd.network.wait-online.anyInterface = true;
 
   systemd.network.networks = {
