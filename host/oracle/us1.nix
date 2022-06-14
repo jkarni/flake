@@ -1,4 +1,4 @@
-{ config, pkgs, ... }: {
+{ config, pkgs, lib, ... }: {
   imports = [
     ./default.nix
   ];
@@ -14,7 +14,7 @@
         comment = "Public samba share.";
       };
     
-    invalidUsers = mkForce []; 
+    invalidUsers = lib.mkForce []; 
   };
 
 
