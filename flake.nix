@@ -76,23 +76,6 @@
           specialArgs = { inherit homeStateVersion neovim-nightly; };
         };
 
-
-        "ovh" = nixpkgs.lib.nixosSystem {
-          system = "x86_64-linux";
-          modules = [
-            sops-nix.nixosModules.sops
-            home-manager.nixosModules.home-manager
-            ./host/ovh
-            ./overlay/Neovim.nix
-
-            {
-              system.stateVersion = stateVersion;
-              networking.hostName = "ovh";
-            }
-          ];
-          specialArgs = { inherit homeStateVersion neovim-nightly; };
-        };
-
       } // builtins.listToAttrs (
 
         builtins.map
@@ -130,14 +113,8 @@
         magicRollback = false;
         autoRollback = false;
 
-        nodes = {
-          "ovh" = {
-            hostname = "ovh.mlyxshi.com";
-            profiles.system = {
-              path = deploy-rs.lib.x86_64-linux.activate.nixos self.nixosConfigurations."ovh";
-            };
-          };
-        } // builtins.listToAttrs (
+        #https://lantian.pub/article/modify-website/nixos-initial-config-flake-deploy.lantian/
+        nodes = builtins.listToAttrs (
           builtins.map
             (hostName: {
               name = hostName;

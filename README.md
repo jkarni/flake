@@ -27,7 +27,7 @@ nix-env -iA nixos.git
 git clone https://github.com/mlyxshi/flake /etc/flake
 # delete default grub boot, use systemd-boot instead
 rm -rf /boot/*
-nixos-rebuild switch --flake /etc/flake#<NAME> --install-bootloader -v --option substituters https://mlyxshi.cachix.org --option trusted-public-keys mlyxshi.cachix.org-1:yc7GPiryyBn0HfiCXdmO1ECWKBhfwrjdIFnRSA4ct7s=
+nixos-rebuild switch --flake /etc/flake#<NAME> --install-bootloader -v
 git remote set-url origin github.com:mlyxshi/flake
 ```
 

@@ -17,6 +17,7 @@
     ];
 
     casks = [
+      "wezterm"
       "font-roboto-mono-nerd-font"
       "mpv"  # Don't use mpv from nixpkgs <-- Not optimized for macos
       "calibre"
@@ -33,7 +34,6 @@
       "raycast"
       "visual-studio-code"
       "firefox"
-      "warp"
       "qbittorrent"
 
       # Already installed from offical website <-- Uncomment this when completely reinstall macos

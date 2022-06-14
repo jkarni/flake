@@ -9,7 +9,7 @@
     gh
     go
     ideviceinstaller
-    rclone  
+    rclone 
   ];
 
 }
