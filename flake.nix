@@ -36,18 +36,6 @@
     let
       stateVersion = "22.05";
       homeStateVersion = stateVersion;
-      
-      neovimOverlay = (final: prev: {
-        neovim-unwrapped = prev.neovim-unwrapped.overrideAttrs (oldAttrs: {
-          version = "master";
-          src = neovim-nightly;
-        });
-      });
-
-      AppleFontOverlay = (final: prev: {
-        PingFang = prev.callPackage ./pkgs/fonts/PingFang { };
-        SF-Pro = prev.callPackage ./pkgs/fonts/SF-Pro { };
-      });
     in
     {
 
@@ -60,8 +48,9 @@
             home-manager.darwinModules.home-manager
             ./darwin
             ./darwin/brew.nix
-            { nixpkgs.overlays = [ neovimOverlay ]; }
+            ./overlay/Neovim.nix
           ];
+          specialArgs = {inherit homeStateVersion neovim-nightly;};
         };
 
       };
@@ -75,14 +64,15 @@
             sops-nix.nixosModules.sops
             home-manager.nixosModules.home-manager
             ./host/hx90
+            ./overlay/Neovim.nix
+            ./overlay/AppleFont.nix
 
             { 
               system.stateVersion = stateVersion;
               networking.hostName = "hx90";
-              nixpkgs.overlays = [ neovimOverlay AppleFontOverlay];
             }
           ];
-          specialArgs = {inherit homeStateVersion;};
+          specialArgs = {inherit homeStateVersion neovim-nightly;};
         };
 
       } // builtins.listToAttrs (
@@ -98,14 +88,14 @@
                 # https://nixos.wiki/wiki/Nix_Expression_Language
                 # Coercing a relative path with interpolated variables to an absolute path (for imports)
                 (./host/oracle + "/${hostName}.nix")
+                ./overlay/Neovim.nix
 
                 {
                   system.stateVersion = stateVersion;
                   networking.hostName = hostName;
-                  nixpkgs.overlays = [ neovimOverlay ];
                 }
               ];
-              specialArgs = {inherit homeStateVersion;};
+              specialArgs = {inherit homeStateVersion neovim-nightly;};
             };
           }) [ "jp2" "jp4" "sw" "us1" "kr" ]
 

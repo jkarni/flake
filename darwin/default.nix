@@ -1,7 +1,8 @@
-{ config, pkgs, ... }: {
-
+{ config, pkgs, homeStateVersion, ... }: {
+  
   home-manager.useGlobalPkgs = true;
   home-manager.useUserPackages = true;
+  home-manager.extraSpecialArgs = { inherit homeStateVersion; };
   home-manager.users.dominic = import ./home.nix;
 
   nix = {
