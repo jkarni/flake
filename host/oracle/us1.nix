@@ -14,7 +14,7 @@
         comment = "Public samba share.";
       };
     
-    invalidUsers = lib.mkForce []; 
+    invalidUsers = lib.mkForce ["random"]; 
   };
 
 
