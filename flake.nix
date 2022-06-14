@@ -32,7 +32,7 @@
 
   };
 
-  outputs = { self, nixpkgs, darwin, home-manager, deploy-rs, neovim-nightly, sops-nix, ... }@args:
+  outputs = { self, nixpkgs, darwin, home-manager, deploy-rs, neovim-nightly, sops-nix, ... }:
     let
       stateVersion = "22.05";
       homeStateVersion = stateVersion;
