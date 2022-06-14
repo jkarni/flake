@@ -77,6 +77,7 @@
 
             { 
               system.stateVersion = stateVersion;
+              home.stateVersion = stateVersion;
               networking.hostName = "hx90";
               nixpkgs.overlays = [ neovimOverlay AppleFontOverlay];
             }
@@ -99,6 +100,7 @@
 
                 {
                   system.stateVersion = stateVersion;
+                  home.stateVersion = stateVersion;
                   networking.hostName = hostName;
                   nixpkgs.overlays = [ neovimOverlay ];
                 }
@@ -130,7 +132,7 @@
             }) [ "jp2" "jp4" "kr" "us1" "sw" ]
         );
 
-      };
+      }; # end of deploy
 
 
 
