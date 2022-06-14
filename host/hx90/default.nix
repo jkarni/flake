@@ -8,6 +8,7 @@
     ./hardware.nix
     ../../nixos/desktop.nix
     ../../service/sway.nix
+    ../../secrets
   ];
 
 

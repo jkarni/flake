@@ -72,7 +72,6 @@
             sops-nix.nixosModules.sops
             home-manager.nixosModules.home-manager
             ./host/hx90
-            ./secrets
 
             {
               networking.hostName = "hx90";
@@ -91,11 +90,9 @@
               modules = [
                 sops-nix.nixosModules.sops
                 home-manager.nixosModules.home-manager
-                ./host/oracle
                 # https://nixos.wiki/wiki/Nix_Expression_Language
                 # Coercing a relative path with interpolated variables to an absolute path (for imports)
                 (./host/oracle + "/${hostName}.nix")
-                ./secrets
 
                 {
                   networking.hostName = "${hostName}";
@@ -126,7 +123,7 @@
                 profiles.system.path = deploy-rs.lib.aarch64-linux.activate.nixos self.nixosConfigurations.${hostName};
               };
 
-            }) [ "jp4" "sw" "us1" ]  # jp2 and kr need test
+            }) [ "jp2" "jp4" "kr" "us1" "sw" ]
         );
 
       };

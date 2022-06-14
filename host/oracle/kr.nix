@@ -1,5 +1,9 @@
 { config, pkgs, ... }: {
 
+  imports = [
+    ./default.nix
+  ];
+
   # grafana configuration
   services.grafana = {
     enable = true;
