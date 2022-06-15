@@ -2,6 +2,7 @@
 
   imports = [
     ../home/common.nix
+    ../home/wezterm.nix
     ../home/mpv.nix
   ];
 
@@ -9,7 +10,8 @@
     gh
     go
     ideviceinstaller
-    rclone 
+    rclone
   ];
 
 }
+
