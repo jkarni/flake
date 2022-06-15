@@ -12,4 +12,9 @@ return {
   initial_cols = 140,
   initial_rows = 50,
 
+
+  keys = {
+    {key="w", mods="CMD", action=wezterm.action{CloseCurrentTab={confirm=false}}},
+  },
+
 }
