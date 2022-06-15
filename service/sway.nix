@@ -26,4 +26,8 @@
     };
   };
 
+  environment.systemPackages = with pkgs; [
+    kbct
+  ];
+
 }
