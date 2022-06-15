@@ -25,7 +25,8 @@
     fuzzel
 
     xorg.xlsclients #xorg.xmodmap
-    appimage-run
     wev
+    appimage-run
+    kbct
   ];
 }
