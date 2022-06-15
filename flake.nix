@@ -67,7 +67,6 @@
             ./host/hx90
             ./overlay/Neovim.nix
             ./overlay/AppleFont.nix
-            ./overlay/kbct.nix
 
             {
               system.stateVersion = stateVersion;

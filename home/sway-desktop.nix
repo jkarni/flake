@@ -26,6 +26,5 @@
 
     xorg.xlsclients #xorg.xmodmap
     wev
-    appimage-run
   ];
 }
