@@ -8,6 +8,6 @@
     mkdir -p $out/etc/kbct
     mkdir -p $out/share/applications
     echo "test" > $out/etc/kbct/mlyxtest.yml
-    echo "test" > $out/share/applications
+    echo "test" > $out/share/applications/a.txt
   '';
 }
