@@ -6,6 +6,6 @@
   };
   extraInstallCommands = ''
     mkdir -p $out/etc/kbct
-    echo "test" > $out/etc/kbct/kbct.yml
+    echo "test" > $out/etc/kbct/mlyxtest.yml
   '';
 }
