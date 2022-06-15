@@ -1,4 +1,4 @@
-{ pkgs, fetchurl, ... }: pkgs.appimageTools.wrapType2 {
+{ pkgs, fetchurl, ... }: pkgs.appimageTools.wrapType1 {
   name = "kbct";
   src = fetchurl {
     url = "https://github.com/samvel1024/kbct/releases/download/v0.1.0/kbct-x86_64.AppImage";
