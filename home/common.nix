@@ -10,6 +10,7 @@
   home.packages = with pkgs;  [
     # basic
     wget
+    file
     vim
     tree
     htop
