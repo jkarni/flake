@@ -52,7 +52,7 @@
     wantedBy = [ "multi-user.target" ];
 
     serviceConfig = {
-      ExecStart = "kbct remap --config /etc/kbct/config.yml";
+      ExecStart = "/run/current-system/sw/bin/kbct remap --config /etc/kbct/config.yml";
     };
 
   };
