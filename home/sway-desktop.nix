@@ -24,9 +24,8 @@
     foot
     fuzzel
 
-    xorg.xlsclients
-    xorg.xmodmap
-    xorg.setxkbmap 
+    xorg.xlsclients #xorg.xmodmap
+    appimage-run
     wev
   ];
 }
