@@ -26,35 +26,4 @@
     };
   };
 
-  environment.systemPackages = with pkgs; [
-    kbct
-  ];
-
-  environment.etc = {
-    "kbct/config.yml" = {
-      text = ''
-        - keyboards: [ 'Keychron Keychron K3' ]
-
-          keymap:
-            leftmeta: leftctrl
-            rightctrl: leftmeta
-
-          layers:
-            - modifiers: ['leftmeta']
-              keymap:
-                c: copy
-      '';
-    };
-  };
-
-  systemd.services.kbct = {
-    description = "kbct Daemon";
-    wantedBy = [ "multi-user.target" ];
-
-    serviceConfig = {
-      ExecStart = "/run/current-system/sw/bin/kbct remap --config /etc/kbct/config.yml";
-    };
-
-  };
-
 }
