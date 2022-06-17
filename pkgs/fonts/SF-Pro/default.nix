@@ -1,4 +1,4 @@
-{ lib, stdenvNoCC, unzip, fetchurl, ... }:
+{ stdenvNoCC, unzip, fetchurl }:
 
 stdenvNoCC.mkDerivation rec{
   pname = "SF-Pro";
@@ -23,7 +23,7 @@ stdenvNoCC.mkDerivation rec{
     cp *.otf $out/share/fonts/opentype
   '';
 
-  meta = with lib; {
+  meta = {
     description = "SF-Pro <-- Apple default font for English";
   };
 }
