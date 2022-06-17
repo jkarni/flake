@@ -4,6 +4,8 @@
   home-manager.extraSpecialArgs = {inherit homeStateVersion;};
   home-manager.users.root = import ../../home/server.nix;
 
+  nixpkgs.config.enableParallelBuildingByDefault=true;
+
   imports = [
     ./hardware.nix
     ../../nixos/server.nix
