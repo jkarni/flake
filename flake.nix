@@ -53,6 +53,7 @@
             ./darwin
             ./darwin/brew.nix
             ./overlay/Neovim.nix
+            ./overlay/Firefox-darwin.nix
           ];
           specialArgs = { inherit homeStateVersion neovim-nightly; };
         };
@@ -71,7 +72,7 @@
             home-manager.nixosModules.home-manager
             ./host/hx90
             ./overlay/Neovim.nix
-            ./overlay/Firefox.nix
+            ./overlay/Firefox-linux.nix
             ./overlay/AppleFont.nix
 
             {

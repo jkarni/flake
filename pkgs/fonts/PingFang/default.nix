@@ -5,11 +5,14 @@ stdenvNoCC.mkDerivation rec{
   version = "apple";
 
   src = fetchurl {
+    name = "PingFang";
     url = "https://github.com/mlyxshi/Ping-Fang/releases/download/v1.0/release.zip";
     sha256 = "ocSL4kFdnbcENGngPc57fq86zgEqFOCWOBspXFRmsqg=";
   };
 
   buildInputs = [ unzip ];
+
+  phases = [ "unpackPhase" "installPhase" ];
 
   unpackPhase =''
     unzip $src

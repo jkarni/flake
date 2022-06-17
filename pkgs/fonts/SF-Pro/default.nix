@@ -5,11 +5,14 @@ stdenvNoCC.mkDerivation rec{
   version = "apple";
 
   src = fetchurl {
+    name = "SF-Pro";
     url = "https://github.com/mlyxshi/SF-Pro/releases/download/v1.0/release.zip";
     sha256 = "ebMwszbFxj3GT7wdZBbQWt5z0HMMG0/UhdN9tH19NuI=";
   };
 
   buildInputs = [ unzip ];
+
+  phases = [ "unpackPhase" "installPhase" ];
 
   unpackPhase = ''
     unzip $src

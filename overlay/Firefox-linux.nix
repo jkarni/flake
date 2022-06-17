@@ -48,45 +48,6 @@
 
           };
 
-          ManagedBookmarks = [
-            {
-              "toplevel_name" = "NixOS";
-            }
-            {
-              "url" = "https://nixos.org/";
-              "name" = "NixOS Website";
-            }
-            {
-              "url" = "https://search.nixos.org/";
-              "name" = "NixOS Search";
-            }
-            {
-              "url" = "https://rycee.gitlab.io/home-manager/options.html";
-              "name" = "Home Manager";
-            }
-            {
-              "url" = "https://nixos.org/guides/nix-pills/";
-              "name" = "Nix Pills";
-            }
-            {
-              "url" = "https://nixos.org/manual/nix/unstable/expressions/builtins.html";
-              "name" = "Nix Buildin Fn";
-            }
-            {
-              "url" = "https://nixos.org/manual/nixpkgs/stable/";
-              "name" = "NixPkgs Manual";
-            }
-            {
-              "url" = "https://nixos.org/manual/nixos/stable/";
-              "name" = "NixOS Manual";
-            }
-            {
-              "url" = "https://github.com/mlyxshi/flake";
-              "name" = "My Nix";
-            }
-
-          ];
-
 
           # https://github.com/mozilla/policy-templates#extensionsettings
           ExtensionSettings = {

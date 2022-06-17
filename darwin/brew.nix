@@ -33,7 +33,6 @@
       "wireshark"
       "raycast"
       "visual-studio-code"
-      "firefox"
       "qbittorrent"
 
       # Already installed from offical website <-- Uncomment this when completely reinstall macos
