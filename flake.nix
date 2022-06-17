@@ -37,6 +37,7 @@
       stateVersion = "22.05";
       homeStateVersion = stateVersion;
       oracleServer = [ "jp2" "jp4" "sw" "us1" "kr" ];
+      inherit (nixpkgs) lib;
     in
     {
 
