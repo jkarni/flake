@@ -42,6 +42,7 @@
 
       #############################################################################################################################
       # darwinConfigurations
+      
       darwinConfigurations = {
 
         "M1" = darwin.lib.darwinSystem {
@@ -70,6 +71,7 @@
             home-manager.nixosModules.home-manager
             ./host/hx90
             ./overlay/Neovim.nix
+            ./overlay/Firefox.nix
             ./overlay/AppleFont.nix
 
             {
