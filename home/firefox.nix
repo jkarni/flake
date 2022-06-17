@@ -1,25 +1,24 @@
-{ pkgs, ... }: {
+{ pkgs, lib, ... }: {
 
   programs.firefox = {
-
     enable = true;
-
-    # See details: overlay/Firefox.nix 
+    # See details: overlay/Firefox-linux.nix  overlay/Firefox-darwin.nix 
     package = pkgs.firefox;
+  };
 
-    profiles.default = {
-      # https://github.com/Aris-t2/CustomCSSforFx
-      # https://firefox-source-docs.mozilla.org/devtools-user/browser_toolbox/index.html
-      # Remove annoying "import bookmarks" button in PersonalToolbar 
-      userChrome = "
-        #import-button, #fxa-toolbar-menu-button, #appMenu-passwords-button {
-          display: none !important;
-        }
-      ";
 
+  programs.firefox.profiles = {
+    default = {
+      userChrome = builtins.readFile ../config/firefox/userChrome.css;
     };
+  };
 
+  # nix-darwin install application in "~/Application/Nix Apps" by default
+  # link to system application in path
+  home.activation = lib.optionalAttrs pkgs.stdenv.isDarwin {
+    linkFirefox = lib.hm.dag.entryAfter [ "writeBoundary" ] ''
+      ln -sfn ${pkgs.firefox}/Applications/Firefox.app /Applications/Firefox.app
+    '';
   };
 
 }
-

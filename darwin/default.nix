@@ -1,5 +1,5 @@
 { config, pkgs, homeStateVersion, ... }: {
-  
+
   home-manager.useGlobalPkgs = true;
   home-manager.useUserPackages = true;
   home-manager.extraSpecialArgs = { inherit homeStateVersion; };
@@ -32,5 +32,10 @@
       };
     };
   };
+
+  environment.systemPackages = with pkgs;[
+    # See detail: overlay/Firefox-darwin.nix
+    firefox
+  ];
 
 }

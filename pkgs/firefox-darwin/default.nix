@@ -1,7 +1,19 @@
 # with(import <nixpkgs> { });
-{ stdenv, lib, fetchurl, undmg }:
+{ stdenvNoCC, lib, fetchurl, writeText, undmg }:
 
-stdenv.mkDerivation rec {
+let
+  # https://github.com/NixOS/nixpkgs/blob/master/pkgs/applications/networking/browsers/firefox/wrapper.nix
+  extraPolicies = import ../../config/firefox/policy.nix;
+  wrapperPolicies = {
+    policies = {
+      DisableAppUpdate = true;
+    } // extraPolicies;
+  };
+
+  policiesJson = writeText "policies.json" (builtins.toJSON wrapperPolicies);
+in
+
+stdenvNoCC.mkDerivation rec {
   name = "firefox-app-${version}";
 
   pname = "Firefox";
@@ -19,6 +31,8 @@ stdenv.mkDerivation rec {
   # https://github.com/NixOS/nixpkgs/pull/13636
   buildInputs = [ undmg ];
 
+  phases = [ "unpackPhase" "installPhase" ];
+
   # The dmg contains the app and a symlink, the default unpackPhase tries to cd
   # into the only directory produced so it fails.
 
@@ -29,11 +43,13 @@ stdenv.mkDerivation rec {
 
   installPhase = ''
     mkdir -p $out/Applications
-    mv ${pname}.app $out/Applications
+    mv Firefox.app $out/Applications
+
+    mkdir $out/Applications/Firefox.app/Contents/Resources/distribution
+    cat ${policiesJson} > $out/Applications/Firefox.app/Contents/Resources/distribution/policies.json
   '';
 
   meta = {
     description = "Mozilla Firefox, Darwin, (binary package)";
-    platforms = [ "aarch64-darwin" ];
   };
 }
