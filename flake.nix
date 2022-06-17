@@ -76,30 +76,28 @@
           specialArgs = { inherit homeStateVersion neovim-nightly; };
         };
 
-      } // builtins.listToAttrs (map
-        (hostName: {
-          name = hostName;
-          value = nixpkgs.lib.nixosSystem {
-            system = "aarch64-linux";
-            modules = [
-              sops-nix.nixosModules.sops
-              home-manager.nixosModules.home-manager
-              # https://nixos.wiki/wiki/Nix_Expression_Language
-              # Coercing a relative path with interpolated variables to an absolute path (for imports)
-              (./host/oracle + "/${hostName}.nix")
-              ./overlay/Neovim.nix
+      } // lib.attrsets.genAttrs oracleServer (hostName: {
+        name = hostName;
+        value = nixpkgs.lib.nixosSystem {
+          system = "aarch64-linux";
+          modules = [
+            sops-nix.nixosModules.sops
+            home-manager.nixosModules.home-manager
+            # https://nixos.wiki/wiki/Nix_Expression_Language
+            # Coercing a relative path with interpolated variables to an absolute path (for imports)
+            (./host/oracle + "/${hostName}.nix")
+            ./overlay/Neovim.nix
 
-              {
-                system.stateVersion = stateVersion;
-                networking.hostName = hostName;
-              }
-            ];
-            specialArgs = { inherit homeStateVersion neovim-nightly; };
-          };
-        })
-        oracleServer
+            {
+              system.stateVersion = stateVersion;
+              networking.hostName = hostName;
+            }
+          ];
+          specialArgs = { inherit homeStateVersion neovim-nightly; };
+        };
+      });
 
-      ); # end of nixosConfigurations
+
 
 
 
