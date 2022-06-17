@@ -36,11 +36,12 @@
     let
       stateVersion = "22.05";
       homeStateVersion = stateVersion;
-      oracleServer = [ "jp2" "jp4" "sw" "us1" "kr" ];
-      inherit (nixpkgs) lib;
+      oracleServerList = [ "jp2" "jp4" "sw" "us1" "kr" ];
     in
     {
 
+      #############################################################################################################################
+      # darwinConfigurations
       darwinConfigurations = {
 
         "M1" = darwin.lib.darwinSystem {
@@ -79,7 +80,7 @@
           specialArgs = { inherit homeStateVersion neovim-nightly; };
         };
 
-      } // lib.attrsets.genAttrs oracleServer (hostName: nixpkgs.lib.nixosSystem {
+      } // nixpkgs.lib.attrsets.genAttrs oracleServerList (hostName: nixpkgs.lib.nixosSystem {
         system = "aarch64-linux";
         modules = [
           sops-nix.nixosModules.sops
@@ -99,7 +100,7 @@
 
 
       #############################################################################################################################
-
+      # deploy-rs
 
       deploy = {
         sshUser = "root";
@@ -109,21 +110,13 @@
         magicRollback = false;
         autoRollback = false;
 
-        #https://lantian.pub/article/modify-website/nixos-initial-config-flake-deploy.lantian/
-        nodes = builtins.listToAttrs (map
-          (hostName: {
-            name = hostName;
-            value = {
-              hostname = "${hostName}.mlyxshi.com";
-              profiles.system.path = deploy-rs.lib.aarch64-linux.activate.nixos self.nixosConfigurations.${hostName};
-            };
+        nodes = nixpkgs.lib.attrsets.genAttrs oracleServerList (hostName: {
+          hostname = "${hostName}.mlyxshi.com";
+          profiles.system.path = deploy-rs.lib.aarch64-linux.activate.nixos self.nixosConfigurations.${hostName};
+        });
 
-          })
-          oracleServer
-        );
-
-      }; # end of deploy
-
+      };
+      #############################################################################################################################
 
 
     }; #end of outputs
