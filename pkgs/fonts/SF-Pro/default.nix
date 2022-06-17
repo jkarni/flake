@@ -5,8 +5,8 @@ stdenvNoCC.mkDerivation rec{
   version = "apple";
 
   src = fetchurl {
-    url = "https://cdn.mlyxshi.com/SF-Pro.zip";
-    sha256 = "RrKsAY0UFMjnGmrDD/L8kLTxcTzCksvsaM8hJ+fwPFo=";
+    url = "https://github.com/mlyxshi/SF-Pro/releases/download/v1.0/release.zip";
+    sha256 = "ebMwszbFxj3GT7wdZBbQWt5z0HMMG0/UhdN9tH19NuI=";
   };
 
   buildInputs = [ unzip ];
@@ -16,11 +16,8 @@ stdenvNoCC.mkDerivation rec{
   '';
 
   installPhase = ''
-    mkdir -p $out/share/fonts/truetype
-    mkdir -p $out/share/fonts/opentype
-
-    cp *.ttf $out/share/fonts/truetype
-    cp *.otf $out/share/fonts/opentype
+    install -m444 -Dt  $out/share/fonts/truetype  *.ttf
+    install -m444 -Dt  $out/share/fonts/opentype  *.otf
   '';
 
   meta = {

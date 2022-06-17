@@ -1,10 +1,21 @@
-{ fetchzip }:
-fetchzip {
-  url = "https://cdn.mlyxshi.com/PingFang.zip";
-  sha256 = "uhfp7hHmRv/8VuqEzMZeNaGQCtYj3S56Q2ATBaIFmB0=";
-  stripRoot=false;
+{ stdenvNoCC, unzip, fetchurl }:
 
-  postFetch = ''
+stdenvNoCC.mkDerivation rec{
+  pname = "PingFang";
+  version = "apple";
+
+  src = fetchurl {
+    url = "https://github.com/mlyxshi/Ping-Fang/releases/download/v1.0/release.zip";
+    sha256 = "ocSL4kFdnbcENGngPc57fq86zgEqFOCWOBspXFRmsqg=";
+  };
+
+  buildInputs = [ unzip ];
+
+  unpackPhase =''
+    unzip $src
+  '';
+
+  installPhase = ''
     install -m444 -Dt  $out/share/fonts/truetype  *.ttf
   '';
 
