@@ -80,7 +80,7 @@
           specialArgs = { inherit homeStateVersion neovim-nightly; };
         };
 
-      } // nixpkgs.lib.attrsets.genAttrs oracleServerList (hostName: nixpkgs.lib.nixosSystem {
+      } // nixpkgs.lib.genAttrs oracleServerList (hostName: nixpkgs.lib.nixosSystem {
         system = "aarch64-linux";
         modules = [
           sops-nix.nixosModules.sops
@@ -110,7 +110,7 @@
         magicRollback = false;
         autoRollback = false;
 
-        nodes = nixpkgs.lib.attrsets.genAttrs oracleServerList (hostName: {
+        nodes = nixpkgs.lib.genAttrs oracleServerList (hostName: {
           hostname = "${hostName}.mlyxshi.com";
           profiles.system.path = deploy-rs.lib.aarch64-linux.activate.nixos self.nixosConfigurations.${hostName};
         });
