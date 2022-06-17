@@ -1,4 +1,4 @@
-{ neovim-nightly }: {
+{ neovim-nightly,... }: {
   nixpkgs.overlays = [
     (final: prev: {
       neovim-unwrapped = prev.neovim-unwrapped.overrideAttrs (finalAttrs: previousAttrs: {
