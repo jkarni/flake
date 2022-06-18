@@ -59,17 +59,31 @@ cmp.setup.cmdline(":", {
 })
 
 
-
+--lua don't have continue, so we have to use strange 'repeat until' way to simulate it.
 for server_name, lang_config in pairs(require("lang-config.lsp.servers")) do
-  local config = {
-    on_attach = require("keybindings").LSP_on_attach,
-    capabilities = require('cmp_nvim_lsp').update_capabilities(vim.lsp.protocol.make_client_capabilities()),
-  }
-  config.settings = lang_config.config
-  --lua extra config for nvim api
-  if (server_name == "sumneko_lua") then
-    lspconfig[server_name].setup(lua_dev.setup({ lspconfig = config }))
-  else
-    lspconfig[server_name].setup(config)
-  end
+
+  repeat
+-------------------------------------------------------------------------------
+--- continue part
+    local exeName=lang_config.exeName
+    if vim.fn.executable(exeName) == 0 then
+      vim.notify("LSP ".. exeName.." Not Found")
+      break
+    end
+-------------------------------------------------------------------------------
+--- normal loop part
+    local config = {
+      on_attach = require("keybindings").LSP_on_attach,
+      capabilities = require('cmp_nvim_lsp').update_capabilities(vim.lsp.protocol.make_client_capabilities()),
+    }
+    config.settings = lang_config.config
+    --lua extra config for nvim api
+    if (server_name == "sumneko_lua") then
+      lspconfig[server_name].setup(lua_dev.setup({ lspconfig = config }))
+    else
+      lspconfig[server_name].setup(config)
+    end
+-------------------------------------------------------------------------------
+  until true
+
 end
