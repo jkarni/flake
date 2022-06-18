@@ -14,30 +14,24 @@ jobs:
     - run: sudo apt install -y pcregrep jq
     - name: Shell Script
       run: |
-      baseUrl="https://download.mozilla.org/?product=firefox-latest&os=osx&lang=en-US"
-      currentVersion=$(curl --silent "https://raw.githubusercontent.com/mlyxshi/flake/main/config/firefox/darwin-version.json"| jq ".version")
-      
-      latestUrl="\"$(curl --silent --output /dev/null  -w "%{redirect_url}" ${baseUrl})\""
-      latestVersion="\"$(echo ${latestUrl}|pcregrep -o1 "releases\/(.*)\/mac")\""
-      latestHash="\"$(nix-prefetch-url --name 'firefox-app-latest.dmg' ${baseUrl})\""
+        baseUrl="https://download.mozilla.org/?product=firefox-latest&os=osx&lang=en-US"
+        currentVersion=$(curl --silent "https://raw.githubusercontent.com/mlyxshi/flake/main/config/firefox/darwin-version.json"| jq ".version")
+        
+        latestUrl="\"$(curl --silent --output /dev/null  -w "%{redirect_url}" ${baseUrl})\""
+        latestVersion="\"$(echo ${latestUrl}|pcregrep -o1 "releases\/(.*)\/mac")\""
+        latestHash="\"$(nix-prefetch-url --name 'firefox-app-latest.dmg' ${baseUrl})\""
 
-      TG_TOKEN=${{ secrets.TG_TOKEN }}
-      TG_CHAT_ID=${{ secrets.TG_CHAT_ID }}
-      TGUrl="https://api.telegram.org/bot${TG_TOKEN}/sendMessage"
+        TG_TOKEN=${{ secrets.TG_TOKEN }}
+        TG_CHAT_ID=${{ secrets.TG_CHAT_ID }}
+        TGUrl="https://api.telegram.org/bot${TG_TOKEN}/sendMessage"
 
-      if [ ${currentVersion} == ${latestVersion}  ]; then
-        echo "current firefox version is latest"     
-      else
-        MESSAGE="current firefox version is outdated"        
-        curl --silent --output /dev/null --request POST ${TGUrl} -d chat_id=${TG_CHAT_ID} -d text="${MESSAGE}"
-        cat > ${GITHUB_WORKSPACE}/config/firefox/darwin-version.json <<EOF
-        {
-          "url": ${latestUrl},
-          "version": ${latestVersion},
-          "sha256" : ${latestHash}
-        }
-        EOF     
-      fi
+        if [ ${currentVersion} == ${latestVersion}  ]; then
+          echo "current firefox version is latest"     
+        else
+          MESSAGE="current firefox version is outdated"        
+          curl --silent --output /dev/null --request POST ${TGUrl} -d chat_id=${TG_CHAT_ID} -d text="${MESSAGE}"
+          echo { "url": ${latestUrl}, "version": ${latestVersion}, "sha256": ${latestHash}} >  ${GITHUB_WORKSPACE}/config/firefox/darwin-version.json
+        fi
 
     - name: Create Pull Request
       uses: peter-evans/create-pull-request@v4
