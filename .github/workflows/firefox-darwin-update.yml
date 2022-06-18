@@ -6,7 +6,7 @@ on:
     - cron: '00 00 * * *'
 
 jobs:
-  CI:
+  AutoUpdateFirefox:
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v3
@@ -25,13 +25,13 @@ jobs:
 
         TG_TOKEN=${{ secrets.TG_TOKEN }}
         TG_CHAT_ID=${{ secrets.TG_CHAT_ID }}
-        TGUrl="https://api.telegram.org/bot${TG_TOKEN}/sendMessage"
+        TG_Url="https://api.telegram.org/bot${TG_TOKEN}/sendMessage"
 
         if [ ${currentVersion} == ${latestVersion}  ]; then
           echo "current firefox version is latest"     
         else
           MESSAGE="current firefox version is outdated"        
-          curl --silent --output /dev/null --request POST ${TGUrl} -d chat_id=${TG_CHAT_ID} -d text="${MESSAGE}"
+          curl --silent --output /dev/null --request POST ${TG_Url} -d chat_id=${TG_CHAT_ID} -d text="${MESSAGE}"
           echo ${metaData} >  ${GITHUB_WORKSPACE}/config/firefox/darwin-version.json
         fi
 
