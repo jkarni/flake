@@ -1,4 +1,4 @@
-{ pkgs, lib, ... }:
+{ pkgs, lib, developerMode, ... }:
 let
 
   TREESITTER = (pkgs.vimPlugins.nvim-treesitter.withPlugins (
@@ -48,7 +48,12 @@ in
 
     TREESITTER
 
-    #LSP Server
+    # Telescope
+    fd
+    ripgrep
+
+  ] ++ lib.optionals developerMode [
+
     rnix-lsp #rnix-lsp
     sumneko-lua-language-server #lua-language-server
     clang-tools # clangd  
@@ -56,17 +61,13 @@ in
     nodePackages.pyright #python
     rust-analyzer #rust
 
-    nodePackages.typescript
-    nodePackages.typescript-language-server #Typescript
+    nodePackages.typescript #Typescript
+    nodePackages.typescript-language-server 
 
     cargo #Rust
     rustc
+
     nodejs # JavaScript
-
-    # Telescope
-    fd
-    ripgrep
-
   ];
 
 }

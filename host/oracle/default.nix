@@ -1,7 +1,7 @@
-{ config, pkgs, homeStateVersion, ... }: {
+{ config, pkgs, developerMode, homeStateVersion, ... }: {
   home-manager.useGlobalPkgs = true;
   home-manager.useUserPackages = true;
-  home-manager.extraSpecialArgs = {inherit homeStateVersion;};
+  home-manager.extraSpecialArgs = { inherit developerMode homeStateVersion; };
   home-manager.users.root = import ../../home/server.nix;
 
   imports = [

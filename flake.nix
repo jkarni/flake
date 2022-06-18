@@ -55,7 +55,7 @@
             ./overlay/Neovim.nix
             ./overlay/Firefox-darwin.nix
           ];
-          specialArgs = { inherit homeStateVersion neovim-nightly; };
+          specialArgs = { inherit homeStateVersion neovim-nightly; developerMode = true; };
         };
 
       };
@@ -80,7 +80,7 @@
               networking.hostName = "hx90";
             }
           ];
-          specialArgs = { inherit homeStateVersion neovim-nightly; };
+          specialArgs = { inherit homeStateVersion neovim-nightly; developerMode = true; };
         };
 
       } // nixpkgs.lib.genAttrs oracleServerList (hostName: nixpkgs.lib.nixosSystem {
@@ -98,7 +98,7 @@
             networking.hostName = hostName;
           }
         ];
-        specialArgs = { inherit homeStateVersion neovim-nightly; };
+        specialArgs = { inherit homeStateVersion neovim-nightly; developerMode = false; };
       });
 
 

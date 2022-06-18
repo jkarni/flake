@@ -1,4 +1,4 @@
-{ pkgs, homeStateVersion, ... }: {
+{ pkgs, lib, homeStateVersion, developerMode, ... }: {
 
   imports = [
     ./git.nix
@@ -20,7 +20,6 @@
     ookla-speedtest
     # nix
     nix-tree
-    statix
     sops
     # rust
     exa
@@ -30,7 +29,9 @@
     bandwhich
     bat
     bat-extras.batman
-    # go
+
+  ] ++ lib.optionals developerMode [ 
+    statix 
     lazygit
   ];
 
@@ -40,6 +41,6 @@
   #     enable = true;
   #   };
   # };
-   
+
   home.stateVersion = homeStateVersion;
 }
