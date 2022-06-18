@@ -58,6 +58,7 @@ jobs:
   
   SendTG:
     runs-on: ubuntu-latest
+    needs: AutoUpdateFirefox
     steps:
     - name: send location message
       uses: appleboy/telegram-action@master
