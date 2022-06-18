@@ -30,7 +30,7 @@ jobs:
         else
           MESSAGE="current firefox version is outdated"        
           curl --silent --output /dev/null --request POST ${TGUrl} -d chat_id=${TG_CHAT_ID} -d text="${MESSAGE}"
-          cat > ./config/firefox/darwin-version.json <'EOF'
+          cat > flake/config/firefox/darwin-version.json <'EOF'
           {
             "url": ${latestUrl},
             "version": ${latestVersion},
