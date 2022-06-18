@@ -14,7 +14,7 @@
   };
 
   # nix-darwin install application in "~/Application/Nix Apps" by default
-  # link to system application in path
+  # I prefer link to system application path
   home.activation = lib.optionalAttrs pkgs.stdenv.isDarwin {
     linkFirefox = lib.hm.dag.entryAfter [ "writeBoundary" ] ''
       ln -sfn ${pkgs.firefox}/Applications/Firefox.app /Applications/Firefox.app
