@@ -30,13 +30,13 @@ jobs:
         else
           MESSAGE="current firefox version is outdated"        
           curl --silent --output /dev/null --request POST ${TGUrl} -d chat_id=${TG_CHAT_ID} -d text="${MESSAGE}"
-          cat > ${GITHUB_WORKSPACE}/config/firefox/darwin-version.json <<'EOF'
+          cat > ${GITHUB_WORKSPACE}/config/firefox/darwin-version.json <<EOF
           {
             "url": ${latestUrl},
             "version": ${latestVersion},
             "sha256" : ${latestHash}
           }
-          EOF
+          EOF     
         fi
 
     - name: Create Pull Request
