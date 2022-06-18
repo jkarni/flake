@@ -13,15 +13,14 @@ jobs:
     - uses: cachix/install-nix-action@v17
     - run: apt install -y pcregrep jq
     - run: |
-      baseUrl="https://download.mozilla.org/?product=firefox-latest&os=osx&lang=en-US"
-      latestUrl=$(curl --silent --output /dev/null  -w "%{redirect_url}" ${baseUrl})
-      latestVersion=$(echo ${latestUrl}|pcregrep -o1 "releases\/(.*)\/mac")
-      latestHash=$(nix-prefetch-url --name 'firefox-app-latest.dmg' ${baseUrl})
+        baseUrl="https://download.mozilla.org/?product=firefox-latest&os=osx&lang=en-US"
+        latestUrl=$(curl --silent --output /dev/null  -w "%{redirect_url}" ${baseUrl})
+        latestVersion=$(echo ${latestUrl}|pcregrep -o1 "releases\/(.*)\/mac")
+        latestHash=$(nix-prefetch-url --name 'firefox-app-latest.dmg' ${baseUrl})
     - run: |
-      echo ${latestUrl}
-      echo ${latestVersion}
-      echo ${latestHash}
-
+        echo ${latestUrl}
+        echo ${latestVersion}
+        echo ${latestHash}
 
 
       
