@@ -25,10 +25,10 @@ jobs:
 
         if [ ${currentVersion} == ${latestVersion}  ]; then
           MESSAGE="current firefox version is latest"     
-          curl --silent --request POST ${TGUrl} -d chat_id=${TG_CHAT_ID} -d text="${MESSAGE}"
+          curl --silent --output /dev/null --request POST ${TGUrl} -d chat_id=${TG_CHAT_ID} -d text="${MESSAGE}"
         else
           MESSAGE="current firefox version is outdated"        
-          curl --silent --request POST ${TGUrl} -d chat_id=${TG_CHAT_ID} -d text="${MESSAGE}"
+          curl --silent --output /dev/null --request POST ${TGUrl} -d chat_id=${TG_CHAT_ID} -d text="${MESSAGE}"
         fi
 
       
