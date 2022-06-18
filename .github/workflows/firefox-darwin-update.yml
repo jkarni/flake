@@ -28,18 +28,13 @@ jobs:
 
         metaData=$(jq --null-input --arg latestUrl $latestUrl  --arg latestVersion $latestVersion --arg latestHash $latestHash '{"url":$latestUrl,"version":$latestVersion,"sha256":$latestHash}')
 
-        TG_TOKEN=${{ secrets.TG_TOKEN }}
-        TG_CHAT_ID=${{ secrets.TG_CHAT_ID }}
-        TG_Url="https://api.telegram.org/bot${TG_TOKEN}/sendMessage"
-
         echo "::set-output name=latestVersion::${latestVersion}"
 
         if [ ${currentVersion} == ${latestVersion}  ]; then
           echo "current firefox version is latest"     
         else
-          MESSAGE="current firefox version is outdated"        
-          curl --silent --output /dev/null --request POST ${TG_Url} -d chat_id=${TG_CHAT_ID} -d text="${MESSAGE}"
           echo ${metaData} >  ${GITHUB_WORKSPACE}/config/firefox/darwin-version.json
+          echo "::set-output name=latestVersion::${latestVersion}"
         fi
 
     - name: Create Pull Request
@@ -65,4 +60,4 @@ jobs:
       with:
         to: ${{ secrets.TG_CHAT_ID }}
         token: ${{ secrets.TG_TOKEN }}
-        message: "${{needs.AutoUpdateFirefox.outputs.output1}}"
+        message: "https://www.mozilla.org/en-US/firefox/${{needs.AutoUpdateFirefox.outputs.output1}}/releasenotes/"
