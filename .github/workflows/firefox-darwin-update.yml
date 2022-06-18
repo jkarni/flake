@@ -64,4 +64,6 @@ jobs:
         to: ${{ secrets.TG_CHAT_ID }}
         token: ${{ secrets.TG_TOKEN }}
         message: |
+          Firefox Update: ${{needs.AutoUpdateFirefox.outputs.output1}}
+
           https://www.mozilla.org/en-US/firefox/${{needs.AutoUpdateFirefox.outputs.output1}}/releasenotes/
