@@ -25,15 +25,13 @@ jobs:
         TG_CHAT_ID=${{ secrets.TG_CHAT_ID }}
         TGUrl="https://api.telegram.org/bot${TG_TOKEN}/sendMessage"
 
-        ls
-        pwd
 
         if [ ${currentVersion} == ${latestVersion}  ]; then
           echo "current firefox version is latest"     
         else
           MESSAGE="current firefox version is outdated"        
           curl --silent --output /dev/null --request POST ${TGUrl} -d chat_id=${TG_CHAT_ID} -d text="${MESSAGE}"
-          cat > flake/config/firefox/darwin-version.json <'EOF'
+          cat > ${GITHUB_WORKSPACE}/config/firefox/darwin-version.json <'EOF'
           {
             "url": ${latestUrl},
             "version": ${latestVersion},
