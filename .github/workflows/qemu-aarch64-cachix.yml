@@ -4,7 +4,6 @@
 # https://nixos.wiki/wiki/NixOS_on_ARM
 name: "aarch64 build"
 on:
-  pull_request:
   push:
 jobs:
   CI:
