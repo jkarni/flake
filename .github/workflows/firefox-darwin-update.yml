@@ -16,7 +16,7 @@ jobs:
         baseUrl="https://download.mozilla.org/?product=firefox-latest&os=osx&lang=en-US"
         currentVersion=$(curl --silent "https://raw.githubusercontent.com/mlyxshi/flake/main/config/firefox/darwin-version.json"| jq ".version")
         latestUrl=$(curl --silent --output /dev/null  -w "%{redirect_url}" ${baseUrl})
-        latestVersion=$(echo ${latestUrl}|pcregrep -o1 "releases\/(.*)\/mac")
+        latestVersion="\"$(echo ${latestUrl}|pcregrep -o1 "releases\/(.*)\/mac")\""
         latestHash=$(nix-prefetch-url --name 'firefox-app-latest.dmg' ${baseUrl})
 
         TG_TOKEN=${{ secrets.TG_TOKEN }}
@@ -24,10 +24,10 @@ jobs:
         TGUrl="https://api.telegram.org/bot${TG_TOKEN}/sendMessage"
     - run: |
         if [ ${currentVersion} == ${latestVersion}  ]; then
-          MESSAGE="current version is latest"     
+          MESSAGE="current firefox version is latest"     
           curl --silent --request POST ${TGUrl} -d chat_id=${TG_CHAT_ID} -d text="${MESSAGE}"
         else
-          MESSAGE="current version is outdated"        
+          MESSAGE="current firefox version is outdated"        
           curl --silent --request POST ${TGUrl} -d chat_id=${TG_CHAT_ID} -d text="${MESSAGE}"
         fi
 
