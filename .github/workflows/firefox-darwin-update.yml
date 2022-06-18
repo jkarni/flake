@@ -11,18 +11,18 @@ jobs:
     steps:
     - uses: actions/checkout@v3
     - uses: cachix/install-nix-action@v17
-    - run: |
-        which jq
     - run: sudo apt install -y pcregrep jq
     - run: |
         baseUrl="https://download.mozilla.org/?product=firefox-latest&os=osx&lang=en-US"
+        currentVersion=$(curl --silent "https://raw.githubusercontent.com/mlyxshi/flake/main/config/firefox/darwin-version.json"| jq ".version")
         latestUrl=$(curl --silent --output /dev/null  -w "%{redirect_url}" ${baseUrl})
         latestVersion=$(echo ${latestUrl}|pcregrep -o1 "releases\/(.*)\/mac")
         latestHash=$(nix-prefetch-url --name 'firefox-app-latest.dmg' ${baseUrl})
     - run: |
-        echo ${latestUrl}
-        echo ${latestVersion}
-        echo ${latestHash}
-
+        if [ ${currentVersion} == ${latestVersion}  ]; then
+          echo "current version is latest"
+        else
+          echo "current version is outdated"
+        fi
 
       

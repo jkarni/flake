@@ -10,6 +10,7 @@
   home.packages = with pkgs;  [
     # basic
     wget
+    jq
     file
     vim
     tree
