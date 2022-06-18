@@ -21,7 +21,7 @@ jobs:
         latestVersion=$(echo ${latestUrl}|pcregrep -o1 "releases\/(.*)\/mac")
         latestHash=$(nix-prefetch-url --name 'firefox-app-latest.dmg' ${baseUrl})
 
-        jq --null-input --arg latestUrl $latestUrl  --arg latestVersion $latestVersion --arg latestHash $latestHash '{"url":${latestUrl},"version":${latestVersion},"sha256":$latestHash}'
+        metaData=$(jq --null-input --arg latestUrl $latestUrl  --arg latestVersion $latestVersion --arg latestHash $latestHash '{"url":$latestUrl,"version":$latestVersion,"sha256":$latestHash}')
 
         TG_TOKEN=${{ secrets.TG_TOKEN }}
         TG_CHAT_ID=${{ secrets.TG_CHAT_ID }}
@@ -32,7 +32,7 @@ jobs:
         else
           MESSAGE="current firefox version is outdated"        
           curl --silent --output /dev/null --request POST ${TGUrl} -d chat_id=${TG_CHAT_ID} -d text="${MESSAGE}"
-          jq --null-input --arg latestUrl $latestUrl  --arg latestVersion $latestVersion --arg latestHash $latestHash '{"url":${latestUrl},"version":${latestVersion},"sha256":$latestHash}' >  ${GITHUB_WORKSPACE}/config/firefox/darwin-version.json
+          echo ${metaData} >  ${GITHUB_WORKSPACE}/config/firefox/darwin-version.json
         fi
 
     - name: Create Pull Request
