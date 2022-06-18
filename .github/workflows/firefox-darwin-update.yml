@@ -18,11 +18,17 @@ jobs:
         latestUrl=$(curl --silent --output /dev/null  -w "%{redirect_url}" ${baseUrl})
         latestVersion=$(echo ${latestUrl}|pcregrep -o1 "releases\/(.*)\/mac")
         latestHash=$(nix-prefetch-url --name 'firefox-app-latest.dmg' ${baseUrl})
+
+        TG_TOKEN=${{ secrets.TG_TOKEN }}
+        TG_CHAT_ID=${{ secrets.TG_CHAT_ID }}
+        TGUrl="https://api.telegram.org/bot${TG_TOKEN}/sendMessage"
     - run: |
         if [ ${currentVersion} == ${latestVersion}  ]; then
-          echo "current version is latest"
+          MESSAGE="current version is latest"     
+          curl --silent --request POST ${TGUrl} -d chat_id=${TG_CHAT_ID} -d text="${MESSAGE}"
         else
-          echo "current version is outdated"
+          MESSAGE="current version is outdated"        
+          curl --silent --request POST ${TGUrl} -d chat_id=${TG_CHAT_ID} -d text="${MESSAGE}"
         fi
 
       
