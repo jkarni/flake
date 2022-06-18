@@ -22,7 +22,7 @@ jobs:
         TG_TOKEN=${{ secrets.TG_TOKEN }}
         TG_CHAT_ID=${{ secrets.TG_CHAT_ID }}
         TGUrl="https://api.telegram.org/bot${TG_TOKEN}/sendMessage"
-    - run: |
+
         if [ ${currentVersion} == ${latestVersion}  ]; then
           MESSAGE="current firefox version is latest"     
           curl --silent --request POST ${TGUrl} -d chat_id=${TG_CHAT_ID} -d text="${MESSAGE}"
