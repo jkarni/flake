@@ -1,6 +1,8 @@
 name: "[Auto] deploy-rs build"
 on:
   push:
+    branches:
+    - main
   workflow_dispatch:
   schedule:
     - cron: '00 00 * * *'
