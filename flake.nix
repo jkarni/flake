@@ -75,11 +75,14 @@
             ./overlay/Firefox-linux.nix
             ./overlay/AppleFont.nix
             ./modules/profile/desktopEnv.nix
+            ./modules/services/ssh-my.nix
 
             {
               system.stateVersion = stateVersion;
               networking.hostName = "hx90";
+
               profile.desktopEnv.enable = true;
+              services.ssh-my.enable = true;
             }
           ];
           specialArgs = { inherit homeStateVersion neovim-nightly;};
@@ -97,6 +100,7 @@
 
           ./modules/profile/desktopEnv.nix
           ./modules/services/shadowsocks-rust.nix
+          ./modules/services/ssh-my.nix
 
           {
             system.stateVersion = stateVersion;
@@ -104,6 +108,7 @@
             boot.loader.systemd-boot.netbootxyz.enable = true;
 
             profile.desktopEnv.enable = false;
+            services.ssh-my.enable = true;
             services.shadowsocks-rust.enable =true;        
           }
         ];
