@@ -1,4 +1,4 @@
-name: "[Auto] deploy-rs build"
+name: "[Auto] deploy-rs cache binary build"
 on:
   push:
     branches:
