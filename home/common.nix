@@ -5,10 +5,12 @@
     ./zsh.nix
     ./lf.nix
     ./nvim.nix
+  ] ++ lib.optionals config.home.developerMode.enable [
+    ./direnv.nix
   ];
 
-            
-            
+
+
   home.packages = with pkgs;  [
     # basic
     wget
@@ -31,18 +33,12 @@
     bat
     bat-extras.batman
 
-  ] ++ lib.optionals config.home.developerMode.enable [ 
+  ] ++ lib.optionals config.home.developerMode.enable [
     jq
-    statix 
+    statix
     lazygit
   ];
 
-  # programs.direnv = {
-  #   enable = true;
-  #   nix-direnv = {
-  #     enable = true;
-  #   };
-  # };
 
   home.stateVersion = homeStateVersion;
 }

@@ -1,9 +1,10 @@
 { pkgs, homeStateVersion, ... }: {
   home-manager.useGlobalPkgs = true;
   home-manager.useUserPackages = true;
+  home-manager.verbose = true;
 
-  home-manager.users.root = import ../../home/sway-headless.nix;
-  home-manager.users.dominic = import ../../home/sway-desktop.nix;
+  home-manager.users.root = import ../../home/common.nix;
+  home-manager.users.dominic = import ../../home/sway.nix;
 
   home-manager.extraSpecialArgs = { inherit homeStateVersion; };
   home-manager.sharedModules = [

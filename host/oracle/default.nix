@@ -1,7 +1,7 @@
 { pkgs, homeStateVersion, ... }: {
   home-manager.useGlobalPkgs = true;
   home-manager.useUserPackages = true;
-  home-manager.users.root = import ../../home/server.nix;
+  home-manager.users.root = import ../../home/common.nix;
 
   home-manager.extraSpecialArgs = { inherit homeStateVersion; };
   home-manager.sharedModules = [
