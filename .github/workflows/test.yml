@@ -17,4 +17,4 @@ jobs:
       with:
         key: '${{ secrets.SSH_PRIVATE_KEY }}'
         known_hosts: unnecessary
-    - run: nix build ~/flake#darwinConfigurations.M1.system
+    - run: nix build .#darwinConfigurations.M1.system
