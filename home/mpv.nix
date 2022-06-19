@@ -18,6 +18,6 @@
   home.packages = with pkgs; [
     ffmpeg
     yt-dlp
-    # mpv is not optimized for MacOS, so I install mpv from homebrew in MacOS.
+    # mpv from nixpkgs is not optimized for MacOS, so I install mpv from homebrew in MacOS.
   ] ++ lib.optionals pkgs.stdenv.isLinux [ mpv ];
 }

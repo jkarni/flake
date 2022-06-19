@@ -1,4 +1,4 @@
-{ pkgs, lib, ... }: {
+{ pkgs, lib, config,... }: {
 
   # Rust autojump
   programs.zoxide.enable = true;
@@ -6,7 +6,7 @@
   # Rust prompt
   programs.starship.enable = true;
 
-  programs.nix-index.enable = true;
+  programs.nix-index.enable = config.mode.developerMode.enable;
 
   home.file = lib.optionalAttrs pkgs.stdenv.isLinux {
     "starship.toml".source = ../config/starship.toml;
