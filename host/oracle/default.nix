@@ -15,7 +15,6 @@
   imports = [
     ./hardware.nix
     ../../nixos/server.nix
-    ../../secrets
   ];
 
   # Workaround for fixing timeout issue

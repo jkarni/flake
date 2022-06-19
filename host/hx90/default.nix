@@ -17,7 +17,6 @@
   imports = [
     ./hardware.nix
     ../../nixos/desktop.nix
-    ../../secrets
   ];
 
 

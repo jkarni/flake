@@ -1,0 +1,23 @@
+{ pkgs, lib, config, ... }:
+let
+  cfg = config.services.sops-nix;
+in
+{
+
+  options = {
+    services.sops-nix.enable = lib.mkEnableOption "sops secret service";
+  };
+
+  config = lib.mkIf cfg.enable {
+
+    sops.defaultSopsFile = ./key.yaml;
+    sops.age.keyFile = "/var/lib/sops-nix/key.txt";
+
+    sops.secrets.github-ci-token = { };
+    sops.secrets.shadowsocks-config = { };
+    sops.secrets.ssh-private-key = { } // lib.optionalAttrs config.profile.desktopEnv.enable { owner = "dominic"; };
+
+  };
+
+
+}

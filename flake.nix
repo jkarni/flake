@@ -76,6 +76,7 @@
             ./overlay/AppleFont.nix
             ./modules/profile/desktopEnv.nix
             ./modules/services/ssh-config.nix
+            ./modules/secrets
 
             {
               system.stateVersion = stateVersion;
@@ -83,6 +84,7 @@
 
               profile.desktopEnv.enable = true;
               services.ssh-config.enable = true;
+              services.sops-nix.enable =true;
             }
           ];
           specialArgs = { inherit homeStateVersion neovim-nightly;};
@@ -101,6 +103,7 @@
           ./modules/profile/desktopEnv.nix
           ./modules/services/shadowsocks-rust.nix
           ./modules/services/ssh-config.nix
+          ./modules/secrets
 
           {
             system.stateVersion = stateVersion;
@@ -108,6 +111,7 @@
             boot.loader.systemd-boot.netbootxyz.enable = true;
 
             profile.desktopEnv.enable = false;
+            services.sops-nix.enable =true;
             services.ssh-config.enable = true;
             services.shadowsocks-rust.enable =true;        
           }
