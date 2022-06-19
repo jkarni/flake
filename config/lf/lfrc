@@ -20,14 +20,16 @@ cmd open ${{
     # ${f}  file
     # "${f}" prevent space in file name
 
-    case $(file --mime-type --brief "${f}") in
-        text/*) $EDITOR "${f}";;
-        application/json) $EDITOR "${f}";;
-        inode/x-empty) $EDITOR "${f}";; # emply file
-        image/*) mpv --config-dir=$HOME/.config/mpi "${f}" > /dev/null 2> /dev/null &;;
-        audio/*) mpv "${f}" > /dev/null 2> /dev/null &;;
-        video/*) mpv "${f}" > /dev/null 2> /dev/null &;;
-        *) ${OPENER} "${f}" > /dev/null 2> /dev/null &;;
+    path=$(readlink -f "${f}")
+
+    case $(file --mime-type --brief "${path}") in
+        text/*) $EDITOR "${path}";;
+        application/json) $EDITOR "${path}";;
+        inode/x-empty) $EDITOR "${path}";; # emply file
+        image/*) mpv --config-dir=$HOME/.config/mpi "${path}" > /dev/null 2> /dev/null &;;
+        audio/*) mpv "${path}" > /dev/null 2> /dev/null &;;
+        video/*) mpv "${path}" > /dev/null 2> /dev/null &;;
+        *) ${OPENER} "${path}" > /dev/null 2> /dev/null &;;
     esac
 }}
 

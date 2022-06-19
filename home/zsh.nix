@@ -30,6 +30,7 @@
       g = "lazygit";
       c = "bat";
       man = "batman";
+      P = ''echo $PATH|sed "s/:/\n/g"'';
     } // lib.optionalAttrs pkgs.stdenv.isDarwin {
       update = "cd ~/flake; git add .; darwin-rebuild switch --flake ~/flake#M1";
     } // lib.optionalAttrs pkgs.stdenv.isLinux {

@@ -1,0 +1,8 @@
+# Auto Merge Firefox Update
+pull_request_rules:
+  - name: Automatic merge on approval
+    conditions:
+      - "author=mlyxshi"
+    actions:
+      merge:
+        method: merge
