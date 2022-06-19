@@ -1,11 +1,11 @@
 { pkgs, lib, config, ... }:
 let
-  cfg = config.services.ssh-my;
+  cfg = config.services.ssh-config;
 in
 {
 
   options = {
-    services.ssh-my.enable = lib.mkEnableOption "my ssh service";
+    services.ssh-config.enable = lib.mkEnableOption "my ssh service";
   };
 
   config = lib.mkIf cfg.enable {
