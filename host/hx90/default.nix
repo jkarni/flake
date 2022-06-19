@@ -10,7 +10,7 @@
     ../../modules/developerMode.nix
 
     {
-      config.mode.developerMode.enable = true;
+      mode.developerMode.enable = true;
     }
   ];
 

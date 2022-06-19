@@ -8,7 +8,7 @@
     ../../modules/developerMode.nix
 
     {
-      config.mode.developerMode.enable = false;
+      mode.developerMode.enable = false;
     }
   ];
 

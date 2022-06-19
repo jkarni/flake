@@ -12,7 +12,6 @@
   home.packages = with pkgs;  [
     # basic
     wget
-    jq
     file
     vim
     tree
@@ -33,6 +32,7 @@
     bat-extras.batman
 
   ] ++ lib.optionals config.mode.developerMode.enable [ 
+    jq
     statix 
     lazygit
   ];

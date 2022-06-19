@@ -6,9 +6,8 @@
   home-manager.extraSpecialArgs = { inherit homeStateVersion; };
   home-manager.sharedModules = [
     ../modules/developerMode.nix
-
     {
-      config.mode.developerMode.enable = true;
+      mode.developerMode.enable = true;
     }
   ];
 
