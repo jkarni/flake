@@ -17,4 +17,4 @@ jobs:
       with:
         key: '${{ secrets.SSH_PRIVATE_KEY }}'
         known_hosts: unnecessary
-    - run: nix build .#darwinConfigurations.M1.system
+    - run: nix build  .#pkgsCross.aarch64-darwin.darwinConfigurations.M1.system
