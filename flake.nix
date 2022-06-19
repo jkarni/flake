@@ -95,11 +95,14 @@
           (./host/oracle + "/${hostName}.nix")
           ./overlay/Neovim.nix
           ./modules/desktopEnv.nix
+          ./modules/services/shadowsocks-rust.nix
 
           {
             system.stateVersion = stateVersion;
             networking.hostName = hostName;
             env.desktop.enable = false;
+            programs.shadowsocks-rust.enable =true;
+            boot.loader.systemd-boot.netbootxyz.enable = true;
           }
         ];
         specialArgs = { inherit homeStateVersion neovim-nightly;};

@@ -15,7 +15,7 @@
   imports = [
     ./hardware.nix
     ../../nixos/server.nix
-    ../../service/server.nix
+    ../../service/common.nix
     ../../secrets
   ];
 
