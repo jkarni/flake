@@ -52,7 +52,7 @@ in
     fd
     ripgrep
 
-  ] ++ lib.optionals config.profile.developerMode.enable [ 
+  ] ++ lib.optionals config.home.developerMode.enable [ 
 
     rnix-lsp #rnix-lsp
     sumneko-lua-language-server #lua-language-server

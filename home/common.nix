@@ -31,7 +31,7 @@
     bat
     bat-extras.batman
 
-  ] ++ lib.optionals config.profile.developerMode.enable [ 
+  ] ++ lib.optionals config.home.developerMode.enable [ 
     jq
     statix 
     lazygit

@@ -50,8 +50,8 @@
           modules = [
             # sops-nix currently doesn't support aarch64-darwin
             home-manager.darwinModules.home-manager
-            ./darwin
-            ./darwin/brew.nix
+            ./host/darwin
+            ./host/darwin/brew.nix
             ./overlay/Neovim.nix
             ./overlay/Firefox-darwin.nix
           ];
