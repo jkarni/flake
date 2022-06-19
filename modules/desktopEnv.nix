@@ -5,6 +5,6 @@ in
 {
 
   options = {
-    env.desktop.enable =  lib.mkEnableOption "desktop env";
+    env.desktop.enable =  lib.mkEnableOption "desktop env: install extra fonts, extra permission";
   };
 }
