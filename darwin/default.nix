@@ -5,9 +5,9 @@
   home-manager.users.dominic = import ./home.nix;
   home-manager.extraSpecialArgs = { inherit homeStateVersion; };
   home-manager.sharedModules = [
-    ../modules/developerMode.nix
+    ../modules/profile/developerMode.nix
     {
-      mode.developerMode.enable = true;
+      profile.developerMode.enable = true;
     }
   ];
 

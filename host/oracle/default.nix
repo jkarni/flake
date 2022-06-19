@@ -5,10 +5,10 @@
 
   home-manager.extraSpecialArgs = { inherit homeStateVersion; };
   home-manager.sharedModules = [
-    ../../modules/developerMode.nix
+    ../../modules/profile/developerMode.nix
 
     {
-      mode.developerMode.enable = false;
+      profile.developerMode.enable = false;
     }
   ];
 

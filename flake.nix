@@ -74,7 +74,7 @@
             ./overlay/Neovim.nix
             ./overlay/Firefox-linux.nix
             ./overlay/AppleFont.nix
-            ./modules/desktopEnv.nix
+            ./modules/profile/desktopEnv.nix
 
             {
               system.stateVersion = stateVersion;
@@ -94,15 +94,16 @@
           # Coercing a relative path with interpolated variables to an absolute path (for imports)
           (./host/oracle + "/${hostName}.nix")
           ./overlay/Neovim.nix
-          ./modules/desktopEnv.nix
+
+          ./modules/profile/desktopEnv.nix
           ./modules/services/shadowsocks-rust.nix
 
           {
             system.stateVersion = stateVersion;
             networking.hostName = hostName;
             boot.loader.systemd-boot.netbootxyz.enable = true;
-            
-            env.desktop.enable = false;
+
+            profile.desktopEnv.enable = false;
             services.shadowsocks-rust.enable =true;        
           }
         ];

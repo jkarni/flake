@@ -6,7 +6,7 @@
   # Rust prompt
   programs.starship.enable = true;
 
-  programs.nix-index.enable = config.mode.developerMode.enable;
+  programs.nix-index.enable = config.profile.developerMode.enable;
 
   home.file = lib.optionalAttrs pkgs.stdenv.isLinux {
     "starship.toml".source = ../config/starship.toml;
