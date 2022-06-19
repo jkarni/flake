@@ -1,11 +1,11 @@
 { pkgs, lib, config, ... }:
 let
-  cfg = config.packages.shadowsocks-rust;
+  cfg = config.services.shadowsocks-rust;
 in
 {
 
   options = {
-    packages.shadowsocks-rust.enable = lib.mkEnableOption "shadowsocks-rust service";
+    services.shadowsocks-rust.enable = lib.mkEnableOption "shadowsocks-rust service";
   };
 
   config = lib.mkIf cfg.enable {
