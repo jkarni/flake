@@ -4,7 +4,7 @@
   
   sops.secrets.github-ci-token = { };
   sops.secrets.shadowsocks-config = { };
-  sops.secrets.ssh-private-key = { } // lib.optionalAttrs (config.users.users ? dominic) { owner = "dominic"; };
+  sops.secrets.ssh-private-key = { } // lib.optionalAttrs config.env.desktop { owner = "dominic"; };
 
 }
 

@@ -74,10 +74,12 @@
             ./overlay/Neovim.nix
             ./overlay/Firefox-linux.nix
             ./overlay/AppleFont.nix
+            ./modules/desktopEnv.nix
 
             {
               system.stateVersion = stateVersion;
               networking.hostName = "hx90";
+              env.desktop = true;
             }
           ];
           specialArgs = { inherit homeStateVersion neovim-nightly;};
@@ -92,10 +94,12 @@
           # Coercing a relative path with interpolated variables to an absolute path (for imports)
           (./host/oracle + "/${hostName}.nix")
           ./overlay/Neovim.nix
+          ./modules/desktopEnv.nix
 
           {
             system.stateVersion = stateVersion;
             networking.hostName = hostName;
+            env.desktop = false;
           }
         ];
         specialArgs = { inherit homeStateVersion neovim-nightly;};

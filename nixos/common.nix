@@ -38,8 +38,7 @@
   fonts = {
     fonts = [
       (pkgs.nerdfonts.override { fonts = [ "RobotoMono" ]; }) # Terminal Font
-    ] ++ lib.optionals (config.users.users ? dominic) [
-      # If desktop user dominic is defined, add desktop fonts
+    ] ++ lib.optionals config.env.desktop [
       # The essence of Apple
       pkgs.SF-Pro # English
       pkgs.PingFang # Chinese/Japanese
@@ -52,7 +51,7 @@
       enable = true;
       defaultFonts = {
         monospace = [ "RobotoMono Nerd Font" ];
-      } // lib.optionalAttrs (config.users.users ? dominic) {
+      } // lib.optionalAttrs config.env.desktop {
         sansSerif = [ "SF Pro" ];
         serif = [ "SF Pro" ];
       };
