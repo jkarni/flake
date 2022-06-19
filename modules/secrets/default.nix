@@ -1,11 +1,11 @@
 { pkgs, lib, config, ... }:
 let
-  cfg = config.services.sops-nix;
+  cfg = config.secrets.sops-nix;
 in
 {
 
   options = {
-    services.sops-nix.enable = lib.mkEnableOption "sops secret service";
+    secrets.sops-nix.enable = lib.mkEnableOption "sops secret service";
   };
 
   config = lib.mkIf cfg.enable {
