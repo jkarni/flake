@@ -79,7 +79,7 @@
             {
               system.stateVersion = stateVersion;
               networking.hostName = "hx90";
-              env.desktop.enable = true;
+              profile.desktopEnv.enable = true;
             }
           ];
           specialArgs = { inherit homeStateVersion neovim-nightly;};
