@@ -5,7 +5,7 @@ in
 {
 
   options = {
-    env.desktop.enable = lib.mkEnableOption "shadowsocks-rust service";
+    packages.shadowsocks-rust.enable = lib.mkEnableOption "shadowsocks-rust service";
   };
 
   config = lib.mkIf cfg.enable {
