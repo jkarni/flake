@@ -67,7 +67,7 @@ for server_name, lang_config in pairs(require("lang-config.lsp.servers")) do
 --- continue part
     local exeName=lang_config.exeName
     if vim.fn.executable(exeName) == 0 then
-      vim.notify("LSP ".. exeName.." Not Found")
+      -- vim.notify("LSP ".. exeName.." Not Found")
       break
     end
 -------------------------------------------------------------------------------

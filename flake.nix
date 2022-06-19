@@ -42,7 +42,7 @@
 
       #############################################################################################################################
       # darwinConfigurations
-      
+
       darwinConfigurations = {
 
         "M1" = darwin.lib.darwinSystem {
@@ -55,7 +55,7 @@
             ./overlay/Neovim.nix
             ./overlay/Firefox-darwin.nix
           ];
-          specialArgs = { inherit homeStateVersion neovim-nightly; developerMode = true; };
+          specialArgs = { inherit homeStateVersion neovim-nightly; };
         };
 
       };
@@ -80,7 +80,7 @@
               networking.hostName = "hx90";
             }
           ];
-          specialArgs = { inherit homeStateVersion neovim-nightly; developerMode = true; };
+          specialArgs = { inherit homeStateVersion neovim-nightly;};
         };
 
       } // nixpkgs.lib.genAttrs oracleServerList (hostName: nixpkgs.lib.nixosSystem {
@@ -98,7 +98,7 @@
             networking.hostName = hostName;
           }
         ];
-        specialArgs = { inherit homeStateVersion neovim-nightly; developerMode = false; };
+        specialArgs = { inherit homeStateVersion neovim-nightly;};
       });
 
 
@@ -119,8 +119,31 @@
         });
 
       };
-      #############################################################################################################################
 
+
+      #############################################################################################################################
+      # Packages
+      # nix build .#SF-Pro
+      # cd test && nix develop ..#SF-Pro
+
+      packages."x86_64-linux"."PingFang" = import ./pkgs/fonts/PingFang { inherit (nixpkgs.legacyPackages."x86_64-linux") stdenvNoCC unzip fetchurl; };
+      packages."aarch64-darwin"."PingFang" = import ./pkgs/fonts/PingFang { inherit (nixpkgs.legacyPackages."aarch64-darwin") stdenvNoCC unzip fetchurl; };
+      packages."x86_64-linux"."SF-Pro" = import ./pkgs/fonts/SF-Pro { inherit (nixpkgs.legacyPackages."x86_64-linux") stdenvNoCC unzip fetchurl; };
+      packages."aarch64-darwin"."SF-Pro" = import ./pkgs/fonts/SF-Pro { inherit (nixpkgs.legacyPackages."aarch64-darwin") stdenvNoCC unzip fetchurl; };
+
+
+      packages."aarch64-darwin"."firefox-darwin" = import ./pkgs/firefox-darwin { inherit (nixpkgs.legacyPackages."aarch64-darwin") stdenvNoCC lib fetchurl writeText undmg; };
+
+
+      #############################################################################################################################
+      # Shell
+      # nix develop .#test 
+      # eval ${unpackPhase:-unpackPhase}
+      # eval ${configurePhase:-configurePhase}
+      # eval ${buildPhase:-buildPhase}
+      # eval ${installPhase:-installPhase}   <-- Not working
+
+      devShells."aarch64-darwin"."test" = import ./shells { pkgs = nixpkgs.legacyPackages."aarch64-darwin"; };
 
     }; #end of outputs
 

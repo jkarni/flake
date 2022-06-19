@@ -1,9 +1,16 @@
-{ config, pkgs, developerMode, homeStateVersion, ... }: {
+{ pkgs, homeStateVersion, ... }: {
 
   home-manager.useGlobalPkgs = true;
   home-manager.useUserPackages = true;
-  home-manager.extraSpecialArgs = { inherit homeStateVersion developerMode; };
   home-manager.users.dominic = import ./home.nix;
+  home-manager.extraSpecialArgs = { inherit homeStateVersion; };
+  home-manager.sharedModules = [
+    ../modules/developerMode.nix
+
+    {
+      config.mode.developerMode.enable = true;
+    }
+  ];
 
   nix = {
     extraOptions = ''

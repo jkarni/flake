@@ -1,4 +1,4 @@
-{ pkgs, lib, homeStateVersion, developerMode, ... }: {
+{ pkgs, lib, homeStateVersion, config, ... }: {
 
   imports = [
     ./git.nix
@@ -7,6 +7,8 @@
     ./nvim.nix
   ];
 
+            
+            
   home.packages = with pkgs;  [
     # basic
     wget
@@ -30,7 +32,7 @@
     bat
     bat-extras.batman
 
-  ] ++ lib.optionals developerMode [ 
+  ] ++ lib.optionals config.mode.developerMode.enable [ 
     statix 
     lazygit
   ];

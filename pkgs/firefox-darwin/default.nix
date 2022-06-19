@@ -1,4 +1,3 @@
-# with(import <nixpkgs> { });
 { stdenvNoCC, lib, fetchurl, writeText, undmg }:
 
 let
