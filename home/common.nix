@@ -5,7 +5,6 @@
     ./zsh.nix
     ./lf.nix
     ./nvim.nix
-  ] ++ lib.optionals config.home.developerMode.enable [
     ./direnv.nix
   ];
 
