@@ -1,21 +1,19 @@
 { pkgs, homeStateVersion, ... }: {
+
+  imports = [
+    ./hardware.nix
+    ../../nixos/server.nix
+  ];
+
   home-manager.useGlobalPkgs = true;
   home-manager.useUserPackages = true;
   home-manager.users.root = import ../../home/common.nix;
 
   home-manager.extraSpecialArgs = { inherit homeStateVersion; };
   home-manager.sharedModules = [
-    ../../modules/home/developerMode.nix
-
-    {
-      home.developerMode.enable = false;
-    }
+    ../../modules/home
   ];
 
-  imports = [
-    ./hardware.nix
-    ../../nixos/server.nix
-  ];
 
   # Workaround for fixing timeout issue
   # manually reboot once

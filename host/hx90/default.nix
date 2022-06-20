@@ -1,4 +1,10 @@
 { pkgs, homeStateVersion, ... }: {
+
+  imports = [
+    ./hardware.nix
+    ../../nixos/desktop.nix
+  ];
+
   home-manager.useGlobalPkgs = true;
   home-manager.useUserPackages = true;
   home-manager.verbose = true;
@@ -8,16 +14,11 @@
 
   home-manager.extraSpecialArgs = { inherit homeStateVersion; };
   home-manager.sharedModules = [
-    ../../modules/home/developerMode.nix
+    ../../modules/home
 
     {
       home.developerMode.enable = true;
     }
-  ];
-
-  imports = [
-    ./hardware.nix
-    ../../nixos/desktop.nix
   ];
 
 
