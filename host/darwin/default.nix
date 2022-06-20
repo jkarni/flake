@@ -25,6 +25,10 @@
   # System Level ZSH Enable
   programs.zsh = {
     enable = true;
+    variables = {
+      EDITOR = "nvim";
+      PAGER = "bat";
+    };
   };
 
   programs.ssh = {

@@ -35,6 +35,11 @@
 
   i18n.defaultLocale = "en_US.UTF-8";
 
+  environment.sessionVariables = {
+    EDITOR = "nvim";
+    PAGER = "bat";
+  };
+
   fonts = {
     fonts = [
       (pkgs.nerdfonts.override { fonts = [ "RobotoMono" ]; }) # Terminal Font
@@ -64,5 +69,5 @@
     "net.ipv4.tcp_congestion_control" = "bbr";
     "net.ipv4.tcp_fastopen" = "3";
   };
-  
+
 }

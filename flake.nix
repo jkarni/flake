@@ -30,13 +30,19 @@
       flake = false;
     };
 
+    zsh-tab-title = {
+      url = "github:trystan2k/zsh-tab-title";
+      flake = false;
+    };
+
   };
 
-  outputs = { self, nixpkgs, darwin, home-manager, deploy-rs, neovim-nightly, sops-nix, ... }:
+  outputs = { self, nixpkgs, darwin, home-manager, deploy-rs, neovim-nightly, sops-nix, zsh-tab-title, ... }:
     let
       stateVersion = "22.05";
       homeStateVersion = stateVersion;
       oracleServerList = [ "jp2" "jp4" "sw" "us1" "kr" ];
+      commonsSpecialArgs = { inherit homeStateVersion neovim-nightly zsh-tab-title; };
     in
     {
 
@@ -52,10 +58,11 @@
             home-manager.darwinModules.home-manager
             ./host/darwin
             ./host/darwin/brew.nix
-            ./overlay/Neovim.nix
+            ./overlay
             ./overlay/Firefox-darwin.nix
+
           ];
-          specialArgs = { inherit homeStateVersion neovim-nightly; };
+          specialArgs = commonsSpecialArgs;
         };
 
       };
@@ -70,7 +77,7 @@
             sops-nix.nixosModules.sops
             home-manager.nixosModules.home-manager
             ./host/hx90
-            ./overlay/Neovim.nix
+            ./overlay
             ./overlay/Firefox-linux.nix
             ./overlay/AppleFont.nix
             ./modules/profile/desktopEnv.nix
@@ -86,7 +93,7 @@
               secrets.sops-nix.enable = true;
             }
           ];
-          specialArgs = { inherit homeStateVersion neovim-nightly; };
+          specialArgs = commonsSpecialArgs;
         };
 
       } // nixpkgs.lib.genAttrs oracleServerList (hostName: nixpkgs.lib.nixosSystem {
@@ -97,7 +104,7 @@
           # https://nixos.wiki/wiki/Nix_Expression_Language
           # Coercing a relative path with interpolated variables to an absolute path (for imports)
           (./host/oracle + "/${hostName}.nix")
-          ./overlay/Neovim.nix
+          ./overlay
 
           ./modules/profile/desktopEnv.nix
           ./modules/services/shadowsocks-rust.nix
@@ -115,7 +122,7 @@
             services.shadowsocks-rust.enable = true;
           }
         ];
-        specialArgs = { inherit homeStateVersion neovim-nightly; };
+        specialArgs = commonsSpecialArgs;
       });
 
 
@@ -150,7 +157,8 @@
 
 
       packages."aarch64-darwin"."firefox-darwin" = import ./pkgs/firefox-darwin { inherit (nixpkgs.legacyPackages."aarch64-darwin") stdenvNoCC lib fetchurl writeText undmg; };
-
+      
+      packages."aarch64-darwin"."zsh-tab-title" = import ./pkgs/zsh/zsh-tab-title.nix { inherit (nixpkgs.legacyPackages."aarch64-darwin") stdenvNoCC; inherit zsh-tab-title; };
 
       #############################################################################################################################
       # Shell

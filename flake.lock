@@ -201,7 +201,8 @@
         "home-manager": "home-manager",
         "neovim-nightly": "neovim-nightly",
         "nixpkgs": "nixpkgs",
-        "sops-nix": "sops-nix"
+        "sops-nix": "sops-nix",
+        "zsh-tab-title": "zsh-tab-title"
       }
     },
     "sops-nix": {
@@ -213,11 +214,11 @@
         "nixpkgs-22_05": "nixpkgs-22_05"
       },
       "locked": {
-        "lastModified": 1655665732,
-        "narHash": "sha256-Fe+evSlGbMOMNSI9dECLDJx6L3ZvYFxosfaDnaPwSK8=",
+        "lastModified": 1655707707,
+        "narHash": "sha256-PlDTG9w4FtoqnELKC+FYS2d2XCG/HGpBMqDX+V98pu4=",
         "owner": "Mic92",
         "repo": "sops-nix",
-        "rev": "67af9b179c629dea211ebd83f92c77f5745043be",
+        "rev": "2a8d731e401889bd3e03b40da50f7314dee4a4da",
         "type": "github"
       },
       "original": {
@@ -253,6 +254,22 @@
       "original": {
         "owner": "numtide",
         "repo": "flake-utils",
+        "type": "github"
+      }
+    },
+    "zsh-tab-title": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1638891784,
+        "narHash": "sha256-nlumBGteG4RcQI0xLLFk6AZbz1TsBc2naTMlPdTCpEk=",
+        "owner": "trystan2k",
+        "repo": "zsh-tab-title",
+        "rev": "6e532a48e46ae56daec18255512dd8d0597f4aa6",
+        "type": "github"
+      },
+      "original": {
+        "owner": "trystan2k",
+        "repo": "zsh-tab-title",
         "type": "github"
       }
     }

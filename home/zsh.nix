@@ -5,6 +5,7 @@
     zsh-fast-syntax-highlighting
     zsh-autosuggestions
     zsh-you-should-use
+    zsh-tab-title
   ];
 
   programs.fzf.enable = true;
@@ -28,11 +29,6 @@
     dotDir = ".config/zsh";
 
     history.path = "$HOME/.config/zsh/.zsh_history";
-
-    sessionVariables = {
-      EDITOR = "nvim";
-      PAGER = "bat";
-    };
 
     shellAliases = {
       cd = "z";
@@ -58,13 +54,10 @@
       source ${pkgs.zsh-fast-syntax-highlighting}/share/zsh/site-functions/fast-syntax-highlighting.plugin.zsh
       source ${pkgs.zsh-autosuggestions}/share/zsh-autosuggestions/zsh-autosuggestions.zsh
       source ${pkgs.zsh-you-should-use}/share/zsh/plugins/you-should-use/you-should-use.plugin.zsh
+      source ${pkgs.zsh-tab-title}/zsh-tab-title.plugin.zsh 
 
-      zstyle ':fzf-tab:complete:cd:*' fzf-preview 'exa -1 --color=always $realpath'
 
-      function set_win_title() {
-        echo -ne "\033]0; shell: $(basename "$PWD") \007"
-      }
-      precmd_functions+=(set_win_title)
+      zstyle ':fzf-tab:complete:cd:*' fzf-preview 'exa -1 --color=always $realpath'      
 
     '' + lib.optionalString pkgs.stdenv.isDarwin ''
       path+=~/go/bin
