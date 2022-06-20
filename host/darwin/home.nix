@@ -1,7 +1,7 @@
 { pkgs,config, ... }: {
 
   imports = [
-    ../../home/common.nix
+    ../../home
     ../../home/wezterm.nix
     ../../home/mpv.nix
     ../../home/firefox.nix

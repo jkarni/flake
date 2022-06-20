@@ -1,6 +1,6 @@
 { pkgs, ... }: {
   imports = [
-    ./common.nix
+    ./default.nix
     ./mpv.nix
     ./firefox.nix
   ];

@@ -9,7 +9,7 @@
   home-manager.useUserPackages = true;
   home-manager.verbose = true;
 
-  home-manager.users.root = import ../../home/common.nix;
+  home-manager.users.root = import ../../home;
   home-manager.users.dominic = import ../../home/sway.nix;
 
   home-manager.extraSpecialArgs = { inherit homeStateVersion; };
