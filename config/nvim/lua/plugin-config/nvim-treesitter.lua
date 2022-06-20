@@ -7,7 +7,8 @@ end
 
 treesitter.setup({
 
-  ensure_installed = require("lang-config.treesitter.parsers"),
+  -- TreeSitter Parser from nixpkgs
+  -- ensure_installed = require("lang-config.treesitter.parsers"),
 
   highlight = {
     enable = true,
