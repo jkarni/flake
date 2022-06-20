@@ -80,9 +80,8 @@
             ./overlay
             ./overlay/Firefox-linux.nix
             ./overlay/AppleFont.nix
-            ./modules/profile/desktopEnv.nix
-            ./modules/services/ssh-config.nix
-            ./modules/secrets
+            ./modules
+
 
             {
               system.stateVersion = stateVersion;
@@ -106,17 +105,14 @@
           (./host/oracle + "/${hostName}.nix")
           ./overlay
 
-          ./modules/profile/desktopEnv.nix
-          ./modules/services/shadowsocks-rust.nix
-          ./modules/services/ssh-config.nix
-          ./modules/secrets
+          ./modules
+
 
           {
             system.stateVersion = stateVersion;
             networking.hostName = hostName;
             boot.loader.systemd-boot.netbootxyz.enable = true;
 
-            profile.desktopEnv.enable = false;
             secrets.sops-nix.enable = true;
             services.ssh-config.enable = true;
             services.shadowsocks-rust.enable = true;

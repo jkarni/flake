@@ -9,7 +9,7 @@ nixos-rebuild switch --flake /etc/flake#hx90 -v
 
 ## 2. NixInject(Server)
 
-Reinstall OS to Debian(fixed partition)
+Reinstall OS to Debian(fix partition without entering tmpfs env)
 ```
 bash <(wget -qO- https://raw.githubusercontent.com/bohanyang/debi/master/debi.sh) --user root --password 12345 --authorized-keys-url https://github.com/mlyxshi.keys --version stable --filesystem ext4 --esp 538 && reboot
 ```
@@ -22,13 +22,10 @@ wget -qO- https://raw.githubusercontent.com/elitak/nixos-infect/master/nixos-inf
 
 Rebuild NixOS
 ```
-nix-env -iA nixos.git
-<write sops key>
-git clone https://github.com/mlyxshi/flake /etc/flake
+# write age private key to /var/lib/sops-nix/key.txt
 # delete default grub boot, use systemd-boot instead
 rm -rf /boot/*
-nixos-rebuild switch --flake /etc/flake#<NAME> --install-bootloader -v
-git remote set-url origin github.com:mlyxshi/flake
+nixos-rebuild switch --flake github:mlyxshi/flake#<NAME> --install-bootloader -v
 ```
 
 ## 3. First Install[PC]
