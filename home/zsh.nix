@@ -29,6 +29,11 @@
 
     history.path = "$HOME/.config/zsh/.zsh_history";
 
+    sessionVariables = {
+      EDITOR = "nvim";
+      PAGER = "bat";
+    };
+
     shellAliases = {
       cd = "z";
       l = "exa -algh";
@@ -47,8 +52,7 @@
 
 
     initExtra = '' 
-
-      export FZF_COMPLETION_TRIGGER='\'
+      FZF_COMPLETION_TRIGGER='\';
 
       source ${pkgs.zsh-fzf-tab}/share/fzf-tab/fzf-tab.plugin.zsh
       source ${pkgs.zsh-fast-syntax-highlighting}/share/zsh/site-functions/fast-syntax-highlighting.plugin.zsh
