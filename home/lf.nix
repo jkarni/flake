@@ -2,7 +2,6 @@
 
   home.packages = with pkgs;  [
     lf
-    pistol #previewer
   ];
 
   xdg.configFile = lib.optionalAttrs pkgs.stdenv.isLinux {

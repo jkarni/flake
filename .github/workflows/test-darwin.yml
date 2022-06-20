@@ -1,0 +1,13 @@
+name: "macos test"
+on:
+  push:
+    branches:
+    - main
+
+jobs:
+  CI:
+    runs-on: macos-latest
+    steps:
+    - uses: actions/checkout@v3
+    - uses: cachix/install-nix-action@v17
+    - run: nix build  .#darwinConfigurations."CI-TEST".system

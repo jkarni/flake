@@ -12,6 +12,7 @@ map Q   quit
 map D   delete
 map Z   extract
 map <enter> open
+map <c-f> fzf
 
 
 set previewer pistol
@@ -46,3 +47,14 @@ cmd extract ${{
 }}
 
 
+cmd fzf ${{
+    res="$(find . -maxdepth 1 | fzf --reverse --header='Jump to location' | sed 's/\\/\\\\/g;s/"/\\"/g')"
+    if [ -d "$res" ] ; then
+        cmd="cd"
+    elif [ -f "$res" ] ; then
+        cmd="select"
+    else
+        exit 0
+    fi
+    lf -remote "send $id $cmd \"$res\""
+}}

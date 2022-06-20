@@ -31,6 +31,8 @@
     bandwhich
     bat
     bat-extras.batman
+    # go
+    pistol
 
   ] ++ lib.optionals config.home.developerMode.enable [
     jq

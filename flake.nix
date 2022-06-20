@@ -58,6 +58,20 @@
           specialArgs = { inherit homeStateVersion neovim-nightly; };
         };
 
+        # It is hard to get an aarch64 darwin environment
+        # Therefore, I use X86_64 Darwin to find out any logical error.
+        "CI-TEST" = darwin.lib.darwinSystem {
+          system = "x86_64-darwin";
+          modules = [
+            home-manager.darwinModules.home-manager
+            ./host/darwin
+            # ./host/darwin/brew.nix
+            ./overlay/Neovim.nix
+            ./overlay/Firefox-darwin.nix
+          ];
+          specialArgs = { inherit homeStateVersion neovim-nightly; };
+        };
+
       };
 
       #############################################################################################################################
@@ -84,10 +98,10 @@
 
               profile.desktopEnv.enable = true;
               services.ssh-config.enable = true;
-              secrets.sops-nix.enable =true;
+              secrets.sops-nix.enable = true;
             }
           ];
-          specialArgs = { inherit homeStateVersion neovim-nightly;};
+          specialArgs = { inherit homeStateVersion neovim-nightly; };
         };
 
       } // nixpkgs.lib.genAttrs oracleServerList (hostName: nixpkgs.lib.nixosSystem {
@@ -111,12 +125,12 @@
             boot.loader.systemd-boot.netbootxyz.enable = true;
 
             profile.desktopEnv.enable = false;
-            secrets.sops-nix.enable =true;
+            secrets.sops-nix.enable = true;
             services.ssh-config.enable = true;
-            services.shadowsocks-rust.enable =true;        
+            services.shadowsocks-rust.enable = true;
           }
         ];
-        specialArgs = { inherit homeStateVersion neovim-nightly;};
+        specialArgs = { inherit homeStateVersion neovim-nightly; };
       });
 
 

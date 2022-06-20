@@ -1,11 +1,8 @@
 { pkgs, lib, config,... }: {
 
-  # Rust autojump
+  programs.fzf.enable = true;
   programs.zoxide.enable = true;
-
-  # Rust prompt
   programs.starship.enable = true;
-
   programs.nix-index.enable = config.home.developerMode.enable;
 
   home.file = lib.optionalAttrs pkgs.stdenv.isLinux {
@@ -23,6 +20,7 @@
     enable = true;
 
     shellAliases = {
+      cd = "z";
       l = "exa -algh";
       v = "nvim";
       r = "lf";
@@ -42,22 +40,8 @@
 
 
     initExtra = '' 
-      lfcd () {
-        tmp="$(mktemp)"
-        lf -last-dir-path="$tmp" "$@"
-        if [ -f "$tmp" ]; then
-          dir="$(cat "$tmp")"
-          rm -f "$tmp"
-          if [ -d "$dir" ]; then
-            if [ "$dir" != "$(pwd)" ]; then
-              cd "$dir"
-            fi
-          fi
-        fi
-      }
-
-      bindkey -s '^f' 'lfcd\n'  # zsh
-
+      export FZF_COMPLETION_TRIGGER='\'
+      export FZF_DEFAULT_OPTS='--preview "pistol {}"'
     '' + lib.optionalString pkgs.stdenv.isDarwin ''
       path+=~/go/bin
       path+=/Applications/Surge.app/Contents/Applications
