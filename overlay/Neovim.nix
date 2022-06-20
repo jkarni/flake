@@ -1,11 +1,8 @@
-{ neovim-nightly,... }: {
-  nixpkgs.overlays = [
-    (final: prev: {
-      neovim-unwrapped = prev.neovim-unwrapped.overrideAttrs (finalAttrs: previousAttrs: {
-        version = "master";
-        src = neovim-nightly;
-      });
-    })
-  ];
-}
+{ neovim-nightly }:
 
+final: prev: {
+  neovim-unwrapped = prev.neovim-unwrapped.overrideAttrs (finalAttrs: previousAttrs: {
+    version = "master";
+    src = neovim-nightly;
+  });
+}

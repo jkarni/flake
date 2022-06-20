@@ -59,7 +59,6 @@
             ./host/darwin
             ./host/darwin/brew.nix
             ./overlay
-            ./overlay/Firefox-darwin.nix
 
           ];
           specialArgs = commonsSpecialArgs;
@@ -78,8 +77,6 @@
             home-manager.nixosModules.home-manager
             ./host/hx90
             ./overlay
-            ./overlay/Firefox-linux.nix
-            ./overlay/AppleFont.nix
             ./modules
 
 
@@ -104,7 +101,6 @@
           # Coercing a relative path with interpolated variables to an absolute path (for imports)
           (./host/oracle + "/${hostName}.nix")
           ./overlay
-
           ./modules
 
 
