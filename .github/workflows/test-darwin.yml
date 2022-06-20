@@ -1,4 +1,4 @@
-name: "macos test"
+name: "test darwin"
 on:
   push:
     branches:
@@ -10,6 +10,8 @@ jobs:
     steps:
     - uses: actions/checkout@v3
     - uses: cachix/install-nix-action@v17
+      with:
+        extra_nix_config: |
+          allowBroken = true;
     - run: |
-        export NIXPKGS_ALLOW_BROKEN=1
         nix build  .#darwinConfigurations."CI-TEST".system

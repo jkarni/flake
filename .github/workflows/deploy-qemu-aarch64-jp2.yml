@@ -1,4 +1,4 @@
-name: "aarch64 deploy jp2"
+name: "deploy jp2"
 on:
   workflow_dispatch
 

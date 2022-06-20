@@ -1,4 +1,4 @@
-name: "[Auto] deploy-rs cache binary build"
+name: "[Auto] cache deploy-rs"
 on:
   schedule:
     - cron: '00 00 * * *'

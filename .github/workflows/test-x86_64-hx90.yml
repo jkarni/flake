@@ -1,4 +1,4 @@
-name: "hx90 build"
+name: "test hx90"
 on:
   push:
     branches:

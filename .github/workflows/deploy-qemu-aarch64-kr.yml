@@ -1,4 +1,4 @@
-name: "aarch64 deploy kr"
+name: "deploy kr"
 on:
   workflow_dispatch
 

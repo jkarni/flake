@@ -1,4 +1,4 @@
-name: "[Auto] firefox darwin update"
+name: "[Auto] update darwin firefox"
 on:
   schedule:
     - cron: '00 00 * * *'

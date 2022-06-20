@@ -1,4 +1,4 @@
-name: "aarch64 deploy sw"
+name: "deploy sw"
 on:
   workflow_dispatch
 
