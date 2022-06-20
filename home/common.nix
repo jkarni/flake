@@ -27,7 +27,7 @@
     exa
     delta
     tealdeer
-    # procs
+    procs
     bandwhich
     bat
     bat-extras.batman

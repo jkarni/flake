@@ -1,0 +1,15 @@
+name: "[Auto] update flake"
+on:
+  workflow_dispatch:
+  schedule:
+    - cron: '0 0 * * 0' # runs weekly on Sunday at 00:00
+jobs:
+  AutoUpdateFlake:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - uses: cachix/install-nix-action@v17
+      - name: Update flake.lock
+        uses: DeterminateSystems/update-flake-lock@v9
+        with:
+          token: ${{ secrets.GIT_TOKEN }}

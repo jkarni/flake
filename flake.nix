@@ -58,21 +58,6 @@
           specialArgs = { inherit homeStateVersion neovim-nightly; };
         };
 
-        # It is hard to get an aarch64 darwin environment
-        # Therefore, I use X86_64 Darwin to find out any logical error.
-        "CI-TEST" = darwin.lib.darwinSystem {
-          system = "x86_64-darwin";
-          modules = [
-            home-manager.darwinModules.home-manager
-            ./host/darwin
-            # ./host/darwin/brew.nix
-            ./overlay/Neovim.nix
-            ./overlay/Firefox-darwin.nix
-          ];
-          specialArgs = { inherit homeStateVersion neovim-nightly; };
-        };
-
-      };
 
       #############################################################################################################################
       # nixosConfigurations
