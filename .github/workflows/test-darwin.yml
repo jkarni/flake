@@ -12,6 +12,7 @@ jobs:
     - uses: cachix/install-nix-action@v17
       with:
         extra_nix_config: |
-          allowBroken = true;
+          allowBroken = true
     - run: |
-        nix build  .#darwinConfigurations."CI-TEST".system
+        export NIXPKGS_ALLOW_BROKEN=1
+        nix build  .#darwinConfigurations."CI-TEST".system --impure
