@@ -2,7 +2,7 @@
 
   programs.firefox = {
     enable = true;
-    # See details: overlay/Firefox-linux.nix  overlay/Firefox-darwin.nix 
+    # See details: overlay/Firefox.nix
     package = pkgs.firefox;
   };
 
@@ -13,8 +13,8 @@
     };
   };
 
-  # nix-darwin install application in "~/Application/Nix Apps" by default
-  # I prefer link to system application path
+  # nix-darwin only install application in "~/Application/Nix Apps" by default
+  # I prefer also link to system application path
   home.activation = lib.optionalAttrs pkgs.stdenv.isDarwin {
     linkFirefox = lib.hm.dag.entryAfter [ "writeBoundary" ] ''
       ln -sfn ${pkgs.firefox}/Applications/Firefox.app   /Applications/Firefox.app
