@@ -58,7 +58,7 @@
           specialArgs = { inherit homeStateVersion neovim-nightly; };
         };
 
-
+      };
       #############################################################################################################################
       # nixosConfigurations
 
