@@ -10,4 +10,6 @@ jobs:
     steps:
     - uses: actions/checkout@v3
     - uses: cachix/install-nix-action@v17
-    - run: nix build  .#darwinConfigurations."CI-TEST".system
+    - run: |
+        export NIXPKGS_ALLOW_BROKEN=1
+        nix build  .#darwinConfigurations."CI-TEST".system

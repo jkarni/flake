@@ -1,9 +1,5 @@
 name: "[Auto] firefox darwin update"
 on:
-  push:
-    branches:
-    - main
-  workflow_dispatch:
   schedule:
     - cron: '00 00 * * *'
 
