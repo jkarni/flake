@@ -1,4 +1,4 @@
-{ lib, pkgs, neovim-nightly, zsh-tab-title, ... }: {
+{ lib, pkgs, neovim-nightly, ... }: {
   nixpkgs.overlays = [
     (import ./AppleFont.nix)
     (import ./Neovim.nix { inherit neovim-nightly; })

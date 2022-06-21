@@ -35,6 +35,22 @@
       flake = false;
     };
 
+    zsh-fast-syntax-highlighting = {
+      url = "github:zdharma-continuum/fast-syntax-highlighting";
+      flake = false;
+    };
+
+    zsh-you-should-use = {
+      url = "github:MichaelAquilina/zsh-you-should-use";
+      flake = false;
+    };
+
+    zsh-autosuggestions = {
+      url = "github:zsh-users/zsh-autosuggestions";
+      flake = false;
+    };
+    
+
   };
 
   outputs = { self, nixpkgs, darwin, home-manager, deploy-rs, sops-nix, ... }@args:
@@ -42,7 +58,7 @@
       stateVersion = "22.05";
       homeStateVersion = stateVersion;
       oracleServerList = [ "jp2" "jp4" "sw" "us1" "kr" ];
-      commonSpecialArgs = { inherit (args) neovim-nightly zsh-tab-title; inherit homeStateVersion; };
+      commonSpecialArgs = { inherit (args) neovim-nightly zsh-tab-title zsh-fast-syntax-highlighting zsh-you-should-use zsh-autosuggestions; inherit homeStateVersion; };
     in
     {
 
@@ -149,8 +165,6 @@
 
 
       packages."aarch64-darwin"."firefox-darwin" = import ./pkgs/darwin/firefox { inherit (nixpkgs.legacyPackages."aarch64-darwin") stdenvNoCC lib fetchurl writeText undmg; };
-
-      # packages."aarch64-darwin"."zsh-tab-title" = import ./pkgs/zsh/zsh-tab-title { inherit (nixpkgs.legacyPackages."aarch64-darwin") stdenvNoCC; inherit (args) zsh-tab-title; };
 
       #############################################################################################################################
       # Shell

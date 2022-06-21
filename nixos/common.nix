@@ -38,6 +38,7 @@
   environment.sessionVariables = {
     EDITOR = "nvim";
     PAGER = "bat";
+    FZF_COMPLETION_TRIGGER="\\\\";  # actual value is '\' , but nix-lang and shell need escape  <-- weird
   };
 
   fonts = {

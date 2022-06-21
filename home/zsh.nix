@@ -1,10 +1,7 @@
-{ pkgs, lib, config,  zsh-tab-title, ... }: {
+{ pkgs, lib, config, ... }@args: {
 
   home.packages = with pkgs;  [
     zsh-fzf-tab
-    zsh-fast-syntax-highlighting
-    zsh-autosuggestions
-    zsh-you-should-use
   ];
 
   programs.fzf.enable = true;
@@ -47,18 +44,17 @@
 
 
     initExtra = '' 
-      FZF_COMPLETION_TRIGGER='\';
-
+      
       source ${pkgs.zsh-fzf-tab}/share/fzf-tab/fzf-tab.plugin.zsh
-      source ${pkgs.zsh-fast-syntax-highlighting}/share/zsh/site-functions/fast-syntax-highlighting.plugin.zsh
-      source ${pkgs.zsh-autosuggestions}/share/zsh-autosuggestions/zsh-autosuggestions.zsh
-      source ${pkgs.zsh-you-should-use}/share/zsh/plugins/you-should-use/you-should-use.plugin.zsh
-      source ${zsh-tab-title}/zsh-tab-title.plugin.zsh 
 
+      source ${args.zsh-autosuggestions}/zsh-autosuggestions.zsh 
+      source ${args.zsh-fast-syntax-highlighting}/fast-syntax-highlighting.plugin.zsh
+      source ${args.zsh-you-should-use}/you-should-use.plugin.zsh
+      source ${args.zsh-tab-title}/zsh-tab-title.plugin.zsh    
 
-      zstyle ':fzf-tab:complete:cd:*' fzf-preview 'exa -1 --color=always $realpath'      
+    ''
+    + lib.optionalString pkgs.stdenv.isDarwin ''
 
-    '' + lib.optionalString pkgs.stdenv.isDarwin ''
       path+=~/go/bin
       path+=/Applications/Surge.app/Contents/Applications
     '';

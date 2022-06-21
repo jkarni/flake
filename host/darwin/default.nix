@@ -4,7 +4,7 @@
   home-manager.useUserPackages = true;
   home-manager.verbose = true;
   home-manager.users.dominic = import ./home.nix;
-  home-manager.extraSpecialArgs = { inherit (args) homeStateVersion  zsh-tab-title; };
+  home-manager.extraSpecialArgs = { inherit (args) homeStateVersion  zsh-tab-title zsh-fast-syntax-highlighting zsh-you-should-use zsh-autosuggestions; };
   home-manager.sharedModules = [
     ../../modules/home
     {
@@ -28,6 +28,7 @@
     variables = {
       EDITOR = "nvim";
       PAGER = "bat";
+      FZF_COMPLETION_TRIGGER="\\\\";  # actual value is '\' , but nix-lang and shell need escape  <-- weird
     };
   };
 

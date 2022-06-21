@@ -12,7 +12,7 @@
   home-manager.users.root = import ../../home;
   home-manager.users.dominic = import ../../home/sway.nix;
 
-  home-manager.extraSpecialArgs = { inherit (args) homeStateVersion; };
+  home-manager.extraSpecialArgs = { inherit (args) homeStateVersion  zsh-tab-title zsh-fast-syntax-highlighting zsh-you-should-use zsh-autosuggestions; };
   home-manager.sharedModules = [
     ../../modules/home
 
