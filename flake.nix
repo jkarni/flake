@@ -2,11 +2,11 @@
   inputs = {
 
     nixpkgs = {
-      url = "github:nixos/nixpkgs/nixos-unstable";
+      url = "github:nixos/nixpkgs/nixos-22.05";
     };
 
     home-manager = {
-      url = "github:nix-community/home-manager";
+      url = "github:nix-community/home-manager/release-22.05";
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
@@ -180,6 +180,8 @@
 
 
       packages."aarch64-darwin"."firefox-darwin" = import ./pkgs/darwin/firefox { inherit (nixpkgs.legacyPackages."aarch64-darwin") stdenvNoCC lib fetchurl writeText undmg; };
+
+      packages."aarch64-darwin"."Anime4k" = import ./pkgs/Anime4k { inherit (nixpkgs.legacyPackages."aarch64-darwin") stdenvNoCC fetchzip; };
 
       #############################################################################################################################
       # Shell

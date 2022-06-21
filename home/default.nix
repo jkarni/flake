@@ -1,4 +1,4 @@
-{ pkgs, lib, homeStateVersion, osConfig,... }: {
+{ pkgs, lib, homeStateVersion, osConfig, ... }: {
 
   imports = [
     ./git.nix
@@ -19,7 +19,6 @@
     htop
     neofetch
     unzip
-    ookla-speedtest
     # nix
     nix-tree
     sops
@@ -38,6 +37,8 @@
     jq
     statix
     lazygit
+  ] ++ lib.optionals pkgs.stdenv.isLinux [
+    ookla-speedtest
   ];
 
 
