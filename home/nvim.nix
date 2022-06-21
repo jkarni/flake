@@ -30,7 +30,6 @@ in
       
       -- Invoke Real Start
       require("start")
-
     '';
   } // lib.optionalAttrs pkgs.stdenv.isLinux {
     "nvim/lua/".source = ../config/nvim/lua;

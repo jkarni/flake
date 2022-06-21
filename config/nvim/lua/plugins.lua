@@ -39,17 +39,17 @@ packer.startup(
       use 'akinsho/bufferline.nvim'
       use 'famiu/bufdelete.nvim'
       use 'j-hui/fidget.nvim'
-      use 'nvim-telescope/telescope.nvim'
-      use 'nvim-telescope/telescope-ui-select.nvim'
-      use 'ahmedkhalf/project.nvim'
-      use 'goolord/alpha-nvim'
       use 'lewis6991/gitsigns.nvim'
       use 'akinsho/toggleterm.nvim'
       use 'folke/which-key.nvim'
-      use 'SmiteshP/nvim-gps'
+
+      -- Telescope
+      use 'nvim-telescope/telescope.nvim'
+      use 'nvim-telescope/telescope-ui-select.nvim'
+      use 'goolord/alpha-nvim'
+      use 'ahmedkhalf/project.nvim'
       use 'rmagatti/auto-session'
       use 'rmagatti/session-lens'
-      use 'AckslD/nvim-neoclip.lua'
 
       --Tree-Sitter from nixpkgs
       -- use 'nvim-treesitter/nvim-treesitter'
@@ -62,6 +62,7 @@ packer.startup(
       use 'hrsh7th/cmp-path'
       use 'hrsh7th/cmp-cmdline'
       use 'onsails/lspkind-nvim'
+      use 'SmiteshP/nvim-navic'
       --use'github/copilot.vim'
 
       --Snip

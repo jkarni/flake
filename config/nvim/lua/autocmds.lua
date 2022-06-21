@@ -42,17 +42,6 @@ autocmd("BufWritePost", {
   end,
 })
 
---Treesitter
-autocmd("BufWritePost", {
-  group = myAutoGroup,
-  pattern = "*.lua",
-  callback = function()
-    if vim.fn.expand("<afile>") == "lua/lang-config/treesitter/parsers.lua" then
-      cmd("source lua/lang-config/treesitter/parsers.lua")
-      cmd("TSUpdate")
-    end
-  end,
-})
 
 -- 用o换行不要延续注释
 autocmd("BufEnter", {
@@ -63,3 +52,16 @@ autocmd("BufEnter", {
         + "r" -- But do continue when pressing enter.
   end,
 })
+
+
+--Treesitter
+-- autocmd("BufWritePost", {
+--   group = myAutoGroup,
+--   pattern = "*.lua",
+--   callback = function()
+--     if vim.fn.expand("<afile>") == "lua/lang-config/treesitter/parsers.lua" then
+--       cmd("source lua/lang-config/treesitter/parsers.lua")
+--       cmd("TSUpdate")
+--     end
+--   end,
+-- })

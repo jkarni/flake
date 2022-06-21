@@ -117,8 +117,6 @@ M.nvimTreeList = {
   { key = "o", action = "open" },
 }
 
--- Clipboard
-keymap("n", '<leader>d', ":Telescope neoclip<CR>", opts)
 
 M.LSP_on_attach = function(_, bufnr)
   keymap('n', '<leader>e', vim.diagnostic.open_float, { desc = 'Open diagnostics window' })

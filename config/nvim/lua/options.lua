@@ -31,6 +31,8 @@ local options = {
 
   cmdheight = 0,
 
+  -- winbar =,
+
   termguicolors = true,
 }
 

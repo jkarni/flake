@@ -16,7 +16,10 @@
     variables = {
       EDITOR = "nvim";
       PAGER = "bat";
-      # FZF_COMPLETION_TRIGGER="\\\\";  # actual value is '\' , but nix-lang and shell need escape  <-- weird
+      FZF_COMPLETION_TRIGGER="\\\\";  # actual value is '\' , but nix-lang and shell need escape  <-- weird
+      FZF_DEFAULT_COMMAND = "fd --type file --follow --hidden --exclude .git";
+      FZF_CTRL_T_COMMAND = "fd --type file --follow --hidden --exclude .git";
+      FZF_ALT_C_COMMAND = "fd --type file --follow --hidden --exclude .git";
     };
   };
 

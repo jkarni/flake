@@ -22,6 +22,13 @@ if not status then
   return
 end
 
+local status, navic = pcall(require, "nvim-navic")
+if not status then
+  vim.notify("navic Not Found")
+  return
+end
+
+
 cmp.setup({
   snippet = {
     expand = function(args)
@@ -63,27 +70,31 @@ cmp.setup.cmdline(":", {
 for server_name, lang_config in pairs(require("lang-config.lsp.servers")) do
 
   repeat
--------------------------------------------------------------------------------
---- continue part
-    local exeName=lang_config.exeName
+    -------------------------------------------------------------------------------
+    --- continue part
+    local exeName = lang_config.exeName
     if vim.fn.executable(exeName) == 0 then
       -- vim.notify("LSP ".. exeName.." Not Found")
       break
     end
--------------------------------------------------------------------------------
---- normal loop part
+    -------------------------------------------------------------------------------
+    --- normal loop part
     local config = {
-      on_attach = require("keybindings").LSP_on_attach,
+      on_attach = function(client, bufnr)
+        -- navic.attach(client, bufnr)
+        require("keybindings").LSP_on_attach(client, bufnr)
+      end,
       capabilities = require('cmp_nvim_lsp').update_capabilities(vim.lsp.protocol.make_client_capabilities()),
     }
     config.settings = lang_config.config
+
     --lua extra config for nvim api
     if (server_name == "sumneko_lua") then
       lspconfig[server_name].setup(lua_dev.setup({ lspconfig = config }))
     else
       lspconfig[server_name].setup(config)
     end
--------------------------------------------------------------------------------
+    -------------------------------------------------------------------------------
   until true
 
 end
