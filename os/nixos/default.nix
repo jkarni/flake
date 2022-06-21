@@ -1,4 +1,8 @@
-{ config, pkgs, lib, ... }: {
+{ config, pkgs, lib, ... }:
+let
+  hashedPassword = "$6$fwJZwHNLE640VkQd$SrYMjayP9fofIncuz3ehVLpfwGlpUj0NFZSssSy8GcIXIbDKI4JnrgfMZxSw5vxPkXkAEL/ktm3UZOyPMzA.p0";
+in
+{
 
 
   nix = {
@@ -33,12 +37,12 @@
     defaultUserShell = pkgs.zsh;
 
     users = {
-      root.hashedPassword = "$6$fwJZwHNLE640VkQd$SrYMjayP9fofIncuz3ehVLpfwGlpUj0NFZSssSy8GcIXIbDKI4JnrgfMZxSw5vxPkXkAEL/ktm3UZOyPMzA.p0";
+      root.hashedPassword = hashedPassword;
     } // lib.optionalAttrs config.profile.desktopEnv.enable {
       dominic = {
         isNormalUser = true;
         description = "mlyxshi";
-        hashedPassword = "$6$fwJZwHNLE640VkQd$SrYMjayP9fofIncuz3ehVLpfwGlpUj0NFZSssSy8GcIXIbDKI4JnrgfMZxSw5vxPkXkAEL/ktm3UZOyPMzA.p0";
+        hashedPassword = hashedPassword;
         extraGroups = [ "wheel" ];
       };
     };
@@ -53,7 +57,6 @@
   environment.sessionVariables = {
     EDITOR = "nvim";
     PAGER = "bat";
-    FZF_COMPLETION_TRIGGER = "\\\\"; # actual value is '\' , but nix-lang and shell need escape  <-- weird
   };
 
   fonts = {

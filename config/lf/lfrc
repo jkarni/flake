@@ -12,7 +12,7 @@ map Q   quit
 map D   delete
 map Z   extract
 map <enter> open
-map <c-f> fzf
+map <tab> fzf
 
 
 set previewer pistol
