@@ -1,4 +1,4 @@
-{ pkgs, homeStateVersion, ... }: {
+{ pkgs, ... }@args: {
 
   imports = [
     ./hardware.nix
@@ -12,7 +12,7 @@
   home-manager.users.root = import ../../home;
   home-manager.users.dominic = import ../../home/sway.nix;
 
-  home-manager.extraSpecialArgs = { inherit homeStateVersion; };
+  home-manager.extraSpecialArgs = { inherit (args) homeStateVersion; };
   home-manager.sharedModules = [
     ../../modules/home
 

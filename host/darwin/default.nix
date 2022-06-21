@@ -1,10 +1,10 @@
-{ pkgs, homeStateVersion, ... }: {
+{ pkgs, ... }@args: {
 
   home-manager.useGlobalPkgs = true;
   home-manager.useUserPackages = true;
   home-manager.verbose = true;
   home-manager.users.dominic = import ./home.nix;
-  home-manager.extraSpecialArgs = { inherit homeStateVersion; };
+  home-manager.extraSpecialArgs = { inherit (args) homeStateVersion  zsh-tab-title; };
   home-manager.sharedModules = [
     ../../modules/home
     {

@@ -37,12 +37,12 @@
 
   };
 
-  outputs = { self, nixpkgs, darwin, home-manager, deploy-rs, neovim-nightly, sops-nix, zsh-tab-title, ... }:
+  outputs = { self, nixpkgs, darwin, home-manager, deploy-rs, sops-nix, ... }@args:
     let
       stateVersion = "22.05";
       homeStateVersion = stateVersion;
       oracleServerList = [ "jp2" "jp4" "sw" "us1" "kr" ];
-      commonsSpecialArgs = { inherit homeStateVersion neovim-nightly zsh-tab-title; };
+      commonSpecialArgs = { inherit (args) neovim-nightly zsh-tab-title; inherit homeStateVersion; };
     in
     {
 
@@ -61,7 +61,7 @@
             ./overlay
 
           ];
-          specialArgs = commonsSpecialArgs;
+          specialArgs = commonSpecialArgs;
         };
 
       };
@@ -89,7 +89,7 @@
               secrets.sops-nix.enable = true;
             }
           ];
-          specialArgs = commonsSpecialArgs;
+          specialArgs = commonSpecialArgs;
         };
 
       } // nixpkgs.lib.genAttrs oracleServerList (hostName: nixpkgs.lib.nixosSystem {
@@ -114,7 +114,7 @@
             services.shadowsocks-rust.enable = true;
           }
         ];
-        specialArgs = commonsSpecialArgs;
+        specialArgs = commonSpecialArgs;
       });
 
 
@@ -148,9 +148,9 @@
       packages."aarch64-darwin"."SF-Pro" = import ./pkgs/fonts/SF-Pro { inherit (nixpkgs.legacyPackages."aarch64-darwin") stdenvNoCC unzip fetchurl; };
 
 
-      packages."aarch64-darwin"."firefox-darwin" = import ./pkgs/firefox-darwin { inherit (nixpkgs.legacyPackages."aarch64-darwin") stdenvNoCC lib fetchurl writeText undmg; };
-      
-      packages."aarch64-darwin"."zsh-tab-title" = import ./pkgs/zsh/zsh-tab-title.nix { inherit (nixpkgs.legacyPackages."aarch64-darwin") stdenvNoCC; inherit zsh-tab-title; };
+      packages."aarch64-darwin"."firefox-darwin" = import ./pkgs/darwin/firefox { inherit (nixpkgs.legacyPackages."aarch64-darwin") stdenvNoCC lib fetchurl writeText undmg; };
+
+      # packages."aarch64-darwin"."zsh-tab-title" = import ./pkgs/zsh/zsh-tab-title { inherit (nixpkgs.legacyPackages."aarch64-darwin") stdenvNoCC; inherit (args) zsh-tab-title; };
 
       #############################################################################################################################
       # Shell

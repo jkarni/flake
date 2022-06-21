@@ -15,6 +15,6 @@ final: prev: {
           extraPolicies = import ../config/firefox/policy.nix;
         }
     else # Darwin
-      prev.callPackage ../pkgs/firefox-darwin { };
+      prev.callPackage ../pkgs/darwin/firefox { };
 
 }

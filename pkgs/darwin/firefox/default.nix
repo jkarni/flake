@@ -2,7 +2,7 @@
 
 let
   # https://github.com/NixOS/nixpkgs/blob/master/pkgs/applications/networking/browsers/firefox/wrapper.nix
-  extraPolicies = import ../../config/firefox/policy.nix;
+  extraPolicies = import ../../../config/firefox/policy.nix;
   wrapperPolicies = {
     policies = {
       DisableAppUpdate = true;
@@ -11,7 +11,7 @@ let
 
   policiesJson = writeText "policies.json" (builtins.toJSON wrapperPolicies);
 
-  metaData = builtins.fromJSON (builtins.readFile ../../config/firefox/darwin-version.json);
+  metaData = builtins.fromJSON (builtins.readFile ../../../config/firefox/darwin-version.json);
 in
 
 stdenvNoCC.mkDerivation rec {
