@@ -34,7 +34,7 @@
 
     users = {
       root.hashedPassword = "$6$fwJZwHNLE640VkQd$SrYMjayP9fofIncuz3ehVLpfwGlpUj0NFZSssSy8GcIXIbDKI4JnrgfMZxSw5vxPkXkAEL/ktm3UZOyPMzA.p0";
-    } // lib.optionals config.profile.desktopEnv.enable {
+    } // lib.optionalAttrs config.profile.desktopEnv.enable {
       dominic = {
         isNormalUser = true;
         description = "mlyxshi";
