@@ -72,8 +72,8 @@
           modules = [
             # sops-nix currently doesn't support aarch64-darwin
             home-manager.darwinModules.home-manager
-            ./host/darwin
-            ./host/darwin/brew.nix
+            ./host/M1
+            ./host/M1/brew.nix
             ./overlay
 
           ];

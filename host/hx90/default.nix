@@ -1,4 +1,4 @@
-{ pkgs, ... }@args: {
+{
 
   imports = [
     ./hardware.nix
