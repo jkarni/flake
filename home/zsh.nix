@@ -1,11 +1,10 @@
-{ pkgs, lib, config, ... }: {
+{ pkgs, lib, config,  zsh-tab-title, ... }: {
 
   home.packages = with pkgs;  [
     zsh-fzf-tab
     zsh-fast-syntax-highlighting
     zsh-autosuggestions
     zsh-you-should-use
-    zsh-tab-title
   ];
 
   programs.fzf.enable = true;
@@ -54,7 +53,7 @@
       source ${pkgs.zsh-fast-syntax-highlighting}/share/zsh/site-functions/fast-syntax-highlighting.plugin.zsh
       source ${pkgs.zsh-autosuggestions}/share/zsh-autosuggestions/zsh-autosuggestions.zsh
       source ${pkgs.zsh-you-should-use}/share/zsh/plugins/you-should-use/you-should-use.plugin.zsh
-      source ${pkgs.zsh-tab-title}/zsh-tab-title.plugin.zsh 
+      source ${zsh-tab-title}/zsh-tab-title.plugin.zsh 
 
 
       zstyle ':fzf-tab:complete:cd:*' fzf-preview 'exa -1 --color=always $realpath'      
