@@ -3,9 +3,9 @@
   home-manager.useUserPackages = true;
   home-manager.verbose = true;
 
-  home-manager.sharedModules = [
-    ../modules/home
-  ];
-
-  home-manager.extraSpecialArgs = { inherit (args) homeStateVersion zsh-tab-title zsh-fast-syntax-highlighting zsh-you-should-use zsh-autosuggestions; };
+  home-manager.extraSpecialArgs = {
+    osConfig = args.config;
+    inherit (args) homeStateVersion;
+    inherit (args) zsh-tab-title zsh-fast-syntax-highlighting zsh-you-should-use zsh-autosuggestions;
+  };
 }

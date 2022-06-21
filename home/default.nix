@@ -1,4 +1,4 @@
-{ pkgs, lib, homeStateVersion, config, ... }: {
+{ pkgs, lib, homeStateVersion, osConfig,... }: {
 
   imports = [
     ./git.nix
@@ -34,7 +34,7 @@
     # go
     pistol
 
-  ] ++ lib.optionals config.home.developerMode.enable [
+  ] ++ lib.optionals osConfig.profile.developerMode.enable [
     jq
     statix
     lazygit

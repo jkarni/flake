@@ -1,4 +1,4 @@
-{ pkgs, lib, config, ... }:
+{ pkgs, lib, osConfig, ... }:
 let
 
   TREESITTER = (pkgs.vimPlugins.nvim-treesitter.withPlugins (
@@ -52,7 +52,7 @@ in
     fd
     ripgrep
 
-  ] ++ lib.optionals config.home.developerMode.enable [ 
+  ] ++ lib.optionals osConfig.profile.developerMode.enable [ 
 
     rnix-lsp #rnix-lsp
     sumneko-lua-language-server #lua-language-server

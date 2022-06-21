@@ -49,7 +49,7 @@
       url = "github:zsh-users/zsh-autosuggestions";
       flake = false;
     };
-    
+
 
   };
 
@@ -58,7 +58,11 @@
       stateVersion = "22.05";
       homeStateVersion = stateVersion;
       oracleServerList = [ "jp2" "jp4" "sw" "us1" "kr" ];
-      commonSpecialArgs = { inherit (args) neovim-nightly zsh-tab-title zsh-fast-syntax-highlighting zsh-you-should-use zsh-autosuggestions; inherit homeStateVersion; };
+      commonSpecialArgs = {
+        inherit homeStateVersion;
+        inherit (args) neovim-nightly;
+        inherit (args) zsh-tab-title zsh-fast-syntax-highlighting zsh-you-should-use zsh-autosuggestions;
+      };
     in
     {
 
@@ -75,6 +79,11 @@
             ./host/M1
             ./host/M1/brew.nix
             ./overlay
+            ./modules/darwin.nix
+
+            {
+              profile.developerMode.enable = true;
+            }
 
           ];
           specialArgs = commonSpecialArgs;
@@ -93,7 +102,7 @@
             home-manager.nixosModules.home-manager
             ./host/hx90
             ./overlay
-            ./modules
+            ./modules/linux.nix
 
 
             {
@@ -101,8 +110,10 @@
               networking.hostName = "hx90";
 
               profile.desktopEnv.enable = true;
-              services.ssh-config.enable = true;
+              profile.developerMode.enable = true;
               secrets.sops-nix.enable = true;
+
+              services.ssh-config.enable = true;
             }
           ];
           specialArgs = commonSpecialArgs;
@@ -117,7 +128,7 @@
           # Coercing a relative path with interpolated variables to an absolute path (for imports)
           (./host/oracle + "/${hostName}.nix")
           ./overlay
-          ./modules
+          ./modules/linux.nix
 
 
           {
@@ -125,7 +136,9 @@
             networking.hostName = hostName;
             boot.loader.systemd-boot.netbootxyz.enable = true;
 
+            profile.developerMode.enable = true;
             secrets.sops-nix.enable = true;
+
             services.ssh-config.enable = true;
             services.shadowsocks-rust.enable = true;
           }

@@ -37,12 +37,14 @@ in
     defaultUserShell = pkgs.zsh;
 
     users = {
-      root.hashedPassword = hashedPassword;
+      root = {
+        inherit hashedPassword;
+      };
     } // lib.optionalAttrs config.profile.desktopEnv.enable {
       dominic = {
         isNormalUser = true;
         description = "mlyxshi";
-        hashedPassword = hashedPassword;
+        inherit hashedPassword;
         extraGroups = [ "wheel" ];
       };
     };

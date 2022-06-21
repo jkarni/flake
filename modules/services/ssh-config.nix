@@ -8,7 +8,7 @@ in
     services.ssh-config.enable = lib.mkEnableOption "my ssh service";
   };
 
-  config = lib.mkIf cfg.enable {
+  config = lib.mkIf (cfg.enable && config.secrets.sops-nix.enable) {
 
     # sshd (server)
     services.openssh = {

@@ -1,4 +1,4 @@
-{ pkgs, lib, config, ... }@args: {
+{ pkgs, lib, osConfig, ... }@args: {
 
   home.packages = with pkgs;  [
     zsh-fzf-tab
@@ -7,7 +7,7 @@
   programs.fzf.enable = true;
   programs.zoxide.enable = true;
   programs.starship.enable = true;
-  programs.nix-index.enable = config.home.developerMode.enable;
+  programs.nix-index.enable = osConfig.profile.developerMode.enable;
 
   home.file = lib.optionalAttrs pkgs.stdenv.isLinux {
     "starship.toml".source = ../config/starship.toml;
