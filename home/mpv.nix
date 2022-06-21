@@ -42,9 +42,6 @@ in
     yt-dlp
   ];
 
-  #############################################################################
-  # MPV
-
   home.activation = lib.optionalAttrs pkgs.stdenv.isDarwin {
     linkMPV = lib.hm.dag.entryAfter [ "writeBoundary" ] ''
       ln -sfn $HOME/flake/config/mpv/mpv.conf  $HOME/.config/mpv/mpv.conf 

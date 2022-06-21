@@ -43,10 +43,6 @@
     initExtra = with args;'' 
       setopt globdots
       export FZF_COMPLETION_TRIGGER='\'
-      export FZF_DEFAULT_COMMAND= "fd --type file --color=always --follow --hidden --exclude .git"
-      export FZF_DEFAULT_OPTS="--ansi"
-
-      
 
       source ${zsh-you-should-use}/you-should-use.plugin.zsh
       source ${zsh-tab-title}/zsh-tab-title.plugin.zsh   
