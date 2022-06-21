@@ -28,8 +28,23 @@
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
 
-  users.defaultUserShell = pkgs.zsh;
-  users.users.root.hashedPassword = "$6$fwJZwHNLE640VkQd$SrYMjayP9fofIncuz3ehVLpfwGlpUj0NFZSssSy8GcIXIbDKI4JnrgfMZxSw5vxPkXkAEL/ktm3UZOyPMzA.p0";
+
+  users = {
+    defaultUserShell = pkgs.zsh;
+
+    users = {
+      root.hashedPassword = "$6$fwJZwHNLE640VkQd$SrYMjayP9fofIncuz3ehVLpfwGlpUj0NFZSssSy8GcIXIbDKI4JnrgfMZxSw5vxPkXkAEL/ktm3UZOyPMzA.p0";
+    } // lib.optionals config.profile.desktopEnv.enable {
+      dominic = {
+        isNormalUser = true;
+        description = "mlyxshi";
+        hashedPassword = "$6$fwJZwHNLE640VkQd$SrYMjayP9fofIncuz3ehVLpfwGlpUj0NFZSssSy8GcIXIbDKI4JnrgfMZxSw5vxPkXkAEL/ktm3UZOyPMzA.p0";
+        extraGroups = [ "wheel" ];
+      };
+    };
+
+  };
+
 
   time.timeZone = "America/Los_Angeles";
 
@@ -38,7 +53,7 @@
   environment.sessionVariables = {
     EDITOR = "nvim";
     PAGER = "bat";
-    FZF_COMPLETION_TRIGGER="\\\\";  # actual value is '\' , but nix-lang and shell need escape  <-- weird
+    FZF_COMPLETION_TRIGGER = "\\\\"; # actual value is '\' , but nix-lang and shell need escape  <-- weird
   };
 
   fonts = {
@@ -69,6 +84,13 @@
     "net.core.default_qdisc" = "fq";
     "net.ipv4.tcp_congestion_control" = "bbr";
     "net.ipv4.tcp_fastopen" = "3";
+  };
+
+
+  networking = {
+    useNetworkd = true;
+    useDHCP = false;
+    firewall.enable = false;
   };
 
 }

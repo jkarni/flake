@@ -2,7 +2,7 @@
 
   imports = [
     ./hardware.nix
-    ../../nixos/desktop.nix
+    ../../os/nixos
     ../../home/home-manager.nix
   ];
 

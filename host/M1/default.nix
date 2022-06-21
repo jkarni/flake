@@ -1,7 +1,7 @@
 {
 
   imports = [
-    ../../darwin
+    ../../os/darwin
     ../../home/home-manager.nix
   ];
 
