@@ -1,12 +1,12 @@
 { pkgs, ... }@args: {
 
-  home-manager.useGlobalPkgs = true;
-  home-manager.useUserPackages = true;
-  home-manager.verbose = true;
+  imports =[
+    ../../home/home-manager.nix
+  ];
+
+
   home-manager.users.dominic = import ./home.nix;
-  home-manager.extraSpecialArgs = { inherit (args) homeStateVersion  zsh-tab-title zsh-fast-syntax-highlighting zsh-you-should-use zsh-autosuggestions; };
   home-manager.sharedModules = [
-    ../../modules/home
     {
       home.developerMode.enable = true;
     }
