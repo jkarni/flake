@@ -8,7 +8,7 @@
       then # Linux
         pkgs.firefox.overrideAttrs
           (old: {
-            buildCommand = old + ''
+            buildCommand = old.buildCommand + ''
               mkdir -p "$out/lib/$${libName}/defaults/pref"
               mkdir -p "$out/lib/$${libName}/TEST"
             '';
