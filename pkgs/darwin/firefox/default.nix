@@ -24,14 +24,13 @@ stdenvNoCC.mkDerivation rec {
   AppName = "Firefox Nightly.app";
   pname = "Firefox-Nightly";
 
-  version = metaData.version;
+  inherit (metaData) version;
 
   # To update run:
   # nix-prefetch-url --name 'firefox-app-latest.dmg' 'https://download.mozilla.org/?product=firefox-latest&os=osx&lang=en-US'
   src = fetchurl {
     name = "firefox-nightly-${version}.dmg";
-    url = metaData.url;
-    sha256 = metaData.sha256;
+    inherit (metaData) url sha256;
   };
 
   # https://github.com/NixOS/nixpkgs/pull/13636
