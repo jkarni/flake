@@ -15,16 +15,14 @@ let
 in
 
 stdenvNoCC.mkDerivation rec {
-  name = "firefox-app-${version}";
-
-  pname = "Firefox";
+  pname = "Firefox-Nightly";
 
   version = metaData.version;
 
   # To update run:
   # nix-prefetch-url --name 'firefox-app-latest.dmg' 'https://download.mozilla.org/?product=firefox-latest&os=osx&lang=en-US'
   src = fetchurl {
-    name = "firefox-app-${version}.dmg";
+    name = "firefox-nightly-${version}.dmg";
     url = metaData.url;
     sha256 = metaData.sha256;
   };
@@ -43,13 +41,13 @@ stdenvNoCC.mkDerivation rec {
 
   installPhase = ''
     mkdir -p $out/Applications
-    mv Firefox.app $out/Applications
+    mv "Firefox Nightly.app" $out/Applications
 
-    mkdir $out/Applications/Firefox.app/Contents/Resources/distribution
-    cat ${policiesJson} > $out/Applications/Firefox.app/Contents/Resources/distribution/policies.json
+    mkdir "$out/Applications/Firefox Nightly.app/Contents/Resources/distribution"
+    cat ${policiesJson} > "$out/Applications/Firefox Nightly.app/Contents/Resources/distribution/policies.json"
   '';
 
   meta = {
-    description = "Mozilla Firefox, Darwin, (binary package)";
+    description = "Mozilla Firefox Nightly, (Darwin binary package)";
   };
 }
