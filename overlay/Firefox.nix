@@ -12,7 +12,7 @@ final: prev: {
         {
           forceWayland = true;
           # https://github.com/mozilla/policy-templates#enterprisepoliciesenabled
-          extraPolicies = import ../config/firefox/app/policy.nix;
+          extraPolicies = import ../config/firefox/policy.nix;
         }
     else # Darwin
       prev.callPackage ../pkgs/darwin/firefox { };
