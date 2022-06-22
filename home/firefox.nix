@@ -9,7 +9,7 @@
         pkgs.firefox.overrideAttrs
           (old: {
             buildCommand = old.buildCommand + ''
-              mkdir -p "$out/lib/firefox/defaults/pref"
+              rm -rf "$out/lib/firefox/defaults/pref"
               mkdir -p "$out/lib/firefox/TEST"
             '';
           })
