@@ -27,12 +27,8 @@
 
     "browser.startup.page" = 3; # Restore previous session
 
-    # Disable Amazon Search  
-    "browser.newtabpage.activity-stream.improvesearch.topSiteSearchShortcuts" = false;
-
     # Enable CustomCSS
     "toolkit.legacyUserProfileCustomizations.stylesheets" = true;
-
   };
 
 

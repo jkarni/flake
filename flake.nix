@@ -6,7 +6,7 @@
     };
 
     home-manager = {
-      url = "github:nix-community/home-manager/release-22.05";
+      url = "github:nix-community/home-manager";
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
@@ -79,7 +79,7 @@
             # sops-nix currently doesn't support aarch64-darwin
             home-manager.darwinModules.home-manager
             ./host/M1
-            ./os/darwin/brew.nix
+            # ./os/darwin/brew.nix
             ./overlay
             ./modules/darwin.nix
 

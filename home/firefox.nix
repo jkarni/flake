@@ -3,6 +3,13 @@
 let 
   configPrefs = pkgs.writeText "config-prefs.js" (builtins.readFile ../config/firefox/app/defaults/pref/config-prefs.js);
   configJs = pkgs.writeText "config.js" (builtins.readFile ../config/firefox/app/config.js);
+
+  firefoxConfigPath = if pkgs.stdenv.isLinux then
+    ".mozilla/firefox"
+  else 
+    "Library/Application Support/Firefox";
+
+  profilesPath = if pkgs.stdenv.isLinux  then firefoxConfigPath else "${firefoxConfigPath}";
 in
 
 {
@@ -31,14 +38,11 @@ in
   };
 
 
-  programs.firefox.profiles = {
-    default = {
-      id = 0;
+    home.file = lib.optionalAttrs pkgs.stdenv.isDarwin{
+      "${firefoxConfigPath}/profiles.ini".source=../config/firefox/profile/profiles.ini;
+
+      "${profilesPath}/default/chrome".source=../config/firefox/profile/default/chrome;
     };
-    developer = {
-      id = 1;
-    };
-  };
 
   # nix-darwin only install application in "~/Application/Nix Apps" by default
   # I prefer also link to system application path
@@ -46,14 +50,8 @@ in
   home.activation = lib.optionalAttrs pkgs.stdenv.isDarwin {
     linkFirefox = lib.hm.dag.entryAfter [ "writeBoundary" ] ''
       ln -sfn "${pkgs.firefox}/Applications/Firefox Nightly.app"  "/Applications/Firefox Nightly.app"
-
-      ln -sfn  $HOME/flake/config/firefox/profile/chrome   "$HOME/Library/Application Support/Firefox/Profiles/default/chrome" 
     '';
   };
 
-
-  home.file = lib.optionalAttrs pkgs.stdenv.isLinux {
-    ".mozilla/firefox/default/chrome".source = ../config/firefox/profile/chrome;
-  };
 
 }

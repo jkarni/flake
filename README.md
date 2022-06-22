@@ -71,7 +71,11 @@ git remote set-url origin github.com:mlyxshi/flake
 ## pre
 ```
 # disbale gatekeeper
-sudo spctl --master-disable  
+sudo spctl --master-disable 
+csrutil status
+
+# Recovery Command+R   <-- shut down + long press start 
+csrutil disable
 
 xcode-select --install
 
