@@ -9,8 +9,8 @@
         pkgs.firefox.overrideAttrs
           (old: {
             buildCommand = old.buildCommand + ''
-              mkdir -p "$out/lib/$${libName}/defaults/pref"
-              mkdir -p "$out/lib/$${libName}/TEST"
+              mkdir -p "$out/lib/firefox/defaults/pref"
+              mkdir -p "$out/lib/firefox/TEST"
             '';
           })
       else # Darwin
