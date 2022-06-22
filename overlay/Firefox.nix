@@ -7,7 +7,7 @@
 final: prev: {
   firefox =
     if pkgs.stdenv.isLinux
-    then # Linux
+    then
       prev.wrapFirefox prev.firefox-unwrapped
         {
           forceWayland = true;
@@ -15,9 +15,9 @@ final: prev: {
           extraPolicies = import ../config/firefox/app/policy.nix;
           # https://github.com/xiaoxiaoflood/firefox-scripts/tree/master/installation-folder
           # https://support.mozilla.org/en-US/kb/customizing-firefox-using-autoconfig
-          extraPrefs = builtins.readFile ../config/firefox/app/config.js;
+          extraPrefsFiles = [ ../config/firefox/app/config.js ];
         }
-    else # Darwin
+    else
       prev.callPackage ../pkgs/darwin/firefox { };
 
 }

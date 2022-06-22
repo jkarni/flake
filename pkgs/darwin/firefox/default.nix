@@ -12,8 +12,8 @@ let
   policiesJson = writeText "policies.json" (builtins.toJSON wrapperPolicies);
 
   
-  configPrefs = writeText "config-prefs.js" (builtins.readFile ../../../config/firefox/app/defaults/pref/config-prefs.js);
-  configJs = writeText "config.js" (builtins.readFile ../../../config/firefox/app/config.js);
+  configPrefs = ../../../config/firefox/app/defaults/pref/config-prefs.js;
+  configJs =  ../../../config/firefox/app/config.js;
 
 
   metaData = builtins.fromJSON (builtins.readFile ../../../config/firefox/darwin-version.json);
