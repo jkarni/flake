@@ -3,7 +3,9 @@
 # https://nixos.wiki/wiki/Firefox
 # https://github.com/nix-community/home-manager/blob/master/modules/programs/firefox.nix#blob-path
 { lib, pkgs }:
-
+let
+  extraPrefs = ../config/firefox/app/config.js;
+in
 final: prev: {
   firefox =
     if pkgs.stdenv.isLinux
@@ -15,7 +17,7 @@ final: prev: {
           extraPolicies = import ../config/firefox/app/policy.nix;
           # https://github.com/xiaoxiaoflood/firefox-scripts/tree/master/installation-folder
           # https://support.mozilla.org/en-US/kb/customizing-firefox-using-autoconfig
-          extraPrefsFiles = [ ../config/firefox/app/config.js ];
+          extraPrefsFiles = [ extraPrefs ];
         }
     else
       prev.callPackage ../pkgs/darwin/firefox { };
