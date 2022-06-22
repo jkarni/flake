@@ -58,10 +58,8 @@
   outputs = { self, nixpkgs, darwin, home-manager, deploy-rs, sops-nix, ... }@args:
     let
       stateVersion = "22.05";
-      homeStateVersion = stateVersion;
       oracleServerList = [ "jp2" "jp4" "sw" "us1" "kr" ];
       commonSpecialArgs = {
-        inherit homeStateVersion;
         inherit (args) neovim-nightly;
         inherit (args) zsh-tab-title zsh-fast-syntax-highlighting zsh-you-should-use zsh-autosuggestions;
       };
@@ -84,6 +82,7 @@
             ./modules/darwin.nix
 
             {
+              hm.stateVersion = stateVersion;
               profile.developerMode.enable = true;
             }
 
@@ -109,6 +108,7 @@
 
             {
               system.stateVersion = stateVersion;
+              hm.stateVersion = stateVersion;
               networking.hostName = "hx90";
 
               profile.desktopEnv.enable = true;
@@ -135,6 +135,7 @@
 
           {
             system.stateVersion = stateVersion;
+            hm.stateVersion = stateVersion;
             networking.hostName = hostName;
             boot.loader.systemd-boot.netbootxyz.enable = true;
 

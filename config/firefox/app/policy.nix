@@ -27,6 +27,8 @@
 
     "browser.startup.page" = 3; # Restore previous session
 
+    "browser.toolbars.bookmarks.visibility" = "always";
+
     # Enable CustomCSS
     "toolkit.legacyUserProfileCustomizations.stylesheets" = true;
   };

@@ -1,5 +1,7 @@
 { lib, pkgs, ... }: {
   imports = [
+    ./hm
+    
     ./profile/developerMode.nix
  
     ./profile/desktopEnv.nix

@@ -1,4 +1,7 @@
-{ pkgs, lib, homeStateVersion, osConfig, ... }: {
+{ pkgs, lib, osConfig, ... }:
+
+
+{
 
   imports = [
     ./git.nix
@@ -42,5 +45,5 @@
   ];
 
 
-  home.stateVersion = homeStateVersion;
+  home.stateVersion = osConfig.hm.stateVersion;
 }
