@@ -1,4 +1,11 @@
-{ pkgs, lib, ... }: {
+{ pkgs, lib, ... }: 
+
+let 
+  configPrefs = pkgs.writeText "config-prefs.js" (builtins.readFile ../config/firefox/app/defaults/pref/config-prefs.js);
+  configJs = pkgs.writeText "config.js" (builtins.readFile ../config/firefox/app/config.js);
+in
+
+{
 
   programs.firefox = {
     enable = true;
@@ -6,11 +13,17 @@
     package =
       if pkgs.stdenv.isLinux
       then # Linux
+
+        # delete original  lib/firefox/defaults
+        # change to github:xiaoxiaoflood/firefox-scripts/
         pkgs.firefox.overrideAttrs
           (old: {
             buildCommand = old.buildCommand + ''
-              rm -rf "$out/lib/firefox/defaults/pref"
-              mkdir -p "$out/lib/firefox/TEST"
+              rm -rf "$out/lib/firefox/defaults/"
+              mkdir -p  "$out/lib/firefox/defaults/pref/"
+
+              cat ${configPrefs} > "$out/lib/firefox/defaults/pref/config-prefs.js"
+              cat ${configJs} > "$out/lib/firefox/config.js"
             '';
           })
       else # Darwin
