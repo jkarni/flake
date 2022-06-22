@@ -1,9 +1,7 @@
 { pkgs, lib, ... }:
 
 let
-  configPrefs = pkgs.writeText "config-prefs.js" (builtins.readFile ../config/firefox/app/defaults/pref/config-prefs.js);
-  configJs = pkgs.writeText "config.js" (builtins.readFile ../config/firefox/app/config.js);
-
+  
   firefoxConfigPath =
     if pkgs.stdenv.isLinux then
       ".mozilla/firefox"
@@ -11,19 +9,15 @@ let
       "Library/Application Support/Firefox";
 
 
-  # See details: overlay/Firefox.nix
+
   Firefox =
     if pkgs.stdenv.isLinux then # Linux
-    # delete original  lib/firefox/defaults
-    # change to github:xiaoxiaoflood/firefox-scripts/
+      # https://github.com/xiaoxiaoflood/firefox-scripts/tree/master/installation-folder
+      # Also see:  overlay/Firefox.nix
       pkgs.firefox.overrideAttrs
         (old: {
           buildCommand = old.buildCommand + ''
-            rm -rf "$out/lib/firefox/defaults/"
-            mkdir -p  "$out/lib/firefox/defaults/pref/"
-
-            cat ${configPrefs} > "$out/lib/firefox/defaults/pref/config-prefs.js"
-            cat ${configJs} > "$out/lib/firefox/config.js"
+            cat "pref("general.config.sandbox_enabled", false);" >> "$out/lib/firefox/defaults/pref/autoconfig.js"
           '';
         })
     else # Darwin

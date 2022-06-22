@@ -59,6 +59,13 @@
       installation_mode = "force_installed";
       install_url = "https://addons.mozilla.org/firefox/downloads/latest/vimium-ff/latest.xpi";
     };
+
+    # DownThemAll
+    "{DDC359D1-844A-42a7-9AA1-88A850A938A8}" = {
+      installation_mode = "force_installed";
+      install_url = "https://addons.mozilla.org/firefox/downloads/latest/downthemall/latest.xpi";
+    };
+    
  
 
     # Uninstall Sponsored build-in Extension  <-- I only need google or duckduckgo
