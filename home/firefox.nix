@@ -39,7 +39,7 @@
   };
 
 
-  xdg.home = lib.optionalAttrs pkgs.stdenv.isLinux {
+  home.file = lib.optionalAttrs pkgs.stdenv.isLinux {
     ".mozilla/firefox/default/chrome".source = ../config/firefox/profile/chrome;
   };
 
