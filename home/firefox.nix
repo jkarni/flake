@@ -17,7 +17,7 @@ let
       pkgs.firefox.overrideAttrs
         (old: {
           buildCommand = old.buildCommand + ''
-            cat "pref("general.config.sandbox_enabled", false);" >> "$out/lib/firefox/defaults/pref/autoconfig.js"
+            cat 'pref("general.config.sandbox_enabled", false);' >> "$out/lib/firefox/defaults/pref/autoconfig.js"
           '';
         })
     else # Darwin
