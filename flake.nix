@@ -79,7 +79,7 @@
             # sops-nix currently doesn't support aarch64-darwin
             home-manager.darwinModules.home-manager
             ./host/M1
-            ./host/M1/brew.nix
+            ./os/darwin/brew.nix
             ./overlay
             ./modules/darwin.nix
 
