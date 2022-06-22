@@ -9,7 +9,10 @@
 
   programs.firefox.profiles = {
     default = {
-      userChrome = builtins.readFile ../config/firefox/userChrome.css;
+      id = 0;
+    };
+    developer = {
+      id = 1;
     };
   };
 
@@ -18,6 +21,8 @@
   home.activation = lib.optionalAttrs pkgs.stdenv.isDarwin {
     linkFirefox = lib.hm.dag.entryAfter [ "writeBoundary" ] ''
       ln -sfn "${pkgs.firefox}/Applications/Firefox Nightly.app"  "/Applications/Firefox Nightly.app"
+
+      ln -sfn  $HOME/flake/config/firefox/profile/chrome   "$HOME/Library/Application Support/Firefox/Profiles/default/chrome" 
     '';
   };
 

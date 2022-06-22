@@ -2,7 +2,7 @@
 
 let
   # https://github.com/NixOS/nixpkgs/blob/master/pkgs/applications/networking/browsers/firefox/wrapper.nix
-  extraPolicies = import ../../../config/firefox/policy.nix;
+  extraPolicies = import ../../../config/firefox/app/policy.nix;
   wrapperPolicies = {
     policies = {
       DisableAppUpdate = true;
@@ -11,10 +11,17 @@ let
 
   policiesJson = writeText "policies.json" (builtins.toJSON wrapperPolicies);
 
+  
+  configPrefs = writeText "config-prefs.js" (builtins.readFile ../../../config/firefox/app/defaults/pref/config-prefs.js);
+  configJs = writeText "config.js" (builtins.readFile ../../../config/firefox/app/config.js);
+
+
   metaData = builtins.fromJSON (builtins.readFile ../../../config/firefox/darwin-version.json);
 in
 
 stdenvNoCC.mkDerivation rec {
+
+  AppName = "Firefox Nightly.app";
   pname = "Firefox-Nightly";
 
   version = metaData.version;
@@ -41,10 +48,15 @@ stdenvNoCC.mkDerivation rec {
 
   installPhase = ''
     mkdir -p $out/Applications
-    mv "Firefox Nightly.app" $out/Applications
+    mv "${AppName}" $out/Applications
 
-    mkdir "$out/Applications/Firefox Nightly.app/Contents/Resources/distribution"
-    cat ${policiesJson} > "$out/Applications/Firefox Nightly.app/Contents/Resources/distribution/policies.json"
+    mkdir "$out/Applications/${AppName}/Contents/Resources/distribution"
+
+    cat ${policiesJson} > "$out/Applications/${AppName}/Contents/Resources/distribution/policies.json"
+
+    cat ${configPrefs} > "$out/Applications/${AppName}/Contents/Resources/defaults/pref/config-prefs.js"
+    cat ${configJs} > "$out/Applications/${AppName}/Contents/Resources/config.js"
+
   '';
 
   meta = {

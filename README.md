@@ -70,6 +70,8 @@ git remote set-url origin github.com:mlyxshi/flake
 # Darwin
 ## pre
 ```
+# disbale gatekeeper
+sudo spctl --master-disable  
 
 xcode-select --install
 

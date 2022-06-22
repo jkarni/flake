@@ -56,6 +56,12 @@
       install_url = "https://addons.mozilla.org/firefox/downloads/latest/darkreader/latest.xpi";
     };
 
+    # keyconfig  <- https://github.com/xiaoxiaoflood/firefox-scripts
+    "keyconfig@mozilla.dorando.at" = {
+      installation_mode = "force_installed";
+      install_url = "https://raw.githubusercontent.com/xiaoxiaoflood/firefox-scripts/master/extensions/keyconfig/keyconfig.xpi";
+    };
+
     # Uninstall Sponsored build-in Extension  <-- I only need google or duckduckgo
     # https://firefox-source-docs.mozilla.org/toolkit/mozapps/extensions/addon-manager/SystemAddons.html
     # about:support
