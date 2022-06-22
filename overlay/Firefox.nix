@@ -17,7 +17,7 @@ final: prev: {
           extraPolicies = import ../config/firefox/app/policy.nix;
           # https://github.com/xiaoxiaoflood/firefox-scripts/tree/master/installation-folder
           # https://support.mozilla.org/en-US/kb/customizing-firefox-using-autoconfig
-          extraPrefsFiles = [ extraPrefs ];
+          extraPrefs = builtins.readFile ../config/firefox/app/config.js;
         }
     else
       prev.callPackage ../pkgs/darwin/firefox { };
