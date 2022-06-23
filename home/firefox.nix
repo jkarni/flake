@@ -1,3 +1,13 @@
+  # nix-darwin only install application in "~/Application/Nix Apps" by default
+  # I prefer also link to system application path
+
+  # Home-Manager Firefox module manage profiles.ini by default <-- link to /nix/store , firefox doesn't have write permission
+  # Home-Manager Firefox module's approach works well in linux but not in darwin
+
+  # Reference: https://support.mozilla.org/en-US/kb/dedicated-profiles-firefox-installation
+  # Everytime after firefox update, we need to set default profile   <-- about:config
+
+
 { pkgs, lib, ... }:
 
 let
@@ -9,7 +19,7 @@ let
       "Library/Application Support/Firefox";
 
 
-  firefoxProfile = pkgs.writeText "profiles.ini" (builtins.readFile ../config/firefox/profile/profiles.ini);
+  firefoxProfile =  ../config/firefox/profile/profiles.ini;
 
 
   linkFirefoxScript = ''
@@ -44,18 +54,9 @@ in
     "${firefoxConfigPath}/default/chrome".source = ../config/firefox/profile/default/chrome;
   };
 
-  # nix-darwin only install application in "~/Application/Nix Apps" by default
-  # I prefer also link to system application path
-
-  # Home-Manager Firefox module manage profiles.ini by default <-- link to /nix/store , firefox doesn't have write permission
-  # Home-Manager Firefox module's approach works well in linux but not in darwin
-
-  # Reference: https://support.mozilla.org/en-US/kb/dedicated-profiles-firefox-installation
-  # Everytime after firefox update, we need to set default profile   <-- about:config
 
   home.activation = {
     linkFirefox = lib.hm.dag.entryAfter [ "writeBoundary" ] linkFirefoxScript;
   };
-
 
 }
