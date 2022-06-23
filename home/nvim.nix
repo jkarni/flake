@@ -1,6 +1,7 @@
 { pkgs, lib, osConfig, ... }:
 let
-
+  # the special plugin which contains parsers  <-- need compile
+  # use packer to manage other plugins 
   TREESITTER = (pkgs.vimPlugins.nvim-treesitter.withPlugins (
     plugins: with plugins; [
       tree-sitter-bash
@@ -24,9 +25,8 @@ in
       -- Begin Stage: Cache and Accelerate
       require("plugin-config.impatient")
       
-      -- Prepend Treesitter Path
-      vim.opt.packpath = vim.opt.packpath ^ "${TREESITTER}"
-      vim.opt.runtimepath = vim.opt.runtimepath ^ "${TREESITTER}"
+      -- Add Treesitter Path
+      vim.opt.runtimepath = vim.opt.runtimepath + "${TREESITTER}"
       
       -- Invoke Real Start
       require("start")
