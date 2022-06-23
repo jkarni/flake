@@ -12,8 +12,8 @@ jobs:
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v3
-    # - run: sudo apt install -y qemu-user-static  <-- Sometimes debian binary cache may return 404, use docker/setup-qemu-action@v1 instead
-    - uses: docker/setup-qemu-action@v1
+    # - run: sudo apt install -y qemu-user-static  <-- Sometimes debian binary cache may return 404, use docker/setup-qemu-action@v2 instead
+    - uses: docker/setup-qemu-action@v2
     - uses: cachix/install-nix-action@v17
       with:
         extra_nix_config: |
