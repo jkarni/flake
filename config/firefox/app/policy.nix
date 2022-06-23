@@ -4,8 +4,6 @@
   DisablePocket = true;
   DisableTelemetry = true;
 
-  # FirefoxAccount only for Sync bookmarks
-  # DisableFirefoxAccounts = true;
 
   NoDefaultBookmarks = true;
   DontCheckDefaultBrowser = true;
@@ -29,48 +27,53 @@
 
     "browser.toolbars.bookmarks.visibility" = "always";
 
+    "browser.warnOnQuitShortcut" = false;
+
     # Enable CustomCSS
     "toolkit.legacyUserProfileCustomizations.stylesheets" = true;
+
+
   };
 
 
   # https://github.com/mozilla/policy-templates#extensionsettings
   ExtensionSettings = {
-    # Bitwarden
-    "{446900e4-71c2-419f-a6a7-df9c091e268b}" = {
+    # sync normal plugins by mozilla account 
+
+    # customize the search shortcut
+
+    # @ytb  -->  YouTube
+    # @bili  -->  BiliBili
+    # @gh  -->  GitHub
+    # @nix  -->  Nix Package
+
+    # all plugins are not signed 
+    # use  https://github.com/xiaoxiaoflood/firefox-scripts to bypass the signature check
+
+
+    "github@search" = {
       installation_mode = "force_installed";
-      install_url = "https://addons.mozilla.org/firefox/downloads/latest/bitwarden-password-manager/latest.xpi";
+      install_url = "https://github.com/mlyxshi/FireFox-Search-Shortcuts-Github/releases/download/v1.0/release.zip";
     };
 
-    # Adguard
-    "adguardadblocker@adguard.com" = {
+    "youtube@search" = {
       installation_mode = "force_installed";
-      install_url = "https://addons.mozilla.org/firefox/downloads/latest/adguard-adblocker/latest.xpi";
+      install_url = "https://github.com/mlyxshi/FireFox-Search-Shortcuts-YouTube/releases/download/v1.0/release.zip";
     };
 
-    # Dark Reader
-    "addon@darkreader.org" = {
+    "bilibili@search" = {
       installation_mode = "force_installed";
-      install_url = "https://addons.mozilla.org/firefox/downloads/latest/darkreader/latest.xpi";
+      install_url = "https://github.com/mlyxshi/FireFox-Search-Shortcuts-BiliBili/releases/download/v1.0/release.zip";
     };
 
-    # Vimium
-    "{d7742d87-e61d-4b78-b8a1-b469842139fa}" = {
+    "nix.package@search" = {
       installation_mode = "force_installed";
-      install_url = "https://addons.mozilla.org/firefox/downloads/latest/vimium-ff/latest.xpi";
+      install_url = "https://github.com/mlyxshi/FireFox-Search-Shortcuts-Nix-Package/releases/download/v1.0/release.zip";
     };
 
-    # DownThemAll
-    "{DDC359D1-844A-42a7-9AA1-88A850A938A8}" = {
-      installation_mode = "force_installed";
-      install_url = "https://addons.mozilla.org/firefox/downloads/latest/downthemall/latest.xpi";
-    };
-    
- 
 
-    # Uninstall Sponsored build-in Extension  <-- I only need google or duckduckgo
-    # https://firefox-source-docs.mozilla.org/toolkit/mozapps/extensions/addon-manager/SystemAddons.html
-    # about:support
+    # Uninstall all build-in search shortcuts except google <-- my default search engine
+
     "ebay@search.mozilla.org" = {
       installation_mode = "blocked";
     };
@@ -80,6 +83,14 @@
     };
 
     "bing@search.mozilla.org" = {
+      installation_mode = "blocked";
+    };
+
+    "ddg@search.mozilla.org" = {
+      installation_mode = "blocked";
+    };
+
+    "wikipedia@search.mozilla.org" = {
       installation_mode = "blocked";
     };
 
