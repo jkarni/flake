@@ -1,7 +1,7 @@
 { pkgs, lib, ... }:
 
 let
-  
+
   firefoxConfigPath =
     if pkgs.stdenv.isLinux then
       ".mozilla/firefox"
@@ -9,11 +9,20 @@ let
       "Library/Application Support/Firefox";
 
 
+  firefoxProfile = pkgs.writeText "profiles.ini" (builtins.readFile ../config/firefox/profile/profiles.ini);
+
+
+  linkFirefoxScript = ''
+    cat "${firefoxProfile}" > "${firefoxConfigPath}/profiles.ini"
+  '' + lib.optionalString pkgs.stdenv.isDarwin ''
+    ln -sfn "${pkgs.firefox}/Applications/Firefox Nightly.app"  "/Applications/Firefox Nightly.app"
+  '';
+
 
   Firefox =
     if pkgs.stdenv.isLinux then # Linux
-      # https://github.com/xiaoxiaoflood/firefox-scripts/tree/master/installation-folder
-      # Also see:  overlay/Firefox.nix
+    # https://github.com/xiaoxiaoflood/firefox-scripts/tree/master/installation-folder
+    # Also see:  overlay/Firefox.nix
       pkgs.firefox.overrideAttrs
         (old: {
           buildCommand = old.buildCommand + ''
@@ -32,16 +41,20 @@ in
 
 
   home.file = {
-    "${firefoxConfigPath}/profiles.ini".source = ../config/firefox/profile/profiles.ini;
     "${firefoxConfigPath}/default/chrome".source = ../config/firefox/profile/default/chrome;
   };
 
   # nix-darwin only install application in "~/Application/Nix Apps" by default
   # I prefer also link to system application path
-  home.activation = lib.optionalAttrs pkgs.stdenv.isDarwin {
-    linkFirefox = lib.hm.dag.entryAfter [ "writeBoundary" ] ''
-      ln -sfn "${pkgs.firefox}/Applications/Firefox Nightly.app"  "/Applications/Firefox Nightly.app"
-    '';
+
+  # Home-Manager Firefox module manage profiles.ini by default <-- link to /nix/store , firefox doesn't have write permission
+  # Home-Manager Firefox module's approach works well in linux but not in darwin
+
+  # Reference: https://support.mozilla.org/en-US/kb/dedicated-profiles-firefox-installation
+  # Everytime after firefox update, we need to set default profile   <-- about:config
+
+  home.activation = {
+    linkFirefox = lib.hm.dag.entryAfter [ "writeBoundary" ] linkFirefoxScript;
   };
 
 
