@@ -1,6 +1,7 @@
 # https://discourse.nixos.org/t/on-niv-running-on-mac-which-branch-should-i-use-to-update-to-21-11-i-cant-find-release-21-11-darwin-branch-on-nixpkgs/16446/7
 {
   inputs = {
+
     nixpkgs = {
       url = "github:nixos/nixpkgs/nixos-unstable";
     };
@@ -8,7 +9,6 @@
     nixpkgs-darwin-stable = {
       url = "github:nixos/nixpkgs/nixpkgs-22.05-darwin";
     };
-
 
     home-manager = {
       url = "github:nix-community/home-manager";

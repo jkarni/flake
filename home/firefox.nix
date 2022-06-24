@@ -1,11 +1,11 @@
-  # nix-darwin only install application in "~/Application/Nix Apps" by default
-  # I prefer also link to system application path
+# nix-darwin only install application in "~/Application/Nix Apps" by default
+# I prefer also link to system application path
 
-  # Home-Manager Firefox module manage profiles.ini by default <-- link to /nix/store , firefox doesn't have write permission
-  # Home-Manager Firefox module's approach works well in linux but not in darwin
+# Home-Manager Firefox module manage profiles.ini by default <-- link to /nix/store , firefox doesn't have write permission
+# Home-Manager Firefox module's approach works well in linux but not in darwin
 
-  # Reference: https://support.mozilla.org/en-US/kb/dedicated-profiles-firefox-installation
-  # Everytime after firefox update, we need to set default profile   <-- about:config
+# Reference: https://support.mozilla.org/en-US/kb/dedicated-profiles-firefox-installation
+# Everytime after darwin firefox update, we need to set default profile   <-- about:profiles
 
 
 { pkgs, lib, ... }:
