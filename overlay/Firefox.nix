@@ -2,13 +2,13 @@
 # https://github.com/NixOS/nixpkgs/blob/master/pkgs/applications/networking/browsers/firefox/wrapper.nix
 # https://nixos.wiki/wiki/Firefox
 # https://github.com/nix-community/home-manager/blob/master/modules/programs/firefox.nix#blob-path
-{ lib, pkgs }:
+{ stdenv }:
 let
   extraPrefs = ../config/firefox/app/config.js;
 in
 final: prev: {
   firefox =
-    if pkgs.stdenv.isLinux
+    if stdenv.isLinux
     then
       prev.wrapFirefox prev.firefox-unwrapped
         {

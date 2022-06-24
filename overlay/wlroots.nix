@@ -8,7 +8,7 @@ final: prev: {
       owner = "wlroots";
       repo = "wlroots";
       rev = version;
-      #sha256 = "";
+      sha256 = "O7o/25v07Da4Wt4lBq3CZ5kOObyx3Knp4zFnlvvwHmU=";
     };
   });
 }
