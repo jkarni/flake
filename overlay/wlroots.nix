@@ -1,4 +1,4 @@
-{ wlroots-nightly }:
+{ fetchFromGitLab  }:
 
 final: prev: {
   wlroots = prev.wlroots.overrideAttrs (finalAttrs: previousAttrs: {
@@ -8,7 +8,7 @@ final: prev: {
       owner = "wlroots";
       repo = "wlroots";
       rev = version;
-      #sha256 = "sha256-MFR38UuB/wW7J9ODDUOfgTzKLse0SSMIRYTpEaEdRwM=";
+      sha256 = "";
     };
   });
 }
