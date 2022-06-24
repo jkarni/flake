@@ -1,18 +1,28 @@
+# https://discourse.nixos.org/t/on-niv-running-on-mac-which-branch-should-i-use-to-update-to-21-11-i-cant-find-release-21-11-darwin-branch-on-nixpkgs/16446/7
 {
   inputs = {
-
     nixpkgs = {
-      url = "github:nixos/nixpkgs/nixos-22.05";
+      url = "github:nixos/nixpkgs/nixos-unstable";
     };
+
+    nixpkgs-darwin-stable = {
+      url = "github:nixos/nixpkgs/nixpkgs-22.05-darwin";
+    };
+
 
     home-manager = {
       url = "github:nix-community/home-manager";
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
+    home-manager-darwin-stable = {
+      url = "github:nix-community/home-manager";
+      inputs.nixpkgs.follows = "nixpkgs-darwin-stable";
+    };
+
     darwin = {
       url = "github:LnL7/nix-darwin";
-      inputs.nixpkgs.follows = "nixpkgs";
+      inputs.nixpkgs.follows = "nixpkgs-darwin-stable";
     };
 
     deploy-rs = {
@@ -56,7 +66,7 @@
 
   };
 
-  outputs = { self, nixpkgs, darwin, home-manager, deploy-rs, sops-nix, ... }@args:
+  outputs = { self, nixpkgs, darwin, home-manager, home-manager-darwin-stable, deploy-rs, sops-nix, ... }@args:
     let
       stateVersion = "22.05";
       oracleServerList = [ "jp2" "jp4" "sw" "us1" "kr" ];
@@ -76,7 +86,7 @@
           system = "aarch64-darwin";
           modules = [
             # sops-nix currently doesn't support aarch64-darwin
-            home-manager.darwinModules.home-manager
+            home-manager-darwin-stable.darwinModules.home-manager
             ./host/M1
             # ./os/darwin/brew.nix
             ./overlay
