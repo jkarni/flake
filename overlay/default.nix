@@ -5,6 +5,6 @@
     (import ./Neovim.nix { inherit neovim-nightly; })
     (import ./Firefox.nix { inherit lib pkgs; })
 
-    (import ./wlroots.nix)
+    (import ./wlroots.nix {inherit (pkgs) fetchFromGitLab;})
   ];
 }
