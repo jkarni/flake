@@ -35,7 +35,6 @@ cmd open ${{
 }}
 
 
-
 cmd extract ${{
     set -f
     case $f in

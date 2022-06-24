@@ -30,6 +30,12 @@
       flake = false;
     };
 
+
+    wlroots-nightly ={
+      url ="gitlab:wlroots/wlroots";
+      flake = false;
+    };
+
     #############################################################################################################################
     # zsh plugin
     zsh-tab-title = {
@@ -61,6 +67,7 @@
       oracleServerList = [ "jp2" "jp4" "sw" "us1" "kr" ];
       commonSpecialArgs = {
         inherit (args) neovim-nightly;
+        inherit (args) wlroots-nightly;
         inherit (args) zsh-tab-title zsh-fast-syntax-highlighting zsh-you-should-use zsh-autosuggestions;
       };
     in
