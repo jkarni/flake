@@ -37,6 +37,7 @@ jobs:
       with:
         token: ${{ secrets.GIT_TOKEN }}
         branch: update-firefox
+        delete-branch: true
         title: '[Auto] Update Firefox'
         body: |
           Update report
