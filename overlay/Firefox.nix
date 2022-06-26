@@ -61,7 +61,19 @@ final: prev: {
 
   });
 
-  firefox-nightly-bin = prev.wrapFirefox final.firefox-bin-unwrapped { };
+  firefox-nightly-tmp = prev.wrapFirefox final.firefox-bin-unwrapped { };
+
+  firefox-nightly-bin = final.firefox-nightly-tmp.overrideAttrs (old: {
+    installPhase = old.installPhase + ''
+      rm "$out/lib/firefox/distribution/policies.json"
+      cat ${policiesJson} > "$out/lib/firefox/distribution/policies.json"
+
+      rm -rf "$out/lib/firefox/defaults/"
+      mkdir -p  "$out/lib/firefox/defaults/pref/"
+      cat ${configPrefs} > "$out/lib/firefox/defaults/pref/config-prefs.js"
+      cat ${configJs} > "$out/lib/firefox/config.js"
+    '';
+  });
 
 
   ################################################################################################
