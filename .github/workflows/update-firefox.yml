@@ -32,7 +32,13 @@ jobs:
           latestDarwinHash=$(nix-prefetch-url ${latestDarwinUrl})
           latestLinuxHash=$(nix-prefetch-url ${latestLinuxUrl})
 
-          jq --null-input --arg latestDarwinUrl $latestDarwinUrl  --arg latestLinuxUrl $latestLinuxUrl  --arg latestVersion $latestVersion  --arg latestDarwinHash $latestDarwinHash  --arg latestLinuxHash $latestLinuxHash  '{"version":$latestVersion, "darwin-url":$latestDarwinUrl, "darwin-sha256":$latestDarwinHash, "linux-url":$latestLinuxUrl, "linux-sha256":$latestLinuxHash}' >  ${GITHUB_WORKSPACE}/config/firefox/darwin-version.json
+          jq --null-input --arg latestDarwinUrl $latestDarwinUrl  \
+            --arg latestLinuxUrl $latestLinuxUrl \
+            --arg latestVersion $latestVersion  \
+            --arg latestDarwinHash $latestDarwinHash \
+            --arg latestLinuxHash $latestLinuxHash \
+            '{"version":$latestVersion, "darwin-url":$latestDarwinUrl, "darwin-sha256":$latestDarwinHash, "linux-url":$latestLinuxUrl, "linux-sha256":$latestLinuxHash}' \
+            >  ${GITHUB_WORKSPACE}/config/firefox/version.json
           echo "::set-output name=latestVersion::${latestVersion}"
         fi
 
