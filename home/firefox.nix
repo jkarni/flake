@@ -35,7 +35,7 @@ let
 
   Firefox =
     if pkgs.stdenv.isLinux then # Linux
-      pkgs.wrapFirefox pkgs.firefox-bin-unwrapped.overrideAttrs
+      pkgs.wrapFirefox (pkgs.firefox-bin-unwrapped.overrideAttrs
         (old: {
           pname = "firefox-bin";
           version = "nightly";
@@ -45,7 +45,7 @@ let
             sha256 = metaData.linux-sha256;
           };
 
-        })
+        }))
     else # Darwin
       pkgs.firefox;
 in
