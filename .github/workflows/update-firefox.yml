@@ -27,8 +27,8 @@ jobs:
 
         else
 
-          latest-Darwin-Url='https://download.cdn.mozilla.net/pub/firefox/nightly/latest-mozilla-central/firefox-${lastestVersion}.en-US.mac.dmg'
-          latest-Linux-Url='https://download.cdn.mozilla.net/pub/firefox/nightly/latest-mozilla-central/firefox-${lastestVersion}.en-US.linux-x86_64.tar.bz2'
+          latest-Darwin-Url="https://download.cdn.mozilla.net/pub/firefox/nightly/latest-mozilla-central/firefox-${lastestVersion}.en-US.mac.dmg"
+          latest-Linux-Url="https://download.cdn.mozilla.net/pub/firefox/nightly/latest-mozilla-central/firefox-${lastestVersion}.en-US.linux-x86_64.tar.bz2"
           latest-Darwin-Hash=$(nix-prefetch-url latest-Darwin-Url)
           latest-Linux-Hash=$(nix-prefetch-url latest-Linux-Url)
 
