@@ -9,6 +9,11 @@ set $menu fuzzel --terminal foot --background 282a36FA --text-color FFFFFFA0 --s
 set $xcursor_theme Adwaita
 set $xcursor_size 24
 
+input type:keyboard {
+  xkb_options "altwin:meta_win"
+}
+
+
 # waymsg -t get_outputs
 output HDMI-A-1 scale 3
 
