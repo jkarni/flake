@@ -29,8 +29,8 @@ jobs:
 
           latestDarwinUrl="https://download.cdn.mozilla.net/pub/firefox/nightly/latest-mozilla-central/firefox-${lastestVersion}.en-US.mac.dmg"
           latestLinuxUrl="https://download.cdn.mozilla.net/pub/firefox/nightly/latest-mozilla-central/firefox-${lastestVersion}.en-US.linux-x86_64.tar.bz2"
-          latestDarwinHash=$(nix-prefetch-url latestDarwinUrl)
-          latestLinuxHash=$(nix-prefetch-url latestLinuxUrl)
+          latestDarwinHash=$(nix-prefetch-url ${latestDarwinUrl})
+          latestLinuxHash=$(nix-prefetch-url ${latestLinuxUrl})
 
           jq --null-input --arg latestDarwinUrl $latestDarwinUrl  \
           --arg latestLinuxUrl $latestLinuxUrl \
