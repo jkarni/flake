@@ -17,7 +17,7 @@ jobs:
       id: shell
       run: |
 
-        lastestVersion=$(curl --silent https://product-details.mozilla.org/1.0/firefox_versions.json | jq '.FIREFOX_NIGHTLY' | tr -d '"')
+        latestVersion=$(curl --silent https://product-details.mozilla.org/1.0/firefox_versions.json | jq '.FIREFOX_NIGHTLY' | tr -d '"')
         currentVersion=$(curl --silent "https://raw.githubusercontent.com/mlyxshi/flake/main/config/firefox/version.json"| jq ".version" | tr -d '"')       
 
         if [ ${currentVersion} == ${latestVersion}  ]; then
@@ -27,18 +27,12 @@ jobs:
 
         else
 
-          latestDarwinUrl="https://download.cdn.mozilla.net/pub/firefox/nightly/latest-mozilla-central/firefox-${lastestVersion}.en-US.mac.dmg"
-          latestLinuxUrl="https://download.cdn.mozilla.net/pub/firefox/nightly/latest-mozilla-central/firefox-${lastestVersion}.en-US.linux-x86_64.tar.bz2"
+          latestDarwinUrl="https://download.cdn.mozilla.net/pub/firefox/nightly/latest-mozilla-central/firefox-${latestVersion}.en-US.mac.dmg"
+          latestLinuxUrl="https://download.cdn.mozilla.net/pub/firefox/nightly/latest-mozilla-central/firefox-${latestVersion}.en-US.linux-x86_64.tar.bz2"
           latestDarwinHash=$(nix-prefetch-url ${latestDarwinUrl})
           latestLinuxHash=$(nix-prefetch-url ${latestLinuxUrl})
 
-          jq --null-input --arg latestDarwinUrl $latestDarwinUrl  \
-          --arg latestLinuxUrl $latestLinuxUrl \
-          --arg latestVersion $latestVersion \
-          --arg latestDarwinHash $latestDarwinHash \
-          --arg latestLinuxHash $latestLinuxHash \
-          '{"version":$latestVersion, "darwin-url":$latestDarwinUrl, "darwin-sha256":$latestDarwinHash, "linux-url":$latestLinuxUrl, "linux-sha256":$latestLinuxHash}' \
-          >  ${GITHUB_WORKSPACE}/config/firefox/darwin-version.json
+          jq --null-input --arg latestDarwinUrl $latestDarwinUrl  --arg latestLinuxUrl $latestLinuxUrl  --arg latestVersion $latestVersion  --arg latestDarwinHash $latestDarwinHash  --arg latestLinuxHash $latestLinuxHash  '{"version":$latestVersion, "darwin-url":$latestDarwinUrl, "darwin-sha256":$latestDarwinHash, "linux-url":$latestLinuxUrl, "linux-sha256":$latestLinuxHash}' >  ${GITHUB_WORKSPACE}/config/firefox/darwin-version.json
           echo "::set-output name=latestVersion::${latestVersion}"
         fi
 
