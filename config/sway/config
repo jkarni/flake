@@ -10,15 +10,6 @@ set $xcursor_theme Adwaita
 set $xcursor_size 24
 
 
-# Configuring Linux's Super key like OSX's Command key
-# http://www.relud.com/cmd.html
-# Mod4 is Super_L by default
-# Now Mod4 is Meta_L
-# input type:keyboard {
-#   xkb_options "altwin:meta_win"
-# }
-
-
 # waymsg -t get_outputs
 output HDMI-A-1 scale 3
 
