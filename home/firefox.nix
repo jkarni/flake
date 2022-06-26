@@ -39,7 +39,7 @@ let
           pname = "firefox-bin";
           version = "nightly";
 
-          src = prev.fetchurl {
+          src = pkgs.fetchurl {
             url = metaData.linux-url;
             sha256 = metaData.linux-sha256;
           };
