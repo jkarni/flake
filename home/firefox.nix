@@ -35,7 +35,7 @@ let
 
   Firefox =
     if pkgs.stdenv.isLinux then # Linux
-      pkgs.firefox-bin.overrideAttrs
+      pkgs.firefox-bin-unwrapped.overrideAttrs
         (old: {
           pname = "firefox-bin";
           version = "nightly";
