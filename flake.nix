@@ -40,7 +40,9 @@
       flake = false;
     };
 
-    nixpkgs-wayland = { url = "github:nix-community/nixpkgs-wayland"; };
+    nixpkgs-wayland = {
+      url = "github:nix-community/nixpkgs-wayland";
+    };
 
 
     #############################################################################################################################

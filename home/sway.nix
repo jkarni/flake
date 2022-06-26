@@ -5,10 +5,7 @@
     ./firefox.nix
   ];
 
-  # Apple Keyboard
-  # control->control
-  # option->Alt_L->Mod1
-  # command->Super_L->Mod4
+
   xdg.configFile."sway/config".source = ../config/sway/config;
   xdg.configFile."foot/foot.ini".source = ../config/foot/foot.ini;
 

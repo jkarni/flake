@@ -9,9 +9,14 @@ set $menu fuzzel --terminal foot --background 282a36FA --text-color FFFFFFA0 --s
 set $xcursor_theme Adwaita
 set $xcursor_size 24
 
-input type:keyboard {
-  xkb_options "altwin:meta_win"
-}
+
+# Configuring Linux's Super key like OSX's Command key
+# http://www.relud.com/cmd.html
+# Mod4 is Super_L by default
+# Now Mod4 is Meta_L
+# input type:keyboard {
+#   xkb_options "altwin:meta_win"
+# }
 
 
 # waymsg -t get_outputs
@@ -19,7 +24,7 @@ output HDMI-A-1 scale 3
 
 seat * xcursor_theme $xcursor_theme $xcursor_size
 
-gaps inner 6
+gaps inner 5
 
 default_border pixel
 
