@@ -7,6 +7,7 @@ let
   extraPrefs = ../config/firefox/app/config.js;
 in
 final: prev: {
+  # Stable
   firefox =
     if stdenv.isLinux
     then

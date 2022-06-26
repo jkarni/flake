@@ -19,7 +19,7 @@ let
       "Library/Application Support/Firefox";
 
 
-  firefoxProfile =  ../config/firefox/profile/profiles.ini;
+  firefoxProfile = ../config/firefox/profile/profiles.ini;
 
 
   linkFirefoxScript = ''
@@ -29,15 +29,23 @@ let
   '';
 
 
+
+  metaData = builtins.fromJSON (builtins.readFile ../config/firefox/version.json);
+
+
   Firefox =
     if pkgs.stdenv.isLinux then # Linux
-    # https://github.com/xiaoxiaoflood/firefox-scripts/tree/master/installation-folder
-    # Also see:  overlay/Firefox.nix
-      pkgs.firefox.overrideAttrs
+      pkgs.firefox-bin.overrideAttrs
         (old: {
-          buildCommand = old.buildCommand + ''
-            echo 'pref("general.config.sandbox_enabled", false);' >> "$out/lib/firefox/defaults/pref/autoconfig.js"
-          '';
+          pname = "firefox-bin";
+          version = "nightly";
+
+          src = fetchurl {
+            url = metaData.linux-url;
+            sha256 = metaData.linux-sha256;
+          };
+
+          buildCommand = old.buildCommand;
         })
     else # Darwin
       pkgs.firefox;
