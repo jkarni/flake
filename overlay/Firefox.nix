@@ -74,7 +74,7 @@ final: prev: {
 
   });
 
-  firefox-nightly-bin = wrapFirefox final.firefox-nightly-bin-tmp {};
+  firefox-nightly-bin = prev.wrapFirefox final.firefox-nightly-bin-tmp {};
 
   #firefox-nightly-bin = prev.wrapFirefox final.firefox-bin-unwrapped { };
 
