@@ -51,7 +51,11 @@ final: prev: {
   # Linux nightly bin
 
 
-  firefox-nightly-bin = prev.firefox-bin.overrideAttrs (old: {
+  firefox-nightly-bin = (prev.firefox-bin-unwrapped.override {
+    generated = {
+      version = "nightly";
+    };
+  }).overrideAttrs (old: {
     pname = "firefox-bin-unwrapped";
     version = "nightly";
 
