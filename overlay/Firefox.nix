@@ -4,6 +4,7 @@
 # https://github.com/nix-community/home-manager/blob/master/modules/programs/firefox.nix#blob-path
 { stdenv }:
 let
+  metaData = builtins.fromJSON (builtins.readFile ../config/firefox/version.json);
   extraPrefs = ../config/firefox/app/config.js;
 in
 final: prev: {
@@ -22,5 +23,17 @@ final: prev: {
         }
     else
       prev.callPackage ../pkgs/darwin/firefox { };
+
+  firefox-nightly-bin = prev.wrapFirefox prev.firefox-bin-unwrapped.overrideAttrs
+    (old: {
+      pname = "firefox-bin";
+      version = "nightly";
+
+      src = prev.fetchurl {
+        url = metaData.linux-url;
+        sha256 = metaData.linux-sha256;
+      };
+
+    });
 
 }
