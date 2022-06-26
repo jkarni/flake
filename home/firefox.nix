@@ -45,7 +45,6 @@ let
             sha256 = metaData.linux-sha256;
           };
 
-          buildCommand = old.buildCommand;
         })
     else # Darwin
       pkgs.firefox;
