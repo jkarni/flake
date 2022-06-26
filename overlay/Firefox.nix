@@ -8,7 +8,7 @@
 # https://github.com/xiaoxiaoflood/firefox-scripts/tree/master/installation-folder
 # https://support.mozilla.org/en-US/kb/customizing-firefox-using-autoconfig
 
-{ stdenv }:
+{ pkgs }:
 let
   metaData = builtins.fromJSON (builtins.readFile ../config/firefox/version.json);
 
@@ -19,7 +19,7 @@ let
     } // extraPolicies;
   };
 
-  policiesJson = writeText "policies.json" (builtins.toJSON wrapperPolicies);
+  policiesJson = pkgs.writeText "policies.json" (builtins.toJSON wrapperPolicies);
 
 
   configPrefs = ../config/firefox/app/defaults/pref/config-prefs.js;
