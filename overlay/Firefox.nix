@@ -24,7 +24,9 @@ final: prev: {
     else
       prev.callPackage ../pkgs/darwin/firefox { };
 
-  firefox-nightly-bin = prev.wrapFirefox (prev.firefox-bin-unwrapped { }).overrideAttrs
+
+
+  firefox-bin-unwrapped = prev.firefox-bin-unwrapped.overrideAttrs
     (old: {
       pname = "firefox-bin";
       version = "nightly";
@@ -35,5 +37,7 @@ final: prev: {
       };
 
     });
+
+  firefox-nightly-bin = prev.wrapFirefox final.firefox-bin-unwrapped { };
 
 }
