@@ -14,9 +14,7 @@ let
 
   extraPolicies = import ../config/firefox/app/policy.nix;
   wrapperPolicies = {
-    policies = {
-      DisableAppUpdate = true;
-    } // extraPolicies;
+    policies = extraPolicies;
   };
 
   policiesJson = pkgs.writeText "policies.json" (builtins.toJSON wrapperPolicies);
@@ -51,7 +49,7 @@ final: prev: {
   # Linux nightly bin
 
 
-  firefox-nightly-bin = (prev.firefox-bin-unwrapped.override {
+  firefox-nightly-bin-tmp = (prev.firefox-bin-unwrapped.override {
     generated = {
       version = "nightly";
     };
@@ -75,6 +73,8 @@ final: prev: {
     '';
 
   });
+
+  firefox-nightly-bin = wrapFirefox final.firefox-nightly-bin-tmp {};
 
   #firefox-nightly-bin = prev.wrapFirefox final.firefox-bin-unwrapped { };
 
