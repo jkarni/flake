@@ -2,10 +2,28 @@
 # https://github.com/NixOS/nixpkgs/blob/master/pkgs/applications/networking/browsers/firefox/wrapper.nix
 # https://nixos.wiki/wiki/Firefox
 # https://github.com/nix-community/home-manager/blob/master/modules/programs/firefox.nix#blob-path
+
+
+# https://github.com/mozilla/policy-templates#enterprisepoliciesenabled
+# https://github.com/xiaoxiaoflood/firefox-scripts/tree/master/installation-folder
+# https://support.mozilla.org/en-US/kb/customizing-firefox-using-autoconfig
+
 { stdenv }:
 let
   metaData = builtins.fromJSON (builtins.readFile ../config/firefox/version.json);
-  extraPrefs = ../config/firefox/app/config.js;
+
+  extraPolicies = import ../config/firefox/app/policy.nix;
+  wrapperPolicies = {
+    policies = {
+      DisableAppUpdate = true;
+    } // extraPolicies;
+  };
+
+  policiesJson = writeText "policies.json" (builtins.toJSON wrapperPolicies);
+
+
+  configPrefs = ../config/firefox/app/defaults/pref/config-prefs.js;
+  configJs = ../config/firefox/app/config.js;
 in
 final: prev: {
 
@@ -13,17 +31,18 @@ final: prev: {
   # Linux stable
   firefox-tmp = prev.wrapFirefox prev.firefox-unwrapped {
     forceWayland = true;
-    # https://github.com/mozilla/policy-templates#enterprisepoliciesenabled
-    extraPolicies = import ../config/firefox/app/policy.nix;
-    # https://github.com/xiaoxiaoflood/firefox-scripts/tree/master/installation-folder
-    # https://support.mozilla.org/en-US/kb/customizing-firefox-using-autoconfig
-    extraPrefs = builtins.readFile ../config/firefox/app/config.js;
   };
 
   firefox-stable = final.firefox-tmp.overrideAttrs
     (old: {
       buildCommand = old.buildCommand + ''
-        echo 'pref("general.config.sandbox_enabled", false);' >> "$out/lib/firefox/defaults/pref/autoconfig.js"
+        rm "$out/lib/firefox/distribution/policies.json"
+        cat ${policiesJson} > "$out/lib/firefox/distribution/policies.json"
+
+        rm -rf "$out/lib/firefox/defaults/"
+        mkdir -p  "$out/lib/firefox/defaults/pref/"
+        cat ${configPrefs} > "$out/lib/firefox/defaults/pref/config-prefs.js"
+        cat ${configJs} > "$out/lib/firefox/config.js"
       '';
     });
 
