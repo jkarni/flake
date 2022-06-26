@@ -34,17 +34,7 @@ let
 
   Firefox =
     if pkgs.stdenv.isLinux then # Linux
-      pkgs.firefox-nightly-bin.overrideAttrs
-        (old: {
-          pname = "firefox-bin";
-          version = "nightly";
-
-          src = pkgs.fetchurl {
-            url = metaData.linux-url;
-            sha256 = metaData.linux-sha256;
-          };
-
-        })
+      pkgs.firefox-nightly-bin
     else # Darwin
       pkgs.firefox;
 in
