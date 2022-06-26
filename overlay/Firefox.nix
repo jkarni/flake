@@ -50,7 +50,7 @@ final: prev: {
   ################################################################################################
   # Linux nightly bin
 
-  firefox-bin-unwrapped = prev.firefox-bin-unwrapped.overrideAttrs ({
+  firefox-nightly-bin = prev.firefox-bin-unwrapped.overrideAttrs ({
     pname = "firefox-bin-unwrapped";
     version = "nightly";
 
@@ -59,21 +59,31 @@ final: prev: {
       sha256 = metaData.linux-sha256;
     };
 
+    # installPhase = old.installPhase + ''
+    #   rm "$out/lib/firefox/distribution/policies.json"
+    #   cat ${policiesJson} > "$out/lib/firefox/distribution/policies.json"
+
+    #   rm -rf "$out/lib/firefox/defaults/"
+    #   mkdir -p  "$out/lib/firefox/defaults/pref/"
+    #   cat ${configPrefs} > "$out/lib/firefox/defaults/pref/config-prefs.js"
+    #   cat ${configJs} > "$out/lib/firefox/config.js"
+    # '';
+
   });
 
-  firefox-nightly-tmp = prev.wrapFirefox final.firefox-bin-unwrapped { };
+  #firefox-nightly-bin = prev.wrapFirefox final.firefox-bin-unwrapped { };
 
-  firefox-nightly-bin = final.firefox-nightly-tmp.overrideAttrs (old: {
-    installPhase = old.installPhase + ''
-      rm "$out/lib/firefox/distribution/policies.json"
-      cat ${policiesJson} > "$out/lib/firefox/distribution/policies.json"
+  # firefox-nightly-bin = final.firefox-nightly-tmp.overrideAttrs (old: {
+  #   installPhase = old.installPhase + ''
+  #     rm "$out/lib/firefox/distribution/policies.json"
+  #     cat ${policiesJson} > "$out/lib/firefox/distribution/policies.json"
 
-      rm -rf "$out/lib/firefox/defaults/"
-      mkdir -p  "$out/lib/firefox/defaults/pref/"
-      cat ${configPrefs} > "$out/lib/firefox/defaults/pref/config-prefs.js"
-      cat ${configJs} > "$out/lib/firefox/config.js"
-    '';
-  });
+  #     rm -rf "$out/lib/firefox/defaults/"
+  #     mkdir -p  "$out/lib/firefox/defaults/pref/"
+  #     cat ${configPrefs} > "$out/lib/firefox/defaults/pref/config-prefs.js"
+  #     cat ${configJs} > "$out/lib/firefox/config.js"
+  #   '';
+  # });
 
 
   ################################################################################################
