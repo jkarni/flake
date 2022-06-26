@@ -40,6 +40,8 @@
       flake = false;
     };
 
+    nixpkgs-wayland = { url = "github:nix-community/nixpkgs-wayland"; };
+
 
     #############################################################################################################################
     # zsh plugin
@@ -116,6 +118,9 @@
             ./overlay
             ./modules/linux.nix
 
+            {
+              nixpkgs.overlays = [ args.nixpkgs-wayland.overlay ];
+            }
 
             {
               system.stateVersion = stateVersion;
