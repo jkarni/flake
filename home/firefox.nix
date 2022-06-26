@@ -34,7 +34,7 @@ let
 
   Firefox =
     if pkgs.stdenv.isLinux then # Linux
-      pkgs.firefox-nightly-bin
+      firefox-stable
     else # Darwin
       pkgs.firefox;
 in
