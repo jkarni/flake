@@ -27,17 +27,17 @@ jobs:
 
         else
 
-          latest-Darwin-Url="https://download.cdn.mozilla.net/pub/firefox/nightly/latest-mozilla-central/firefox-${lastestVersion}.en-US.mac.dmg"
-          latest-Linux-Url="https://download.cdn.mozilla.net/pub/firefox/nightly/latest-mozilla-central/firefox-${lastestVersion}.en-US.linux-x86_64.tar.bz2"
-          latest-Darwin-Hash=$(nix-prefetch-url latest-Darwin-Url)
-          latest-Linux-Hash=$(nix-prefetch-url latest-Linux-Url)
+          latestDarwinUrl="https://download.cdn.mozilla.net/pub/firefox/nightly/latest-mozilla-central/firefox-${lastestVersion}.en-US.mac.dmg"
+          latestLinuxUrl="https://download.cdn.mozilla.net/pub/firefox/nightly/latest-mozilla-central/firefox-${lastestVersion}.en-US.linux-x86_64.tar.bz2"
+          latestDarwinHash=$(nix-prefetch-url latestDarwinUrl)
+          latestLinuxHash=$(nix-prefetch-url latestLinuxUrl)
 
-          jq --null-input --arg latest-Darwin-Url $latest-Darwin-Url  \
-          --arg latest-Linux-Url $latest-Linux-Url \
+          jq --null-input --arg latestDarwinUrl $latestDarwinUrl  \
+          --arg latestLinuxUrl $latestLinuxUrl \
           --arg latestVersion $latestVersion \
-          --arg latest-Darwin-Hash $latest-Darwin-Hash \
-          --arg latest-Linux-Hash $latest-Linux-Hash \
-          '{"version":$latestVersion, "darwin-url":$latest-Darwin-Url, "darwin-sha256":$latest-Darwin-Hash, "linux-url":$latest-Linux-Url, "linux-sha256":$latest-Linux-Hash}' \
+          --arg latestDarwinHash $latestDarwinHash \
+          --arg latestLinuxHash $latestLinuxHash \
+          '{"version":$latestVersion, "darwin-url":$latestDarwinUrl, "darwin-sha256":$latestDarwinHash, "linux-url":$latestLinuxUrl, "linux-sha256":$latestLinuxHash}' \
           >  ${GITHUB_WORKSPACE}/config/firefox/darwin-version.json
           echo "::set-output name=latestVersion::${latestVersion}"
         fi
