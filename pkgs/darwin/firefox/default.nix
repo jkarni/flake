@@ -16,7 +16,7 @@ let
   configJs =  ../../../config/firefox/app/config.js;
 
 
-  metaData = builtins.fromJSON (builtins.readFile ../../../config/firefox/darwin-version.json);
+  metaData = builtins.fromJSON (builtins.readFile ../../../config/firefox/version.json);
 in
 
 stdenvNoCC.mkDerivation rec {

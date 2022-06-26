@@ -1,4 +1,4 @@
-name: "[Auto] update darwin firefox"
+name: "[Auto] update firefox version"
 on:
   workflow_dispatch:
   schedule:
@@ -12,23 +12,33 @@ jobs:
     steps:
     - uses: actions/checkout@v3
     - uses: cachix/install-nix-action@v17
-    - run: sudo apt install -y pcregrep jq
+    # - run: sudo apt install -y pcregrep jq
     - name: Shell Script
       id: shell
       run: |
-        baseUrl="https://download.mozilla.org/?product=firefox-nightly-latest-ssl&os=osx&lang=en-US"
 
-        latestUrl=$(curl --silent --output /dev/null  -w "%{redirect_url}" ${baseUrl})
-        latestVersion=$(echo ${latestUrl}|pcregrep -o1 "firefox-(.*)\.en-US\.mac\.dmg")
-        latestHash=$(nix-prefetch-url --name 'firefox-app-latest.dmg' ${baseUrl})
-
-        currentVersion=$(curl --silent "https://raw.githubusercontent.com/mlyxshi/flake/main/config/firefox/darwin-version.json"| jq ".version"|tr -d '"')
+        lastestVersion=$(curl --silent https://product-details.mozilla.org/1.0/firefox_versions.json | jq '.FIREFOX_NIGHTLY' | tr -d '"')
+        currentVersion=$(curl --silent "https://raw.githubusercontent.com/mlyxshi/flake/main/config/firefox/version.json"| jq ".version" | tr -d '"')       
 
         if [ ${currentVersion} == ${latestVersion}  ]; then
+
           echo "current firefox version is latest"
           echo "::set-output name=latestVersion::0"     
+
         else
-          jq --null-input --arg latestUrl $latestUrl  --arg latestVersion $latestVersion --arg latestHash $latestHash '{"url":$latestUrl,"version":$latestVersion,"sha256":$latestHash}' >  ${GITHUB_WORKSPACE}/config/firefox/darwin-version.json
+
+          latest-Darwin-Url=https://download.cdn.mozilla.net/pub/firefox/nightly/latest-mozilla-central/firefox-${lastestVersion}.en-US.mac.dmg
+          latest-Linux-Url=https://download.cdn.mozilla.net/pub/firefox/nightly/latest-mozilla-central/firefox-${lastestVersion}.en-US.linux-x86_64.tar.bz2
+          latest-Darwin-Hash=$(nix-prefetch-url latest-Darwin-Url)
+          latest-Linux-Hash=$(nix-prefetch-url latest-Linux-Url)
+
+          jq --null-input --arg latest-Darwin-Url $latest-Darwin-Url  \
+          --arg latest-Linux-Url $latest-Linux-Url \
+          --arg latestVersion $latestVersion \
+          --arg latest-Darwin-Hash $latest-Darwin-Hash \
+          --arg latest-Linux-Hash $latest-Linux-Hash \
+          '{"version":$latestVersion, "darwin-url":$latest-Darwin-Url, "darwin-sha256":$latest-Darwin-Hash, "linux-url":$latest-Linux-Url, "linux-sha256":$latest-Linux-Hash}' \
+          >  ${GITHUB_WORKSPACE}/config/firefox/darwin-version.json
           echo "::set-output name=latestVersion::${latestVersion}"
         fi
 
