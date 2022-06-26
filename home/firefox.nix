@@ -29,9 +29,22 @@ let
   '';
 
 
+  metaData = builtins.fromJSON (builtins.readFile ../config/firefox/version.json);
+
+
   Firefox =
     if pkgs.stdenv.isLinux then # Linux
-      pkgs.firefox-nightly-bin
+      pkgs.firefox-nightly-bin.overrideAttrs
+        (old: {
+          pname = "firefox-bin";
+          version = "nightly";
+
+          src = prev.fetchurl {
+            url = metaData.linux-url;
+            sha256 = metaData.linux-sha256;
+          };
+
+        })
     else # Darwin
       pkgs.firefox;
 in

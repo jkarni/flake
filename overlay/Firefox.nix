@@ -24,16 +24,6 @@ final: prev: {
     else
       prev.callPackage ../pkgs/darwin/firefox { };
 
-  firefox-nightly-bin = prev.wrapFirefox (prev.firefox-bin-unwrapped).overrideAttrs
-    (old: {
-      pname = "firefox-bin";
-      version = "nightly";
-
-      src = prev.fetchurl {
-        url = metaData.linux-url;
-        sha256 = metaData.linux-sha256;
-      };
-
-    });
+  firefox-nightly-bin = prev.wrapFirefox prev.firefox-bin-unwrapped;
 
 }
