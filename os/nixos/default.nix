@@ -13,9 +13,11 @@ in
     settings = {
       substituters = [
         "https://mlyxshi.cachix.org"
+         "https://nixpkgs-wayland.cachix.org"
       ];
       trusted-public-keys = [
         "mlyxshi.cachix.org-1:yc7GPiryyBn0HfiCXdmO1ECWKBhfwrjdIFnRSA4ct7s="
+        "nixpkgs-wayland.cachix.org-1:3lwxaILxMRkVhehr5StQprHdEo4IrE8sRho9R9HOLYA="
       ];
       auto-optimise-store = true;
     };

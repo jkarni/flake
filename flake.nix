@@ -68,7 +68,7 @@
 
   };
 
-  outputs = { self, nixpkgs, darwin, home-manager, home-manager-darwin-stable, deploy-rs, sops-nix, ... }@args:
+  outputs = { self, nixpkgs, darwin, home-manager, home-manager-darwin-stable, nixpkgs-wayland, deploy-rs, sops-nix, ... }@args:
     let
       stateVersion = "22.05";
       oracleServerList = [ "jp2" "jp4" "sw" "us1" "kr" ];
@@ -119,7 +119,7 @@
             ./modules/linux.nix
 
             {
-              nixpkgs.overlays = [ args.nixpkgs-wayland.overlay ];
+              nixpkgs.overlays = [ nixpkgs-wayland.overlay ];
             }
 
             {
