@@ -64,15 +64,15 @@ final: prev: {
       sha256 = metaData.linux-sha256;
     };
 
-    # installPhase = old.installPhase + ''
-    #   rm "$out/lib/firefox/distribution/policies.json"
-    #   cat ${policiesJson} > "$out/lib/firefox/distribution/policies.json"
+    installPhase = old.installPhase + ''
+      rm "$out/lib/firefox-bin-nightly/distribution/policies.json"
+      cat ${policiesJson} > "$out/lib/firefox-bin-nightly/distribution/policies.json"
 
-    #   rm -rf "$out/lib/firefox/defaults/"
-    #   mkdir -p  "$out/lib/firefox/defaults/pref/"
-    #   cat ${configPrefs} > "$out/lib/firefox/defaults/pref/config-prefs.js"
-    #   cat ${configJs} > "$out/lib/firefox/config.js"
-    # '';
+      rm -rf "$out/lib/firefox-bin-nightly/defaults/"
+      mkdir -p  "$out/lib/firefox-bin-nightly/defaults/pref/"
+      cat ${configPrefs} > "$out/lib/firefox-bin-nightly/defaults/pref/config-prefs.js"
+      cat ${configJs} > "$out/lib/firefox-bin-nightly/config.js"
+    '';
 
   });
 
