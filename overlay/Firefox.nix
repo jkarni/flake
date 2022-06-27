@@ -63,8 +63,9 @@ final: prev: {
     extraPrefs = builtins.readFile ../config/firefox/app/config.js;
   }).overrideAttrs
     (old: {
+      # passthru.libName = "firefox-bin-${version}";
       buildCommand = old.buildCommand + ''
-        echo 'pref("general.config.sandbox_enabled", false);' >> "$out/lib/"${libName}/defaults/pref/autoconfig.js"
+        echo 'pref("general.config.sandbox_enabled", false);' >> "$out/lib/firefox-bin-${metaData.version}/defaults/pref/autoconfig.js"
       '';
     });
 
