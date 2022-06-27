@@ -59,8 +59,6 @@
     ''
     + lib.optionalString pkgs.stdenv.isDarwin ''
     
-      launchctl setenv MOZ_LEGACY_PROFILES 1
-
       export EDITOR=nvim
       export PAGER=bat
 

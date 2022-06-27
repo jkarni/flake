@@ -31,4 +31,18 @@
     firefox-nightly-bin-darwin
   ];
 
+
+  #  cd /var/db/com.apple.xpc.launchd
+  #  sudo launchctl bootstrap  system  /Library/LaunchAgents/org.nixos.FirefoxEnv.plist
+  #  sudo launchctl enable system/org.nixos.FirefoxEnv
+  launchd.agents.FirefoxEnv = {
+    serviceConfig.ProgramArguments = [
+      "/bin/launchctl"
+      "setenv"
+      "MOZ_LEGACY_PROFILES"
+      "1"
+    ];
+    serviceConfig.RunAtLoad = true;
+  };
+
 }

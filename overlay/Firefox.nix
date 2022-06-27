@@ -32,10 +32,7 @@ final: prev: {
 
   firefox-nightly-bin = (prev.wrapFirefox final.firefox-nightly-bin-unwrapped {
     forceWayland = true;
-    # https://github.com/mozilla/policy-templates#enterprisepoliciesenabled
     extraPolicies = import ../config/firefox/app/policy.nix;
-    # https://github.com/xiaoxiaoflood/firefox-scripts/tree/master/installation-folder
-    # https://support.mozilla.org/en-US/kb/customizing-firefox-using-autoconfig
     extraPrefs = builtins.readFile ../config/firefox/app/config.js;
   }).overrideAttrs
     (old: {
@@ -48,5 +45,5 @@ final: prev: {
   ################################################################################################
   # Darwin nightly bin
   firefox-nightly-bin-darwin = prev.callPackage ../pkgs/darwin/firefox { };
-  
+
 }
