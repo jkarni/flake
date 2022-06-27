@@ -1,5 +1,4 @@
 {
-  DisableAppUpdate = true;
   PasswordManagerEnabled = false;
   DisableFirefoxStudies = true;
   DisablePocket = true;

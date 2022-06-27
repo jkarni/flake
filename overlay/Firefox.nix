@@ -13,9 +13,13 @@ let
   metaData = builtins.fromJSON (builtins.readFile ../config/firefox/version.json);
 
   extraPolicies = import ../config/firefox/app/policy.nix;
+
   wrapperPolicies = {
-    policies = extraPolicies;
+    policies = {
+      DisableAppUpdate = true;
+    } // extraPolicies;
   };
+
 
   policiesJson = pkgs.writeText "policies.json" (builtins.toJSON wrapperPolicies);
 
@@ -29,6 +33,8 @@ final: prev: {
   # Linux stable
   firefox-tmp = prev.wrapFirefox prev.firefox-unwrapped {
     forceWayland = true;
+    extraPolicies = import ../config/firefox/app/policy.nix;
+    extraPrefs = builtins.readFile ../config/firefox/app/config.js;
   };
 
   firefox-stable = final.firefox-tmp.overrideAttrs
@@ -49,7 +55,7 @@ final: prev: {
   # Linux nightly bin
 
 
-  firefox-nightly-bin-tmp = (prev.firefox-bin-unwrapped.override {
+  firefox-nightly-bin-unwrapped = (prev.firefox-bin-unwrapped.override {
     generated = {
       version = "nightly";
     };
@@ -62,34 +68,21 @@ final: prev: {
       sha256 = metaData.linux-sha256;
     };
 
-    installPhase = old.installPhase + ''
-      rm "$out/lib/firefox-bin-nightly/distribution/policies.json"
-      cat ${policiesJson} > "$out/lib/firefox-bin-nightly/distribution/policies.json"
-
-      rm -rf "$out/lib/firefox-bin-nightly/defaults/"
-      mkdir -p  "$out/lib/firefox-bin-nightly/defaults/pref/"
-      cat ${configPrefs} > "$out/lib/firefox-bin-nightly/defaults/pref/config-prefs.js"
-      cat ${configJs} > "$out/lib/firefox-bin-nightly/config.js"
-    '';
-
   });
 
-  firefox-nightly-bin = prev.wrapFirefox final.firefox-nightly-bin-tmp {};
-
-  #firefox-nightly-bin = prev.wrapFirefox final.firefox-bin-unwrapped { };
-
-  # firefox-nightly-bin = final.firefox-nightly-tmp.overrideAttrs (old: {
-  #   installPhase = old.installPhase + ''
-  #     rm "$out/lib/firefox/distribution/policies.json"
-  #     cat ${policiesJson} > "$out/lib/firefox/distribution/policies.json"
-
-  #     rm -rf "$out/lib/firefox/defaults/"
-  #     mkdir -p  "$out/lib/firefox/defaults/pref/"
-  #     cat ${configPrefs} > "$out/lib/firefox/defaults/pref/config-prefs.js"
-  #     cat ${configJs} > "$out/lib/firefox/config.js"
-  #   '';
-  # });
-
+  firefox-nightly-bin = (prev.wrapFirefox final.firefox-nightly-bin-unwrapped {
+    forceWayland = true;
+    # https://github.com/mozilla/policy-templates#enterprisepoliciesenabled
+    extraPolicies = import ../config/firefox/app/policy.nix;
+    # https://github.com/xiaoxiaoflood/firefox-scripts/tree/master/installation-folder
+    # https://support.mozilla.org/en-US/kb/customizing-firefox-using-autoconfig
+    extraPrefs = builtins.readFile ../config/firefox/app/config.js;
+  }).overrideAttrs
+    (old: {
+      buildCommand = old.buildCommand + ''
+        echo 'pref("general.config.sandbox_enabled", false);' >> "$out/lib/firefox-bin-nightly/defaults/pref/autoconfig.js"
+      '';
+    });
 
   ################################################################################################
   # Darwin Nightly

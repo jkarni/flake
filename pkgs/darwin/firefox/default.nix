@@ -3,8 +3,11 @@
 let
   # https://github.com/NixOS/nixpkgs/blob/master/pkgs/applications/networking/browsers/firefox/wrapper.nix
   extraPolicies = import ../../../config/firefox/app/policy.nix;
+  
   wrapperPolicies = {
-    policies = extraPolicies;
+    policies = {
+      DisableAppUpdate = true;
+    } // extraPolicies;
   };
 
   policiesJson = writeText "policies.json" (builtins.toJSON wrapperPolicies);
