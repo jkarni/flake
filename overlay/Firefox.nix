@@ -16,24 +16,24 @@ final: prev: {
 
   ################################################################################################
   # Linux stable
-  firefox-tmp = prev.wrapFirefox prev.firefox-unwrapped {
-    forceWayland = true;
-    extraPolicies = import ../config/firefox/app/policy.nix;
-    extraPrefs = builtins.readFile ../config/firefox/app/config.js;
-  };
+  # firefox-tmp = prev.wrapFirefox prev.firefox-unwrapped {
+  #   forceWayland = true;
+  #   extraPolicies = import ../config/firefox/app/policy.nix;
+  #   extraPrefs = builtins.readFile ../config/firefox/app/config.js;
+  # };
 
-  firefox-stable = final.firefox-tmp.overrideAttrs
-    (old: {
-      buildCommand = old.buildCommand + ''
-        rm "$out/lib/firefox/distribution/policies.json"
-        cat ${policiesJson} > "$out/lib/firefox/distribution/policies.json"
+  # firefox-stable = final.firefox-tmp.overrideAttrs
+  #   (old: {
+  #     buildCommand = old.buildCommand + ''
+  #       rm "$out/lib/firefox/distribution/policies.json"
+  #       cat ${policiesJson} > "$out/lib/firefox/distribution/policies.json"
 
-        rm -rf "$out/lib/firefox/defaults/"
-        mkdir -p  "$out/lib/firefox/defaults/pref/"
-        cat ${configPrefs} > "$out/lib/firefox/defaults/pref/config-prefs.js"
-        cat ${configJs} > "$out/lib/firefox/config.js"
-      '';
-    });
+  #       rm -rf "$out/lib/firefox/defaults/"
+  #       mkdir -p  "$out/lib/firefox/defaults/pref/"
+  #       cat ${configPrefs} > "$out/lib/firefox/defaults/pref/config-prefs.js"
+  #       cat ${configJs} > "$out/lib/firefox/config.js"
+  #     '';
+  #   });
 
 
   ################################################################################################
