@@ -22,21 +22,15 @@ let
   firefoxProfile = ../config/firefox/profile/profiles.ini;
 
 
-  linkFirefoxScript = ''
-    cat "${firefoxProfile}" > "${firefoxConfigPath}/profiles.ini"
-  '' + lib.optionalString pkgs.stdenv.isDarwin ''
-    ln -sfn "${pkgs.firefox}/Applications/Firefox Nightly.app"  "/Applications/Firefox Nightly.app"
-  '';
-
-
-  metaData = builtins.fromJSON (builtins.readFile ../config/firefox/version.json);
-
+  linkFirefoxScript = lib.optionalString pkgs.stdenv.isDarwin ''
+      ln -sfn "${pkgs.firefox}/Applications/Firefox Nightly.app"  "/Applications/Firefox Nightly.app"
+    '';
 
   Firefox =
-    if pkgs.stdenv.isLinux then # Linux
+    if pkgs.stdenv.isLinux then
       pkgs.firefox-nightly-bin
-    else # Darwin
-      pkgs.firefox;
+    else
+      pkgs.firefox-nightly-bin-darwin;
 in
 
 {

@@ -3,7 +3,7 @@
 let
   # https://github.com/NixOS/nixpkgs/blob/master/pkgs/applications/networking/browsers/firefox/wrapper.nix
   extraPolicies = import ../../../config/firefox/app/policy.nix;
-  
+
   wrapperPolicies = {
     policies = {
       DisableAppUpdate = true;
@@ -25,13 +25,12 @@ stdenvNoCC.mkDerivation rec {
   AppName = "Firefox Nightly.app";
   pname = "Firefox-Nightly";
 
-  inherit (metaData) version;
+  version = metaData.version;
 
-  # To update run:
-  # nix-prefetch-url --name 'firefox-app-latest.dmg' 'https://download.mozilla.org/?product=firefox-latest&os=osx&lang=en-US'
   src = fetchurl {
     name = "firefox-nightly-${version}.dmg";
-    inherit (metaData) url sha256;
+    url = metaData.darwin-url;
+    sha256 = metaData.darwin-sha256;
   };
 
   # https://github.com/NixOS/nixpkgs/pull/13636
