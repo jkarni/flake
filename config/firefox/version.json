@@ -1,7 +1,7 @@
 {
   "version": "103.0a1",
   "darwin-url": "https://download.cdn.mozilla.net/pub/firefox/nightly/latest-mozilla-central/firefox-103.0a1.en-US.mac.dmg",
-  "darwin-sha256": "0a6lbm3zr140psgw3ygr6z430ql4jlr3ia8frw17p2rnyyma7aw6",
+  "darwin-sha256": "ZOtM2Xikvyr6OvOVN8UaAsBD/LQXTrnzlz2G7+5vCMA=",
   "linux-url": "https://download.cdn.mozilla.net/pub/firefox/nightly/latest-mozilla-central/firefox-103.0a1.en-US.linux-x86_64.tar.bz2",
   "linux-sha256": "1c4xl6hwis37svkna41732my6agyf34ypgsli636lbks4m1f6pdw"
 }

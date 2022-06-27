@@ -1,7 +1,5 @@
 {
 
-  LegacyProfiles = false; # Disable the feature enforcing a separate profile for each installation.
-
   PasswordManagerEnabled = false;
   DisableFirefoxStudies = true;
   DisablePocket = true;
