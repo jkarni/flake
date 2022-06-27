@@ -11,21 +11,6 @@
 { pkgs }:
 let
   metaData = builtins.fromJSON (builtins.readFile ../config/firefox/version.json);
-
-  extraPolicies = import ../config/firefox/app/policy.nix;
-
-  wrapperPolicies = {
-    policies = {
-      DisableAppUpdate = true;
-    } // extraPolicies;
-  };
-
-
-  policiesJson = pkgs.writeText "policies.json" (builtins.toJSON wrapperPolicies);
-
-
-  configPrefs = ../config/firefox/app/defaults/pref/config-prefs.js;
-  configJs = ../config/firefox/app/config.js;
 in
 final: prev: {
 
@@ -55,14 +40,13 @@ final: prev: {
   # Linux nightly bin
 
 
+  # https://github.com/NixOS/nixpkgs/blob/master/pkgs/applications/networking/browsers/firefox-bin/default.nix
   firefox-nightly-bin-unwrapped = (prev.firefox-bin-unwrapped.override {
     generated = {
-      version = "nightly";
-    };
+      version = metaData.version;  # important, only overrideAttrs version is not enough
+    };                             # overide from input
   }).overrideAttrs (old: {
     pname = "firefox-bin-unwrapped";
-    version = "nightly";
-
     src = prev.fetchurl {
       url = metaData.linux-url;
       sha256 = metaData.linux-sha256;
@@ -80,7 +64,7 @@ final: prev: {
   }).overrideAttrs
     (old: {
       buildCommand = old.buildCommand + ''
-        echo 'pref("general.config.sandbox_enabled", false);' >> "$out/lib/firefox-bin-nightly/defaults/pref/autoconfig.js"
+        echo 'pref("general.config.sandbox_enabled", false);' >> "$out/lib/"${libName}/defaults/pref/autoconfig.js"
       '';
     });
 
