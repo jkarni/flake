@@ -3,6 +3,11 @@
     (import ./AppleFont.nix)
     (import ./Anime4k.nix)
     (import ./Neovim.nix { inherit (args) neovim-nightly; })
-    (import ./Firefox.nix { inherit pkgs; })
+
+
+    (final: prev: {
+      firefox-nightly-bin-darwin = prev.callPackage ../pkgs/darwin/firefox { };
+    })
+
   ];
 }

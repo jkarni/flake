@@ -44,9 +44,4 @@ final: prev: {
         echo 'pref("general.config.sandbox_enabled", false);' >> "$out/lib/firefox-bin-${metaData.version}/defaults/pref/autoconfig.js"
       '';
     });
-
-  ################################################################################################
-  # Darwin Nightly
-
-  firefox-nightly-bin-darwin = prev.callPackage ../pkgs/darwin/firefox { };
 }

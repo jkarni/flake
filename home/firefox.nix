@@ -23,7 +23,7 @@ let
 
 
   linkFirefoxScript = lib.optionalString pkgs.stdenv.isDarwin ''
-      ln -sfn "${pkgs.firefox}/Applications/Firefox Nightly.app"  "/Applications/Firefox Nightly.app"
+      ln -sfn "${pkgs.firefox-nightly-bin-darwin}/Applications/Firefox Nightly.app"  "/Applications/Firefox Nightly.app"
     '';
 
   Firefox =
