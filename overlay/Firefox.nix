@@ -19,8 +19,8 @@ final: prev: {
   # https://github.com/NixOS/nixpkgs/blob/master/pkgs/applications/networking/browsers/firefox-bin/default.nix
   firefox-nightly-bin-unwrapped = (prev.firefox-bin-unwrapped.override {
     generated = {
-      version = metaData.version;  # important, only overrideAttrs version is not enough
-    };                             # overide from args
+      version = metaData.version; # important, only overrideAttrs version is not enough
+    }; # overide from args
   }).overrideAttrs (old: {
     pname = "firefox-bin-unwrapped";
     src = prev.fetchurl {
@@ -44,4 +44,9 @@ final: prev: {
         echo 'pref("general.config.sandbox_enabled", false);' >> "$out/lib/firefox-bin-${metaData.version}/defaults/pref/autoconfig.js"
       '';
     });
+
+  ################################################################################################
+  # Darwin nightly bin
+  firefox-nightly-bin-darwin = prev.callPackage ../pkgs/darwin/firefox { };
+  
 }

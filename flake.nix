@@ -93,7 +93,7 @@
             home-manager-darwin-stable.darwinModules.home-manager
             ./host/M1
             # ./os/darwin/brew.nix
-            ./overlay/darwin.nix
+            ./overlay
             ./modules/darwin.nix
 
             {
@@ -117,7 +117,7 @@
             sops-nix.nixosModules.sops
             home-manager.nixosModules.home-manager
             ./host/hx90
-            ./overlay/linux.nix
+            ./overlay
             ./modules/linux.nix
 
             {
@@ -147,7 +147,7 @@
           # https://nixos.wiki/wiki/Nix_Expression_Language
           # Coercing a relative path with interpolated variables to an absolute path (for imports)
           (./host/oracle + "/${hostName}.nix")
-          ./overlay/linux.nix
+          ./overlay
           ./modules/linux.nix
 
 
