@@ -157,7 +157,6 @@
             networking.hostName = hostName;
             boot.loader.systemd-boot.netbootxyz.enable = true;
 
-            profile.developerMode.enable = true;
             secrets.sops-nix.enable = true;
 
             services.ssh-config.enable = true;

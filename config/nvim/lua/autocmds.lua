@@ -11,12 +11,12 @@ autocmd("BufWritePre", {
   pattern = require("lang-config.treesitter.autoformat"),
 })
 
---This setting is based on my keyboard(Apple Magic Keyboard) layout
---open help in right window
---q to quit
---<CR> to jump in
+-- This setting is based on my keyboard(Apple Magic Keyboard) layout
+-- open help in right window
+-- q to quit
+-- <CR> to jump in
 -- <HOME> <END> to jump previous / next
---<PageUp> <PageDown> to move up and down
+-- <PageUp> <PageDown> to move up and down
 autocmd("BufEnter", {
   group = myAutoGroup,
   pattern = vim.fn.expand('$VIMRUNTIME') .. "/doc/*.txt",
@@ -29,7 +29,8 @@ autocmd("BufEnter", {
   end,
 })
 
-
+-- Enable Copy over SSH
+-- vim.opt.clipboard = vim.opt.clipboard + 'unnamedplus',  <-- Enable Copy to Local System Clipboard Also
 autocmd("TextYankPost", {
   group = myAutoGroup,
   pattern = "*",
