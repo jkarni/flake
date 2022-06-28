@@ -9,7 +9,7 @@
 # https://support.mozilla.org/en-US/kb/customizing-firefox-using-autoconfig
 
 let
-  metaData = builtins.fromJSON (builtins.readFile ../config/firefox/version.json);
+  metaData = builtins.fromJSON (builtins.readFile ../../config/firefox/version.json);
 in
 final: prev: {
 
@@ -32,8 +32,8 @@ final: prev: {
 
   firefox-nightly-bin = (prev.wrapFirefox final.firefox-nightly-bin-unwrapped {
     forceWayland = true;
-    extraPolicies = import ../config/firefox/app/policy.nix;
-    extraPrefs = builtins.readFile ../config/firefox/app/config.js;
+    extraPolicies = import ../../config/firefox/app/policy.nix;
+    extraPrefs = builtins.readFile ../../config/firefox/app/config.js;
   }).overrideAttrs
     (old: {
       # libName = "firefox-bin-${version}";
@@ -44,6 +44,6 @@ final: prev: {
 
   ################################################################################################
   # Darwin nightly bin
-  firefox-nightly-bin-darwin = prev.callPackage ../pkgs/darwin/firefox { };
+  firefox-nightly-bin-darwin = prev.callPackage  ../../pkgs/darwin/firefox { };
 
 }

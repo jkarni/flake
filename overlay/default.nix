@@ -1,8 +1,8 @@
 { pkgs, lib, ... }@args: {
   nixpkgs.overlays = [
-    (import ./AppleFont.nix)
-    (import ./Anime4k.nix)
-    (import ./Neovim.nix { inherit (args) neovim-nightly; })
-    (import ./Firefox.nix)
+    (import ./AppleFont)
+    (import ./Anime4k)
+    (import ./Nvim { inherit (args) neovim-nightly; })
+    (import ./Firefox)
   ];
 }
