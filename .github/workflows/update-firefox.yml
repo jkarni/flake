@@ -37,12 +37,7 @@ jobs:
             --arg latestVersion $latestVersion  \
             --arg latestDarwinHash $latestDarwinHash \
             --arg latestLinuxHash $latestLinuxHash \
-            '{ \
-             "version": $latestVersion, \
-             "linux": {"url": $latestLinuxUrl,"sha256": $latestLinuxHash}, \
-             "darwin": { "url": $latestDarwinUrl,"sha256": $latestDarwinHash}, \
-             "description": "[Auto-generated] Firefox Nightly Version" \
-             }' \
+            '{ "version": $latestVersion, "linux": {"url": $latestLinuxUrl,"sha256": $latestLinuxHash}, "darwin": { "url": $latestDarwinUrl,"sha256": $latestDarwinHash}, "description": "[Auto-Generated] Firefox Nightly Version" }' \
             >  ${GITHUB_WORKSPACE}/config/firefox/version.json
           echo "::set-output name=latestVersion::${latestVersion}"
         fi
