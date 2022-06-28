@@ -34,7 +34,7 @@ autocmd("TextYankPost", {
   group = myAutoGroup,
   pattern = "*",
   callback = function()
-    cmd('OSCYank')
+    cmd('OSCYankReg +')
   end,
 })
 
