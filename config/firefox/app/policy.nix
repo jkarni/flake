@@ -34,6 +34,9 @@
     "toolkit.legacyUserProfileCustomizations.stylesheets" = true;
 
 
+    "browser.urlbar.dnsResolveSingleWordsAfterSearch" = 0;
+
+
   };
 
 

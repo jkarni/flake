@@ -43,6 +43,6 @@ final: prev: {
 
   ################################################################################################
   # Darwin nightly bin
-  firefox-nightly-bin-darwin = prev.callPackage ../../pkgs/darwin/firefox { };
+  firefox-nightly-bin-darwin = prev.callPackage ../../pkgs/darwin/Firefox { };
 
 }
