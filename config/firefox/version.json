@@ -1,5 +1,5 @@
 {
-  "version": "104.0a1",
+  "version": "test",
   "linux": {
     "url": "https://download.cdn.mozilla.net/pub/firefox/nightly/latest-mozilla-central/firefox-104.0a1.en-US.linux-x86_64.tar.bz2",
     "sha256": "0yz6clxd1clbxxbq32frgshz8mlrm5cimwy4iw66akd1fh7h0xil"
