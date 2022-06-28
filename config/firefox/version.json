@@ -1,11 +1,11 @@
 {
-  "version": "test",
+  "version": "104.0a1",
   "linux": {
-    "sha256": "b",
-    "url": "d"
+    "url": "https://download.cdn.mozilla.net/pub/firefox/nightly/latest-mozilla-central/firefox-104.0a1.en-US.linux-x86_64.tar.bz2",
+    "sha256": "0yz6clxd1clbxxbq32frgshz8mlrm5cimwy4iw66akd1fh7h0xil"
   },
   "darwin": {
-    "url": "b",
-    "sha256": "d"
+    "url": "https://download.cdn.mozilla.net/pub/firefox/nightly/latest-mozilla-central/firefox-104.0a1.en-US.mac.dmg",
+    "sha256": "0qqdzhhfamhn6rlapw9xhrb28maf9d8gfqaca3gnff9gnv74k05g"
   }
 }
