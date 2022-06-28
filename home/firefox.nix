@@ -12,7 +12,7 @@ let
     if pkgs.stdenv.isLinux then
       pkgs.firefox-nightly-bin
     else
-      pkgs.runCommand "firefox-0.0.0" { } "mkdir $out"; # declare firefox-darwin in environment.systemPackages instead <-- Raycast can launch
+      pkgs.runCommand "firefox-0.0.0" { } "mkdir $out"; # declare actual firefox-nightly-bin-darwin in environment.systemPackages instead <-- Raycast can launch
 
 in
 
