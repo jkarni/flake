@@ -30,6 +30,15 @@ autocmd("BufEnter", {
 })
 
 
+autocmd("TextYankPost", {
+  group = myAutoGroup,
+  pattern = "*",
+  callback = function()
+    cmd('OSCYank')
+  end,
+})
+
+
 --Packer
 autocmd("BufWritePost", {
   group = myAutoGroup,

@@ -92,9 +92,6 @@ keymap("n", "<leader>p", ":FzfLua files<CR>")
 -- Find Code
 keymap("n", "<leader>f", ":FzfLua live_grep<CR>")
 
--- SSH Copy
-keymap({'n', 'v'}, '<leader>y', ':OSCYankReg<CR>')
-
 
 -- Vimtree
 -- alt + b 键打开关闭tree [VScode]
