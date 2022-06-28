@@ -50,10 +50,7 @@ packer.startup(
       use 'goolord/alpha-nvim'
       use 'ahmedkhalf/project.nvim'
       use 'rmagatti/auto-session'
-      use 'rmagatti/session-lens'
-
-      -- System Enhancement
-      use 'ojroques/vim-oscyank'
+      use 'rmagatti/session-lens'  
 
       -- fzf
       use 'ibhagwan/fzf-lua'
@@ -89,6 +86,7 @@ packer.startup(
 
       --Enhancement
       use 'lewis6991/impatient.nvim'
+      use 'ojroques/vim-oscyank'
 
       -- Automatically set up your configuration after cloning packer.nvim
       if packer_bootstrap then
