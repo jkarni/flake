@@ -3,7 +3,8 @@ local install_path = fn.stdpath("data") .. "/site/pack/packer/start/packer.nvim"
 local packer_bootstrap
 if fn.empty(fn.glob(install_path)) > 0 then
   vim.notify("Pakcer Installing...")
-  packer_bootstrap = fn.system({ 'git', 'clone', '--depth', '1', 'https://github.com/wbthomason/packer.nvim', install_path })
+  packer_bootstrap = fn.system({ 'git', 'clone', '--depth', '1', 'https://github.com/wbthomason/packer.nvim',
+    install_path })
 
   -- https://github.com/wbthomason/packer.nvim/issues/750
   local rtp_addition = vim.fn.stdpath("data") .. "/site/pack/*/start/*"
@@ -43,13 +44,19 @@ packer.startup(
       use 'akinsho/toggleterm.nvim'
       use 'folke/which-key.nvim'
 
-      -- Telescope
+      -- Telescope/Dashboard
       use 'nvim-telescope/telescope.nvim'
       use 'nvim-telescope/telescope-ui-select.nvim'
       use 'goolord/alpha-nvim'
       use 'ahmedkhalf/project.nvim'
       use 'rmagatti/auto-session'
       use 'rmagatti/session-lens'
+
+      -- System Enhancement
+      use 'ojroques/vim-oscyank'
+
+      -- fzf
+      use 'ibhagwan/fzf-lua'
 
       --Tree-Sitter from nixpkgs
       -- use 'nvim-treesitter/nvim-treesitter'

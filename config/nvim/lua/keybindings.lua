@@ -88,9 +88,12 @@ M.toggleTerm = "<leader>\\"
 
 -- Telescope
 -- Find File Base On Path
-keymap("n", "<leader>p", ":Telescope find_files<CR>")
+keymap("n", "<leader>p", ":FzfLua files<CR>")
 -- Find Code
-keymap("n", "<leader>f", ":Telescope live_grep<CR>")
+keymap("n", "<leader>f", ":FzfLua live_grep<CR>")
+
+-- SSH Copy
+keymap({'n', 'v'}, '<leader>y', ':OSCYankReg<CR>')
 
 
 -- Vimtree
