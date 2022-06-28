@@ -29,8 +29,8 @@ stdenvNoCC.mkDerivation rec {
 
   src = fetchurl {
     name = "firefox-nightly-${version}.dmg";
-    url = metaData.darwin-url;
-    sha256 = metaData.darwin-sha256;
+    inherit (metaData.darwin) url;
+    inherit (metaData.darwin) sha256;
   };
 
   # https://github.com/NixOS/nixpkgs/pull/13636

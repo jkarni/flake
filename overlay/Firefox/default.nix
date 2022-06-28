@@ -18,14 +18,13 @@ final: prev: {
 
   # https://github.com/NixOS/nixpkgs/blob/master/pkgs/applications/networking/browsers/firefox-bin/default.nix
   firefox-nightly-bin-unwrapped = (prev.firefox-bin-unwrapped.override {
-    generated = {
-      version = metaData.version; # important, only overrideAttrs version is not enough
-    }; # overide from args
+    generated.version = metaData.version; # Important, only overrideAttrs version is not enough  <--overide from args
   }).overrideAttrs (old: {
     pname = "firefox-bin-unwrapped";
+    # version is from generated.version
     src = prev.fetchurl {
-      url = metaData.linux-url;
-      sha256 = metaData.linux-sha256;
+      inherit (metaData.linux) url;
+      inherit (metaData.linux) sha256;
     };
 
   });
@@ -44,6 +43,6 @@ final: prev: {
 
   ################################################################################################
   # Darwin nightly bin
-  firefox-nightly-bin-darwin = prev.callPackage  ../../pkgs/darwin/firefox { };
+  firefox-nightly-bin-darwin = prev.callPackage ../../pkgs/darwin/firefox { };
 
 }
