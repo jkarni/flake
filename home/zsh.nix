@@ -1,10 +1,17 @@
-{ pkgs, lib, osConfig, ... }@args: {
+{ pkgs, lib, osConfig, ... }@args:
+let
+
+  zsh-config = ../config/zsh;
+
+in
+
+{
 
   home.packages = with pkgs;  [
+    fzf
     zsh-fzf-tab
   ];
 
-  programs.fzf.enable = true;
   programs.zoxide.enable = true;
   programs.starship.enable = true;
   programs.nix-index.enable = osConfig.profile.developerMode.enable;
@@ -44,50 +51,40 @@
 
 
     initExtra = with args;'' 
-      setopt globdots
 
-      export FZF_COMPLETION_TRIGGER='\'
+    setopt globdots
 
-      _fzf_compgen_path() {
-        fd --hidden --follow --exclude ".git" . "$1"
-      }
+    export FZF_COMPLETION_TRIGGER='\'
 
-      _fzf_compgen_dir() {
-        fd --type d --hidden --follow --exclude ".git" . "$1" 
-      }
+    zstyle ':completion:*:descriptions' format '[%d]'
+    zstyle ':fzf-tab:*' switch-group ',' '.'
+  
+    zstyle ':fzf-tab:complete:z:*' fzf-preview 'if [ -d "$realpath" ]; then exa -1 --color=always "$realpath"; else pistol "$realpath"; fi'
+    zstyle ':fzf-tab:complete:z:*' fzf-pad 50
 
-      zstyle ':completion:*:descriptions' format '[%d]'
-      zstyle ':fzf-tab:*' switch-group ',' '.'
-    
-      zstyle ':fzf-tab:complete:z:*' fzf-preview 'if [ -d "$realpath" ]; then exa -1 --color=always "$realpath"; else pistol "$realpath"; fi'
-      zstyle ':fzf-tab:complete:nvim:*' fzf-preview 'if [ -d "$realpath" ]; then exa -1 --color=always "$realpath"; else pistol "$realpath"; fi'
+    zstyle ':fzf-tab:complete:kill:argument-rest' fzf-preview 'ps --pid=$word -o cmd --no-headers -w -w'
+    zstyle ':fzf-tab:complete:kill:argument-rest' fzf-flags '--preview-window=down:4:wrap'
 
-      # give a preview of commandline arguments when completing `kill`
-      zstyle ':completion:*:*:*:*:processes' command "ps -u $USER -o pid,user,comm -w -w"
-      zstyle ':fzf-tab:complete:(kill|ps):argument-rest' fzf-preview \
-      '[[ $group == "[process ID]" ]] && ps --pid=$word -o cmd --no-headers -w -w'
-      zstyle ':fzf-tab:complete:(kill|ps):argument-rest' fzf-flags --preview-window=down:3:wrap
+    zstyle ':fzf-tab:complete:systemctl-*:*' fzf-preview 'SYSTEMD_COLORS=1 systemctl status $word'
 
-      zstyle ':fzf-tab:complete:systemctl-*:*' fzf-preview 'SYSTEMD_COLORS=1 systemctl status $word'
+    source ${zsh-you-should-use}/you-should-use.plugin.zsh
+    source ${zsh-tab-title}/zsh-tab-title.plugin.zsh  
 
+    source ${zsh-config}/fzf/completion.zsh
+    source ${zsh-config}/fzf/key-bindings.zsh
+    source ${pkgs.zsh-fzf-tab}/share/fzf-tab/fzf-tab.plugin.zsh
 
-      source ${zsh-you-should-use}/you-should-use.plugin.zsh
-      source ${zsh-tab-title}/zsh-tab-title.plugin.zsh   
-
-      source ${pkgs.zsh-fzf-tab}/share/fzf-tab/fzf-tab.plugin.zsh
-      source ${zsh-autosuggestions}/zsh-autosuggestions.zsh 
-      source ${zsh-fast-syntax-highlighting}/fast-syntax-highlighting.plugin.zsh
-
-
+    source ${zsh-autosuggestions}/zsh-autosuggestions.zsh 
+    source ${zsh-fast-syntax-highlighting}/fast-syntax-highlighting.plugin.zsh
 
     ''
     + lib.optionalString pkgs.stdenv.isDarwin ''
     
-      export EDITOR=nvim
-      export PAGER=bat
+    export EDITOR=nvim
+    export PAGER=bat
 
-      path+=~/go/bin
-      path+=/Applications/Surge.app/Contents/Applications
+    path+=~/go/bin
+    path+=/Applications/Surge.app/Contents/Applications
     '';
 
   };
