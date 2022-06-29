@@ -99,6 +99,7 @@
             {
               hm.stateVersion = stateVersion;
               profile.developerMode.enable = true;
+              security.pam.enableSudoTouchIdAuth = true; # https://github.com/LnL7/nix-darwin/pull/228
             }
 
           ];
