@@ -57,8 +57,11 @@
         fd --type d --hidden --follow --exclude ".git" . "$1" 
       }
 
+
       zstyle ':completion:*:descriptions' format '[%d]'
       zstyle ':fzf-tab:*' switch-group ',' '.'
+
+
      
       zstyle ':fzf-tab:complete:z:*' fzf-preview 'if [ -d "$realpath" ]; then exa -1 --color=always "$realpath"; else pistol "$realpath"; fi'
       zstyle ':fzf-tab:complete:nvim:*' fzf-preview 'if [ -d "$realpath" ]; then exa -1 --color=always "$realpath"; else pistol "$realpath"; fi'
@@ -71,9 +74,6 @@
 
       zstyle ':fzf-tab:complete:systemctl-*:*' fzf-preview 'SYSTEMD_COLORS=1 systemctl status $word'
 
-      zstyle ':fzf-tab:*' fzf-bindings 'y:execute-silent({_FTB_INIT_}echo "$realpath" | pbcopy)'
-
-      zstyle ':fzf-tab:*' continuous-trigger '/'
 
       source ${zsh-you-should-use}/you-should-use.plugin.zsh
       source ${zsh-tab-title}/zsh-tab-title.plugin.zsh   

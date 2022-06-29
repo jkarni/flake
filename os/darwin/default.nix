@@ -27,12 +27,9 @@
     };
   };
 
-  environment.systemPackages = with pkgs;[
-    firefox-nightly-bin-darwin
-  ];
 
 
-  #  cd /var/db/com.apple.xpc.launchd
+  #  launchd related folder: /var/db/com.apple.xpc.launchd
   #  sudo launchctl bootstrap  system  /Library/LaunchAgents/org.nixos.FirefoxEnv.plist
   #  sudo launchctl enable system/org.nixos.FirefoxEnv
   launchd.agents.FirefoxEnv = {
