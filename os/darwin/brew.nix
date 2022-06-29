@@ -3,7 +3,7 @@
     enable = true;
     autoUpdate = true;
     cleanup = "uninstall";
-    
+
     brews = [
       "iproute2mac"
       "mas"
@@ -28,7 +28,6 @@
       "provisionql"
       "android-platform-tools"
       "bob"
-      "lyricsx"
       "nrlquaker-winbox"
       "wireshark"
       "raycast"
@@ -41,7 +40,7 @@
       # "neteasemusic"
 
       # "google-chrome"
-   
+
       # "tencent-lemon"
       # "airbuddy"
       # "bartender"
@@ -83,6 +82,7 @@
     #   Xcode = 497799835;
     #   Bitwarden = 1352778147;
     #   Infuse = 1136220934;
+    #   LyricsX = 1254743014;
     #   Apple-Configurator = 1037126344;
     # };
 

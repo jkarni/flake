@@ -94,7 +94,7 @@
             ./host/M1
             # ./os/darwin/brew.nix
             ./overlay
-            ./modules/darwin.nix
+            ./modules 
 
             {
               hm.stateVersion = stateVersion;
@@ -103,7 +103,7 @@
             }
 
           ];
-          specialArgs = commonSpecialArgs;
+          specialArgs = commonSpecialArgs//{ isDarwin = true;};
         };
 
       };
@@ -119,7 +119,7 @@
             home-manager.nixosModules.home-manager
             ./host/hx90
             ./overlay
-            ./modules/linux.nix
+            ./modules
 
             {
               nixpkgs.overlays = [ nixpkgs-wayland.overlay ];
@@ -137,7 +137,7 @@
               services.ssh-config.enable = true;
             }
           ];
-          specialArgs = commonSpecialArgs;
+          specialArgs = commonSpecialArgs//{ isLinux = true;};
         };
 
       } // nixpkgs.lib.genAttrs oracleServerList (hostName: nixpkgs.lib.nixosSystem {
@@ -149,8 +149,7 @@
           # Coercing a relative path with interpolated variables to an absolute path (for imports)
           (./host/oracle + "/${hostName}.nix")
           ./overlay
-          ./modules/linux.nix
-
+          ./modules
 
           {
             system.stateVersion = stateVersion;
@@ -164,7 +163,7 @@
             services.shadowsocks-rust.enable = true;
           }
         ];
-        specialArgs = commonSpecialArgs;
+        specialArgs = commonSpecialArgs//{ isLinux = true;};
       });
 
 
