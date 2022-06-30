@@ -1,6 +1,7 @@
 {
   # https://github.com/mozilla/policy-templates/
   PasswordManagerEnabled = false;
+  DisableTelemetry = true;
   DisableFirefoxStudies = true;
   DisablePocket = true;
   CaptivePortal = false;
@@ -28,11 +29,11 @@
     "browser.aboutwelcome.enabled" = false;
     "browser.warnOnQuitShortcut" = false;
     "browser.urlbar.dnsResolveSingleWordsAfterSearch" = 0;
-
-    "extensions.getAddons.showPane" = false; # hide left side bar
-    "extensions.htmlaboutaddons.recommendations.enabled" = false; # To use this option, DisableTelemetry can not be true <-- evil!
+   
+    # disable recommended plugin on about:addons
+    "extensions.getAddons.showPane" = false; 
+    "extensions.htmlaboutaddons.recommendations.enabled" = false;
     
-
     # Enable CustomCSS
     "toolkit.legacyUserProfileCustomizations.stylesheets" = true;
   };
