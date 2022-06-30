@@ -34,10 +34,7 @@
   #  sudo launchctl enable system/org.nixos.FirefoxEnv
   launchd.agents.FirefoxEnv = {
     serviceConfig.ProgramArguments = [
-      "/bin/launchctl"
-      "setenv"
-      "MOZ_LEGACY_PROFILES"
-      "1"
+      "launchctl setenv MOZ_LEGACY_PROFILES 1; launchctl setenv MOZ_ALLOW_DOWNGRADE 1"
     ];
     serviceConfig.RunAtLoad = true;
   };
