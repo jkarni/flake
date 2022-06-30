@@ -1,4 +1,4 @@
-{ pkgs, lib, ... }: {
+{ pkgs, lib, config, ... }: {
 
   home.packages = with pkgs;  [
     lf
@@ -13,4 +13,5 @@
       ln -sfn $HOME/flake/config/lf  $HOME/.config/lf
     '';
   };
+
 }
