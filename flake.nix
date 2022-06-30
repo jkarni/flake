@@ -94,16 +94,17 @@
             ./host/M1
             # ./os/darwin/brew.nix
             ./overlay
-            ./modules 
+            ./modules
 
             {
               hm.stateVersion = stateVersion;
+              networking.hostName ="M1";
               profile.developerMode.enable = true;
               security.pam.enableSudoTouchIdAuth = true; # https://github.com/LnL7/nix-darwin/pull/228
             }
 
           ];
-          specialArgs = commonSpecialArgs//{ isDarwin = true;};
+          specialArgs = commonSpecialArgs // { isDarwin = true; };
         };
 
       };
@@ -137,7 +138,7 @@
               services.ssh-config.enable = true;
             }
           ];
-          specialArgs = commonSpecialArgs//{ isLinux = true;};
+          specialArgs = commonSpecialArgs // { isLinux = true; };
         };
 
       } // nixpkgs.lib.genAttrs oracleServerList (hostName: nixpkgs.lib.nixosSystem {
@@ -163,7 +164,7 @@
             services.shadowsocks-rust.enable = true;
           }
         ];
-        specialArgs = commonSpecialArgs//{ isLinux = true;};
+        specialArgs = commonSpecialArgs // { isLinux = true; };
       });
 
 
@@ -199,7 +200,7 @@
 
       packages."aarch64-darwin"."firefox-darwin" = import ./pkgs/darwin/firefox { inherit (nixpkgs.legacyPackages."aarch64-darwin") stdenvNoCC lib fetchurl writeText undmg; };
 
-      packages."aarch64-darwin"."Anime4k" = import ./pkgs/Anime4k { inherit (nixpkgs.legacyPackages."aarch64-darwin") stdenvNoCC fetchzip; };
+      packages."aarch64-darwin"."Anime4k" = import ./pkgs/Anime4k { inherit (nixpkgs.legacyPackages."aarch64-darwin") stdenvNoCC unzip fetchurl; };
 
       #############################################################################################################################
       # Shell

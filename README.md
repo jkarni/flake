@@ -50,10 +50,6 @@ git clone  https://github.com/mlyxshi/flake /mnt/etc/flake
 nixos-install --flake /mnt/etc/flake#hx90 -v
 ```
 
-第一次安装, sops配置失败，不过没关系，ssh authorized_key是明文ed25519 public key，所以可以登录
-
-ssh登录后，配置sops
-
 ```
 mkdir -p /var/lib/sops-nix/
 echo "MY AGE PRIVATE KEY" > /var/lib/sops-nix/key.txt
@@ -74,7 +70,7 @@ git remote set-url origin github.com:mlyxshi/flake
 sudo spctl --master-disable 
 csrutil status
 
-# Recovery Command+R   <-- shut down + long press start 
+# Recovery  <-- shut down + long press start 
 csrutil disable
 
 xcode-select --install

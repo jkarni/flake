@@ -21,22 +21,16 @@
     "browser.theme.toolbar-theme" = 0;
     "browser.theme.content-theme" = 0;
 
-    "browser.aboutConfig.showWarning" = false;
-    "browser.aboutwelcome.enabled" = false;
-
     "browser.startup.page" = 3; # Restore previous session
-
     "browser.toolbars.bookmarks.visibility" = "always";
 
+    "browser.aboutConfig.showWarning" = false;
+    "browser.aboutwelcome.enabled" = false;
     "browser.warnOnQuitShortcut" = false;
+    "browser.urlbar.dnsResolveSingleWordsAfterSearch" = 0;
 
     # Enable CustomCSS
     "toolkit.legacyUserProfileCustomizations.stylesheets" = true;
-
-
-    "browser.urlbar.dnsResolveSingleWordsAfterSearch" = 0;
-
-
   };
 
 

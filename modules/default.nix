@@ -1,4 +1,4 @@
-# we must pass a variable to determine system, pkgs.stdenv.isLinux will cause infinite recursion
+# Must pass a variable to determine system, pkgs.stdenv.isLinux will cause infinite recursion
 { pkgs, lib, ... }@args: {
   imports = [
     # common
