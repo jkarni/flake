@@ -19,6 +19,7 @@
     tree
     htop
     neofetch
+    mediainfo
     unzip
     # nix
     nix-tree

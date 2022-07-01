@@ -1,6 +1,3 @@
-# Use mpv as video player and image viewer
-# mpv                                 <-- video(default)
-# mpv --config-dir=$HOME/.config/mpi  <-- image
 { pkgs, lib, config, osConfig, ... }:
 let
   anime4k = pkgs.Anime4k;
@@ -46,7 +43,4 @@ in
   home.file.".config/mpv/mpv.conf".source = config.lib.file.mkOutOfStoreSymlink "${osConfig.hm.nixConfigDir}/config/mpv/mpv.conf";
   home.file.".config/mpv/scripts".source = config.lib.file.mkOutOfStoreSymlink "${osConfig.hm.nixConfigDir}/config/mpv/scripts";
   home.file.".config/mpv/script-opts".source = config.lib.file.mkOutOfStoreSymlink "${osConfig.hm.nixConfigDir}/config/mpv/script-opts";
-
-  home.file.".config/mpi".source = config.lib.file.mkOutOfStoreSymlink "${osConfig.hm.nixConfigDir}/config/mpi";
-
 }
