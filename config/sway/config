@@ -46,14 +46,16 @@ exec swayidle -w \
 #
 # Basics:
 #
-    # Start a terminal
-    bindsym $mod+Return exec $term
+
 
     # Kill focused window
     bindsym $mod+q kill
 
     # Start your launcher
     bindsym $mod+space  exec $menu
+
+    # Start a terminal
+    bindsym alt+space exec $term
 
     # Reload the configuration file
     bindsym $mod+Shift+r reload
