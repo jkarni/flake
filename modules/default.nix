@@ -3,7 +3,8 @@
   imports = [
     # common
     ./profile/developerMode.nix
-    ./hm
+    ./hm/stateVersion.nix
+    ./hm/nixConfigDir.nix
   ] ++ lib.optionals (args ? isDarwin) [
     ./security/pam.nix
   ] ++ lib.optionals (args ? isLinux) [

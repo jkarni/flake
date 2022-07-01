@@ -1,4 +1,4 @@
-{ pkgs, lib, ... }:
+{ pkgs, lib, config, osConfig, ... }:
 
 let
 
@@ -23,13 +23,14 @@ in
   ];
 
 
+  #  https://support.mozilla.org/en-US/kb/understanding-depth-profile-installation
+  #  Linux firefox wrapper set MOZ_LEGACY_PROFILES=1 by default
+  #  Under macOS, we need to set System-level environment variable MOZ_LEGACY_PROFILES=1 by launchctl setenv, See os/darwin/default.nix
   home.file = {
-    #  https://support.mozilla.org/en-US/kb/understanding-depth-profile-installation
-    #  Linux firefox wrapper set MOZ_LEGACY_PROFILES=1 by default
-    #  Under macOS, we need to set System-level environment variable MOZ_LEGACY_PROFILES=1 by launchctl setenv, See os/darwin/default.nix
-    "${firefoxConfigPath}/profiles.ini".source = ../config/firefox/profile/profiles.ini;
-    "${firefoxConfigPath}/default/chrome".source = ../config/firefox/profile/default/chrome;
+    "${firefoxConfigPath}/profiles.ini".source = config.lib.file.mkOutOfStoreSymlink ../config/firefox/profile/profiles.ini;
+    "${firefoxConfigPath}/default/chrome".source = config.lib.file.mkOutOfStoreSymlink ../config/firefox/profile/default/chrome;
   };
+
 
 
   # we need alias to /Applications so that Raycast/Spotlight can work <-- Not sure

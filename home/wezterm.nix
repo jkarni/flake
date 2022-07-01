@@ -1,9 +1,3 @@
-{ pkgs, lib, ... }: {
-
-  home.activation = lib.optionalAttrs pkgs.stdenv.isDarwin {
-    linkWezterm = lib.hm.dag.entryAfter [ "writeBoundary" ] ''
-      ln -sfn $HOME/flake/config/wezterm  $HOME/.config/wezterm
-    '';
-  };
-
+{ config, osConfig, ... }: {
+  home.file.".config/wezterm".source = config.lib.file.mkOutOfStoreSymlink "${osConfig.hm.nixConfigDir}/config/wezterm";
 }

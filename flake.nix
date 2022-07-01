@@ -98,6 +98,7 @@
 
             {
               hm.stateVersion = stateVersion;
+              hm.nixConfigDir = "/Users/dominic/flake";
               networking.hostName ="M1";
               profile.developerMode.enable = true;
               security.pam.enableSudoTouchIdAuth = true; # https://github.com/LnL7/nix-darwin/pull/228
@@ -129,6 +130,7 @@
             {
               system.stateVersion = stateVersion;
               hm.stateVersion = stateVersion;
+              hm.nixConfigDir = "/etc/flake";
               networking.hostName = "hx90";
 
               profile.desktopEnv.enable = true;
@@ -155,6 +157,7 @@
           {
             system.stateVersion = stateVersion;
             hm.stateVersion = stateVersion;
+            hm.nixConfigDir = "/etc/flake";
             networking.hostName = hostName;
             boot.loader.systemd-boot.netbootxyz.enable = true;
 

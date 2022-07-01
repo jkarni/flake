@@ -1,10 +1,7 @@
-{ pkgs, lib, osConfig, ... }@args:
+{ pkgs, lib, config, osConfig, ... }@args:
 let
-
   zsh-config = ../config/zsh;
-
 in
-
 {
 
   home.packages = with pkgs;  [
@@ -16,15 +13,7 @@ in
   programs.starship.enable = true;
   programs.nix-index.enable = osConfig.profile.developerMode.enable;
 
-  home.file = lib.optionalAttrs pkgs.stdenv.isLinux {
-    "starship.toml".source = ../config/starship.toml;
-  };
-
-  home.activation = lib.optionalAttrs pkgs.stdenv.isDarwin {
-    linkStarShip = lib.hm.dag.entryAfter [ "writeBoundary" ] ''
-      ln -sfn $HOME/flake/config/starship.toml  $HOME/.config/starship.toml
-    '';
-  };
+  home.file.".config/starship.toml".source = config.lib.file.mkOutOfStoreSymlink "${osConfig.hm.nixConfigDir}/config/starship.toml";
 
   programs.zsh = {
 

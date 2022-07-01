@@ -1,4 +1,4 @@
-{ pkgs, lib, osConfig, ... }:
+{ pkgs, lib, osConfig, config, ... }:
 let
   # the special plugin which contains parsers  <-- need compile
   # use packer to manage other plugins 
@@ -31,15 +31,10 @@ in
       -- Invoke Real Start
       require("start")
     '';
-  } // lib.optionalAttrs pkgs.stdenv.isLinux {
-    "nvim/lua/".source = ../config/nvim/lua;
   };
 
-  home.activation = lib.optionalAttrs pkgs.stdenv.isDarwin {
-    linkNeovim = lib.hm.dag.entryAfter [ "writeBoundary" ] ''
-      ln -sfn $HOME/flake/config/nvim/lua  $HOME/.config/nvim/lua
-    '';
-  };
+
+  home.file.".config/nvim/lua".source = config.lib.file.mkOutOfStoreSymlink "${osConfig.hm.nixConfigDir}/config/nvim/lua";
 
   home.packages = with pkgs;  [
 
@@ -68,5 +63,6 @@ in
 
     nodejs # JavaScript
   ];
+
 
 }

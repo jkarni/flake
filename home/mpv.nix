@@ -1,7 +1,7 @@
 # Use mpv as video player and image viewer
 # mpv                                 <-- video(default)
 # mpv --config-dir=$HOME/.config/mpi  <-- image
-{ pkgs, lib, ... }:
+{ pkgs, lib, config, osConfig, ... }:
 let
   anime4k = pkgs.Anime4k;
   Anime4kInputs = {
@@ -42,24 +42,11 @@ in
     yt-dlp
   ];
 
-  home.activation = lib.optionalAttrs pkgs.stdenv.isDarwin {
-    linkMPV = lib.hm.dag.entryAfter [ "writeBoundary" ] ''
-      ln -sfn $HOME/flake/config/mpv/mpv.conf  $HOME/.config/mpv/mpv.conf 
-      ln -sfn $HOME/flake/config/mpv/scripts $HOME/.config/mpv/scripts
-      ln -sfn $HOME/flake/config/mpv/script-opts   $HOME/.config/mpv/script-opts  
-    '';
-    linkMPI = lib.hm.dag.entryAfter [ "writeBoundary" ] ''
-      ln -sfn $HOME/flake/config/mpi  $HOME/.config/mpi
-    '';
-  };
 
-  xdg.configFile = lib.optionalAttrs pkgs.stdenv.isLinux {
-    "mpv/mpv.conf".source = ../config/mpv/mpv.conf;
-    "mpv/scripts".source = ../config/mpv/scripts;
-    "mpv/script-opts".source = ../config/mpv/script-opts;
+  home.file.".config/mpv/mpv.conf".source = config.lib.file.mkOutOfStoreSymlink "${osConfig.hm.nixConfigDir}/config/mpv/mpv.conf";
+  home.file.".config/mpv/scripts".source = config.lib.file.mkOutOfStoreSymlink "${osConfig.hm.nixConfigDir}/config/mpv/scripts";
+  home.file.".config/mpv/script-opts".source = config.lib.file.mkOutOfStoreSymlink "${osConfig.hm.nixConfigDir}/config/mpv/script-opts";
 
-    "mpi".source = ../config/mpi;
-  };
-
+  home.file.".config/mpi".source = config.lib.file.mkOutOfStoreSymlink "${osConfig.hm.nixConfigDir}/config/mpi";
 
 }
