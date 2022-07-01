@@ -18,7 +18,6 @@
 
     casks = [
       "mpv"
-      "wezterm"
       "font-roboto-mono-nerd-font"
       "calibre"
       "ipatool"

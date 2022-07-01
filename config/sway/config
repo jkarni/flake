@@ -3,8 +3,8 @@
 # Mod Key = Option
 set $mod Mod4
 
-set $term foot
-set $menu fuzzel --terminal foot --background 282a36FA --text-color FFFFFFA0 --selection-color 3e4153FA --selection-text-color FFFFFFFF --match-color bd93f9FF
+set $term kitty
+set $menu fuzzel --terminal kitty --background 282a36FA --text-color FFFFFFA0 --selection-color 3e4153FA --selection-text-color FFFFFFFF --match-color bd93f9FF
 
 set $xcursor_theme Adwaita
 set $xcursor_size 24
@@ -131,6 +131,6 @@ mode "resize" {
 bindsym $mod+r mode "resize"
 
 exec swaymsg "workspace 2; exec firefox" 
-exec swaymsg "workspace 3; exec foot" # root terminal
-exec swaymsg "workspace 1; exec foot" # default terminal
+exec swaymsg "workspace 3; exec kitty" # root terminal
+exec swaymsg "workspace 1; exec kitty" # default terminal
 

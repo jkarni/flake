@@ -9,7 +9,6 @@ in
     lf
     
     # preview image 
-    kitty
     previewerWrapper
     cleanerWrapper
   ];

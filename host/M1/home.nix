@@ -2,7 +2,7 @@
 
   imports = [
     ../../home
-    ../../home/wezterm.nix
+    ../../home/kitty.nix
     ../../home/mpv.nix
     ../../home/firefox.nix
   ];

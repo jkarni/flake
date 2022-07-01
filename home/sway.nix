@@ -1,13 +1,13 @@
 { pkgs, ... }: {
   imports = [
     ./default.nix
+    ./kitty.nix
     ./mpv.nix
     ./firefox.nix
   ];
 
 
   xdg.configFile."sway/config".source = ../config/sway/config;
-  xdg.configFile."foot/foot.ini".source = ../config/foot/foot.ini;
 
   home.packages = with pkgs; [
     swaylock
@@ -15,9 +15,6 @@
     wl-clipboard
     pavucontrol
     baobab
-
-    # https://codeberg.org/dnkl   <-- my favourite developer in wayland. Minimalism! 
-    foot
     fuzzel
 
     xorg.xlsclients #xorg.xmodmap
