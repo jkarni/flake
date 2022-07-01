@@ -32,8 +32,6 @@ in
   };
 
 
-
-  # we need alias to /Applications so that Raycast/Spotlight can work <-- Not sure
   home.activation = lib.optionalAttrs pkgs.stdenv.isDarwin {
     linkFirefox = lib.hm.dag.entryAfter [ "writeBoundary" ] ''
       ln -sfn "${pkgs.firefox-nightly-bin-darwin}/Applications/Firefox Nightly.app"  "/Applications/Firefox Nightly.app"
