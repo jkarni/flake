@@ -7,7 +7,8 @@
     delta.enable = true;
     
     ignores = [
-      ".DS_Store" # macOS
+      ".DS_Store"
+      ".vscode"
     ];
 
     extraConfig = {
