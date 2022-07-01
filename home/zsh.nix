@@ -53,6 +53,7 @@ in
     zstyle -e '*' list-colors 'reply=(''${(s[:])LS_COLORS})'
     zstyle ':completion:*:descriptions' format '[%d]'
     zstyle ':fzf-tab:*' switch-group ',' '.'
+    zstyle ':fzf-tab:*' continuous-trigger 'space'
   
     zstyle ':fzf-tab:complete:z:*' fzf-preview 'if [ -d "$realpath" ]; then exa -1 --color=always "$realpath"; else pistol "$realpath"; fi'
     zstyle ':fzf-tab:complete:z:*' fzf-pad 50
