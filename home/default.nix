@@ -20,6 +20,7 @@
     htop
     neofetch
     mediainfo
+    yt-dlp
     unzip
     # nix
     nix-tree
