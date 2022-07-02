@@ -30,8 +30,9 @@
 
 
   #  launchd related folder: /var/db/com.apple.xpc.launchd
+
+  #  Manually run once
   #  sudo launchctl bootstrap  system  /Library/LaunchAgents/org.nixos.FirefoxEnv.plist
-  #  sudo launchctl enable system/org.nixos.FirefoxEnv
   launchd.agents.FirefoxEnv = {
     serviceConfig.ProgramArguments = [
       "bash"

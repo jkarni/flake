@@ -3,3 +3,6 @@ skhd-init:
 
 skhd-restart:
 	launchctl kickstart -k gui/501/org.nixos.skhd
+
+firefox-env-init:
+	sudo launchctl bootstrap  system  /Library/LaunchAgents/org.nixos.FirefoxEnv.plist
