@@ -6,7 +6,6 @@
     ./zsh.nix
     ./lf.nix
     ./nvim.nix
-    ./direnv.nix
   ];
 
 

@@ -13,6 +13,13 @@ in
   programs.starship.enable = true;
   programs.nix-index.enable = osConfig.profile.developerMode.enable;
 
+  programs.direnv = lib.optionalAttrs osConfig.profile.developerMode.enable {
+    enable = true;
+    nix-direnv = {
+      enable = true;
+    };
+  };
+
   home.file.".config/starship.toml".source = config.lib.file.mkOutOfStoreSymlink "${osConfig.hm.nixConfigDir}/config/starship.toml";
 
   programs.zsh = {

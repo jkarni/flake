@@ -1,11 +1,10 @@
-{ pkgs, config, ... }: {
+{ pkgs, config, osConfig, ... }: {
 
   imports = [
     ./default.nix
     ./kitty.nix
     ./mpv.nix
     ./firefox.nix
-    ./skhd.nix
   ];
 
   home.packages = with pkgs;  [
@@ -26,6 +25,9 @@
       };
     in
     "${apps}/Applications";
+
+
+  home.file.".config/skhd".source = config.lib.file.mkOutOfStoreSymlink "${osConfig.hm.nixConfigDir}/config/skhd";
 
 }
 
