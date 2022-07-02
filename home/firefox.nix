@@ -31,11 +31,4 @@ in
     "${firefoxConfigPath}/default/chrome".source = config.lib.file.mkOutOfStoreSymlink ../config/firefox/profile/default/chrome;
   };
 
-
-  home.activation = lib.optionalAttrs pkgs.stdenv.isDarwin {
-    linkFirefox = lib.hm.dag.entryAfter [ "writeBoundary" ] ''
-      ln -sfn "${pkgs.firefox-nightly-bin-darwin}/Applications/Firefox Nightly.app"  "/Applications/Firefox Nightly.app"
-    '';
-  };
-
 }

@@ -9,7 +9,6 @@
 
   # Manually run once!!!  
   # launchctl bootstrap  gui/${UID}  ~/Library/LaunchDaemons/org.nixos.skhd.plist 
-  # launchctl enable gui/${UID}/org.nixos.skhd
 
   home.activation."CopySkhdLaunchDaemon" = lib.hm.dag.entryAfter [ "writeBoundary" ] ''
     cp -f ${pkgs.skhd}/Library/LaunchDaemons/org.nixos.skhd.plist $HOME/Library/LaunchDaemons/
