@@ -17,7 +17,7 @@ in
 
   programs.mpv = {
     enable = true;
-    # Install mpv from Homebrew, nixpkgs doesn't optimize for Darwin
+    # Install mpv from Homebrew, nix's mpv does not support swift, and the default `f` keybinding to fullscreen does not work
     # This populates a dummy package to satsify the requirement
     package =
       if pkgs.stdenv.isLinux

@@ -4,17 +4,24 @@
     autoUpdate = true;
     cleanup = "uninstall";
 
+    taps = [
+      "homebrew/cask"
+      "homebrew/cask-fonts"
+      "homebrew/services"
+      "majd/repo"
+      "koekeishiya/formulae"
+    ];
+
     brews = [
       "iproute2mac"
       "mas"
       "qemu"
     ];
 
-    taps = [
-      "homebrew/cask"
-      "homebrew/cask-fonts"
-      "majd/repo"
-    ];
+    # use launchd config from homebrew(original github config)
+    extraConfig =''
+        brew "skhd", restart_service: true
+    '';
 
     casks = [
       "mpv"
