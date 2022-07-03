@@ -66,7 +66,7 @@ in
       ];
 
       environment = { 
-        BASE_URL = "kr.mlyxshi.com";
+        BASE_URL = "http://kr.mlyxshi.com/changeio";
       };
       volumes = [ "datastore-volume:/datastore" ];
 
