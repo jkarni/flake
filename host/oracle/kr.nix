@@ -13,7 +13,7 @@ in
   # grafana configuration
   services.grafana = {
     enable = true;
-    inherit domain; 
+    inherit domain;
     port = 2333;
     addr = "127.0.0.1";
   };
@@ -59,6 +59,11 @@ in
 
   # ChangeDetectionIO
   virtualisation.oci-containers.containers = {
+
+    "playwright-chrome" = {
+      image = "browserless/chrome";
+    };
+
     "changedetectionio" = {
       image = "dgtlmoon/changedetection.io";
 
@@ -66,15 +71,16 @@ in
         "${toString changeioPort}:${toString changeioPort}"
       ];
 
-      environment = { };
       volumes = [ "datastore-volume:/datastore" ];
 
-      extraOptions = [ "--network=host" ];
+      environment = {
+        PLAYWRIGHT_DRIVER_URL = "ws://playwright-chrome:3000/";
+      };
 
-      # extraOptions = [
-      #   "-d"
-      #   "--restart unless-stopped"
-      # ];
+      extraOptions = [
+        "--link playwright-chrome"
+        "--network=host"
+      ];
 
     };
 
@@ -94,6 +100,3 @@ in
 #   -e PLAYWRIGHT_DRIVER_URL=ws://playwright-chrome:3000/ \
 #   -v datastore-volume:/datastore \
 #   dgtlmoon/changedetection.io
-
-
-# podman run -d  -p "5000:5000" -v datastore-volume:/datastore --name changedetection.io dgtlmoon/changedetection.io
