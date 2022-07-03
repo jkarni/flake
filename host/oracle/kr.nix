@@ -58,9 +58,6 @@ in
 
     "playwright-chrome" = {
       image = "browserless/chrome";
-      extraOptions = [
-        "--network=host"
-      ];
     };
 
     "changedetectionio" = {
