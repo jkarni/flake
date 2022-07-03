@@ -29,10 +29,6 @@ in
         proxy_set_header Host kr.mlyxshi.com;
       '';
     };
-
-    # locations."/" = {
-    #   proxyPass = "http://127.0.0.1:${toString changeioPort}";
-    # };
   };
 
   # prometheus main node
@@ -62,6 +58,9 @@ in
 
     "playwright-chrome" = {
       image = "browserless/chrome";
+      extraOptions = [
+        "--network=host"
+      ];
     };
 
     "changedetectionio" = {
@@ -74,11 +73,10 @@ in
       volumes = [ "datastore-volume:/datastore" ];
 
       environment = {
-        PLAYWRIGHT_DRIVER_URL = "ws://playwright-chrome:3000/";
+        PLAYWRIGHT_DRIVER_URL = "ws://localhost:3000/";
       };
 
       extraOptions = [
-        "--link playwright-chrome"
         "--network=host"
       ];
 
