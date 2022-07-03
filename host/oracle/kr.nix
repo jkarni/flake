@@ -58,7 +58,7 @@ in
 
   # ChangeDetectionIO
   virtualisation.oci-containers.containers."changedetectionio" = {
-    image = "dgtlmoon/changedetection.io";
+    image = "dgtlmoon/changedetection.io:latest";
     ports = [
       "${toString changeioPort}:${toString changeioPort}"
     ];
