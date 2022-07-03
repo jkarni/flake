@@ -70,6 +70,7 @@ in
     volumes = [ "datastore-volume:/datastore" ];
 
     extraOptions = [
+       "--name changedetectionio"
        "--restart unless-stopped"
     ];
      
