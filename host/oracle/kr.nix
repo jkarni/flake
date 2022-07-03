@@ -69,9 +69,11 @@ in
     environment = { };
     volumes = [ "datastore-volume:/datastore" ];
 
-    extraOptions = ''
-      --restart unless-stopped
-    '';
+    extraOptions = [
+       "--restart unless-stopped"
+    ];
+     
+
   };
 
 
