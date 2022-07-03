@@ -61,11 +61,6 @@ in
     "changedetectionio" = {
       image = "dgtlmoon/changedetection.io";
 
-      cmd = [
-        "-d"
-        "--restart unless-stopped"
-      ];
-
       ports = [
         "${toString changeioPort}:${toString changeioPort}"
       ];
@@ -73,7 +68,10 @@ in
       # environment = { };
       volumes = [ "datastore-volume:/datastore" ];
 
-
+      # extraOptions = [
+      #   "-d"
+      #   "--restart unless-stopped"
+      # ];
 
     };
 
