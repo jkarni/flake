@@ -63,7 +63,7 @@ in
       ];
     };
 
-    "changedetectionio" = {
+    "change-detection-io" = {
       image = "dgtlmoon/changedetection.io";
       ports = [
         "${toString changeioPort}:${toString changeioPort}"
