@@ -33,7 +33,6 @@
       "openinterminal-lite"
       "provisionql"
       "android-platform-tools"
-      "bob"
       "nrlquaker-winbox"
       "wireshark"
       "raycast"
@@ -85,6 +84,7 @@
     #   Microsoft-Remote-Desktop = 1295203466;
 
     #   Paste = 967805235;
+    #   Bob = 1630034110;
     #   Xcode = 497799835;
     #   Bitwarden = 1352778147;
     #   Infuse = 1136220934;

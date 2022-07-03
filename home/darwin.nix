@@ -30,4 +30,3 @@
   home.file.".config/skhd".source = config.lib.file.mkOutOfStoreSymlink "${osConfig.hm.nixConfigDir}/config/skhd";
 
 }
-
