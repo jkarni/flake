@@ -60,7 +60,7 @@ in
   virtualisation.oci-containers.backend = "podman";
 
   # ChangeDetectionIO
-  virtualisation.oci-containers."changedetectionio" = {
+  virtualisation.oci-containers.containers."changedetectionio" = {
     image = "dgtlmoon/changedetection.io";
     ports = [
       "${toString changeioPort}:${toString changeioPort}"
