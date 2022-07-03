@@ -65,7 +65,9 @@ in
         "${toString changeioPort}:${toString changeioPort}"
       ];
 
-      # environment = { };
+      environment = { 
+        BASE_URL = "kr.mlyxshi.com";
+      };
       volumes = [ "datastore-volume:/datastore" ];
 
       # extraOptions = [
