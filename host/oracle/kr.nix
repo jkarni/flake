@@ -1,4 +1,9 @@
-{ config, pkgs, ... }: {
+{ config, pkgs, ... }:
+let
+
+  changeioPort = 5000;
+in
+{
 
   imports = [
     ./default.nix
@@ -23,8 +28,13 @@
         proxy_set_header Host kr.mlyxshi.com;
       '';
     };
+
+    locations."/changeio" = {
+      proxyPass = "http://127.0.0.1:${toString changeioPort}";
+    };
   };
 
+  # prometheus main node
   services.prometheus = {
     enable = true;
     retentionTime = "365d";
@@ -46,4 +56,35 @@
   };
 
 
+
+  virtualisation.oci-containers.backend = "podman";
+
+  # ChangeDetectionIO
+  virtualisation.oci-containers."changedetectionio" = {
+    image = "dgtlmoon/changedetection.io";
+    ports = [
+      ''${changeioPort}:${changeioPort}''
+    ];
+
+    environment = { };
+    volumes = [ "datastore-volume:/datastore" ];
+
+    extraOptions = ''
+      --restart unless-stopped
+    '';
+  };
+
+
+
 }
+
+
+
+# podman run -d \
+#   --name changedetectionio \
+#   --restart unless-stopped \
+#   --link playwright-chrome \
+#   -p 5000:5000 \
+#   -e PLAYWRIGHT_DRIVER_URL=ws://playwright-chrome:3000/ \
+#   -v datastore-volume:/datastore \
+#   dgtlmoon/changedetection.io
