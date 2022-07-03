@@ -58,7 +58,7 @@ in
 
   # ChangeDetectionIO
   virtualisation.oci-containers.containers."changedetectionio" = {
-    image = "dgtlmoon/changedetection.io:latest";
+    image = "docker.io/dgtlmoon/changedetection.io:latest";
     ports = [
       "${toString changeioPort}:${toString changeioPort}"
     ];
@@ -89,3 +89,6 @@ in
 #   -e PLAYWRIGHT_DRIVER_URL=ws://playwright-chrome:3000/ \
 #   -v datastore-volume:/datastore \
 #   dgtlmoon/changedetection.io
+
+
+# podman run -d  -p "5000:5000" -v datastore-volume:/datastore --name changedetection.io dgtlmoon/changedetection.io
