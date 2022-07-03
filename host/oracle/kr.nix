@@ -2,6 +2,7 @@
 let
 
   changeioPort = 5000;
+  domain = "kr.mlyxshi.com";
 in
 {
 
@@ -12,14 +13,14 @@ in
   # grafana configuration
   services.grafana = {
     enable = true;
-    domain = "kr.mlyxshi.com";
+    inherit domain; 
     port = 2333;
     addr = "127.0.0.1";
   };
 
   # nginx reverse proxy
   services.nginx.enable = true;
-  services.nginx.virtualHosts.${config.services.grafana.domain} = {
+  services.nginx.virtualHosts.${domain} = {
     locations."/" = {
       proxyPass = "http://127.0.0.1:${toString config.services.grafana.port}";
       proxyWebsockets = true;
@@ -29,9 +30,9 @@ in
       '';
     };
 
-    locations."/changeio" = {
-      proxyPass = "http://127.0.0.1:${toString changeioPort}";
-    };
+    # locations."/" = {
+    #   proxyPass = "http://127.0.0.1:${toString changeioPort}";
+    # };
   };
 
   # prometheus main node
@@ -65,10 +66,10 @@ in
         "${toString changeioPort}:${toString changeioPort}"
       ];
 
-      environment = { 
-        BASE_URL = "http://kr.mlyxshi.com/changeio";
-      };
+      environment = { };
       volumes = [ "datastore-volume:/datastore" ];
+
+      extraOptions = [ "--network=host" ];
 
       # extraOptions = [
       #   "-d"
