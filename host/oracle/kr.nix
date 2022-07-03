@@ -58,6 +58,9 @@ in
 
     "playwright-chrome" = {
       image = "browserless/chrome";
+      ports = [
+        "3000:3000"
+      ];
     };
 
     "changedetectionio" = {
