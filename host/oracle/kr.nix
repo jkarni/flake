@@ -65,21 +65,28 @@ in
 
     "changedetectionio" = {
       image = "dgtlmoon/changedetection.io";
-
       ports = [
         "${toString changeioPort}:${toString changeioPort}"
       ];
-
       volumes = [ "datastore-volume:/datastore" ];
-
       environment = {
         PLAYWRIGHT_DRIVER_URL = "ws://localhost:3000/";
       };
-
       extraOptions = [
         "--network=host"
       ];
 
+    };
+
+
+    "kms-server" = {
+      image = "mikolatero/vlmcsd";
+      ports = [
+        "1688:1688"
+      ];
+      extraOptions = [
+        "--network=host"
+      ];
     };
 
   };
@@ -90,11 +97,16 @@ in
 
 
 
-# podman run -d \
-#   --name changedetectionio \
-#   --restart unless-stopped \
-#   --link playwright-chrome \
-#   -p 5000:5000 \
-#   -e PLAYWRIGHT_DRIVER_URL=ws://playwright-chrome:3000/ \
-#   -v datastore-volume:/datastore \
-#   dgtlmoon/changedetection.io
+# Windows 10 LTSC 2019/2021
+
+# Install product key
+#slmgr.vbs /ipk M7XTQ-FN8P6-TTKYV-9D4CC-J462D
+
+# Specifies KMS host 
+#slmgr.vbs /skms ovh.mlyxshi.com
+
+# Prompts KMS activation attempt.
+#slmgr.vbs /ato
+
+# Display detailed license information.
+#slmgr.vbs -dlv
