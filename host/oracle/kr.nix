@@ -59,20 +59,22 @@ in
   # ChangeDetectionIO
   virtualisation.oci-containers.containers = {
     "changedetectionio" = {
-      image = "dgtlmoon/changedetection.io:latest";
+      image = "dgtlmoon/changedetection.io";
+
+      cmd = [
+        "-d"
+        "--restart unless-stopped"
+      ];
+
       ports = [
-        "${toString changeioPort}:${toString changeioPort}/tcp"
+        "${toString changeioPort}:${toString changeioPort}"
       ];
 
       # environment = { };
       volumes = [ "datastore-volume:/datastore" ];
 
-      extraOptions = [
-        "-d"
-        "--name changedetectionio"
-        "--restart unless-stopped"
-      ];
-    
+
+
     };
 
   };
