@@ -56,9 +56,6 @@ in
   };
 
 
-
-  virtualisation.oci-containers.backend = "podman";
-
   # ChangeDetectionIO
   virtualisation.oci-containers.containers."changedetectionio" = {
     image = "dgtlmoon/changedetection.io";
@@ -70,6 +67,7 @@ in
     volumes = [ "datastore-volume:/datastore" ];
 
     extraOptions = [
+       "-d"
        "--name changedetectionio"
        "--restart unless-stopped"
     ];
