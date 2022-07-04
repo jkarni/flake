@@ -1,6 +1,9 @@
-{ stdenvNoCC, unzip, fetchurl }:
-
-stdenvNoCC.mkDerivation rec{
+{
+  stdenvNoCC,
+  unzip,
+  fetchurl,
+}:
+stdenvNoCC.mkDerivation rec {
   pname = "SF-Pro";
   version = "apple";
 
@@ -10,9 +13,9 @@ stdenvNoCC.mkDerivation rec{
     sha256 = "ebMwszbFxj3GT7wdZBbQWt5z0HMMG0/UhdN9tH19NuI=";
   };
 
-  buildInputs = [ unzip ];
+  buildInputs = [unzip];
 
-  phases = [ "unpackPhase" "installPhase" ];
+  phases = ["unpackPhase" "installPhase"];
 
   unpackPhase = ''
     unzip $src

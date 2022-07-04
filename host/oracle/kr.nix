@@ -1,11 +1,11 @@
-{ config, pkgs, ... }:
-let
-
+{
+  config,
+  pkgs,
+  ...
+}: let
   changeioPort = 5000;
   domain = "kr.mlyxshi.com";
-in
-{
-
+in {
   imports = [
     ./default.nix
   ];
@@ -44,18 +44,17 @@ in
     scrapeConfigs = [
       {
         job_name = "metrics";
-        static_configs = [{
-          targets = map (hostName: "${hostName}.mlyxshi.com:${toString config.services.prometheus.exporters.node.port}") [ "kr" "jp2" "jp4" "us1" "sw" ];
-        }];
+        static_configs = [
+          {
+            targets = map (hostName: "${hostName}.mlyxshi.com:${toString config.services.prometheus.exporters.node.port}") ["kr" "jp2" "jp4" "us1" "sw"];
+          }
+        ];
       }
     ];
-
   };
-
 
   # ChangeDetectionIO
   virtualisation.oci-containers.containers = {
-
     "playwright-chrome" = {
       image = "browserless/chrome";
       ports = [
@@ -68,16 +67,14 @@ in
       ports = [
         "${toString changeioPort}:${toString changeioPort}"
       ];
-      volumes = [ "datastore-volume:/datastore" ];
+      volumes = ["datastore-volume:/datastore"];
       environment = {
         PLAYWRIGHT_DRIVER_URL = "ws://localhost:3000/";
       };
       extraOptions = [
         "--network=host"
       ];
-
     };
-
 
     "kms-server" = {
       image = "mikolatero/vlmcsd";
@@ -88,25 +85,15 @@ in
         "--network=host"
       ];
     };
-
   };
-
-
-
 }
-
-
-
 # Windows 10 LTSC 2021
-
 # Install product key
 #slmgr.vbs /ipk M7XTQ-FN8P6-TTKYV-9D4CC-J462D
-
-# Specifies KMS host 
+# Specifies KMS host
 #slmgr.vbs /skms ovh.mlyxshi.com
-
 # Prompts KMS activation attempt.
 #slmgr.vbs /ato
-
 # Display detailed license information.
 #slmgr.vbs -dlv
+

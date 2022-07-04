@@ -1,5 +1,4 @@
 {
-
   imports = [
     ./hardware.nix
     ../../os/nixos
@@ -22,10 +21,7 @@
   services.prometheus.exporters = {
     node = {
       enable = true;
-      enabledCollectors = [ "systemd" ];
+      enabledCollectors = ["systemd"];
     };
   };
-
-
 }
-

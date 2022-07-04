@@ -17,7 +17,7 @@
   # about:config
   # https://github.com/arkenfox/user.js/blob/master/user.js
   Preferences = {
-    #Force Dark theme 
+    #Force Dark theme
     "browser.theme.toolbar-theme" = 0;
     "browser.theme.content-theme" = 0;
 
@@ -29,30 +29,28 @@
     "browser.aboutwelcome.enabled" = false;
     "browser.warnOnQuitShortcut" = false;
     "browser.urlbar.dnsResolveSingleWordsAfterSearch" = 0;
-   
+
     # disable recommended plugin on about:addons
-    "extensions.getAddons.showPane" = false; 
+    "extensions.getAddons.showPane" = false;
     "extensions.htmlaboutaddons.recommendations.enabled" = false;
-    
+
     # Enable CustomCSS
     "toolkit.legacyUserProfileCustomizations.stylesheets" = true;
   };
 
-
   # https://github.com/mozilla/policy-templates#extensionsettings
   ExtensionSettings = {
-    # sync normal plugins by mozilla account 
+    # sync normal plugins by mozilla account
 
-    # customize the search shortcut, so I don't have to hack search.json.mozlz4  <-- write single search shortcut plugin is very simple 
+    # customize the search shortcut, so I don't have to hack search.json.mozlz4  <-- write single search shortcut plugin is very simple
 
     # @ytb  -->  YouTube
     # @bili  -->  BiliBili
     # @gh  -->  GitHub
     # @nix  -->  Nix Package
 
-    # all plugins are not signed 
+    # all plugins are not signed
     # use  https://github.com/xiaoxiaoflood/firefox-scripts to bypass the signature check
-
 
     "github@search" = {
       installation_mode = "force_installed";
@@ -73,7 +71,6 @@
       installation_mode = "force_installed";
       install_url = "https://github.com/mlyxshi/FireFox-Search-Shortcuts-Nix-Package/releases/download/v1.0/release.zip";
     };
-
 
     # Uninstall all build-in search shortcuts except google <-- my default search engine
 
@@ -96,7 +93,5 @@
     "wikipedia@search.mozilla.org" = {
       installation_mode = "blocked";
     };
-
   };
-
 }

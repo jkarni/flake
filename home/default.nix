@@ -1,6 +1,9 @@
-{ pkgs, lib, osConfig, ... }:
 {
-
+  pkgs,
+  lib,
+  osConfig,
+  ...
+}: {
   imports = [
     ./git.nix
     ./zsh.nix
@@ -8,41 +11,39 @@
     ./nvim.nix
   ];
 
-
-
-  home.packages = with pkgs;  [
-    # basic
-    wget
-    file
-    vim
-    tree
-    htop
-    neofetch
-    mediainfo
-    yt-dlp
-    unzip
-    # nix
-    nix-tree
-    sops
-    # rust
-    exa
-    delta
-    tealdeer
-    procs
-    bandwhich
-    bat
-    bat-extras.batman
-    # go
-    pistol
-
-  ] ++ lib.optionals osConfig.profile.developerMode.enable [
-    jq
-    statix
-    lazygit
-  ] ++ lib.optionals pkgs.stdenv.isLinux [
-    ookla-speedtest
-  ];
-
+  home.packages = with pkgs;
+    [
+      # basic
+      wget
+      file
+      vim
+      tree
+      htop
+      neofetch
+      mediainfo
+      yt-dlp
+      unzip
+      # nix
+      nix-tree
+      sops
+      # rust
+      exa
+      delta
+      tealdeer
+      procs
+      bandwhich
+      bat
+      bat-extras.batman
+      # go
+      pistol
+    ]
+    ++ lib.optionals osConfig.profile.developerMode.enable [
+      jq
+      lazygit
+    ]
+    ++ lib.optionals pkgs.stdenv.isLinux [
+      ookla-speedtest
+    ];
 
   home.stateVersion = osConfig.hm.stateVersion;
 }

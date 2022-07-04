@@ -1,5 +1,9 @@
-{ pkgs, lib, config, ... }: {
-
+{
+  pkgs,
+  lib,
+  config,
+  ...
+}: {
   imports = [
     ./system.nix
   ];
@@ -21,13 +25,11 @@
   programs.ssh = {
     knownHosts = {
       github = {
-        hostNames = [ "github.com" ];
+        hostNames = ["github.com"];
         publicKey = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIOMqqnkVzrm0SdG6UOoqKLsabgH5C9okWi0dh2l9GKJl";
       };
     };
   };
-
-
 
   #  launchd related folder: /var/db/com.apple.xpc.launchd
 
@@ -41,5 +43,4 @@
     ];
     serviceConfig.RunAtLoad = true;
   };
-
 }

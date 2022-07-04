@@ -1,5 +1,4 @@
-{ modulesPath, ... }:
-{
+{modulesPath, ...}: {
   imports = [
     (modulesPath + "/profiles/qemu-guest.nix")
   ];
@@ -13,5 +12,4 @@
     device = "/dev/sda1";
     fsType = "vfat";
   };
-
 }

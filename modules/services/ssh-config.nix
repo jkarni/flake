@@ -1,15 +1,16 @@
-{ pkgs, lib, config, ... }:
-let
-  cfg = config.services.ssh-config;
-in
 {
-
+  pkgs,
+  lib,
+  config,
+  ...
+}: let
+  cfg = config.services.ssh-config;
+in {
   options = {
     services.ssh-config.enable = lib.mkEnableOption "my ssh service";
   };
 
   config = lib.mkIf (cfg.enable && config.secrets.sops-nix.enable) {
-
     # sshd (server)
     services.openssh = {
       enable = true;
@@ -17,15 +18,14 @@ in
     };
 
     users.users = {
-      root.openssh.authorizedKeys.keys = [ "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIMpaY3LyCW4HHqbp4SA4tnA+1Bkgwrtro2s/DEsBcPDe" ];
+      root.openssh.authorizedKeys.keys = ["ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIMpaY3LyCW4HHqbp4SA4tnA+1Bkgwrtro2s/DEsBcPDe"];
     };
 
     # ssh (client)
     programs.ssh = {
-
       knownHosts = {
         github = {
-          hostNames = [ "github.com" ];
+          hostNames = ["github.com"];
           publicKey = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIOMqqnkVzrm0SdG6UOoqKLsabgH5C9okWi0dh2l9GKJl";
         };
       };
@@ -41,8 +41,5 @@ in
           IdentityFile ${config.sops.secrets.ssh-private-key.path}
       '';
     };
-
   };
-
-
 }

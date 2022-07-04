@@ -1,4 +1,4 @@
-{ pkgs, ... }: {
+{pkgs, ...}: {
   homebrew = {
     enable = true;
     autoUpdate = true;
@@ -19,8 +19,8 @@
     ];
 
     # use launchd config from homebrew(original github config)
-    extraConfig =''
-        brew "skhd", restart_service: true
+    extraConfig = ''
+      brew "skhd", restart_service: true
     '';
 
     casks = [
@@ -91,11 +91,9 @@
     #   LyricsX = 1254743014;
     #   Apple-Configurator = 1037126344;
     # };
-
   };
 }
-
 # Other Application not in Homebrew/Nixpkgs/Appstore
-# Install Manually 
-
+# Install Manually
 # Hopper-Disassembler https://www.hopperapp.com/
+

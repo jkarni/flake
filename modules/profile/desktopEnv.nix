@@ -1,15 +1,16 @@
-{ pkgs, lib, config, ... }:
-let
-  cfg = config.profile.desktopEnv;
-in
 {
-
+  pkgs,
+  lib,
+  config,
+  ...
+}: let
+  cfg = config.profile.desktopEnv;
+in {
   options = {
     profile.desktopEnv.enable = lib.mkEnableOption "desktop env: install extra fonts, extra permission";
   };
 
   config = lib.mkIf cfg.enable {
-
     programs.sway = {
       enable = true;
       wrapperFeatures.gtk = true;
@@ -32,7 +33,5 @@ in
         default_session = initial_session;
       };
     };
-
   };
-
 }

@@ -1,10 +1,11 @@
-{ config, pkgs, lib, ... }:
-let
-  hashedPassword = "$6$fwJZwHNLE640VkQd$SrYMjayP9fofIncuz3ehVLpfwGlpUj0NFZSssSy8GcIXIbDKI4JnrgfMZxSw5vxPkXkAEL/ktm3UZOyPMzA.p0";
-in
 {
-
-
+  config,
+  pkgs,
+  lib,
+  ...
+}: let
+  hashedPassword = "$6$fwJZwHNLE640VkQd$SrYMjayP9fofIncuz3ehVLpfwGlpUj0NFZSssSy8GcIXIbDKI4JnrgfMZxSw5vxPkXkAEL/ktm3UZOyPMzA.p0";
+in {
   nix = {
     extraOptions = ''
       experimental-features = nix-command flakes
@@ -13,7 +14,7 @@ in
     settings = {
       substituters = [
         "https://mlyxshi.cachix.org"
-         "https://nixpkgs-wayland.cachix.org"
+        "https://nixpkgs-wayland.cachix.org"
       ];
       trusted-public-keys = [
         "mlyxshi.cachix.org-1:yc7GPiryyBn0HfiCXdmO1ECWKBhfwrjdIFnRSA4ct7s="
@@ -26,7 +27,6 @@ in
       automatic = true;
       dates = "weekly";
     };
-
   };
 
   nixpkgs.config.allowUnfree = true;
@@ -36,25 +36,24 @@ in
   boot.loader.efi.canTouchEfiVariables = true;
   boot.kernelPackages = pkgs.linuxPackages_latest;
 
-
   users = {
     defaultUserShell = pkgs.zsh;
 
-    users = {
-      root = {
-        inherit hashedPassword;
+    users =
+      {
+        root = {
+          inherit hashedPassword;
+        };
+      }
+      // lib.optionalAttrs config.profile.desktopEnv.enable {
+        dominic = {
+          isNormalUser = true;
+          description = "mlyxshi";
+          inherit hashedPassword;
+          extraGroups = ["wheel"];
+        };
       };
-    } // lib.optionalAttrs config.profile.desktopEnv.enable {
-      dominic = {
-        isNormalUser = true;
-        description = "mlyxshi";
-        inherit hashedPassword;
-        extraGroups = [ "wheel" ];
-      };
-    };
-
   };
-
 
   time.timeZone = "America/Los_Angeles";
 
@@ -66,27 +65,30 @@ in
   };
 
   fonts = {
-    fonts = [
-      (pkgs.nerdfonts.override { fonts = [ "RobotoMono" ]; }) # Terminal Font
-    ] ++ lib.optionals config.profile.desktopEnv.enable [
-      # The essence of Apple
-      pkgs.SF-Pro # English
-      pkgs.PingFang # Chinese/Japanese
-    ];
+    fonts =
+      [
+        (pkgs.nerdfonts.override {fonts = ["RobotoMono"];}) # Terminal Font
+      ]
+      ++ lib.optionals config.profile.desktopEnv.enable [
+        # The essence of Apple
+        pkgs.SF-Pro # English
+        pkgs.PingFang # Chinese/Japanese
+      ];
 
     enableDefaultFonts = false; # If Sway is enabled, enableDefaultFonts is true by default <-- I don't need extra default fonts
 
     # fc-list
     fontconfig = {
       enable = true;
-      defaultFonts = {
-        monospace = [ "RobotoMono Nerd Font" ];
-      } // lib.optionalAttrs config.profile.desktopEnv.enable {
-        sansSerif = [ "SF Pro" ];
-        serif = [ "SF Pro" ];
-      };
+      defaultFonts =
+        {
+          monospace = ["RobotoMono Nerd Font"];
+        }
+        // lib.optionalAttrs config.profile.desktopEnv.enable {
+          sansSerif = ["SF Pro"];
+          serif = ["SF Pro"];
+        };
     };
-
   };
 
   boot.kernel.sysctl = {
@@ -95,11 +97,9 @@ in
     "net.ipv4.tcp_fastopen" = "3";
   };
 
-
   networking = {
     useNetworkd = true;
     useDHCP = false;
     firewall.enable = false;
   };
-
 }

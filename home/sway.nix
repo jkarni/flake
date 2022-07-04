@@ -1,11 +1,10 @@
-{ pkgs, ... }: {
+{pkgs, ...}: {
   imports = [
     ./default.nix
     ./kitty.nix
     ./mpv.nix
     ./firefox.nix
   ];
-
 
   xdg.configFile."sway/config".source = ../config/sway/config;
 
@@ -20,7 +19,6 @@
     xorg.xlsclients #xorg.xmodmap
     wev
   ];
-
 
   # Fix Strange Cursor Size Under Sway
   home.pointerCursor = {
@@ -42,6 +40,4 @@
       name = "Numix-Circle";
     };
   };
-
-
 }

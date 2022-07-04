@@ -1,8 +1,10 @@
-{ config, pkgs, ... }:
-let
-  domain = "jp4.mlyxshi.com";
-in
 {
+  config,
+  pkgs,
+  ...
+}: let
+  domain = "jp4.mlyxshi.com";
+in {
   imports = [
     ./default.nix
   ];
@@ -11,24 +13,22 @@ in
     qbittorrent-nox
   ];
 
-
   services.nginx.enable = true;
   services.nginx.virtualHosts.${domain} = {
     root = "/var/lib/qbittorrent-nox/qBittorrent/downloads";
     locations."/" = {
       extraConfig = ''
-          autoindex on;
-        	autoindex_exact_size on;
-        	autoindex_localtime on;
+         autoindex on;
+        autoindex_exact_size on;
+        autoindex_localtime on;
       '';
     };
   };
 
-
   # https://github.com/1sixth/flakes/blob/master/modules/qbittorrent-nox.nix
 
   systemd.services.qbittorrent-nox = {
-    after = [ "local-fs.target" "network-online.target" "nss-lookup.target" ];
+    after = ["local-fs.target" "network-online.target" "nss-lookup.target"];
     description = "qBittorrent-nox service";
     serviceConfig = {
       PrivateTmp = false;
@@ -38,8 +38,8 @@ in
       TimeoutStopSec = 1800;
       StateDirectory = "qbittorrent-nox";
     };
-    wantedBy = [ "multi-user.target" ];
-    wants = [ "network-online.target" ];
+    wantedBy = ["multi-user.target"];
+    wants = ["network-online.target"];
   };
 
   users = {
