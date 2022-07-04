@@ -1,6 +1,8 @@
-{ config, pkgs, ... }: let
- domain = "jp4.mlyxshi.com";
-in{
+{ config, pkgs, ... }:
+let
+  domain = "jp4.mlyxshi.com";
+in
+{
   imports = [
     ./default.nix
   ];
@@ -14,6 +16,11 @@ in{
   services.nginx.virtualHosts.${domain} = {
     root = "/var/lib/qbittorrent-nox/qBittorrent/downloads";
     locations."/" = {
+      extraConfig = ''
+          autoindex on;
+        	autoindex_exact_size on;
+        	autoindex_localtime on;
+      '';
     };
   };
 
