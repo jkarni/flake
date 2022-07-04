@@ -97,7 +97,7 @@ in
 
 
 
-# Windows 10 LTSC 2019/2021
+# Windows 10 LTSC 2021
 
 # Install product key
 #slmgr.vbs /ipk M7XTQ-FN8P6-TTKYV-9D4CC-J462D
