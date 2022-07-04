@@ -3,6 +3,11 @@
     ./default.nix
   ];
 
+  environment.systemPackages = with pkgs; [
+    qbittorrent-nox
+  ];
+
+
 
   systemd.services.qbittorrent-nox = {
     after = [ "local-fs.target" "network-online.target" "nss-lookup.target" ];
