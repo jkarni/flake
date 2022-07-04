@@ -1,4 +1,6 @@
-{ config, pkgs, ... }: {
+{ config, pkgs, ... }: let
+ domain = "jp4.mlyxshi.com";
+in{
   imports = [
     ./default.nix
   ];
@@ -8,6 +10,15 @@
   ];
 
 
+  services.nginx.enable = true;
+  services.nginx.virtualHosts.${domain} = {
+    root = "/var/lib/qbittorrent-nox/qBittorrent/downloads";
+    locations."/" = {
+    };
+  };
+
+
+  # https://github.com/1sixth/flakes/blob/master/modules/qbittorrent-nox.nix
 
   systemd.services.qbittorrent-nox = {
     after = [ "local-fs.target" "network-online.target" "nss-lookup.target" ];
