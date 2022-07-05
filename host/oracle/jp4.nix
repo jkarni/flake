@@ -70,8 +70,7 @@ let
     }
 
     function telegram(){
-        TOKEN=${config.sops.secrets.tg-token.path}
-        CHAT_ID=${config.sops.secrets.tg-chatid.path}
+
         MESSAGE="''${torrent_name} GoogleDrive Upload Success"
         URL="https://api.telegram.org/bot$TOKEN/sendMessage"
         curl -X POST ''${URL} -d chat_id=''${CHAT_ID} -d text="$MESSAGE"
