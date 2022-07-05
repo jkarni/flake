@@ -1,3 +1,4 @@
+# common sops key 
 { pkgs
 , lib
 , config
@@ -15,8 +16,6 @@ in
     sops.defaultSopsFile = ./key.yaml;
     sops.age.keyFile = "/var/lib/sops-nix/key.txt";
 
-    sops.secrets.tg-chatid = { };
-    sops.secrets.tg-token = { };
     sops.secrets.shadowsocks-config = { };
     sops.secrets.ssh-private-key = { } // lib.optionalAttrs config.profile.desktopEnv.enable { owner = "dominic"; };
   };
