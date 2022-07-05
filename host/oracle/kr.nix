@@ -4,7 +4,7 @@
   ...
 }: let
   changeioPort = 5000;
-  domain = "kr.mlyxshi.com";
+  domain = "${config.networking.hostName}.mlyxshi.com";
 in {
   imports = [
     ./default.nix
