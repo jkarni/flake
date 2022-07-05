@@ -19,5 +19,6 @@
       ./secrets
       ./services/shadowsocks-rust.nix
       ./services/ssh-config.nix
+      ./services/bt.nix
     ];
 }
