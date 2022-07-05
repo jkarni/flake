@@ -4,10 +4,9 @@
 }:
 let
   domain = "${config.networking.hostName}.mlyxshi.com";
+  #  Run external program on torrent completion
+  # /run/current-system/sw/bin/qbScript "%N" "%F" "%C" "%Z" "%I" "%L"
   qbScript = pkgs.writeShellScriptBin "qbScript" ''
-    #  Run external program on torrent completion
-    # /run/current-system/sw/bin/qbScript "%N" "%F" "%C" "%Z" "%I" "%L"
-
     torrent_name=''$1
     content_dir=''$2
     files_num=''$3
@@ -104,7 +103,7 @@ in
 
   environment.systemPackages = with pkgs; [
     qbittorrent-nox
-    rclone  # rclone gd_token always changes, so sops can not apply here
+    rclone # rclone gd_token always changes, so sops can not apply here
     qbScript
   ];
 
@@ -126,17 +125,6 @@ in
     wants = [ "network-online.target" ];
   };
 
-  # users = {
-  #   groups.qbittorrent.gid = 1000;
-  #   users.qbittorrent = {
-  #     group = "qbittorrent";
-  #     isSystemUser = true;
-  #     uid = 1000;
-  #   };
-  # };
-
-  
-  # special sops key
   sops.secrets.tg-chatid = { };
   sops.secrets.tg-token = { };
 }
