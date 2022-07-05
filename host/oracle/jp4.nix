@@ -33,10 +33,10 @@ let
 
 
     function check_category(){
-        if [ ''${torrent_category} == ''${leech_category} ]
+        if [ "''${torrent_category}" == ''${leech_category} ]
         then
             echo "[''$(date '+%Y-%m-%d %H:%M:%S')] Detect Leech Category, Continue" >> ''${log_dir}/qb.log 
-        elif [ ''${torrent_category} == ''${upload_category} ]
+        elif [ "''${torrent_category}" == ''${upload_category} ]
         then 
             echo "[''$(date '+%Y-%m-%d %H:%M:%S')] Detect Upload Category, Continue" >> ''${log_dir}/qb.log 
         else
