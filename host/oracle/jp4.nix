@@ -49,10 +49,10 @@ let
     function rclone_copy(){
         if [ -f "''${content_dir}" ]
         then
-            ${pkgs.rclone}/bin/rclone -v copy --log-file  ''${log_dir}/rclone.log "''${content_dir}" ''${rclone_dest}:
+            ${pkgs.rclone}/bin/rclone --config /var/lib/qbittorrent-nox/rclone/rclone.conf -v copy --log-file  ''${log_dir}/rclone.log "''${content_dir}" ''${rclone_dest}:
         elif [ -d "''${content_dir}" ]
         then
-            ${pkgs.rclone}/bin/rclone -v copy --transfers ''${rclone_parallel} --log-file ''${log_dir}/rclone.log "''${content_dir}" ''${rclone_dest}:"''${torrent_name}"
+            ${pkgs.rclone}/bin/rclone --config /var/lib/qbittorrent-nox/rclone/rclone.conf -v copy --transfers ''${rclone_parallel} --log-file ''${log_dir}/rclone.log "''${content_dir}" ''${rclone_dest}:"''${torrent_name}"
         fi
 
         echo -e "-------------------------------------------------------------\n" >> ''${log_dir}/rclone.log
