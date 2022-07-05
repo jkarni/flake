@@ -103,6 +103,7 @@ in
   environment.systemPackages = with pkgs; [
     qbittorrent-nox
     rclone
+    qbScript
   ];
 
   # services.nginx.enable = true;
