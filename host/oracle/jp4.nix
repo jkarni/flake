@@ -6,7 +6,7 @@ let
   domain = "${config.networking.hostName}.mlyxshi.com";
   qbScript = pkgs.writeShellScriptBin "qbScript" ''
     #  Run external program on torrent completion
-    # qbScript "%N" "%F" "%C" "%Z" "%I" "%L"
+    # /run/current-system/sw/bin/qbScript "%N" "%F" "%C" "%Z" "%I" "%L"
 
     torrent_name=''$1
     content_dir=''$2
@@ -49,10 +49,10 @@ let
     function rclone_copy(){
         if [ -f "''${content_dir}" ]
         then
-            rclone -v copy --log-file  ''${log_dir}/rclone.log "''${content_dir}" ''${rclone_dest}:
+            ${pkgs.rclone}/bin/rclone -v copy --log-file  ''${log_dir}/rclone.log "''${content_dir}" ''${rclone_dest}:
         elif [ -d "''${content_dir}" ]
         then
-            rclone -v copy --transfers ''${rclone_parallel} --log-file ''${log_dir}/rclone.log "''${content_dir}" ''${rclone_dest}:"''${torrent_name}"
+            ${pkgs.rclone}/bin/rclone -v copy --transfers ''${rclone_parallel} --log-file ''${log_dir}/rclone.log "''${content_dir}" ''${rclone_dest}:"''${torrent_name}"
         fi
 
         echo -e "-------------------------------------------------------------\n" >> ''${log_dir}/rclone.log
@@ -61,7 +61,7 @@ let
     function qb_del(){
         if [ ''${torrent_category} == ''${leech_category} ]
         then
-            curl -X POST -d "hashes=''${file_hash}&deleteFiles=true" "''${qb_web_url}/api/v2/torrents/delete" 
+            ${pkgs.curl}/bin/curl -X POST -d "hashes=''${file_hash}&deleteFiles=true" "''${qb_web_url}/api/v2/torrents/delete" 
             echo "[''$(date '+%Y-%m-%d %H:%M:%S')] Auto-delete Success" >> ''${log_dir}/qb.log
         elif [ ''${torrent_category} == ''${upload_category} ]
         then
@@ -74,7 +74,7 @@ let
         CHAT_ID=''$(echo ${config.sops.secrets.tg-chatid.path})
         MESSAGE="''${torrent_name} GoogleDrive Upload Success"
         URL="https://api.telegram.org/bot$TOKEN/sendMessage"
-        curl -X POST ''${URL} -d chat_id=''${CHAT_ID} -d text="$MESSAGE"
+        ${pkgs.curl}/bin/curl -X POST ''${URL} -d chat_id=''${CHAT_ID} -d text="$MESSAGE"
         echo "[''$(date '+%Y-%m-%d %H:%M:%S')] Notification Success" >> ''${log_dir}/qb.log
     }
 
