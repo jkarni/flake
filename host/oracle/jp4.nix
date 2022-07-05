@@ -16,8 +16,8 @@ let
     torrent_category=''$6
 
     qb_web_url="localhost:8080"
-    rclone_dest="googleshare"
-    log_dir="/var/lib/qbittorrent-nox/qbauto"
+    rclone_dest="googleshare:Download"
+    log_dir="/var/lib/qbittorrent-nox/qBLog"
     rclone_parallel="32"
     # For leech_category, after download, upload to googledrive and delete immediately(important resource, Public BT)
     leech_category="leech"
@@ -49,10 +49,10 @@ let
     function rclone_copy(){
         if [ -f "''${content_dir}" ]
         then
-            ${pkgs.rclone}/bin/rclone --config /var/lib/qbittorrent-nox/rclone/rclone.conf -v copy --log-file  ''${log_dir}/rclone.log "''${content_dir}" ''${rclone_dest}:
+            ${pkgs.rclone}/bin/rclone --config /var/lib/qbittorrent-nox/rclone/rclone.conf -v copy --log-file  ''${log_dir}/rclone.log "''${content_dir}" ''${rclone_dest}
         elif [ -d "''${content_dir}" ]
         then
-            ${pkgs.rclone}/bin/rclone --config /var/lib/qbittorrent-nox/rclone/rclone.conf -v copy --transfers ''${rclone_parallel} --log-file ''${log_dir}/rclone.log "''${content_dir}" ''${rclone_dest}:"''${torrent_name}"
+            ${pkgs.rclone}/bin/rclone --config /var/lib/qbittorrent-nox/rclone/rclone.conf -v copy --transfers ''${rclone_parallel} --log-file ''${log_dir}/rclone.log "''${content_dir}" ''${rclone_dest}/"''${torrent_name}"
         fi
 
         echo -e "-------------------------------------------------------------\n" >> ''${log_dir}/rclone.log
@@ -95,9 +95,7 @@ let
 
   '';
 
-  testScript = pkgs.writeShellScriptBin "testScript" ''
-     echo "test" > /var/lib/qbittorrent-nox/zzz
-  '';
+
 in
 {
   imports = [
@@ -108,7 +106,6 @@ in
     qbittorrent-nox
     rclone
     qbScript
-    testScript
   ];
 
   # services.nginx.enable = true;
