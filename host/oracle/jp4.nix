@@ -104,21 +104,10 @@ in
 
   environment.systemPackages = with pkgs; [
     qbittorrent-nox
-    rclone
+    rclone  # rclone gd_token always changes, so sops can not apply here
     qbScript
   ];
 
-  # services.nginx.enable = true;
-  # services.nginx.virtualHosts.${domain} = {
-  #   root = "/var/lib/qbittorrent-nox/qBittorrent/downloads";
-  #   locations."/" = {
-  #     extraConfig = ''
-  #       autoindex on;
-  #       autoindex_exact_size on;
-  #       autoindex_localtime on;
-  #     '';
-  #   };
-  # };
 
   # https://github.com/1sixth/flakes/blob/master/modules/qbittorrent-nox.nix
 
