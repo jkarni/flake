@@ -1,11 +1,12 @@
-{
-  pkgs,
-  lib,
-  config,
-  ...
-}: let
+{ pkgs
+, lib
+, config
+, ...
+}:
+let
   cfg = config.secrets.sops-nix;
-in {
+in
+{
   options = {
     secrets.sops-nix.enable = lib.mkEnableOption "sops secret service";
   };
@@ -14,8 +15,9 @@ in {
     sops.defaultSopsFile = ./key.yaml;
     sops.age.keyFile = "/var/lib/sops-nix/key.txt";
 
-    sops.secrets.github-ci-token = {};
-    sops.secrets.shadowsocks-config = {};
-    sops.secrets.ssh-private-key = {} // lib.optionalAttrs config.profile.desktopEnv.enable {owner = "dominic";};
+    sops.secrets.tg-chatid = { };
+    sops.secrets.tg-token = { };
+    sops.secrets.shadowsocks-config = { };
+    sops.secrets.ssh-private-key = { } // lib.optionalAttrs config.profile.desktopEnv.enable { owner = "dominic"; };
   };
 }
