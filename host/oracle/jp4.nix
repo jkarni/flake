@@ -94,6 +94,10 @@ let
     echo -e "-------------------------------------------------------------\n" >> ''${log_dir}/qb.log
 
   '';
+
+  testScript = pkgs.writeShellScriptBin "testScript" ''
+     echo "test" > /var/lib/qbittorrent-nox/zzz
+  '';
 in
 {
   imports = [
@@ -104,6 +108,7 @@ in
     qbittorrent-nox
     rclone
     qbScript
+    testScript
   ];
 
   # services.nginx.enable = true;
