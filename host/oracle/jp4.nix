@@ -12,6 +12,7 @@ in
 
   environment.systemPackages = with pkgs; [
     qbittorrent-nox
+    rclone
   ];
 
   # services.nginx.enable = true;
@@ -25,16 +26,6 @@ in
   #     '';
   #   };
   # };
-
-  services.traefik.dynamicConfigOptions.http = {
-    middlewares.qbittorrent.stripprefix.prefixes = "/qbittorrent";
-    routers.qbittorrent = {
-      middlewares = [ "qbittorrent" ];
-      rule = "Host(`${domain}`) && PathPrefix(`/qbittorrent/`)";
-      service = "qbittorrent";
-    };
-    services.qbittorrent.loadBalancer.servers = [{ url = "http://127.0.0.1:8080"; }];
-  };
 
   # https://github.com/1sixth/flakes/blob/master/modules/qbittorrent-nox.nix
 
