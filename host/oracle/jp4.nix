@@ -130,7 +130,7 @@ in
     description = "qBittorrent-nox service";
     serviceConfig = {
       PrivateTmp = false;
-      User = "qbittorrent";
+      # User = "qbittorrent";
       # https://github.com/qbittorrent/qBittorrent/wiki/How-to-use-portable-mode
       ExecStart = "${pkgs.qbittorrent-nox}/bin/qbittorrent-nox --profile=/var/lib/qbittorrent-nox --relative-fastresume";
       TimeoutStopSec = 1800;
@@ -140,17 +140,17 @@ in
     wants = [ "network-online.target" ];
   };
 
-  users = {
-    groups.qbittorrent.gid = 1000;
-    users.qbittorrent = {
-      group = "qbittorrent";
-      isSystemUser = true;
-      uid = 1000;
-    };
-  };
+  # users = {
+  #   groups.qbittorrent.gid = 1000;
+  #   users.qbittorrent = {
+  #     group = "qbittorrent";
+  #     isSystemUser = true;
+  #     uid = 1000;
+  #   };
+  # };
 
   
   # special sops key
-  sops.secrets.tg-chatid = { owner = "qbittorrent"; };
-  sops.secrets.tg-token = { owner = "qbittorrent"; };
+  sops.secrets.tg-chatid = { };
+  sops.secrets.tg-token = { };
 }
