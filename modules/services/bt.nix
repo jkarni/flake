@@ -80,7 +80,7 @@ let
     }
 
 
-    echo "Torrent Name：${torrent_name}" >> ''${log_dir}/qb.log
+    echo "Torrent Name：$torrent_name" >> ''${log_dir}/qb.log
     echo "Content Path：''${content_dir}" >> ''${log_dir}/qb.log
     echo "File Number：''${files_num}" >> ''${log_dir}/qb.log
     echo "Size：''${torrent_size} Bytes" >> ''${log_dir}/qb.log
