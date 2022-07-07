@@ -20,53 +20,45 @@ let
     rclone_dest="googleshare:Download"
     log_dir="/var/lib/qbittorrent-nox/qBLog"
     rclone_parallel="32"
-    # For leech_category, after download, upload to googledrive and delete immediately(important resource, Public BT)
-    leech_category="leech"
+
     # For upload_category, after download, upload to googledrive but do not auto delete(important resource, PT share ratio requirement)
     upload_category="upload"
-    # For Anything else, after download, do not upload and keep seeding(unimportant resource, only for improving PT statistics)
-    # https://github.com/jerrymakesjelly/autoremove-torrents
+
 
     if [ ! -d $log_dir ]
     then
-        mkdir -p $log_dir
+      mkdir -p $log_dir
     fi
 
 
     function check_category(){
-        if [ "$torrent_category" == $leech_category ]
-        then
-            echo "[$(date '+%Y-%m-%d %H:%M:%S')] Detect Leech Category, Continue" >> $log_dir/qb.log 
-        elif [ "$torrent_category" == $upload_category ]
+        if [ "$torrent_category" == $upload_category ]
         then 
-            echo "[$(date '+%Y-%m-%d %H:%M:%S')] Detect Upload Category, Continue" >> $log_dir/qb.log 
+          echo "[$(date '+%Y-%m-%d %H:%M:%S')] Detect Upload Category" >> $log_dir/qb.log 
         else
-            echo "[$(date '+%Y-%m-%d %H:%M:%S')] Not Leech or Upload Category, EXIT" >> $log_dir/qb.log
-            echo -e "-------------------------------------------------------------\n" >> $log_dir/qb.log
-            exit 0       
+          echo "[$(date '+%Y-%m-%d %H:%M:%S')] Not Upload Category" >> $log_dir/qb.log
         fi
     }
 
     function rclone_copy(){
         if [ -f "$content_dir" ]
         then
-            ${pkgs.rclone}/bin/rclone --config ${config.sops.secrets.rclone-config.path} -v copy --log-file  $log_dir/rclone.log "$content_dir" $rclone_dest
+          ${pkgs.rclone}/bin/rclone --config ${config.sops.secrets.rclone-config.path} -v copy --log-file  $log_dir/rclone.log "$content_dir" $rclone_dest
         elif [ -d "$content_dir" ]
         then
-            ${pkgs.rclone}/bin/rclone --config ${config.sops.secrets.rclone-config.path} -v copy --transfers $rclone_parallel --log-file $log_dir/rclone.log "$content_dir" $rclone_dest/"$torrent_name"
+          ${pkgs.rclone}/bin/rclone --config ${config.sops.secrets.rclone-config.path} -v copy --transfers $rclone_parallel --log-file $log_dir/rclone.log "$content_dir" $rclone_dest/"$torrent_name"
         fi
 
         echo -e "-------------------------------------------------------------\n" >> $log_dir/rclone.log
     }
 
     function qb_del(){
-        if [ $torrent_category == $leech_category ]
+        if [ $torrent_category == $upload_category ]
         then
-            ${pkgs.curl}/bin/curl -X POST -d "hashes=$file_hash&deleteFiles=true" "$qb_web_url/api/v2/torrents/delete" 
-            echo "[$(date '+%Y-%m-%d %H:%M:%S')] Auto-delete Success" >> $log_dir/qb.log
-        elif [ $torrent_category == $upload_category ]
-        then
-            echo "[$(date '+%Y-%m-%d %H:%M:%S')] Upload Category: Do Not Auto-delete" >> $log_dir/qb.log
+          echo "[$(date '+%Y-%m-%d %H:%M:%S')] Upload Category: Do Not Auto-delete" >> $log_dir/qb.log
+        else 
+          ${pkgs.curl}/bin/curl -X POST -d "hashes=$file_hash&deleteFiles=true" "$qb_web_url/api/v2/torrents/delete" 
+          echo "[$(date '+%Y-%m-%d %H:%M:%S')] Auto-delete Success" >> $log_dir/qb.log
         fi
     }
 
@@ -107,7 +99,7 @@ in
   config = lib.mkIf cfg.enable {
     environment.systemPackages = with pkgs; [
       qbittorrent-nox
-      rclone 
+      rclone
       qbScript
     ];
 
