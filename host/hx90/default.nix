@@ -15,9 +15,6 @@
     };
   };
 
-  sops.secrets.restic-password = { };
-  sops.secrets.rclone-config = { };
-
   services.restic.backups."firefox-profile" = {
     extraBackupArgs = [
       "--exclude=chrome"

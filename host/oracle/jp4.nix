@@ -8,8 +8,20 @@
     ./default.nix
   ];
 
-  # manually copy rclone config to /var/lib/qbittorrent-nox/rclone/rclone.conf  <-- GDtoken will refresh itself
-  # TODO: impermanence + restic 
+
   services.bt.enable = true;
+
+  services.restic.backups."bt-backup" = {
+    extraBackupArgs = [
+      "--exclude=qBittorrent/downloads"
+    ];
+    passwordFile = config.sops.secrets.restic-password.path;
+    rcloneConfigFile = config.sops.secrets.rclone-config.path;
+    paths = [
+      "/var/lib/qbittorrent-nox"
+    ];
+    repository = "rclone:googleshare:backup";
+    timerConfig.OnCalendar = "daily";
+  };
 
 }
