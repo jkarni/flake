@@ -20,7 +20,7 @@
 
   services.restic.backups."firefox-profile" = {
     extraBackupArgs = [
-      "--exclude-file=/home/dominic/.mozilla/firefox/default/chrome"
+      "--exclude=chrome"
     ];
     passwordFile = config.sops.secrets.restic-password.path;
     rcloneConfigFile = config.sops.secrets.rclone-config.path;
