@@ -8,5 +8,16 @@
 # skhd-restart:
 # 	launchctl kickstart -k gui/501/homebrew.mxcl.skhd
 
-firefox-env-init:
+darwin-firefox-env-init:
 	sudo launchctl bootstrap  system  /Library/LaunchAgents/org.nixos.FirefoxEnv.plist
+
+darwin-firefox-profile-backup:
+	restic --verbose backup '/Users/dominic/Library/Application Support/Firefox/default' --exclude="chrome"
+
+darwin-firefox-profile-restore:
+
+
+linux-firefox-profile-backup:
+	restic --verbose backup '/Users/dominic/Library/Application Support/Firefox/default' --exclude="chrome"
+
+linux-firefox-profile-restore:

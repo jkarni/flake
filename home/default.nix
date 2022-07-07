@@ -1,8 +1,7 @@
-{
-  pkgs,
-  lib,
-  osConfig,
-  ...
+{ pkgs
+, lib
+, osConfig
+, ...
 }: {
   imports = [
     ./git.nix
@@ -23,6 +22,8 @@
       mediainfo
       yt-dlp
       unzip
+      rclone
+      restic
       # nix
       nix-tree
       sops
