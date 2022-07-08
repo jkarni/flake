@@ -1,9 +1,9 @@
-{ pkgs
-, lib
-, config
-, ...
-}:
-let
+{
+  pkgs,
+  lib,
+  config,
+  ...
+}: let
   cfg = config.services.bt;
   domain = "${config.networking.hostName}.mlyxshi.com";
   #  Run external program on torrent completion
@@ -33,8 +33,8 @@ let
 
     function check_category(){
         if [ "$torrent_category" == $upload_category ]
-        then 
-          echo "[$(date '+%Y-%m-%d %H:%M:%S')] Detect Upload Category" >> $log_dir/qb.log 
+        then
+          echo "[$(date '+%Y-%m-%d %H:%M:%S')] Detect Upload Category" >> $log_dir/qb.log
         else
           echo "[$(date '+%Y-%m-%d %H:%M:%S')] Not Upload Category" >> $log_dir/qb.log
         fi
@@ -56,8 +56,8 @@ let
         if [ $torrent_category == $upload_category ]
         then
           echo "[$(date '+%Y-%m-%d %H:%M:%S')] Upload Category: Do Not Auto-delete" >> $log_dir/qb.log
-        else 
-          ${pkgs.curl}/bin/curl -X POST -d "hashes=$file_hash&deleteFiles=true" "$qb_web_url/api/v2/torrents/delete" 
+        else
+          ${pkgs.curl}/bin/curl -X POST -d "hashes=$file_hash&deleteFiles=true" "$qb_web_url/api/v2/torrents/delete"
           echo "[$(date '+%Y-%m-%d %H:%M:%S')] Auto-delete Success" >> $log_dir/qb.log
         fi
     }
@@ -87,11 +87,7 @@ let
     echo -e "-------------------------------------------------------------\n" >> $log_dir/qb.log
 
   '';
-
-
-
-in
-{
+in {
   options = {
     services.bt.enable = lib.mkEnableOption "bt download service";
   };
@@ -103,23 +99,21 @@ in
       qbScript
     ];
 
-
     # https://github.com/1sixth/flakes/blob/master/modules/qbittorrent-nox.nix
     # https://github.com/qbittorrent/qBittorrent/wiki/How-to-use-portable-mode
 
     systemd.services.qbittorrent-nox = {
-      after = [ "local-fs.target" "network-online.target" "nss-lookup.target" ];
+      after = ["local-fs.target" "network-online.target" "nss-lookup.target"];
       description = "qBittorrent-nox service";
       serviceConfig = {
         ExecStart = "${pkgs.qbittorrent-nox}/bin/qbittorrent-nox --profile=/var/lib/qbittorrent-nox --relative-fastresume";
         StateDirectory = "qbittorrent-nox";
       };
-      wantedBy = [ "multi-user.target" ];
-      wants = [ "network-online.target" ];
+      wantedBy = ["multi-user.target"];
+      wants = ["network-online.target"];
     };
 
-    sops.secrets.tg-chatid = { };
-    sops.secrets.tg-token = { };
-
+    sops.secrets.tg-chatid = {};
+    sops.secrets.tg-token = {};
   };
 }

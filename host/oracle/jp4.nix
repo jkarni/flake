@@ -1,13 +1,11 @@
-{ config
-, pkgs
-, ...
-}:
-
 {
+  config,
+  pkgs,
+  ...
+}: {
   imports = [
     ./default.nix
   ];
-
 
   services.bt.enable = true;
 
@@ -23,5 +21,4 @@
     repository = "rclone:googleshare:backup";
     timerConfig.OnCalendar = "daily";
   };
-
 }

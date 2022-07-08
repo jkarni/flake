@@ -12,6 +12,7 @@
   ];
 
   home.packages = with pkgs; [
+    alejandra
     gh
     go
     ideviceinstaller
