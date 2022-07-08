@@ -27,6 +27,11 @@ def main():
         path = os.environ.get("PATH")
         # homebrew path
         os.environ["PATH"] = f"/opt/homebrew/bin:/usr/local/bin:{path}"
+    
+    if platform.system() == "Linux":
+        path = os.environ.get("PATH")
+        # nix path
+        os.environ["PATH"] = f"/etc/profile/per-user/dominic/bin:{path}"
 
     subprocess.Popen(args, **kwargs)
 
