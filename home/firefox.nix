@@ -5,7 +5,7 @@
 , ...
 }:
 let
-  FirefoxConfigPath =
+  FirefoxProfilePath =
     if pkgs.stdenv.isLinux
     then ".mozilla/firefox"
     else "Library/Application Support/Firefox";
@@ -91,8 +91,8 @@ in
   #  Linux firefox wrapper set MOZ_LEGACY_PROFILES=1 by default
   #  Under macOS, we need to set System-level environment variable MOZ_LEGACY_PROFILES=1 by launchctl setenv, See os/darwin/default.nix
   home.file = {
-    "${FirefoxConfigPath}/profiles.ini".source = config.lib.file.mkOutOfStoreSymlink ../config/firefox/profile/profiles.ini;
-    "${FirefoxConfigPath}/default/chrome".source = config.lib.file.mkOutOfStoreSymlink ../config/firefox/profile/default/chrome;
+    "${FirefoxProfilePath}/profiles.ini".source = config.lib.file.mkOutOfStoreSymlink ../config/firefox/profile/profiles.ini;
+    "${FirefoxProfilePath}/default/chrome".source = config.lib.file.mkOutOfStoreSymlink ../config/firefox/profile/default/chrome;
 
     # woodruffw/ff2mpv 
     "${NativeMessagingHostsPath}/ff2mpv.json".text = ''
