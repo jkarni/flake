@@ -123,9 +123,10 @@
             ./overlay
             ./modules
 
-            {
-              nixpkgs.overlays = [nixpkgs-wayland.overlay];
-            }
+            # Fix firefox bug, but cause mpv bug ......
+            # {
+            #   nixpkgs.overlays = [nixpkgs-wayland.overlay];
+            # }
 
             {
               system.stateVersion = stateVersion;
