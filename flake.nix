@@ -77,7 +77,6 @@
     , darwin
     , home-manager
     , home-manager-darwin-stable
-    , nixpkgs-wayland
     , deploy-rs
     , sops-nix
     , ...
@@ -86,7 +85,7 @@
       stateVersion = "22.05";
       oracleServerList = [ "jp2" "jp4" "sw" "us1" "kr" ];
       commonSpecialArgs = {
-        inherit (args) neovim-nightly mpv-nightly;
+        inherit (args) neovim-nightly mpv-nightly nixpkgs-wayland;
         inherit (args) zsh-tab-title zsh-fast-syntax-highlighting zsh-you-should-use zsh-autosuggestions;
       };
     in
@@ -130,11 +129,6 @@
               ./overlay
               ./modules
 
-              # Fix firefox bug, but cause mpv bug ......
-              # {
-              #   nixpkgs.overlays = [nixpkgs-wayland.overlay];
-              # }
-
               {
                 system.stateVersion = stateVersion;
                 hm.stateVersion = stateVersion;
@@ -142,6 +136,7 @@
                 networking.hostName = "hx90";
 
                 profile.desktopEnv.enable = true;
+                profile.waylandNightly.enable = true;
                 profile.developerMode.enable = true;
                 secrets.sops-nix.enable = true;
 

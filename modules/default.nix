@@ -16,6 +16,7 @@
     ]
     ++ lib.optionals (args ? isLinux) [
       ./profile/desktopEnv.nix
+      ./profile/waylandNightly.nix
       ./secrets
       ./services/shadowsocks-rust.nix
       ./services/ssh-config.nix
