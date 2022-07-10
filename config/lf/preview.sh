@@ -6,6 +6,11 @@ HEIGHT="$3"
 X="$4"
 Y="$5"
 
+# exclude rclone mount directory
+case "$FILE" in
+    /Users/dominic/rcloneMount/*) exit 0;;
+esac
+
 
 case "$(file --mime-type --dereference --brief "$FILE")" in
   video/*)
