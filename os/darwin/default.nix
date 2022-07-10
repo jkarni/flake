@@ -1,7 +1,8 @@
-{ pkgs
-, lib
-, config
-, ...
+{
+  pkgs,
+  lib,
+  config,
+  ...
 }: {
   imports = [
     ./system.nix
@@ -24,20 +25,25 @@
   programs.ssh = {
     knownHosts = {
       github = {
-        hostNames = [ "github.com" ];
+        hostNames = ["github.com"];
         publicKey = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIOMqqnkVzrm0SdG6UOoqKLsabgH5C9okWi0dh2l9GKJl";
       };
     };
   };
 
   # https://github.com/azuwis/nix-config/blob/master/darwin/skhd.nix
-  # Add skhd to Settings->Privacy & Security->Accessibility        <-- launchd 
-  system.activationScripts.postActivation.text = let path = "${pkgs.skhd}/bin/skhd"; in ''
+  # Add skhd to Settings->Privacy & Security->Accessibility        <-- launchd
+  system.activationScripts.postActivation.text = let
+    path = "${pkgs.skhd}/bin/skhd";
+  in ''
     ${pkgs.sqlite}/bin/sqlite3 '/Library/Application Support/com.apple.TCC/TCC.db' \
       'INSERT or REPLACE INTO access VALUES("kTCCServiceAccessibility","${path}",1,2,4,1,NULL,NULL,0,NULL,NULL,0,NULL);
       DELETE from access where client_type = 1 and client != "${path}" and client like "%/bin/skhd";'
-  '';
 
+
+    # show upgrade diff
+    ${pkgs.nix}/bin/nix store --experimental-features nix-command diff-closures /run/current-system "$systemConfig"
+  '';
 
   launchd.agents.FirefoxEnv = {
     serviceConfig.ProgramArguments = [
@@ -47,7 +53,6 @@
     ];
     serviceConfig.RunAtLoad = true;
   };
-
 
   # skhd
   # Important, DO NOT USE services.skhd from nix-darwin

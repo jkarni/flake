@@ -13,6 +13,8 @@ linux-firefox-profile-backup:
 linux-firefox-profile-restore:
 	restic restore latest  --target / --path "/home/dominic/.mozilla/firefox/default" 
 
+# I don't know why launchd will fail to start services and show error code 78 after reboot
+# Therefore, I have to manually unload and load services after reboot
 launchd:
 	launchctl unload ~/Library/LaunchAgents/org.nixos.SKHD.plist
 	launchctl load -w ~/Library/LaunchAgents/org.nixos.SKHD.plist

@@ -31,7 +31,7 @@
     fi
 
 
-    function check_category(){
+    check_category(){
         if [ "$torrent_category" == $upload_category ]
         then
           echo "[$(date '+%Y-%m-%d %H:%M:%S')] Detect Upload Category" >> $log_dir/qb.log
@@ -40,7 +40,7 @@
         fi
     }
 
-    function rclone_copy(){
+    rclone_copy(){
         if [ -f "$content_dir" ]
         then
           ${pkgs.rclone}/bin/rclone --config ${config.sops.secrets.rclone-config.path} -v copy --log-file  $log_dir/rclone.log "$content_dir" $rclone_dest
@@ -52,7 +52,7 @@
         echo -e "-------------------------------------------------------------\n" >> $log_dir/rclone.log
     }
 
-    function qb_del(){
+    qb_del(){
         if [ $torrent_category == $upload_category ]
         then
           echo "[$(date '+%Y-%m-%d %H:%M:%S')] Upload Category: Do Not Auto-delete" >> $log_dir/qb.log
@@ -62,7 +62,7 @@
         fi
     }
 
-    function telegram(){
+    telegram(){
         TOKEN=$(cat ${config.sops.secrets.tg-token.path})
         CHAT_ID=$(cat ${config.sops.secrets.tg-chatid.path})
         MESSAGE="$torrent_name GoogleDrive Upload Success"

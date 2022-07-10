@@ -73,6 +73,9 @@ csrutil status
 # Recovery  <-- shut down + long press start 
 csrutil disable
 
+# disable spotlight 
+sudo mdutil -a -i off
+
 xcode-select --install
 
 #insatll homebrew
