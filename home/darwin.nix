@@ -16,6 +16,7 @@
     gh
     go
     ideviceinstaller
+    skhd
   ];
 
   # https://github.com/nix-community/home-manager/blob/db00b39a9abec04245486a01b236b8d9734c9ad0/modules/targets/darwin/linkapps.nix

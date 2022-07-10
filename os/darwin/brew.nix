@@ -19,9 +19,9 @@
     ];
 
     # use launchd config from homebrew(original github config)
-    extraConfig = ''
-      brew "skhd", restart_service: true
-    '';
+    # extraConfig = ''
+    #   brew "skhd", restart_service: true
+    # '';
 
     casks = [
       "macfuse" # rclone mount
