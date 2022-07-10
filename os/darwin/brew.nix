@@ -24,6 +24,7 @@
     '';
 
     casks = [
+      "macfuse" # rclone mount
       "mpv"
       "font-roboto-mono-nerd-font"
       "calibre"

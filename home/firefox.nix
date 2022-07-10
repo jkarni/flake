@@ -1,10 +1,10 @@
-{ pkgs
-, lib
-, config
-, osConfig
-, ...
-}:
-let
+{
+  pkgs,
+  lib,
+  config,
+  osConfig,
+  ...
+}: let
   FirefoxProfilePath =
     if pkgs.stdenv.isLinux
     then ".mozilla/firefox"
@@ -50,7 +50,7 @@ let
             path = os.environ.get("PATH")
             # homebrew path
             os.environ["PATH"] = f"/opt/homebrew/bin:/usr/local/bin:{path}"
-  
+
 
         subprocess.Popen(args, **kwargs)
 
@@ -80,9 +80,7 @@ let
     if __name__ == "__main__":
         main()
   '';
-
-in
-{
+in {
   home.packages = [
     FirefoxPackage
   ];
@@ -94,7 +92,7 @@ in
     "${FirefoxProfilePath}/profiles.ini".source = config.lib.file.mkOutOfStoreSymlink ../config/firefox/profile/profiles.ini;
     "${FirefoxProfilePath}/default/chrome".source = config.lib.file.mkOutOfStoreSymlink ../config/firefox/profile/default/chrome;
 
-    # woodruffw/ff2mpv 
+    # woodruffw/ff2mpv
     "${NativeMessagingHostsPath}/ff2mpv.json".text = ''
       {
         "name": "ff2mpv",
