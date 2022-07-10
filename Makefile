@@ -14,5 +14,7 @@ linux-firefox-profile-restore:
 	restic restore latest  --target / --path "/home/dominic/.mozilla/firefox/default" 
 
 launchd:
-  	launchctl unload ~/Library/LaunchAgents/org.nixos.SKHD.plist
+	launchctl unload ~/Library/LaunchAgents/org.nixos.SKHD.plist
 	launchctl load -w ~/Library/LaunchAgents/org.nixos.SKHD.plist
+	launchctl unload ~/Library/LaunchAgents/org.nixos.RcloneMount.plist
+	launchctl load -w ~/Library/LaunchAgents/org.nixos.RcloneMount.plist
