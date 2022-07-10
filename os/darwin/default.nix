@@ -30,10 +30,15 @@
     };
   };
 
-  #  launchd related folder: /var/db/com.apple.xpc.launchd
+  # https://github.com/azuwis/nix-config/blob/master/darwin/skhd.nix
+  # Add skhd to Settings->Privacy & Security->Accessibility        <-- launchd 
+  system.activationScripts.postActivation.text = let path = "${pkgs.skhd}/bin/skhd"; in ''
+    ${pkgs.sqlite}/bin/sqlite3 '/Library/Application Support/com.apple.TCC/TCC.db' \
+      'INSERT or REPLACE INTO access VALUES("kTCCServiceAccessibility","${path}",1,2,4,1,NULL,NULL,0,NULL,NULL,0,NULL);
+      DELETE from access where client_type = 1 and client != "${path}" and client like "%/bin/skhd";'
+  '';
 
-  #  Manually run once
-  #  sudo launchctl bootstrap  system  /Library/LaunchAgents/org.nixos.FirefoxEnv.plist
+
   launchd.agents.FirefoxEnv = {
     serviceConfig.ProgramArguments = [
       "bash"
@@ -49,7 +54,7 @@
   # Details: https://github.com/azuwis/nix-config/commit/64a28173876aaf03f409691457e4f9500d868528
   launchd.user.agents.SKHD = {
     serviceConfig.ProgramArguments = [
-      "/etc/profiles/per-user/dominic/bin/skhd"
+      "${pkgs.skhd}/bin/skhd"
     ];
     serviceConfig.RunAtLoad = true;
     serviceConfig.KeepAlive = true;
@@ -64,7 +69,7 @@
   # rclone mount googleshare:Download /Users/dominic/rcloneMount <-- mpv play anime
   launchd.user.agents.RcloneMount = {
     serviceConfig.ProgramArguments = [
-      "/etc/profiles/per-user/dominic/bin/rclone"
+      "${pkgs.rclone}/bin/rclone"
       "mount"
       "googleshare:Download"
       "/Users/dominic/rcloneMount"
