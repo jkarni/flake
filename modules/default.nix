@@ -20,6 +20,6 @@
       ./secrets
       ./services/shadowsocks-rust.nix
       ./services/ssh-config.nix
-      ./services/bt.nix
+      ./services/qbittorrent-nox.nix
     ];
 }

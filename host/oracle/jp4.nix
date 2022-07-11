@@ -7,5 +7,5 @@
     ./default.nix
   ];
 
-  services.bt.enable = true;
+  services.qbittorrent-nox.enable = true;
 }

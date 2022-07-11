@@ -4,7 +4,7 @@
 , ...
 }:
 let
-  cfg = config.services.bt;
+  cfg = config.services.qbittorrent-nox;
   domain = "${config.networking.hostName}.mlyxshi.com";
   #  Run external program on torrent completion
   # /run/current-system/sw/bin/qbScript "%N" "%F" "%C" "%Z" "%I" "%L"
@@ -90,7 +90,7 @@ let
 in
 {
   options = {
-    services.bt.enable = lib.mkEnableOption "bt download service";
+    services.qbittorrent-nox.enable = lib.mkEnableOption "qbittorrent-nox download service";
   };
 
   config = lib.mkIf cfg.enable {
@@ -129,7 +129,7 @@ in
       ];
       repository = "rclone:googleshare:backup";
       timerConfig.OnCalendar = "daily";
-      pruneOpts=["--keep-last 2"];
+      pruneOpts = [ "--keep-last 2" ];
     };
 
   };
