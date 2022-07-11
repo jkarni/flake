@@ -1,9 +1,9 @@
-{
-  pkgs,
-  lib,
-  config,
-  ...
-}: let
+{ pkgs
+, lib
+, config
+, ...
+}:
+let
   cfg = config.services.bt;
   domain = "${config.networking.hostName}.mlyxshi.com";
   #  Run external program on torrent completion
@@ -87,12 +87,17 @@
     echo -e "-------------------------------------------------------------\n" >> $log_dir/qb.log
 
   '';
-in {
+in
+{
   options = {
     services.bt.enable = lib.mkEnableOption "bt download service";
   };
 
   config = lib.mkIf cfg.enable {
+
+    sops.secrets.tg-chatid = { };
+    sops.secrets.tg-token = { };
+
     environment.systemPackages = with pkgs; [
       qbittorrent-nox
       rclone
@@ -103,17 +108,29 @@ in {
     # https://github.com/qbittorrent/qBittorrent/wiki/How-to-use-portable-mode
 
     systemd.services.qbittorrent-nox = {
-      after = ["local-fs.target" "network-online.target" "nss-lookup.target"];
+      after = [ "local-fs.target" "network-online.target" "nss-lookup.target" ];
       description = "qBittorrent-nox service";
       serviceConfig = {
         ExecStart = "${pkgs.qbittorrent-nox}/bin/qbittorrent-nox --profile=/var/lib/qbittorrent-nox --relative-fastresume";
         StateDirectory = "qbittorrent-nox";
       };
-      wantedBy = ["multi-user.target"];
-      wants = ["network-online.target"];
+      wantedBy = [ "multi-user.target" ];
+      wants = [ "network-online.target" ];
     };
 
-    sops.secrets.tg-chatid = {};
-    sops.secrets.tg-token = {};
+    services.restic.backups."bt-backup" = {
+      extraBackupArgs = [
+        "--exclude=qBittorrent/downloads"
+      ];
+      passwordFile = config.sops.secrets.restic-password.path;
+      rcloneConfigFile = config.sops.secrets.rclone-config.path;
+      paths = [
+        "/var/lib/qbittorrent-nox"
+      ];
+      repository = "rclone:googleshare:backup";
+      timerConfig.OnCalendar = "daily";
+      pruneOpts=["--keep-last 2"];
+    };
+
   };
 }
