@@ -2,11 +2,11 @@
   "version": "104.0a1",
   "linux": {
     "url": "https://download.cdn.mozilla.net/pub/firefox/nightly/latest-mozilla-central/firefox-104.0a1.en-US.linux-x86_64.tar.bz2",
-    "sha256": "1qmxrmcwlhrpsqc0n2x32i40x8anifhbx3sd56ln2jr5k0fd021g"
+    "sha256": "0w708s7xayfilj3fkx0qdj8br8yajjr2wnif8knhihcd162nnmxc"
   },
   "darwin": {
     "url": "https://download.cdn.mozilla.net/pub/firefox/nightly/latest-mozilla-central/firefox-104.0a1.en-US.mac.dmg",
-    "sha256": "1b7qvqnrd5xfn219ivixx3lp2dcsyn1fx0ypmkh5fvzkvdljzwsp"
+    "sha256": "1n60s2vkki7qha662398sjffd1lqylgryhlqjymwkmhpxmrvjkld"
   },
   "description": "[Auto-Generated] Firefox Nightly Version"
 }
