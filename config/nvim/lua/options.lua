@@ -1,7 +1,6 @@
 --:help option_list 
 --:help vim_diff.txt
 local options = {
-  mouse = "a",
   number = true,
 
   splitbelow = true,
@@ -30,8 +29,6 @@ local options = {
   laststatus = 3,
 
   cmdheight = 0,
-
-  -- winbar =,
 
   termguicolors = true,
 }

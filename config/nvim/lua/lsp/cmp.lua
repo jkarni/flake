@@ -81,7 +81,10 @@ for server_name, lang_config in pairs(require("lang-config.lsp.servers")) do
     --- normal loop part
     local config = {
       on_attach = function(client, bufnr)
-        -- navic.attach(client, bufnr)
+        if (server_name == "clangd" or server_name == "sumneko_lua" ) then
+          navic.attach(client, bufnr) --show winbar navi for C, C++, lua
+          vim.wo.winbar = "%{%v:lua.require'nvim-navic'.get_location()%}" -- window-local option, wait https://github.com/neovim/neovim/issues/19396 fix
+        end     
         require("keybindings").LSP_on_attach(client, bufnr)
       end,
       capabilities = require('cmp_nvim_lsp').update_capabilities(vim.lsp.protocol.make_client_capabilities()),
