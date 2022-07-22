@@ -5,23 +5,23 @@
       url = "github:nixos/nixpkgs/nixos-unstable";
     };
 
-    nixpkgs-darwin-stable = {
-      url = "github:nixos/nixpkgs/nixpkgs-22.05-darwin";
-    };
-
     home-manager = {
-      url = "github:nix-community/home-manager/release-22.05";
+      url = "github:nix-community/home-manager";
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
-    home-manager-darwin-stable = {
-      url = "github:nix-community/home-manager/release-22.05";
-      inputs.nixpkgs.follows = "nixpkgs-darwin-stable";
-    };
+    # nixpkgs-darwin-stable = {
+    #   url = "github:nixos/nixpkgs/nixpkgs-22.05-darwin";
+    # };
+
+    # home-manager-darwin-stable = {
+    #   url = "github:nix-community/home-manager/release-22.05";
+    #   inputs.nixpkgs.follows = "nixpkgs-darwin-stable";
+    # };
 
     darwin = {
       url = "github:LnL7/nix-darwin";
-      inputs.nixpkgs.follows = "nixpkgs-darwin-stable";
+      inputs.nixpkgs.follows = "nixpkgs";
     };
 
     deploy-rs = {
@@ -76,7 +76,7 @@
     nixpkgs,
     darwin,
     home-manager,
-    home-manager-darwin-stable,
+    # home-manager-darwin-stable,
     deploy-rs,
     sops-nix,
     ...
@@ -96,7 +96,7 @@
         system = "aarch64-darwin";
         modules = [
           # sops-nix currently doesn't support aarch64-darwin
-          home-manager-darwin-stable.darwinModules.home-manager
+          home-manager.darwinModules.home-manager
           ./host/M1
           ./os/darwin/brew.nix
           ./overlay
