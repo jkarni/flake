@@ -26,7 +26,7 @@ z Z Adjust subtitle delay by +/- 0.1 seconds
 
 h H subtitle up dan down
 
-[ ] Decrease/increase current playback speed by 10%.
+[ ] Decrease/increase current playback speed
 
 BACKSPACE Reset playback speed to normal.
 
