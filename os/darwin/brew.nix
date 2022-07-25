@@ -16,6 +16,7 @@
       "iproute2mac"
       "mas"
       "qemu"
+      "mpv"
     ];
 
     # use launchd config from homebrew(original github config)
@@ -25,7 +26,7 @@
 
     casks = [
       "macfuse" # rclone mount
-      "mpv"
+      "utm"
       "font-roboto-mono-nerd-font"
       "calibre"
       "ipatool"

@@ -6,7 +6,7 @@
   },
   "darwin": {
     "url": "https://download.cdn.mozilla.net/pub/firefox/nightly/latest-mozilla-central/firefox-104.0a1.en-US.mac.dmg",
-    "sha256": "070wi5djhjjyyasyc8xxw0sxrh10vy2rzvvamknxn6x8hdz60kax"
+    "sha256": "q2smOcB2uqL2csx8jaHUFJ4ltztrhXPSXWpYL6XtngU="
   },
   "description": "[Auto-Generated] Firefox Nightly Version"
 }
