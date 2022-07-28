@@ -29,6 +29,7 @@
 
     casks = [
       "kitty"
+      "firefox"
       "macfuse" # rclone mount
       "utm"
       "font-roboto-mono-nerd-font"

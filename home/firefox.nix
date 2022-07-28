@@ -18,7 +18,7 @@
   FirefoxPackage =
     if pkgs.stdenv.isLinux
     then pkgs.firefox-linux
-    else pkgs.firefox-bin-darwin;
+    else pkgs.runCommand "firefox-0.0.0" { } "mkdir $out";
 
   ff-mpv = pkgs.writeScript "ff-mpv" ''
     #!${pkgs.python3}/bin/python

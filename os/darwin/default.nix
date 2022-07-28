@@ -1,8 +1,7 @@
-{
-  pkgs,
-  lib,
-  config,
-  ...
+{ pkgs
+, lib
+, config
+, ...
 }: {
   imports = [
     ./system.nix
@@ -25,7 +24,7 @@
   programs.ssh = {
     knownHosts = {
       github = {
-        hostNames = ["github.com"];
+        hostNames = [ "github.com" ];
         publicKey = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIOMqqnkVzrm0SdG6UOoqKLsabgH5C9okWi0dh2l9GKJl";
       };
     };
@@ -33,17 +32,34 @@
 
   # https://github.com/azuwis/nix-config/blob/master/darwin/skhd.nix
   # Add skhd to Settings->Privacy & Security->Accessibility        <-- launchd
-  system.activationScripts.postActivation.text = let
-    path = "${pkgs.skhd}/bin/skhd";
-  in ''
-    ${pkgs.sqlite}/bin/sqlite3 '/Library/Application Support/com.apple.TCC/TCC.db' \
-      'INSERT or REPLACE INTO access VALUES("kTCCServiceAccessibility","${path}",1,2,4,1,NULL,NULL,0,NULL,NULL,0,NULL);
-      DELETE from access where client_type = 1 and client != "${path}" and client like "%/bin/skhd";'
+  system.activationScripts.postActivation.text =
+    let
+      path = "${pkgs.skhd}/bin/skhd";
+
+      extraPolicies = import ../../config/firefox/app/policy.nix;
+      wrapperPolicies = {
+        policies =
+          {
+            DisableAppUpdate = true;
+          }
+          // extraPolicies;
+      };
+      policiesJson = pkgs.writeText "policies.json" (builtins.toJSON wrapperPolicies);
+    in
+    ''
+      ${pkgs.sqlite}/bin/sqlite3 '/Library/Application Support/com.apple.TCC/TCC.db' \
+        'INSERT or REPLACE INTO access VALUES("kTCCServiceAccessibility","${path}",1,2,4,1,NULL,NULL,0,NULL,NULL,0,NULL);
+        DELETE from access where client_type = 1 and client != "${path}" and client like "%/bin/skhd";'
+
+      # add firefox policy
+      mkdir "/Applications/Firefox.app/Contents/Resources/distribution"
+      cat ${policiesJson} > "/Applications/Firefox.app/Contents/Resources/distribution/policies.json"
 
 
-    # show upgrade diff
-    ${pkgs.nix}/bin/nix store --experimental-features nix-command diff-closures /run/current-system "$systemConfig"
-  '';
+      # show upgrade diff
+      ${pkgs.nix}/bin/nix store --experimental-features nix-command diff-closures /run/current-system "$systemConfig"
+
+    '';
 
   launchd.agents.FirefoxEnv = {
     serviceConfig.ProgramArguments = [

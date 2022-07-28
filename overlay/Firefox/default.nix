@@ -18,7 +18,4 @@ final: prev: {
       extraPolicies = import ../../config/firefox/app/policy.nix;
     };
 
-  ################################################################################################
-  # Darwin bin
-  firefox-bin-darwin = prev.callPackage ../../pkgs/darwin/Firefox { };
 }
