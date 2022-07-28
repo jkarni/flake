@@ -8,8 +8,9 @@
       "homebrew/cask"
       "homebrew/cask-fonts"
       "homebrew/services"
-      "majd/repo"
-      "koekeishiya/formulae"
+      "majd/repo"         
+      "koekeishiya/formulae" #yabai/skhd
+      "xgadget-lab/nexttrace"
     ];
 
     brews = [
@@ -17,6 +18,8 @@
       "mas"
       "qemu"
       "mpv"
+      "nexttrace"
+      "imagemagick" #kitty image dependency
     ];
 
     # use launchd config from homebrew(original github config)
@@ -25,6 +28,7 @@
     # '';
 
     casks = [
+      "kitty"
       "macfuse" # rclone mount
       "utm"
       "font-roboto-mono-nerd-font"

@@ -1,5 +1,21 @@
 {
   "nodes": {
+    "UnblockNeteaseMusic": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1658897947,
+        "narHash": "sha256-waE9x+TQrpD0x5BoRrN8DenDpoETAB5r26nJeT4rE5E=",
+        "owner": "UnblockNeteaseMusic",
+        "repo": "server",
+        "rev": "b30f803a6d5b586bed8805a063fb1e12d610b490",
+        "type": "github"
+      },
+      "original": {
+        "owner": "UnblockNeteaseMusic",
+        "repo": "server",
+        "type": "github"
+      }
+    },
     "cachix": {
       "locked": {
         "lastModified": 1658346836,
@@ -113,11 +129,11 @@
         "utils": "utils_2"
       },
       "locked": {
-        "lastModified": 1658751516,
-        "narHash": "sha256-Y/3dHoTjbvYBtWd+TTBQJUIgDPO9d+Gqt05C5dyR7E4=",
+        "lastModified": 1658924727,
+        "narHash": "sha256-Fhh9FK9CvuCLxG1WkWJPoendDeXKI4gHYTfezo1n2Zg=",
         "owner": "nix-community",
         "repo": "home-manager",
-        "rev": "dbed4c794d20d51027fc1107f063ec5be027dafc",
+        "rev": "0e2f7876d2f2ae98a67d89a8bef8c49332aae5af",
         "type": "github"
       },
       "original": {
@@ -148,11 +164,11 @@
     "mpv-nightly": {
       "flake": false,
       "locked": {
-        "lastModified": 1658606208,
-        "narHash": "sha256-gm3XMJZYthHAfj8U/LiF/NHkaq6o2P7kKXxEEDjF6V0=",
+        "lastModified": 1658870183,
+        "narHash": "sha256-dBRuxPZTAT1WhgpgkA8xJ4hlGNZ3N1OjEkamVuySo1c=",
         "owner": "mpv-player",
         "repo": "mpv",
-        "rev": "d2467f61bec6909d3596cdc98343ef1f0366aff5",
+        "rev": "284fecc0bdd8152a35a35a387faf5d4675b8f0c8",
         "type": "github"
       },
       "original": {
@@ -164,11 +180,11 @@
     "neovim-nightly": {
       "flake": false,
       "locked": {
-        "lastModified": 1658755950,
-        "narHash": "sha256-gsx8mTSYu76lT6hgbkM47lBQ3tmkubMJGY6QVNALvOg=",
+        "lastModified": 1659024146,
+        "narHash": "sha256-YN9hZ8RXCeSEbuEhh02ZVjAL/3uTnlotV5dKe1LnRU0=",
         "owner": "neovim",
         "repo": "neovim",
-        "rev": "7961f79904f6583ed3279fb1c73f2107ce9603ef",
+        "rev": "468b1a689a40e7eb8ee78c0d1926d149148ed951",
         "type": "github"
       },
       "original": {
@@ -179,11 +195,11 @@
     },
     "nixpkgs": {
       "locked": {
-        "lastModified": 1658648081,
-        "narHash": "sha256-RL5nr4Xhp0zQeEGG/I3t3FmqaI9QrBg5PH31NF+7A/A=",
+        "lastModified": 1658826464,
+        "narHash": "sha256-94ZTF0uIX/iZdiD4RJ5f933ak/OM4XLl7hF+gCa4Iuk=",
         "owner": "nixos",
         "repo": "nixpkgs",
-        "rev": "e494a908e8895b9cba18e21d5fc83362f64b3f6a",
+        "rev": "ce49cb7792a7ffd65ef352dda1110a4e4a204eac",
         "type": "github"
       },
       "original": {
@@ -232,11 +248,11 @@
         "nixpkgs": "nixpkgs_2"
       },
       "locked": {
-        "lastModified": 1658764039,
-        "narHash": "sha256-JAWWzBBxLZ3q5iZ9EWBcvxenfw1Xykk+49Azrz2tOtI=",
+        "lastModified": 1658992610,
+        "narHash": "sha256-DC4gQWSC55EncDVBQppxhBQp+eBoWQmIREjmRJAuDxA=",
         "owner": "nix-community",
         "repo": "nixpkgs-wayland",
-        "rev": "2e93b045af9160166ffe386e302d9560b5c732f5",
+        "rev": "a3dde2c94caa90a825ecd077856d8bf34db962fb",
         "type": "github"
       },
       "original": {
@@ -247,11 +263,11 @@
     },
     "nixpkgs_2": {
       "locked": {
-        "lastModified": 1658648081,
-        "narHash": "sha256-RL5nr4Xhp0zQeEGG/I3t3FmqaI9QrBg5PH31NF+7A/A=",
+        "lastModified": 1658826464,
+        "narHash": "sha256-94ZTF0uIX/iZdiD4RJ5f933ak/OM4XLl7hF+gCa4Iuk=",
         "owner": "nixos",
         "repo": "nixpkgs",
-        "rev": "e494a908e8895b9cba18e21d5fc83362f64b3f6a",
+        "rev": "ce49cb7792a7ffd65ef352dda1110a4e4a204eac",
         "type": "github"
       },
       "original": {
@@ -263,6 +279,7 @@
     },
     "root": {
       "inputs": {
+        "UnblockNeteaseMusic": "UnblockNeteaseMusic",
         "darwin": "darwin",
         "deploy-rs": "deploy-rs",
         "home-manager": "home-manager",
