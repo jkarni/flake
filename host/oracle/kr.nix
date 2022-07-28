@@ -84,16 +84,6 @@ in
       ];
     };
 
-    # Port 8080,8081
-    "netease" = {
-      image = "pan93412/unblock-netease-music-enhanced";
-      extraOptions = [
-        "--network=host"
-      ];
-
-      entrypoint = "node app.js";
-    };
-
 
 
 
