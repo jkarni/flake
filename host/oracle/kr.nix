@@ -92,9 +92,9 @@ in {
       ports = [
         "8080:8080"
       ];
-      # extraOptions = [
-      #   "--network=host"
-      # ];
+      extraOptions = [
+        "--network=host"
+      ];
     };
 
 
