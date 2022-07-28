@@ -55,6 +55,8 @@ in
 
   # ChangeDetectionIO
   virtualisation.oci-containers.containers = {
+    
+    # Local Port 3000
     "playwright-chrome" = {
       image = "browserless/chrome";
       ports = [
@@ -87,6 +89,7 @@ in
       image = "pan93412/unblock-netease-music-enhanced";
       extraOptions = [
         "--network=host"
+        "-o ytdlp bilibili"
       ];
       # cmd = [
       #   "-o ytdlp bilibili"
