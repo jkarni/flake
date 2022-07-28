@@ -21,7 +21,7 @@ jobs:
         currentVersion=$(curl --silent "https://raw.githubusercontent.com/mlyxshi/flake/main/config/firefox/version.json"| jq ".version" | tr -d '"')       
         
         currentDarwinHash=$(curl --silent "https://raw.githubusercontent.com/mlyxshi/flake/main/config/firefox/version.json"| jq ".darwin.sha256" | tr -d '"') 
-        latestDarwinUrl='https://download-installer.cdn.mozilla.net/pub/firefox/releases/${latestVersion}/mac/en-US/Firefox%20${latestVersion}.dmg'
+        latestDarwinUrl="https://download-installer.cdn.mozilla.net/pub/firefox/releases/${latestVersion}/mac/en-US/Firefox%20${latestVersion}.dmg"
         latestDarwinHash=$(nix-prefetch-url ${latestDarwinUrl})
 
         if [ $currentVersion == $latestVersion && $currentDarwinHash == $latestDarwinHash && $currentLinuxHash == $latestLinuxHash ]; then
