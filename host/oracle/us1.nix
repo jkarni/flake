@@ -12,14 +12,14 @@
     yt-dlp
   ];
 
-  # systemd.services."UnblockNeteaseMusic" = {
-  #   description = "UnblockNeteaseMusic Daemon";
-  #   after = [ "network.target" ];
-  #   wantedBy = [ "multi-user.target" ];
+  systemd.services."UnblockNeteaseMusic" = {
+    description = "UnblockNeteaseMusic Daemon";
+    after = [ "network.target" ];
+    wantedBy = [ "multi-user.target" ];
 
-  #   serviceConfig = {
-  #     Restart = "always";
-  #     ExecStart = "${pkgs.shadowsocks-rust}/bin/ssserver -c ${config.sops.secrets.shadowsocks-config.path}";
-  #   };
-  # };
+    serviceConfig = {
+      Restart = "always";
+      ExecStart = "${pkgs.nodejs}/bin/node  /root/server/app.js -e "https://music.163.com"  -o ytdlp bilibili";
+    };
+  };
 }
