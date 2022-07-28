@@ -9,7 +9,7 @@
 
   environment.systemPackages = with pkgs; [
     nodejs
-    ytb-dlp
+    yt-dlp
   ];
 
   # systemd.services."UnblockNeteaseMusic" = {
