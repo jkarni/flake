@@ -7,7 +7,7 @@
   ];
 
 
-  environment.systemPackages = [
+  environment.systemPackages = with pkgs; [
     nodejs
     ytb-dlp
   ];
