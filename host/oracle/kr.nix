@@ -79,9 +79,9 @@ in
 
     "kms-server" = {
       image = "mikolatero/vlmcsd";
-      ports = [
-        "1688:1688"
-      ];
+      # ports = [
+      #   "1688:1688"
+      # ];
       extraOptions = [
         "--network=host"
       ];
