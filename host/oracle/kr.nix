@@ -89,11 +89,9 @@ in
       image = "pan93412/unblock-netease-music-enhanced";
       extraOptions = [
         "--network=host"
-        "-o ytdlp bilibili"
       ];
-      # cmd = [
-      #   "-o ytdlp bilibili"
-      # ];
+
+      entrypoint = "node app.js -o ytdlp bilibili";
     };
 
 
