@@ -24,7 +24,7 @@
 
     serviceConfig = {
       Restart = "always";
-      ExecStart = "${pkgs.nodejs}/bin/node  ${UnblockNeteaseMusic}/server/app.js -e https://music.163.com  -o bilibili ytdlp";
+      ExecStart = "${pkgs.nodejs}/bin/node  ${UnblockNeteaseMusic}/app.js -e https://music.163.com  -o bilibili ytdlp";
     };
   };
 }
