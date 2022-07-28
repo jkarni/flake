@@ -17,12 +17,17 @@ jobs:
       id: shell
       run: |
 
-        latestVersion=$(curl --silent https://product-details.mozilla.org/1.0/firefox_versions.json | jq '.LATEST_FIREFOX_VERSION' | tr -d '"')
+        latestVersion=$(curl --silent https://product-details.mozilla.org/1.0/firefox_versions.json | jq '.FIREFOX_NIGHTLY' | tr -d '"')
         currentVersion=$(curl --silent "https://raw.githubusercontent.com/mlyxshi/flake/main/config/firefox/version.json"| jq ".version" | tr -d '"')       
         
         currentDarwinHash=$(curl --silent "https://raw.githubusercontent.com/mlyxshi/flake/main/config/firefox/version.json"| jq ".darwin.sha256" | tr -d '"') 
-        latestDarwinUrl=https://download-installer.cdn.mozilla.net/pub/firefox/releases/${latestVersion}/mac/en-US/Firefox%20${latestVersion}.dmg
+        currentLinuxHash=$(curl --silent "https://raw.githubusercontent.com/mlyxshi/flake/main/config/firefox/version.json"| jq ".linux.sha256" | tr -d '"') 
+        
+        latestDarwinUrl="https://download.cdn.mozilla.net/pub/firefox/nightly/latest-mozilla-central/firefox-${latestVersion}.en-US.mac.dmg"
+        latestLinuxUrl="https://download.cdn.mozilla.net/pub/firefox/nightly/latest-mozilla-central/firefox-${latestVersion}.en-US.linux-x86_64.tar.bz2"
+        
         latestDarwinHash=$(nix-prefetch-url ${latestDarwinUrl})
+        latestLinuxHash=$(nix-prefetch-url ${latestLinuxUrl})
 
         if [ $currentVersion == $latestVersion && $currentDarwinHash == $latestDarwinHash && $currentLinuxHash == $latestLinuxHash ]; then
 
@@ -32,9 +37,11 @@ jobs:
         else
 
           jq --null-input --arg latestDarwinUrl $latestDarwinUrl  \
+            --arg latestLinuxUrl $latestLinuxUrl \
             --arg latestVersion $latestVersion  \
             --arg latestDarwinHash $latestDarwinHash \
-            '{ "version": $latestVersion, "darwin": { "url": $latestDarwinUrl,"sha256": $latestDarwinHash}, "description": "[Auto-Generated] Firefox Stable Version" }' \
+            --arg latestLinuxHash $latestLinuxHash \
+            '{ "version": $latestVersion, "linux": {"url": $latestLinuxUrl,"sha256": $latestLinuxHash}, "darwin": { "url": $latestDarwinUrl,"sha256": $latestDarwinHash}, "description": "[Auto-Generated] Firefox Nightly Version" }' \
             >  ${GITHUB_WORKSPACE}/config/firefox/version.json
           echo "::set-output name=latestVersion::${latestVersion}"
         fi
