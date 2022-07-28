@@ -78,9 +78,7 @@ in {
 
     "kms-server" = {
       image = "mikolatero/vlmcsd";
-      ports = [
-        "1688:1688"
-      ];
+      # 1688
       extraOptions = [
         "--network=host"
       ];
@@ -89,11 +87,13 @@ in {
 
     "netease" = {
       image = "pan93412/unblock-netease-music-enhanced";
-      ports = [
-        "8080:8080"
-      ];
+      # http 8080
+      # https 8081
       extraOptions = [
         "--network=host"
+      ];
+      cmd= [
+        "-o ytdlp bilibili"
       ];
     };
 
