@@ -3,7 +3,6 @@
 , ...
 }:
 let
-  changeioPort = 5000;
   domain = "${config.networking.hostName}.mlyxshi.com";
 in
 {
@@ -63,11 +62,9 @@ in
       ];
     };
 
+    # Port: 5000
     "change-detection-io" = {
       image = "dgtlmoon/changedetection.io";
-      ports = [
-        "${toString changeioPort}:${toString changeioPort}"
-      ];
       volumes = [ "datastore-volume:/datastore" ];
       environment = {
         PLAYWRIGHT_DRIVER_URL = "ws://localhost:3000/";
@@ -77,22 +74,17 @@ in
       ];
     };
 
+    # Port 1688 
     "kms-server" = {
       image = "mikolatero/vlmcsd";
-      # ports = [
-      #   "1688:1688"
-      # ];
       extraOptions = [
         "--network=host"
       ];
     };
 
-
+    # Port 8080,8081
     "netease" = {
       image = "pan93412/unblock-netease-music-enhanced";
-      ports = [
-        "8080:8080"
-      ];
       extraOptions = [
         "--network=host"
       ];
