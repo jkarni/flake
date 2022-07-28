@@ -91,7 +91,7 @@ in
         "--network=host"
       ];
 
-      entrypoint = "node app.js -o ytdlp bilibili";
+      entrypoint = "node app.js";
     };
 
 
