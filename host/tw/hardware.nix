@@ -13,7 +13,7 @@
       fsType = "ext4";
     };
   
-  boot.loader.grub.device = "/dev/vda1";
+  boot.loader.grub.device = "/dev/vda";
 
   hardware.cpu.intel.updateMicrocode = lib.mkDefault config.hardware.enableRedistributableFirmware;
 }
