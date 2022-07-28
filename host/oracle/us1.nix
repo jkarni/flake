@@ -1,5 +1,6 @@
 { config
 , pkgs
+, UnblockNeteaseMusic
 , ...
 }: {
   imports = [
@@ -18,12 +19,12 @@
     wantedBy = [ "multi-user.target" ];
 
     environment = {
-      PATH = pkgs.lib.mkForce "/run/wrappers/bin:/root/.nix-profile/bin:/etc/profiles/per-user/root/bin:/nix/var/nix/profiles/default/bin:/run/current-system/sw/bin";
+      PATH = pkgs.lib.mkForce "${pkgs.yt-dlp}/bin";
     };
 
     serviceConfig = {
       Restart = "always";
-      ExecStart = "${pkgs.nodejs}/bin/node  /root/server/app.js -e https://music.163.com  -o bilibili ytdlp";
+      ExecStart = "${pkgs.nodejs}/bin/node  ${UnblockNeteaseMusic}/server/app.js -e https://music.163.com  -o bilibili ytdlp";
     };
   };
 }
