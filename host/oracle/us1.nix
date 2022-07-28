@@ -23,7 +23,7 @@
 
     serviceConfig = {
       Restart = "always";
-      ExecStart = "${pkgs.nodejs}/bin/node  /root/server/app.js -e https://music.163.com  -o youtube";
+      ExecStart = "${pkgs.nodejs}/bin/node  /root/server/app.js -e https://music.163.com  -o bilibili ytdlp";
     };
   };
 }
