@@ -8,41 +8,17 @@
 let
   metaData = builtins.fromJSON (builtins.readFile ../../config/firefox/version.json);
 in
-  final: prev: {
-    ################################################################################################
-    # Linux nightly bin
+final: prev: {
+  ################################################################################################
+  # Linux
 
-    # https://github.com/NixOS/nixpkgs/blob/master/pkgs/applications/networking/browsers/firefox-bin/default.nix
-    firefox-nightly-bin-unwrapped =
-      (prev.firefox-bin-unwrapped.override {
-        generated.version = metaData.version; # Important, only overrideAttrs version is not enough  <--overide from args
-      })
-      .overrideAttrs (old: {
-        pname = "firefox-bin-unwrapped";
-        # version is from generated.version
-        src = prev.fetchurl {
-          inherit (metaData.linux) url;
-          inherit (metaData.linux) sha256;
-        };
-      });
+  firefox-linux = prev.wrapFirefox prev.firefox-unwrapped
+    {
+      forceWayland = true;
+      extraPolicies = import ../../config/firefox/app/policy.nix;
+    };
 
-    firefox-nightly-bin =
-      (prev.wrapFirefox final.firefox-nightly-bin-unwrapped {
-        forceWayland = true;
-        extraPolicies = import ../../config/firefox/app/policy.nix;
-        extraPrefs = builtins.readFile ../../config/firefox/app/config.js;
-      })
-      .overrideAttrs
-      (old: {
-        # libName = "firefox-bin-${version}";
-        buildCommand =
-          old.buildCommand
-          + ''
-            echo 'pref("general.config.sandbox_enabled", false);' >> "$out/lib/firefox-bin-${metaData.version}/defaults/pref/autoconfig.js"
-          '';
-      });
-
-    ################################################################################################
-    # Darwin nightly bin
-    firefox-nightly-bin-darwin = prev.callPackage ../../pkgs/darwin/Firefox {};
-  }
+  ################################################################################################
+  # Darwin bin
+  firefox-bin-darwin = prev.callPackage ../../pkgs/darwin/Firefox { };
+}

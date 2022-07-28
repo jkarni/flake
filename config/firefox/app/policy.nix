@@ -49,27 +49,33 @@
     # @gh  -->  GitHub
     # @nix  -->  Nix Package
 
-    # all plugins are not signed
-    # use  https://github.com/xiaoxiaoflood/firefox-scripts to bypass the signature check
+    # plugins are self-signed
+    # https://addons.mozilla.org/en-US/developers/
 
     "github@search" = {
       installation_mode = "force_installed";
-      install_url = "https://github.com/mlyxshi/FireFox-Search-Shortcuts-Github/releases/download/v1.0/release.zip";
+      install_url = "https://raw.githubusercontent.com/mlyxshi/FFExtension/main/github-search.xpi";
     };
 
     "youtube@search" = {
       installation_mode = "force_installed";
-      install_url = "https://github.com/mlyxshi/FireFox-Search-Shortcuts-YouTube/releases/download/v1.0/release.zip";
+      install_url = "https://raw.githubusercontent.com/mlyxshi/FFExtension/main/youtube-search.xpi";
     };
 
     "bilibili@search" = {
       installation_mode = "force_installed";
-      install_url = "https://github.com/mlyxshi/FireFox-Search-Shortcuts-BiliBili/releases/download/v1.0/release.zip";
+      install_url = "https://raw.githubusercontent.com/mlyxshi/FFExtension/main/bilibili-search.xpi";
     };
 
     "nix.package@search" = {
       installation_mode = "force_installed";
-      install_url = "https://github.com/mlyxshi/FireFox-Search-Shortcuts-Nix-Package/releases/download/v1.0/release.zip";
+      install_url = "https://raw.githubusercontent.com/mlyxshi/FFExtension/main/nix-search.xpi";
+    };
+
+    # PT Plugin Plus
+    "{530a53cf-3bc5-4f4f-9048-35a9459a89c9}" = {
+      installation_mode = "force_installed";
+      install_url = "https://raw.githubusercontent.com/mlyxshi/FFExtension/main/PT-Plugin-Plus-1.5.2.xpi";
     };
 
     # Uninstall all build-in search shortcuts except google <-- my default search engine

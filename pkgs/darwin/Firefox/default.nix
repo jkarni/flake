@@ -18,19 +18,16 @@
 
   policiesJson = writeText "policies.json" (builtins.toJSON wrapperPolicies);
 
-  configPrefs = ../../../config/firefox/app/defaults/pref/config-prefs.js;
-  configJs = ../../../config/firefox/app/config.js;
-
   metaData = builtins.fromJSON (builtins.readFile ../../../config/firefox/version.json);
 in
   stdenvNoCC.mkDerivation rec {
-    AppName = "Firefox Nightly.app";
-    pname = "Firefox-Nightly";
+    AppName = "Firefox.app";
+    pname = "Firefox";
 
     version = metaData.version;
 
     src = fetchurl {
-      name = "firefox-nightly-${version}.dmg";
+      name = "firefox-${version}.dmg";
       inherit (metaData.darwin) url;
       inherit (metaData.darwin) sha256;
     };
@@ -50,13 +47,9 @@ in
 
       mkdir "$out/Applications/${AppName}/Contents/Resources/distribution"
       cat ${policiesJson} > "$out/Applications/${AppName}/Contents/Resources/distribution/policies.json"
-
-      cat ${configPrefs} > "$out/Applications/${AppName}/Contents/Resources/defaults/pref/config-prefs.js"
-      cat ${configJs} > "$out/Applications/${AppName}/Contents/Resources/config.js"
-
     '';
 
     meta = {
-      description = "Mozilla Firefox Nightly, (Darwin binary package)";
+      description = "Mozilla Firefox Stable, (Darwin binary package)";
     };
   }

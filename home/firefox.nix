@@ -17,8 +17,8 @@
 
   FirefoxPackage =
     if pkgs.stdenv.isLinux
-    then pkgs.firefox-nightly-bin
-    else pkgs.firefox-nightly-bin-darwin;
+    then pkgs.firefox-linux
+    else pkgs.firefox-bin-darwin;
 
   ff-mpv = pkgs.writeScript "ff-mpv" ''
     #!${pkgs.python3}/bin/python
