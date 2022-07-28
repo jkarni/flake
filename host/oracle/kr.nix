@@ -85,6 +85,21 @@ in {
         "--network=host"
       ];
     };
+
+
+    "netease" = {
+      image = "pan93412/unblock-netease-music-enhanced";
+      ports = [
+        "8080:8080"
+      ];
+      # extraOptions = [
+      #   "--network=host"
+      # ];
+    };
+
+
+    
+
   };
 }
 # Windows 10 LTSC 2021

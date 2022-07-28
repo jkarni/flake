@@ -69,7 +69,6 @@
     #   Octotree = 1457450145;
     #   uBlacklist = 1547912640;
     #   Tampermonkey = 1482490089;
-    #   Grammarly = 1462114288;
 
     #   WeChat = 836500024;
     #   Telegram = 747648890;
