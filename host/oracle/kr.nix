@@ -96,9 +96,9 @@ in
       extraOptions = [
         "--network=host"
       ];
-      cmd = [
-        "-o ytdlp bilibili"
-      ];
+      # cmd = [
+      #   "-o ytdlp bilibili"
+      # ];
     };
 
 
