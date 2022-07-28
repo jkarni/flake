@@ -1,11 +1,12 @@
-{
-  config,
-  pkgs,
-  ...
-}: let
+{ config
+, pkgs
+, ...
+}:
+let
   changeioPort = 5000;
   domain = "${config.networking.hostName}.mlyxshi.com";
-in {
+in
+{
   imports = [
     ./default.nix
   ];
@@ -46,7 +47,7 @@ in {
         job_name = "metrics";
         static_configs = [
           {
-            targets = map (hostName: "${hostName}.mlyxshi.com:${toString config.services.prometheus.exporters.node.port}") ["kr" "jp2" "jp4" "us1" "sw"];
+            targets = map (hostName: "${hostName}.mlyxshi.com:${toString config.services.prometheus.exporters.node.port}") [ "kr" "jp2" "jp4" "us1" "sw" ];
           }
         ];
       }
@@ -67,7 +68,7 @@ in {
       ports = [
         "${toString changeioPort}:${toString changeioPort}"
       ];
-      volumes = ["datastore-volume:/datastore"];
+      volumes = [ "datastore-volume:/datastore" ];
       environment = {
         PLAYWRIGHT_DRIVER_URL = "ws://localhost:3000/";
       };
@@ -78,7 +79,9 @@ in {
 
     "kms-server" = {
       image = "mikolatero/vlmcsd";
-      # 1688
+      ports = [
+        "1688:1688"
+      ];
       extraOptions = [
         "--network=host"
       ];
@@ -87,18 +90,19 @@ in {
 
     "netease" = {
       image = "pan93412/unblock-netease-music-enhanced";
-      # http 8080
-      # https 8081
+      ports = [
+        "8080:8080"
+      ];
       extraOptions = [
         "--network=host"
       ];
-      cmd= [
+      cmd = [
         "-o ytdlp bilibili"
       ];
     };
 
 
-    
+
 
   };
 }
