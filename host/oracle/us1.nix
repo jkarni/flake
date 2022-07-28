@@ -17,6 +17,10 @@
     after = [ "network.target" ];
     wantedBy = [ "multi-user.target" ];
 
+    environment = {
+      PATH = "/run/wrappers/bin:/root/.nix-profile/bin:/etc/profiles/per-user/root/bin:/nix/var/nix/profiles/default/bin:/run/current-system/sw/bin";
+    };
+
     serviceConfig = {
       Restart = "always";
       ExecStart = "${pkgs.nodejs}/bin/node  /root/server/app.js -e https://music.163.com  -o ytdlp bilibili";
