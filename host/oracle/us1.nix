@@ -18,7 +18,7 @@
     wantedBy = [ "multi-user.target" ];
 
     environment = {
-      PATH = "/run/wrappers/bin:/root/.nix-profile/bin:/etc/profiles/per-user/root/bin:/nix/var/nix/profiles/default/bin:/run/current-system/sw/bin";
+      PATH = pkgs.lib.mkForce "/run/wrappers/bin:/root/.nix-profile/bin:/etc/profiles/per-user/root/bin:/nix/var/nix/profiles/default/bin:/run/current-system/sw/bin";
     };
 
     serviceConfig = {
