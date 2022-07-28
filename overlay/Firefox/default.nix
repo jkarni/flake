@@ -5,14 +5,11 @@
 # https://github.com/mozilla/policy-templates#enterprisepoliciesenabled
 # https://github.com/xiaoxiaoflood/firefox-scripts/tree/master/installation-folder
 # https://support.mozilla.org/en-US/kb/customizing-firefox-using-autoconfig
-let
-  metaData = builtins.fromJSON (builtins.readFile ../../config/firefox/version.json);
-in
 final: prev: {
   ################################################################################################
   # Linux
 
-  firefox-linux = prev.wrapFirefox prev.firefox-unwrapped
+  firefox = prev.wrapFirefox prev.firefox-unwrapped
     {
       forceWayland = true;
       extraPolicies = import ../../config/firefox/app/policy.nix;
