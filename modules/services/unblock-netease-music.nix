@@ -23,10 +23,9 @@ in
       after = [ "network.target" ];
       wantedBy = [ "multi-user.target" ];
 
-      environment = {
-        PATH = pkgs.lib.mkForce "${pkgs.yt-dlp}/bin";
-      };
-
+      # environment = {
+      #   PATH = pkgs.lib.mkForce "${pkgs.yt-dlp}/bin";
+      # };
 
       # wait fix https://github.com/UnblockNeteaseMusic/server/issues/775#issuecomment-1181323847
       # only use bilibili now

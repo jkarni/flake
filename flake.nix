@@ -70,153 +70,183 @@
       flake = false;
     };
 
+    #############################################################################################################################
+    # Other
     UnblockNeteaseMusic = {
       url = "github:UnblockNeteaseMusic/server";
       flake = false;
     };
   };
 
-  outputs = {
-    self,
-    nixpkgs,
-    darwin,
-    home-manager,
-    # home-manager-darwin-stable,
-    deploy-rs,
-    sops-nix,
-    ...
-  } @ args: let
-    stateVersion = "22.05";
-    oracleServerList = ["jp2" "jp4" "sw" "us1" "kr"];
-    commonSpecialArgs = {
-      inherit (args) neovim-nightly mpv-nightly nixpkgs-wayland;
-      inherit (args) zsh-tab-title zsh-fast-syntax-highlighting zsh-you-should-use zsh-autosuggestions;
-      inherit (args) UnblockNeteaseMusic;
-    };
-  in {
-    #############################################################################################################################
-    # darwinConfigurations
-
-    darwinConfigurations = {
-      "M1" = darwin.lib.darwinSystem {
-        system = "aarch64-darwin";
-        modules = [
-          # sops-nix currently doesn't support aarch64-darwin
-          home-manager.darwinModules.home-manager
-          ./host/M1
-          ./os/darwin/brew.nix
-          ./overlay
-          ./modules
-
-          {
-            hm.stateVersion = stateVersion;
-            hm.nixConfigDir = "/Users/dominic/flake";
-            networking.hostName = "M1";
-            profile.developerMode.enable = true;
-            security.pam.enableSudoTouchIdAuth = true; # https://github.com/LnL7/nix-darwin/pull/228
-          }
-        ];
-        specialArgs = commonSpecialArgs // {isDarwin = true;};
+  outputs =
+    { self
+    , nixpkgs
+    , darwin
+    , home-manager
+    , # home-manager-darwin-stable,
+      deploy-rs
+    , sops-nix
+    , ...
+    } @ args:
+    let
+      stateVersion = "22.05";
+      oracleServerList = [ "jp2" "jp4" "sw" "us1" "kr" ];
+      commonSpecialArgs = {
+        inherit (args) neovim-nightly mpv-nightly nixpkgs-wayland;
+        inherit (args) zsh-tab-title zsh-fast-syntax-highlighting zsh-you-should-use zsh-autosuggestions;
+        inherit (args) UnblockNeteaseMusic;
       };
-    };
-    #############################################################################################################################
-    # nixosConfigurations
+    in
+    {
+      #############################################################################################################################
+      # darwinConfigurations
 
-    nixosConfigurations =
-      {
-        "hx90" = nixpkgs.lib.nixosSystem {
-          system = "x86_64-linux";
+      darwinConfigurations = {
+        "M1" = darwin.lib.darwinSystem {
+          system = "aarch64-darwin";
           modules = [
-            sops-nix.nixosModules.sops
-            home-manager.nixosModules.home-manager
-            ./host/hx90
+            # sops-nix currently doesn't support aarch64-darwin
+            home-manager.darwinModules.home-manager
+            ./host/M1
+            ./os/darwin/brew.nix
             ./overlay
             ./modules
 
             {
-              system.stateVersion = stateVersion;
               hm.stateVersion = stateVersion;
-              hm.nixConfigDir = "/etc/flake";
-              networking.hostName = "hx90";
-
-              profile.desktopEnv.enable = true;
-              profile.waylandNightly.enable = true;
+              hm.nixConfigDir = "/Users/dominic/flake";
+              networking.hostName = "M1";
               profile.developerMode.enable = true;
-              secrets.sops-nix.enable = true;
-
-              services.ssh-config.enable = true;
+              security.pam.enableSudoTouchIdAuth = true; # https://github.com/LnL7/nix-darwin/pull/228
             }
           ];
-          specialArgs = commonSpecialArgs // {isLinux = true;};
+          specialArgs = commonSpecialArgs // { isDarwin = true; };
         };
-      }
-      // nixpkgs.lib.genAttrs oracleServerList (hostName:
-        nixpkgs.lib.nixosSystem {
-          system = "aarch64-linux";
-          modules = [
-            sops-nix.nixosModules.sops
-            home-manager.nixosModules.home-manager
-            # https://nixos.wiki/wiki/Nix_Expression_Language
-            # Coercing a relative path with interpolated variables to an absolute path (for imports)
-            (./host/oracle + "/${hostName}.nix")
-            ./overlay
-            ./modules
+      };
+      #############################################################################################################################
+      # nixosConfigurations
 
-            {
-              system.stateVersion = stateVersion;
-              hm.stateVersion = stateVersion;
-              hm.nixConfigDir = "/etc/flake";
-              networking.hostName = hostName;
-              boot.loader.systemd-boot.netbootxyz.enable = true;
+      nixosConfigurations =
+        {
+          "hx90" = nixpkgs.lib.nixosSystem {
+            system = "x86_64-linux";
+            modules = [
+              sops-nix.nixosModules.sops
+              home-manager.nixosModules.home-manager
+              ./host/hx90
+              ./overlay
+              ./modules
 
-              secrets.sops-nix.enable = true;
+              {
+                system.stateVersion = stateVersion;
+                hm.stateVersion = stateVersion;
+                hm.nixConfigDir = "/etc/flake";
+                networking.hostName = "hx90";
 
-              services.ssh-config.enable = true;
-              services.shadowsocks-rust.enable = true;
-            }
-          ];
-          specialArgs = commonSpecialArgs // {isLinux = true;};
+                profile.desktopEnv.enable = true;
+                profile.waylandNightly.enable = true;
+                profile.developerMode.enable = true;
+                secrets.sops-nix.enable = true;
+
+                services.ssh-config.enable = true;
+              }
+            ];
+            specialArgs = commonSpecialArgs // { isLinux = true; };
+          };
+
+          
+          "tw" = nixpkgs.lib.nixosSystem {
+            system = "x86_64-linux";
+            modules = [
+              sops-nix.nixosModules.sops
+              home-manager.nixosModules.home-manager
+              ./host/tw
+              ./overlay
+              ./modules
+
+ 
+              {
+                system.stateVersion = stateVersion;
+                hm.stateVersion = stateVersion;
+                hm.nixConfigDir = "/etc/flake";
+                networking.hostName = "tw";
+
+                secrets.sops-nix.enable = true;
+
+                services.ssh-config.enable = true;
+                services.shadowsocks-rust.enable = true;
+              }
+            ];
+            specialArgs = commonSpecialArgs // { isLinux = true; };
+          };
+        }
+        // nixpkgs.lib.genAttrs oracleServerList (hostName:
+          nixpkgs.lib.nixosSystem {
+            system = "aarch64-linux";
+            modules = [
+              sops-nix.nixosModules.sops
+              home-manager.nixosModules.home-manager
+              # https://nixos.wiki/wiki/Nix_Expression_Language
+              # Coercing a relative path with interpolated variables to an absolute path (for imports)
+              (./host/oracle + "/${hostName}.nix")
+              ./overlay
+              ./modules
+
+              {
+                system.stateVersion = stateVersion;
+                hm.stateVersion = stateVersion;
+                hm.nixConfigDir = "/etc/flake";
+                networking.hostName = hostName;
+                boot.loader.systemd-boot.netbootxyz.enable = true;
+
+                secrets.sops-nix.enable = true;
+
+                services.ssh-config.enable = true;
+                services.shadowsocks-rust.enable = true;
+              }
+            ];
+            specialArgs = commonSpecialArgs // { isLinux = true; };
+          });
+
+      #############################################################################################################################
+      # deploy-rs
+
+      deploy = {
+        sshUser = "root";
+        user = "root";
+        sshOpts = [ "-o" "StrictHostKeyChecking=no" ];
+
+        magicRollback = false;
+        autoRollback = false;
+
+        nodes = nixpkgs.lib.genAttrs oracleServerList (hostName: {
+          hostname = "${hostName}.mlyxshi.com";
+          profiles.system.path = deploy-rs.lib.aarch64-linux.activate.nixos self.nixosConfigurations.${hostName};
         });
+      };
 
-    #############################################################################################################################
-    # deploy-rs
+      #############################################################################################################################
+      # Packages
+      # nix build .#SF-Pro
+      # cd test && nix develop ..#SF-Pro
 
-    deploy = {
-      sshUser = "root";
-      user = "root";
-      sshOpts = ["-o" "StrictHostKeyChecking=no"];
+      packages."x86_64-linux"."PingFang" = import ./pkgs/fonts/PingFang { inherit (nixpkgs.legacyPackages."x86_64-linux") stdenvNoCC unzip fetchurl; };
+      packages."aarch64-darwin"."PingFang" = import ./pkgs/fonts/PingFang { inherit (nixpkgs.legacyPackages."aarch64-darwin") stdenvNoCC unzip fetchurl; };
+      packages."x86_64-linux"."SF-Pro" = import ./pkgs/fonts/SF-Pro { inherit (nixpkgs.legacyPackages."x86_64-linux") stdenvNoCC unzip fetchurl; };
+      packages."aarch64-darwin"."SF-Pro" = import ./pkgs/fonts/SF-Pro { inherit (nixpkgs.legacyPackages."aarch64-darwin") stdenvNoCC unzip fetchurl; };
 
-      magicRollback = false;
-      autoRollback = false;
+      packages."aarch64-darwin"."firefox-darwin" = import ./pkgs/darwin/firefox { inherit (nixpkgs.legacyPackages."aarch64-darwin") stdenvNoCC lib fetchurl writeText undmg; };
 
-      nodes = nixpkgs.lib.genAttrs oracleServerList (hostName: {
-        hostname = "${hostName}.mlyxshi.com";
-        profiles.system.path = deploy-rs.lib.aarch64-linux.activate.nixos self.nixosConfigurations.${hostName};
-      });
-    };
+      packages."aarch64-darwin"."Anime4k" = import ./pkgs/Anime4k { inherit (nixpkgs.legacyPackages."aarch64-darwin") stdenvNoCC unzip fetchurl; };
 
-    #############################################################################################################################
-    # Packages
-    # nix build .#SF-Pro
-    # cd test && nix develop ..#SF-Pro
+      #############################################################################################################################
+      # Shell
+      # nix develop .#test
+      # eval ${unpackPhase:-unpackPhase}
+      # eval ${configurePhase:-configurePhase}
+      # eval ${buildPhase:-buildPhase}
+      # eval ${installPhase:-installPhase}   <-- Not working
 
-    packages."x86_64-linux"."PingFang" = import ./pkgs/fonts/PingFang {inherit (nixpkgs.legacyPackages."x86_64-linux") stdenvNoCC unzip fetchurl;};
-    packages."aarch64-darwin"."PingFang" = import ./pkgs/fonts/PingFang {inherit (nixpkgs.legacyPackages."aarch64-darwin") stdenvNoCC unzip fetchurl;};
-    packages."x86_64-linux"."SF-Pro" = import ./pkgs/fonts/SF-Pro {inherit (nixpkgs.legacyPackages."x86_64-linux") stdenvNoCC unzip fetchurl;};
-    packages."aarch64-darwin"."SF-Pro" = import ./pkgs/fonts/SF-Pro {inherit (nixpkgs.legacyPackages."aarch64-darwin") stdenvNoCC unzip fetchurl;};
-
-    packages."aarch64-darwin"."firefox-darwin" = import ./pkgs/darwin/firefox {inherit (nixpkgs.legacyPackages."aarch64-darwin") stdenvNoCC lib fetchurl writeText undmg;};
-
-    packages."aarch64-darwin"."Anime4k" = import ./pkgs/Anime4k {inherit (nixpkgs.legacyPackages."aarch64-darwin") stdenvNoCC unzip fetchurl;};
-
-    #############################################################################################################################
-    # Shell
-    # nix develop .#test
-    # eval ${unpackPhase:-unpackPhase}
-    # eval ${configurePhase:-configurePhase}
-    # eval ${buildPhase:-buildPhase}
-    # eval ${installPhase:-installPhase}   <-- Not working
-
-    devShells."aarch64-darwin"."test" = import ./shells {pkgs = nixpkgs.legacyPackages."aarch64-darwin";};
-  }; #end of outputs
+      devShells."aarch64-darwin"."test" = import ./shells { pkgs = nixpkgs.legacyPackages."aarch64-darwin"; };
+    }; #end of outputs
 }
