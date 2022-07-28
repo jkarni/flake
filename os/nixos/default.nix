@@ -31,9 +31,6 @@ in {
 
   nixpkgs.config.allowUnfree = true;
 
-  boot.loader.systemd-boot.enable = true;
-  boot.loader.timeout = 3;
-  boot.loader.efi.canTouchEfiVariables = true;
   boot.kernelPackages = pkgs.linuxPackages_latest;
 
   users = {

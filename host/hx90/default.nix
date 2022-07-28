@@ -8,6 +8,10 @@
   home-manager.users.root = import ../../home;
   home-manager.users.dominic = import ../../home/sway.nix;
 
+  boot.loader.systemd-boot.enable = true;
+  boot.loader.timeout = 3;
+  boot.loader.efi.canTouchEfiVariables = true;
+
   systemd.network.networks = {
     dhcp = {
       name = "eno1";

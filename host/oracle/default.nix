@@ -7,6 +7,11 @@
 
   home-manager.users.root = import ../../home;
 
+
+  boot.loader.systemd-boot.enable = true;
+  boot.loader.timeout = 3;
+  boot.loader.efi.canTouchEfiVariables = true;
+
   # Workaround for fixing timeout issue
   # manually reboot once
   systemd.network.wait-online.anyInterface = true;
@@ -21,7 +26,7 @@
   services.prometheus.exporters = {
     node = {
       enable = true;
-      enabledCollectors = ["systemd"];
+      enabledCollectors = [ "systemd" ];
     };
   };
 }
