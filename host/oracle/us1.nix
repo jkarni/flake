@@ -1,5 +1,6 @@
 { config
 , pkgs
+,lib
 , ...
 }: {
   imports = [
@@ -12,7 +13,7 @@
   sops.secrets.tg-rss-token = { };
 
 
-  system.activationScripts.generateSecretEnv = stringAfter [ "var" ] ''
+  system.activationScripts.generateSecretEnv = lib.stringAfter [ "var" ] ''
     echo MANAGER=$(cat ${config.sops.secrets.tg-userid}) > /tmp/rss-telegram.env
     echo TOKEN=$(cat ${config.sops.secrets.tg-rss-token}) >> /tmp/rss-telegram.env
   '';
