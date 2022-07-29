@@ -12,7 +12,7 @@
   sops.secrets.tg-userid = { };
   sops.secrets.tg-rss-token = { };
 
-  system.activationScripts.makeRssConfigDir = stringAfter [ "var" ] ''
+  system.activationScripts.makeRssConfigDir = lib.stringAfter [ "var" ] ''
     mkdir -p /var/lib/rss
   '';
 
