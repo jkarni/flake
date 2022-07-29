@@ -14,8 +14,8 @@
 
 
   system.activationScripts.generateSecretEnv = lib.stringAfter [ "var" ] ''
-    echo MANAGER=$(cat ${config.sops.secrets.tg-userid}) > /tmp/rss-telegram.env
-    echo TOKEN=$(cat ${config.sops.secrets.tg-rss-token}) >> /tmp/rss-telegram.env
+    echo MANAGER=$(cat ${config.sops.secrets.tg-userid.path}) > /tmp/rss-telegram.env
+    echo TOKEN=$(cat ${config.sops.secrets.tg-rss-token.path}) >> /tmp/rss-telegram.env
   '';
 
 
