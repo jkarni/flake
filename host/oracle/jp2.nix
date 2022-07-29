@@ -6,4 +6,6 @@
   imports = [
     ./default.nix
   ];
+
+  services.rss-telegram.enable = true;
 }

@@ -8,6 +8,5 @@
   ];
 
   services.unblock-netease-music.enable = true;
-  services.rss-telegram.enable = true;
 
 }
