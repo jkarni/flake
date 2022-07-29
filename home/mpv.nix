@@ -33,10 +33,10 @@ in {
         # https://github.com/mpv-player/mpv/blob/master/etc/input.conf
         h = "add sub-pos -1";
         H = "add sub-pos +1";
-        "["= "add speed -0.1";
-        "]" ="add speed +0.1";
-        "{"= "add speed -0.5";
-        "}" ="add speed +0.5";
+        "[" = "add speed -0.1";
+        "]" = "add speed +0.1";
+        "{" = "add speed -0.5";
+        "}" = "add speed +0.5";
       }
       // Anime4kInputs;
   };

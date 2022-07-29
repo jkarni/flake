@@ -7,7 +7,6 @@
 
   home-manager.users.root = import ../../home;
 
-
   boot.loader.systemd-boot.enable = true;
   boot.loader.timeout = 3;
   boot.loader.efi.canTouchEfiVariables = true;
@@ -26,7 +25,7 @@
   services.prometheus.exporters = {
     node = {
       enable = true;
-      enabledCollectors = [ "systemd" ];
+      enabledCollectors = ["systemd"];
     };
   };
 }

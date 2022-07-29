@@ -1,9 +1,9 @@
-{ pkgs
-, lib
-, config
-, ...
-}:
-let
+{
+  pkgs,
+  lib,
+  config,
+  ...
+}: let
   cfg = config.services.qbittorrent-nox;
   domain = "${config.networking.hostName}.mlyxshi.com";
   qbConfigDir = "/var/lib/qbittorrent-nox";
@@ -88,16 +88,14 @@ let
     echo -e "-------------------------------------------------------------\n" >> $log_dir/qb.log
 
   '';
-in
-{
+in {
   options = {
     services.qbittorrent-nox.enable = lib.mkEnableOption "qbittorrent-nox download service";
   };
 
   config = lib.mkIf cfg.enable {
-
-    sops.secrets.tg-userid = { };
-    sops.secrets.tg-notify-token = { };
+    sops.secrets.tg-userid = {};
+    sops.secrets.tg-notify-token = {};
 
     environment.systemPackages = with pkgs; [
       qbittorrent-nox
@@ -109,14 +107,14 @@ in
     # https://github.com/qbittorrent/qBittorrent/wiki/How-to-use-portable-mode
 
     systemd.services.qbittorrent-nox = {
-      after = [ "local-fs.target" "network-online.target" "nss-lookup.target" ];
+      after = ["local-fs.target" "network-online.target" "nss-lookup.target"];
       description = "qBittorrent-nox service";
       serviceConfig = {
         ExecStart = "${pkgs.qbittorrent-nox}/bin/qbittorrent-nox --profile=${qbConfigDir} --relative-fastresume";
         StateDirectory = "qbittorrent-nox";
       };
-      wantedBy = [ "multi-user.target" ];
-      wants = [ "network-online.target" ];
+      wantedBy = ["multi-user.target"];
+      wants = ["network-online.target"];
     };
 
     services.restic.backups."bt-backup" = {
@@ -130,8 +128,7 @@ in
       ];
       repository = "rclone:googleshare:backup";
       timerConfig.OnCalendar = "daily";
-      pruneOpts = [ "--keep-last 2" ];
+      pruneOpts = ["--keep-last 2"];
     };
-
   };
 }

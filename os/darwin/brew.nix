@@ -8,7 +8,7 @@
       "homebrew/cask"
       "homebrew/cask-fonts"
       "homebrew/services"
-      "majd/repo"         
+      "majd/repo"
       "koekeishiya/formulae" #yabai/skhd
       "xgadget-lab/nexttrace"
     ];

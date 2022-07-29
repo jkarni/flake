@@ -9,10 +9,10 @@ final: prev: {
   ################################################################################################
   # Linux
 
-  firefox = prev.wrapFirefox prev.firefox-unwrapped
+  firefox =
+    prev.wrapFirefox prev.firefox-unwrapped
     {
       forceWayland = true;
       extraPolicies = import ../../config/firefox/app/policy.nix;
     };
-
 }

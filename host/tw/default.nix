@@ -1,4 +1,4 @@
-{ config, ... }: {
+{config, ...}: {
   imports = [
     ./hardware.nix
     ../../os/nixos
@@ -18,6 +18,5 @@
     };
   };
 
-  networking.nameservers = [ "1.1.1.1" ];
-
+  networking.nameservers = ["1.1.1.1"];
 }

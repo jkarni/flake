@@ -1,10 +1,10 @@
-{ pkgs
-, lib
-, config
-, osConfig
-, ...
-}:
-let
+{
+  pkgs,
+  lib,
+  config,
+  osConfig,
+  ...
+}: let
   FirefoxProfilePath =
     if pkgs.stdenv.isLinux
     then ".mozilla/firefox"
@@ -18,13 +18,13 @@ let
   FirefoxPackage =
     if pkgs.stdenv.isLinux
     then pkgs.firefox
-    else pkgs.runCommand "firefox-0.0.0" { } "mkdir $out";
+    else pkgs.runCommand "firefox-0.0.0" {} "mkdir $out";
 
   ff-mpv = pkgs.writeScript "ff2mpv" (''
-    #!${pkgs.python3}/bin/python
-  '' + builtins.readFile ../config/firefox/NativeMessagingHosts/ff2mpv.py);
-in
-{
+      #!${pkgs.python3}/bin/python
+    ''
+    + builtins.readFile ../config/firefox/NativeMessagingHosts/ff2mpv.py);
+in {
   home.packages = [
     FirefoxPackage
   ];

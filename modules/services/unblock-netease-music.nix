@@ -1,13 +1,12 @@
-{ pkgs
-, lib
-, config
-, UnblockNeteaseMusic
-, ...
-}:
-let
-  cfg = config.services.unblock-netease-music;
-in
 {
+  pkgs,
+  lib,
+  config,
+  UnblockNeteaseMusic,
+  ...
+}: let
+  cfg = config.services.unblock-netease-music;
+in {
   options = {
     services.unblock-netease-music.enable = lib.mkEnableOption "UnblockNeteaseMusic service";
   };
@@ -20,8 +19,8 @@ in
 
     systemd.services."UnblockNeteaseMusic" = {
       description = "UnblockNeteaseMusic Daemon";
-      after = [ "network.target" ];
-      wantedBy = [ "multi-user.target" ];
+      after = ["network.target"];
+      wantedBy = ["multi-user.target"];
 
       # environment = {
       #   PATH = pkgs.lib.mkForce "${pkgs.yt-dlp}/bin";

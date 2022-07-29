@@ -1,11 +1,10 @@
-{ config
-, pkgs
-, ...
-}:
-let
-  domain = "${config.networking.hostName}.mlyxshi.com";
-in
 {
+  config,
+  pkgs,
+  ...
+}: let
+  domain = "${config.networking.hostName}.mlyxshi.com";
+in {
   imports = [
     ./default.nix
   ];
@@ -46,7 +45,7 @@ in
         job_name = "metrics";
         static_configs = [
           {
-            targets = map (hostName: "${hostName}.mlyxshi.com:${toString config.services.prometheus.exporters.node.port}") [ "kr" "jp2" "jp4" "us1" "sw" ];
+            targets = map (hostName: "${hostName}.mlyxshi.com:${toString config.services.prometheus.exporters.node.port}") ["kr" "jp2" "jp4" "us1" "sw"];
           }
         ];
       }
@@ -55,7 +54,6 @@ in
 
   # ChangeDetectionIO
   virtualisation.oci-containers.containers = {
-    
     # Local Port 3000
     "playwright-chrome" = {
       image = "browserless/chrome";
@@ -67,7 +65,7 @@ in
     # Port: 5000
     "change-detection-io" = {
       image = "dgtlmoon/changedetection.io";
-      volumes = [ "datastore-volume:/datastore" ];
+      volumes = ["datastore-volume:/datastore"];
       environment = {
         PLAYWRIGHT_DRIVER_URL = "ws://localhost:3000/";
       };
@@ -76,17 +74,13 @@ in
       ];
     };
 
-    # Port 1688 
+    # Port 1688
     "kms-server" = {
       image = "mikolatero/vlmcsd";
       extraOptions = [
         "--network=host"
       ];
     };
-
-
-
-
   };
 }
 # Windows 10 LTSC 2021
