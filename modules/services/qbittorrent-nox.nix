@@ -95,8 +95,8 @@ in
 
   config = lib.mkIf cfg.enable {
 
-    sops.secrets.tg-chatid = { };
-    sops.secrets.tg-token = { };
+    sops.secrets.tg-userid = { };
+    sops.secrets.tg-notify-token = { };
 
     environment.systemPackages = with pkgs; [
       qbittorrent-nox
