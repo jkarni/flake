@@ -1,4 +1,4 @@
-{pkgs, ...}:{
+{pkgs, ...}: {
   launchd.agents.FirefoxEnv = {
     serviceConfig.ProgramArguments = [
       "bash"
@@ -39,5 +39,4 @@
     serviceConfig.StandardErrorPath = "/tmp/launchdLogs/rclone-mount/error.log";
     serviceConfig.StandardOutPath = "/tmp/launchdLogs/rclone-mount/stdout.log";
   };
-
 }
