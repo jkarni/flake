@@ -6,6 +6,7 @@
 let
   cfg = config.services.qbittorrent-nox;
   domain = "${config.networking.hostName}.mlyxshi.com";
+  qbConfigDir = "/var/lib/qbittorrent-nox";
   #  Run external program on torrent completion
   # /run/current-system/sw/bin/qbScript "%N" "%F" "%C" "%Z" "%I" "%L"
   qbScript = pkgs.writeShellScriptBin "qbScript" ''
@@ -18,7 +19,7 @@ let
 
     qb_web_url="localhost:8080"
     rclone_dest="googleshare:Download"
-    log_dir="/var/lib/qbittorrent-nox/qBLog"
+    log_dir="${qbConfigDir}/qBLog"
     rclone_parallel="32"
 
     # For upload_category, after download, upload to googledrive but do not auto delete(important resource, PT share ratio requirement)
@@ -111,7 +112,7 @@ in
       after = [ "local-fs.target" "network-online.target" "nss-lookup.target" ];
       description = "qBittorrent-nox service";
       serviceConfig = {
-        ExecStart = "${pkgs.qbittorrent-nox}/bin/qbittorrent-nox --profile=/var/lib/qbittorrent-nox --relative-fastresume";
+        ExecStart = "${pkgs.qbittorrent-nox}/bin/qbittorrent-nox --profile=${qbConfigDir} --relative-fastresume";
         StateDirectory = "qbittorrent-nox";
       };
       wantedBy = [ "multi-user.target" ];
@@ -125,7 +126,7 @@ in
       passwordFile = config.sops.secrets.restic-password.path;
       rcloneConfigFile = config.sops.secrets.rclone-config.path;
       paths = [
-        "/var/lib/qbittorrent-nox"
+        "${qbConfigDir}"
       ];
       repository = "rclone:googleshare:backup";
       timerConfig.OnCalendar = "daily";
