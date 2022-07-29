@@ -11,15 +11,22 @@
   sops.secrets.tg-userid = { };
   sops.secrets.tg-rss-token = { };
 
+
+  system.activationScripts.generateSecretEnv = stringAfter [ "var" ] ''
+    echo MANAGER=$(cat ${config.sops.secrets.tg-userid}) > /tmp/rss-telegram.env
+    echo TOKEN=$(cat ${config.sops.secrets.tg-rss-token}) >> /tmp/rss-telegram.env
+  '';
+
+
   virtualisation.oci-containers.containers = {
 
     "rss-telegram" = {
       image = "rongronggg9/rss-to-telegram";
       volumes = [ "/etc/rss/:/app/config" ];
-      environment = {
-        TOKEN = builtins.readFile "${config.sops.secrets.tg-rss-token.path}"; # get it from @BotFather
-        MANAGER = builtins.readFile "${config.sops.secrets.tg-userid.path}"; # get it from @userinfobot
-      };
+
+      environmentFiles = [
+        /tmp/rss-telegram.env
+      ];
     };
 
 
