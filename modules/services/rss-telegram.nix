@@ -36,7 +36,7 @@ in
         volumes = [ "${RssConfigDir}:/app/config" ];
 
         environmentFiles = [
-          ${RssEnv}
+          "${RssEnv}"
         ];
       };
 
@@ -46,7 +46,7 @@ in
       passwordFile = config.sops.secrets.restic-password.path;
       rcloneConfigFile = config.sops.secrets.rclone-config.path;
       paths = [
-        ${RssConfigDir}
+        "${RssConfigDir}"
       ];
       repository = "rclone:googleshare:backup";
       timerConfig.OnCalendar = "daily";
