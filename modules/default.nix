@@ -22,5 +22,6 @@
       ./services/ssh-config.nix
       ./services/qbittorrent-nox.nix
       ./services/unblock-netease-music.nix
+      ./services/rss-telegram.nix
     ];
 }
