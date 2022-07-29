@@ -34,6 +34,15 @@ in {
           "${RssEnv}"
         ];
       };
+
+      #Port 1200
+      "rsshub" = {
+        image = "diygod/rsshub";
+        extraOptions = [
+          "--network=host"
+        ];
+      };
+
     };
 
     services.restic.backups."rss-telegram-backup" = {
