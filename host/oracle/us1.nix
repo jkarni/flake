@@ -1,6 +1,6 @@
 { config
 , pkgs
-,lib
+, lib
 , ...
 }: {
   imports = [
@@ -11,6 +11,10 @@
 
   sops.secrets.tg-userid = { };
   sops.secrets.tg-rss-token = { };
+
+  system.activationScripts.makeRssConfigDir = stringAfter [ "var" ] ''
+    mkdir -p /var/lib/rss
+  '';
 
 
   system.activationScripts.generateSecretEnv = lib.stringAfter [ "var" ] ''
@@ -23,7 +27,7 @@
 
     "rss-telegram" = {
       image = "rongronggg9/rss-to-telegram";
-      volumes = [ "/etc/rss/:/app/config" ];
+      volumes = [ "/var/lib/rss:/app/config" ];
 
       environmentFiles = [
         /tmp/rss-telegram.env
