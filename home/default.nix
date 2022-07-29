@@ -19,7 +19,6 @@
       vim
       tree
       htop
-      neofetch
       mediainfo
       yt-dlp
       unzip
@@ -44,6 +43,7 @@
       lazygit
     ]
     ++ lib.optionals pkgs.stdenv.isLinux [
+      neofetch
       ookla-speedtest
     ];
 

@@ -34,6 +34,11 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
+    sops-nix-darwin = {
+      url = "github:4825764518/sops-nix/darwin";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+
     neovim-nightly = {
       url = "github:neovim/neovim";
       flake = false;
@@ -86,6 +91,7 @@
     # home-manager-darwin-stable,
     deploy-rs,
     sops-nix,
+    sops-nix-darwin,
     ...
   } @ args: let
     stateVersion = "22.05";
@@ -103,7 +109,8 @@
       "M1" = darwin.lib.darwinSystem {
         system = "aarch64-darwin";
         modules = [
-          # sops-nix currently doesn't support aarch64-darwin
+          # official sops-nix currently doesn't support aarch64-darwin
+          sops-nix-darwin.nixosModules.sops
           home-manager.darwinModules.home-manager
           ./host/M1
           ./os/darwin/brew.nix

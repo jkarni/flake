@@ -14,6 +14,7 @@
     ];
 
     brews = [
+      "neofetch"
       "iproute2mac"
       "mas"
       "qemu"

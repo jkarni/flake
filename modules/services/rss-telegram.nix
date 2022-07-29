@@ -17,7 +17,7 @@ in {
     sops.secrets.tg-rss-token = {};
 
     system.activationScripts.makeRssConfigDir = lib.stringAfter ["var"] ''
-      mkdir -p ${RssConfigDir}
+      [ ! -d ${RssConfigDir} ] && mkdir -p ${RssConfigDir}
     '';
 
     system.activationScripts.generateSecretEnv = lib.stringAfter ["var"] ''
