@@ -44,7 +44,11 @@
     rclone_copy(){
         if [ -f "$content_dir" ]
         then
-          ${pkgs.rclone}/bin/rclone --config ${config.sops.secrets.rclone-config.path} -v copy --log-file  $log_dir/rclone.log "$content_dir" $rclone_dest
+          # 单集追番优化，RSS Feed Download Rules -> Save to a Different Directory
+          # https://www.shellscript.sh/tips/pattern-substitution/
+          downloadPathPrefix="/var/lib/qbittorrent-nox/qBittorrent/downloads/"
+                                                                                                                                                          # escape
+          ${pkgs.rclone}/bin/rclone --config ${config.sops.secrets.rclone-config.path} -v copy --log-file  $log_dir/rclone.log "$content_dir" $rclone_dest/"''${content_dir/$downloadPathPrefix}"
         elif [ -d "$content_dir" ]
         then
           ${pkgs.rclone}/bin/rclone --config ${config.sops.secrets.rclone-config.path} -v copy --transfers $rclone_parallel --log-file $log_dir/rclone.log "$content_dir" $rclone_dest/"$torrent_name"

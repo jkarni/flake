@@ -44,7 +44,6 @@ in {
           "--network=host"
         ];
       };
-
     };
 
     services.restic.backups."rss-telegram-backup" = {
