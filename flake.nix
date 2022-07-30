@@ -162,6 +162,7 @@
         "tw" = nixpkgs.lib.nixosSystem {
           system = "x86_64-linux";
           modules = [
+            sops-nix.nixosModules.sops
             ./host/tw
             ./modules/profile/desktopEnv.nix
             ./modules/secrets/default.nix
