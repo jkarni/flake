@@ -13,10 +13,10 @@
 
   systemd.network.networks = {
     dhcp = {
-      name = "ens3";
+      name = "ens4";
       DHCP = "yes";
     };
   };
 
-  networking.nameservers = ["1.1.1.1"];
+  # networking.nameservers = ["1.1.1.1"];
 }
