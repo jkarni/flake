@@ -1,11 +1,12 @@
-{
-  config,
-  pkgs,
-  lib,
-  ...
-}: let
+{ config
+, pkgs
+, lib
+, ...
+}:
+let
   hashedPassword = "$6$fwJZwHNLE640VkQd$SrYMjayP9fofIncuz3ehVLpfwGlpUj0NFZSssSy8GcIXIbDKI4JnrgfMZxSw5vxPkXkAEL/ktm3UZOyPMzA.p0";
-in {
+in
+{
   nix = {
     extraOptions = ''
       experimental-features = nix-command flakes
@@ -40,6 +41,7 @@ in {
       {
         root = {
           inherit hashedPassword;
+          openssh.authorizedKeys.keys = [ "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIMpaY3LyCW4HHqbp4SA4tnA+1Bkgwrtro2s/DEsBcPDe" ];
         };
       }
       // lib.optionalAttrs config.profile.desktopEnv.enable {
@@ -47,9 +49,15 @@ in {
           isNormalUser = true;
           description = "mlyxshi";
           inherit hashedPassword;
-          extraGroups = ["wheel"];
+          extraGroups = [ "wheel" ];
         };
       };
+  };
+
+  # sshd (server)
+  services.openssh = {
+    enable = true;
+    passwordAuthentication = false;
   };
 
   time.timeZone = "America/Los_Angeles";
@@ -64,7 +72,7 @@ in {
   fonts = {
     fonts =
       [
-        (pkgs.nerdfonts.override {fonts = ["RobotoMono"];}) # Terminal Font
+        (pkgs.nerdfonts.override { fonts = [ "RobotoMono" ]; }) # Terminal Font
       ]
       ++ lib.optionals config.profile.desktopEnv.enable [
         # The essence of Apple
@@ -79,11 +87,11 @@ in {
       enable = true;
       defaultFonts =
         {
-          monospace = ["RobotoMono Nerd Font"];
+          monospace = [ "RobotoMono Nerd Font" ];
         }
         // lib.optionalAttrs config.profile.desktopEnv.enable {
-          sansSerif = ["SF Pro"];
-          serif = ["SF Pro"];
+          sansSerif = [ "SF Pro" ];
+          serif = [ "SF Pro" ];
         };
     };
   };

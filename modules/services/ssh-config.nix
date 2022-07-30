@@ -11,16 +11,6 @@ in {
   };
 
   config = lib.mkIf (cfg.enable && config.secrets.sops-nix.enable) {
-    # sshd (server)
-    services.openssh = {
-      enable = true;
-      passwordAuthentication = false;
-    };
-
-    users.users = {
-      root.openssh.authorizedKeys.keys = ["ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIMpaY3LyCW4HHqbp4SA4tnA+1Bkgwrtro2s/DEsBcPDe"];
-    };
-
     # ssh (client)
     programs.ssh = {
       knownHosts = {

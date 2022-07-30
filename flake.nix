@@ -162,21 +162,16 @@
         "tw" = nixpkgs.lib.nixosSystem {
           system = "x86_64-linux";
           modules = [
-            sops-nix.nixosModules.sops
-            home-manager.nixosModules.home-manager
             ./host/tw
             ./overlay
             ./modules
 
             {
               system.stateVersion = stateVersion;
-              hm.stateVersion = stateVersion;
-              hm.nixConfigDir = "/etc/flake";
               networking.hostName = "tw";
-
+              
               secrets.sops-nix.enable = true;
 
-              services.ssh-config.enable = true;
               services.shadowsocks-rust.enable = true;
             }
           ];
