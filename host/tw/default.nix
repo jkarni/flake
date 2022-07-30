@@ -2,10 +2,10 @@
   imports = [
     ./hardware.nix
     ../../os/nixos
-    ../../home/home-manager.nix
+    #../../home/home-manager.nix
   ];
 
-  home-manager.users.root = import ../../home;
+  #home-manager.users.root = import ../../home;
 
   # Workaround for fixing timeout issue
   # manually reboot once
