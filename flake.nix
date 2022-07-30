@@ -163,15 +163,14 @@
           system = "x86_64-linux";
           modules = [
             ./host/tw
-            ./overlay
-            ./modules
+            ./modules/secrets/default.nix
+            ./modules/services/shadowsocks-rust.nix
 
             {
               system.stateVersion = stateVersion;
               networking.hostName = "tw";
               
               secrets.sops-nix.enable = true;
-
               services.shadowsocks-rust.enable = true;
             }
           ];
