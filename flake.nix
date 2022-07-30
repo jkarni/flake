@@ -163,6 +163,7 @@
           system = "x86_64-linux";
           modules = [
             ./host/tw
+            ./modules/profile/desktopEnv.nix
             ./modules/secrets/default.nix
             ./modules/services/shadowsocks-rust.nix
 
