@@ -15,6 +15,7 @@ in {
   config = lib.mkIf cfg.enable {
     sops.secrets.tg-userid = {};
     sops.secrets.tg-rss-token = {};
+    sops.secrets.telegraph-token = {};
 
     system.activationScripts.makeRssConfigDir = lib.stringAfter ["var"] ''
       [ ! -d ${RssConfigDir} ] && mkdir -p ${RssConfigDir}
@@ -23,6 +24,7 @@ in {
     system.activationScripts.generateSecretEnv = lib.stringAfter ["var"] ''
       echo MANAGER=$(cat ${config.sops.secrets.tg-userid.path}) > ${RssEnv}
       echo TOKEN=$(cat ${config.sops.secrets.tg-rss-token.path}) >> ${RssEnv}
+      echo TELEGRAPH_TOKEN=$(cat ${config.sops.secrets.telegraph-token.path}) >> ${RssEnv}
     '';
 
     virtualisation.oci-containers.containers = {

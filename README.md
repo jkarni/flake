@@ -82,6 +82,9 @@ xcode-select --install
 /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install.sh)"
 
 # login appstore and uncomment brew mas section
+
+# sops age private key
+/Users/dominic/Library/Application Support/sops/age/keys.txt
 ```
 
 ## nix
