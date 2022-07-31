@@ -11,10 +11,11 @@
   # mkdir -p /download/jackett/downloads
 
   # mkdir -p /download/sonarr/config
+  # mkdir -p /download/sonarr/downloads
 
   # mkdir -p /download/qbittorrent/config
 
-  # mkdir -p /download/data
+ 
 
   virtualisation.oci-containers.containers = {
     # Port 9117
@@ -34,7 +35,7 @@
       image = "linuxserver/sonarr";
       volumes = [
         "/download/sonarr/config:/config"
-        "/download/data:/tv"  # real download file
+        "/download/sonarr:/data"  # real download file
       ];
       environment = {
         "PUID" = "0";
@@ -50,7 +51,7 @@
 
       volumes = [
         "/download/qbittorrent/config:/config"
-        "/download/data:/downloads"
+        "/download/sonarr:/data"
       ];
 
       environment = {
