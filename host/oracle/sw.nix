@@ -6,16 +6,18 @@
     ./default.nix
   ];
 
-  # mkdir -p /download/sonarr/config
+
   # mkdir -p /download/jackett/config
   # mkdir -p /download/jackett/downloads
+  # mkdir -p /download/sonarr/config
+  # mkdir -p /download/sonarr/downloads
   virtualisation.oci-containers.containers = {
     # Port 9117
     "jackett" = {
       image = "linuxserver/jackett";
       volumes = [
         "/download/jackett/config:/config"
-        "/download/jackett/downloads:/downloads"
+        "/download/jackett/downloads:/downloads"  #torrent
       ];
       extraOptions = [
         "--network=host"
@@ -27,7 +29,7 @@
       image = "linuxserver/sonarr";
       volumes = [
         "/download/sonarr/config:/config"
-        "/download/sonarr:/anime"
+        "/download/sonarr/downloads:/tv"  # real download file
       ];
       environment = {
         "PUID" = "0";
