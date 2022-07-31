@@ -8,12 +8,12 @@
 
 
   # mkdir -p /download/jackett/config
-
+  # mkdir -p /download/qbittorrent/config
   # mkdir -p /download/sonarr/config
   # mkdir -p /download/sonarr/downloads
-  # mkdir -p /download/sonarr/media/tv
+  # mkdir -p /download/sonarr/media/anime
 
-  # mkdir -p /download/qbittorrent/config
+ 
 
  
 
@@ -33,9 +33,8 @@
     sonarr = {
       image = "linuxserver/sonarr";
       volumes = [
-        #"/download/sonarr:/data"
+        "/download/sonarr:/data"
         "/download/sonarr/config:/config"
-        "/download/data:/data"
       ];
       environment = {
         "PUID" = "0";
@@ -51,8 +50,7 @@
 
       volumes = [
         "/download/qbittorrent/config:/config"
-        #"/download/sonarr:/data"   #change default save path to: /data/downloads/  [real path: /download/sonarr/downloads ]
-        "/download/data/downloads:/downloads"
+        "/download/sonarr:/data"   #change default save path to: /data/downloads/  [hacky way so that from sonarr use the same download location path]
       ];
 
       environment = {
