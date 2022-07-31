@@ -27,7 +27,7 @@
       image = "linuxserver/sonarr";
       volumes = [
         "/download/sonarr/config:/config"
-        "/download/sonarr:/data"
+        "/download/sonarr:/anime"
       ];
       environment = {
         "PUID" = "0";
