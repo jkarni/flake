@@ -29,6 +29,7 @@
     # '';
 
     casks = [
+      "input-source-pro"
       "kitty"
       "firefox"
       "macfuse" # rclone mount
