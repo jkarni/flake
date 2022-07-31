@@ -48,11 +48,8 @@
         "PUID" = "0";
         "PGID" = "0";
       };
-      # extraOptions = [
-      #   "--network=host"
-      # ];
-      ports = [
-        "8989:8989"
+      extraOptions = [
+        "--network=host"
       ];
     };
 
