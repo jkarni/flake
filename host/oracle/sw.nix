@@ -9,7 +9,7 @@
 
   # mkdir -p /download/jackett/config
   # mkdir -p /download/jackett/downloads
-  
+
   # mkdir -p /download/sonarr/config
 
   # mkdir -p /download/qbittorrent/config
@@ -56,7 +56,7 @@
       environment = {
         "PUID" = "0";
         "PGID" = "0";
-        "WEBUI_PORT"=8080;
+        "WEBUI_PORT"="8080";
       };
       extraOptions = [
         "--network=host"
