@@ -24,7 +24,7 @@
   '';
 
 
-
+  # https://reorx.com/blog/track-and-download-shows-automatically-with-sonarr
   virtualisation.oci-containers.containers = {
     # Port 9117
     "jackett" = {
@@ -48,8 +48,11 @@
         "PUID" = "0";
         "PGID" = "0";
       };
-      extraOptions = [
-        "--network=host"
+      # extraOptions = [
+      #   "--network=host"
+      # ];
+      ports = [
+        "8989:8989"
       ];
     };
 
