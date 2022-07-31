@@ -71,7 +71,7 @@
       image = "linuxserver/jellyfin";
       volumes = [
         "/download/jellyfin/config:/config"
-        "/download/sonarr/media:/data/tvshows"
+        "/download/sonarr/media/anime:/data/anime"
       ];
 
       environment = {
