@@ -1,9 +1,18 @@
-{pkgs, ...}: {
+{pkgs, config, ...}: {
   launchd.agents.FirefoxEnv = {
     serviceConfig.ProgramArguments = [
       "bash"
       "-c"
       "launchctl setenv MOZ_LEGACY_PROFILES 1; launchctl setenv MOZ_ALLOW_DOWNGRADE 1"
+    ];
+    serviceConfig.RunAtLoad = true;
+  };
+
+  launchd.agents.resticEnv = {
+    serviceConfig.ProgramArguments = [
+      "bash"
+      "-c"
+      "launchctl setenv RESTIC_REPOSITORY rclone:googleshare:backup; launchctl setenv RESTIC_PASSWORD_FILE ${config.sops.secrets.restic-password.path}"
     ];
     serviceConfig.RunAtLoad = true;
   };
