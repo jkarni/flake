@@ -9,13 +9,14 @@
 
   # mkdir -p /download/jackett/config
   # mkdir -p /download/qbittorrent/config
+  # mkdir -p /download/jellyfin/config
   # mkdir -p /download/sonarr/config
   # mkdir -p /download/sonarr/downloads
   # mkdir -p /download/sonarr/media/anime
 
- 
 
- 
+
+
 
   virtualisation.oci-containers.containers = {
     # Port 9117
@@ -50,19 +51,35 @@
 
       volumes = [
         "/download/qbittorrent/config:/config"
-        "/download/sonarr:/data"   #change default save path to: /data/downloads/  [hacky way so that from sonarr use the same download location path]
+        "/download/sonarr:/data" #change default save path to: /data/downloads/  [hacky way so that from sonarr use the same download location path]
       ];
 
       environment = {
         "PUID" = "0";
         "PGID" = "0";
-        "WEBUI_PORT"="8080";
+        "WEBUI_PORT" = "8080";
       };
       extraOptions = [
         "--network=host"
       ];
 
 
+    };
+
+    # Port 8096
+    "jellyfin" = {
+      image = "linuxserver/jellyfin";
+      volumes = [
+        "/download/jellyfin/config:/config"
+      ];
+
+      environment = {
+        "PUID" = "0";
+        "PGID" = "0";
+      };
+      extraOptions = [
+        "--network=host"
+      ];
     };
 
 
