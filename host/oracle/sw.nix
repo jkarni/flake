@@ -14,7 +14,14 @@
   # mkdir -p /download/sonarr/downloads
   # mkdir -p /download/sonarr/media/anime
 
-
+  system.activationScripts.makeDownloadDir = lib.stringAfter ["var"] ''
+      [ ! -d /download/jackett/config ] && mkdir -p /download/jackett/config
+      [ ! -d /download/qbittorrent/config ] && mkdir -p /download/qbittorrent/config
+      [ ! -d /download/jellyfin/config ] && mkdir -p /download/jellyfin/config
+      [ ! -d /download/sonarr/config ] && mkdir -p /download/sonarr/config
+      [ ! -d /download/sonarr/downloads ] && mkdir -p /download/sonarr/downloads
+      [ ! -d /download/sonarr/media/anime ] && mkdir -p /download/sonarr/media/anime
+  '';
 
 
 
