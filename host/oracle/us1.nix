@@ -9,9 +9,6 @@
 
   # only san jose need this, other region do not need, I do not why
   networking.nameservers = [ "1.1.1.1" "8.8.8.8" ];
-  services.resolved.enable = true;
-  services.resolved.dnssec = false;
-  services.resolved.llmnr =false;
 
   # services = {
   #   unblock-netease-music.enable = true;
