@@ -26,6 +26,7 @@
 
   services.traefik = {
     enable = true;
+    group= "docker";
 
     dynamicConfigOptions = {
       middlewares.compress.compress = { };
@@ -44,12 +45,18 @@
       # };
 
       entryPoints = {
-        http = {
+        web = {
           address = ":80";
         };
-        https = {
+        websecure = {
           address = ":443";
         };
+      };
+
+
+      providers.docker = {
+        endpoint = "unix:///var/run/docker.sock";
+        exposedByDefault = false;
       };
     };
   };
