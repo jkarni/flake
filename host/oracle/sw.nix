@@ -42,16 +42,13 @@
       #   keyType = "EC256";
       #   storage = "${config.services.traefik.dataDir}/acme.json";
       # };
-      experimental.http3 = true;
+
       entryPoints = {
         http = {
           address = ":80";
-          http.redirections.entryPoint.to = "https";
         };
         https = {
           address = ":443";
-          http.tls.certResolver = "letsencrypt";
-          http3 = { };
         };
       };
     };
