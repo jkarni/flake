@@ -26,7 +26,6 @@
 
   services.traefik = {
     enable = true;
-    group = "docker";
 
     dynamicConfigOptions = {
       middlewares.compress.compress = { };
@@ -38,9 +37,7 @@
         jackett = {
           rule = "Host(`jackett.mlyxshi.com`)";
           service = "jackett";
-        };
-
-       
+        };   
       };
 
       http.services = {
