@@ -19,5 +19,6 @@ in {
     sops.secrets.ssh-private-key = {} // lib.optionalAttrs config.profile.desktopEnv.enable {owner = "dominic";};
     sops.secrets.restic-password = {};
     sops.secrets.rclone-config = {};
+    sops.secrets.traefik-cloudflare-env = {};
   };
 }

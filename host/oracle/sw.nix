@@ -23,7 +23,7 @@
     [ ! -d /download/sonarr/media/anime ] && mkdir -p /download/sonarr/media/anime
   '';
 
-  systemd.services.traefik.serviceConfig.EnvironmentFile = "/etc/traefik/env";
+  systemd.services.traefik.serviceConfig.EnvironmentFile = config.sops.secrets.traefik-cloudflare-env.path;
 
   services.traefik = {
     enable = true;
@@ -60,8 +60,7 @@
       certificatesResolvers.letsencrypt.acme = {
         dnsChallenge.provider = "cloudflare";
         email = "mlyxdev@gmail.com";
-        # "/var/lib/traefik"
-        storage = "${config.services.traefik.dataDir}/acme.json";
+        storage = "${config.services.traefik.dataDir}/acme.json";         # "/var/lib/traefik/acme.json"
       };
 
       api.dashboard = true;
