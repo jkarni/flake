@@ -6,20 +6,18 @@
     ./default.nix
   ];
 
-
   systemd.services.traefik.serviceConfig.EnvironmentFile = config.sops.secrets.traefik-cloudflare-env.path;
 
   services.traefik = {
     enable = true;
 
     dynamicConfigOptions = {
-      middlewares.compress.compress = { };
       tls.options.default = {
         minVersion = "VersionTLS12";
         sniStrict = true;
       };
-      http.routers = {
 
+      http.routers = {
         libreddit.rule = "Host(`reddit.mlyxshi.com`)";
         libreddit.service = "libreddit";
 
@@ -35,33 +33,33 @@
         nitter.loadBalancer.servers = [{ url = "http://localhost:8083"; }];
         youtube.loadBalancer.servers = [{ url = "http://localhost:8084"; }];
       };
+
+      http.middlewares = {
+        web-redirect.redirectScheme.scheme = "https";
+      };
     };
 
     staticConfigOptions = {
-      certificatesResolvers.letsencrypt.acme = {
-        dnsChallenge.provider = "cloudflare";
-        email = "mlyxdev@gmail.com";
-        storage = "${config.services.traefik.dataDir}/acme.json"; # "/var/lib/traefik/acme.json"
-      };
-
       # api.dashboard = true;
       # api.insecure = true;
 
       entryPoints = {
         web = {
           address = ":80";
-          http.redirections.entryPoint.to = "websecure";
         };
         websecure = {
           address = ":443";
           http.tls.certResolver = "letsencrypt";
         };
       };
+
+      certificatesResolvers.letsencrypt.acme = {
+        dnsChallenge.provider = "cloudflare";
+        email = "mlyxdev@gmail.com";
+        storage = "${config.services.traefik.dataDir}/acme.json"; # "/var/lib/traefik/acme.json"
+      };
     };
   };
-
-
-
 
   services.libreddit = {
     enable = true;
@@ -88,6 +86,5 @@
     domain = "youtube.mlyxshi.com";
     port = 8084;
   };
-
 
 }
