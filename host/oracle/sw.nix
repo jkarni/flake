@@ -39,10 +39,16 @@
           rule = "Host(`jackett.mlyxshi.com`)";
           service = "jackett";
         };   
+
+        sonarr = {
+          rule = "Host(`sonarr.mlyxshi.com`)";
+          service = "sonarr";
+        };   
       };
 
       http.services = {
          jackett.loadBalancer.servers = [{url = "http://localhost:9117";}];
+         sonarr.loadBalancer.servers = [{url = "http://localhost:8989";}];
       };
     };
 
@@ -85,21 +91,21 @@
       ];
     };
 
-    # # Port 8989
-    # sonarr = {
-    #   image = "linuxserver/sonarr";
-    #   volumes = [
-    #     "/download/sonarr:/data"
-    #     "/download/sonarr/config:/config"
-    #   ];
-    #   environment = {
-    #     "PUID" = "0";
-    #     "PGID" = "0";
-    #   };
-    #   extraOptions = [
-    #     "--network=host"
-    #   ];
-    # };
+    # Port 8989
+    sonarr = {
+      image = "linuxserver/sonarr";
+      volumes = [
+        "/download/sonarr:/data"
+        "/download/sonarr/config:/config"
+      ];
+      environment = {
+        "PUID" = "0";
+        "PGID" = "0";
+      };
+      extraOptions = [
+        "--network=host"
+      ];
+    };
 
     # "qbittorrent" = {
     #   image = "linuxserver/qbittorrent";
