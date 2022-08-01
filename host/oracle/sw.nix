@@ -24,8 +24,9 @@
   '';
 
 
-  services.traefik.enable = true;
   services.traefik = {
+    enable = true;
+
     dynamicConfigOptions = {
       middlewares.compress.compress = { };
       tls.options.default = {
@@ -33,7 +34,7 @@
         sniStrict = true;
       };
     };
-    enable = true;
+
     staticConfigOptions = {
       # certificatesResolvers.letsencrypt.acme = {
       #   dnsChallenge.provider = "cloudflare";
