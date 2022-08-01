@@ -35,20 +35,16 @@
         sniStrict = true;
       };
       http.routers = {
-        jackett = {
-          rule = "Host(`media.mlyxshi.com`) && PathPrefix(`/jackett`)";
-          service = "jackett";
-        };   
+        jackett.rule = "Host(`jackett.mlyxshi.com`)";
+        jackett.service = "jackett";
 
-        sonarr = {
-          rule = "Host(`media.mlyxshi.com`) && PathPrefix(`/sonarr`)";
-          service = "sonarr";
-        };   
+        sonarr.rule = "Host(`sonarr.mlyxshi.com`)";
+        sonarr.service = "sonarr";
       };
 
       http.services = {
-         jackett.loadBalancer.servers = [{url = "http://localhost:9117";}];
-         sonarr.loadBalancer.servers = [{url = "http://localhost:8989";}];
+        jackett.loadBalancer.servers = [{ url = "http://localhost:9117"; }];
+        sonarr.loadBalancer.servers = [{ url = "http://localhost:8989"; }];
       };
     };
 
@@ -60,8 +56,8 @@
         storage = "${config.services.traefik.dataDir}/acme.json";
       };
 
-      api.dashboard = true;
-      api.insecure = true;
+      # api.dashboard = true;
+      # api.insecure = true;
 
       entryPoints = {
         web = {
@@ -118,7 +114,7 @@
       environment = {
         "PUID" = "0";
         "PGID" = "0";
-        "WEBUI_PORT" = "8081";
+        "WEBUI_PORT" = "8080";
       };
       extraOptions = [
         "--network=host"
