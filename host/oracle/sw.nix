@@ -55,6 +55,9 @@
 
         nitter.rule = "Host(`twitter.mlyxshi.com`)";
         nitter.service = "nitter";
+
+        youtube.rule = "Host(`youtube.mlyxshi.com`)";
+        youtube.service = "youtube";
       };
 
       http.services = {
@@ -64,6 +67,7 @@
         jellyfin.loadBalancer.servers = [{ url = "http://localhost:8096"; }];
         libreddit.loadBalancer.servers = [{ url = "http://localhost:8082"; }];
         nitter.loadBalancer.servers = [{ url = "http://localhost:8083"; }];
+        youtube.loadBalancer.servers = [{ url = "http://localhost:8084"; }];
       };
     };
 
@@ -156,14 +160,6 @@
       ];
     };
 
-
-    "nitter" = {
-      image = "unixfox/nitter";
-      extraOptions = [
-        "--network=host"
-      ];
-    };
-
   };
 
 
@@ -174,19 +170,25 @@
     port = 8082;
   };
 
-  # services.nitter = {
-  #   enable = true;
-  #   preferences = {
-  #     replaceTwitter = config.services.nitter.server.hostname;
-  #     theme = "Auto";
-  #   };
-  #   server = {
-  #     address = "127.0.0.1";
-  #     https = true;
-  #     hostname = "twitter.mlyxshi.com";
-  #     port = 8083;
-  #   };
-  # };
+  services.nitter = {
+    enable = true;
+    preferences = {
+      replaceTwitter = config.services.nitter.server.hostname;
+      theme = "Auto";
+    };
+    server = {
+      address = "127.0.0.1";
+      https = true;
+      hostname = "twitter.mlyxshi.com";
+      port = 8083;
+    };
+  };
+
+  services.invidious= {
+    enable = true;
+    domain = "youtube.mlyxshi.com";
+    port = 8084;
+  };
 
 
   services.restic.backups."media" = {
