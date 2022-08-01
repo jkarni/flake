@@ -76,6 +76,11 @@
       volumes = [
         "/download/jackett/config:/config"
       ];
+      extraOptions =[
+      "--label traefik.enable=true"
+      "--label traefik.http.routers.jackett.entryPoints=web"
+      "--label traefik.http.routers.jackett.rule=Path(`/jackett`)"
+      ];
     };
 
     # # Port 8989
