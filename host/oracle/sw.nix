@@ -63,7 +63,7 @@
 
 
   # https://reorx.com/blog/track-and-download-shows-automatically-with-sonarr
-
+  virtualisation.docker.enable = true;
   virtualisation.oci-containers.backend = "docker";
 
   virtualisation.oci-containers.containers = {
