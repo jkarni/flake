@@ -37,10 +37,10 @@
         address = ":443";
       };
     };
-    providers.docker = {
-      endpoint = "unix:///var/run/docker.sock";
-      exposedByDefault = false;
-    };
+    # providers.docker = {
+    #   endpoint = "unix:///var/run/docker.sock";
+    #   exposedByDefault = false;
+    # };
     # certificatesResolvers.cf.acme = {
     #   email = "mlyxdev@gmail.com";
     #   storage = "/srv/traefik/acme.json";
