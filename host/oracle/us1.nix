@@ -13,9 +13,9 @@
   services.resolved.dnssec = false;
   services.resolved.llmnr =false;
 
-  services = {
-    unblock-netease-music.enable = true;
-  };
+  # services = {
+  #   unblock-netease-music.enable = true;
+  # };
 
   # systemd.services.traefik.serviceConfig.EnvironmentFile = config.sops.secrets.traefik-cloudflare-env.path;
 
