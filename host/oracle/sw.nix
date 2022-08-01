@@ -60,14 +60,9 @@
     };
 
     staticConfigOptions = {
-      certificatesResolvers.letsencrypt.acme = {
-        dnsChallenge.provider = "cloudflare";
-        email = "mlyxdev@gmail.com";
-        storage = "${config.services.traefik.dataDir}/acme.json"; # "/var/lib/traefik/acme.json"
-      };
 
-      # api.dashboard = true;
-      # api.insecure = true;
+      api.dashboard = true;
+      api.insecure = true;
 
       entryPoints = {
         web = {
@@ -79,6 +74,14 @@
           http.tls.certResolver = "letsencrypt";
         };
       };
+
+      certificatesResolvers.letsencrypt.acme = {
+        dnsChallenge.provider = "cloudflare";
+        email = "mlyxdev@gmail.com";
+        storage = "${config.services.traefik.dataDir}/acme.json"; # "/var/lib/traefik/acme.json"
+      };
+
+
     };
   };
 
@@ -154,7 +157,7 @@
 
   services.restic.backups."media" = {
     extraBackupArgs = [
-      "--exclude=sonarr/downloads/*"   # * keep directory
+      "--exclude=sonarr/downloads/*" # * keep directory
       "--exclude=sonarr/media/anime/*"
     ];
     passwordFile = config.sops.secrets.restic-password.path;
