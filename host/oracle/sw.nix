@@ -41,7 +41,7 @@
         };   
 
         sonarr = {
-          rule = "PathPrefix(`/sonarr/`)";
+          rule = "Host(`media.mlyxshi.com`) && Path(`/sonarr`)";
           service = "sonarr";
         };   
       };
