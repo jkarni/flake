@@ -75,12 +75,6 @@
       flake = false;
     };
 
-    #############################################################################################################################
-    # Other
-    UnblockNeteaseMusic = {
-      url = "github:UnblockNeteaseMusic/server";
-      flake = false;
-    };
   };
 
   outputs = {
@@ -99,7 +93,6 @@
     commonSpecialArgs = {
       inherit (args) neovim-nightly mpv-nightly nixpkgs-wayland;
       inherit (args) zsh-tab-title zsh-fast-syntax-highlighting zsh-you-should-use zsh-autosuggestions;
-      inherit (args) UnblockNeteaseMusic;
     };
   in {
     #############################################################################################################################
