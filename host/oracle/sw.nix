@@ -36,12 +36,12 @@
       };
       http.routers = {
         jackett = {
-          rule = "Host(`jackett.mlyxshi.com`)";
+          rule = "PathPrefix(`/jackett/`)";
           service = "jackett";
         };   
 
         sonarr = {
-          rule = "Host(`sonarr.mlyxshi.com`)";
+          rule = "PathPrefix(`/sonarr/`)";
           service = "sonarr";
         };   
       };
@@ -107,22 +107,22 @@
       ];
     };
 
-    # "qbittorrent" = {
-    #   image = "linuxserver/qbittorrent";
+    "qbittorrent" = {
+      image = "linuxserver/qbittorrent";
 
-    #   volumes = [
-    #     "/download/qbittorrent/config:/config"
-    #     "/download/sonarr:/data" #change default save path to: /data/downloads/  [hacky way so that from sonarr use the same download location path]
-    #   ];
+      volumes = [
+        "/download/qbittorrent/config:/config"
+        "/download/sonarr:/data" #change default save path to: /data/downloads/  [hacky way so that from sonarr use the same download location path]
+      ];
 
-    #   environment = {
-    #     "PUID" = "0";
-    #     "PGID" = "0";
-    #     "WEBUI_PORT" = "8080";
-    #   };
-    #   extraOptions = [
-    #     "--network=host"
-    #   ];
+      environment = {
+        "PUID" = "0";
+        "PGID" = "0";
+        "WEBUI_PORT" = "8081";
+      };
+      extraOptions = [
+        "--network=host"
+      ];
 
 
     # };
