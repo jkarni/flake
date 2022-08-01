@@ -65,8 +65,8 @@
 
     staticConfigOptions = {
 
-      api.dashboard = true;
-      api.insecure = true;
+      # api.dashboard = true;
+      # api.insecure = true;
 
       entryPoints = {
         web = {
