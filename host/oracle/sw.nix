@@ -60,9 +60,11 @@
       entryPoints = {
         web = {
           address = ":80";
+          http.redirections.entryPoint.to = "websecure";
         };
         websecure = {
           address = ":443";
+          http.tls.certResolver = "letsencrypt";
         };
       };
     };
