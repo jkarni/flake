@@ -15,10 +15,7 @@
       ports = [
         "8080:8080"
       ];
-      entrypoint = [
-         "node app.js -e https://music.163.com -o ytdlp bilibili"
-      ];
-
+      entrypoint = "node app.js -e https://music.163.com -o ytdlp bilibili";
     };
   };
 }
