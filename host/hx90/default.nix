@@ -21,7 +21,7 @@
 
   services.restic.backups."firefox-profile" = {
     extraBackupArgs = [
-      "--exclude=chrome"
+      "--exclude=chrome" # managed by hm soft link
     ];
     passwordFile = config.sops.secrets.restic-password.path;
     rcloneConfigFile = config.sops.secrets.rclone-config.path;

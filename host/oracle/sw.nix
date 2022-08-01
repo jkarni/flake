@@ -14,14 +14,17 @@
   # mkdir -p /download/sonarr/downloads
   # mkdir -p /download/sonarr/media/anime
 
-  system.activationScripts.makeDownloadDir = pkgs.lib.stringAfter [ "var" ] ''
-    [ ! -d /download/jackett/config ] && mkdir -p /download/jackett/config
-    [ ! -d /download/qbittorrent/config ] && mkdir -p /download/qbittorrent/config
-    [ ! -d /download/jellyfin/config ] && mkdir -p /download/jellyfin/config
-    [ ! -d /download/sonarr/config ] && mkdir -p /download/sonarr/config
-    [ ! -d /download/sonarr/downloads ] && mkdir -p /download/sonarr/downloads
-    [ ! -d /download/sonarr/media/anime ] && mkdir -p /download/sonarr/media/anime
-  '';
+
+  # system.activationScripts.makeDownloadDir = pkgs.lib.stringAfter [ "var" ] ''
+  #   [ ! -d /download/jackett/config ] && mkdir -p /download/jackett/config
+  #   [ ! -d /download/qbittorrent/config ] && mkdir -p /download/qbittorrent/config
+  #   [ ! -d /download/jellyfin/config ] && mkdir -p /download/jellyfin/config
+  #   [ ! -d /download/sonarr/config ] && mkdir -p /download/sonarr/config
+  #   [ ! -d /download/sonarr/downloads ] && mkdir -p /download/sonarr/downloads
+  #   [ ! -d /download/sonarr/media/anime ] && mkdir -p /download/sonarr/media/anime
+  # '';
+
+  # restic restore backup to create basic configuration tree directory
 
   systemd.services.traefik.serviceConfig.EnvironmentFile = config.sops.secrets.traefik-cloudflare-env.path;
 
@@ -71,8 +74,8 @@
         storage = "${config.services.traefik.dataDir}/acme.json"; # "/var/lib/traefik/acme.json"
       };
 
-      api.dashboard = true;
-      api.insecure = true;
+      # api.dashboard = true;
+      # api.insecure = true;
 
       entryPoints = {
         web = {
@@ -153,6 +156,14 @@
       ];
     };
 
+
+    "nitter" = {
+      image = "unixfox/nitter";
+      extraOptions = [
+        "--network=host"
+      ];
+    };
+
   };
 
 
@@ -163,25 +174,25 @@
     port = 8082;
   };
 
-  services.nitter = {
-    enable = true;
-    preferences = {
-      replaceTwitter = config.services.nitter.server.hostname;
-      theme = "Auto";
-    };
-    server = {
-      address = "127.0.0.1";
-      https = true;
-      hostname = "twitter.mlyxshi.com";
-      port = 8083;
-    };
-  };
+  # services.nitter = {
+  #   enable = true;
+  #   preferences = {
+  #     replaceTwitter = config.services.nitter.server.hostname;
+  #     theme = "Auto";
+  #   };
+  #   server = {
+  #     address = "127.0.0.1";
+  #     https = true;
+  #     hostname = "twitter.mlyxshi.com";
+  #     port = 8083;
+  #   };
+  # };
 
 
   services.restic.backups."media" = {
     extraBackupArgs = [
-      "--exclude=sonarr/downloads"
-      "--exclude=sonarr/media/anime"
+      "--exclude=sonarr/downloads/*"   # * keep directory
+      "--exclude=sonarr/media/anime/*"
     ];
     passwordFile = config.sops.secrets.restic-password.path;
     rcloneConfigFile = config.sops.secrets.rclone-config.path;
