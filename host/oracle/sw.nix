@@ -40,11 +40,15 @@
 
         sonarr.rule = "Host(`sonarr.mlyxshi.com`)";
         sonarr.service = "sonarr";
+
+        qb-media.rule = "Host(`qb.media.mlyxshi.com`)";
+        qb-media.service = "qb-media";
       };
 
       http.services = {
         jackett.loadBalancer.servers = [{ url = "http://localhost:9117"; }];
         sonarr.loadBalancer.servers = [{ url = "http://localhost:8989"; }];
+        qb-media.loadBalancer.servers = [{ url = "http://localhost:8081"; }];
       };
     };
 
@@ -56,8 +60,8 @@
         storage = "${config.services.traefik.dataDir}/acme.json";
       };
 
-      # api.dashboard = true;
-      # api.insecure = true;
+      api.dashboard = true;
+      api.insecure = true;
 
       entryPoints = {
         web = {
@@ -114,7 +118,7 @@
       environment = {
         "PUID" = "0";
         "PGID" = "0";
-        "WEBUI_PORT" = "8080";
+        "WEBUI_PORT" = "8081";
       };
       extraOptions = [
         "--network=host"
