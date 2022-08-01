@@ -36,7 +36,7 @@
       };
       http.routers = {
         jackett = {
-          rule = "PathPrefix(`/jackett/`)";
+          rule = "Host(`media.mlyxshi.com`)&&PathPrefix(`/jackett/`)";
           service = "jackett";
         };   
 
