@@ -27,6 +27,8 @@
   services.traefik.enable = true;
   services.traefik.group = "docker";
   services.traefik.staticConfigOptions = {
+    api.dashboard = true;
+    api.insecure = true;
     entryPoints = {
       web = {
         address = ":80";
@@ -95,7 +97,7 @@
       environment = {
         "PUID" = "0";
         "PGID" = "0";
-        "WEBUI_PORT" = "8080";
+        "WEBUI_PORT" = "8082";
       };
       extraOptions = [
         "--network=host"
