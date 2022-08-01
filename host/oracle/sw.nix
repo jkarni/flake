@@ -154,7 +154,7 @@
 
 
   services.libreddit = {
-    address = "127.0.0.1";
+    # address = "127.0.0.1";
     enable = true;
     port = 8082;
   };
