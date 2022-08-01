@@ -34,6 +34,18 @@
         minVersion = "VersionTLS12";
         sniStrict = true;
       };
+      http.routers = {
+        jackett = {
+          rule = "Host(`jackett.mlyxshi.com`)";
+          service = "jackett";
+        };
+
+       
+      };
+
+      http.services = {
+         jackett.loadBalancer.servers = [{url = "http://localhost:9177";}];
+      };
     };
 
     staticConfigOptions = {
@@ -54,19 +66,11 @@
           address = ":443";
         };
       };
-
-
-      providers.docker = {
-        endpoint = "unix:///var/run/docker.sock";
-        exposedByDefault = false;
-      };
     };
   };
 
 
   # https://reorx.com/blog/track-and-download-shows-automatically-with-sonarr
-  virtualisation.docker.enable = true;
-  virtualisation.oci-containers.backend = "docker";
 
   virtualisation.oci-containers.containers = {
 
@@ -76,10 +80,8 @@
       volumes = [
         "/download/jackett/config:/config"
       ];
-      extraOptions =[
-      "--label traefik.enable=true"
-      "--label traefik.http.routers.jackett.entryPoints=web"
-      "--label traefik.http.routers.jackett.rule=Path(`/jackett`)"
+      extraOptions = [
+        "--network=host"
       ];
     };
 
