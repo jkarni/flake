@@ -24,10 +24,28 @@
   '';
 
 
+  services.traefik.enable = true;
+  services.traefik.staticConfigOptions = {
+    entryPoints.web.address = ":80";
+    entryPoints.websecure.address = ":443";
+    # certificatesResolvers = {
+    #   letsencrypt.acme = {
+    #     email = "mlyxdev@gmail.com";
+    #     caServer = "https://acme-staging-v02.api.letsencrypt.org/directory";
+    #     storage = "/var/lib/traefik/acme.json";
+    #     dnsChallenge = {
+    #       provider = "cloudflare";
+    #       delayBeforeCheck = 0;
+    #     };
+    #   };
+    # };
+  };
+
+
+
   # https://reorx.com/blog/track-and-download-shows-automatically-with-sonarr
 
   virtualisation.oci-containers.backend = "docker";
-
 
   virtualisation.oci-containers.containers = {
 
