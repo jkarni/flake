@@ -25,6 +25,7 @@
 
 
   services.traefik.enable = true;
+  services.traefik.group = "docker";
   services.traefik.staticConfigOptions = {
     entryPoints = {
       web = {
