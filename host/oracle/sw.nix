@@ -25,7 +25,12 @@
 
 
   # https://reorx.com/blog/track-and-download-shows-automatically-with-sonarr
+
+  virtualisation.oci-containers.backend = "docker";
+
+
   virtualisation.oci-containers.containers = {
+
     # Port 9117
     "jackett" = {
       image = "linuxserver/jackett";
