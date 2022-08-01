@@ -7,94 +7,87 @@
   ];
 
 
-  # only san jose need this, other region do not need, I do not why
-  # networking.nameservers = [ "1.1.1.1" "8.8.8.8" ];
+  systemd.services.traefik.serviceConfig.EnvironmentFile = config.sops.secrets.traefik-cloudflare-env.path;
 
-  # services = {
-  #   unblock-netease-music.enable = true;
-  # };
+  services.traefik = {
+    enable = true;
 
-  # systemd.services.traefik.serviceConfig.EnvironmentFile = config.sops.secrets.traefik-cloudflare-env.path;
+    dynamicConfigOptions = {
+      middlewares.compress.compress = { };
+      tls.options.default = {
+        minVersion = "VersionTLS12";
+        sniStrict = true;
+      };
+      http.routers = {
 
-  # services.traefik = {
-  #   enable = true;
+        libreddit.rule = "Host(`reddit.mlyxshi.com`)";
+        libreddit.service = "libreddit";
 
-  #   dynamicConfigOptions = {
-  #     middlewares.compress.compress = { };
-  #     tls.options.default = {
-  #       minVersion = "VersionTLS12";
-  #       sniStrict = true;
-  #     };
-  #     http.routers = {
+        nitter.rule = "Host(`twitter.mlyxshi.com`)";
+        nitter.service = "nitter";
 
-  #       libreddit.rule = "Host(`reddit.mlyxshi.com`)";
-  #       libreddit.service = "libreddit";
+        youtube.rule = "Host(`youtube.mlyxshi.com`)";
+        youtube.service = "youtube";
+      };
 
-  #       nitter.rule = "Host(`twitter.mlyxshi.com`)";
-  #       nitter.service = "nitter";
+      http.services = {
+        libreddit.loadBalancer.servers = [{ url = "http://localhost:8082"; }];
+        nitter.loadBalancer.servers = [{ url = "http://localhost:8083"; }];
+        youtube.loadBalancer.servers = [{ url = "http://localhost:8084"; }];
+      };
+    };
 
-  #       youtube.rule = "Host(`youtube.mlyxshi.com`)";
-  #       youtube.service = "youtube";
-  #     };
+    staticConfigOptions = {
+      certificatesResolvers.letsencrypt.acme = {
+        dnsChallenge.provider = "cloudflare";
+        email = "mlyxdev@gmail.com";
+        storage = "${config.services.traefik.dataDir}/acme.json"; # "/var/lib/traefik/acme.json"
+      };
 
-  #     http.services = {
-  #       libreddit.loadBalancer.servers = [{ url = "http://localhost:8082"; }];
-  #       nitter.loadBalancer.servers = [{ url = "http://localhost:8083"; }];
-  #       youtube.loadBalancer.servers = [{ url = "http://localhost:8084"; }];
-  #     };
-  #   };
+      # api.dashboard = true;
+      # api.insecure = true;
 
-  #   staticConfigOptions = {
-  #     certificatesResolvers.letsencrypt.acme = {
-  #       dnsChallenge.provider = "cloudflare";
-  #       email = "mlyxdev@gmail.com";
-  #       storage = "${config.services.traefik.dataDir}/acme.json"; # "/var/lib/traefik/acme.json"
-  #     };
-
-  #     # api.dashboard = true;
-  #     # api.insecure = true;
-
-  #     entryPoints = {
-  #       web = {
-  #         address = ":80";
-  #         http.redirections.entryPoint.to = "websecure";
-  #       };
-  #       websecure = {
-  #         address = ":443";
-  #         http.tls.certResolver = "letsencrypt";
-  #       };
-  #     };
-  #   };
-  # };
+      entryPoints = {
+        web = {
+          address = ":80";
+          http.redirections.entryPoint.to = "websecure";
+        };
+        websecure = {
+          address = ":443";
+          http.tls.certResolver = "letsencrypt";
+        };
+      };
+    };
+  };
 
 
 
 
-  # services.libreddit = {
-  #   enable = true;
-  #   address = "127.0.0.1";
-  #   port = 8082;
-  # };
+  services.libreddit = {
+    enable = true;
+    address = "127.0.0.1";
+    port = 8082;
+  };
 
-  # services.nitter = {
-  #   enable = true;
-  #   preferences = {
-  #     replaceTwitter = config.services.nitter.server.hostname;
-  #     theme = "Auto";
-  #   };
-  #   server = {
-  #     address = "127.0.0.1";
-  #     https = true;
-  #     hostname = "twitter.mlyxshi.com";
-  #     port = 8083;
-  #   };
-  # };
+  services.nitter = {
+    enable = true;
+    preferences = {
+      replaceTwitter = config.services.nitter.server.hostname;
+      theme = "Auto";
+    };
+    server = {
+      address = "127.0.0.1";
+      https = true;
+      hostname = "twitter.mlyxshi.com";
+      port = 8083;
+    };
+  };
 
-  # services.invidious = {
-  #   enable = true;
-  #   domain = "youtube.mlyxshi.com";
-  #   port = 8084;
-  # };
+  services.invidious = {
+    enable = true;
+    domain = "youtube.mlyxshi.com";
+    port = 8084;
+  };
 
 
 }
