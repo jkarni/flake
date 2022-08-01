@@ -41,7 +41,7 @@
       };
 
       http.services = {
-         jackett.loadBalancer.servers = [{url = "http://localhost:9177";}];
+         jackett.loadBalancer.servers = [{url = "http://localhost:9117";}];
       };
     };
 
