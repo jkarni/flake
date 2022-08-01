@@ -32,7 +32,7 @@
     enable = true;
 
     dynamicConfigOptions = {
-      middlewares.compress.compress = { };
+
       tls.options.default = {
         minVersion = "VersionTLS12";
         sniStrict = true;
@@ -57,6 +57,10 @@
         qb-media.loadBalancer.servers = [{ url = "http://localhost:8081"; }];
         jellyfin.loadBalancer.servers = [{ url = "http://localhost:8096"; }];
       };
+
+      http.middlewares = {
+        web-redirect.redirectScheme.scheme = "https";
+      };
     };
 
     staticConfigOptions = {
@@ -67,7 +71,6 @@
       entryPoints = {
         web = {
           address = ":80";
-          http.redirections.entryPoint.to = "websecure";
         };
         websecure = {
           address = ":443";
