@@ -26,7 +26,7 @@
 
   services.traefik = {
     enable = true;
-    group= "docker";
+    group = "docker";
 
     dynamicConfigOptions = {
       middlewares.compress.compress = { };
@@ -40,9 +40,11 @@
       # certificatesResolvers.letsencrypt.acme = {
       #   dnsChallenge.provider = "cloudflare";
       #   email = "mlyxdev@gmail.com";
-      #   keyType = "EC256";
       #   storage = "${config.services.traefik.dataDir}/acme.json";
       # };
+
+      api.dashboard = true;
+      api.insecure = true;
 
       entryPoints = {
         web = {
@@ -68,16 +70,13 @@
 
   virtualisation.oci-containers.containers = {
 
-    # # Port 9117
-    # "jackett" = {
-    #   image = "linuxserver/jackett";
-    #   volumes = [
-    #     "/download/jackett/config:/config"
-    #   ];
-    #   extraOptions = [
-    #     "--network=host"
-    #   ];
-    # };
+    # Port 9117
+    "jackett" = {
+      image = "linuxserver/jackett";
+      volumes = [
+        "/download/jackett/config:/config"
+      ];
+    };
 
     # # Port 8989
     # sonarr = {
