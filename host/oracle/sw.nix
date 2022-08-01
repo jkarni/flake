@@ -26,17 +26,24 @@
 
   services.traefik.enable = true;
   services.traefik.staticConfigOptions = {
-    entryPoints.web.address = ":80";
-    entryPoints.websecure.address = ":443";
-    # certificatesResolvers = {
-    #   letsencrypt.acme = {
-    #     email = "mlyxdev@gmail.com";
-    #     caServer = "https://acme-staging-v02.api.letsencrypt.org/directory";
-    #     storage = "/var/lib/traefik/acme.json";
-    #     dnsChallenge = {
-    #       provider = "cloudflare";
-    #       delayBeforeCheck = 0;
-    #     };
+    entryPoints = {
+      web = {
+        address = ":80";
+      };
+      websecure = {
+        address = ":443";
+      };
+    };
+    providers.docker = {
+      endpoint = "unix:///var/run/docker.sock";
+      exposedByDefault = false;
+    };
+    # certificatesResolvers.cf.acme = {
+    #   email = "mlyxdev@gmail.com";
+    #   storage = "/srv/traefik/acme.json";
+    #   dnsChallenge = {
+    #     provider = "cloudflare";
+    #     resolvers = [ "1.1.1.1:53" "1.0.0.1:53" ];
     #   };
     # };
   };
