@@ -36,12 +36,12 @@
       };
       http.routers = {
         jackett = {
-          rule = "Host(`media.mlyxshi.com`) && Path(`/jackett`)";
+          rule = "Host(`media.mlyxshi.com`) && PathPrefix(`/jackett`)";
           service = "jackett";
         };   
 
         sonarr = {
-          rule = "Host(`media.mlyxshi.com`) && Path(`/sonarr`)";
+          rule = "Host(`media.mlyxshi.com`) && PathPrefix(`/sonarr`)";
           service = "sonarr";
         };   
       };
