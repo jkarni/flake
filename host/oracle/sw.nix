@@ -46,6 +46,9 @@
 
         jellyfin.rule = "Host(`jellyfin.mlyxshi.com`)";
         jellyfin.service = "jellyfin";
+
+        libreddit.rule = "Host(`reddit.mlyxshi.com`)";
+        libreddit.service = "libreddit";
       };
 
       http.services = {
@@ -53,6 +56,7 @@
         sonarr.loadBalancer.servers = [{ url = "http://localhost:8989"; }];
         qb-media.loadBalancer.servers = [{ url = "http://localhost:8081"; }];
         jellyfin.loadBalancer.servers = [{ url = "http://localhost:8096"; }];
+        libreddit.loadBalancer.servers = [{ url = "http://localhost:8082"; }];
       };
     };
 
@@ -60,7 +64,7 @@
       certificatesResolvers.letsencrypt.acme = {
         dnsChallenge.provider = "cloudflare";
         email = "mlyxdev@gmail.com";
-        storage = "${config.services.traefik.dataDir}/acme.json";         # "/var/lib/traefik/acme.json"
+        storage = "${config.services.traefik.dataDir}/acme.json"; # "/var/lib/traefik/acme.json"
       };
 
       api.dashboard = true;
@@ -94,7 +98,6 @@
       ];
     };
 
-    # Port 8989
     sonarr = {
       image = "linuxserver/sonarr";
       volumes = [
@@ -121,7 +124,7 @@
       environment = {
         "PUID" = "0";
         "PGID" = "0";
-        "WEBUI_PORT" = "8081";
+        "WEBUI_PORT" = "8081"; # 8080 is traefik WebUI port
       };
       extraOptions = [
         "--network=host"
@@ -146,6 +149,14 @@
       ];
     };
 
+  };
+
+
+
+  services.libreddit = {
+    address = "127.0.0.1";
+    enable = true;
+    port = 8082;
   };
 
 
