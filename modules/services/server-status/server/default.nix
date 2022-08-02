@@ -20,7 +20,7 @@ in
         #image = "stilleshan/serverstatus";
         image = "imbytecat/serverstatus";
         ports = [
-          "80:80"
+          "80:8080"
           "35601:35601"
         ];
         volumes = [
