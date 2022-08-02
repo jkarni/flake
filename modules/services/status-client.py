@@ -11,8 +11,6 @@ import subprocess
 from collections import deque
 
 
-
-
 def check_interface(net_name):
     net_name = net_name.strip()
     invalid_name = ['lo', 'tun', 'kube', 'docker', 'vmbr', 'br-', 'vnet', 'veth']

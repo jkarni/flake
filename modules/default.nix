@@ -23,5 +23,6 @@
       ./services/qbittorrent-nox.nix
       ./services/rss-telegram.nix
       ./services/traefik-cloudflare.nix
+      ./services/status-client.nix
     ];
 }

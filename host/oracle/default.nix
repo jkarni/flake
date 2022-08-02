@@ -21,9 +21,6 @@
       DHCP = "yes";
     };
   };
-
-
-  services.vnstat.enable = true;
   
   services.prometheus.exporters = {
     node = {
