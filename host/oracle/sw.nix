@@ -6,15 +6,6 @@
     ./default.nix
   ];
 
-
-  # mkdir -p /download/jackett/config
-  # mkdir -p /download/qbittorrent/config
-  # mkdir -p /download/jellyfin/config
-  # mkdir -p /download/sonarr/config
-  # mkdir -p /download/sonarr/downloads
-  # mkdir -p /download/sonarr/media/anime
-
-
   # system.activationScripts.makeDownloadDir = pkgs.lib.stringAfter [ "var" ] ''
   #   [ ! -d /download/jackett/config ] && mkdir -p /download/jackett/config
   #   [ ! -d /download/qbittorrent/config ] && mkdir -p /download/qbittorrent/config
@@ -26,71 +17,35 @@
 
   # restic restore backup to create basic configuration tree directory
 
-  systemd.services.traefik.serviceConfig.EnvironmentFile = config.sops.secrets.traefik-cloudflare-env.path;
+  services.traefik-cloudflare.enable = true;
 
-  services.traefik = {
-    enable = true;
+  services.traefik.dynamicConfigOptions = {
 
-    dynamicConfigOptions = {
+    http.routers = {
+      jackett.rule = "Host(`jackett.mlyxshi.com`)";
+      jackett.service = "jackett";
 
-      tls.options.default = {
-        minVersion = "VersionTLS12";
-        sniStrict = true;
-      };
-      http.routers = {
-        jackett.rule = "Host(`jackett.mlyxshi.com`)";
-        jackett.service = "jackett";
+      sonarr.rule = "Host(`sonarr.mlyxshi.com`)";
+      sonarr.service = "sonarr";
 
-        sonarr.rule = "Host(`sonarr.mlyxshi.com`)";
-        sonarr.service = "sonarr";
+      qb-media.rule = "Host(`qb.media.mlyxshi.com`)";
+      qb-media.service = "qb-media";
 
-        qb-media.rule = "Host(`qb.media.mlyxshi.com`)";
-        qb-media.service = "qb-media";
-
-        jellyfin.rule = "Host(`jellyfin.mlyxshi.com`)";
-        jellyfin.service = "jellyfin";
-      };
-
-      http.services = {
-        jackett.loadBalancer.servers = [{ url = "http://localhost:9117"; }];
-        sonarr.loadBalancer.servers = [{ url = "http://localhost:8989"; }];
-        qb-media.loadBalancer.servers = [{ url = "http://localhost:8081"; }];
-        jellyfin.loadBalancer.servers = [{ url = "http://localhost:8096"; }];
-      };
-
-      http.middlewares = {
-        web-redirect.redirectScheme.scheme = "https";
-      };
+      jellyfin.rule = "Host(`jellyfin.mlyxshi.com`)";
+      jellyfin.service = "jellyfin";
     };
 
-    staticConfigOptions = {
-
-      # api.dashboard = true;
-      # api.insecure = true;
-
-      entryPoints = {
-        web = {
-          address = ":80";
-        };
-        websecure = {
-          address = ":443";
-          http.tls.certResolver = "letsencrypt";
-          # wildcard-letsencrypt-certificates, format problem
-          # http.tls.domains[0].main="mlyxshi.com";
-          # http.tls.domains[0].sans="*.mlyxshi.com";
-        };
-      };
-
-      certificatesResolvers.letsencrypt.acme = {
-        dnsChallenge.provider = "cloudflare";
-        email = "blackhole@mlyxshi.com";
-        storage = "${config.services.traefik.dataDir}/acme.json"; # "/var/lib/traefik/acme.json"
-      };
-
-
-
+    http.services = {
+      jackett.loadBalancer.servers = [{ url = "http://localhost:9117"; }];
+      sonarr.loadBalancer.servers = [{ url = "http://localhost:8989"; }];
+      qb-media.loadBalancer.servers = [{ url = "http://localhost:8081"; }];
+      jellyfin.loadBalancer.servers = [{ url = "http://localhost:8096"; }];
     };
+
+
   };
+
+
 
 
   # https://reorx.com/blog/track-and-download-shows-automatically-with-sonarr
