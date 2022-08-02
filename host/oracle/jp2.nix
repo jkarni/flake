@@ -35,10 +35,10 @@
         "/tmp:/tmp:rw"
       ];
       environment = {
-        PORT = 35601;
-        VERBOSE = true;
-        PING_INTERVAL = 30;
-        TZ = Asia/Shanghai;
+        PORT = "35601";
+        VERBOSE = "true";
+        PING_INTERVAL = "30";
+        TZ = "Asia/Shanghai";
 
         USE_PUSH = "true";
         USE_IPC = "true";
@@ -53,8 +53,8 @@
         WEB_PASSWORD = "";
         WEB_SECRET = "";
 
-        PUSH_TIMEOUT = 120;
-        PUSH_DELAY = 15;
+        PUSH_TIMEOUT = "120";
+        PUSH_DELAY = "15";
 
       };
     };
