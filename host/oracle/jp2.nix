@@ -23,26 +23,6 @@
     };
   };
 
-
-  sops.secrets.nodestatus-env = {};
-
-  virtualisation.oci-containers.containers = {
-
-    "nodestatus-server" = {
-      image = "cokemine/nodestatus";
-      ports = [
-        "35601:35601"
-      ];
-      volumes = [
-        "/var/lib/NodeStatus/server:/usr/local/NodeStatus/server"
-        "/tmp:/tmp:rw"
-      ];
-      environmentFiles = [
-        config.sops.secrets.nodestatus-env.path
-      ];
-    };
-
-  };
 }
 
 

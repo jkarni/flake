@@ -10,15 +10,6 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
-    # nixpkgs-darwin-stable = {
-    #   url = "github:nixos/nixpkgs/nixpkgs-22.05-darwin";
-    # };
-
-    # home-manager-darwin-stable = {
-    #   url = "github:nix-community/home-manager/release-22.05";
-    #   inputs.nixpkgs.follows = "nixpkgs-darwin-stable";
-    # };
-
     darwin = {
       url = "github:LnL7/nix-darwin";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -82,7 +73,6 @@
     nixpkgs,
     darwin,
     home-manager,
-    # home-manager-darwin-stable,
     deploy-rs,
     sops-nix,
     sops-nix-darwin,
