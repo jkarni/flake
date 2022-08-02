@@ -5,7 +5,7 @@
 }:
 let
   cfg = config.services.status-server;
-  serverConfig = pkgs.writeText "serverConfig.json" (builtins.readfile ./serverConfig.json);
+  serverConfig = pkgs.writeText "serverConfig.json" (builtins.readFile ./serverConfig.json);
 in
 {
   options = {
