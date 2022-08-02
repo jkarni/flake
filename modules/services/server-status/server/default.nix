@@ -24,7 +24,7 @@ in
           "35601:35601"
         ];
         volumes = [
-          "${serverConfig}:/ServerStatus/server/config.json"
+          "${serverConfig}:/opt/config.json"
         ];
       };
     };
