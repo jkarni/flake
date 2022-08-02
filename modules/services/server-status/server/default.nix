@@ -20,15 +20,13 @@ in
     # wget -P /var/lib/ServerStatus/ https://github.com/cokemine/hotaru_theme/releases/latest/download/hotaru-theme.zip
     # unzip -d /var/lib/ServerStatus/ /var/lib/ServerStatus/hotaru-theme.zip 
 
-
-
     systemd.services.serverstatus-server = {
       description = "serverstatus-server";
       after = [ "network.target" ];
       wantedBy = [ "multi-user.target" ];
 
       serviceConfig = {
-        ExecStart = "${pkgs.ServerStatus-Server}/sergate  --config=${serverConfig} --web-dir=/var/lib/ServerStatus/hotaru-theme  --port 35601";
+        ExecStart = "${pkgs.ServerStatus-Server}/bin/sergate  --config=${serverConfig} --web-dir=/var/lib/ServerStatus/hotaru-theme  --port 35601";
       };
     };
 

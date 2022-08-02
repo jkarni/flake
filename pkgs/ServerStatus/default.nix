@@ -27,7 +27,7 @@ stdenv.mkDerivation rec {
 
   installPhase = ''
     mkdir $out
-    cp sergate $out
+    cp sergate $out/bin/
   '';
 
   meta = {
