@@ -3,56 +3,63 @@
    {
     "username": "us1",
     "password": "us1",
-    "name": "Oracle-SanJose",
+    "name": "Oracle-US1",
     "type": "KVM",
     "host": "None",
+    "location": "San Jose",
     "disabled": false ,
-    "location": "US"
+    "region": "US"
     },
   {
    "username": "jp2",
    "password": "jp2",
-   "name": "Oracle-Tokyo",
+   "name": "Oracle-JP2",
    "type": "KVM",
    "host": "None",
+   "location": "Tokyo",
    "disabled": false ,
-   "location": "JP"
+   "region": "JP"
   },
   {
    "username": "jp4",
    "password": "jp4",
-   "name": "Oracle-Osaka",
+   "name": "Oracle-JP4",
    "type": "KVM",
    "host": "None",
+   "location": "Osaka",
    "disabled": false ,
-   "location": "JP"
+   "region": "JP"
   },
   {
     "username": "kr",
     "password": "kr",
-    "name": "Oracle-Chuncheon",
+    "name": "Oracle-KR",
     "type": "KVM",
     "host": "None",
+    "location": "Chuncheon",
     "disabled": false ,
-    "location": "KR"
+    "region": "KR"
    },
    {
     "username": "tw",
     "password": "tw",
-    "name": "Cybree-Taipei",
+    "name": "Cybree-TW",
     "type": "KVM",
     "host": "None",
+    "location": "Taipei",
     "disabled": false ,
-    "location": "TW"
+    "region": "TW"
    },
    {
     "username": "sw",
     "password": "sw",
-    "name": "Oracle-Zurich",
+    "name": "Oracle-SW",
     "type": "KVM",
     "host": "None",
+    "location": "Zurich",
     "disabled": false ,
-    "location": "CH"
+    "region": "CH"
    }
+
  ]
 }
