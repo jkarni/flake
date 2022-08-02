@@ -1,0 +1,65 @@
+{"servers":
+ [
+   {
+    "username": "us1",
+    "password": "us1",
+    "name": "us1",
+    "type": "KVM",
+    "host": "None",
+    "location": "San Jose",
+    "disabled": false ,
+    "region": "US"
+    },
+  {
+   "username": "jp2",
+   "password": "jp2",
+   "name": "jp2",
+   "type": "KVM",
+   "host": "None",
+   "location": "Tokyo",
+   "disabled": false ,
+   "region": "JP"
+  },
+  {
+   "username": "jp4",
+   "password": "jp4",
+   "name": "jp4",
+   "type": "KVM",
+   "host": "None",
+   "location": "Osaka",
+   "disabled": false ,
+   "region": "JP"
+  },
+  {
+    "username": "kr",
+    "password": "kr",
+    "name": "kr",
+    "type": "KVM",
+    "host": "None",
+    "location": "Chuncheon",
+    "disabled": false ,
+    "region": "KR"
+   },
+   {
+    "username": "tw",
+    "password": "tw",
+    "name": "tw",
+    "type": "KVM",
+    "host": "None",
+    "location": "Taipei",
+    "disabled": false ,
+    "region": "TW"
+   },
+   {
+    "username": "sw",
+    "password": "sw",
+    "name": "sw",
+    "type": "KVM",
+    "host": "None",
+    "location": "Zurich",
+    "disabled": false ,
+    "region": "CH"
+   }
+
+ ]
+}
