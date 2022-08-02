@@ -10,11 +10,7 @@ import json
 import subprocess
 from collections import deque
 
-SERVER = "jp1.mlyxshi.com"
-PORT = 35601
-USER = "jp4"
-PASSWORD = "jp4"
-INTERVAL = 1  # 更新间隔，单位：秒
+
 
 
 def check_interface(net_name):
