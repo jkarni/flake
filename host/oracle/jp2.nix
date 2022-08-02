@@ -11,10 +11,6 @@
 
   services.rss-telegram.enable = true;
 
-  environment.systemPackages = with pkgs; [
-     
-  ];
-
 
   # podman run -p 8080:8080 pan93412/unblock-netease-music-enhanced -e https://music.163.com -o ytdlp bilibili
   # can not use oci-containers directly, virtualisation.oci-containers.containers."xx".cmd will parse to "-e https://music.163.com" "-o ytdlp bilibili", UnblockNeteaseserver do not support quotation marks.
