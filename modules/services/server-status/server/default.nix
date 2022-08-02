@@ -5,7 +5,7 @@
 }:
 let
   cfg = config.services.status-server;
-  serverConfig = pkgs.writeText "serverConfig.json" (builtins.readFile ./serverConfig.json);
+  serverConfig = pkgs.writeText "serverConfig.json" (builtins.readFile ./serverConfig2.json);
 in
 {
   options = {
@@ -17,7 +17,8 @@ in
     virtualisation.oci-containers.containers = {
 
       "serverstatus-server" = {
-        image = "stilleshan/serverstatus";
+        #image = "stilleshan/serverstatus";
+        image = "imbytecat/serverstatus";
         ports = [
           "80:80"
           "35601:35601"
