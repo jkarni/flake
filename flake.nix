@@ -221,7 +221,7 @@
 
     packages."aarch64-darwin"."Anime4k" = import ./pkgs/Anime4k {inherit (nixpkgs.legacyPackages."aarch64-darwin") stdenvNoCC unzip fetchurl;};
  
-    packages."aarch64-linux"."ServerStatus" = import ./pkgs/ServerStatus {inherit (nixpkgs.legacyPackages."aarch64-darwin") stdenv unzip fetchurl;};
+    packages."aarch64-linux"."ServerStatus" = import ./pkgs/ServerStatus {inherit (nixpkgs.legacyPackages."aarch64-linux") stdenv unzip fetchurl;};
 
     #############################################################################################################################
     # Shell
