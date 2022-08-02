@@ -33,6 +33,7 @@
       ];
       volumes = [
         "/var/lib/ServerStatus/config.json:/ServerStatus/server/config.json"
+        "/var/lib/ServerStatus/web:/usr/share/nginx/html"
       ];
     };
   };
