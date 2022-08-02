@@ -23,6 +23,9 @@
     };
   };
 
+
+  sops.secrets.nodestatus-env = {};
+
   virtualisation.oci-containers.containers = {
 
     "nodestatus-server" = {
@@ -34,29 +37,9 @@
         "/var/lib/NodeStatus/server:/usr/local/NodeStatus/server"
         "/tmp:/tmp:rw"
       ];
-      environment = {
-        PORT = "35601";
-        VERBOSE = "true";
-        PING_INTERVAL = "30";
-        TZ = "Asia/Shanghai";
-
-        USE_PUSH = "true";
-        USE_IPC = "true";
-        USE_WEB = "true";
-
-        WEB_THEME = "hotaru-theme";
-        WEB_TITLE = "Server Status";
-        WEB_SUBTITLE = "Servers' Probes Set up with NodeStatus";
-        WEB_HEADTITLE = "NodeStatus";
-
-        WEB_USERNAME = "admin";
-        WEB_PASSWORD = "";
-        WEB_SECRET = "";
-
-        PUSH_TIMEOUT = "120";
-        PUSH_DELAY = "15";
-
-      };
+      environmentFiles = [
+        config.sops.secrets.nodestatus-env.path
+      ];
     };
 
   };
