@@ -27,7 +27,7 @@ stdenv.mkDerivation rec {
 
   installPhase = ''
     mkdir $out
-    cp ./ServerStatus-Hotaru-master/server/sergate $out
+    cp sergate $out
   '';
 
   meta = {
