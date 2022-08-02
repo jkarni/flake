@@ -33,7 +33,7 @@
       ];
       volumes = [
         "/var/lib/ServerStatus/config.json:/ServerStatus/server/config.json"
-        "/var/lib/ServerStatus/hotaru-theme:/usr/share/nginx/html"
+        "/var/lib/ServerStatus/ServerStatus/web:/usr/share/nginx/html"
       ];
     };
   };
