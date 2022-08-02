@@ -6,7 +6,7 @@
 let
   cfg = config.services.status-client;
   serverstatus-client-script = pkgs.writeScript "serverstatus-client-script" (''
-    SERVER = "top.mlyxshi.com"
+    SERVER = "jp2.mlyxshi.com"
     PORT = 35601
     USER = "${config.networking.hostName}"
     PASSWORD = "${config.networking.hostName}"
@@ -29,7 +29,21 @@ in
       wantedBy = [ "multi-user.target" ];
 
       serviceConfig = {
-        ExecStart = "${pkgs.python3}/bin/python ${serverstatus-client-script}";
+        ExecStart = "${pkgs.python3}/bin/python ${status-client-script}";
+      };
+    };
+
+    virtualisation.oci-containers.containers = {
+
+      "serverstatus-server" = {
+        image = "stilleshan/serverstatus";
+        ports=[
+          "8888:80"
+          "35601:35601"
+        ];
+        volumes = [
+          "/var/lib/ServerStatus/config.json:/ServerStatus/server/config.json"
+        ];
       };
     };
 
