@@ -55,7 +55,7 @@
 
       certificatesResolvers.letsencrypt.acme = {
         dnsChallenge.provider = "cloudflare";
-        email = "mlyxdev@gmail.com";
+        email = "blackhole@mlyxshi.com";
         storage = "${config.services.traefik.dataDir}/acme.json"; # "/var/lib/traefik/acme.json"
       };
     };
