@@ -6,59 +6,26 @@
     ./default.nix
   ];
 
-  systemd.services.traefik.serviceConfig.EnvironmentFile = config.sops.secrets.traefik-cloudflare-env.path;
+  services.traefik-cloudflare.enable = true;
+  services.traefik.dynamicConfigOptions = {
 
-  services.traefik = {
-    enable = true;
+    http.routers = {
+      libreddit.rule = "Host(`reddit.mlyxshi.com`)";
+      libreddit.service = "libreddit";
 
-    dynamicConfigOptions = {
-      tls.options.default = {
-        minVersion = "VersionTLS12";
-        sniStrict = true;
-      };
+      nitter.rule = "Host(`twitter.mlyxshi.com`)";
+      nitter.service = "nitter";
 
-      http.routers = {
-        libreddit.rule = "Host(`reddit.mlyxshi.com`)";
-        libreddit.service = "libreddit";
-
-        nitter.rule = "Host(`twitter.mlyxshi.com`)";
-        nitter.service = "nitter";
-
-        youtube.rule = "Host(`youtube.mlyxshi.com`)";
-        youtube.service = "youtube";
-      };
-
-      http.services = {
-        libreddit.loadBalancer.servers = [{ url = "http://localhost:8082"; }];
-        nitter.loadBalancer.servers = [{ url = "http://localhost:8083"; }];
-        youtube.loadBalancer.servers = [{ url = "http://localhost:8084"; }];
-      };
-
-      http.middlewares = {
-        web-redirect.redirectScheme.scheme = "https";
-      };
+      youtube.rule = "Host(`youtube.mlyxshi.com`)";
+      youtube.service = "youtube";
     };
 
-    staticConfigOptions = {
-      # api.dashboard = true;
-      # api.insecure = true;
-
-      entryPoints = {
-        web = {
-          address = ":80";
-        };
-        websecure = {
-          address = ":443";
-          http.tls.certResolver = "letsencrypt";
-        };
-      };
-
-      certificatesResolvers.letsencrypt.acme = {
-        dnsChallenge.provider = "cloudflare";
-        email = "blackhole@mlyxshi.com";
-        storage = "${config.services.traefik.dataDir}/acme.json"; # "/var/lib/traefik/acme.json"
-      };
+    http.services = {
+      libreddit.loadBalancer.servers = [{ url = "http://localhost:8082"; }];
+      nitter.loadBalancer.servers = [{ url = "http://localhost:8083"; }];
+      youtube.loadBalancer.servers = [{ url = "http://localhost:8084"; }];
     };
+
   };
 
   services.libreddit = {
