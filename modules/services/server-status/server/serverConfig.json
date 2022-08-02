@@ -1,0 +1,58 @@
+{"servers":
+ [
+   {
+    "username": "us1",
+    "password": "us1",
+    "name": "Oracle-SanJose",
+    "type": "KVM",
+    "host": "None",
+    "disabled": false ,
+    "location": "US"
+    },
+  {
+   "username": "jp2",
+   "password": "jp2",
+   "name": "Oracle-Tokyo",
+   "type": "KVM",
+   "host": "None",
+   "disabled": false ,
+   "location": "JP"
+  },
+  {
+   "username": "jp4",
+   "password": "jp4",
+   "name": "Oracle-Osaka",
+   "type": "KVM",
+   "host": "None",
+   "disabled": false ,
+   "location": "JP"
+  },
+  {
+    "username": "kr",
+    "password": "kr",
+    "name": "Oracle-Chuncheon",
+    "type": "KVM",
+    "host": "None",
+    "disabled": false ,
+    "location": "KR"
+   },
+   {
+    "username": "tw",
+    "password": "tw",
+    "name": "Cybree-Taipei",
+    "type": "KVM",
+    "host": "None",
+    "disabled": false ,
+    "location": "TW"
+   },
+   {
+    "username": "sw",
+    "password": "sw",
+    "name": "Oracle-Zurich",
+    "type": "KVM",
+    "host": "None",
+    "disabled": false ,
+    "location": "CH"
+   }
+ ]
+}
