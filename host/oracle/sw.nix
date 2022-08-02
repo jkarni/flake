@@ -6,6 +6,8 @@
     ./default.nix
   ];
 
+  services.status-client.enable = true;
+
   # system.activationScripts.makeDownloadDir = pkgs.lib.stringAfter [ "var" ] ''
   #   [ ! -d /download/jackett/config ] && mkdir -p /download/jackett/config
   #   [ ! -d /download/qbittorrent/config ] && mkdir -p /download/qbittorrent/config

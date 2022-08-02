@@ -6,6 +6,8 @@
     ./default.nix
   ];
 
+  services.status-client.enable = true;
+
   services.traefik-cloudflare.enable = true;
   services.traefik.dynamicConfigOptions = {
 
