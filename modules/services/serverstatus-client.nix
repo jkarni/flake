@@ -29,7 +29,7 @@ in
       wantedBy = [ "multi-user.target" ];
 
       serviceConfig = {
-        ExecStart = "${pkgs.python3}/bin/python ${status-client-script}";
+        ExecStart = "${pkgs.python3}/bin/python ${serverstatus-client-script}";
       };
     };
 
