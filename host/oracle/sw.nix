@@ -75,14 +75,18 @@
         websecure = {
           address = ":443";
           http.tls.certResolver = "letsencrypt";
+          # wildcard-letsencrypt-certificates
+          http.tls."domains[0]".main="mlyxshi.com";
+          http.tls."domains[0]".sans="*.mlyxshi.com";
         };
       };
 
       certificatesResolvers.letsencrypt.acme = {
         dnsChallenge.provider = "cloudflare";
-        email = "mlyxdev@gmail.com";
+        email = "blackhole@mlyxshi.com";
         storage = "${config.services.traefik.dataDir}/acme.json"; # "/var/lib/traefik/acme.json"
       };
+
 
 
     };
