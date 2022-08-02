@@ -5,6 +5,7 @@
 }:
 let
   cfg = config.services.status-server;
+  serverConfig = pkgs.writeText "serverConfig.json" (builtins.readfile ./serverConfig.json);
 in
 {
   options = {
@@ -12,9 +13,6 @@ in
   };
 
   config = lib.mkIf cfg.enable {
-
-
-    serverConfig = pkgs.writeText "serverConfig.json" (builtins.readfile ./serverConfig.json);
 
     virtualisation.oci-containers.containers = {
 
