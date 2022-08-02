@@ -5,7 +5,7 @@
 }:
 let
   cfg = config.services.status-server;
-  serverEnv =  pkgs.writeText "serverEnv.conf" (builtins.readFile ./serverEnv.conf);
+  #serverEnv =  pkgs.writeText "serverEnv.conf" (builtins.readFile ./serverEnv.conf);
   serverConfig = pkgs.writeText "serverConfig.json" (builtins.readFile ./serverConfig2.json);
 in
 {
