@@ -6,7 +6,7 @@
     ./default.nix
   ];
 
-  services.status-client.enable = true;
+  #services.status-client.enable = true;
   services.rss-telegram.enable = true;
 
 
