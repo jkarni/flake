@@ -22,10 +22,13 @@
     };
   };
 
+
+  services.vnstat.enable = true;
+  
   services.prometheus.exporters = {
     node = {
       enable = true;
-      enabledCollectors = ["systemd"];
+      enabledCollectors = [ "systemd" ];
     };
   };
 }

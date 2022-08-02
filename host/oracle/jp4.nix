@@ -8,5 +8,5 @@
   ];
 
   services.qbittorrent-nox.enable = true;
-  
+
 }
