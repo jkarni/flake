@@ -28,7 +28,7 @@
     "serverstatus-server" = {
       image = "stilleshan/serverstatus";
       ports = [
-        "8888:80"
+        "80:80"
         "35601:35601"
       ];
       volumes = [
