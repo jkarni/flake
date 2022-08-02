@@ -1,21 +1,5 @@
 {
   "nodes": {
-    "UnblockNeteaseMusic": {
-      "flake": false,
-      "locked": {
-        "lastModified": 1658897947,
-        "narHash": "sha256-waE9x+TQrpD0x5BoRrN8DenDpoETAB5r26nJeT4rE5E=",
-        "owner": "UnblockNeteaseMusic",
-        "repo": "server",
-        "rev": "b30f803a6d5b586bed8805a063fb1e12d610b490",
-        "type": "github"
-      },
-      "original": {
-        "owner": "UnblockNeteaseMusic",
-        "repo": "server",
-        "type": "github"
-      }
-    },
     "cachix": {
       "locked": {
         "lastModified": 1658346836,
@@ -279,7 +263,6 @@
     },
     "root": {
       "inputs": {
-        "UnblockNeteaseMusic": "UnblockNeteaseMusic",
         "darwin": "darwin",
         "deploy-rs": "deploy-rs",
         "home-manager": "home-manager",

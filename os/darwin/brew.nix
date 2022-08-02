@@ -2,7 +2,7 @@
   homebrew = {
     enable = true;
     autoUpdate = true;
-    cleanup = "uninstall";
+    cleanup = "zap";
 
     taps = [
       "homebrew/cask"
