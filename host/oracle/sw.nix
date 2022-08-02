@@ -75,9 +75,9 @@
         websecure = {
           address = ":443";
           http.tls.certResolver = "letsencrypt";
-          # wildcard-letsencrypt-certificates
-          http.tls."domains[0]".main="mlyxshi.com";
-          http.tls."domains[0]".sans="*.mlyxshi.com";
+          # wildcard-letsencrypt-certificates, format problem
+          # http.tls.domains[0].main="mlyxshi.com";
+          # http.tls.domains[0].sans="*.mlyxshi.com";
         };
       };
 
