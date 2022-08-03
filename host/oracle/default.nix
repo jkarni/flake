@@ -13,6 +13,8 @@
 
   boot.tmpOnTmpfs = true;
 
+  virtualisation.podman.enable = true;
+
   # Workaround for fixing timeout issue
   # manually reboot once
   systemd.network.wait-online.anyInterface = true;
