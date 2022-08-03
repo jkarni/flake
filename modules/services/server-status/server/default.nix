@@ -6,14 +6,14 @@
 let
   cfg = config.services.status-server;
   serverConfig = pkgs.writeText "serverConfig.json" (builtins.readFile ./serverConfig.json);
-  install-serverstatus-webui = pkgs.writeShellScriptBin "webui-init" ''
-    if [ ! -d /var/lib/ServerStatus/hotaru-theme/json ]
-    then
-      mkdir -p /var/lib/ServerStatus/
-      ${pkgs.wget}/bin/wget -P /var/lib/ServerStatus/ https://github.com/cokemine/hotaru_theme/releases/latest/download/hotaru-theme.zip
-      ${pkgs.unzip}/bin/unzip -d /var/lib/ServerStatus/ /var/lib/ServerStatus/hotaru-theme.zip
-    fi
-  '';
+  # install-serverstatus-webui = pkgs.writeShellScriptBin "webui-init" ''
+  #   if [ ! -d /var/lib/ServerStatus/hotaru-theme/json ]
+  #   then
+  #     mkdir -p /var/lib/ServerStatus/
+  #     ${pkgs.wget}/bin/wget -P /var/lib/ServerStatus/ https://github.com/cokemine/hotaru_theme/releases/latest/download/hotaru-theme.zip
+  #     ${pkgs.unzip}/bin/unzip -d /var/lib/ServerStatus/ /var/lib/ServerStatus/hotaru-theme.zip
+  #   fi
+  # '';
 in
 {
   options = {
@@ -22,20 +22,29 @@ in
 
   config = lib.mkIf cfg.enable {
 
-    systemd.services.install-serverstatus-webui = {
-      description = "install-serverstatus-webui";
-      after = [ "network.target" ];
-      wantedBy = [ "multi-user.target" ];
+    # systemd.services.install-serverstatus-webui = {
+    #   description = "install-serverstatus-webui";
+    #   after = [ "network.target" ];
+    #   wantedBy = [ "multi-user.target" ];
 
-      serviceConfig = {
-        ExecStart = "${install-serverstatus-webui}/bin/webui-init";
-      };
-    };
+    #   serviceConfig = {
+    #     ExecStart = "${install-serverstatus-webui}/bin/webui-init";
+    #   };
+    # };
 
     systemd.services.serverstatus-server = {
       description = "serverstatus-server";
-      after = [ "network.target" "install-serverstatus-webui.target"];
+      after = [ "network.target" ];
       wantedBy = [ "multi-user.target" ];
+
+      preStart =''
+        if [ ! -d /var/lib/ServerStatus/hotaru-theme/json ]
+        then
+          mkdir -p /var/lib/ServerStatus/
+          ${pkgs.wget}/bin/wget -P /var/lib/ServerStatus/ https://github.com/cokemine/hotaru_theme/releases/latest/download/hotaru-theme.zip
+          ${pkgs.unzip}/bin/unzip -d /var/lib/ServerStatus/ /var/lib/ServerStatus/hotaru-theme.zip
+        fi
+      '';
 
       serviceConfig = {
         ExecStart = "${pkgs.ServerStatus-Server}/bin/sergate  --config=${serverConfig} --web-dir=/var/lib/ServerStatus/hotaru-theme  --port 35601";
