@@ -11,6 +11,8 @@
   boot.loader.timeout = 3;
   boot.loader.efi.canTouchEfiVariables = true;
 
+  boot.tmpOnTmpfs = true;
+
   # Workaround for fixing timeout issue
   # manually reboot once
   systemd.network.wait-online.anyInterface = true;

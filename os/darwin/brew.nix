@@ -10,7 +10,6 @@
       "homebrew/services"
       "majd/repo"
       "koekeishiya/formulae" #yabai/skhd
-      "xgadget-lab/nexttrace"
     ];
 
     brews = [
@@ -19,7 +18,6 @@
       "mas"
       "qemu"
       "mpv"
-      "nexttrace"
       "imagemagick" #kitty image dependency
     ];
 
