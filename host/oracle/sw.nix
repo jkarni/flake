@@ -1,6 +1,7 @@
-{ config
-, pkgs
-, ...
+{
+  config,
+  pkgs,
+  ...
 }: {
   imports = [
     ./default.nix
@@ -22,7 +23,6 @@
   services.traefik-cloudflare.enable = true;
 
   services.traefik.dynamicConfigOptions = {
-
     http.routers = {
       jackett.rule = "Host(`jackett.mlyxshi.com`)";
       jackett.service = "jackett";
@@ -38,20 +38,16 @@
     };
 
     http.services = {
-      jackett.loadBalancer.servers = [{ url = "http://localhost:9117"; }];
-      sonarr.loadBalancer.servers = [{ url = "http://localhost:8989"; }];
-      qb-media.loadBalancer.servers = [{ url = "http://localhost:8081"; }];
-      jellyfin.loadBalancer.servers = [{ url = "http://localhost:8096"; }];
+      jackett.loadBalancer.servers = [{url = "http://localhost:9117";}];
+      sonarr.loadBalancer.servers = [{url = "http://localhost:8989";}];
+      qb-media.loadBalancer.servers = [{url = "http://localhost:8081";}];
+      jellyfin.loadBalancer.servers = [{url = "http://localhost:8096";}];
     };
-
-
   };
-
 
   # https://reorx.com/blog/track-and-download-shows-automatically-with-sonarr
 
   virtualisation.oci-containers.containers = {
-
     "jackett" = {
       image = "linuxserver/jackett";
       volumes = [
@@ -93,8 +89,6 @@
       extraOptions = [
         "--network=host"
       ];
-
-
     };
 
     "jellyfin" = {
@@ -112,10 +106,7 @@
         "--network=host"
       ];
     };
-
   };
-
-
 
   services.restic.backups."media" = {
     extraBackupArgs = [
@@ -129,6 +120,6 @@
     ];
     repository = "rclone:googleshare:backup";
     timerConfig.OnCalendar = "daily";
-    pruneOpts = [ "--keep-last 2" ];
+    pruneOpts = ["--keep-last 2"];
   };
 }

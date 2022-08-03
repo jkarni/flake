@@ -1,25 +1,22 @@
-{ pkgs
-, lib
-, config
-, ...
-}:
-let
-  cfg = config.services.traefik-cloudflare;
-in
 {
+  pkgs,
+  lib,
+  config,
+  ...
+}: let
+  cfg = config.services.traefik-cloudflare;
+in {
   options = {
     services.traefik-cloudflare.enable = lib.mkEnableOption "traefik-cloudflare service";
   };
 
   config = lib.mkIf cfg.enable {
-
     systemd.services.traefik.serviceConfig.EnvironmentFile = config.sops.secrets.traefik-cloudflare-env.path;
-    
+
     services.traefik = {
       enable = true;
 
       dynamicConfigOptions = {
-
         tls.options.default = {
           minVersion = "VersionTLS12";
           sniStrict = true;
@@ -31,7 +28,6 @@ in
       }; # dynamicConfigOptions
 
       staticConfigOptions = {
-
         # api.dashboard = true;
         # api.insecure = true;
 
@@ -50,11 +46,7 @@ in
           email = "blackhole@mlyxshi.com";
           storage = "${config.services.traefik.dataDir}/acme.json"; # "/var/lib/traefik/acme.json"
         };
-
       }; # staticConfigOptions
-    
-    };# services.traefik
-
-
+    }; # services.traefik
   };
 }

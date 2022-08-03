@@ -65,7 +65,6 @@
       url = "github:zsh-users/zsh-autosuggestions";
       flake = false;
     };
-
   };
 
   outputs = {
@@ -154,7 +153,7 @@
             {
               system.stateVersion = stateVersion;
               networking.hostName = "tw";
-              
+
               secrets.sops-nix.enable = true;
               services.shadowsocks-rust.enable = true;
             }
@@ -220,7 +219,7 @@
     packages."aarch64-darwin"."firefox-darwin" = import ./pkgs/darwin/firefox {inherit (nixpkgs.legacyPackages."aarch64-darwin") stdenvNoCC lib fetchurl writeText undmg;};
 
     packages."aarch64-darwin"."Anime4k" = import ./pkgs/Anime4k {inherit (nixpkgs.legacyPackages."aarch64-darwin") stdenvNoCC unzip fetchurl;};
- 
+
     packages."aarch64-linux"."ServerStatus" = import ./pkgs/ServerStatus {inherit (nixpkgs.legacyPackages."aarch64-linux") stdenv unzip fetchurl;};
 
     #############################################################################################################################

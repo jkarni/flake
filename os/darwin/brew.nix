@@ -92,7 +92,7 @@
     #   Screens = 1224268771;
     #   Microsoft-Remote-Desktop = 1295203466;
 
-    #   Pasty = 1544620654;  
+    #   Pasty = 1544620654;
     #   Bob = 1630034110;
     #   Xcode = 497799835;
     #   Bitwarden = 1352778147;

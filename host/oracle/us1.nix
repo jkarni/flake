@@ -1,6 +1,7 @@
-{ config
-, pkgs
-, ...
+{
+  config,
+  pkgs,
+  ...
 }: {
   imports = [
     ./default.nix
@@ -10,7 +11,6 @@
 
   services.traefik-cloudflare.enable = true;
   services.traefik.dynamicConfigOptions = {
-
     http.routers = {
       libreddit.rule = "Host(`reddit.mlyxshi.com`)";
       libreddit.service = "libreddit";
@@ -23,11 +23,10 @@
     };
 
     http.services = {
-      libreddit.loadBalancer.servers = [{ url = "http://localhost:8082"; }];
-      nitter.loadBalancer.servers = [{ url = "http://localhost:8083"; }];
-      youtube.loadBalancer.servers = [{ url = "http://localhost:8084"; }];
+      libreddit.loadBalancer.servers = [{url = "http://localhost:8082";}];
+      nitter.loadBalancer.servers = [{url = "http://localhost:8083";}];
+      youtube.loadBalancer.servers = [{url = "http://localhost:8084";}];
     };
-
   };
 
   services.libreddit = {
@@ -55,5 +54,4 @@
     domain = "youtube.mlyxshi.com";
     port = 8084;
   };
-
 }

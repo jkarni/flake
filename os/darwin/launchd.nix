@@ -1,4 +1,8 @@
-{pkgs, config, ...}: {
+{
+  pkgs,
+  config,
+  ...
+}: {
   launchd.agents.FirefoxEnv = {
     serviceConfig.ProgramArguments = [
       "bash"

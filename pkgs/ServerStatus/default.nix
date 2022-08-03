@@ -1,7 +1,7 @@
-{ stdenv
-, fetchurl
-, unzip
-,
+{
+  stdenv,
+  fetchurl,
+  unzip,
 }:
 stdenv.mkDerivation rec {
   pname = "ServerStatus-Server";
@@ -12,9 +12,9 @@ stdenv.mkDerivation rec {
     sha256 = "+fGZZB1Jebl5BzP57abexXfwuW+sNivA41eN/y1t7+E=";
   };
 
-  buildInputs = [ unzip ];
+  buildInputs = [unzip];
 
-  phases = [ "unpackPhase" "buildPhase" "installPhase" ];
+  phases = ["unpackPhase" "buildPhase" "installPhase"];
 
   unpackPhase = ''
     unzip $src
@@ -22,7 +22,7 @@ stdenv.mkDerivation rec {
 
   buildPhase = ''
     cd ./ServerStatus-Hotaru-master/server
-    make 
+    make
   '';
 
   installPhase = ''

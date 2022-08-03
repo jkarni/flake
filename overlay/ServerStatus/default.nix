@@ -1,3 +1,3 @@
 final: prev: {
-  ServerStatus-Server= prev.callPackage ../../pkgs/ServerStatus {};
+  ServerStatus-Server = prev.callPackage ../../pkgs/ServerStatus {};
 }
