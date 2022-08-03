@@ -102,9 +102,7 @@ in
     # shadowsocks tcp fastopen
     "net.ipv4.tcp_fastopen" = "3";
     # https://github.com/lucas-clemente/quic-go/wiki/UDP-Receive-Buffer-Size#non-bsd
-    # "net.core.rmem_max" = "2500000";
-    "net.core.wmem_max" = "1073741824"; # 1 GiB
-    "net.core.rmem_max" = "1073741824"; # 1 GiB
+    "net.core.rmem_max" = "2500000";
   };
 
   networking = {
