@@ -27,6 +27,7 @@ in
     gc = {
       automatic = true;
       dates = "weekly";
+      options = "--delete-older-than 7d";
     };
   };
 
@@ -96,11 +97,12 @@ in
     };
   };
 
+  # https://wiki.archlinux.org/title/sysctl
+  # https://www.starduster.me/2020/03/02/linux-network-tuning-kernel-parameter/
   boot.kernel.sysctl = {
-    "net.core.default_qdisc" = "fq";
+    "net.core.default_qdisc" = "cake";
     "net.ipv4.tcp_congestion_control" = "bbr";
-    # shadowsocks tcp fastopen
-    "net.ipv4.tcp_fastopen" = "3";
+    "net.ipv4.tcp_fastopen" = "3";     # shadowsocks tcp fastopen
   };
 
   networking = {
