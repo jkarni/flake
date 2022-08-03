@@ -6,23 +6,24 @@
 }: let
   cfg = config.services.status-server;
   serverConfig = pkgs.writeText "serverConfig.json" (builtins.readFile ./serverConfig.json);
+  install-serverstatus-webui = pkgs.writeShellScriptBin "install-serverstatus-webui" (builtins.readFile ./install-serverstatus-webui.sh);
 in {
   options = {
     services.status-server.enable = lib.mkEnableOption "status-server service";
   };
 
   config = lib.mkIf cfg.enable {
-    # Please manually run this once
-    # mkdir -p /var/lib/ServerStatus/
-    # wget -P /var/lib/ServerStatus/ https://github.com/cokemine/hotaru_theme/releases/latest/download/hotaru-theme.zip
-    # unzip -d /var/lib/ServerStatus/ /var/lib/ServerStatus/hotaru-theme.zip
 
-    system.activationScripts.installWebUI = lib.stringAfter ["var"] ''
-        mkdir -p /var/lib/ServerStatus/
-        wget -P /var/lib/ServerStatus/ https://github.com/cokemine/hotaru_theme/releases/latest/download/hotaru-theme.zip
-        unzip -d /var/lib/ServerStatus/ /var/lib/ServerStatus/hotaru-theme.zip
+    systemd.services.install-serverstatus-webui = {
+      description = "install-serverstatus-webui";
+      after = ["network.target"];
+      wantedBy = ["multi-user.target"];
+      before =["serverstatus-server.target"];
 
-    '';
+      serviceConfig = {
+        ExecStart = "${install-serverstatus-webui}";
+      };
+    };
 
     systemd.services.serverstatus-server = {
       description = "serverstatus-server";
