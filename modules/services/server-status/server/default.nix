@@ -6,7 +6,7 @@
 let
   cfg = config.services.status-server;
   serverConfig = pkgs.writeText "serverConfig.json" (builtins.readFile ./serverConfig.json);
-  install-serverstatus-webui = pkgs.writeShellScriptBin "install-serverstatus-webui" ''
+  install-serverstatus-webui = pkgs.writeShellScriptBin "webui-init" ''
     if [ ! -d /var/lib/ServerStatus/hotaru-theme/json ]
     then
       mkdir -p /var/lib/ServerStatus/
@@ -28,7 +28,7 @@ in
       wantedBy = [ "multi-user.target" ];
 
       serviceConfig = {
-        ExecStart = "${install-serverstatus-webui}";
+        ExecStart = "${install-serverstatus-webui}/bin/webui-init";
       };
     };
 
