@@ -17,6 +17,13 @@ in {
     # wget -P /var/lib/ServerStatus/ https://github.com/cokemine/hotaru_theme/releases/latest/download/hotaru-theme.zip
     # unzip -d /var/lib/ServerStatus/ /var/lib/ServerStatus/hotaru-theme.zip
 
+    system.activationScripts.installWebUI = lib.stringAfter ["var"] ''
+        mkdir -p /var/lib/ServerStatus/
+        wget -P /var/lib/ServerStatus/ https://github.com/cokemine/hotaru_theme/releases/latest/download/hotaru-theme.zip
+        unzip -d /var/lib/ServerStatus/ /var/lib/ServerStatus/hotaru-theme.zip
+
+    '';
+
     systemd.services.serverstatus-server = {
       description = "serverstatus-server";
       after = ["network.target"];
