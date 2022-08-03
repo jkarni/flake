@@ -6,7 +6,7 @@
 }: let
   cfg = config.services.status-server;
   serverConfig = pkgs.writeText "serverConfig.json" (builtins.readFile ./serverConfig.json);
-  install-serverstatus-webui = pkgs.writeShellScriptBin "install-serverstatus-webui" (builtins.readFile ./install-serverstatus-webui.sh);
+  install-serverstatus-webui = pkgs.writeShellScript "install-serverstatus-webui" (builtins.readFile ./install-serverstatus-webui.sh);
 in {
   options = {
     services.status-server.enable = lib.mkEnableOption "status-server service";
@@ -21,7 +21,7 @@ in {
       before =["serverstatus-server.target"];
 
       serviceConfig = {
-        ExecStart = "${install-serverstatus-webui}";
+        ExecStart = "${pkgs.bash}/bin/bash ${install-serverstatus-webui}";
       };
     };
 
