@@ -100,7 +100,7 @@ in
   # https://wiki.archlinux.org/title/sysctl
   # https://www.starduster.me/2020/03/02/linux-network-tuning-kernel-parameter/
   boot.kernel.sysctl = {
-    "net.core.default_qdisc" = "cake";
+    "net.core.default_qdisc" = "fq_codel";
     "net.ipv4.tcp_congestion_control" = "bbr";
     "net.ipv4.tcp_fastopen" = "3";     # shadowsocks tcp fastopen
   };
