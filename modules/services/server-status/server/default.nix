@@ -6,7 +6,7 @@
 let
   cfg = config.services.status-server;
   serverConfig = pkgs.writeText "serverConfig.json" (builtins.readFile ./serverConfig.json);
-  install-serverstatus-webui = pkgs.writeShellScript "install-serverstatus-webui" ''
+  install-serverstatus-webui = pkgs.writeShellScriptBin "install-serverstatus-webui" ''
     if [ ! -d /var/lib/ServerStatus/hotaru-theme/json ]
     then
       mkdir -p /var/lib/ServerStatus/
@@ -26,16 +26,15 @@ in
       description = "install-serverstatus-webui";
       after = [ "network.target" ];
       wantedBy = [ "multi-user.target" ];
-      before = [ "serverstatus-server.target" ];
 
       serviceConfig = {
-        ExecStart = "${pkgs.bash}/bin/bash ${install-serverstatus-webui}";
+        ExecStart = "${install-serverstatus-webui}";
       };
     };
 
     systemd.services.serverstatus-server = {
       description = "serverstatus-server";
-      after = [ "network.target" ];
+      after = [ "network.target" "install-serverstatus-webui.target"];
       wantedBy = [ "multi-user.target" ];
 
       serviceConfig = {
