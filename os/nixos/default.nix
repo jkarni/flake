@@ -101,8 +101,6 @@ in
     "net.ipv4.tcp_congestion_control" = "bbr";
     # shadowsocks tcp fastopen
     "net.ipv4.tcp_fastopen" = "3";
-    # https://github.com/lucas-clemente/quic-go/wiki/UDP-Receive-Buffer-Size#non-bsd
-    "net.core.rmem_max" = "2500000";
   };
 
   networking = {
