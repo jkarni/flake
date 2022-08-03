@@ -44,7 +44,7 @@
 # Install product key
 #slmgr.vbs /ipk M7XTQ-FN8P6-TTKYV-9D4CC-J462D
 # Specifies KMS host
-#slmgr.vbs /skms ovh.mlyxshi.com
+#slmgr.vbs /skms kr.mlyxshi.com
 # Prompts KMS activation attempt.
 #slmgr.vbs /ato
 # Display detailed license information.

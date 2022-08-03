@@ -1,65 +1,74 @@
-{"servers":
- [
-   {
-    "username": "us1",
-    "password": "us1",
-    "name": "Oracle-US1",
-    "type": "KVM",
-    "host": "None",
-    "location": "San Jose",
-    "disabled": false ,
-    "region": "US"
+{
+  "servers": [
+    {
+      "username": "us1",
+      "password": "us1",
+      "name": "Oracle-US1",
+      "type": "KVM",
+      "host": "None",
+      "location": "San Jose",
+      "disabled": false,
+      "region": "US"
     },
-  {
-   "username": "jp2",
-   "password": "jp2",
-   "name": "Oracle-JP2",
-   "type": "KVM",
-   "host": "None",
-   "location": "Tokyo",
-   "disabled": false ,
-   "region": "JP"
-  },
-  {
-   "username": "jp4",
-   "password": "jp4",
-   "name": "Oracle-JP4",
-   "type": "KVM",
-   "host": "None",
-   "location": "Osaka",
-   "disabled": false ,
-   "region": "JP"
-  },
-  {
-    "username": "kr",
-    "password": "kr",
-    "name": "Oracle-KR",
-    "type": "KVM",
-    "host": "None",
-    "location": "Chuncheon",
-    "disabled": false ,
-    "region": "KR"
-   },
-   {
-    "username": "tw",
-    "password": "tw",
-    "name": "Cybree-TW",
-    "type": "KVM",
-    "host": "None",
-    "location": "Taipei",
-    "disabled": false ,
-    "region": "TW"
-   },
-   {
-    "username": "sw",
-    "password": "sw",
-    "name": "Oracle-SW",
-    "type": "KVM",
-    "host": "None",
-    "location": "Zurich",
-    "disabled": false ,
-    "region": "CH"
-   }
-
- ]
+    {
+      "username": "jp2",
+      "password": "jp2",
+      "name": "Oracle-JP2",
+      "type": "KVM",
+      "host": "None",
+      "location": "Tokyo",
+      "disabled": false,
+      "region": "JP"
+    },
+    {
+      "username": "jp4",
+      "password": "jp4",
+      "name": "Oracle-JP4",
+      "type": "KVM",
+      "host": "None",
+      "location": "Osaka",
+      "disabled": false,
+      "region": "JP"
+    },
+    {
+      "username": "kr",
+      "password": "kr",
+      "name": "Oracle-KR",
+      "type": "KVM",
+      "host": "None",
+      "location": "Chuncheon",
+      "disabled": false,
+      "region": "KR"
+    },
+    {
+      "username": "tw",
+      "password": "tw",
+      "name": "Cybree-TW",
+      "type": "KVM",
+      "host": "None",
+      "location": "Taipei",
+      "disabled": false,
+      "region": "TW"
+    },
+    {
+      "username": "sw",
+      "password": "sw",
+      "name": "Oracle-SW",
+      "type": "KVM",
+      "host": "None",
+      "location": "Zurich",
+      "disabled": false,
+      "region": "CH"
+    },
+    {
+      "username": "au",
+      "password": "au",
+      "name": "Oracle-AU",
+      "type": "KVM",
+      "host": "None",
+      "location": "Sydney",
+      "disabled": false,
+      "region": "AU"
+    }
+  ]
 }
