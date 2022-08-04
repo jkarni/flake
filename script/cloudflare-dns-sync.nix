@@ -30,7 +30,6 @@ let
       dnsID=$(echo $result | ${pkgs.jq}/bin/jq .id | tr -d '"')
       recordIP=$(echo $result | ${pkgs.jq}/bin/jq .content | tr -d '"')
       if [ $localIP != $recordIP ]; then
-        #echo "IP Not Match, Update DNS Record"
         echo -e "$YELLOW IP Not Match, Update DNS Record$NOCOLOR"
         requestData=$(${pkgs.jq}/bin/jq --null-input --arg domain $domain --arg content $localIP '{"type":"A","name": $domain,"content": $content,"ttl":1,"proxied":false}')
         ${pkgs.curl}/bin/curl --silent -X PUT "https://api.cloudflare.com/client/v4/zones/$zoneid/dns_records/$dnsID" \
