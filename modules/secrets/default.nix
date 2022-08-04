@@ -13,7 +13,7 @@ in {
 
   config = lib.mkIf cfg.enable {
     sops.defaultSopsFile = ./key.yaml;
-    sops.age.keyFile = "/etc/ssh/ssh_host_ed25519_key";
+    sops.age.sshKeyPaths = [ "/etc/ssh/ssh_host_ed25519_key" ];
 
     sops.secrets.shadowsocks-config = {};
     sops.secrets.ssh-private-key = {} // lib.optionalAttrs config.profile.desktopEnv.enable {owner = "dominic";};
