@@ -8,8 +8,8 @@ let
     zoneid=$(cat ${config.sops.secrets.cloudflare-zone-id.path})
 
     result=$(${pkgs.curl}/bin/curl --silent "https://api.cloudflare.com/client/v4/zones/$zoneid/dns_records?name=$domain" \
-         -H 'Content-Type: application/json' \
-         -H 'Authorization: Bearer $token' | ${pkgs.jq}/bin/jq ".result[0]")
+         -H "Content-Type: application/json" \
+         -H "Authorization: Bearer $token" | ${pkgs.jq}/bin/jq ".result[0]")
 
     localIP=$(${pkgs.curl}/bin/curl --silent -4 ip.sb)
 
@@ -17,8 +17,8 @@ let
       echo "not found, create dns record"
       requestData=$(${pkgs.jq}/bin/jq --null-input --arg domain $domain --arg content $localIP '{"type":"A","name": $domain,"content": $content,"ttl":1,"proxied":false}')
       ${pkgs.curl}/bin/curl --silent -X POST "https://api.cloudflare.com/client/v4/zones/$zoneid/dns_records" \
-         -H 'Content-Type: application/json' \
-         -H 'Authorization: Bearer $token' \
+         -H "Content-Type: application/json" \
+         -H "Authorization: Bearer $token" \
          --data "$requestData"
     else
       echo "found"
@@ -28,8 +28,8 @@ let
         echo "update dns record"
         requestData=$(${pkgs.jq}/bin/jq --null-input --arg domain $domain --arg content $localIP '{"type":"A","name": $domain,"content": $content,"ttl":1,"proxied":false}')
         ${pkgs.curl}/bin/curl --silent -X PUT "https://api.cloudflare.com/client/v4/zones/$zoneid/dns_records/$dnsID" \
-         -H 'Content-Type: application/json' \
-         -H 'Authorization: Bearer $token' \
+         -H "Content-Type: application/json" \
+         -H "Authorization: Bearer $token" \
          --data "$requestData"
       fi
     fi
@@ -42,7 +42,5 @@ in
   sops.secrets.cloudflare-zone-id = { };
 
   environment.systemPackages = [ cloudflare-dns-sync ];
-
-
 
 }
