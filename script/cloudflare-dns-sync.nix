@@ -41,6 +41,11 @@ in
   sops.secrets.cloudflare-dns-token = { };
   sops.secrets.cloudflare-zone-id = { };
 
-  environment.systemPackages = [ cloudflare-dns-sync ];
+
+  nixpkgs.overlays = [
+    (final: prev: { 
+      cloudflare-dns-sync=cloudflare-dns-sync;
+    })
+  ];
 
 }
