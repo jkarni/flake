@@ -40,6 +40,9 @@
 
   services.traefik.dynamicConfigOptions = {
     http.routers = {
+      jackett.rule = "Host(`jackett.mlyxshi.com`)";
+      jackett.service = "jackett";
+
       sonarr.rule = "Host(`sonarr.mlyxshi.com`)";
       sonarr.service = "sonarr";
 
