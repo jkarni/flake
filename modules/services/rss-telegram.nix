@@ -20,9 +20,9 @@ in
       [ ! -d ${RssConfigDir} ] && mkdir -p ${RssConfigDir}
     '';
 
-    # system.activationScripts.SyncRssDNS = lib.stringAfter [ "var" ] ''
-    #   ${config.environment.systemPackages} rss.mlyxshi.com
-    # '';
+    system.activationScripts.SyncRssDNS = lib.stringAfter [ "var" ] ''
+      ${pkgs.cloudflare-dns-sync} rss.mlyxshi.com
+    '';
 
     virtualisation.oci-containers.containers = {
       "rss-telegram" = {
