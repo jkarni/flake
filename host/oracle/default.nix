@@ -4,7 +4,7 @@
     ../../os/nixos
     ../../home/home-manager.nix
 
-    ../../script/cloudflare-dns-sync.nix
+    # ../../script/cloudflare-dns-sync.nix
   ];
 
   home-manager.users.root = import ../../home;
