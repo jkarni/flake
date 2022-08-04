@@ -20,8 +20,8 @@ in
       [ ! -d ${RssConfigDir} ] && mkdir -p ${RssConfigDir}
     '';
 
-    system.activationScripts.SyncRssDNS = ''
-      ${config.environment.systemPackages.cloudflare-dns-sync} rss.mlyxshi.com
+    system.activationScripts.SyncRssDNS = lib.stringAfter [ "var" ] ''
+      cloudflare-dns-sync rss.mlyxshi.com
     '';
 
     virtualisation.oci-containers.containers = {
