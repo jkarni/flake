@@ -44,7 +44,7 @@ in
 
   nixpkgs.overlays = [
     (final: prev: { 
-      cloudflare-dns-sync=prev.writeShellScriptBin "cloudflare-dns-sync" cloudflare-dns-sync;
+      cloudflare-dns-sync=prev.writeShellScript "cloudflare-dns-sync" cloudflare-dns-sync;
     })
   ];
 
