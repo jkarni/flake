@@ -31,6 +31,8 @@ in {
         # api.dashboard = true;
         # api.insecure = true;
 
+        providers.docker.endpoint = "unix:///run/podman/podman.sock";
+
         entryPoints = {
           web = {
             address = ":80";
