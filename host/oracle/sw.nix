@@ -1,5 +1,6 @@
 { config
 , pkgs
+, lib
 , ...
 }: {
   imports = [
@@ -9,7 +10,7 @@
   services.status-client.enable = true;
 
 
-  system.activationScripts.SyncRssDNS = lib.stringAfter [ "var" ] ''
+  system.activationScripts.SyncMediaDNS = lib.stringAfter [ "var" ] ''
     ${pkgs.cloudflare-dns-sync} jackett.mlyxshi.com
     ${pkgs.cloudflare-dns-sync} sonarr.mlyxshi.com
     ${pkgs.cloudflare-dns-sync} qb.media.mlyxshi.com
