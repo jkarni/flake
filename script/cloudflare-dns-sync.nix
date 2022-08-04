@@ -7,12 +7,6 @@ let
     RED='\033[0;31m'
     NOCOLOR='\033[0m'
 
-    if [ ! -f ${config.sops.secrets.cloudflare-dns-token.path} ]; then
-      echo -e "$RED Sops-nix Known Limitations: https://github.com/Mic92/sops-nix#using-secrets-at-evaluation-time $NOCOLOR"
-      echo -e "$RED Please rebuild system again to use sops secrets $NOCOLOR"
-      exit 1;
-    fi
-
     domain=$1
 
     token=$(cat ${config.sops.secrets.cloudflare-dns-token.path})
