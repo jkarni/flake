@@ -9,6 +9,11 @@
 
   services.status-client.enable = true;
 
+  system.activationScripts.SyncDNS = lib.stringAfter [ "var" ] ''
+    ${pkgs.cloudflare-dns-sync} change.mlyxshi.com
+    ${pkgs.cloudflare-dns-sync} kms.mlyxshi.com
+  '';
+
   # ChangeDetectionIO
   virtualisation.oci-containers.containers = {
     # Local Port 3000
