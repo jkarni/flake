@@ -66,7 +66,7 @@
   virtualisation.oci-containers.containers = {
     "jackett" = {
       image = "linuxserver/jackett";
-      #ports =["9117:9117"];
+      ports =["9117:9117"];
       volumes = [
         "/download/jackett/config:/config"
       ];
