@@ -24,6 +24,7 @@
       unzip
       rclone
       restic
+      ssh-to-age
       # nix
       nix-tree
       sops
