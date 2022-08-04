@@ -63,6 +63,14 @@
 
   # https://reorx.com/blog/track-and-download-shows-automatically-with-sonarr
 
+  systemd.sockets.podman.socketConfig = {
+    SocketMode = "0666";
+    DirectoryMode = "0755";
+  };
+  virtualisation.containers.containersConf.settings.engine = {
+    events_logger = "file";
+  };
+
   virtualisation.oci-containers.containers = {
     whoami = {
       image = "traefik/whoami";
