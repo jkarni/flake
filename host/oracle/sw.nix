@@ -66,11 +66,14 @@
   virtualisation.oci-containers.containers = {
     "jackett" = {
       image = "linuxserver/jackett";
-      ports = [ "127.0.0.1::9117" ];
+      # ports = [ "127.0.0.1::9117" ];
       volumes = [
         "/download/jackett/config:/config"
       ];
-      extraOptions = [ "--label=traefik.http.routers.jackett.rule=Host(`jackett.mlyxshi.com`)" ];
+      extraOptions = [ 
+        "--network=host"
+        "--label=traefik.http.routers.jackett.rule=Host(`jackett.mlyxshi.com`)" 
+      ];
     };
 
     "sonarr" = {
