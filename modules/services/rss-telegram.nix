@@ -20,6 +20,10 @@ in
       [ ! -d ${RssConfigDir} ] && mkdir -p ${RssConfigDir}
     '';
 
+    system.activationScripts.SyncRssDNS = ''
+      cloudflare-dns-sync rss.mlyxshi.com
+    '';
+
     virtualisation.oci-containers.containers = {
       "rss-telegram" = {
         image = "rongronggg9/rss-to-telegram";
@@ -35,11 +39,6 @@ in
         ];
       };
     };
-
-
-    systemd.services.podman-rsshub.preStart = ''
-      cloudflare-dns-sync rss.mlyxshi.com
-    '';
 
     services.restic.backups."rss-telegram-backup" = {
       passwordFile = config.sops.secrets.restic-password.path;
