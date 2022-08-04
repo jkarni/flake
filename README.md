@@ -1,6 +1,3 @@
-## Pre: sops file
-write age private key to /var/lib/sops-nix/key.txt
-
 ## 1. Normal[PC]
 ```
 git clone github.com:mlyxshi/flake /etc/flake
@@ -20,10 +17,16 @@ apt install -y wget
 wget -qO- https://raw.githubusercontent.com/elitak/nixos-infect/master/nixos-infect | NIX_CHANNEL=nixos-unstable  bash -x
 ```
 
+Refresh Sops Settings
+```
+# SSH login
+ssh-keyscan xxx.mlyxshi.com | ssh-to-age
+# write to modules/secrets/.sops.yaml
+# update modules/secrets/key.yaml
+```
 Rebuild NixOS
 ```
-# write age private key to /var/lib/sops-nix/key.txt
-# delete default grub boot, use systemd-boot instead
+# If EFI, delete default grub boot, use systemd-boot instead
 rm -rf /boot/*
 nixos-rebuild switch --flake github:mlyxshi/flake#<NAME> --install-bootloader -v
 ```
@@ -48,11 +51,6 @@ nix-env -iA nixos.git nixos.nixUnstable
 
 git clone  https://github.com/mlyxshi/flake /mnt/etc/flake 
 nixos-install --flake /mnt/etc/flake#hx90 -v
-```
-
-```
-mkdir -p /var/lib/sops-nix/
-echo "MY AGE PRIVATE KEY" > /var/lib/sops-nix/key.txt
 ```
 
 ```
@@ -108,7 +106,7 @@ darwin-rebuild switch --flake ~/flake#M1 -v
 ```
 
 
-# FAQ
+# Disclaimer
 ```
 Darwin is my main OS. 
 ```

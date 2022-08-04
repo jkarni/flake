@@ -34,6 +34,9 @@
   };
 
   sops.defaultSopsFile = ../../modules/secrets/key.yaml;
+  # This is using an age key that is expected to already be in the filesystem
+  # We do not allow openssh login under MacOS
+  # Under Linux, use sops.age.sshKeyPaths = [ "/etc/ssh/ssh_host_ed25519_key" ];
   sops.age.keyFile = "/Users/dominic/Library/Application Support/sops/age/keys.txt";
 
   sops.secrets.restic-password = {

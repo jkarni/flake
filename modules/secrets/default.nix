@@ -13,6 +13,7 @@ in {
 
   config = lib.mkIf cfg.enable {
     sops.defaultSopsFile = ./key.yaml;
+    # This will automatically import SSH keys as age keys
     sops.age.sshKeyPaths = [ "/etc/ssh/ssh_host_ed25519_key" ];
 
     sops.secrets.shadowsocks-config = {};
