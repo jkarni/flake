@@ -22,7 +22,7 @@ Refresh Sops Settings
 # SSH login
 ssh-keyscan xxx.mlyxshi.com | ssh-to-age
 # write to modules/secrets/.sops.yaml
-# update modules/secrets/key.yaml
+sops updatekeys key.yaml
 ```
 Rebuild NixOS
 ```
