@@ -44,27 +44,6 @@
       url = "github:nix-community/nixpkgs-wayland";
     };
 
-    #############################################################################################################################
-    # zsh plugin
-    zsh-tab-title = {
-      url = "github:trystan2k/zsh-tab-title";
-      flake = false;
-    };
-
-    zsh-fast-syntax-highlighting = {
-      url = "github:zdharma-continuum/fast-syntax-highlighting";
-      flake = false;
-    };
-
-    zsh-you-should-use = {
-      url = "github:MichaelAquilina/zsh-you-should-use";
-      flake = false;
-    };
-
-    zsh-autosuggestions = {
-      url = "github:zsh-users/zsh-autosuggestions";
-      flake = false;
-    };
   };
 
   outputs = {
@@ -81,7 +60,6 @@
     oracleServerList = ["jp2" "jp4" "sw" "us1" "kr"];
     commonSpecialArgs = {
       inherit (args) neovim-nightly mpv-nightly nixpkgs-wayland;
-      inherit (args) zsh-tab-title zsh-fast-syntax-highlighting zsh-you-should-use zsh-autosuggestions;
     };
   in {
     #############################################################################################################################

@@ -1,12 +1,13 @@
-{
-  pkgs,
-  lib,
-  config,
-  osConfig,
-  ...
-} @ args: let
+{ pkgs
+, lib
+, config
+, osConfig
+, ...
+}:
+let
   zsh-config = ../config/zsh;
-in {
+in
+{
   home.packages = with pkgs; [
     fzf
     zsh-fzf-tab
@@ -52,8 +53,7 @@ in {
         slog = "systemctl status";
       };
 
-    initExtra = with args;
-      ''
+    initExtra = ''
 
         setopt globdots
 
@@ -77,18 +77,17 @@ in {
 
         zstyle ':fzf-tab:complete:systemctl-*:*' fzf-preview 'SYSTEMD_COLORS=1 systemctl status $word'
 
-        source ${zsh-you-should-use}/you-should-use.plugin.zsh
-        source ${zsh-tab-title}/zsh-tab-title.plugin.zsh
+        source ${pkgs.zsh-you-should-use}/share/zsh/plugins/you-should-use/you-should-use.plugin.zsh
 
         source ${zsh-config}/fzf/completion.zsh
         source ${zsh-config}/fzf/key-bindings.zsh
         source ${pkgs.zsh-fzf-tab}/share/fzf-tab/fzf-tab.plugin.zsh
 
-        source ${zsh-autosuggestions}/zsh-autosuggestions.zsh
-        source ${zsh-fast-syntax-highlighting}/fast-syntax-highlighting.plugin.zsh
+        source ${pkgs.zsh-autosuggestions}/share/zsh-autosuggestions/zsh-autosuggestions.zsh
+        source ${pkgs.zsh-fast-syntax-highlighting}/share/zsh/site-functions/fast-syntax-highlighting.plugin.zsh
 
       ''
-      + lib.optionalString pkgs.stdenv.isDarwin ''
+    + lib.optionalString pkgs.stdenv.isDarwin ''
 
         export EDITOR=nvim
         export PAGER=bat

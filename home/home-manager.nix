@@ -4,6 +4,6 @@
   home-manager.verbose = true;
 
   home-manager.extraSpecialArgs = {
-    inherit (args) zsh-tab-title zsh-fast-syntax-highlighting zsh-you-should-use zsh-autosuggestions;
+    #inherit (args) zsh-tab-title;
   };
 }
