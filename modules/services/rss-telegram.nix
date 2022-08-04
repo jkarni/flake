@@ -36,6 +36,11 @@ in
       };
     };
 
+
+    systemd.services.podman-rsshub.preStart = ''
+      cloudflare-dns-sync rss.mlyxshi.com
+    '';
+
     services.restic.backups."rss-telegram-backup" = {
       passwordFile = config.sops.secrets.restic-password.path;
       rcloneConfigFile = config.sops.secrets.rclone-config.path;
