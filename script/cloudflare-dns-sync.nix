@@ -1,7 +1,7 @@
 { pkgs, config, ... }:
 let
   # arg1 = domain
-  cloudflare-dns-sync = pkgs.writeShellScriptBin "cloudflare-dns-sync" ''
+  cloudflare-dns-sync =''
     domain=$1
 
     token=$(cat ${config.sops.secrets.cloudflare-dns-token.path})
@@ -44,7 +44,7 @@ in
 
   nixpkgs.overlays = [
     (final: prev: { 
-      cloudflare-dns-sync=cloudflare-dns-sync;
+      cloudflare-dns-sync=prev.writeShellScriptBin "cloudflare-dns-sync" cloudflare-dns-sync;
     })
   ];
 
