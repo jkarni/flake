@@ -1,5 +1,6 @@
 { config
 , pkgs
+, lib
 , ...
 }: {
   imports = [
@@ -69,4 +70,12 @@
       ExecStart = "${pkgs.podman}/bin/podman run --name='unblock-netease-music' -p 8899:8080 pan93412/unblock-netease-music-enhanced -e https://music.163.com -o ytdlp bilibili";
     };
   };
+
+
+  system.activationScripts.SyncDNS = lib.stringAfter [ "var" ] ''
+    ${pkgs.cloudflare-dns-sync} reddit.mlyxshi.com
+    ${pkgs.cloudflare-dns-sync} youtube.mlyxshi.com
+    ${pkgs.cloudflare-dns-sync} twitter.mlyxshi.com
+    ${pkgs.cloudflare-dns-sync} netease.mlyxshi.com
+  '';
 }
