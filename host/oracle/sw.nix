@@ -74,6 +74,7 @@
   virtualisation.oci-containers.containers = {
     whoami = {
       image = "traefik/whoami";
+      ports = [ "127.0.0.1::80" ];
       extraOptions = [
         "--label=traefik.enable=true"
         "--label=traefik.http.routers.whoami.rule=Host(`whoami.mlyxshi.com`)"
