@@ -28,8 +28,8 @@ in {
       }; # dynamicConfigOptions
 
       staticConfigOptions = {
-        # api.dashboard = true;
-        # api.insecure = true;
+        api.dashboard = true;
+        api.insecure = true;
 
         providers.docker.endpoint = "unix:///run/podman/podman.sock";
 
