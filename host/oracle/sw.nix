@@ -70,9 +70,17 @@
       volumes = [
         "/download/jackett/config:/config"
       ];
-      extraOptions = [ 
+      extraOptions = [
         "--network=host"
-        "--label=traefik.http.routers.jackett.rule=Host(`jackett.mlyxshi.com`)" 
+        "--label=traefik.http.routers.jackett.rule=Host(`jackett.mlyxshi.com`)"
+      ];
+    };
+
+    whoami = {
+      image = "traefik/whoami";
+      extraOptions = [
+        "--label=traefik.enable=true"
+        "--label=traefik.http.routers.whoami.rule=Host(`whoami.mlyxshi.com`)"
       ];
     };
 
