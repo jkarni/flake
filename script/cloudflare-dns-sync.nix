@@ -38,8 +38,8 @@
   '';
 
 
-  environment.systemPackages = [
-    pkgs.cloudflare-dns-sync
+  environment.systemPackages = with pkgs; [
+    cloudflare-dns-sync
   ];
 
 }
