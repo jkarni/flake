@@ -1,13 +1,20 @@
-{
-  config,
-  pkgs,
-  ...
+{ config
+, pkgs
+, ...
 }: {
   imports = [
     ./default.nix
   ];
 
   services.status-client.enable = true;
+
+
+  system.activationScripts.SyncRssDNS = lib.stringAfter [ "var" ] ''
+    ${pkgs.cloudflare-dns-sync} jackett.mlyxshi.com
+    ${pkgs.cloudflare-dns-sync} sonarr.mlyxshi.com
+    ${pkgs.cloudflare-dns-sync} qb.media.mlyxshi.com
+    ${pkgs.cloudflare-dns-sync} jellyfin.mlyxshi.com
+  '';
 
   # system.activationScripts.makeDownloadDir = pkgs.lib.stringAfter [ "var" ] ''
   #   [ ! -d /download/jackett/config ] && mkdir -p /download/jackett/config
@@ -38,10 +45,10 @@
     };
 
     http.services = {
-      jackett.loadBalancer.servers = [{url = "http://localhost:9117";}];
-      sonarr.loadBalancer.servers = [{url = "http://localhost:8989";}];
-      qb-media.loadBalancer.servers = [{url = "http://localhost:8081";}];
-      jellyfin.loadBalancer.servers = [{url = "http://localhost:8096";}];
+      jackett.loadBalancer.servers = [{ url = "http://localhost:9117"; }];
+      sonarr.loadBalancer.servers = [{ url = "http://localhost:8989"; }];
+      qb-media.loadBalancer.servers = [{ url = "http://localhost:8081"; }];
+      jellyfin.loadBalancer.servers = [{ url = "http://localhost:8096"; }];
     };
   };
 
@@ -120,6 +127,6 @@
     ];
     repository = "rclone:googleshare:backup";
     timerConfig.OnCalendar = "daily";
-    pruneOpts = ["--keep-last 2"];
+    pruneOpts = [ "--keep-last 2" ];
   };
 }

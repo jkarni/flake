@@ -1,7 +1,7 @@
 { pkgs, config, ... }:
 let
   # arg1 = domain
-  cloudflare-dns-sync =''
+  cloudflare-dns-sync = ''
     domain=$1
 
     token=$(cat ${config.sops.secrets.cloudflare-dns-token.path})
@@ -14,18 +14,18 @@ let
     localIP=$(${pkgs.curl}/bin/curl --silent -4 ip.sb)
 
     if [ "$result" = "null" ]; then
-      echo "not found, create dns record"
+      echo "$domain DNS Not Registered, Create DNS Record Now"
       requestData=$(${pkgs.jq}/bin/jq --null-input --arg domain $domain --arg content $localIP '{"type":"A","name": $domain,"content": $content,"ttl":1,"proxied":false}')
       ${pkgs.curl}/bin/curl --silent -X POST "https://api.cloudflare.com/client/v4/zones/$zoneid/dns_records" \
          -H "Content-Type: application/json" \
          -H "Authorization: Bearer $token" \
          --data "$requestData"
     else
-      echo "found"
+      echo "$domain DNS Registered"
       dnsID=$(echo $result | ${pkgs.jq}/bin/jq .id | tr -d '"')
       recordIP=$(echo $result | ${pkgs.jq}/bin/jq .content | tr -d '"')
       if [ $localIP != $recordIP ]; then
-        echo "update dns record"
+        echo "IP Not Match, Update DNS Record"
         requestData=$(${pkgs.jq}/bin/jq --null-input --arg domain $domain --arg content $localIP '{"type":"A","name": $domain,"content": $content,"ttl":1,"proxied":false}')
         ${pkgs.curl}/bin/curl --silent -X PUT "https://api.cloudflare.com/client/v4/zones/$zoneid/dns_records/$dnsID" \
          -H "Content-Type: application/json" \
@@ -43,8 +43,8 @@ in
 
 
   nixpkgs.overlays = [
-    (final: prev: { 
-      cloudflare-dns-sync=prev.writeShellScript "cloudflare-dns-sync" cloudflare-dns-sync;
+    (final: prev: {
+      cloudflare-dns-sync = prev.writeShellScript "cloudflare-dns-sync" cloudflare-dns-sync;
     })
   ];
 
