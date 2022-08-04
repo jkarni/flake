@@ -28,7 +28,7 @@
     paths = [
       "/home/dominic/.mozilla/firefox/default"
     ];
-    repository = "rclone:googleshare:backup";
+    repository = "rclone:r2:backup";
     timerConfig.OnCalendar = "daily";
     pruneOpts = ["--keep-last 2"];
   };

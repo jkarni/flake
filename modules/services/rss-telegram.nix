@@ -54,7 +54,7 @@ in
       paths = [
         "${RssConfigDir}"
       ];
-      repository = "rclone:googleshare:backup";
+      repository = "rclone:r2:backup";
       timerConfig.OnCalendar = "daily";
       pruneOpts = [ "--keep-last 2" ];
     };

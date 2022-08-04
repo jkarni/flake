@@ -16,7 +16,7 @@
     serviceConfig.ProgramArguments = [
       "bash"
       "-c"
-      "launchctl setenv RESTIC_REPOSITORY rclone:googleshare:backup; launchctl setenv RESTIC_PASSWORD_FILE ${config.sops.secrets.restic-password.path}"
+      "launchctl setenv RESTIC_REPOSITORY rclone:r2:backup; launchctl setenv RESTIC_PASSWORD_FILE ${config.sops.secrets.restic-password.path}"
     ];
     serviceConfig.RunAtLoad = true;
   };
