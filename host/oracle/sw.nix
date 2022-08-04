@@ -40,8 +40,8 @@
 
   services.traefik.dynamicConfigOptions = {
     http.routers = {
-      jackett.rule = "Host(`jackett.mlyxshi.com`)";
-      jackett.service = "jackett";
+      # jackett.rule = "Host(`jackett.mlyxshi.com`)";
+      # jackett.service = "jackett";
 
       sonarr.rule = "Host(`sonarr.mlyxshi.com`)";
       sonarr.service = "sonarr";
@@ -54,7 +54,7 @@
     };
 
     http.services = {
-      jackett.loadBalancer.servers = [{ url = "http://localhost:9117"; }];
+      # jackett.loadBalancer.servers = [{ url = "http://localhost:9117"; }];
       sonarr.loadBalancer.servers = [{ url = "http://localhost:8989"; }];
       qb-media.loadBalancer.servers = [{ url = "http://localhost:8081"; }];
       jellyfin.loadBalancer.servers = [{ url = "http://localhost:8096"; }];
@@ -66,12 +66,11 @@
   virtualisation.oci-containers.containers = {
     "jackett" = {
       image = "linuxserver/jackett";
+      #ports =["9117:9117"];
       volumes = [
         "/download/jackett/config:/config"
       ];
-      extraOptions = [
-        "--network=host"
-      ];
+      extraOptions = [ "--label=traefik.http.routers.jackett.rule=Host(`jackett.mlyxshi.com`)" ];
     };
 
     "sonarr" = {
