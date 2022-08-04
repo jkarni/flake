@@ -39,7 +39,7 @@
 
 
   environment.systemPackages = [
-    cloudflare-dns-sync
+    pkgs.cloudflare-dns-sync
   ];
 
 }
