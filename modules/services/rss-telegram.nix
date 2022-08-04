@@ -21,7 +21,7 @@ in
     '';
 
     system.activationScripts.SyncRssDNS = ''
-      ${pkgs.cloudflare-dns-sync} rss.mlyxshi.com
+      ${config.environment.systemPackages.cloudflare-dns-sync} rss.mlyxshi.com
     '';
 
     virtualisation.oci-containers.containers = {
