@@ -1,9 +1,7 @@
-{ pkgs, config, ... }: {
-
-  sops.secrets.cloudflare-dns-token = { };
-  sops.secrets.cloudflare-zone-id = { };
+{ pkgs, config, ... }:
+let
   # arg1 = domain
-  cloudflare-dns-sync = pkgs.writeShellScriptBin "cloudflare-dns-sync" ''
+  cloudflare-dns-sync = pkgs.writeShellScript "cloudflare-dns-sync" ''
     domain=$1
 
     token=$(cat ${config.sops.secrets.cloudflare-dns-token.path})
@@ -37,9 +35,14 @@
     fi
   '';
 
+in
+{
 
-  environment.systemPackages = with pkgs; [
-    cloudflare-dns-sync
-  ];
+  sops.secrets.cloudflare-dns-token = { };
+  sops.secrets.cloudflare-zone-id = { };
+
+  environment.systemPackages = [ cloudflare-dns-sync ];
+
+
 
 }
