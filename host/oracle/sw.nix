@@ -46,10 +46,10 @@
       sonarr.rule = "Host(`sonarr.mlyxshi.com`)";
       sonarr.service = "sonarr";
 
-      qb-media.rule = "Host(`qb1.mlyxshi.com`)";
+      qb-media.rule = "Host(`qb.media.mlyxshi.com`)";
       qb-media.service = "qb-media";
 
-      jellyfin.rule = "Host(`jellyfin1.mlyxshi.com`)";
+      jellyfin.rule = "Host(`jellyfin.mlyxshi.com`)";
       jellyfin.service = "jellyfin";
     };
 
