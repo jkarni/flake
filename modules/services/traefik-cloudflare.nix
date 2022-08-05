@@ -12,6 +12,7 @@ in
   };
 
   config = lib.mkIf cfg.enable {
+
     systemd.services.traefik.serviceConfig.EnvironmentFile = config.sops.secrets.traefik-cloudflare-env.path;
 
     services.traefik = {
@@ -33,7 +34,7 @@ in
         api.insecure = true;
 
         # TODO: wait traefik support podman
-        providers.docker.endpoint = "unix:///run/podman/podman.sock";
+        # providers.docker.endpoint = "unix:///run/podman/podman.sock";
 
         entryPoints = {
           web = {
