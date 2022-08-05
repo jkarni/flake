@@ -1,11 +1,12 @@
-{
-  pkgs,
-  lib,
-  config,
-  ...
-}: let
+{ pkgs
+, lib
+, config
+, ...
+}:
+let
   cfg = config.services.traefik-cloudflare;
-in {
+in
+{
   options = {
     services.traefik-cloudflare.enable = lib.mkEnableOption "traefik-cloudflare service";
   };
@@ -44,11 +45,27 @@ in {
           };
         };
 
+        # certificatesResolvers.letsencrypt.acme = {
+        #   dnsChallenge.provider = "cloudflare";
+        #   email = "blackhole@mlyxshi.com";
+        #   storage = "${config.services.traefik.dataDir}/acme.json"; # "/var/lib/traefik/acme.json"
+        # };
+
         certificatesResolvers.letsencrypt.acme = {
-          dnsChallenge.provider = "cloudflare";
+          caServer = "https://acme.zerossl.com/v2/DV90";
           email = "blackhole@mlyxshi.com";
-          storage = "${config.services.traefik.dataDir}/acme.json"; # "/var/lib/traefik/acme.json"
+          storage = config.services.traefik.dataDir + "/acme.json";
+          keyType = "EC256";
+          dnsChallenge = {
+            provider = "cloudflare";
+          };
+          eab = {
+            kid = "{{ env `KID` }}";
+            hmacEncoded = "{{ env `HMAC` }}";
+          };
         };
+
+
       }; # staticConfigOptions
     }; # services.traefik
   };
