@@ -42,7 +42,7 @@ in
           };
           websecure = {
             address = ":443";
-            http.tls.certResolver = "letsencrypt";
+            http.tls.certResolver = "zerossl";
           };
         };
 
@@ -52,7 +52,7 @@ in
         #   storage = "${config.services.traefik.dataDir}/acme.json"; # "/var/lib/traefik/acme.json"
         # };
 
-        certificatesResolvers.letsencrypt.acme = {
+        certificatesResolvers.zerossl.acme = {
           caServer = "https://acme.zerossl.com/v2/DV90";
           email = "blackhole@mlyxshi.com";
           storage = config.services.traefik.dataDir + "/acme.json";
