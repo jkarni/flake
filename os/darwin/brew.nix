@@ -27,6 +27,7 @@
     # '';
 
     casks = [
+      "element"
       "jellyfin-media-player"
       "input-source-pro"
       "kitty"

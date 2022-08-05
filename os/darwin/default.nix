@@ -13,7 +13,16 @@
     extraOptions = ''
       experimental-features = nix-command flakes
     '';
+    gc = {
+      automatic = true;
+
+      # TODO: wait nix-darwin rename
+      interval = { Hour = 24; } ;
+      options = "--delete-older-than 7d";
+    };
   };
+
+
 
   services.nix-daemon.enable = true;
 
