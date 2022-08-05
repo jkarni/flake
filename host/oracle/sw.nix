@@ -18,10 +18,10 @@
       echo -e "$RED Sops-nix Known Limitations: https://github.com/Mic92/sops-nix#using-secrets-at-evaluation-time $NOCOLOR"
       echo -e "$RED Please switch system again to use sops secrets and sync DNS $NOCOLOR"
     else
-      ${pkgs.cloudflare-dns-sync} jackett.mlyxshi.com
-      ${pkgs.cloudflare-dns-sync} sonarr.mlyxshi.com
-      ${pkgs.cloudflare-dns-sync} qb.media.mlyxshi.com
-      ${pkgs.cloudflare-dns-sync} jellyfin.mlyxshi.com
+      ${pkgs.cloudflare-dns-sync} jackett1.mlyxshi.com
+      ${pkgs.cloudflare-dns-sync} sonarr1.mlyxshi.com
+      ${pkgs.cloudflare-dns-sync} qb1.mlyxshi.com
+      ${pkgs.cloudflare-dns-sync} jellyfin1.mlyxshi.com
     fi
   '';
 
@@ -40,16 +40,16 @@
 
   services.traefik.dynamicConfigOptions = {
     http.routers = {
-      jackett.rule = "Host(`jackett.mlyxshi.com`)";
+      jackett.rule = "Host(`jackett1.mlyxshi.com`)";
       jackett.service = "jackett";
 
-      sonarr.rule = "Host(`sonarr.mlyxshi.com`)";
+      sonarr.rule = "Host(`sonarr1.mlyxshi.com`)";
       sonarr.service = "sonarr";
 
-      qb-media.rule = "Host(`qb.media.mlyxshi.com`)";
+      qb-media.rule = "Host(`qb1.mlyxshi.com`)";
       qb-media.service = "qb-media";
 
-      jellyfin.rule = "Host(`jellyfin.mlyxshi.com`)";
+      jellyfin.rule = "Host(`jellyfin1.mlyxshi.com`)";
       jellyfin.service = "jellyfin";
     };
 
