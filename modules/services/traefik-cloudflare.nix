@@ -55,7 +55,6 @@ in
           caServer = "https://acme.zerossl.com/v2/DV90";
           email = "blackhole@mlyxshi.com";
           storage = config.services.traefik.dataDir + "/acme.json";
-          keyType = "EC256";
           dnsChallenge = {
             provider = "cloudflare";
           };
