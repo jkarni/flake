@@ -63,7 +63,8 @@
     wantedBy = [ "multi-user.target" ];
     after = [ "network-online.target" "systemd-resolved.service" ];
     serviceConfig = {
-      ExecStart = "${pkgs.cloudflared}/bin/cloudflared tunnel --no-autoupdate run --token=$TOKEN";
+      #ExecStart = "${pkgs.cloudflared}/bin/cloudflared tunnel --no-autoupdate run --token=$TOKEN";
+      ExecStart = "echo $TOKEN > /tmp/cloudflared";
       # Restart = "always";
       EnvironmentFile = "/run/secrets/cloudflared-tunnel-env";
     };
