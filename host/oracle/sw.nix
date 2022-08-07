@@ -108,13 +108,15 @@
       environment = {
         "PUID" = "0";
         "PGID" = "0";
-        "WEBUI_PORT" = "8081"; # 8080 is traefik WebUI port
+        "WEBUI_PORT" = "8080";
       };
       extraOptions = [
         "--label"
         "traefik.enable=true"
         "--label"
         "traefik.http.routers.qbittorrent.rule=Host(`qbittorrent.mlyxshi.com`)"
+        "--label"
+        "traefik.http.services.qbittorrent.loadbalancer.server.port=8080"
       ];
     };
 
