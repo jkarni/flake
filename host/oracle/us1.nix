@@ -10,10 +10,10 @@
   services.status-client.enable = true;
 
 
-    
-      # libreddit.loadBalancer.servers = [{ url = "http://localhost:8082"; }];
-      # nitter.loadBalancer.servers = [{ url = "http://localhost:8083"; }];
-      # youtube.loadBalancer.servers = [{ url = "http://localhost:8084"; }];
+
+  # libreddit.loadBalancer.servers = [{ url = "http://localhost:8082"; }];
+  # nitter.loadBalancer.servers = [{ url = "http://localhost:8083"; }];
+  # youtube.loadBalancer.servers = [{ url = "http://localhost:8084"; }];
 
 
   services.libreddit = {
@@ -58,13 +58,14 @@
   #   };
   # };
 
-  sops.secrets.cloudflared-tunnel-env = {};
+  sops.secrets.cloudflared-tunnel-env = { };
   systemd.services.cloudflared = {
     wantedBy = [ "multi-user.target" ];
     after = [ "network-online.target" "systemd-resolved.service" ];
     serviceConfig = {
-      #ExecStart = "${pkgs.cloudflared}/bin/cloudflared tunnel --no-autoupdate run --token=$TOKEN";
-      ExecStart = "${pkgs.bash}/bin/bash -c 'echo $TOKEN > /tmp/cloudflared'";
+      ExecStart = ''
+        ${pkgs.bash}/bin/bash -c "${pkgs.cloudflared}/bin/cloudflared tunnel --no-autoupdate run --token=$TOKEN"
+      '';
       # Restart = "always";
       EnvironmentFile = "/run/secrets/cloudflared-tunnel-env";
     };
