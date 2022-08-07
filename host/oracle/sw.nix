@@ -38,28 +38,28 @@
 
   services.traefik-cloudflare.enable = true;
 
-  services.traefik.dynamicConfigOptions = {
-    http.routers = {
-      jackett.rule = "Host(`jackett.mlyxshi.com`)";
-      jackett.service = "jackett";
+  # services.traefik.dynamicConfigOptions = {
+  #   http.routers = {
+  #     jackett.rule = "Host(`jackett.mlyxshi.com`)";
+  #     jackett.service = "jackett";
 
-      sonarr.rule = "Host(`sonarr.mlyxshi.com`)";
-      sonarr.service = "sonarr";
+  #     sonarr.rule = "Host(`sonarr.mlyxshi.com`)";
+  #     sonarr.service = "sonarr";
 
-      qb-media.rule = "Host(`qb.media.mlyxshi.com`)";
-      qb-media.service = "qb-media";
+  #     qb-media.rule = "Host(`qb.media.mlyxshi.com`)";
+  #     qb-media.service = "qb-media";
 
-      jellyfin.rule = "Host(`jellyfin.mlyxshi.com`)";
-      jellyfin.service = "jellyfin";
-    };
+  #     jellyfin.rule = "Host(`jellyfin.mlyxshi.com`)";
+  #     jellyfin.service = "jellyfin";
+  #   };
 
-    http.services = {
-      jackett.loadBalancer.servers = [{ url = "http://localhost:9117"; }];
-      sonarr.loadBalancer.servers = [{ url = "http://localhost:8989"; }];
-      qb-media.loadBalancer.servers = [{ url = "http://localhost:8081"; }];
-      jellyfin.loadBalancer.servers = [{ url = "http://localhost:8096"; }];
-    };
-  };
+  #   http.services = {
+  #     jackett.loadBalancer.servers = [{ url = "http://localhost:9117"; }];
+  #     sonarr.loadBalancer.servers = [{ url = "http://localhost:8989"; }];
+  #     qb-media.loadBalancer.servers = [{ url = "http://localhost:8081"; }];
+  #     jellyfin.loadBalancer.servers = [{ url = "http://localhost:8096"; }];
+  #   };
+  # };
 
   # https://reorx.com/blog/track-and-download-shows-automatically-with-sonarr
 
@@ -72,7 +72,10 @@
         "/download/jackett/config:/config"
       ];
       extraOptions = [
-        "--network=host"
+        "--label"
+        "traefik.enable=true"
+        "--label"
+        "traefik.http.routers.jackett.rule=Host(`jackett.mlyxshi.com`)"
       ];
     };
 
