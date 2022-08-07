@@ -16,12 +16,12 @@
   boot.tmpOnTmpfs = true;
 
   # podman
-  # virtualisation.podman.enable = true;
+  virtualisation.podman.enable = true;
 
   # docker
   # for traefik discovery
-  virtualisation.docker.enable = true;
-  virtualisation.oci-containers.backend = "docker";
+  # virtualisation.docker.enable = true;
+  # virtualisation.oci-containers.backend = "docker";
 
 
   networking = {

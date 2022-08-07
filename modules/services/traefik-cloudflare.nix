@@ -15,8 +15,6 @@ in
 
     systemd.services.traefik.serviceConfig.EnvironmentFile = config.sops.secrets.traefik-cloudflare-env.path;
 
-    services.traefik.group = "docker";
-
     services.traefik = {
       enable = true;
 
@@ -32,12 +30,12 @@ in
       }; # dynamicConfigOptions
 
       staticConfigOptions = {
-        api.dashboard = true;
-        api.insecure = true;
+        # api.dashboard = true;
+        # api.insecure = true;
 
         # TODO: wait traefik support podman
         # providers.docker.endpoint = "unix:///run/podman/podman.sock";      
-        providers.docker.exposedByDefault = false;
+        # providers.docker.exposedByDefault = false;
 
         entryPoints = {
           web = {
