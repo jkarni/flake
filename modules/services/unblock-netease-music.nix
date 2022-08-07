@@ -25,7 +25,7 @@ in
       };
     };
 
-    system.activationScripts.SyncMediaDNS = lib.stringAfter [ "var" ] ''
+    system.activationScripts.SyncNeteaseDNS = lib.stringAfter [ "var" ] ''
       RED='\033[0;31m'
       NOCOLOR='\033[0m'
 
