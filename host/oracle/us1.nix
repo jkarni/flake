@@ -58,7 +58,7 @@
     };
   };
 
-
+  sops.secrets.cloudflared-tunnel-env = {};
   systemd.services.cloudflared = {
     wantedBy = [ "multi-user.target" ];
     after = [ "network-online.target" "systemd-resolved.service" ];
