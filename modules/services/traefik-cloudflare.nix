@@ -34,9 +34,8 @@ in
         api.insecure = true;
 
         # TODO: wait traefik support podman
-        # providers.docker.endpoint = "unix:///run/podman/podman.sock";
-        
-        providers.docker.exposedByDefault = false;
+        # providers.docker.endpoint = "unix:///run/podman/podman.sock";      
+        # providers.docker.exposedByDefault = false;
 
         entryPoints = {
           web = {
