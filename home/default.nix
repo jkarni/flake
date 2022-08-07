@@ -25,6 +25,7 @@
       rclone
       restic
       ssh-to-age
+      cloudflared
       # nix
       nix-tree
       sops

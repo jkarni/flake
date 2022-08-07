@@ -9,25 +9,12 @@
 
   services.status-client.enable = true;
 
-  services.traefik-cloudflare.enable = true;
-  services.traefik.dynamicConfigOptions = {
-    http.routers = {
-      libreddit.rule = "Host(`reddit.mlyxshi.com`)";
-      libreddit.service = "libreddit";
 
-      nitter.rule = "Host(`twitter.mlyxshi.com`)";
-      nitter.service = "nitter";
+    
+      # libreddit.loadBalancer.servers = [{ url = "http://localhost:8082"; }];
+      # nitter.loadBalancer.servers = [{ url = "http://localhost:8083"; }];
+      # youtube.loadBalancer.servers = [{ url = "http://localhost:8084"; }];
 
-      youtube.rule = "Host(`youtube.mlyxshi.com`)";
-      youtube.service = "youtube";
-    };
-
-    http.services = {
-      libreddit.loadBalancer.servers = [{ url = "http://localhost:8082"; }];
-      nitter.loadBalancer.servers = [{ url = "http://localhost:8083"; }];
-      youtube.loadBalancer.servers = [{ url = "http://localhost:8084"; }];
-    };
-  };
 
   services.libreddit = {
     enable = true;
@@ -72,18 +59,15 @@
   };
 
 
-  system.activationScripts.SyncDNS = lib.stringAfter [ "var" ] ''
-    RED='\033[0;31m'
-    NOCOLOR='\033[0m'
+  systemd.services.cloudflared = {
+    wantedBy = [ "multi-user.target" ];
+    after = [ "network-online.target" "systemd-resolved.service" ];
+    serviceConfig = {
+      ExecStart = " tunnel --no-autoupdate run --token=$TOKEN";
+      Restart = "always";
+      EnvironmentFile = config.sops.secrets.cloudflared-token-env.path;
+    };
+  };
 
-    if [ ! -f ${config.sops.secrets.cloudflare-dns-token.path} ]; then
-      echo -e "$RED Sops-nix Known Limitations: https://github.com/Mic92/sops-nix#using-secrets-at-evaluation-time $NOCOLOR"
-      echo -e "$RED Please switch system again to use sops secrets and sync DNS $NOCOLOR"
-    else
-      ${pkgs.cloudflare-dns-sync} reddit.mlyxshi.com
-      ${pkgs.cloudflare-dns-sync} youtube.mlyxshi.com
-      ${pkgs.cloudflare-dns-sync} twitter.mlyxshi.com
-      ${pkgs.cloudflare-dns-sync} netease.mlyxshi.com
-    fi
-  '';
+
 }
