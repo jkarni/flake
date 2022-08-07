@@ -48,15 +48,15 @@
   # podman run -p 8080:8080 pan93412/unblock-netease-music-enhanced -e https://music.163.com -o ytdlp bilibili
   # can not use oci-containers directly, virtualisation.oci-containers.containers."xx".cmd will parse to "-e https://music.163.com" "-o ytdlp bilibili", UnblockNeteaseserver do not support quotation marks.
 
-  systemd.services.unblock-netease-music = {
-    description = "unblock-netease-music";
-    after = [ "network.target" ];
-    wantedBy = [ "multi-user.target" ];
+  # systemd.services.unblock-netease-music = {
+  #   description = "unblock-netease-music";
+  #   after = [ "network.target" ];
+  #   wantedBy = [ "multi-user.target" ];
 
-    serviceConfig = {
-      ExecStart = "${pkgs.podman}/bin/podman run --name='unblock-netease-music' -p 8899:8080 pan93412/unblock-netease-music-enhanced -e https://music.163.com -o ytdlp bilibili";
-    };
-  };
+  #   serviceConfig = {
+  #     ExecStart = "${pkgs.podman}/bin/podman run --name='unblock-netease-music' -p 8899:8080 pan93412/unblock-netease-music-enhanced -e https://music.163.com -o ytdlp bilibili";
+  #   };
+  # };
 
   sops.secrets.cloudflared-tunnel-env = {};
   systemd.services.cloudflared = {
@@ -64,7 +64,7 @@
     after = [ "network-online.target" "systemd-resolved.service" ];
     serviceConfig = {
       #ExecStart = "${pkgs.cloudflared}/bin/cloudflared tunnel --no-autoupdate run --token=$TOKEN";
-      ExecStart = "${pkgs.bash}/bin/bash -c 'echo ggg > /tmp/cloudflared'";
+      ExecStart = "${pkgs.bash}/bin/bash -c 'echo $TOKEN > /tmp/cloudflared'";
       # Restart = "always";
       EnvironmentFile = "/run/secrets/cloudflared-tunnel-env";
     };
