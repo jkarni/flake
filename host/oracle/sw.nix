@@ -114,7 +114,7 @@
         "--label"
         "traefik.enable=true"
         "--label"
-        "traefik.http.routers.qbittorrent.rule=Host(`qbittorrent.mlyxshi.com`)"
+        "traefik.http.routers.qbittorrent.rule=Host(`qb.media.mlyxshi.com`)"
         "--label"
         "traefik.http.services.qbittorrent.loadbalancer.server.port=8080"
       ];
