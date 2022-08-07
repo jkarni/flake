@@ -14,6 +14,7 @@ in
   config = lib.mkIf cfg.enable {
 
     systemd.services.traefik.serviceConfig.EnvironmentFile = config.sops.secrets.traefik-cloudflare-env.path;
+    users.users.traefik.extraGroups = [ "docker" ];
 
     services.traefik = {
       enable = true;
