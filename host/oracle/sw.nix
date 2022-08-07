@@ -90,7 +90,10 @@
         "PGID" = "0";
       };
       extraOptions = [
-        "--network=host"
+        "--label"
+        "traefik.enable=true"
+        "--label"
+        "traefik.http.routers.sonarr.rule=Host(`sonarr.mlyxshi.com`)"
       ];
     };
 
@@ -108,7 +111,10 @@
         "WEBUI_PORT" = "8081"; # 8080 is traefik WebUI port
       };
       extraOptions = [
-        "--network=host"
+        "--label"
+        "traefik.enable=true"
+        "--label"
+        "traefik.http.routers.qbittorrent.rule=Host(`qbittorrent.mlyxshi.com`)"
       ];
     };
 
@@ -124,7 +130,10 @@
         "PGID" = "0";
       };
       extraOptions = [
-        "--network=host"
+        "--label"
+        "traefik.enable=true"
+        "--label"
+        "traefik.http.routers.jellyfin.rule=Host(`jellyfin.mlyxshi.com`)"
       ];
     };
   };
