@@ -16,7 +16,6 @@ in {
     ];
 
     systemd.services.shadowsocks-rust = {
-      description = "shadowsocks-rust Daemon";
       after = ["network.target"];
       wantedBy = ["multi-user.target"];
 
