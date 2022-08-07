@@ -4,6 +4,13 @@
     ../../os/nixos
   ];
 
+
+  networking = {
+    useNetworkd = true;
+    useDHCP = false;
+    firewall.enable = false;
+  };
+
   # Workaround for fixing timeout issue
   # manually reboot once
   systemd.network.wait-online.anyInterface = true;

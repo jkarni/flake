@@ -15,7 +15,19 @@
 
   boot.tmpOnTmpfs = true;
 
-  virtualisation.podman.enable = true;
+  # podman
+  # virtualisation.podman.enable = true;
+
+  # docker
+  # for traefik discovery
+  virtualisation.docker.enable = true;
+  virtualisation.oci-containers.backend = "docker";
+
+  networking = {
+    useNetworkd = true;
+    useDHCP = false;
+    firewall.enable = false;
+  };
 
   # Workaround for fixing timeout issue
   # manually reboot once

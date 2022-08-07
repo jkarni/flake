@@ -48,6 +48,7 @@
       "visual-studio-code"
       "qbittorrent"
       "google-drive"
+      "istat-menus"
 
       # Already installed from offical website <-- Uncomment this when completely reinstall macos
       # "surge"
@@ -63,7 +64,7 @@
       # "checkra1n"
       # "uninstallpkg"
       # "suspicious-package"
-      # "istat-menus"
+
       # "snipaste"
       # "paw"
     ];

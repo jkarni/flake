@@ -105,9 +105,4 @@ in
     "net.ipv4.tcp_fastopen" = "3";     # shadowsocks tcp fastopen
   };
 
-  networking = {
-    useNetworkd = true;
-    useDHCP = false;
-    firewall.enable = false;
-  };
 }

@@ -12,6 +12,12 @@
   boot.loader.timeout = 5;
   boot.loader.efi.canTouchEfiVariables = true;
 
+  networking = {
+    useNetworkd = true;
+    useDHCP = false;
+    firewall.enable = false;
+  };
+
   systemd.network.networks = {
     dhcp = {
       name = "eno1";
