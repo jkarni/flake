@@ -65,7 +65,7 @@
     serviceConfig = {
       ExecStart = " tunnel --no-autoupdate run --token=$TOKEN";
       Restart = "always";
-      EnvironmentFile = config.sops.secrets.cloudflared-token-env.path;
+      EnvironmentFile = config.sops.secrets.cloudflared-tunnel-env.path;
     };
   };
 
