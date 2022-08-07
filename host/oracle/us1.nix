@@ -64,7 +64,7 @@
     after = [ "network-online.target" "systemd-resolved.service" ];
     serviceConfig = {
       #ExecStart = "${pkgs.cloudflared}/bin/cloudflared tunnel --no-autoupdate run --token=$TOKEN";
-      ExecStart = "echo ggg > /tmp/cloudflared";
+      ExecStart = "${pkgs.bash}/bin/bash -c 'echo ggg > /tmp/cloudflared'";
       # Restart = "always";
       EnvironmentFile = "/run/secrets/cloudflared-tunnel-env";
     };
