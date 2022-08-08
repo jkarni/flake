@@ -87,6 +87,9 @@
     enable = true;
     domain = "youtube.mlyxshi.com";
     port = 8084;
+    settings = {
+      autoplay = true;
+    };
   };
 
   # Do not use cloudflared, <--bandwidth limit
