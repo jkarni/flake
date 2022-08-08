@@ -20,7 +20,7 @@ in
       wantedBy = [ "multi-user.target" ];
 
       serviceConfig = {
-        ExecStartPre = writeShellScript "script" ''
+        ExecStartPre = pkgs.writeShellScript "script" ''
           ${pkgs.podman}/bin/podman rm -f unblock-netease-music || true
         '';
 
