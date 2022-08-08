@@ -1,9 +1,10 @@
 db:
   dbname: invidious
-  host: ''
+  host: localhost
   password: ''
   port: 5432
   user: kemal
+
 domain: youtube.mlyxshi.com
 port: 8084
 quality: dash

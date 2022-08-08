@@ -96,7 +96,7 @@
   };
 
   systemd.services.invidious.script = lib.mkForce ''
-      export INVIDIOUS_CONFIG="${builtins.readFile ./a.yml}"
+      export INVIDIOUS_CONFIG_FILE= ${./a.yml}
       exec ${pkgs.invidious}/bin/invidious 
   '';
   # Do not use cloudflared, <--bandwidth limit
