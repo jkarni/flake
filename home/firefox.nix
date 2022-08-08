@@ -1,10 +1,10 @@
-{
-  pkgs,
-  lib,
-  config,
-  osConfig,
-  ...
-}: let
+{ pkgs
+, lib
+, config
+, osConfig
+, ...
+}:
+let
   FirefoxProfilePath =
     if pkgs.stdenv.isLinux
     then ".mozilla/firefox"
@@ -18,13 +18,14 @@
   FirefoxPackage =
     if pkgs.stdenv.isLinux
     then pkgs.firefox
-    else pkgs.runCommand "firefox-0.0.0" {} "mkdir $out";
+    else pkgs.runCommand "firefox-0.0.0" { } "mkdir $out";
 
   ff-mpv = pkgs.writeScript "ff2mpv" (''
-      #!${pkgs.python3}/bin/python
-    ''
-    + builtins.readFile ../config/firefox/NativeMessagingHosts/ff2mpv.py);
-in {
+    #!${pkgs.python3}/bin/python
+  ''
+  + builtins.readFile ../config/firefox/NativeMessagingHosts/ff2mpv.py);
+in
+{
   home.packages = [
     FirefoxPackage
   ];
@@ -33,8 +34,8 @@ in {
   #  Linux firefox wrapper set MOZ_LEGACY_PROFILES=1 by default
   #  Under macOS, we need to set System-level environment variable MOZ_LEGACY_PROFILES=1 by launchctl setenv, See os/darwin/default.nix
   home.file = {
-    "${FirefoxProfilePath}/profiles.ini".source = config.lib.file.mkOutOfStoreSymlink ../config/firefox/profile/profiles.ini;
-    "${FirefoxProfilePath}/default/chrome".source = config.lib.file.mkOutOfStoreSymlink ../config/firefox/profile/default/chrome;
+    "${FirefoxProfilePath}/profiles.ini".source = ../config/firefox/profile/profiles.ini; # Do not give write permission
+    "${FirefoxProfilePath}/default/chrome".source = ../config/firefox/profile/default/chrome;
 
     # woodruffw/ff2mpv
     "${NativeMessagingHostsPath}/ff2mpv.json".text = ''
