@@ -1,0 +1,13 @@
+db:
+  dbname: invidious
+  host: ''
+  password: ''
+  port: 5432
+  user: kemal
+domain: youtube.mlyxshi.com
+port: 8084
+quality: dash
+quality_dash: best
+video_loop: true
+autoplay: true
+check_tables: true

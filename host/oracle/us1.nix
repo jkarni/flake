@@ -95,6 +95,10 @@
     };
   };
 
+  systemd.services.invidious.script = lib.mkForce ''
+      export INVIDIOUS_CONFIG="${builtins.readFile ./a.yml}"
+      exec ${cfg.package}/bin/invidious 
+  '';
   # Do not use cloudflared, <--bandwidth limit
 
   # sops.secrets.cloudflared-tunnel-us-env = { };
