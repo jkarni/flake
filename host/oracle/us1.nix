@@ -76,11 +76,10 @@
   # https://github.com/NixOS/nixpkgs/blob/master/nixos/modules/services/misc/nitter.nix#L350
   # Disable old redis config way
   services.nitter.redisCreateLocally = false;
-  services.nitter.cache.redisPort =7000;
+  services.nitter.cache.redisPort = 6379;
   services.redis.servers.nitter = {
     enable = true;
-    port = 7000;
-    bind = "127.0.0.1";
+    port = 6379;
   };
 
 
