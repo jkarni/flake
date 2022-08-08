@@ -44,10 +44,24 @@
     };
   };
 
-  services.libreddit = {
-    enable = true;
-    address = "127.0.0.1";
-    port = 8082;
+  # services.libreddit = {
+  #   enable = true;
+  #   address = "127.0.0.1";
+  #   port = 8082;
+  # };
+
+  virtualisation.oci-containers.containers = {
+    "libreddit" = {
+      image = "spikecodes/libreddit:arm";
+      ports = [
+        "8082:8080"
+      ];
+      environment = {
+        WIDE = "on";
+        SHOW_NSFW = "on";
+        USE_HLS = "on";
+      };
+    };
   };
 
   services.nitter = {
@@ -70,6 +84,7 @@
     port = 8084;
   };
 
+  # Do not use cloudflared, <--bandwidth limit
 
   # sops.secrets.cloudflared-tunnel-us-env = { };
   # systemd.services.cloudflared = {
