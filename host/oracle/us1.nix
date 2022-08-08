@@ -89,6 +89,9 @@
     port = 8084;
     settings = {
       autoplay = true;
+      video_loop = true;
+      quality ="dash";
+      quality_dash="best";
     };
   };
 
