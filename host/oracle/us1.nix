@@ -40,7 +40,7 @@
   sops.secrets.cloudflared-tunnel-us-env = { };
   systemd.services.cloudflared = {
     wantedBy = [ "multi-user.target" ];
-    after = [ "network-online.target" "systemd-resolved.service" ];
+    after = [  "systemd-resolved.service" ];
     serviceConfig = {
       ExecStart = ''
         ${pkgs.bash}/bin/bash -c "${pkgs.cloudflared}/bin/cloudflared tunnel --no-autoupdate run --token=$TOKEN"
