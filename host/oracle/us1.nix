@@ -44,30 +44,25 @@
     };
   };
 
-  # services.libreddit = {
-  #   enable = true;
-  #   address = "127.0.0.1";
-  #   port = 8082;
-  # };
 
-  virtualisation.oci-containers.containers = {
-    "libreddit" = {
-      image = "spikecodes/libreddit:arm";
-      ports = [
-        "8082:8080"
-      ];
-      environment = {
-        LIBREDDIT_DEFAULT_WIDE = "on";
-        LIBREDDIT_DEFAULT_SHOW_NSFW = "on";
-        LIBREDDIT_DEFAULT_USE_HLS = "on";
-      };
-    };
+  services.libreddit = {
+    enable = true;
+    address = "127.0.0.1";
+    port = 8082;
   };
+  systemd.services.libreddit.environment = {
+    LIBREDDIT_DEFAULT_WIDE = "on";
+    LIBREDDIT_DEFAULT_SHOW_NSFW = "on";
+    LIBREDDIT_DEFAULT_USE_HLS = "on";
+  };
+
 
   services.nitter = {
     enable = true;
     preferences = {
       replaceTwitter = config.services.nitter.server.hostname;
+      infiniteScroll = true;
+      hlsPlayback = true;
       theme = "Auto";
     };
     server = {
