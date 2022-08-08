@@ -57,9 +57,9 @@
         "8082:8080"
       ];
       environment = {
-        WIDE = "on";
-        SHOW_NSFW = "on";
-        USE_HLS = "on";
+        LIBREDDIT_DEFAULT_WIDE = "on";
+        LIBREDDIT_DEFAULT_SHOW_NSFW = "on";
+        LIBREDDIT_DEFAULT_USE_HLS = "on";
       };
     };
   };
