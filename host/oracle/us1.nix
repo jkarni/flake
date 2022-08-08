@@ -95,9 +95,7 @@
     };
   };
 
-  systemd.services.invidious.script = lib.mkForce ''
-      exec ${pkgs.invidious}/bin/invidious 
-  '';
+
   # Do not use cloudflared, <--bandwidth limit
 
   # sops.secrets.cloudflared-tunnel-us-env = { };
