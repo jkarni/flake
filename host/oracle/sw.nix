@@ -66,8 +66,8 @@
         "PGID" = "0";
       };
       extraOptions = [
-        "--label traefik.enable=true"
-        "--label traefik.http.routers.sonarr.rule=Host(`sonarr.mlyxshi.com`)"
+        "--label" "traefik.enable=true"
+        "--label" "traefik.http.routers.sonarr.rule=Host(`sonarr.mlyxshi.com`)"
       ];
     };
 
