@@ -48,10 +48,8 @@
         "/download/jackett/config:/config"
       ];
       extraOptions = [
-        "--label"
-        "traefik.enable=true"
-        "--label"
-        "traefik.http.routers.jackett.rule=Host(`jackett.mlyxshi.com`)"
+        "--label" "traefik.enable=true"
+        "--label" "traefik.http.routers.jackett.rule=Host(`jackett.mlyxshi.com`)"
       ];
     };
 
@@ -82,15 +80,11 @@
       environment = {
         "PUID" = "0";
         "PGID" = "0";
-        "WEBUI_PORT" = "8080";
       };
       extraOptions = [
-        "--label"
-        "traefik.enable=true"
-        "--label"
-        "traefik.http.routers.qb.rule=Host(`qb.media.mlyxshi.com`)"
-        "--label"
-        "traefik.http.services.qbittorrent.loadbalancer.server.port=8080"   
+        "--label" "traefik.enable=true"
+        "--label" "traefik.http.routers.qb.rule=Host(`qb.media.mlyxshi.com`)"
+        "--label" "traefik.http.services.qbittorrent.loadbalancer.server.port=8080"   
       ];
     };
 
@@ -106,10 +100,8 @@
         "PGID" = "0";
       };
       extraOptions = [
-        "--label"
-        "traefik.enable=true"
-        "--label"
-        "traefik.http.routers.jellyfin.rule=Host(`jellyfin.mlyxshi.com`)"   
+        "--label" "traefik.enable=true"
+        "--label" "traefik.http.routers.jellyfin.rule=Host(`jellyfin.mlyxshi.com`)"   
       ];
     };
   };
