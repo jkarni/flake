@@ -117,7 +117,10 @@
     "librespeed" = {
       image = "linuxserver/librespeed";
       extraOptions = [
-        "--network=host"
+        "--label"
+        "traefik.enable=true"
+        "--label"
+        "traefik.http.routers.librespeed.rule=Host(`librespeed.mlyxshi.com`)"
       ];
     };
   };
