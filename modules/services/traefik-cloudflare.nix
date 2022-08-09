@@ -35,7 +35,8 @@ in
         http.routers.api = {
           rule = "Host(`${config.networking.fqdn}`)";
           service = "api@internal";
-          middlewares= "auth";
+          entrypoints = "web";
+          middlewares = "auth";
         };
 
       }; # dynamicConfigOptions
