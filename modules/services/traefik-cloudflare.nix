@@ -15,6 +15,7 @@ in
 
     systemd.services.traefik.serviceConfig.EnvironmentFile = config.sops.secrets.traefik-cloudflare-env.path;
 
+    # https://traefik.io/blog/traefik-2-0-docker-101-fc2893944b9d/
     services.traefik = {
       enable = true;
       group = "podman"; # podman backend
@@ -28,12 +29,18 @@ in
         http.middlewares = {
           web-redirect.redirectScheme.scheme = "https";
         };
+
+        http.routers.api = {
+          rule = "Host(`${config.networking.fqdn}`)";
+          service = "api@internal";
+        };
+
       }; # dynamicConfigOptions
 
       staticConfigOptions = {
-        api.insecure = true; # dashboard
+        api = { };
 
-        providers.docker.endpoint = "unix:///run/podman/podman.sock";      
+        providers.docker.endpoint = "unix:///run/podman/podman.sock";
         providers.docker.exposedByDefault = false;
 
         entryPoints = {
