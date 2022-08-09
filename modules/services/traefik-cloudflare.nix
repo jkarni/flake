@@ -28,11 +28,14 @@ in
 
         http.middlewares = {
           web-redirect.redirectScheme.scheme = "https";
+          # https://tool.oschina.net/htpasswd
+          auth.basicauth.users = "admin:$apr1$DImGj.4T$L0bHKQ1csdPlxURxWZWc/1";
         };
 
         http.routers.api = {
           rule = "Host(`${config.networking.fqdn}`)";
           service = "api@internal";
+          middlewares= "auth";
         };
 
       }; # dynamicConfigOptions
