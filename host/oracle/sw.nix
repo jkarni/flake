@@ -37,9 +37,8 @@
   # restic restore backup to create basic configuration tree directory
 
   services.traefik-cloudflare.enable = true;
+
   # https://reorx.com/blog/track-and-download-shows-automatically-with-sonarr
-
-
   virtualisation.oci-containers.containers = {
 
     "jackett" = {
@@ -86,7 +85,7 @@
 
       volumes = [
         "/download/qbittorrent/config:/config"
-        "/download/sonarr:/data" #change default save path to: /data/downloads/  [hacky way so that from sonarr use the same download location path]
+        "/download/sonarr:/data" #change default save path to: /data/downloads/  [hacky way: from sonarr's view, use the same download location path as qb]
       ];
 
       environment = {
@@ -141,5 +140,3 @@
     pruneOpts = [ "--keep-last 2" ];
   };
 }
-
-

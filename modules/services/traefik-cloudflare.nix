@@ -36,10 +36,16 @@ in
         };
 
         http.routers.api = {
-          rule = "Host(`${config.networking.fqdn}`)";
+          rule = "Host(`${config.networking.fqdn}`) && Path(`/traefik`)";
           service = "api@internal";
           entrypoints = "web";
           middlewares = "auth";
+        };
+
+        http.routers.ping = {
+          rule = "Host(`${config.networking.fqdn}`) && Path(`/ping)";
+          service = "ping@internal";
+          entrypoints = "web";
         };
 
       }; # dynamicConfigOptions
