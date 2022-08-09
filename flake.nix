@@ -158,6 +158,7 @@
                 hm.stateVersion = stateVersion;
                 hm.nixConfigDir = "/etc/flake";
                 networking.hostName = hostName;
+                networking.domain = "mlyxshi.com";
                 boot.loader.systemd-boot.netbootxyz.enable = true;
 
                 secrets.sops-nix.enable = true;

@@ -17,23 +17,23 @@
       echo -e "$RED Sops-nix Known Limitations: https://github.com/Mic92/sops-nix#using-secrets-at-evaluation-time $NOCOLOR"
       echo -e "$RED Please switch system again to use sops secrets and sync DNS $NOCOLOR"
     else
-      ${pkgs.cloudflare-dns-sync} reddit.mlyxshi.com
-      ${pkgs.cloudflare-dns-sync} youtube.mlyxshi.com
-      ${pkgs.cloudflare-dns-sync} twitter.mlyxshi.com
-      ${pkgs.cloudflare-dns-sync} netease.mlyxshi.com
+      ${pkgs.cloudflare-dns-sync} reddit.${config.networking.domain}
+      ${pkgs.cloudflare-dns-sync} youtube.${config.networking.domain}
+      ${pkgs.cloudflare-dns-sync} twitter.${config.networking.domain}
+      ${pkgs.cloudflare-dns-sync} netease.${config.networking.domain}
     fi
   '';
 
   services.traefik-cloudflare.enable = true;
   services.traefik.dynamicConfigOptions = {
     http.routers = {
-      libreddit.rule = "Host(`reddit.mlyxshi.com`)";
+      libreddit.rule = "Host(`reddit.${config.networking.domain}`)";
       libreddit.service = "libreddit";
 
-      nitter.rule = "Host(`twitter.mlyxshi.com`)";
+      nitter.rule = "Host(`twitter.${config.networking.domain}`)";
       nitter.service = "nitter";
 
-      youtube.rule = "Host(`youtube.mlyxshi.com`)";
+      youtube.rule = "Host(`youtube.${config.networking.domain}`)";
       youtube.service = "youtube";
     };
 
