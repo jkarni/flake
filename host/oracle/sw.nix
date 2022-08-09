@@ -80,6 +80,7 @@
 
         "--label" "traefik.http.routers.websecure-sonarr.rule=Host(`sonarr.mlyxshi.com`)"
         "--label" "traefik.http.routers.websecure-sonarr.entrypoints=websecure"
+        "--label" "traefik.http.routers.websecure-sonarr.middlewares=auth@file"
       ];
     };
 
