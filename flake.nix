@@ -59,6 +59,7 @@
     let
       stateVersion = "22.05";
       oracleServerList = [ "jp2" "jp4" "sw" "us1" "kr" ];
+      domain = "mlyxshi.com";
       commonSpecialArgs = {
         inherit (args) neovim-nightly mpv-nightly nixpkgs-wayland;
       };
@@ -158,7 +159,7 @@
                 hm.stateVersion = stateVersion;
                 hm.nixConfigDir = "/etc/flake";
                 networking.hostName = hostName;
-                networking.domain = "mlyxshi.com";
+                networking.domain = domain;
                 boot.loader.systemd-boot.netbootxyz.enable = true;
 
                 secrets.sops-nix.enable = true;
@@ -182,7 +183,7 @@
         autoRollback = false;
 
         nodes = nixpkgs.lib.genAttrs oracleServerList (hostName: {
-          hostname = "${hostName}.mlyxshi.com";
+          hostname = "${hostName}.${domain}";
           profiles.system.path = deploy-rs.lib.aarch64-linux.activate.nixos self.nixosConfigurations.${hostName};
         });
       };

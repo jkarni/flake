@@ -23,7 +23,7 @@ in
 
       extraConfig = ''
         Host jp1
-          HostName jp1.mlyxshi.com
+          HostName jp1.${config.networking.domain}
           User root
           IdentityFile ${config.sops.secrets.ssh-private-key.path}
 

@@ -68,7 +68,7 @@
     server = {
       address = "127.0.0.1";
       https = true;
-      hostname = "twitter.mlyxshi.com";
+      hostname = "twitter.${config.networking.domain}";
       port = 8083;
     };
   };
@@ -86,7 +86,7 @@
 
   services.invidious = {
     enable = true;
-    domain = "youtube.mlyxshi.com";
+    domain = "youtube.${config.networking.domain}";
     port = 8084;
     settings = {
       autoplay = true;

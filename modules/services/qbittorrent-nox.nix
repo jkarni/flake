@@ -5,7 +5,6 @@
 }:
 let
   cfg = config.services.qbittorrent-nox;
-  domain = "${config.networking.hostName}.mlyxshi.com";
   qbConfigDir = "/var/lib/qbittorrent-nox";
   #  Run external program on torrent completion
   # /run/current-system/sw/bin/qbScript "%N" "%F" "%C" "%Z" "%I" "%L"
@@ -98,7 +97,7 @@ in
         echo -e "$RED Sops-nix Known Limitations: https://github.com/Mic92/sops-nix#using-secrets-at-evaluation-time $NOCOLOR"
         echo -e "$RED Please switch system again to use sops secrets and sync DNS $NOCOLOR"
       else
-        ${pkgs.cloudflare-dns-sync} qb.mlyxshi.com
+        ${pkgs.cloudflare-dns-sync} qb.${config.networking.domain}
       fi
     '';
 

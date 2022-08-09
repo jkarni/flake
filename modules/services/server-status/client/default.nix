@@ -6,7 +6,7 @@
 let
   cfg = config.services.status-client;
   serverstatus-client-script = pkgs.writeScript "serverstatus-client-script" (''
-    SERVER = "top.mlyxshi.com"
+    SERVER = "top.${config.networking.domain}"
     PORT = 35601
     USER = "${config.networking.hostName}"
     PASSWORD = "${config.networking.hostName}"
