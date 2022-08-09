@@ -17,6 +17,7 @@ in
 
     services.traefik = {
       enable = true;
+      group = "podman";
 
       dynamicConfigOptions = {
         tls.options.default = {
@@ -31,10 +32,10 @@ in
 
       staticConfigOptions = {
         # api.dashboard = true;
-        api.insecure = true;
+        # api.insecure = true;
 
         # TODO: wait traefik support podman
-        # providers.docker.endpoint = "unix:///run/podman/podman.sock";      
+        providers.docker.endpoint = "unix:///run/podman/podman.sock";      
         # providers.docker.exposedByDefault = false;
 
         entryPoints = {
