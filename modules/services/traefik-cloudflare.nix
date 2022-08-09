@@ -36,14 +36,14 @@ in
         };
 
         http.routers.api = {
-          rule = "Host(`${config.networking.fqdn}`) && Path(`/traefik`)";
+          rule = "Host(`${config.networking.fqdn}`) && PathPrefix(`/traefik`)";
           service = "api@internal";
           entrypoints = "web";
           middlewares = "auth";
         };
 
         http.routers.ping = {
-          rule = "Host(`${config.networking.fqdn}`) && Path(`/`)";
+          rule = "Host(`${config.networking.fqdn}`) && PathPrefix(`/ping`)";
           service = "ping@internal";
           entrypoints = "web";
         };
