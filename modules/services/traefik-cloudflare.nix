@@ -47,8 +47,10 @@ in
       staticConfigOptions = {
         api = { };
 
-        providers.docker.endpoint = "unix:///run/podman/podman.sock";
-        providers.docker.exposedByDefault = false;
+        providers.docker = {
+          endpoint = "unix:///run/podman/podman.sock";
+          exposedByDefault = false;
+        };
 
         entryPoints = {
           web = {

@@ -9,7 +9,6 @@
 
   services.status-client.enable = true;
 
-
   system.activationScripts.SyncMediaDNS = lib.stringAfter [ "var" ] ''
     RED='\033[0;31m'
     NOCOLOR='\033[0m'
