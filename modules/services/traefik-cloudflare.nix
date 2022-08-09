@@ -29,7 +29,7 @@ in
         http.middlewares = {
           web-redirect.redirectScheme.scheme = "https";
           # https://tool.oschina.net/htpasswd
-          auth.basicauth={
+          auth.basicauth = {
             users = "{{ env `TRAEFIK_AUTH` }}";
             removeheader = true;
           };
@@ -52,6 +52,7 @@ in
 
       staticConfigOptions = {
         api = { };
+        ping = { };
 
         providers.docker.endpoint = "unix:///run/podman/podman.sock";
         providers.docker.exposedByDefault = false;
