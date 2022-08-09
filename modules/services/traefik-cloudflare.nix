@@ -17,7 +17,7 @@ in
 
     services.traefik = {
       enable = true;
-      group = "podman";
+      group = "podman"; # podman backend
 
       dynamicConfigOptions = {
         tls.options.default = {
