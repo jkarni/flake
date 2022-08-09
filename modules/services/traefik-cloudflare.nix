@@ -32,7 +32,7 @@ in
 
       staticConfigOptions = {
         # api.dashboard = true;
-        # api.insecure = true;
+        api.insecure = true;
 
         # TODO: wait traefik support podman
         providers.docker.endpoint = "unix:///run/podman/podman.sock";      
