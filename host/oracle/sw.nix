@@ -49,15 +49,15 @@
       #qb-media.rule = "Host(`qb.media.${config.networking.domain}`)";
       #qb-media.service = "qb-media";
 
-      jellyfin.rule = "Host(`jellyfin.${config.networking.domain}`)";
-      jellyfin.service = "jellyfin";
+      #jellyfin.rule = "Host(`jellyfin.${config.networking.domain}`)";
+      #jellyfin.service = "jellyfin";
     };
 
     http.services = {
       #jackett.loadBalancer.servers = [{ url = "http://localhost:9117"; }];
       #sonarr.loadBalancer.servers = [{ url = "http://localhost:8989"; }];
-      qb-media.loadBalancer.servers = [{ url = "http://localhost:8081"; }];
-      jellyfin.loadBalancer.servers = [{ url = "http://localhost:8096"; }];
+      #qb-media.loadBalancer.servers = [{ url = "http://localhost:8081"; }];
+      #jellyfin.loadBalancer.servers = [{ url = "http://localhost:8096"; }];
     };
   };
 
@@ -130,13 +130,15 @@
       environment = {
         "PUID" = "0";
         "PGID" = "0";
-        "WEBUI_PORT" = "8081";
+        "WEBUI_PORT" = "8080";
       };
       extraOptions = [
         "--label"
         "traefik.enable=true"
         "--label"
-        "traefik.http.routers.qb.rule=Host(`qb.media.mlyxshi.com`)"   
+        "traefik.http.routers.qb.rule=Host(`qb.media.mlyxshi.com`)"
+        "--label"
+        "traefik.http.services.qbittorrent.loadbalancer.server.port=8080"   
       ];
     };
 
