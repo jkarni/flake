@@ -19,11 +19,11 @@ in
       after = [ "network.target" ];
       wantedBy = [ "multi-user.target" ];
 
-      serviceConfig = {
-        ExecStartPre = pkgs.writeShellScript "script" ''
-          ${pkgs.podman}/bin/podman rm -f unblock-netease-music || true
-        '';
+      preStart = ''
+        ${pkgs.podman}/bin/podman rm -f unblock-netease-music || true
+      '';
 
+      serviceConfig = {
         ExecStart = "${pkgs.podman}/bin/podman run --rm --name='unblock-netease-music' -p 8899:8080 pan93412/unblock-netease-music-enhanced -e https://music.163.com -o ytdlp bilibili";
       };
     };
