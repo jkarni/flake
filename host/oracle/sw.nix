@@ -96,7 +96,6 @@
         "traefik.enable=true"
         "--label"
         "traefik.http.routers.jackett.rule=Host(`jackett.mlyxshi.com`)"
-        "--network=podman"
       ];
     };
 
@@ -115,7 +114,6 @@
         "traefik.enable=true"
         "--label"
         "traefik.http.routers.sonarr.rule=Host(`sonarr.mlyxshi.com`)"
-        "--network=podman"
       ];
     };
 
