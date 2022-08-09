@@ -42,17 +42,10 @@ in
           middlewares = "auth";
         };
 
-        http.routers.ping = {
-          rule = "Host(`${config.networking.fqdn}`) && PathPrefix(`/ping`)";
-          service = "ping@internal";
-          entrypoints = "web";
-        };
-
       }; # dynamicConfigOptions
 
       staticConfigOptions = {
         api = { };
-        ping = { };
 
         providers.docker.endpoint = "unix:///run/podman/podman.sock";
         providers.docker.exposedByDefault = false;
