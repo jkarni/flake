@@ -21,6 +21,7 @@
       ${pkgs.cloudflare-dns-sync} youtube.${config.networking.domain}
       ${pkgs.cloudflare-dns-sync} twitter.${config.networking.domain}
       ${pkgs.cloudflare-dns-sync} netease.${config.networking.domain}
+      ${pkgs.cloudflare-dns-sync} librespeed.${config.networking.domain}
     fi
   '';
 
