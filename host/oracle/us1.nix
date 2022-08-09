@@ -21,7 +21,6 @@
       ${pkgs.cloudflare-dns-sync} youtube.${config.networking.domain}
       ${pkgs.cloudflare-dns-sync} twitter.${config.networking.domain}
       ${pkgs.cloudflare-dns-sync} netease.${config.networking.domain}
-      ${pkgs.cloudflare-dns-sync} librespeed.${config.networking.domain}
     fi
   '';
 
@@ -114,16 +113,16 @@
   # };
 
 
-  virtualisation.oci-containers.containers = {
-    "librespeed" = {
-      image = "linuxserver/librespeed";
-      extraOptions = [
-        "--label"
-        "traefik.enable=true"
-        "--label"
-        "traefik.http.routers.librespeed.rule=Host(`librespeed.mlyxshi.com`)"
-      ];
-    };
-  };
+  # virtualisation.oci-containers.containers = {
+  #   "librespeed" = {
+  #     image = "linuxserver/librespeed";
+  #     extraOptions = [
+  #       "--label"
+  #       "traefik.enable=true"
+  #       "--label"
+  #       "traefik.http.routers.librespeed.rule=Host(`librespeed.mlyxshi.com`)"
+  #     ];
+  #   };
+  # };
 
 }
