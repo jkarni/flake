@@ -36,7 +36,7 @@ in
         };
 
         http.routers.api = {
-          rule = "Host(`${config.networking.fqdn}`) && PathPrefix(`/traefik`)";
+          rule = "Host(`${config.networking.fqdn}`)";
           service = "api@internal";
           entrypoints = "web";
           middlewares = "auth";
