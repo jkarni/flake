@@ -29,7 +29,10 @@ in
         http.middlewares = {
           web-redirect.redirectScheme.scheme = "https";
           # https://tool.oschina.net/htpasswd
-          auth.basicauth.users = "admin:$apr1$DImGj.4T$L0bHKQ1csdPlxURxWZWc/1";
+          auth.basicAuth={
+            users = "admin:$apr1$DImGj.4T$L0bHKQ1csdPlxURxWZWc/1";
+            removeheader = true;
+          };
         };
 
         http.routers.api = {
