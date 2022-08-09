@@ -29,8 +29,8 @@ in
         http.middlewares = {
           web-redirect.redirectScheme.scheme = "https";
           # https://tool.oschina.net/htpasswd
-          auth.basicAuth={
-            users = "admin:$apr1$DImGj.4T$L0bHKQ1csdPlxURxWZWc/1";
+          auth.basicauth={
+            users = "{{ env `TRAEFIK_AUTH` }}";
             removeheader = true;
           };
         };
