@@ -43,7 +43,7 @@ in
         };
 
         http.routers.ping = {
-          rule = "Host(`${config.networking.fqdn}`) && Path(`/ping)";
+          rule = "Host(`${config.networking.fqdn}`) && Path(`/`)";
           service = "ping@internal";
           entrypoints = "web";
         };
