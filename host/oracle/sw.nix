@@ -46,8 +46,8 @@
       #sonarr.rule = "Host(`sonarr.${config.networking.domain}`)";
       #sonarr.service = "sonarr";
 
-      qb-media.rule = "Host(`qb.media.${config.networking.domain}`)";
-      qb-media.service = "qb-media";
+      #qb-media.rule = "Host(`qb.media.${config.networking.domain}`)";
+      #qb-media.service = "qb-media";
 
       jellyfin.rule = "Host(`jellyfin.${config.networking.domain}`)";
       jellyfin.service = "jellyfin";
@@ -133,7 +133,10 @@
         "WEBUI_PORT" = "8081";
       };
       extraOptions = [
-        "--network=host"
+        "--label"
+        "traefik.enable=true"
+        "--label"
+        "traefik.http.routers.qb.rule=Host(`qb.media.mlyxshi.com`)"   
       ];
     };
 
@@ -149,7 +152,10 @@
         "PGID" = "0";
       };
       extraOptions = [
-        "--network=host"
+        "--label"
+        "traefik.enable=true"
+        "--label"
+        "traefik.http.routers.jellyfin.rule=Host(`jellyfin.mlyxshi.com`)"   
       ];
     };
   };
