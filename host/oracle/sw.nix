@@ -95,7 +95,9 @@
       };
       extraOptions = [
         "--label" "traefik.enable=true"
-        "--label" "traefik.http.routers.qb.rule=Host(`qb.media.mlyxshi.com`)"
+
+        "--label" "traefik.http.routers.qbittorrent.rule=Host(`qb.media.mlyxshi.com`)"
+        "--label" "traefik.http.routers.qbittorrent.entrypoints=web"
         "--label" "traefik.http.services.qbittorrent.loadbalancer.server.port=8080"   
       ];
     };
