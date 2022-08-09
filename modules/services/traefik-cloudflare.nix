@@ -31,12 +31,11 @@ in
       }; # dynamicConfigOptions
 
       staticConfigOptions = {
-        # api.dashboard = true;
-        api.insecure = true;
+        api.insecure = true; # dashboard
 
         # TODO: wait traefik support podman
         providers.docker.endpoint = "unix:///run/podman/podman.sock";      
-        # providers.docker.exposedByDefault = false;
+        providers.docker.exposedByDefault = false;
 
         entryPoints = {
           web = {
