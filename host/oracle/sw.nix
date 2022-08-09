@@ -115,7 +115,13 @@
       };
       extraOptions = [
         "--label" "traefik.enable=true"
-        "--label" "traefik.http.routers.jellyfin.rule=Host(`jellyfin.mlyxshi.com`)"   
+        
+        "--label" "traefik.http.routers.jellyfin.rule=Host(`jellyfin.mlyxshi.com`)"
+        "--label" "traefik.http.routers.jellyfin.entrypoints=web"
+        "--label" "traefik.http.routers.jellyfin.middlewares=web-redirect@file"
+
+        "--label" "traefik.http.routers.websecure-jellyfin.rule=Host(`jellyfin.mlyxshi.com`)"
+        "--label" "traefik.http.routers.websecure-jellyfin.entrypoints=websecure"
       ];
     };
   };
