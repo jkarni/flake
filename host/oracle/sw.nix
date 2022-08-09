@@ -52,6 +52,9 @@
         "--label" "traefik.http.routers.jackett.rule=Host(`jackett.mlyxshi.com`)"
         "--label" "traefik.http.routers.jackett.entrypoints=web"
         "--label" "traefik.http.routers.jackett.middlewares=web-redirect@file"
+
+        "--label" "traefik.http.routers.websecure-jackett.rule=Host(`jackett.mlyxshi.com`)"
+        "--label" "traefik.http.routers.websecure-jackett.entrypoints=websecure"
       ];
     };
 
