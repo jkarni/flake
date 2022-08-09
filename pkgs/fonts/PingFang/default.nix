@@ -1,7 +1,7 @@
-{
-  stdenvNoCC,
-  unzip,
-  fetchurl,
+{ stdenvNoCC
+, unzip
+, fetchurl
+,
 }:
 stdenvNoCC.mkDerivation rec {
   pname = "PingFang";
@@ -13,9 +13,9 @@ stdenvNoCC.mkDerivation rec {
     sha256 = "ocSL4kFdnbcENGngPc57fq86zgEqFOCWOBspXFRmsqg=";
   };
 
-  buildInputs = [unzip];
+  buildInputs = [ unzip ];
 
-  phases = ["unpackPhase" "installPhase"];
+  phases = [ "unpackPhase" "installPhase" ];
 
   unpackPhase = ''
     unzip $src

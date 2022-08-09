@@ -1,8 +1,7 @@
-{
-  pkgs,
-  config,
-  osConfig,
-  ...
+{ pkgs
+, config
+, osConfig
+, ...
 }: {
   imports = [
     ./default.nix
@@ -12,7 +11,7 @@
   ];
 
   home.packages = with pkgs; [
-    alejandra
+    nixpkgs-fmt
     gh
     go
     ideviceinstaller

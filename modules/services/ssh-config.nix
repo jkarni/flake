@@ -1,11 +1,12 @@
-{
-  pkgs,
-  lib,
-  config,
-  ...
-}: let
+{ pkgs
+, lib
+, config
+, ...
+}:
+let
   cfg = config.services.ssh-config;
-in {
+in
+{
   options = {
     services.ssh-config.enable = lib.mkEnableOption "my ssh service";
   };
@@ -15,7 +16,7 @@ in {
     programs.ssh = {
       knownHosts = {
         github = {
-          hostNames = ["github.com"];
+          hostNames = [ "github.com" ];
           publicKey = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIOMqqnkVzrm0SdG6UOoqKLsabgH5C9okWi0dh2l9GKJl";
         };
       };

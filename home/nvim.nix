@@ -1,10 +1,10 @@
-{
-  pkgs,
-  lib,
-  osConfig,
-  config,
-  ...
-}: let
+{ pkgs
+, lib
+, osConfig
+, config
+, ...
+}:
+let
   # the special plugin which contains parsers  <-- need compile
   # use packer to manage other plugins
   TREESITTER = pkgs.vimPlugins.nvim-treesitter.withPlugins (
@@ -22,7 +22,8 @@
         tree-sitter-markdown
       ]
   );
-in {
+in
+{
   xdg.configFile = {
     "nvim/init.lua".text = ''
       -- Begin Stage: Cache and Accelerate

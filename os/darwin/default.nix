@@ -17,7 +17,7 @@
       automatic = true;
 
       # TODO: wait nix-darwin rename
-      interval = { Hour = 24; } ;
+      interval = { Hour = 24; };
       options = "--delete-older-than 7d";
     };
   };

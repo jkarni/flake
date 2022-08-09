@@ -1,4 +1,4 @@
-{config, ...}: {
+{ config, ... }: {
   imports = [
     ./hardware.nix
     ../../os/nixos
@@ -36,6 +36,6 @@
     ];
     repository = "rclone:r2:backup";
     timerConfig.OnCalendar = "daily";
-    pruneOpts = ["--keep-last 2"];
+    pruneOpts = [ "--keep-last 2" ];
   };
 }

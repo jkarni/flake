@@ -11,8 +11,8 @@ final: prev: {
 
   firefox =
     prev.wrapFirefox prev.firefox-unwrapped
-    {
-      forceWayland = true;
-      extraPolicies = import ../../config/firefox/app/policy.nix;
-    };
+      {
+        forceWayland = true;
+        extraPolicies = import ../../config/firefox/app/policy.nix;
+      };
 }

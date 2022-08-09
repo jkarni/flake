@@ -1,9 +1,8 @@
 let
-  nixpkgs = import <nixpkgs> {};
+  nixpkgs = import <nixpkgs> { };
   #flake = builtins.getFlake (toString ./.);
 in
-  {
-  }
-  // builtins
-  // nixpkgs
+{ }
+// builtins
+// nixpkgs
   // nixpkgs.lib

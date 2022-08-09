@@ -1,11 +1,12 @@
-{
-  pkgs,
-  lib,
-  config,
-  ...
-}: let
+{ pkgs
+, lib
+, config
+, ...
+}:
+let
   cfg = config.services.shadowsocks-rust;
-in {
+in
+{
   options = {
     services.shadowsocks-rust.enable = lib.mkEnableOption "shadowsocks-rust service";
   };
@@ -16,8 +17,8 @@ in {
     ];
 
     systemd.services.shadowsocks-rust = {
-      after = ["network.target"];
-      wantedBy = ["multi-user.target"];
+      after = [ "network.target" ];
+      wantedBy = [ "multi-user.target" ];
 
       serviceConfig = {
         Restart = "always";

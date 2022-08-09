@@ -1,10 +1,10 @@
-{
-  pkgs,
-  lib,
-  config,
-  osConfig,
-  ...
-}: let
+{ pkgs
+, lib
+, config
+, osConfig
+, ...
+}:
+let
   anime4k = pkgs.Anime4k;
   Anime4kInputs = {
     #lower-end GPU    <-- Apple M1
@@ -16,7 +16,8 @@
     "CTRL+6" = ''no-osd change-list glsl-shaders set "${anime4k}/Anime4K_Clamp_Highlights.glsl:${anime4k}/Anime4K_Upscale_Denoise_CNN_x2_M.glsl:${anime4k}/Anime4K_AutoDownscalePre_x2.glsl:${anime4k}/Anime4K_AutoDownscalePre_x4.glsl:${anime4k}/Anime4K_Restore_CNN_S.glsl:${anime4k}/Anime4K_Upscale_CNN_x2_S.glsl"; show-text "Anime4K: Mode C+A (Fast)"'';
     "CTRL+0" = ''no-osd change-list glsl-shaders clr ""; show-text "GLSL shaders cleared"'';
   };
-in {
+in
+{
   programs.mpv = {
     enable = true;
     # Install mpv from Homebrew, nix's mpv does not support swift, and the default `f` keybinding to fullscreen does not work
@@ -26,7 +27,7 @@ in {
       then # Linux
         pkgs.mpv
       else # Darwin
-        pkgs.runCommand "mpv-0.0.0" {} "mkdir $out";
+        pkgs.runCommand "mpv-0.0.0" { } "mkdir $out";
 
     bindings =
       {

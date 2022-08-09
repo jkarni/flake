@@ -1,3 +1,3 @@
 final: prev: {
-  Anime4k = prev.callPackage ../../pkgs/Anime4k {};
+  Anime4k = prev.callPackage ../../pkgs/Anime4k { };
 }

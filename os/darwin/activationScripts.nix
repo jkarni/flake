@@ -1,4 +1,5 @@
-{pkgs, ...}: let
+{ pkgs, ... }:
+let
   path = "${pkgs.skhd}/bin/skhd";
 
   extraPolicies = import ../../config/firefox/app/policy.nix;
@@ -10,7 +11,8 @@
       // extraPolicies;
   };
   policiesJson = pkgs.writeText "policies.json" (builtins.toJSON wrapperPolicies);
-in {
+in
+{
   # https://github.com/azuwis/nix-config/blob/master/darwin/skhd.nix
   # Add skhd to Settings->Privacy & Security->Accessibility        <-- launchd
   system.activationScripts.postActivation.text = ''

@@ -1,12 +1,13 @@
-{
-  pkgs,
-  config,
-  osConfig,
-  ...
-}: let
+{ pkgs
+, config
+, osConfig
+, ...
+}:
+let
   previewerWrapper = pkgs.writeShellScriptBin "previewerWrapper" (builtins.readFile ../config/lf/preview.sh);
   cleanerWrapper = pkgs.writeShellScriptBin "cleanerWrapper" (builtins.readFile ../config/lf/cleaner.sh);
-in {
+in
+{
   home.packages = with pkgs; [
     lf
 

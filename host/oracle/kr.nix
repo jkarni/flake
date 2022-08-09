@@ -1,8 +1,7 @@
-{
-  config,
-  pkgs,
-  lib,
-  ...
+{ config
+, pkgs
+, lib
+, ...
 }: {
   imports = [
     ./default.nix
@@ -36,7 +35,7 @@
     # Port: 5000
     "change-detection-io" = {
       image = "dgtlmoon/changedetection.io";
-      volumes = ["datastore-volume:/datastore"];
+      volumes = [ "datastore-volume:/datastore" ];
       environment = {
         PLAYWRIGHT_DRIVER_URL = "ws://localhost:3000/";
       };

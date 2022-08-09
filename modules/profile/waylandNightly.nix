@@ -1,11 +1,12 @@
-{
-  pkgs,
-  lib,
-  config,
-  ...
-} @ args: let
+{ pkgs
+, lib
+, config
+, ...
+} @ args:
+let
   cfg = config.profile.waylandNightly;
-in {
+in
+{
   options = {
     profile.waylandNightly.enable = lib.mkEnableOption "git version wayland desktop";
   };
@@ -13,7 +14,7 @@ in {
   config = lib.mkIf cfg.enable {
     nixpkgs.overlays = [
       args.nixpkgs-wayland.overlay
-      (import ../../overlay/Mpv {inherit (args) mpv-nightly;})
+      (import ../../overlay/Mpv { inherit (args) mpv-nightly; })
     ];
   };
 }

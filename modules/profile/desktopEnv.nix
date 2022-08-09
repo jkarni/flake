@@ -1,11 +1,12 @@
-{
-  pkgs,
-  lib,
-  config,
-  ...
-}: let
+{ pkgs
+, lib
+, config
+, ...
+}:
+let
   cfg = config.profile.desktopEnv;
-in {
+in
+{
   options = {
     profile.desktopEnv.enable = lib.mkEnableOption "desktop env: install extra fonts, extra permission";
   };

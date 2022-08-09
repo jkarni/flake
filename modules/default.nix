@@ -1,8 +1,7 @@
 # Must pass a variable to determine system, pkgs.stdenv.isLinux will cause infinite recursion
-{
-  pkgs,
-  lib,
-  ...
+{ pkgs
+, lib
+, ...
 } @ args: {
   imports =
     [

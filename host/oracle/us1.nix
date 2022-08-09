@@ -73,6 +73,7 @@
     };
   };
 
+  # WAIT MERGE: https://github.com/NixOS/nixpkgs/pull/185629
   # https://github.com/NixOS/nixpkgs/blob/master/nixos/modules/services/misc/nitter.nix#L350
   # Disable old redis config way
   services.nitter.redisCreateLocally = false;
@@ -90,8 +91,8 @@
     settings = {
       autoplay = true;
       video_loop = true;
-      quality ="dash";
-      quality_dash="best";
+      quality = "dash";
+      quality_dash = "best";
     };
   };
 

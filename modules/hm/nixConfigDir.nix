@@ -1,11 +1,12 @@
-{
-  pkgs,
-  lib,
-  config,
-  ...
-}: let
+{ pkgs
+, lib
+, config
+, ...
+}:
+let
   cfg = config.hm.nixConfigDir;
-in {
+in
+{
   options = {
     hm.nixConfigDir = lib.mkOption {
       type = lib.types.str;

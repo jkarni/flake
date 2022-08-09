@@ -1,11 +1,12 @@
-{
-  pkgs,
-  lib,
-  config,
-  ...
-}: let
+{ pkgs
+, lib
+, config
+, ...
+}:
+let
   cfg = config.hm.stateVersion;
-in {
+in
+{
   options = {
     hm.stateVersion = lib.mkOption {
       type = lib.types.str;

@@ -1,4 +1,4 @@
-{pkgs}:
+{ pkgs }:
 pkgs.mkShell {
-  packages = [pkgs.curl];
+  packages = [ pkgs.curl ];
 }
