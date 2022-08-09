@@ -49,6 +49,7 @@
       ];
       extraOptions = [
         "--label" "traefik.enable=true"
+
         "--label" "traefik.http.routers.jackett.rule=Host(`jackett.mlyxshi.com`)"
         "--label" "traefik.http.routers.jackett.entrypoints=web"
         "--label" "traefik.http.routers.jackett.middlewares=web-redirect@file"
@@ -70,7 +71,13 @@
       };
       extraOptions = [
         "--label" "traefik.enable=true"
+
         "--label" "traefik.http.routers.sonarr.rule=Host(`sonarr.mlyxshi.com`)"
+        "--label" "traefik.http.routers.sonarr.entrypoints=web"
+        "--label" "traefik.http.routers.sonarr.middlewares=web-redirect@file"
+
+        "--label" "traefik.http.routers.websecure-sonarr.rule=Host(`sonarr.mlyxshi.com`)"
+        "--label" "traefik.http.routers.websecure-sonarr.entrypoints=websecure"
       ];
     };
 
