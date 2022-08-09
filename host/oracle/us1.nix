@@ -113,13 +113,13 @@
   # };
 
 
-  # virtualisation.oci-containers.containers = {
-  #   "librespeed" = {
-  #     image = "linuxserver/librespeed";
-  #     extraOptions = [
-  #       "--network=host"
-  #     ];
-  #   };
-  # };
+  virtualisation.oci-containers.containers = {
+    "librespeed" = {
+      image = "linuxserver/librespeed";
+      extraOptions = [
+        "--network=host"
+      ];
+    };
+  };
 
 }
