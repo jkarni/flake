@@ -50,6 +50,7 @@
       extraOptions = [
         "--label" "traefik.enable=true"
         "--label" "traefik.http.routers.jackett.rule=Host(`jackett.mlyxshi.com`)"
+        "--label" "traefik.http.routers.jackett.entrypoints=web"
         "--label" "traefik.http.routers.jackett.middlewares=web-redirect@file"
       ];
     };
