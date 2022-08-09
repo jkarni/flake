@@ -120,7 +120,7 @@
   #       "--label"
   #       "traefik.enable=true"
   #       "--label"
-  #       "traefik.http.routers.librespeed.rule=Host(`librespeed.mlyxshi.com`)"
+  #       "traefik.http.routers.librespeed.rule=Host(`librespeed.${config.networking.domain}`)"
   #     ];
   #   };
   # };
