@@ -43,8 +43,8 @@
       #jackett.rule = "Host(`jackett.${config.networking.domain}`)";
       #jackett.service = "jackett";
 
-      sonarr.rule = "Host(`sonarr.${config.networking.domain}`)";
-      sonarr.service = "sonarr";
+      #sonarr.rule = "Host(`sonarr.${config.networking.domain}`)";
+      #sonarr.service = "sonarr";
 
       qb-media.rule = "Host(`qb.media.${config.networking.domain}`)";
       qb-media.service = "qb-media";
@@ -55,7 +55,7 @@
 
     http.services = {
       #jackett.loadBalancer.servers = [{ url = "http://localhost:9117"; }];
-      sonarr.loadBalancer.servers = [{ url = "http://localhost:8989"; }];
+      #sonarr.loadBalancer.servers = [{ url = "http://localhost:8989"; }];
       qb-media.loadBalancer.servers = [{ url = "http://localhost:8081"; }];
       jellyfin.loadBalancer.servers = [{ url = "http://localhost:8096"; }];
     };
@@ -65,23 +65,23 @@
 
 
   # https://www.breakds.org/post/declarative-docker-in-nixos/
-  systemd.services.init-traefik-network = {
-    description = "Create the network bridge traefik-rproxy.";
-    after = [ "network.target" ];
-    wantedBy = [ "multi-user.target" ];
+  # systemd.services.init-traefik-network = {
+  #   description = "Create the network bridge traefik-rproxy.";
+  #   after = [ "network.target" ];
+  #   wantedBy = [ "multi-user.target" ];
 
-    serviceConfig.Type = "oneshot";
-    script = ''
-      # Put a true at the end to prevent getting non-zero return code, which will
-      # crash the whole service.
-      check=$(${pkgs.podman}/bin/podman network ls | grep "traefik-rproxy" || true)
-      if [ -z "$check" ]; then
-        ${pkgs.podman}/bin/podman network create traefik-rproxy
-      else
-        echo "traefik-rproxy already exists"
-      fi
-    '';
-  };
+  #   serviceConfig.Type = "oneshot";
+  #   script = ''
+  #     # Put a true at the end to prevent getting non-zero return code, which will
+  #     # crash the whole service.
+  #     check=$(${pkgs.podman}/bin/podman network ls | grep "traefik-rproxy" || true)
+  #     if [ -z "$check" ]; then
+  #       ${pkgs.podman}/bin/podman network create traefik-rproxy
+  #     else
+  #       echo "traefik-rproxy already exists"
+  #     fi
+  #   '';
+  # };
 
 
   virtualisation.oci-containers.containers = {
@@ -96,7 +96,7 @@
         "traefik.enable=true"
         "--label"
         "traefik.http.routers.jackett.rule=Host(`jackett.mlyxshi.com`)"
-        "--network=traefik-rproxy"
+        "--network=podman"
       ];
     };
 
@@ -111,7 +111,11 @@
         "PGID" = "0";
       };
       extraOptions = [
-        "--network=host"
+        "--label"
+        "traefik.enable=true"
+        "--label"
+        "traefik.http.routers.sonarr.rule=Host(`sonarr.mlyxshi.com`)"
+        "--network=podman"
       ];
     };
 
