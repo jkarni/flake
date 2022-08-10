@@ -70,10 +70,7 @@
 
         "--label" "traefik.http.routers.jproxy.rule=Host(`jproxy.${config.networking.domain}`)"
         "--label" "traefik.http.routers.jproxy.entrypoints=web"
-        "--label" "traefik.http.routers.jproxy.middlewares=web-redirect@file"
-
-        "--label" "traefik.http.routers.websecure-jproxy.rule=Host(`jproxy.${config.networking.domain}`)"
-        "--label" "traefik.http.routers.websecure-jproxy.entrypoints=websecure"
+        "--label" "traefik.http.services.qbittorrent.loadbalancer.server.port=8117"  
       ];
     };
 
