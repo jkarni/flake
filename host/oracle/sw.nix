@@ -70,7 +70,7 @@
 
         "--label" "traefik.http.routers.jproxy.rule=Host(`jproxy.${config.networking.domain}`)"
         "--label" "traefik.http.routers.jproxy.entrypoints=web"
-        "--label" "traefik.http.services.qbittorrent.loadbalancer.server.port=8117"  
+        "--label" "traefik.http.services.jproxy.loadbalancer.server.port=8117"  
       ];
     };
 
