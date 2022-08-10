@@ -139,7 +139,6 @@
                 services.shadowsocks-rust.enable = true;
               }
             ];
-            specialArgs = commonSpecialArgs // { isLinux = true; };
           };
         }
         // nixpkgs.lib.genAttrs oracleServerList (hostName:
