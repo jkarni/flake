@@ -17,7 +17,7 @@
 
   systemd.network.networks = {
     dhcp = {
-      name = "ens4";
+      name = "eno0";
       DHCP = "yes";
     };
   };
