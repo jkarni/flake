@@ -18,6 +18,7 @@
       echo -e "$RED Please switch system again to use sops secrets and sync DNS $NOCOLOR"
     else
       ${pkgs.cloudflare-dns-sync} jackett.${config.networking.domain}
+      ${pkgs.cloudflare-dns-sync} jproxy.${config.networking.domain}
       ${pkgs.cloudflare-dns-sync} sonarr.${config.networking.domain}
       ${pkgs.cloudflare-dns-sync} qb.media.${config.networking.domain}
       ${pkgs.cloudflare-dns-sync} jellyfin.${config.networking.domain}
@@ -28,6 +29,7 @@
   #   [ ! -d /download/jackett/config ] && mkdir -p /download/jackett/config
   #   [ ! -d /download/qbittorrent/config ] && mkdir -p /download/qbittorrent/config
   #   [ ! -d /download/jellyfin/config ] && mkdir -p /download/jellyfin/config
+  #   [ ! -d /download/jproxy/config ] && mkdir -p /download/jproxy/config
   #   [ ! -d /download/sonarr/config ] && mkdir -p /download/sonarr/config
   #   [ ! -d /download/sonarr/downloads ] && mkdir -p /download/sonarr/downloads
   #   [ ! -d /download/sonarr/media/anime ] && mkdir -p /download/sonarr/media/anime
@@ -54,6 +56,24 @@
 
         "--label" "traefik.http.routers.websecure-jackett.rule=Host(`jackett.${config.networking.domain}`)"
         "--label" "traefik.http.routers.websecure-jackett.entrypoints=websecure"
+      ];
+    };
+
+    # podman run --name jproxy -v /download/jproxy/config:/app/config luckypuppy514/jproxy:arm64v8-latest --net=host
+    "jproxy" = {
+      image = "luckypuppy514/jproxy:arm64v8-latest";
+      volumes = [
+        "/download/jproxy/config:/app/config"
+      ];
+      extraOptions = [
+        "--label" "traefik.enable=true"
+
+        "--label" "traefik.http.routers.jproxy.rule=Host(`jproxy.${config.networking.domain}`)"
+        "--label" "traefik.http.routers.jproxy.entrypoints=web"
+        "--label" "traefik.http.routers.jproxy.middlewares=web-redirect@file"
+
+        "--label" "traefik.http.routers.websecure-jproxy.rule=Host(`jproxy.${config.networking.domain}`)"
+        "--label" "traefik.http.routers.websecure-jproxy.entrypoints=websecure"
       ];
     };
 
