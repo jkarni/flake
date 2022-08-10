@@ -35,7 +35,7 @@
       "/home/dominic/.mozilla/firefox/default"
     ];
     repository = "rclone:r2:backup";
-    timerConfig.OnCalendar = "daily";
+    timerConfig.OnCalendar = "03:00";
     pruneOpts = [ "--keep-last 2" ];
   };
 }

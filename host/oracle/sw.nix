@@ -135,7 +135,7 @@
       "/download"
     ];
     repository = "rclone:r2:backup";
-    timerConfig.OnCalendar = "daily";
+    timerConfig.OnCalendar = "02:00";
     pruneOpts = [ "--keep-last 2" ];
   };
 }

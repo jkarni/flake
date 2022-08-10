@@ -126,7 +126,7 @@ in
         "${qbConfigDir}"
       ];
       repository = "rclone:r2:backup";
-      timerConfig.OnCalendar = "daily";
+      timerConfig.OnCalendar = "01:00";
       pruneOpts = [ "--keep-last 2" ];
     };
   };

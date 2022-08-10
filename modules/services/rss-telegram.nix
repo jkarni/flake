@@ -55,7 +55,7 @@ in
         "${RssConfigDir}"
       ];
       repository = "rclone:r2:backup";
-      timerConfig.OnCalendar = "daily";
+      timerConfig.OnCalendar = "00:00";
       pruneOpts = [ "--keep-last 2" ];
     };
   };
