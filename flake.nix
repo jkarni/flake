@@ -72,7 +72,6 @@
         "M1" = darwin.lib.darwinSystem {
           system = "aarch64-darwin";
           modules = [
-            # official sops-nix currently doesn't support aarch64-darwin
             sops-nix-darwin.nixosModules.sops
             home-manager.darwinModules.home-manager
             ./host/M1
