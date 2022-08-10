@@ -41,16 +41,6 @@
       "region": "KR"
     },
     {
-      "username": "tw",
-      "password": "tw",
-      "name": "Cybree-TW",
-      "type": "KVM",
-      "host": "None",
-      "location": "Taipei",
-      "disabled": false,
-      "region": "TW"
-    },
-    {
       "username": "sw",
       "password": "sw",
       "name": "Oracle-SW",
