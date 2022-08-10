@@ -3,9 +3,6 @@
 , lib
 , ...
 }:
-let
-  hashedPassword = "$6$fwJZwHNLE640VkQd$SrYMjayP9fofIncuz3ehVLpfwGlpUj0NFZSssSy8GcIXIbDKI4JnrgfMZxSw5vxPkXkAEL/ktm3UZOyPMzA.p0";
-in
 {
   nix = {
     extraOptions = ''
@@ -33,26 +30,10 @@ in
 
   nixpkgs.config.allowUnfree = true;
 
-  boot.kernelPackages = pkgs.linuxPackages_latest;
-
-  users = {
-    defaultUserShell = pkgs.zsh;
-
-    users =
-      {
-        root = {
-          inherit hashedPassword;
-          openssh.authorizedKeys.keys = [ "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIMpaY3LyCW4HHqbp4SA4tnA+1Bkgwrtro2s/DEsBcPDe" ];
-        };
-      }
-      // lib.optionalAttrs config.profile.desktopEnv.enable {
-        dominic = {
-          isNormalUser = true;
-          description = "mlyxshi";
-          inherit hashedPassword;
-          extraGroups = [ "wheel" ];
-        };
-      };
+  users.defaultUserShell = pkgs.zsh;
+  users.users.root = {
+    hashedPassword = "$6$fwJZwHNLE640VkQd$SrYMjayP9fofIncuz3ehVLpfwGlpUj0NFZSssSy8GcIXIbDKI4JnrgfMZxSw5vxPkXkAEL/ktm3UZOyPMzA.p0";
+    openssh.authorizedKeys.keys = [ "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIMpaY3LyCW4HHqbp4SA4tnA+1Bkgwrtro2s/DEsBcPDe" ];
   };
 
   # sshd (server)
@@ -71,32 +52,21 @@ in
   };
 
   fonts = {
-    fonts =
-      [
-        (pkgs.nerdfonts.override { fonts = [ "RobotoMono" ]; }) # Terminal Font
-      ]
-      ++ lib.optionals config.profile.desktopEnv.enable [
-        # The essence of Apple
-        pkgs.SF-Pro # English
-        pkgs.PingFang # Chinese/Japanese
-      ];
-
+    fonts = [
+      (pkgs.nerdfonts.override { fonts = [ "RobotoMono" ]; }) # Terminal Font
+    ];
     enableDefaultFonts = false; # If Sway is enabled, enableDefaultFonts is true by default <-- I don't need extra default fonts
-
     # fc-list
     fontconfig = {
       enable = true;
-      defaultFonts =
-        {
-          monospace = [ "RobotoMono Nerd Font" ];
-        }
-        // lib.optionalAttrs config.profile.desktopEnv.enable {
-          sansSerif = [ "SF Pro" ];
-          serif = [ "SF Pro" ];
-        };
+      defaultFonts = {
+        monospace = [ "RobotoMono Nerd Font" ];
+      };
     };
   };
 
+
+  boot.kernelPackages = pkgs.linuxPackages_latest;
   # https://wiki.archlinux.org/title/sysctl
   # https://www.starduster.me/2020/03/02/linux-network-tuning-kernel-parameter/
   boot.kernel.sysctl = {

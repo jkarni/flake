@@ -82,6 +82,7 @@
             {
               hm.stateVersion = stateVersion;
               hm.nixConfigDir = "/Users/dominic/flake";
+
               networking.hostName = "M1";
               profile.developerMode.enable = true;
               security.pam.enableSudoTouchIdAuth = true; # https://github.com/LnL7/nix-darwin/pull/228
@@ -93,81 +94,77 @@
       #############################################################################################################################
       # nixosConfigurations
 
-      nixosConfigurations =
-        {
-          "hx90" = nixpkgs.lib.nixosSystem {
-            system = "x86_64-linux";
-            modules = [
-              sops-nix.nixosModules.sops
-              home-manager.nixosModules.home-manager
-              ./host/hx90
-              ./overlay
-              ./modules
+      nixosConfigurations = {
+        "hx90" = nixpkgs.lib.nixosSystem {
+          system = "x86_64-linux";
+          modules = [
+            sops-nix.nixosModules.sops
+            home-manager.nixosModules.home-manager
+            ./host/hx90
+            ./overlay
+            ./modules
 
-              {
-                system.stateVersion = stateVersion;
-                hm.stateVersion = stateVersion;
-                hm.nixConfigDir = "/etc/flake";
-                networking.hostName = "hx90";
+            {
+              system.stateVersion = stateVersion;
+              hm.stateVersion = stateVersion;
+              hm.nixConfigDir = "/etc/flake";
+              networking.hostName = "hx90";
 
-                profile.desktopEnv.enable = true;
-                profile.waylandNightly.enable = true;
-                profile.developerMode.enable = true;
-                secrets.sops-nix.enable = true;
+              profile.desktopEnv.enable = true;
+              profile.waylandNightly.enable = true;
+              profile.developerMode.enable = true;
+              secrets.sops-nix.enable = true;
 
-                services.ssh-config.enable = true;
-              }
-            ];
-            specialArgs = commonSpecialArgs // { isLinux = true; };
-          };
+              services.ssh-config.enable = true;
+            }
+          ];
+          specialArgs = commonSpecialArgs // { isLinux = true; };
+        };
 
-          "tw" = nixpkgs.lib.nixosSystem {
-            system = "x86_64-linux";
-            modules = [
-              sops-nix.nixosModules.sops
-              ./host/tw
-              ./modules/profile/desktopEnv.nix
-              ./modules/secrets/default.nix
-              ./modules/services/shadowsocks-rust.nix
+        "test" = nixpkgs.lib.nixosSystem {
+          system = "x86_64-linux";
+          modules = [
+            ./host/test
+            #sops-nix.nixosModules.sops
+            #./modules/secrets/default.nix
+            #./modules/services/shadowsocks-rust.nix
+            {
+              system.stateVersion = stateVersion;
+              networking.hostName = "test";
+              #secrets.sops-nix.enable = true;
+              #services.shadowsocks-rust.enable = true;
+            }
+          ];
+        };
+      }
+      // nixpkgs.lib.genAttrs oracleServerList (hostName:
+        nixpkgs.lib.nixosSystem {
+          system = "aarch64-linux";
+          modules = [
+            sops-nix.nixosModules.sops
+            home-manager.nixosModules.home-manager
+            # https://nixos.wiki/wiki/Nix_Expression_Language
+            # Coercing a relative path with interpolated variables to an absolute path (for imports)
+            (./host/oracle + "/${hostName}.nix")
+            ./overlay
+            ./modules
 
-              {
-                system.stateVersion = stateVersion;
-                networking.hostName = "tw";
+            {
+              system.stateVersion = stateVersion;
+              hm.stateVersion = stateVersion;
+              hm.nixConfigDir = "/etc/flake";
+              networking.hostName = hostName;
+              networking.domain = domain;
+              boot.loader.systemd-boot.netbootxyz.enable = true;
 
-                secrets.sops-nix.enable = true;
-                services.shadowsocks-rust.enable = true;
-              }
-            ];
-          };
-        }
-        // nixpkgs.lib.genAttrs oracleServerList (hostName:
-          nixpkgs.lib.nixosSystem {
-            system = "aarch64-linux";
-            modules = [
-              sops-nix.nixosModules.sops
-              home-manager.nixosModules.home-manager
-              # https://nixos.wiki/wiki/Nix_Expression_Language
-              # Coercing a relative path with interpolated variables to an absolute path (for imports)
-              (./host/oracle + "/${hostName}.nix")
-              ./overlay
-              ./modules
+              secrets.sops-nix.enable = true;
 
-              {
-                system.stateVersion = stateVersion;
-                hm.stateVersion = stateVersion;
-                hm.nixConfigDir = "/etc/flake";
-                networking.hostName = hostName;
-                networking.domain = domain;
-                boot.loader.systemd-boot.netbootxyz.enable = true;
-
-                secrets.sops-nix.enable = true;
-
-                services.ssh-config.enable = true;
-                services.shadowsocks-rust.enable = true;
-              }
-            ];
-            specialArgs = commonSpecialArgs // { isLinux = true; };
-          });
+              services.ssh-config.enable = true;
+              services.shadowsocks-rust.enable = true;
+            }
+          ];
+          specialArgs = commonSpecialArgs // { isLinux = true; };
+        });
 
       #############################################################################################################################
       # deploy-rs

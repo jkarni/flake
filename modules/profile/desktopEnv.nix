@@ -12,6 +12,30 @@ in
   };
 
   config = lib.mkIf cfg.enable {
+
+    users.users.dominic = {
+      isNormalUser = true;
+      description = "mlyxshi";
+      hashedPassword = "$6$fwJZwHNLE640VkQd$SrYMjayP9fofIncuz3ehVLpfwGlpUj0NFZSssSy8GcIXIbDKI4JnrgfMZxSw5vxPkXkAEL/ktm3UZOyPMzA.p0";
+      extraGroups = [ "wheel" ];
+    };
+
+
+    fonts = {
+      # The essence of Apple
+      fonts = [
+        pkgs.SF-Pro # English
+        pkgs.PingFang # Chinese/Japanese
+      ];
+      # fc-list
+      fontconfig = {
+        defaultFonts = {
+          sansSerif = [ "SF Pro" ];
+          serif = [ "SF Pro" ];
+        };
+      };
+    };
+
     programs.sway = {
       enable = true;
       wrapperFeatures.gtk = true;
