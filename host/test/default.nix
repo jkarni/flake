@@ -1,9 +1,11 @@
-{ config, ... }: {
+{ modulesPath, ... }: {
   imports = [
-    ./hardware.nix
     ../../os/nixos
+    (modulesPath + "/profiles/qemu-guest.nix")
   ];
 
+  boot.loader.grub.device = "/dev/sda";
+  fileSystems."/" = { device = "/dev/sda2"; fsType = "ext4"; };
 
   networking = {
     useNetworkd = true;
@@ -11,10 +13,7 @@
     firewall.enable = false;
   };
 
-  # Workaround for fixing timeout issue
-  # manually reboot once
   systemd.network.wait-online.anyInterface = true;
-
   systemd.network.networks = {
     dhcp = {
       name = "eno0";
