@@ -50,6 +50,9 @@ in
     virtualisation.oci-containers.containers = {
       "httpserver" = {
         image = "capriciousduck/http-server";
+        volumes = [
+          "/var/lib/ServerStatus/hotaru-theme:/public"
+        ];
         extraOptions = [
           "--label"
           "traefik.enable=true"
