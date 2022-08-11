@@ -48,26 +48,26 @@ in
 
 
     virtualisation.oci-containers.containers = {
-      "httpserver" = {
-        image = "capriciousduck/http-server:arm64";
+      "nginx" = {
+        image = "nginx";
         volumes = [
-          "/var/lib/ServerStatus/hotaru-theme:/public"
+          "/var/lib/ServerStatus/hotaru-theme:/usr/share/nginx/html"
         ];
         extraOptions = [
           "--label"
           "traefik.enable=true"
 
           "--label"
-          "traefik.http.routers.httpserver.rule=Host(`top.${config.networking.domain}`)"
+          "traefik.http.routers.nginx.rule=Host(`top.${config.networking.domain}`)"
           "--label"
-          "traefik.http.routers.httpserver.entrypoints=web"
+          "traefik.http.routers.nginx.entrypoints=web"
           "--label"
-          "traefik.http.routers.httpserver.middlewares=web-redirect@file"
+          "traefik.http.routers.nginx.middlewares=web-redirect@file"
 
           "--label"
-          "traefik.http.routers.websecure-httpserver.rule=Host(`top.${config.networking.domain}`)"
+          "traefik.http.routers.websecure-nginx.rule=Host(`top.${config.networking.domain}`)"
           "--label"
-          "traefik.http.routers.websecure-httpserver.entrypoints=websecure"
+          "traefik.http.routers.websecure-nginx.entrypoints=websecure"
         ];
       };
     };
