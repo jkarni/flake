@@ -49,7 +49,7 @@ in
 
     virtualisation.oci-containers.containers = {
       "httpserver" = {
-        image = "capriciousduck/http-server";
+        image = "capriciousduck/http-server:arm64";
         volumes = [
           "/var/lib/ServerStatus/hotaru-theme:/public"
         ];
