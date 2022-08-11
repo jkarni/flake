@@ -73,16 +73,6 @@
     };
   };
 
-  # WAIT MERGE: https://github.com/NixOS/nixpkgs/pull/185629
-  # https://github.com/NixOS/nixpkgs/blob/master/nixos/modules/services/misc/nitter.nix#L350
-  # Disable old redis config way
-  services.nitter.redisCreateLocally = false;
-  services.redis.servers.nitter = {
-    enable = true;
-    port = 6379;
-  };
-
-
 
   services.invidious = {
     enable = true;

@@ -39,7 +39,7 @@
 
   # https://reorx.com/blog/track-and-download-shows-automatically-with-sonarr
   virtualisation.oci-containers.containers = {
-
+ 
     "jackett" = {
       image = "linuxserver/jackett";
       volumes = [
