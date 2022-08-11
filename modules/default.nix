@@ -20,7 +20,6 @@
       ./services/shadowsocks-rust.nix
       ./services/ssh-config.nix
       ./services/qbittorrent-nox.nix
-      ./services/rss-telegram.nix
       ./services/traefik-cloudflare.nix
       ./services/unblock-netease-music.nix
       ./services/server-status/client
