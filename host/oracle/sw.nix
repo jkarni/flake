@@ -18,7 +18,7 @@
       echo -e "$RED Please switch system again to use sops secrets and sync DNS $NOCOLOR"
     else
       ${pkgs.cloudflare-dns-sync} jackett.${config.networking.domain}
-      ${pkgs.cloudflare-dns-sync} jproxy.${config.networking.domain}
+      ${pkgs.cloudflare-dns-sync} xarr.${config.networking.domain}
       ${pkgs.cloudflare-dns-sync} sonarr.${config.networking.domain}
       ${pkgs.cloudflare-dns-sync} qb.media.${config.networking.domain}
       ${pkgs.cloudflare-dns-sync} jellyfin.${config.networking.domain}
@@ -29,7 +29,7 @@
   #   [ ! -d /download/jackett/config ] && mkdir -p /download/jackett/config
   #   [ ! -d /download/qbittorrent/config ] && mkdir -p /download/qbittorrent/config
   #   [ ! -d /download/jellyfin/config ] && mkdir -p /download/jellyfin/config
-  #   [ ! -d /download/jproxy/config ] && mkdir -p /download/jproxy/config
+  #   [ ! -d /download/xarr/config ] && mkdir -p /download/xarr/config
   #   [ ! -d /download/sonarr/config ] && mkdir -p /download/sonarr/config
   #   [ ! -d /download/sonarr/downloads ] && mkdir -p /download/sonarr/downloads
   #   [ ! -d /download/sonarr/media/anime ] && mkdir -p /download/sonarr/media/anime
@@ -59,18 +59,16 @@
       ];
     };
 
-    # podman run --name jproxy -v /download/jproxy/config:/app/config luckypuppy514/jproxy:arm64v8-latest --net=host
-    "jproxy" = {
-      image = "luckypuppy514/jproxy:arm64v8-latest";
+    "xarr" = {
+      image = "xiaoyi510/xarr-rss";
       volumes = [
-        "/download/jproxy/config:/app/config"
+        "/download/xarr/config:/app/conf"
       ];
       extraOptions = [
         "--label" "traefik.enable=true"
 
-        "--label" "traefik.http.routers.jproxy.rule=Host(`jproxy.${config.networking.domain}`)"
-        "--label" "traefik.http.routers.jproxy.entrypoints=web"
-        "--label" "traefik.http.services.jproxy.loadbalancer.server.port=8117"  
+        "--label" "traefik.http.routers.xarr.rule=Host(`xarr.${config.networking.domain}`)"
+        "--label" "traefik.http.routers.xarr.entrypoints=web"
       ];
     };
 
