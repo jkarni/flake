@@ -197,10 +197,16 @@
       packages."aarch64-darwin"."Anime4k" = import ./pkgs/Anime4k { inherit (nixpkgs.legacyPackages."aarch64-darwin") stdenvNoCC unzip fetchurl; };
 
       packages."aarch64-linux"."ServerStatus" = import ./pkgs/ServerStatus { inherit (nixpkgs.legacyPackages."aarch64-linux") stdenv unzip fetchurl; };
-
+      packages."aarch64-darwin"."ServerStatus" = import ./pkgs/ServerStatus { inherit (nixpkgs.legacyPackages."aarch64-darwin") stdenv unzip fetchurl; };
       #############################################################################################################################
       # Shell
-      # nix develop .#test
+
+      #  ${variable:-defaultValue}
+      #  first unpackPhase is the string variable we defined
+      #  second unpackPhase is the default unpackPhase function nixpkgs defined
+      #  if we don't define unpackPhase, eval ${unpackPhase:-unpackPhase} -> eval unpackPhase   [eval function_name]
+      #  if we define unpackPhase, eval ${unpackPhase:-unpackPhase} -> eval $unpackPhase   [eval shell_command_string_variable]
+
       # eval ${unpackPhase:-unpackPhase}
       # eval ${configurePhase:-configurePhase}
       # eval ${buildPhase:-buildPhase}
