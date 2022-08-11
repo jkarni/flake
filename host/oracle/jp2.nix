@@ -48,7 +48,7 @@ in
       image = "diygod/rsshub";
       extraOptions = [
         "--label" "traefik.enable=true"
-        "--label" "traefik.http.routers.websecure-rsshub.rule=Host(`rsshub.${config.networking.domain}`)"
+        "--label" "traefik.http.routers.websecure-rsshub.rule=Host(`rss.${config.networking.domain}`)"
         "--label" "traefik.http.routers.websecure-rsshub.entrypoints=websecure"
       ];
     };
