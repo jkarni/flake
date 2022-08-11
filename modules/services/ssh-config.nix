@@ -24,7 +24,7 @@ in
       extraConfig = ''
         Host github.com
           User git
-          IdentityFile ${config.sops.secrets.ssh-private-key.path}
+          IdentityFile ${config.sops.secrets.github-private-key.path}
       '';
     };
   };

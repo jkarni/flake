@@ -18,7 +18,7 @@ in
     sops.age.sshKeyPaths = [ "/etc/ssh/ssh_host_ed25519_key" ];
 
     sops.secrets.shadowsocks-config = { };
-    sops.secrets.ssh-private-key = { } // lib.optionalAttrs config.profile.desktopEnv.enable { owner = "dominic"; };
+    sops.secrets.github-private-key = { } // lib.optionalAttrs config.profile.desktopEnv.enable { owner = "dominic"; };
     sops.secrets.restic-password = { };
     sops.secrets.rclone-config = { };
     sops.secrets.traefik-cloudflare-env = { };
