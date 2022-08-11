@@ -46,32 +46,9 @@ in
       };
     };
 
-
-    virtualisation.oci-containers.containers = {
-      "nginx" = {
-        image = "nginx";
-        volumes = [
-          "/var/lib/ServerStatus/hotaru-theme:/usr/share/nginx/html"
-        ];
-        extraOptions = [
-          "--label"
-          "traefik.enable=true"
-
-          "--label"
-          "traefik.http.routers.nginx.rule=Host(`top.${config.networking.domain}`)"
-          "--label"
-          "traefik.http.routers.nginx.entrypoints=web"
-          "--label"
-          "traefik.http.routers.nginx.middlewares=web-redirect@file"
-
-          "--label"
-          "traefik.http.routers.websecure-nginx.rule=Host(`top.${config.networking.domain}`)"
-          "--label"
-          "traefik.http.routers.websecure-nginx.entrypoints=websecure"
-        ];
-      };
+    services.nginx.enable = true;
+    services.nginx.virtualHosts."top.${config.networking.domain}" = {
+      root = "/var/lib/ServerStatus/hotaru-theme";
     };
-
-
   };
 }

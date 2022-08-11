@@ -13,8 +13,6 @@ in
   ];
 
   services.status-client.enable = true;
-  
-  services.status-server.enable = true;
 
   services.traefik-cloudflare.enable = true;
 
