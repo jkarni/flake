@@ -33,16 +33,16 @@
 
     "miniflux" = {
       image = "miniflux/miniflux";
-      dependsOn = [ "miniflux-db" ];
+      dependsOn = [ "db" ];
       environment = {
-        "DATABASE_URL" = "postgres://miniflux:secret@miniflux-db/miniflux?sslmode=disable";
+        "DATABASE_URL" = "postgres://miniflux:secret@db/miniflux?sslmode=disable";
         "RUN_MIGRATIONS" = "1";
         "CREATE_ADMIN" = "1";
         "ADMIN_USERNAME" = "admin";
-        "ADMIN_PASSWORD" = "admin";
+        "ADMIN_PASSWORD" = "test123";
       };
       extraOptions = [
-        #"--network=miniflux"
+        "--network=miniflux"
 
         "--label"
         "traefik.enable=true"
@@ -54,7 +54,7 @@
       ];
     };
 
-    "miniflux-db" = {
+    "db" = {
       image = "postgres";
       volumes = [
         "/var/lib/miniflux-db:/var/lib/postgresql/data"
@@ -64,7 +64,7 @@
         "POSTGRES_PASSWORD" = "secret";
       };
       extraOptions = [
-        #"--network=miniflux"
+        "--network=miniflux"
       ];
     };
 
