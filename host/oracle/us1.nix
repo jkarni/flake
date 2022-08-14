@@ -8,12 +8,12 @@ let
   INVIDIOUS_CONFIG = ''
     database_url: postgres://kemal:kemal@invidious-db:5432/invidious
     check_tables: true
-    autoplay: true;
-    video_loop: true;
-    quality: "dash";
-    quality_dash: "best";
-    external_port: 443;
-    domain: "youtube.mlyxshi.com"
+    autoplay: true
+    video_loop: true
+    quality: dash
+    quality_dash: best
+    external_port: 443
+    domain: youtube.mlyxshi.com
     https_only: false
   '';
 
