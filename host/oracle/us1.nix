@@ -60,7 +60,6 @@ in
   virtualisation.oci-containers.containers = {
     "nitter" = {
       image = "quay.io/unixfox/nitter";
-      dependsOn = [ "nitter-redis" ];
       volumes = [
         "/var/lib/test/nitter.conf:/src/nitter.conf"
       ];
