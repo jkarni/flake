@@ -46,10 +46,24 @@ in
 
   services.traefik-cloudflare.enable = true;
 
+
+  services.traefik.dynamicConfigOptions = {
+    http.routers = {
+      nitter.rule = "Host(`twitter.${config.networking.domain}`)";
+      nitter.service = "nitter";
+    };
+
+    http.services = {
+      nitter.loadBalancer.servers = [{ url = "http://localhost:8083"; }];
+    };
+  };
+
   services.redis.servers.nitter = {
     enable = true;
     port = 6379;
   };
+
+
 
 
   system.activationScripts.makeInvidiousDir = lib.stringAfter [ "var" ] ''
@@ -64,12 +78,7 @@ in
         "/var/lib/test/nitter.conf:/src/nitter.conf"
       ];
       extraOptions = [
-        "--label"
-        "traefik.enable=true"
-        "--label"
-        "traefik.http.routers.websecure-nitter.rule=Host(`twitter.${config.networking.domain}`)"
-        "--label"
-        "traefik.http.routers.websecure-nitter.entrypoints=websecure"
+        "--net=host"
       ];
     };
 
