@@ -75,7 +75,7 @@ in
 
   services.redis.servers.nitter = {
     enable = true;
-    port = 8083;
+    port = 6379;
   };
 
 
