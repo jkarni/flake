@@ -12,7 +12,6 @@ let
     external_port: 443
     domain: youtube.${config.networking.domain}
     https_only: true
-    popular_enabled: false
     registration_enabled: false
 
     default_user_preferences:
@@ -51,8 +50,8 @@ in
   services.traefik-cloudflare.enable = true;
   services.traefik.dynamicConfigOptions = {
     http.routers = {
-      libreddit.rule = "Host(`reddit.${config.networking.domain}`)";
-      libreddit.service = "libreddit";
+      # libreddit.rule = "Host(`reddit.${config.networking.domain}`)";
+      # libreddit.service = "libreddit";
 
       nitter.rule = "Host(`twitter.${config.networking.domain}`)";
       nitter.service = "nitter";
@@ -60,22 +59,22 @@ in
     };
 
     http.services = {
-      libreddit.loadBalancer.servers = [{ url = "http://localhost:8082"; }];
+      #libreddit.loadBalancer.servers = [{ url = "http://localhost:8082"; }];
       nitter.loadBalancer.servers = [{ url = "http://localhost:8083"; }];
     };
   };
 
 
-  services.libreddit = {
-    enable = true;
-    address = "127.0.0.1";
-    port = 8082;
-  };
-  systemd.services.libreddit.environment = {
-    LIBREDDIT_DEFAULT_WIDE = "on";
-    LIBREDDIT_DEFAULT_SHOW_NSFW = "on";
-    LIBREDDIT_DEFAULT_USE_HLS = "on";
-  };
+  # services.libreddit = {
+  #   enable = true;
+  #   address = "127.0.0.1";
+  #   port = 8082;
+  # };
+  # systemd.services.libreddit.environment = {
+  #   LIBREDDIT_DEFAULT_WIDE = "on";
+  #   LIBREDDIT_DEFAULT_SHOW_NSFW = "on";
+  #   LIBREDDIT_DEFAULT_USE_HLS = "on";
+  # };
 
 
   services.nitter = {
@@ -101,6 +100,22 @@ in
 
   virtualisation.podman.defaultNetwork.dnsname.enable = true;
   virtualisation.oci-containers.containers = {
+    "libreddit" = {
+      image = "spikecodes/libreddit:arm";
+      environment = {
+        LIBREDDIT_DEFAULT_WIDE = "on";
+        LIBREDDIT_DEFAULT_SHOW_NSFW = "on";
+        LIBREDDIT_DEFAULT_USE_HLS = "on";
+      };
+      extraOptions = [
+        "--label"
+        "traefik.enable=true"
+        "--label"
+        "traefik.http.routers.websecure-libreddit.rule=Host(`reddit.${config.networking.domain}`)"
+        "--label"
+        "traefik.http.routers.websecure-libreddit.entrypoints=websecure"
+      ];
+    };
 
     "invidious" = {
       image = "quay.io/invidious/invidious:latest-arm64";
@@ -109,11 +124,8 @@ in
         inherit INVIDIOUS_CONFIG;
       };
       extraOptions = [
-
         "--label"
         "traefik.enable=true"
-
-
         "--label"
         "traefik.http.routers.websecure-invidious.rule=Host(`youtube.${config.networking.domain}`)"
         "--label"
