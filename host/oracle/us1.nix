@@ -2,7 +2,30 @@
 , pkgs
 , lib
 , ...
-}: {
+}:
+let
+
+  INVIDIOUS_CONFIG = ''
+    db:
+      dbname: invidious
+      user: kemal
+      password: kemal
+      host: invidious-db
+      port: 5432
+    check_tables: true
+    autoplay = true;
+    video_loop = true;
+    quality = "dash";
+    quality_dash = "best";
+    # external_port:
+    # domain:
+    # https_only: false
+    # statistics_enabled: false
+  '';
+
+
+in
+{
   imports = [
     ./default.nix
   ];
@@ -98,20 +121,7 @@
       image = "quay.io/invidious/invidious:latest-arm64";
       dependsOn = [ "invidious-db" ];
       environment = {
-        INVIDIOUS_CONFIG = ''
-        db:
-          dbname: invidious
-          user: kemal
-          password: kemal
-          host: invidious-db
-          port: 5432
-        check_tables: true
-        # external_port:
-        # domain:
-        # https_only: false
-        # statistics_enabled: false
-
-        '';
+        inherit INVIDIOUS_CONFIG;
       };
       extraOptions = [
 
