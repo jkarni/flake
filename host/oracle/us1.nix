@@ -45,16 +45,16 @@ in
   '';
 
   services.traefik-cloudflare.enable = true;
-  # services.traefik.dynamicConfigOptions = {
-  #   http.routers = {
-  #     nitter.rule = "Host(`twitter.${config.networking.domain}`)";
-  #     nitter.service = "nitter";
-  #   };
+  services.traefik.dynamicConfigOptions = {
+    http.routers = {
+      nitter.rule = "Host(`twitter.${config.networking.domain}`)";
+      nitter.service = "nitter";
+    };
 
-  #   http.services = {
-  #     nitter.loadBalancer.servers = [{ url = "http://localhost:8083"; }];
-  #   };
-  # };
+    http.services = {
+      nitter.loadBalancer.servers = [{ url = "http://localhost:8083"; }];
+    };
+  };
 
 
   # services.nitter = {
@@ -87,6 +87,7 @@ in
         "/var/lib/test/nitter.conf:/src/nitter.conf"
       ];
       extraOptions = [
+        "--net=host"
         "--label"
         "traefik.enable=true"
         "--label"
@@ -94,14 +95,6 @@ in
         "--label"
         "traefik.http.routers.websecure-nitter.entrypoints=websecure"
       ];
-    };
-
-    "nitter-redis" = {
-      image = "redis";
-      volumes = [
-        "/var/lib/test/redis:/data"
-      ];
-      cmd = [ "redis-server" "--save" "60" "1" "--loglevel" "warning" ];
     };
 
 
@@ -157,3 +150,13 @@ in
 
 
 }
+
+
+
+podman run \
+  --rm \
+  --name='nitter' \
+  --log-driver=journald \
+  -v '/var/lib/test/nitter.conf:/src/nitter.conf' \
+  quay.io/unixfox/nitter
+
