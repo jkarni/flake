@@ -28,7 +28,7 @@ in
   ];
 
   services.status-client.enable = true;
-  services.unblock-netease-music.enable = true;
+  #services.unblock-netease-music.enable = true;
 
   system.activationScripts.SyncReplaceDNS = lib.stringAfter [ "var" ] ''
     RED='\033[0;31m'
@@ -82,6 +82,13 @@ in
 
   virtualisation.podman.defaultNetwork.dnsname.enable = true;
   virtualisation.oci-containers.containers = {
+
+    #podman run -p 8080:8080 pan93412/unblock-netease-music-enhanced -e https://music.163.com -o ytdlp bilibili
+    "unblock-netease-music" = {
+      image = "pan93412/unblock-netease-music-enhanced";
+      ports = [ "8080:8080" ];
+      cmd = [ "-e" "https://music.163.com" "-o" "ytdlp" "bilibili" ];
+    };
 
     "libreddit" = {
       image = "spikecodes/libreddit:arm";
