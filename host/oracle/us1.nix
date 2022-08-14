@@ -4,7 +4,6 @@
 , ...
 }:
 let
-
   # https://github.com/iv-org/invidious/blob/master/config/config.example.yml 
   INVIDIOUS_CONFIG = ''
     database_url: postgres://kemal:kemal@invidious-db:5432/invidious
@@ -22,8 +21,6 @@ let
       default_home: Search
       feed_menu: []
   '';
-
-
 in
 {
   imports = [
@@ -50,31 +47,14 @@ in
   services.traefik-cloudflare.enable = true;
   services.traefik.dynamicConfigOptions = {
     http.routers = {
-      # libreddit.rule = "Host(`reddit.${config.networking.domain}`)";
-      # libreddit.service = "libreddit";
-
       nitter.rule = "Host(`twitter.${config.networking.domain}`)";
       nitter.service = "nitter";
-
     };
 
     http.services = {
-      #libreddit.loadBalancer.servers = [{ url = "http://localhost:8082"; }];
       nitter.loadBalancer.servers = [{ url = "http://localhost:8083"; }];
     };
   };
-
-
-  # services.libreddit = {
-  #   enable = true;
-  #   address = "127.0.0.1";
-  #   port = 8082;
-  # };
-  # systemd.services.libreddit.environment = {
-  #   LIBREDDIT_DEFAULT_WIDE = "on";
-  #   LIBREDDIT_DEFAULT_SHOW_NSFW = "on";
-  #   LIBREDDIT_DEFAULT_USE_HLS = "on";
-  # };
 
 
   services.nitter = {
@@ -108,6 +88,7 @@ in
         LIBREDDIT_DEFAULT_USE_HLS = "on";
       };
       extraOptions = [
+        "--no-healthcheck" # libreddit default healthcheck always fail which will cause traefik omit it.
         "--label"
         "traefik.enable=true"
         "--label"
@@ -149,33 +130,5 @@ in
 
   };
 
-
-  # Do not use cloudflared, <--bandwidth limit
-
-  # sops.secrets.cloudflared-tunnel-us-env = { };
-  # systemd.services.cloudflared = {
-  #   wantedBy = [ "multi-user.target" ];
-  #   after = [ "network-online.target" "systemd-resolved.service" ];
-  #   serviceConfig = {
-  #     ExecStart = ''
-  #       ${pkgs.bash}/bin/bash -c "${pkgs.cloudflared}/bin/cloudflared tunnel --no-autoupdate run --token=$TOKEN"
-  #     '';
-  #     # Restart = "always";
-  #     EnvironmentFile = config.sops.secrets.cloudflared-tunnel-us-env.path;
-  #   };
-  # };
-
-
-  # virtualisation.oci-containers.containers = {
-  #   "librespeed" = {
-  #     image = "linuxserver/librespeed";
-  #     extraOptions = [
-  #       "--label"
-  #       "traefik.enable=true"
-  #       "--label"
-  #       "traefik.http.routers.librespeed.rule=Host(`librespeed.${config.networking.domain}`)"
-  #     ];
-  #   };
-  # };
 
 }
