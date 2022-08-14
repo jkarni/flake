@@ -83,7 +83,7 @@
       video_loop = true;
       quality = "dash";
       quality_dash = "best";
-      external_port = "443";
+      external_port = "80";
     };
   };
 
