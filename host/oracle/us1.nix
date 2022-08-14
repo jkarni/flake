@@ -120,7 +120,7 @@
 
 
         "--label"
-        "traefik.http.routers.websecure-invidious.rule=Host(`invidious.${config.networking.domain}`)"
+        "traefik.http.routers.websecure-invidious.rule=Host(`youtube.${config.networking.domain}`)"
         "--label"
         "traefik.http.routers.websecure-invidious.entrypoints=websecure"
       ];
