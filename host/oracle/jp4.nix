@@ -40,11 +40,13 @@
       dependsOn = [ "miniflux-db" ];
       environmentFiles = [ config.sops.secrets.miniflux-env.path ];
       environment = {
-        #INVIDIOUS_INSTANCE = "youtube.mlyxshi.com";
+        INVIDIOUS_INSTANCE = "youtube.${config.networking.domain}";
         CREATE_ADMIN="1";
         RUN_MIGRATIONS="1";
       };
       extraOptions = [
+        "--network=miniflux"
+        
         "--label"
         "traefik.enable=true"
 
@@ -69,8 +71,7 @@
       ];
       environmentFiles = [ config.sops.secrets.miniflux-db-env.path ];
       extraOptions = [
-        # postgres do not support traefik redirect?
-        "--network=host"
+        "--network=miniflux"
       ];
     };
 
