@@ -13,14 +13,13 @@ let
       host: invidious-db
       port: 5432
     check_tables: true
-    autoplay = true;
-    video_loop = true;
-    quality = "dash";
-    quality_dash = "best";
-    # external_port:
-    # domain:
-    # https_only: false
-    # statistics_enabled: false
+    autoplay: true;
+    video_loop: true;
+    quality: "dash";
+    quality_dash: "best";
+    external_port: 443;
+    domain: "youtube.mlyxshi.com"
+    https_only: false
   '';
 
 
