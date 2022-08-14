@@ -36,7 +36,7 @@
       image = "miniflux/miniflux";
       dependsOn = [ "miniflux-db" ];
       environment = {
-        "DATABASE_URL" = "user=miniflux password=12345 dbname=miniflux host=miniflux-db.mlyxshi.com port=80 sslmode=disable";
+        "DATABASE_URL" = "user=miniflux password=12345 dbname=miniflux host=miniflux.mlyxshi.com port=5432 sslmode=disable";
         "RUN_MIGRATIONS" = "1";
         "CREATE_ADMIN" = "1";
         "ADMIN_USERNAME" = "admin";
@@ -63,13 +63,7 @@
         "POSTGRES_PASSWORD" = "12345";
       };
       extraOptions = [
-        #"--network=host"
-
-        "--label"
-        "traefik.enable=true"
-
-        "--label" "traefik.http.routers.miniflux-db.rule=Host(`miniflux-db.${config.networking.domain}`)"
-        "--label" "traefik.http.routers.miniflux-db.entrypoints=web"
+        "--network=host"
       ];
     };
 
