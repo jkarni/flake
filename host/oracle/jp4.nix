@@ -42,7 +42,7 @@
         "ADMIN_PASSWORD" = "admin";
       };
       extraOptions = [
-        "--network=miniflux"
+        #"--network=miniflux"
 
         "--label"
         "traefik.enable=true"
@@ -64,7 +64,7 @@
         "POSTGRES_PASSWORD" = "secret";
       };
       extraOptions = [
-        "--network=miniflux"
+        #"--network=miniflux"
       ];
     };
 
