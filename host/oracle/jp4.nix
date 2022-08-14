@@ -61,7 +61,8 @@
         "/var/lib/miniflux-db:/var/lib/postgresql/data"
       ];
       environment = {
-        "POSTGRES_PASSWORD" = "secret";
+        "POSTGRES_USER" = "miniflux";
+        "POSTGRES_PASSWORD" = "12345";
       };
       extraOptions = [
         "--network=host"
