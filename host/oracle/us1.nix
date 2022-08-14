@@ -1,8 +1,4 @@
-{ config
-, pkgs
-, lib
-, ...
-}:
+{ config, pkgs, lib, ...}:
 let
   # https://github.com/iv-org/invidious/blob/master/config/config.example.yml 
   INVIDIOUS_CONFIG = ''
@@ -27,8 +23,6 @@ in
     ./default.nix
     ../../modules/services/traefik-cloudflare.nix
   ];
-
-  services.status-client.enable = true;
 
   system.activationScripts.SyncReplaceDNS = lib.stringAfter [ "var" ] ''
     RED='\033[0;31m'
@@ -80,7 +74,6 @@ in
     [ ! -d /var/lib/invidious ] && mkdir -p /var/lib/invidious-db
   '';
 
-  virtualisation.podman.defaultNetwork.dnsname.enable = true;
   virtualisation.oci-containers.containers = {
 
     #podman run -p 8080:8080 pan93412/unblock-netease-music-enhanced -e https://music.163.com -o ytdlp bilibili

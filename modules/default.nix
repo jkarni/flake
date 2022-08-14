@@ -17,10 +17,5 @@
       ./profile/desktopEnv.nix
       ./profile/waylandNightly.nix
       ./secrets
-      ./services/shadowsocks-rust.nix
-      ./services/ssh-config.nix
-      ./services/qbittorrent-nox.nix
-      ./services/server-status/client
-      ./services/server-status/server
     ];
 }

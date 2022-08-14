@@ -1,8 +1,4 @@
-{ pkgs
-, lib
-, config
-, ...
-}:
+{ pkgs, lib, config, ...}:
 let
   RssConfigDir = "/var/lib/rss";
 in
@@ -12,9 +8,6 @@ in
     ./default.nix
     ../../modules/services/traefik-cloudflare.nix
   ];
-
-  services.status-client.enable = true;
-
 
 
   sops.secrets.tg-rss-env = { };

@@ -5,6 +5,9 @@
     ../../home/home-manager.nix
 
     ../../script/cloudflare-dns-sync.nix
+    ../../modules/services/server-status/client
+    ../../modules/services/shadowsocks-rust.nix
+    ../../modules/services/ssh-config.nix
   ];
 
   home-manager.users.root = import ../../home;
@@ -16,6 +19,8 @@
   boot.tmpOnTmpfs = true;
 
   virtualisation.podman.enable = true;
+  # unlike docker, to enable dns resolution between different containers, we need enable dnsname plugin under podman --> https://github.com/containers/dnsname 
+  virtualisation.podman.defaultNetwork.dnsname.enable =true;
 
   networking = {
     useNetworkd = true;

@@ -1,29 +1,17 @@
-{ pkgs
-, lib
-, config
-, ...
-}:
-let
-  cfg = config.services.shadowsocks-rust;
-in
-{
-  options = {
-    services.shadowsocks-rust.enable = lib.mkEnableOption "shadowsocks-rust service";
-  };
+{ pkgs, lib, config, ... }: {
+  sops.secrets.shadowsocks-config = { };
 
-  config = lib.mkIf cfg.enable {
-    environment.systemPackages = with pkgs; [
-      shadowsocks-rust
-    ];
+  environment.systemPackages = with pkgs; [
+    shadowsocks-rust
+  ];
 
-    systemd.services.shadowsocks-rust = {
-      after = [ "network.target" ];
-      wantedBy = [ "multi-user.target" ];
+  systemd.services.shadowsocks-rust = {
+    after = [ "network.target" ];
+    wantedBy = [ "multi-user.target" ];
 
-      serviceConfig = {
-        Restart = "always";
-        ExecStart = "${pkgs.shadowsocks-rust}/bin/ssserver -c ${config.sops.secrets.shadowsocks-config.path}";
-      };
+    serviceConfig = {
+      Restart = "always";
+      ExecStart = "${pkgs.shadowsocks-rust}/bin/ssserver -c ${config.sops.secrets.shadowsocks-config.path}";
     };
   };
 }

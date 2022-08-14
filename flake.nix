@@ -114,8 +114,6 @@
               profile.waylandNightly.enable = true;
               profile.developerMode.enable = true;
               secrets.sops-nix.enable = true;
-
-              services.ssh-config.enable = true;
             }
           ];
           specialArgs = commonSpecialArgs // { isLinux = true; };
@@ -132,7 +130,6 @@
               system.stateVersion = stateVersion;
               networking.hostName = "test";
               #secrets.sops-nix.enable = true;
-              #services.shadowsocks-rust.enable = true;
             }
           ];
         };
@@ -158,9 +155,6 @@
               boot.loader.systemd-boot.netbootxyz.enable = true;
 
               secrets.sops-nix.enable = true;
-
-              services.ssh-config.enable = true;
-              services.shadowsocks-rust.enable = true;
             }
           ];
           specialArgs = commonSpecialArgs // { isLinux = true; };

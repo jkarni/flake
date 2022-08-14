@@ -1,14 +1,8 @@
-{ config
-, pkgs
-, lib
-, ...
-}: {
+{ config, pkgs, lib, ...}: {
   imports = [
     ./default.nix
     ../../modules/services/traefik-cloudflare.nix
   ];
-
-  services.status-client.enable = true;
 
   system.activationScripts.SyncMediaDNS = lib.stringAfter [ "var" ] ''
     RED='\033[0;31m'

@@ -1,13 +1,8 @@
-{ config
-, pkgs
-, lib
-, ...
-}: {
+{ config, pkgs, lib, ...}: {
   imports = [
     ./default.nix
   ];
 
-  services.status-client.enable = true;
 
   system.activationScripts.SyncDNS = lib.stringAfter [ "var" ] ''
     RED='\033[0;31m'

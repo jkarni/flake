@@ -4,7 +4,6 @@
 , ...
 }:
 let
-  cfg = config.services.status-client;
   serverstatus-client-script = pkgs.writeScript "serverstatus-client-script" (''
     SERVER = "top.${config.networking.domain}"
     PORT = 35601
@@ -15,21 +14,18 @@ let
   + builtins.readFile ./serverstatus-client.py);
 in
 {
-  options = {
-    services.status-client.enable = lib.mkEnableOption "status-client service";
-  };
 
-  config = lib.mkIf cfg.enable {
-    services.vnstat.enable = true;
 
-    systemd.services.serverstatus-client = {
-      description = "serverstatus-client";
-      after = [ "network.target" ];
-      wantedBy = [ "multi-user.target" ];
+  services.vnstat.enable = true;
 
-      serviceConfig = {
-        ExecStart = "${pkgs.python3}/bin/python ${serverstatus-client-script}";
-      };
+  systemd.services.serverstatus-client = {
+    description = "serverstatus-client";
+    after = [ "network.target" ];
+    wantedBy = [ "multi-user.target" ];
+
+    serviceConfig = {
+      ExecStart = "${pkgs.python3}/bin/python ${serverstatus-client-script}";
     };
   };
+
 }

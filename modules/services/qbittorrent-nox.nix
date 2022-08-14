@@ -1,10 +1,5 @@
-{ pkgs
-, lib
-, config
-, ...
-}:
+{ pkgs, lib, config, ... }:
 let
-  cfg = config.services.qbittorrent-nox;
   qbConfigDir = "/var/lib/qbittorrent-nox";
   #  Run external program on torrent completion
   # /run/current-system/sw/bin/qbScript "%N" "%F" "%C" "%Z" "%I" "%L"
@@ -74,60 +69,53 @@ let
   '';
 in
 {
-  options = {
-    services.qbittorrent-nox.enable = lib.mkEnableOption "qbittorrent-nox download service";
+  sops.secrets.tg-userid = { };
+  sops.secrets.tg-notify-token = { };
+
+  environment.systemPackages = with pkgs; [
+    qbittorrent-nox
+    rclone
+    qbScript
+  ];
+
+  system.activationScripts.SyncQbDNS = lib.stringAfter [ "var" ] ''
+    RED='\033[0;31m'
+    NOCOLOR='\033[0m'
+
+    if [ ! -f ${config.sops.secrets.cloudflare-dns-token.path} ]; then
+      echo -e "$RED Sops-nix Known Limitations: https://github.com/Mic92/sops-nix#using-secrets-at-evaluation-time $NOCOLOR"
+      echo -e "$RED Please switch system again to use sops secrets and sync DNS $NOCOLOR"
+    else
+      ${pkgs.cloudflare-dns-sync} qb.${config.networking.domain}
+    fi
+  '';
+
+
+  # https://github.com/1sixth/flakes/blob/master/modules/qbittorrent-nox.nix
+  # https://github.com/qbittorrent/qBittorrent/wiki/How-to-use-portable-mode
+
+  systemd.services.qbittorrent-nox = {
+    after = [ "local-fs.target" "network-online.target" "nss-lookup.target" ];
+    description = "qBittorrent-nox service";
+    serviceConfig = {
+      ExecStart = "${pkgs.qbittorrent-nox}/bin/qbittorrent-nox --profile=${qbConfigDir} --relative-fastresume";
+      StateDirectory = "qbittorrent-nox";
+    };
+    wantedBy = [ "multi-user.target" ];
+    wants = [ "network-online.target" ];
   };
 
-
-  config = lib.mkIf cfg.enable {
-    sops.secrets.tg-userid = { };
-    sops.secrets.tg-notify-token = { };
-
-    environment.systemPackages = with pkgs; [
-      qbittorrent-nox
-      rclone
-      qbScript
+  services.restic.backups."bt-backup" = {
+    extraBackupArgs = [
+      "--exclude=qBittorrent/downloads"
     ];
-
-    system.activationScripts.SyncQbDNS = lib.stringAfter [ "var" ] ''
-      RED='\033[0;31m'
-      NOCOLOR='\033[0m'
-
-      if [ ! -f ${config.sops.secrets.cloudflare-dns-token.path} ]; then
-        echo -e "$RED Sops-nix Known Limitations: https://github.com/Mic92/sops-nix#using-secrets-at-evaluation-time $NOCOLOR"
-        echo -e "$RED Please switch system again to use sops secrets and sync DNS $NOCOLOR"
-      else
-        ${pkgs.cloudflare-dns-sync} qb.${config.networking.domain}
-      fi
-    '';
-
-
-    # https://github.com/1sixth/flakes/blob/master/modules/qbittorrent-nox.nix
-    # https://github.com/qbittorrent/qBittorrent/wiki/How-to-use-portable-mode
-
-    systemd.services.qbittorrent-nox = {
-      after = [ "local-fs.target" "network-online.target" "nss-lookup.target" ];
-      description = "qBittorrent-nox service";
-      serviceConfig = {
-        ExecStart = "${pkgs.qbittorrent-nox}/bin/qbittorrent-nox --profile=${qbConfigDir} --relative-fastresume";
-        StateDirectory = "qbittorrent-nox";
-      };
-      wantedBy = [ "multi-user.target" ];
-      wants = [ "network-online.target" ];
-    };
-
-    services.restic.backups."bt-backup" = {
-      extraBackupArgs = [
-        "--exclude=qBittorrent/downloads"
-      ];
-      passwordFile = config.sops.secrets.restic-password.path;
-      rcloneConfigFile = config.sops.secrets.rclone-config.path;
-      paths = [
-        "${qbConfigDir}"
-      ];
-      repository = "rclone:r2:backup";
-      timerConfig.OnCalendar = "01:00";
-      pruneOpts = [ "--keep-last 2" ];
-    };
+    passwordFile = config.sops.secrets.restic-password.path;
+    rcloneConfigFile = config.sops.secrets.rclone-config.path;
+    paths = [
+      "${qbConfigDir}"
+    ];
+    repository = "rclone:r2:backup";
+    timerConfig.OnCalendar = "01:00";
+    pruneOpts = [ "--keep-last 2" ];
   };
 }

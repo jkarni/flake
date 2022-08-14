@@ -1,17 +1,10 @@
-{ config
-, pkgs
-, lib
-, ...
-}: {
+{ config, pkgs, lib, ...}: {
   imports = [
     ./default.nix
     ../../modules/services/traefik-cloudflare.nix
+    ../../modules/services/qbittorrent-nox.nix
   ];
 
-  services.status-client.enable = true;
-  #services.status-server.enable = true;
-
-  services.qbittorrent-nox.enable = true;
 
 
   sops.secrets.miniflux-env = { };
@@ -31,11 +24,6 @@
       ${pkgs.cloudflare-dns-sync} miniflux.${config.networking.domain}
     fi
   '';
-
-
-  # miniflux and miniflux-db will connect to same default podman network bridge
-  # unlike docker, to enable dns resolution between different containers, we need enable dnsname plugin under podman --> https://github.com/containers/dnsname 
-  virtualisation.podman.defaultNetwork.dnsname.enable =true;
 
   virtualisation.oci-containers.containers = {
 
