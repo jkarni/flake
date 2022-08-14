@@ -10,7 +10,7 @@
   services.status-client.enable = true;
   #services.status-server.enable = true;
 
-  #services.qbittorrent-nox.enable = true;
+  services.qbittorrent-nox.enable = true;
 
 
   sops.secrets.miniflux-env = { };
@@ -39,6 +39,11 @@
       image = "miniflux/miniflux";
       dependsOn = [ "miniflux-db" ];
       environmentFiles = [ config.sops.secrets.miniflux-env.path ];
+      environment = {
+        INVIDIOUS_INSTANCE = "youtube.mlyxshi.com";
+        CREATE_ADMIN="1";
+        RUN_MIGRATIONS="1";
+      };
       extraOptions = [
         "--label"
         "traefik.enable=true"
@@ -64,11 +69,23 @@
       ];
       environmentFiles = [ config.sops.secrets.miniflux-db-env.path ];
       extraOptions = [
+        # postgres do not support traefik redirect?
         "--network=host"
       ];
     };
 
 
+  };
+
+  services.restic.backups."miniflux-db-backup" = {
+    passwordFile = config.sops.secrets.restic-password.path;
+    rcloneConfigFile = config.sops.secrets.rclone-config.path;
+    paths = [
+      "/var/lib/miniflux-db"
+    ];
+    repository = "rclone:r2:backup";
+    timerConfig.OnCalendar = "04:00";
+    pruneOpts = [ "--keep-last 2" ];
   };
 
 }
