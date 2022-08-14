@@ -61,19 +61,18 @@
         "/var/lib/miniflux-db:/var/lib/postgresql/data"
       ];
       environment = {
-        "POSTGRES_USER" = "miniflux";
         "POSTGRES_PASSWORD" = "secret";
       };
       extraOptions = [
-        #"--network=host"
+        "--network=host"
 
-        "--label"
-        "traefik.enable=true"
+        # "--label"
+        # "traefik.enable=true"
 
-        "--label"
-        "traefik.http.routers.websecure-miniflux-db.rule=Host(`miniflux-db.${config.networking.domain}`)"
-        "--label"
-        "traefik.http.routers.websecure-miniflux-db.entrypoints=websecure"
+        # "--label"
+        # "traefik.http.routers.websecure-miniflux-db.rule=Host(`miniflux-db.${config.networking.domain}`)"
+        # "--label"
+        # "traefik.http.routers.websecure-miniflux-db.entrypoints=websecure"
       ];
     };
 
