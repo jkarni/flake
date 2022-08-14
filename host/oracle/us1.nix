@@ -45,33 +45,33 @@ in
   '';
 
   services.traefik-cloudflare.enable = true;
-  services.traefik.dynamicConfigOptions = {
-    http.routers = {
-      nitter.rule = "Host(`twitter.${config.networking.domain}`)";
-      nitter.service = "nitter";
-    };
+  # services.traefik.dynamicConfigOptions = {
+  #   http.routers = {
+  #     nitter.rule = "Host(`twitter.${config.networking.domain}`)";
+  #     nitter.service = "nitter";
+  #   };
 
-    http.services = {
-      nitter.loadBalancer.servers = [{ url = "http://localhost:8083"; }];
-    };
-  };
+  #   http.services = {
+  #     nitter.loadBalancer.servers = [{ url = "http://localhost:8083"; }];
+  #   };
+  # };
 
 
-  services.nitter = {
-    enable = true;
-    preferences = {
-      replaceTwitter = config.services.nitter.server.hostname;
-      infiniteScroll = true;
-      hlsPlayback = true;
-      theme = "Auto";
-    };
-    server = {
-      address = "127.0.0.1";
-      https = true;
-      hostname = "twitter.${config.networking.domain}";
-      port = 8083;
-    };
-  };
+  # services.nitter = {
+  #   enable = true;
+  #   preferences = {
+  #     replaceTwitter = config.services.nitter.server.hostname;
+  #     infiniteScroll = true;
+  #     hlsPlayback = true;
+  #     theme = "Auto";
+  #   };
+  #   server = {
+  #     address = "127.0.0.1";
+  #     https = true;
+  #     hostname = "twitter.${config.networking.domain}";
+  #     port = 8083;
+  #   };
+  # };
 
 
   system.activationScripts.makeInvidiousDir = lib.stringAfter [ "var" ] ''
@@ -80,6 +80,31 @@ in
 
   virtualisation.podman.defaultNetwork.dnsname.enable = true;
   virtualisation.oci-containers.containers = {
+    "nitter" = {
+      image = "quay.io/unixfox/nitter";
+      dependsOn = [ "nitter-redis" ];
+      volumes = [
+        "/var/lib/test/nitter.conf:/src/nitter.conf"
+      ];
+      extraOptions = [
+        "--label"
+        "traefik.enable=true"
+        "--label"
+        "traefik.http.routers.websecure-nitter.rule=Host(`twitter.${config.networking.domain}`)"
+        "--label"
+        "traefik.http.routers.websecure-nitter.entrypoints=websecure"
+      ];
+    };
+
+    "nitter-redis" = {
+      image = "redis";
+      volumes = [
+        "/var/lib/test/redis:/data"
+      ];
+      cmd = [ "redis-server" "--save" "60" "1" "--loglevel" "warning" ];
+    };
+
+
     "libreddit" = {
       image = "spikecodes/libreddit:arm";
       environment = {
