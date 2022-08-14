@@ -5,16 +5,21 @@
 }:
 let
 
+  # https://github.com/iv-org/invidious/blob/master/config/config.example.yml 
   INVIDIOUS_CONFIG = ''
     database_url: postgres://kemal:kemal@invidious-db:5432/invidious
     check_tables: true
-    autoplay: true
-    video_loop: true
-    quality: dash
-    quality_dash: best
     external_port: 443
-    domain: youtube.mlyxshi.com
-    https_only: false
+    domain: youtube.${config.networking.domain}
+    https_only: true
+    popular_enabled: false
+    registration_enabled: false
+
+    default_user_preferences:
+      autoplay: true
+      video_loop: true
+      quality: dash
+      quality_dash: best
   '';
 
 
@@ -91,19 +96,6 @@ in
   };
 
 
-  # services.invidious = {
-  #   enable = true;
-  #   domain = "youtube.${config.networking.domain}";
-  #   port = 8084;
-  #   settings = {
-  #     autoplay = true;
-  #     video_loop = true;
-  #     quality = "dash";
-  #     quality_dash = "best";
-  #     external_port = "80";
-  #   };
-  # };
-
   system.activationScripts.makeInvidiousDir = lib.stringAfter [ "var" ] ''
     [ ! -d /var/lib/invidious ] && mkdir -p /var/lib/invidious-db
   '';
@@ -137,6 +129,7 @@ in
         "/var/lib/invidious-db:/var/lib/postgresql/data"
       ];
       environment = {
+        # public service
         POSTGRES_DB = "invidious";
         POSTGRES_USER = "kemal";
         POSTGRES_PASSWORD = "kemal";
