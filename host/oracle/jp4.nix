@@ -35,7 +35,7 @@
       image = "miniflux/miniflux";
       dependsOn = [ "db" ];
       environment = {
-        "DATABASE_URL" = "postgres://miniflux:secret@db/miniflux?sslmode=disable";
+        "DATABASE_URL" = "user=miniflux password=secret dbname=db sslmode=disable";
         "RUN_MIGRATIONS" = "1";
         "CREATE_ADMIN" = "1";
         "ADMIN_USERNAME" = "admin";
