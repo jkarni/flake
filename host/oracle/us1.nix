@@ -73,6 +73,11 @@ in
   #   };
   # };
 
+  services.redis.servers.nitter = {
+    enable = true;
+    port = 8083;
+  };
+
 
   system.activationScripts.makeInvidiousDir = lib.stringAfter [ "var" ] ''
     [ ! -d /var/lib/invidious ] && mkdir -p /var/lib/invidious-db
@@ -153,10 +158,11 @@ in
 
 
 
-podman run \
-  --rm \
-  --name='nitter' \
-  --log-driver=journald \
-  -v '/var/lib/test/nitter.conf:/src/nitter.conf' \
-  quay.io/unixfox/nitter
+  podman
+  run \
+- -rm \
+  - -name='nitter' \
+--log-driver=journald \
+-v '/var/lib/test/nitter.conf:/src/nitter.conf' \
+quay.io/unixfox/nitter
 
