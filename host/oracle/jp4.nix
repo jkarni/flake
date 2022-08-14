@@ -44,13 +44,13 @@
       extraOptions = [
         "--network=miniflux"
 
-        "--label"
-        "traefik.enable=true"
+        # "--label"
+        # "traefik.enable=true"
 
-        "--label"
-        "traefik.http.routers.websecure-miniflux.rule=Host(`miniflux.${config.networking.domain}`)"
-        "--label"
-        "traefik.http.routers.websecure-miniflux.entrypoints=websecure"
+        # "--label"
+        # "traefik.http.routers.websecure-miniflux.rule=Host(`miniflux.${config.networking.domain}`)"
+        # "--label"
+        # "traefik.http.routers.websecure-miniflux.entrypoints=websecure"
       ];
     };
 
