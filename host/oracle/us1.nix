@@ -6,12 +6,7 @@
 let
 
   INVIDIOUS_CONFIG = ''
-    db:
-      dbname: invidious
-      user: kemal
-      password: kemal
-      host: invidious-db
-      port: 5432
+    database_url: postgres://kemal:kemal@invidious-db:5432/invidious
     check_tables: true
     autoplay: true;
     video_loop: true;
