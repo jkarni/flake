@@ -155,14 +155,3 @@ in
 
 
 }
-
-
-
-  podman
-  run \
-- -rm \
-  - -name='nitter' \
---log-driver=journald \
--v '/var/lib/test/nitter.conf:/src/nitter.conf' \
-quay.io/unixfox/nitter
-
