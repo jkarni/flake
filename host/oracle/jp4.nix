@@ -24,6 +24,7 @@
       echo -e "$RED Please switch system again to use sops secrets and sync DNS $NOCOLOR"
     else
       ${pkgs.cloudflare-dns-sync} miniflux.${config.networking.domain}
+      ${pkgs.cloudflare-dns-sync} miniflux-db.${config.networking.domain}
     fi
   '';
 
@@ -31,30 +32,30 @@
 
   virtualisation.oci-containers.containers = {
 
-    "miniflux" = {
-      image = "miniflux/miniflux";
-      dependsOn = [ "db" ];
-      environment = {
-        "DATABASE_URL" = "user=miniflux password=secret dbname=db sslmode=disable";
-        "RUN_MIGRATIONS" = "1";
-        "CREATE_ADMIN" = "1";
-        "ADMIN_USERNAME" = "admin";
-        "ADMIN_PASSWORD" = "test123";
-      };
-      extraOptions = [
-        "--network=host"
+    # "miniflux" = {
+    #   image = "miniflux/miniflux";
+    #   dependsOn = [ "db" ];
+    #   environment = {
+    #     "DATABASE_URL" = "user=miniflux password=secret dbname=db sslmode=disable";
+    #     "RUN_MIGRATIONS" = "1";
+    #     "CREATE_ADMIN" = "1";
+    #     "ADMIN_USERNAME" = "admin";
+    #     "ADMIN_PASSWORD" = "test123";
+    #   };
+    #   extraOptions = [
+    #     "--network=host"
 
-        # "--label"
-        # "traefik.enable=true"
+    #     "--label"
+    #     "traefik.enable=true"
 
-        # "--label"
-        # "traefik.http.routers.websecure-miniflux.rule=Host(`miniflux.${config.networking.domain}`)"
-        # "--label"
-        # "traefik.http.routers.websecure-miniflux.entrypoints=websecure"
-      ];
-    };
+    #     "--label"
+    #     "traefik.http.routers.websecure-miniflux.rule=Host(`miniflux.${config.networking.domain}`)"
+    #     "--label"
+    #     "traefik.http.routers.websecure-miniflux.entrypoints=websecure"
+    #   ];
+    # };
 
-    "db" = {
+    "miniflux-db" = {
       image = "postgres";
       volumes = [
         "/var/lib/miniflux-db:/var/lib/postgresql/data"
@@ -64,7 +65,15 @@
         "POSTGRES_PASSWORD" = "secret";
       };
       extraOptions = [
-        "--network=host"
+        #"--network=host"
+
+        "--label"
+        "traefik.enable=true"
+
+        "--label"
+        "traefik.http.routers.websecure-miniflux-db.rule=Host(`miniflux-db.${config.networking.domain}`)"
+        "--label"
+        "traefik.http.routers.websecure-miniflux-db.entrypoints=websecure"
       ];
     };
 
