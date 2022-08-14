@@ -45,33 +45,6 @@ in
   '';
 
   services.traefik-cloudflare.enable = true;
-  services.traefik.dynamicConfigOptions = {
-    http.routers = {
-      nitter.rule = "Host(`twitter.${config.networking.domain}`)";
-      nitter.service = "nitter";
-    };
-
-    http.services = {
-      nitter.loadBalancer.servers = [{ url = "http://localhost:8083"; }];
-    };
-  };
-
-
-  # services.nitter = {
-  #   enable = true;
-  #   preferences = {
-  #     replaceTwitter = config.services.nitter.server.hostname;
-  #     infiniteScroll = true;
-  #     hlsPlayback = true;
-  #     theme = "Auto";
-  #   };
-  #   server = {
-  #     address = "127.0.0.1";
-  #     https = true;
-  #     hostname = "twitter.${config.networking.domain}";
-  #     port = 8083;
-  #   };
-  # };
 
   services.redis.servers.nitter = {
     enable = true;
@@ -92,7 +65,6 @@ in
         "/var/lib/test/nitter.conf:/src/nitter.conf"
       ];
       extraOptions = [
-        "--net=host"
         "--label"
         "traefik.enable=true"
         "--label"
