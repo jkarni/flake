@@ -34,7 +34,7 @@
 
     "miniflux" = {
       image = "miniflux/miniflux";
-      dependsOn = [ "db" ];
+      dependsOn = [ "miniflux-db" ];
       environment = {
         "DATABASE_URL" = "user=miniflux password=12345 dbname=miniflux host=miniflux-db.mlyxshi.com port=80 sslmode=disable";
         "RUN_MIGRATIONS" = "1";
