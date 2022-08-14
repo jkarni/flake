@@ -12,6 +12,10 @@
 
   #services.qbittorrent-nox.enable = true;
 
+
+  sops.secrets.miniflux-env = { };
+  sops.secrets.miniflux-db-env = { };
+
   system.activationScripts.makeMinifluxDBDir = lib.stringAfter [ "var" ] ''
     [ ! -d /var/lib/miniflux-db ] && mkdir -p /var/lib/miniflux-db
   '';
@@ -24,7 +28,6 @@
       echo -e "$RED Please switch system again to use sops secrets and sync DNS $NOCOLOR"
     else
       ${pkgs.cloudflare-dns-sync} miniflux.${config.networking.domain}
-      ${pkgs.cloudflare-dns-sync} miniflux-db.${config.networking.domain}
     fi
   '';
 
@@ -35,16 +38,17 @@
     "miniflux" = {
       image = "miniflux/miniflux";
       dependsOn = [ "miniflux-db" ];
-      environment = {
-        "DATABASE_URL" = "user=miniflux password=12345 dbname=miniflux host=miniflux.mlyxshi.com port=5432 sslmode=disable";
-        "RUN_MIGRATIONS" = "1";
-        "CREATE_ADMIN" = "1";
-        "ADMIN_USERNAME" = "admin";
-        "ADMIN_PASSWORD" = "admin";
-      };
+      environmentFiles = [ config.sops.secrets.miniflux-env.path ];
       extraOptions = [
         "--label"
         "traefik.enable=true"
+
+        "--label"
+        "traefik.http.routers.miniflux.rule=Host(`miniflux.${config.networking.domain}`)"
+        "--label"
+        "traefik.http.routers.miniflux.entrypoints=web"
+        "--label"
+        "traefik.http.routers.miniflux.middlewares=web-redirect@file"
 
         "--label"
         "traefik.http.routers.websecure-miniflux.rule=Host(`miniflux.${config.networking.domain}`)"
@@ -58,10 +62,7 @@
       volumes = [
         "/var/lib/miniflux-db:/var/lib/postgresql/data"
       ];
-      environment = {
-        "POSTGRES_USER" = "miniflux";
-        "POSTGRES_PASSWORD" = "12345";
-      };
+      environmentFiles = [ config.sops.secrets.miniflux-db-env.path ];
       extraOptions = [
         "--network=host"
       ];
