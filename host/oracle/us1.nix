@@ -58,12 +58,22 @@ in
     };
   };
 
-  services.redis.servers.nitter = {
+
+  services.nitter = {
     enable = true;
-    port = 6379;
+    preferences = {
+      replaceTwitter = config.services.nitter.server.hostname;
+      infiniteScroll = true;
+      hlsPlayback = true;
+      theme = "Auto";
+    };
+    server = {
+      address = "127.0.0.1";
+      https = true;
+      hostname = "twitter.${config.networking.domain}";
+      port = 8083;
+    };
   };
-
-
 
 
   system.activationScripts.makeInvidiousDir = lib.stringAfter [ "var" ] ''
@@ -72,16 +82,6 @@ in
 
   virtualisation.podman.defaultNetwork.dnsname.enable = true;
   virtualisation.oci-containers.containers = {
-    "nitter" = {
-      image = "quay.io/unixfox/nitter";
-      volumes = [
-        "/var/lib/test/nitter.conf:/src/nitter.conf"
-      ];
-      extraOptions = [
-        "--net=host"
-      ];
-    };
-
 
     "libreddit" = {
       image = "spikecodes/libreddit:arm";
