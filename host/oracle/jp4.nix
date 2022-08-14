@@ -10,7 +10,7 @@
   services.status-client.enable = true;
   #services.status-server.enable = true;
 
-  services.qbittorrent-nox.enable = true;
+  #services.qbittorrent-nox.enable = true;
 
   system.activationScripts.makeMinifluxDBDir = lib.stringAfter [ "var" ] ''
     [ ! -d /var/lib/miniflux-db ] && mkdir -p /var/lib/miniflux-db
@@ -32,28 +32,28 @@
 
   virtualisation.oci-containers.containers = {
 
-    # "miniflux" = {
-    #   image = "miniflux/miniflux";
-    #   dependsOn = [ "db" ];
-    #   environment = {
-    #     "DATABASE_URL" = "user=miniflux password=secret dbname=db sslmode=disable";
-    #     "RUN_MIGRATIONS" = "1";
-    #     "CREATE_ADMIN" = "1";
-    #     "ADMIN_USERNAME" = "admin";
-    #     "ADMIN_PASSWORD" = "test123";
-    #   };
-    #   extraOptions = [
-    #     "--network=host"
+    "miniflux" = {
+      image = "miniflux/miniflux";
+      dependsOn = [ "db" ];
+      environment = {
+        "DATABASE_URL" = "user=miniflux password=123465 dbname=miniflux sslmode=disable";
+        "RUN_MIGRATIONS" = "1";
+        "CREATE_ADMIN" = "1";
+        "ADMIN_USERNAME" = "admin";
+        "ADMIN_PASSWORD" = "test123";
+      };
+      extraOptions = [
+        "--network=host"
 
-    #     "--label"
-    #     "traefik.enable=true"
+        "--label"
+        "traefik.enable=true"
 
-    #     "--label"
-    #     "traefik.http.routers.websecure-miniflux.rule=Host(`miniflux.${config.networking.domain}`)"
-    #     "--label"
-    #     "traefik.http.routers.websecure-miniflux.entrypoints=websecure"
-    #   ];
-    # };
+        "--label"
+        "traefik.http.routers.websecure-miniflux.rule=Host(`miniflux.${config.networking.domain}`)"
+        "--label"
+        "traefik.http.routers.websecure-miniflux.entrypoints=websecure"
+      ];
+    };
 
     "miniflux-db" = {
       image = "postgres";
