@@ -5,6 +5,7 @@
 }: {
   imports = [
     ./default.nix
+    ../../modules/services/traefik-cloudflare.nix
   ];
 
   services.status-client.enable = true;
@@ -31,7 +32,6 @@
     fi
   '';
 
-  services.traefik-cloudflare.enable = true;
 
   # miniflux and miniflux-db will connect to same default podman network bridge
   # unlike docker, to enable dns resolution between different containers, we need enable dnsname plugin under podman --> https://github.com/containers/dnsname 

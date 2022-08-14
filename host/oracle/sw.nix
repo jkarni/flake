@@ -5,6 +5,7 @@
 }: {
   imports = [
     ./default.nix
+    ../../modules/services/traefik-cloudflare.nix
   ];
 
   services.status-client.enable = true;
@@ -34,8 +35,6 @@
   # '';
 
   # restic restore backup to create basic configuration tree directory
-
-  services.traefik-cloudflare.enable = true;
 
   # https://reorx.com/blog/track-and-download-shows-automatically-with-sonarr
   virtualisation.oci-containers.containers = {

@@ -25,6 +25,7 @@ in
 {
   imports = [
     ./default.nix
+    ../../modules/services/traefik-cloudflare.nix
   ];
 
   services.status-client.enable = true;

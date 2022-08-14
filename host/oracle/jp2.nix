@@ -10,11 +10,11 @@ in
 
   imports = [
     ./default.nix
+    ../../modules/services/traefik-cloudflare.nix
   ];
 
   services.status-client.enable = true;
 
-  services.traefik-cloudflare.enable = true;
 
 
   sops.secrets.tg-rss-env = { };
