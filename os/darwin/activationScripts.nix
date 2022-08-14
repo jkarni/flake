@@ -1,14 +1,10 @@
 { pkgs, ... }:
 let
-  path = "${pkgs.skhd}/bin/skhd";
-
   extraPolicies = import ../../config/firefox/app/policy.nix;
   wrapperPolicies = {
-    policies =
-      {
-        DisableAppUpdate = true;
-      }
-      // extraPolicies;
+    policies = {
+      DisableAppUpdate = true;
+    } // extraPolicies;
   };
   policiesJson = pkgs.writeText "policies.json" (builtins.toJSON wrapperPolicies);
 in

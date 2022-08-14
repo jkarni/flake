@@ -21,11 +21,7 @@ in
       group = "podman"; # podman backend
 
       dynamicConfigOptions = {
-        tls.options.default = {
-          minVersion = "VersionTLS12";
-          sniStrict = true;
-        };
-
+        
         http.middlewares = {
           web-redirect.redirectScheme.scheme = "https";
           # https://tool.oschina.net/htpasswd
