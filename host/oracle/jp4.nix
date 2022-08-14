@@ -33,7 +33,8 @@
 
   services.traefik-cloudflare.enable = true;
 
-
+  # miniflux and miniflux-db will connect to same default podman network bridge
+  # unlike docker, to enable dns resolution between different containers, we need enable dnsname plugin under podman --> https://github.com/containers/dnsname 
   virtualisation.podman.defaultNetwork.dnsname.enable =true;
 
   virtualisation.oci-containers.containers = {
@@ -48,7 +49,6 @@
         RUN_MIGRATIONS = "1";
       };
       extraOptions = [
-        # "--network=miniflux"
 
         "--label"
         "traefik.enable=true"
@@ -73,33 +73,11 @@
         "/var/lib/miniflux-db:/var/lib/postgresql/data"
       ];
       environmentFiles = [ config.sops.secrets.miniflux-db-env.path ];
-      # extraOptions = [
-      #   "--network=miniflux"
-      # ];
     };
-
 
   };
 
 
-  # systemd.services.init-podman-miniflux-network = {
-  #   after = [ "network.target" ];
-  #   wantedBy = [ "multi-user.target" ];
-  #   serviceConfig.Type = "oneshot";
-  #   script =
-  #     let
-  #       podman = "${pkgs.podman}/bin/podman";
-  #     in
-  #     ''
-  #       # Put a true at the end to prevent getting non-zero return code, which will crash the whole service.
-  #       check=$(${podman} network ls | grep "miniflux" || true)
-  #       if [ -z "$check" ]; then
-  #         ${podman} network create miniflux
-  #       else
-  #         echo "miniflux already exists"
-  #       fi
-  #     '';
-  # };
 
   services.restic.backups."miniflux-db-backup" = {
     passwordFile = config.sops.secrets.restic-password.path;
