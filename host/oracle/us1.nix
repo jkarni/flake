@@ -20,6 +20,8 @@ let
       video_loop: true
       quality: dash
       quality_dash: best
+      default_home: Search
+      feed_menu: []
   '';
 
 
@@ -55,14 +57,11 @@ in
       nitter.rule = "Host(`twitter.${config.networking.domain}`)";
       nitter.service = "nitter";
 
-      # youtube.rule = "Host(`youtube.${config.networking.domain}`)";
-      # youtube.service = "youtube";
     };
 
     http.services = {
       libreddit.loadBalancer.servers = [{ url = "http://localhost:8082"; }];
       nitter.loadBalancer.servers = [{ url = "http://localhost:8083"; }];
-      #youtube.loadBalancer.servers = [{ url = "http://localhost:8084"; }];
     };
   };
 
