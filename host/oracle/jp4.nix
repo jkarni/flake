@@ -40,7 +40,7 @@
       dependsOn = [ "miniflux-db" ];
       environmentFiles = [ config.sops.secrets.miniflux-env.path ];
       environment = {
-        INVIDIOUS_INSTANCE = "youtube.mlyxshi.com";
+        #INVIDIOUS_INSTANCE = "youtube.mlyxshi.com";
         CREATE_ADMIN="1";
         RUN_MIGRATIONS="1";
       };
