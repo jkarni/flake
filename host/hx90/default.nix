@@ -5,7 +5,7 @@
     ../../os/nixos/desktop.nix
     ../../home/home-manager.nix
 
-    ../../modules/services/ssh-config.nix
+    ../../services/ssh-config.nix
   ];
 
   home-manager.users.root = import ../../home;

@@ -6,7 +6,7 @@ in
 
   imports = [
     ./default.nix
-    ../../modules/services/traefik-cloudflare.nix #80,443
+    ../../services/traefik-cloudflare.nix #80,443
   ];
 
 

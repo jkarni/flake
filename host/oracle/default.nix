@@ -5,9 +5,9 @@
     ../../home/home-manager.nix
 
     ../../script/cloudflare-dns-sync.nix
-    ../../modules/services/server-status/client
-    ../../modules/services/shadowsocks-rust.nix
-    ../../modules/services/ssh-config.nix
+    ../../services/server-status/client
+    ../../services/shadowsocks-rust.nix
+    ../../services/ssh-config.nix
   ];
 
   home-manager.users.root = import ../../home;
