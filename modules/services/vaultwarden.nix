@@ -26,7 +26,7 @@
     };
   };
 
-  # hacky way to hide actual domain
+  # strange way to hide actual domain
   systemd.services.podman-vaultwarden.serviceConfig.EnvironmentFile = config.sops.secrets.vaultwarden-env.path;
   systemd.services.podman-vaultwarden.serviceConfig.ExecStart = lib.mkForce (pkgs.writeShellScript "podman-vaultwarden-start" ''
     set -e
@@ -35,13 +35,17 @@
       --name='vaultwarden' \
       --log-driver=journald \
       -e 'SIGNUPS_ALLOWED'='false' \
+      -e 'SENDS_ALLOWED'='false' \
+      -e 'EMERGENCY_ACCESS_ALLOWED'='false' \
+      -e 'WEBSOCKET_ENABLED'='true' \
       -v '/var/lib/vaultwarden:/data' \
-      '--label' \
-      'traefik.enable=true' \
-      '--label' \
-      "traefik.http.routers.websecure-vaultwarden.rule=Host(\`$DOMAIN\`)" \
-      '--label' \
-      'traefik.http.routers.websecure-vaultwarden.entrypoints=websecure' \
+      '--label' 'traefik.enable=true' \
+      '--label' "traefik.http.routers.vaultwarden.rule=Host(\`$DOMAIN\`)" \
+      '--label' 'traefik.http.routers.vaultwarden.entrypoints=websecure' \
+      '--label' "traefik.http.services.vaultwarden.loadbalancer.server.port=80"  \
+      '--label' "traefik.http.routers.vaultwarden-ws.rule=Host(\`$DOMAIN\`) && Path(\`/notifications/hub\`)" \
+      '--label' 'traefik.http.routers.vaultwarden-ws.entrypoints=websecure' \
+      '--label' "traefik.http.services.vaultwarden-ws.loadbalancer.server.port=3012"  \
       vaultwarden/server
   '');
 
