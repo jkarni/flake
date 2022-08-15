@@ -6,9 +6,9 @@
   sops.secrets.miniflux-env = { };
   sops.secrets.miniflux-db-env = { };
 
-  system.activationScripts.makeMinifluxDBDir = lib.stringAfter [ "var" ] ''
-    [ ! -d /var/lib/miniflux-db ] && mkdir -p /var/lib/miniflux-db
-  '';
+  # system.activationScripts.makeMinifluxDBDir = lib.stringAfter [ "var" ] ''
+  #   [ ! -d /var/lib/miniflux-db ] && mkdir -p /var/lib/miniflux-db
+  # '';
 
   system.activationScripts.SyncMinifluxDNS = lib.stringAfter [ "var" ] ''
     RED='\033[0;31m'
