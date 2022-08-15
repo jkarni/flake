@@ -34,6 +34,13 @@ nixos-rebuild switch --flake github:mlyxshi/flake#<NAME> --install-bootloader -v
 
 ## 3. First Install[PC]
 ```
+#nixos@nixos
+passwd 
+> 12345
+
+ssh nixos@ip
+sudo -i
+
 fdisk /dev/nvme0n1
 
 mkfs.fat -F32 /dev/nvme0n1p1
@@ -48,7 +55,7 @@ mount /dev/nvme0n1p1 /mnt/boot
 # vim /mnt/etc/nixos/configuration.nix 
 
 
-nix-env -iA nixos.git nixos.nixUnstable
+nix-env -iA nixos.git
 
 git clone  https://github.com/mlyxshi/flake /mnt/etc/flake 
 nixos-install --flake /mnt/etc/flake#hx90 -v
