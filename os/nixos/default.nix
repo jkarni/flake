@@ -1,4 +1,9 @@
 { config, pkgs, lib, ... }: {
+
+  sops.defaultSopsFile = ../../secrets/key.yaml;
+  # This will automatically import SSH keys as age keys
+  sops.age.sshKeyPaths = [ "/etc/ssh/ssh_host_ed25519_key" ];
+  
   nix = {
     extraOptions = ''
       experimental-features = nix-command flakes
@@ -70,9 +75,4 @@
     "net.ipv4.tcp_fastopen" = "3"; # shadowsocks tcp fastopen
   };
 
-
-  sops.defaultSopsFile = ../../secrets/key.yaml;
-  # This will automatically import SSH keys as age keys
-  sops.age.sshKeyPaths = [ "/etc/ssh/ssh_host_ed25519_key" ];
-  sops.secrets.github-private-key = { };
 }

@@ -1,8 +1,7 @@
 { config, pkgs, lib, ...}: {
   imports = [
     ./default.nix
-    ../../services/traefik-cloudflare.nix  #80,443
-    ../../services/miniflux.nix
+    ../../services/server-status/server/default.nix  #80
     ../../services/qbittorrent-nox.nix     #8080
   ];
 }
