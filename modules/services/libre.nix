@@ -35,6 +35,7 @@ in
   services.traefik.dynamicConfigOptions = {
     http.routers = {
       nitter.rule = "Host(`twitter.${config.networking.domain}`)";
+      nitter.entrypoints = "websecure";
       nitter.service = "nitter";
     };
 
