@@ -3,6 +3,8 @@
     ./hardware.nix
     ../../os/nixos
     ../../home/home-manager.nix
+
+    ../../modules/services/ssh-config.nix
   ];
 
   home-manager.users.root = import ../../home;

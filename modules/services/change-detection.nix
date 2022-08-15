@@ -16,15 +16,11 @@
     [ ! -d /var/lib/changeio ] && mkdir -p /var/lib/changeio
   '';
 
-
-  # ChangeDetectionIO
   virtualisation.oci-containers.containers = {
-    # 3000
     "playwright-chrome" = {
       image = "browserless/chrome";
     };
 
-    # 5000
     "change-detection-io" = {
       image = "dgtlmoon/changedetection.io";
       volumes = [ "/var/lib/changeio:/datastore" ];
@@ -33,7 +29,6 @@
         PLAYWRIGHT_DRIVER_URL = "ws://playwright-chrome:3000/";
       };
       extraOptions = [
-        #"--network=host"
         "--label"
         "traefik.enable=true"
 

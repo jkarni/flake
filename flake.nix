@@ -58,7 +58,7 @@
     } @ args:
     let
       stateVersion = "22.05";
-      oracleServerList = [ "jp2" "jp4" "sw" "us1" "kr" ];
+      oracleServerList = [ "jp2" "jp4" "sw" "us1" "kr" "au" ];
       domain = "mlyxshi.com";
       commonSpecialArgs = {
         inherit (args) neovim-nightly mpv-nightly nixpkgs-wayland;
