@@ -12,25 +12,35 @@
     fi
   '';
 
+  system.activationScripts.makeChangeIODir = lib.stringAfter [ "var" ] ''
+    [ ! -d /var/lib/changeio] && mkdir -p /var/lib/changeio
+  '';
+
+
   # ChangeDetectionIO
   virtualisation.oci-containers.containers = {
-    # Local Port 3000
+    # 3000
     "playwright-chrome" = {
       image = "browserless/chrome";
-      ports = [
-        "3000:3000"
-      ];
     };
 
-    # Port: 5000
+    # 5000
     "change-detection-io" = {
       image = "dgtlmoon/changedetection.io";
-      volumes = [ "datastore-volume:/datastore" ];
+      volumes = [ "/var/lib/changeio:/datastore" ];
+      dependsOn = [ "playwright-chrome" ];
       environment = {
-        PLAYWRIGHT_DRIVER_URL = "ws://localhost:3000/";
+        PLAYWRIGHT_DRIVER_URL = "ws://playwright-chrome:3000/";
       };
       extraOptions = [
-        "--network=host"
+        #"--network=host"
+        "--label"
+        "traefik.enable=true"
+
+        "--label"
+        "traefik.http.routers.change.rule=Host(`change.${config.networking.domain}`)"
+        "--label"
+        "traefik.http.routers.change.entrypoints=web"
       ];
     };
 
