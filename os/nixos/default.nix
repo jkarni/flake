@@ -1,9 +1,4 @@
-{ config
-, pkgs
-, lib
-, ...
-}:
-{
+{ config, pkgs, lib, ... }: {
   nix = {
     extraOptions = ''
       experimental-features = nix-command flakes
@@ -74,5 +69,13 @@
     "net.ipv4.tcp_congestion_control" = "bbr";
     "net.ipv4.tcp_fastopen" = "3"; # shadowsocks tcp fastopen
   };
+
+
+  sops.defaultSopsFile = ../../secrets/key.yaml;
+  # This will automatically import SSH keys as age keys
+  sops.age.sshKeyPaths = [ "/etc/ssh/ssh_host_ed25519_key" ];
+  sops.secrets.github-private-key = { };
+  sops.secrets.restic-password = { };
+  sops.secrets.rclone-config = { };
 
 }

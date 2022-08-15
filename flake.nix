@@ -35,15 +35,6 @@
       flake = false;
     };
 
-    mpv-nightly = {
-      url = "github:mpv-player/mpv";
-      flake = false;
-    };
-
-    nixpkgs-wayland = {
-      url = "github:nix-community/nixpkgs-wayland";
-    };
-
   };
 
   outputs =
@@ -61,7 +52,7 @@
       oracleServerList = [ "jp2" "jp4" "sw" "us1" "kr" "au" ];
       domain = "mlyxshi.com";
       commonSpecialArgs = {
-        inherit (args) neovim-nightly mpv-nightly nixpkgs-wayland;
+        inherit (args) neovim-nightly;
       };
     in
     {
@@ -80,15 +71,14 @@
             ./modules
 
             {
+              networking.hostName = "M1";
               hm.stateVersion = stateVersion;
               hm.nixConfigDir = "/Users/dominic/flake";
-
-              networking.hostName = "M1";
               profile.developerMode.enable = true;
               security.pam.enableSudoTouchIdAuth = true; # https://github.com/LnL7/nix-darwin/pull/228
             }
           ];
-          specialArgs = commonSpecialArgs // { isDarwin = true; };
+          specialArgs = commonSpecialArgs;
         };
       };
       #############################################################################################################################
@@ -105,31 +95,24 @@
             ./modules
 
             {
+              networking.hostName = "hx90";
               system.stateVersion = stateVersion;
               hm.stateVersion = stateVersion;
               hm.nixConfigDir = "/etc/flake";
-              networking.hostName = "hx90";
-
-              profile.desktopEnv.enable = true;
-              profile.waylandNightly.enable = true;
               profile.developerMode.enable = true;
-              secrets.sops-nix.enable = true;
             }
           ];
-          specialArgs = commonSpecialArgs // { isLinux = true; };
+          specialArgs = commonSpecialArgs;
         };
 
         "test" = nixpkgs.lib.nixosSystem {
           system = "x86_64-linux";
           modules = [
             ./host/test
-            #sops-nix.nixosModules.sops
-            #./modules/secrets/default.nix
-            #./modules/services/shadowsocks-rust.nix
+            sops-nix.nixosModules.sops
             {
               system.stateVersion = stateVersion;
               networking.hostName = "test";
-              #secrets.sops-nix.enable = true;
             }
           ];
         };
@@ -147,17 +130,17 @@
             ./modules
 
             {
+              networking.hostName = hostName;
+              networking.domain = domain;
+
               system.stateVersion = stateVersion;
               hm.stateVersion = stateVersion;
               hm.nixConfigDir = "/etc/flake";
-              networking.hostName = hostName;
-              networking.domain = domain;
-              boot.loader.systemd-boot.netbootxyz.enable = true;
 
-              secrets.sops-nix.enable = true;
+              boot.loader.systemd-boot.netbootxyz.enable = true;
             }
           ];
-          specialArgs = commonSpecialArgs // { isLinux = true; };
+          specialArgs = commonSpecialArgs;
         });
 
       #############################################################################################################################
@@ -184,7 +167,7 @@
 
       packages."x86_64-linux"."PingFang" = import ./pkgs/fonts/PingFang { inherit (nixpkgs.legacyPackages."x86_64-linux") stdenvNoCC unzip fetchurl; };
       packages."aarch64-darwin"."PingFang" = import ./pkgs/fonts/PingFang { inherit (nixpkgs.legacyPackages."aarch64-darwin") stdenvNoCC unzip fetchurl; };
-      
+
       packages."x86_64-linux"."SF-Pro" = import ./pkgs/fonts/SF-Pro { inherit (nixpkgs.legacyPackages."x86_64-linux") stdenvNoCC unzip fetchurl; };
       packages."aarch64-darwin"."SF-Pro" = import ./pkgs/fonts/SF-Pro { inherit (nixpkgs.legacyPackages."aarch64-darwin") stdenvNoCC unzip fetchurl; };
 

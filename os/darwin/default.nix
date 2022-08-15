@@ -4,9 +4,10 @@
 , ...
 }: {
   imports = [
-    ./system.nix
+    ./systemDefaults.nix
     ./launchd.nix
     ./activationScripts.nix
+    ./pam.nix
   ];
 
   nix = {
@@ -41,7 +42,7 @@
     };
   };
 
-  sops.defaultSopsFile = ../../modules/secrets/key.yaml;
+  sops.defaultSopsFile = ../../secrets/key.yaml;
 
 
   # Under Linux, use sops.age.sshKeyPaths = [ "/etc/ssh/ssh_host_ed25519_key" ];
