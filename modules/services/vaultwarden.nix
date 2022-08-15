@@ -37,7 +37,6 @@
       -e 'SIGNUPS_ALLOWED'='false' \
       -e 'SENDS_ALLOWED'='false' \
       -e 'EMERGENCY_ACCESS_ALLOWED'='false' \
-      -e 'WEBSOCKET_ENABLED'='true' \
       -v '/var/lib/vaultwarden:/data' \
       '--label' 'traefik.enable=true' \
       '--label' "traefik.http.routers.vaultwarden.rule=Host(\`$DOMAIN\`)" \
