@@ -27,7 +27,7 @@
       '--label' \
       'traefik.enable=true' \
       '--label' \
-      "traefik.http.routers.websecure-vaultwarden.rule=Host(`$DOMAIN`)" \
+      "traefik.http.routers.websecure-vaultwarden.rule=Host(\`$DOMAIN\`)" \
       '--label' \
       'traefik.http.routers.websecure-vaultwarden.entrypoints=websecure' \
       vaultwarden/server
