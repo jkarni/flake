@@ -1,5 +1,8 @@
 { config, pkgs, lib, ...}: {
 
+  sops.secrets.restic-password = { };
+  sops.secrets.rclone-config = { };
+
   sops.secrets.miniflux-env = { };
   sops.secrets.miniflux-db-env = { };
 
