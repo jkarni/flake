@@ -34,6 +34,7 @@
       --rm \
       --name='vaultwarden' \
       --log-driver=journald \
+      -e 'SIGNUPS_ALLOWED'='false' \
       -v '/var/lib/vaultwarden:/data' \
       '--label' \
       'traefik.enable=true' \
