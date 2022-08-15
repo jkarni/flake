@@ -5,7 +5,7 @@
   services.traefik.dynamicConfigOptions = {
     http.routers = {
       vaultwarden.rule = "Host(`{{ env `VAULTWARDEN_DOMAIN` }}`)";
-      vaultwarden.service = "vaultwarden";
+      vaultwarden.service = "vaultwarden@docker";
     };
   };
 
