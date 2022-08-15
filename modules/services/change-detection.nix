@@ -1,6 +1,6 @@
 { config, pkgs, lib, ...}: {
 
-  system.activationScripts.SyncDNS = lib.stringAfter [ "var" ] ''
+  system.activationScripts.SyncChangeIODNS = lib.stringAfter [ "var" ] ''
     RED='\033[0;31m'
     NOCOLOR='\033[0m'
 
