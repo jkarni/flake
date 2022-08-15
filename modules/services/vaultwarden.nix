@@ -22,14 +22,10 @@
     "vaultwarden" = {
       image = "vaultwarden/server";
       volumes = [ "/var/lib/vaultwarden:/data" ];
+  
       extraOptions = [
         "--label"
         "traefik.enable=true"
-
-        "--label"
-        "traefik.http.routers.vaultwarden.rule=Host(`${config.sops.secrets.vaultwarden-domain.path}`)"
-        "--label"
-        "traefik.http.routers.vaultwarden.entrypoints=websecure"
       ];
     };
 
