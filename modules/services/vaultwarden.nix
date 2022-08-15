@@ -40,15 +40,19 @@
       -e 'WEBSOCKET_ENABLED'='true' \
       -v '/var/lib/vaultwarden:/data' \
       '--label' 'traefik.enable=true' \
-      '--label' "traefik.http.routers.vaultwarden.rule=Host(\`$DOMAIN\`)" \
-      '--label' 'traefik.http.routers.vaultwarden.entrypoints=websecure' \
-      '--label' "traefik.http.routers.vaultwarden.service=vaultwarden" \
-      '--label' "traefik.http.services.vaultwarden.loadbalancer.server.port=80"  \
+      '--label' "traefik.http.routers.vaultwarden1.rule=Host(\`$DOMAIN\`)" \
+      '--label' 'traefik.http.routers.vaultwarden1.entrypoints=websecure' \
+      '--label' 'traefik.http.routers.vaultwarden1.service=vaultwarden' \
+      '--label' 'traefik.http.services.vaultwarden.loadbalancer.server.port=80'  \
+      \
+      '--label' "traefik.http.routers.vaultwarden2.rule=Host(\`$DOMAIN\`) && Path(\`/notifications/hub/negotiate\`)" \
+      '--label' 'traefik.http.routers.vaultwarden2.entrypoints=websecure' \
+      '--label' 'traefik.http.routers.vaultwarden2.service=vaultwarden' \
       \
       '--label' "traefik.http.routers.vaultwarden-ws.rule=Host(\`$DOMAIN\`) && Path(\`/notifications/hub\`)" \
       '--label' 'traefik.http.routers.vaultwarden-ws.entrypoints=websecure' \
-      '--label' "traefik.http.routers.vaultwarden-ws.service=vaultwarden-ws" \
-      '--label' "traefik.http.services.vaultwarden-ws.loadbalancer.server.port=3012"  \
+      '--label' 'traefik.http.routers.vaultwarden-ws.service=vaultwarden-ws' \
+      '--label' 'traefik.http.services.vaultwarden-ws.loadbalancer.server.port=3012'  \
       vaultwarden/server
   '');
 
