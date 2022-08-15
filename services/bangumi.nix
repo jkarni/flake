@@ -1,4 +1,5 @@
 { config, pkgs, lib, ...}: {
+  sops.secrets.restic-password = { };
 
   system.activationScripts.SyncMediaDNS = lib.stringAfter [ "var" ] ''
     RED='\033[0;31m'
