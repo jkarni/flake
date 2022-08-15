@@ -44,7 +44,6 @@
       '--label' 'traefik.http.routers.vaultwarden.entrypoints=websecure' \
       '--label' "traefik.http.routers.vaultwarden.service=vaultwarden"
       '--label' "traefik.http.services.vaultwarden.loadbalancer.server.port=80"  \
-      \
       '--label' "traefik.http.routers.vaultwarden-ws.rule=Host(\`$DOMAIN\`) && Path(\`/notifications/hub\`)" \
       '--label' 'traefik.http.routers.vaultwarden-ws.entrypoints=websecure' \
       '--label' "traefik.http.routers.vaultwarden-ws.service=vaultwarden-ws"
