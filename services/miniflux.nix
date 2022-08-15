@@ -10,6 +10,8 @@
   #   [ ! -d /var/lib/miniflux-db ] && mkdir -p /var/lib/miniflux-db
   # '';
 
+  # restic restore backup
+
   system.activationScripts.SyncMinifluxDNS = lib.stringAfter [ "var" ] ''
     RED='\033[0;31m'
     NOCOLOR='\033[0m'
