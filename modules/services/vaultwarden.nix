@@ -42,10 +42,10 @@
       '--label' 'traefik.enable=true' \
       '--label' "traefik.http.routers.vaultwarden.rule=Host(\`$DOMAIN\`)" \
       '--label' 'traefik.http.routers.vaultwarden.entrypoints=websecure' \
-      '--label' "traefik.http.services.vaultwarden.loadbalancer.server.port=80"  \
+      '--label' "traefik.http.services.vaultwarden@docker.loadbalancer.server.port=80"  \
       '--label' "traefik.http.routers.vaultwarden-ws.rule=Host(\`$DOMAIN\`) && Path(\`/notifications/hub\`)" \
       '--label' 'traefik.http.routers.vaultwarden-ws.entrypoints=websecure' \
-      '--label' "traefik.http.services.vaultwarden-ws.loadbalancer.server.port=3012"  \
+      '--label' "traefik.http.services.vaultwarden-ws@docker.loadbalancer.server.port=3012"  \
       vaultwarden/server
   '');
 
