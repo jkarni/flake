@@ -13,7 +13,7 @@
   '';
 
   system.activationScripts.makeChangeIODir = lib.stringAfter [ "var" ] ''
-    [ ! -d /var/lib/changeio] && mkdir -p /var/lib/changeio
+    [ ! -d /var/lib/changeio ] && mkdir -p /var/lib/changeio
   '';
 
 
@@ -46,4 +46,3 @@
 
   };
 }
-
