@@ -9,7 +9,6 @@
 
 
   fonts = {
-    # The essence of Apple
     fonts = [
       pkgs.SF-Pro # English
       pkgs.PingFang # Chinese/Japanese
