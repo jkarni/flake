@@ -1,4 +1,3 @@
-# https://discourse.nixos.org/t/on-niv-running-on-mac-which-branch-should-i-use-to-update-to-21-11-i-cant-find-release-21-11-darwin-branch-on-nixpkgs/16446/7
 {
   inputs = {
     nixpkgs = {
