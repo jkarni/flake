@@ -26,7 +26,7 @@
     };
   };
 
-  systemd.services.podman-rsshub.serviceConfig.ExecStart = lib.mkForce (pkgs.writeShellScript "podman-rsshub-pre-start" ''
+  systemd.services.podman-rsshub.serviceConfig.ExecStartPre = lib.mkForce (pkgs.writeShellScript "podman-rsshub-pre-start" ''
     set -e
     podman rm -f rsshub || true
     
