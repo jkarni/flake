@@ -19,18 +19,6 @@ let
   '';
 in
 {
-  system.activationScripts.SyncLibreDNS = lib.stringAfter [ "var" ] ''
-    RED='\033[0;31m'
-    NOCOLOR='\033[0m'
-    if [ ! -f ${config.sops.secrets.cloudflare-dns-token.path} ]; then
-      echo -e "$RED Sops-nix Known Limitations: https://github.com/Mic92/sops-nix#using-secrets-at-evaluation-time $NOCOLOR"
-      echo -e "$RED Please switch system again to use sops secrets and sync DNS $NOCOLOR"
-    else
-      ${pkgs.cloudflare-dns-sync} reddit.${config.networking.domain}
-      ${pkgs.cloudflare-dns-sync} youtube.${config.networking.domain}
-      ${pkgs.cloudflare-dns-sync} twitter.${config.networking.domain}
-    fi
-  '';
 
   services.traefik.dynamicConfigOptions = {
     http.routers = {
@@ -61,10 +49,6 @@ in
     };
   };
 
-
-  system.activationScripts.makeInvidiousDir = lib.stringAfter [ "var" ] ''
-    [ ! -d /var/lib/invidious ] && mkdir -p /var/lib/invidious-db
-  '';
 
   virtualisation.oci-containers.containers = {
 
@@ -117,5 +101,21 @@ in
     };
 
   };
+
+  systemd.services.podman-libreddit.preStart = lib.mkAfter ''
+    ${pkgs.cloudflare-dns-sync} reddit.${config.networking.domain}
+  '';
+
+  systemd.services.podman-invidious-db.preStart = lib.mkAfter ''
+    [ ! -d /var/lib/invidious ] && mkdir -p /var/lib/invidious-db
+  '';
+
+  systemd.services.podman-invidious.preStart = lib.mkAfter ''
+    ${pkgs.cloudflare-dns-sync} youtube.${config.networking.domain}
+  '';
+
+  systemd.services.nitter.postStart = ''
+    ${pkgs.cloudflare-dns-sync} twitter.${config.networking.domain}
+  '';
 
 }
