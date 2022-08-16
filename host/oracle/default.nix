@@ -20,7 +20,7 @@
 
   virtualisation.podman.enable = true;
   # unlike docker, to enable dns resolution between different containers, we need enable dnsname plugin under podman --> https://github.com/containers/dnsname 
-  virtualisation.podman.defaultNetwork.dnsname.enable =true;
+  virtualisation.podman.defaultNetwork.dnsname.enable = true;
 
   networking = {
     useNetworkd = true;

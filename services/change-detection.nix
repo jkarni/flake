@@ -1,4 +1,4 @@
-{ config, pkgs, lib, ...}: {
+{ config, pkgs, lib, ... }: {
 
   virtualisation.oci-containers.containers = {
     "playwright-chrome" = {

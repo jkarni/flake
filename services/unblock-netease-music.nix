@@ -1,4 +1,4 @@
-{ config, pkgs, lib, ...}:{
+{ config, pkgs, lib, ... }: {
 
   virtualisation.oci-containers.containers = {
     #podman run -p 8080:8080 pan93412/unblock-netease-music-enhanced -e https://music.163.com -o ytdlp bilibili
