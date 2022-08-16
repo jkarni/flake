@@ -1,22 +1,7 @@
-{ config, pkgs, lib, ...}: {
-  
+{ config, pkgs, lib, ... }: {
+
   sops.secrets.restic-password = { };
   sops.secrets.rclone-config = { };
-
-  system.activationScripts.SyncMediaDNS = lib.stringAfter [ "var" ] ''
-    RED='\033[0;31m'
-    NOCOLOR='\033[0m'
-
-    if [ ! -f ${config.sops.secrets.cloudflare-dns-token.path} ]; then
-      echo -e "$RED Sops-nix Known Limitations: https://github.com/Mic92/sops-nix#using-secrets-at-evaluation-time $NOCOLOR"
-      echo -e "$RED Please switch system again to use sops secrets and sync DNS $NOCOLOR"
-    else
-      ${pkgs.cloudflare-dns-sync} jackett.${config.networking.domain}
-      ${pkgs.cloudflare-dns-sync} sonarr.${config.networking.domain}
-      ${pkgs.cloudflare-dns-sync} qb.media.${config.networking.domain}
-      ${pkgs.cloudflare-dns-sync} jellyfin.${config.networking.domain}
-    fi
-  '';
 
   # system.activationScripts.makeDownloadDir = pkgs.lib.stringAfter [ "var" ] ''
   #   [ ! -d /download/jackett/config ] && mkdir -p /download/jackett/config
@@ -31,21 +16,27 @@
 
   # https://reorx.com/blog/track-and-download-shows-automatically-with-sonarr
   virtualisation.oci-containers.containers = {
- 
+
     "jackett" = {
       image = "linuxserver/jackett";
       volumes = [
         "/download/jackett/config:/config"
       ];
       extraOptions = [
-        "--label" "traefik.enable=true"
+        "--label"
+        "traefik.enable=true"
 
-        "--label" "traefik.http.routers.jackett.rule=Host(`jackett.${config.networking.domain}`)"
-        "--label" "traefik.http.routers.jackett.entrypoints=web"
-        "--label" "traefik.http.routers.jackett.middlewares=web-redirect@file"
+        "--label"
+        "traefik.http.routers.jackett.rule=Host(`jackett.${config.networking.domain}`)"
+        "--label"
+        "traefik.http.routers.jackett.entrypoints=web"
+        "--label"
+        "traefik.http.routers.jackett.middlewares=web-redirect@file"
 
-        "--label" "traefik.http.routers.websecure-jackett.rule=Host(`jackett.${config.networking.domain}`)"
-        "--label" "traefik.http.routers.websecure-jackett.entrypoints=websecure"
+        "--label"
+        "traefik.http.routers.websecure-jackett.rule=Host(`jackett.${config.networking.domain}`)"
+        "--label"
+        "traefik.http.routers.websecure-jackett.entrypoints=websecure"
       ];
     };
 
@@ -60,14 +51,20 @@
         "PGID" = "0";
       };
       extraOptions = [
-        "--label" "traefik.enable=true"
+        "--label"
+        "traefik.enable=true"
 
-        "--label" "traefik.http.routers.sonarr.rule=Host(`sonarr.${config.networking.domain}`)"
-        "--label" "traefik.http.routers.sonarr.entrypoints=web"
-        "--label" "traefik.http.routers.sonarr.middlewares=web-redirect@file"
+        "--label"
+        "traefik.http.routers.sonarr.rule=Host(`sonarr.${config.networking.domain}`)"
+        "--label"
+        "traefik.http.routers.sonarr.entrypoints=web"
+        "--label"
+        "traefik.http.routers.sonarr.middlewares=web-redirect@file"
 
-        "--label" "traefik.http.routers.websecure-sonarr.rule=Host(`sonarr.${config.networking.domain}`)"
-        "--label" "traefik.http.routers.websecure-sonarr.entrypoints=websecure"
+        "--label"
+        "traefik.http.routers.websecure-sonarr.rule=Host(`sonarr.${config.networking.domain}`)"
+        "--label"
+        "traefik.http.routers.websecure-sonarr.entrypoints=websecure"
       ];
     };
 
@@ -84,11 +81,15 @@
         "PGID" = "0";
       };
       extraOptions = [
-        "--label" "traefik.enable=true"
+        "--label"
+        "traefik.enable=true"
 
-        "--label" "traefik.http.routers.qbittorrent.rule=Host(`qb.media.${config.networking.domain}`)"
-        "--label" "traefik.http.routers.qbittorrent.entrypoints=web"
-        "--label" "traefik.http.services.qbittorrent.loadbalancer.server.port=8080"   
+        "--label"
+        "traefik.http.routers.qbittorrent.rule=Host(`qb.media.${config.networking.domain}`)"
+        "--label"
+        "traefik.http.routers.qbittorrent.entrypoints=web"
+        "--label"
+        "traefik.http.services.qbittorrent.loadbalancer.server.port=8080"
       ];
     };
 
@@ -104,17 +105,36 @@
         "PGID" = "0";
       };
       extraOptions = [
-        "--label" "traefik.enable=true"
-        
-        "--label" "traefik.http.routers.jellyfin.rule=Host(`jellyfin.${config.networking.domain}`)"
-        "--label" "traefik.http.routers.jellyfin.entrypoints=web"
-        "--label" "traefik.http.routers.jellyfin.middlewares=web-redirect@file"
+        "--label"
+        "traefik.enable=true"
 
-        "--label" "traefik.http.routers.websecure-jellyfin.rule=Host(`jellyfin.${config.networking.domain}`)"
-        "--label" "traefik.http.routers.websecure-jellyfin.entrypoints=websecure"
+        "--label"
+        "traefik.http.routers.jellyfin.rule=Host(`jellyfin.${config.networking.domain}`)"
+        "--label"
+        "traefik.http.routers.jellyfin.entrypoints=web"
+        "--label"
+        "traefik.http.routers.jellyfin.middlewares=web-redirect@file"
+
+        "--label"
+        "traefik.http.routers.websecure-jellyfin.rule=Host(`jellyfin.${config.networking.domain}`)"
+        "--label"
+        "traefik.http.routers.websecure-jellyfin.entrypoints=websecure"
       ];
     };
   };
+
+  systemd.services.podman-jackett.preStart = lib.mkAfter ''
+    ${pkgs.cloudflare-dns-sync} jackett.${config.networking.domain}
+  '';
+  systemd.services.podman-sonarr.preStart = lib.mkAfter ''
+    ${pkgs.cloudflare-dns-sync} sonarr.${config.networking.domain}
+  '';
+  systemd.services.podman-qbittorrent.preStart = lib.mkAfter ''
+    ${pkgs.cloudflare-dns-sync} qb.media.${config.networking.domain}
+  '';
+  systemd.services.podman-jellyfin.preStart = lib.mkAfter ''
+    ${pkgs.cloudflare-dns-sync} jellyfin.${config.networking.domain}
+  '';
 
   services.restic.backups."media" = {
     extraBackupArgs = [

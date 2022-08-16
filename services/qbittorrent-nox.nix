@@ -80,25 +80,15 @@ in
     qbScript
   ];
 
-  system.activationScripts.SyncQbDNS = lib.stringAfter [ "var" ] ''
-    RED='\033[0;31m'
-    NOCOLOR='\033[0m'
-
-    if [ ! -f ${config.sops.secrets.cloudflare-dns-token.path} ]; then
-      echo -e "$RED Sops-nix Known Limitations: https://github.com/Mic92/sops-nix#using-secrets-at-evaluation-time $NOCOLOR"
-      echo -e "$RED Please switch system again to use sops secrets and sync DNS $NOCOLOR"
-    else
-      ${pkgs.cloudflare-dns-sync} qb.${config.networking.domain}
-    fi
-  '';
-
 
   # https://github.com/1sixth/flakes/blob/master/modules/qbittorrent-nox.nix
   # https://github.com/qbittorrent/qBittorrent/wiki/How-to-use-portable-mode
 
   systemd.services.qbittorrent-nox = {
     after = [ "local-fs.target" "network-online.target" "nss-lookup.target" ];
-    description = "qBittorrent-nox service";
+    preStart = ''
+      ${pkgs.cloudflare-dns-sync} qb.${config.networking.domain}
+    '';
     serviceConfig = {
       ExecStart = "${pkgs.qbittorrent-nox}/bin/qbittorrent-nox --profile=${qbConfigDir} --relative-fastresume";
       StateDirectory = "qbittorrent-nox";
@@ -106,6 +96,8 @@ in
     wantedBy = [ "multi-user.target" ];
     wants = [ "network-online.target" ];
   };
+
+
 
   services.restic.backups."bt-backup" = {
     extraBackupArgs = [

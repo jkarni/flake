@@ -114,6 +114,8 @@ in
     ${pkgs.cloudflare-dns-sync} youtube.${config.networking.domain}
   '';
 
+  # nitter's preStart is python script
+  # use postStart instead
   systemd.services.nitter.postStart = ''
     ${pkgs.cloudflare-dns-sync} twitter.${config.networking.domain}
   '';

@@ -7,22 +7,7 @@
   sops.secrets.miniflux-env = { };
   sops.secrets.miniflux-db-env = { };
 
-  # system.activationScripts.makeMinifluxDBDir = lib.stringAfter [ "var" ] ''
-  #   [ ! -d /var/lib/miniflux-db ] && mkdir -p /var/lib/miniflux-db
-  # '';
-
-  # restic restore backup
-
-  system.activationScripts.SyncMinifluxDNS = lib.stringAfter [ "var" ] ''
-    RED='\033[0;31m'
-    NOCOLOR='\033[0m'
-    if [ ! -f ${config.sops.secrets.cloudflare-dns-token.path} ]; then
-      echo -e "$RED Sops-nix Known Limitations: https://github.com/Mic92/sops-nix#using-secrets-at-evaluation-time $NOCOLOR"
-      echo -e "$RED Please switch system again to use sops secrets and sync DNS $NOCOLOR"
-    else
-      ${pkgs.cloudflare-dns-sync} miniflux.${config.networking.domain}
-    fi
-  '';
+  # restic restore backup /var/lib/miniflux-db
 
   virtualisation.oci-containers.containers = {
 
@@ -64,7 +49,9 @@
 
   };
 
-
+  systemd.services.podman-miniflux.preStart = lib.mkAfter ''
+    ${pkgs.cloudflare-dns-sync} miniflux.${config.networking.domain}
+  '';
 
   services.restic.backups."miniflux-db-backup" = {
     passwordFile = config.sops.secrets.restic-password.path;
