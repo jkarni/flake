@@ -1,5 +1,6 @@
 { config, pkgs, lib, ...}: {
-
+  
+  # rss to muted silent tg bot  <-- only for tracking
   sops.secrets.miniflux-env = { };
   sops.secrets.miniflux-db-env = { };
 

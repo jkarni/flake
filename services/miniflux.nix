@@ -1,5 +1,6 @@
 { config, pkgs, lib, ...}: {
-
+  
+  # rss to unmuted tg bot  <-- important updates and news
   sops.secrets.restic-password = { };
   sops.secrets.rclone-config = { };
 
