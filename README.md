@@ -1,7 +1,7 @@
 ## 1. Normal[PC]
 ```
 # git clone https://github.com/mlyxshi/flake /etc/flake
-git clone github.com:mlyxshi/flake /etc/flake 
+git clone git@github.com:mlyxshi/flake /etc/flake 
 nixos-rebuild switch --flake /etc/flake#hx90 -v
 ```
 
