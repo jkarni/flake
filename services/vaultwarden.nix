@@ -22,7 +22,6 @@
   virtualisation.oci-containers.containers = {
     "vaultwarden" = {
       image = "vaultwarden/server";
-      volumes = [ "/var/lib/vaultwarden:/data" ];
     };
   };
 
