@@ -48,6 +48,7 @@
     # @bili  -->  BiliBili
     # @gh  -->  GitHub
     # @nix  -->  Nix Package
+    # @ghnix  -->  Nix Code in Github
 
     # plugins are self-signed
     # https://addons.mozilla.org/en-US/developers/
@@ -70,6 +71,11 @@
     "nix.package@search" = {
       installation_mode = "force_installed";
       install_url = "https://raw.githubusercontent.com/mlyxshi/FFExtension/main/nix-search.xpi";
+    };
+
+    "github.nix@search" = {
+      installation_mode = "force_installed";
+      install_url = "https://raw.githubusercontent.com/mlyxshi/FFExtension/main/github-nix.xpi";
     };
 
     # PT Plugin Plus

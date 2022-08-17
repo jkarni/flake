@@ -13,7 +13,7 @@
   '';
 
   systemd.services.podman-unblock-netease-music.serviceConfig.EnvironmentFile = config.sops.secrets.unblock-netease-music-env.path;
-  systemd.services.podman-unblock-netease-music.serviceConfig.ExecStart = lib.mkForce (pkgs.writeShellScript "podman-unblock-netease-music-start" ''
+  systemd.services.podman-unblock-netease-music.script = ''
     set -e
     exec podman run \
       --rm \
@@ -21,6 +21,6 @@
       --log-driver=journald \
       '--net=host' \
       pan93412/unblock-netease-music-enhanced -p $PORT --strict -e https://music.163.com -o ytdlp bilibili
-  '');
+  '';
 
 }

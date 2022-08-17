@@ -22,7 +22,7 @@ Refresh Sops Settings
 ```
 # SSH login
 ssh-keyscan xxx.mlyxshi.com | ssh-to-age
-# write to modules/secrets/.sops.yaml
+# write to secrets/.sops.yaml
 sops updatekeys key.yaml
 ```
 
