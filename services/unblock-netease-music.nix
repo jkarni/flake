@@ -2,6 +2,12 @@
 
   sops.secrets.unblock-netease-music-env = { };
 
+  virtualisation.oci-containers.containers = {
+    "unblock-netease-music" = {
+      image = "pan93412/unblock-netease-music-enhanced";
+    };
+  };
+
   systemd.services.podman-unblock-netease-music.preStart = lib.mkAfter ''
     ${pkgs.cloudflare-dns-sync} netease.${config.networking.domain}
   '';
