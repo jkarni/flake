@@ -19,9 +19,8 @@
       --rm \
       --name='unblock-netease-music' \
       --log-driver=journald \
-      -p "$PORT:8080" \
       '--net=host' \
-      pan93412/unblock-netease-music-enhanced --strict -e https://music.163.com -o ytdlp bilibili
+      pan93412/unblock-netease-music-enhanced -p $PORT --strict -e https://music.163.com -o ytdlp bilibili
   '');
 
 }
