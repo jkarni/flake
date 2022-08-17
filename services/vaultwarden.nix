@@ -17,6 +17,9 @@
       --rm \
       --name='vaultwarden' \
       --log-driver=journald \
+      -e 'SIGNUPS_ALLOWED'='false' \
+      -e 'SENDS_ALLOWED'='false' \
+      -e 'EMERGENCY_ACCESS_ALLOWED'='false' \
       -v '/var/lib/vaultwarden:/data' \
       '--label' 'traefik.enable=true' \
       '--label' "traefik.http.routers.vaultwarden.rule=Host(\`$DOMAIN\`)" \
