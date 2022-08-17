@@ -1,11 +1,11 @@
 { config, pkgs, lib, ... }: {
 
   virtualisation.oci-containers.containers = {
-    #podman run -p 8080:8080 pan93412/unblock-netease-music-enhanced -e https://music.163.com -o ytdlp bilibili
+    #podman run -p 8080:8080 pan93412/unblock-netease-music-enhanced --strict -e https://music.163.com -o ytdlp bilibili 
     "unblock-netease-music" = {
       image = "pan93412/unblock-netease-music-enhanced";
       ports = [ "8080:8080" ];
-      cmd = [ "-e" "https://music.163.com" "-o" "ytdlp" "bilibili" ];
+      cmd = [ "--strict" "-e" "https://music.163.com" "-o" "ytdlp" "bilibili" ];
       extraOptions = [
         "--net=host"
       ];
