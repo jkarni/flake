@@ -20,34 +20,34 @@ let
 in
 {
 
-  services.traefik.dynamicConfigOptions = {
-    http.routers = {
-      nitter.rule = "Host(`twitter.${config.networking.domain}`)";
-      nitter.entrypoints = "websecure";
-      nitter.service = "nitter";
-    };
+  # services.traefik.dynamicConfigOptions = {
+  #   http.routers = {
+  #     nitter.rule = "Host(`twitter.${config.networking.domain}`)";
+  #     nitter.entrypoints = "websecure";
+  #     nitter.service = "nitter";
+  #   };
 
-    http.services = {
-      nitter.loadBalancer.servers = [{ url = "http://localhost:8083"; }];
-    };
-  };
+  #   http.services = {
+  #     nitter.loadBalancer.servers = [{ url = "http://localhost:8083"; }];
+  #   };
+  # };
 
 
-  services.nitter = {
-    enable = true;
-    preferences = {
-      replaceTwitter = config.services.nitter.server.hostname;
-      infiniteScroll = true;
-      hlsPlayback = true;
-      theme = "Auto";
-    };
-    server = {
-      address = "127.0.0.1";
-      https = true;
-      hostname = "twitter.${config.networking.domain}";
-      port = 8083;
-    };
-  };
+  # services.nitter = {
+  #   enable = true;
+  #   preferences = {
+  #     replaceTwitter = config.services.nitter.server.hostname;
+  #     infiniteScroll = true;
+  #     hlsPlayback = true;
+  #     theme = "Auto";
+  #   };
+  #   server = {
+  #     address = "127.0.0.1";
+  #     https = true;
+  #     hostname = "twitter.${config.networking.domain}";
+  #     port = 8083;
+  #   };
+  # };
 
 
   virtualisation.oci-containers.containers = {
