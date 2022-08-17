@@ -12,10 +12,9 @@
     };
   };
 
-  # strange way to hide actual domain
+  # hide actual domain
   systemd.services.podman-vaultwarden.serviceConfig.EnvironmentFile = config.sops.secrets.vaultwarden-env.path;
-  systemd.services.podman-vaultwarden.serviceConfig.ExecStart = lib.mkForce (pkgs.writeShellScript "podman-vaultwarden-start" ''
-    set -e
+  systemd.services.podman-vaultwarden.script = lib.mkForce ''
     exec podman run \
       --rm \
       --name='vaultwarden' \
@@ -30,7 +29,7 @@
       '--label' 'traefik.http.routers.vaultwarden.service=vaultwarden' \
       '--label' 'traefik.http.services.vaultwarden.loadbalancer.server.port=80'  \
       vaultwarden/server
-  '');
+  '';
 
   systemd.services.podman-vaultwarden.preStart = lib.mkAfter ''
     [ ! -d /var/lib/vaultwarden ] && mkdir -p /var/lib/vaultwarden
@@ -40,9 +39,7 @@
   services.restic.backups."vaultwarden-backup" = {
     passwordFile = config.sops.secrets.restic-password.path;
     rcloneConfigFile = config.sops.secrets.rclone-config.path;
-    paths = [
-      "/var/lib/vaultwarden"
-    ];
+    paths = [ "/var/lib/vaultwarden" ];
     repository = "rclone:r2:backup";
     timerConfig.OnCalendar = "06:00";
     pruneOpts = [ "--keep-last 2" ];

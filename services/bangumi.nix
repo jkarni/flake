@@ -143,9 +143,7 @@
     ];
     passwordFile = config.sops.secrets.restic-password.path;
     rcloneConfigFile = config.sops.secrets.rclone-config.path;
-    paths = [
-      "/download"
-    ];
+    paths = [ "/download" ];
     repository = "rclone:r2:backup";
     timerConfig.OnCalendar = "02:00";
     pruneOpts = [ "--keep-last 2" ];

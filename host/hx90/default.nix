@@ -37,9 +37,7 @@
     ];
     passwordFile = config.sops.secrets.restic-password.path;
     rcloneConfigFile = config.sops.secrets.rclone-config.path;
-    paths = [
-      "/home/dominic/.mozilla/firefox/default"
-    ];
+    paths = [ "/home/dominic/.mozilla/firefox/default" ];
     repository = "rclone:r2:backup";
     timerConfig.OnCalendar = "03:00";
     pruneOpts = [ "--keep-last 2" ];

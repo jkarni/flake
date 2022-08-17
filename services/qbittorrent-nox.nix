@@ -105,9 +105,7 @@ in
     ];
     passwordFile = config.sops.secrets.restic-password.path;
     rcloneConfigFile = config.sops.secrets.rclone-config.path;
-    paths = [
-      "${qbConfigDir}"
-    ];
+    paths = [ "${qbConfigDir}" ];
     repository = "rclone:r2:backup";
     timerConfig.OnCalendar = "01:00";
     pruneOpts = [ "--keep-last 2" ];
