@@ -13,7 +13,7 @@
   '';
 
   systemd.services.podman-unblock-netease-music.serviceConfig.EnvironmentFile = config.sops.secrets.unblock-netease-music-env.path;
-  systemd.services.podman-unblock-netease-music.script = ''
+  systemd.services.podman-unblock-netease-music.script = lib.mkForce ''
     set -e
     exec podman run \
       --rm \
