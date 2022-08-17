@@ -63,6 +63,7 @@ in
   };
 
   virtualisation.oci-containers.containers = {
+    # nitter and redis must be in the host network, I don't know why.
     "nitter" = {
       image = "quay.io/unixfox/nitter";
       dependsOn = [ "nitter-db" ];
