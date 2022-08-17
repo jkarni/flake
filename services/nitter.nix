@@ -67,6 +67,10 @@ in
     "nitter" = {
       image = "quay.io/unixfox/nitter";
       dependsOn = [ "nitter-db" ];
+      environment = {
+        "REPLACE_TWITTER" = "twitter.mlyxshi.com";
+      };
+
       volumes = [
         "/var/lib/nitter/nitter.conf:/src/nitter.conf"
       ];
