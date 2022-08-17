@@ -116,8 +116,8 @@ in
 
   # nitter's preStart is python script
   # use postStart instead
-  systemd.services.nitter.postStart = ''
-    ${pkgs.cloudflare-dns-sync} twitter.${config.networking.domain}
-  '';
+  # systemd.services.nitter.postStart = ''
+  #   ${pkgs.cloudflare-dns-sync} twitter.${config.networking.domain}
+  # '';
 
 }
