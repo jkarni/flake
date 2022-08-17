@@ -25,11 +25,19 @@ ssh-keyscan xxx.mlyxshi.com | ssh-to-age
 # write to modules/secrets/.sops.yaml
 sops updatekeys key.yaml
 ```
+
 Rebuild NixOS
 ```
+git clone https://github.com/mlyxshi/flake /etc/flake
+
 # If EFI, delete default grub boot, use systemd-boot instead
 rm -rf /boot/*
-nixos-rebuild switch --flake github:mlyxshi/flake#<NAME> --install-bootloader -v
+nixos-rebuild switch --flake /etc/flake#NAME --install-bootloader -v
+```
+
+End
+```
+cd /etc/flake && git remote set-url origin github.com:mlyxshi/flake 
 ```
 
 ## 3. First Install[PC]
@@ -64,7 +72,7 @@ nixos-install --flake /mnt/etc/flake#hx90 -v
 ```
 nixos-rebuild switch --flake /etc/flake#hx90 -v
 
-cd /etc/falke
+cd /etc/flake
 git remote set-url origin github.com:mlyxshi/flake 
 ```
 
