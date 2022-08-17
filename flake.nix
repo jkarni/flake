@@ -135,8 +135,6 @@
               system.stateVersion = stateVersion;
               hm.stateVersion = stateVersion;
               hm.nixConfigDir = "/etc/flake";
-
-              boot.loader.systemd-boot.netbootxyz.enable = true;
             }
           ];
           specialArgs = commonSpecialArgs;
