@@ -58,6 +58,7 @@ in
         "/var/lib/nitter/nitter.conf:/src/nitter.conf"
       ];
       extraOptions = [
+        "--net=nitter"
         "--label"
         "traefik.enable=true"
         "--label"
@@ -73,6 +74,9 @@ in
         "/var/lib/nitter-db:/data"
       ];
       cmd = [ "redis-server" "--save" "60" "1" "--loglevel" "warning" ];
+      extraOptions = [
+        "--net=nitter"
+      ];
     };
 
   };
