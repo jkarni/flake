@@ -1,5 +1,9 @@
 { config, pkgs, lib, ... }: {
 
+  sops.secrets.restic-password = { };
+  sops.secrets.rclone-config = { };
+
+
   sops.secrets.vaultwarden-domain = { };
   sops.secrets.vaultwarden-env = { };
 
@@ -33,5 +37,16 @@
     [ ! -d /var/lib/vaultwarden ] && mkdir -p /var/lib/vaultwarden
     ${pkgs.cloudflare-dns-sync} $(cat ${config.sops.secrets.vaultwarden-domain.path})
   '';
+
+  services.restic.backups."vaultwarden-backup" = {
+    passwordFile = config.sops.secrets.restic-password.path;
+    rcloneConfigFile = config.sops.secrets.rclone-config.path;
+    paths = [
+      "/var/lib/vaultwarden"
+    ];
+    repository = "rclone:r2:backup";
+    timerConfig.OnCalendar = "06:00";
+    pruneOpts = [ "--keep-last 2" ];
+  };
 
 }

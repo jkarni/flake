@@ -28,6 +28,7 @@ sops updatekeys key.yaml
 
 Rebuild NixOS
 ```
+nix profile install nixpkgs#git
 git clone https://github.com/mlyxshi/flake /etc/flake
 
 # If EFI, delete default grub boot, use systemd-boot instead
