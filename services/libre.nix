@@ -52,23 +52,23 @@ in
 
   virtualisation.oci-containers.containers = {
 
-    "libreddit" = {
-      image = "spikecodes/libreddit:arm";
-      environment = {
-        LIBREDDIT_DEFAULT_WIDE = "on";
-        LIBREDDIT_DEFAULT_SHOW_NSFW = "on";
-        LIBREDDIT_DEFAULT_USE_HLS = "on";
-      };
-      extraOptions = [
-        "--no-healthcheck" # libreddit default healthcheck always fail which will cause traefik omit it.
-        "--label"
-        "traefik.enable=true"
-        "--label"
-        "traefik.http.routers.websecure-libreddit.rule=Host(`reddit.${config.networking.domain}`)"
-        "--label"
-        "traefik.http.routers.websecure-libreddit.entrypoints=websecure"
-      ];
-    };
+    # "libreddit" = {
+    #   image = "spikecodes/libreddit:arm";
+    #   environment = {
+    #     LIBREDDIT_DEFAULT_WIDE = "on";
+    #     LIBREDDIT_DEFAULT_SHOW_NSFW = "on";
+    #     LIBREDDIT_DEFAULT_USE_HLS = "on";
+    #   };
+    #   extraOptions = [
+    #     "--no-healthcheck" # libreddit default healthcheck always fail which will cause traefik omit it.
+    #     "--label"
+    #     "traefik.enable=true"
+    #     "--label"
+    #     "traefik.http.routers.websecure-libreddit.rule=Host(`reddit.${config.networking.domain}`)"
+    #     "--label"
+    #     "traefik.http.routers.websecure-libreddit.entrypoints=websecure"
+    #   ];
+    # };
 
     "invidious" = {
       image = "quay.io/invidious/invidious:latest-arm64";
@@ -102,9 +102,9 @@ in
 
   };
 
-  systemd.services.podman-libreddit.preStart = lib.mkAfter ''
-    ${pkgs.cloudflare-dns-sync} reddit.${config.networking.domain}
-  '';
+  # systemd.services.podman-libreddit.preStart = lib.mkAfter ''
+  #   ${pkgs.cloudflare-dns-sync} reddit.${config.networking.domain}
+  # '';
 
   systemd.services.podman-invidious-db.preStart = lib.mkAfter ''
     [ ! -d /var/lib/invidious ] && mkdir -p /var/lib/invidious-db
