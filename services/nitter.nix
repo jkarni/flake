@@ -78,6 +78,7 @@ in
   };
 
   systemd.services.podman-nitter.preStart = lib.mkAfter ''
+    [ ! -d /var/lib/nitter ] && mkdir -p /var/lib/nitter
     cat ${NitterConfig} > /var/lib/nitter/nitter.conf
     ${pkgs.cloudflare-dns-sync} twitter.${config.networking.domain}
   '';
