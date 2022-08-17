@@ -73,9 +73,12 @@ in
         "/var/lib/nitter-db:/data"
       ];
       cmd = [ "redis-server" "--save" "60" "1" "--loglevel" "warning" ];
-      extraOptions = [ "--memory=20m" ];
     };
 
+  };
+
+  boot.kernel.sysctl = {
+    "vm.overcommit_memory" = "1";
   };
 
   # systemd.services.podman-nitter.preStart = lib.mkAfter ''
