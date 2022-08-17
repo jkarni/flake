@@ -58,7 +58,6 @@ in
         "/var/lib/nitter/nitter.conf:/src/nitter.conf"
       ];
       extraOptions = [
-        "--net=nitter"
         "--label"
         "traefik.enable=true"
         "--label"
