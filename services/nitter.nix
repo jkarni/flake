@@ -3,7 +3,7 @@ let
   NitterConfig = pkgs.writeText "NitterConfig" ''
     [Server]
     address = "0.0.0.0"
-    port = 8080
+    port = 9000
     https = false  # disable to enable cookies when not using https
     httpMaxConnections = 100
     staticDir = "./public"
@@ -50,6 +50,18 @@ let
 in
 {
 
+  services.traefik.dynamicConfigOptions = {
+    http.routers = {
+      nitter.rule = "Host(`twitter.${config.networking.domain}`)";
+      nitter.entrypoints = web-secure;
+      nitter.service = "nitter";
+    };
+
+    http.services = {
+      nitter.loadBalancer.servers = [{ url = "http://localhost:9000"; }];
+    };
+  };
+
   virtualisation.oci-containers.containers = {
     "nitter" = {
       image = "quay.io/unixfox/nitter";
@@ -59,12 +71,6 @@ in
       ];
       extraOptions = [
         "--net=host"
-        "--label"
-        "traefik.enable=true"
-        "--label"
-        "traefik.http.routers.websecure-nitter.rule=Host(`twitter.${config.networking.domain}`)"
-        "--label"
-        "traefik.http.routers.websecure-nitter.entrypoints=websecure"
       ];
     };
 
@@ -93,7 +99,7 @@ in
     ${pkgs.cloudflare-dns-sync} twitter.${config.networking.domain}
   '';
 
-  # systemd.services.podman-nitter-db.preStart = lib.mkAfter ''
-  #   [ ! -d /var/lib/nitter-db ] && mkdir -p /var/lib/nitter-db
-  # '';
+  systemd.services.podman-nitter-db.preStart = lib.mkAfter ''
+    [ ! -d /var/lib/nitter-db ] && mkdir -p /var/lib/nitter-db
+  '';
 }
