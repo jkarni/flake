@@ -3,7 +3,6 @@
   sops.secrets.restic-password = { };
   sops.secrets.rclone-config = { };
 
-
   sops.secrets.vaultwarden-domain = { };
   sops.secrets.vaultwarden-env = { };
 
