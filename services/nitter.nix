@@ -51,21 +51,21 @@ in
 {
 
   virtualisation.oci-containers.containers = {
-    "nitter" = {
-      image = "quay.io/unixfox/nitter";
-      dependsOn = [ "nitter-db" ];
-      volumes = [
-        "/var/lib/nitter/nitter.conf:/src/nitter.conf"
-      ];
-      extraOptions = [
-        "--label"
-        "traefik.enable=true"
-        "--label"
-        "traefik.http.routers.websecure-nitter.rule=Host(`twitter.${config.networking.domain}`)"
-        "--label"
-        "traefik.http.routers.websecure-nitter.entrypoints=websecure"
-      ];
-    };
+    # "nitter" = {
+    #   image = "quay.io/unixfox/nitter";
+    #   dependsOn = [ "nitter-db" ];
+    #   volumes = [
+    #     "/var/lib/nitter/nitter.conf:/src/nitter.conf"
+    #   ];
+    #   extraOptions = [
+    #     "--label"
+    #     "traefik.enable=true"
+    #     "--label"
+    #     "traefik.http.routers.websecure-nitter.rule=Host(`twitter.${config.networking.domain}`)"
+    #     "--label"
+    #     "traefik.http.routers.websecure-nitter.entrypoints=websecure"
+    #   ];
+    # };
 
     "nitter-db" = {
       image = "redis";
@@ -77,11 +77,11 @@ in
 
   };
 
-  systemd.services.podman-nitter.preStart = lib.mkAfter ''
-    [ ! -d /var/lib/nitter ] && mkdir -p /var/lib/nitter
-    cat ${NitterConfig} > /var/lib/nitter/nitter.conf
-    ${pkgs.cloudflare-dns-sync} twitter.${config.networking.domain}
-  '';
+  # systemd.services.podman-nitter.preStart = lib.mkAfter ''
+  #   [ ! -d /var/lib/nitter ] && mkdir -p /var/lib/nitter
+  #   cat ${NitterConfig} > /var/lib/nitter/nitter.conf
+  #   ${pkgs.cloudflare-dns-sync} twitter.${config.networking.domain}
+  # '';
 
   systemd.services.podman-nitter-db.preStart = lib.mkAfter ''
     [ ! -d /var/lib/nitter-db ] && mkdir -p /var/lib/nitter-db
