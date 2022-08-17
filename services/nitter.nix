@@ -13,7 +13,7 @@ let
     [Cache]
     listMinutes = 240  # how long to cache list info (not the tweets, so keep it high)
     rssMinutes = 10  # how long to cache rss queries
-    redisHost = "nitter-db"  # Change to "nitter-redis" if using docker-compose
+    redisHost = "us1.mlyxshi.com"  # Change to "nitter-redis" if using docker-compose
     redisPort = 6379
     redisPassword = ""
     redisConnections = 20  # connection pool size
@@ -75,7 +75,7 @@ in
       ];
       cmd = [ "redis-server" "--save" "60" "1" "--loglevel" "warning" ];
       extraOptions = [
-        "--net=nitter"
+        "--net=host"
       ];
     };
 
