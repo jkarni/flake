@@ -83,7 +83,7 @@ in
   #   ${pkgs.cloudflare-dns-sync} twitter.${config.networking.domain}
   # '';
 
-  systemd.services.podman-nitter-db.preStart = lib.mkAfter ''
-    [ ! -d /var/lib/nitter-db ] && mkdir -p /var/lib/nitter-db
-  '';
+  # systemd.services.podman-nitter-db.preStart = lib.mkAfter ''
+  #   [ ! -d /var/lib/nitter-db ] && mkdir -p /var/lib/nitter-db
+  # '';
 }
