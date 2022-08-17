@@ -1,18 +1,27 @@
 { config, pkgs, lib, ... }: {
 
-  virtualisation.oci-containers.containers = {
-    #podman run -p 8080:8080 pan93412/unblock-netease-music-enhanced --strict -e https://music.163.com -o ytdlp bilibili 
-    "unblock-netease-music" = {
-      image = "pan93412/unblock-netease-music-enhanced";
-      ports = [ "8080:8080" ];
-      cmd = [ "--strict" "-e" "https://music.163.com" "-o" "ytdlp" "bilibili" ];
-      extraOptions = [
-        "--net=host"
-      ];
-    };
-  };
-
+  sops.secrets.unblock-netease-music-env = { };
   systemd.services.podman-unblock-netease-music.preStart = lib.mkAfter ''
     ${pkgs.cloudflare-dns-sync} netease.${config.networking.domain}
   '';
+
+
+  systemd.services.podman-unblock-netease-music.serviceConfig.EnvironmentFile = config.sops.secrets.unblock-netease-music-env.path;
+  systemd.services.podman-unblock-netease-music.serviceConfig.ExecStart = lib.mkForce (pkgs.writeShellScript "podman-unblock-netease-music-start" ''
+    set -e
+    exec podman run \
+      --rm \
+      --name='unblock-netease-music' \
+      --log-driver=journald \
+      -p "$PORT:8080" \
+      '--net=host' \
+      pan93412/unblock-netease-music-enhanced \
+      '--strict' \
+      '-e' \
+      'https://music.163.com' \
+      '-o' \
+      'ytdlp' \
+      'bilibili'
+  '');
+
 }
