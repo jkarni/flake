@@ -5,6 +5,9 @@
   sops.age.sshKeyPaths = [ "/etc/ssh/ssh_host_ed25519_key" ];
 
   nix = {
+    
+    nixPath = [ "nixos-config=/etc/flake/flake.nix" ];
+
     extraOptions = ''
       experimental-features = nix-command flakes
     '';
@@ -27,6 +30,7 @@
       options = "--delete-older-than 7d";
     };
   };
+
 
   nixpkgs.config.allowUnfree = true;
 
