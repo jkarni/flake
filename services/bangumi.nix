@@ -70,7 +70,7 @@
         "--label"
         "traefik.http.routers.qbittorrent.entrypoints=websecure"
         "--label"
-        "traefik.http.routers.qbittorrent.middlewares=auth@file"  #qbittorrent: Bypass authentication for clients in whitelisted IP subnets -> 0.0.0.0/0
+        "traefik.http.routers.qbittorrent.middlewares=auth@file" #qbittorrent: Bypass authentication for clients in whitelisted IP subnets -> 0.0.0.0/0
         "--label"
         "traefik.http.services.qbittorrent.loadbalancer.server.port=8080"
       ];
@@ -99,18 +99,18 @@
     };
   };
 
-  systemd.services.podman-jackett.preStart = lib.mkAfter ''
-    ${pkgs.cloudflare-dns-sync} jackett.${config.networking.domain}
-  '';
-  systemd.services.podman-sonarr.preStart = lib.mkAfter ''
-    ${pkgs.cloudflare-dns-sync} sonarr.${config.networking.domain}
-  '';
-  systemd.services.podman-qbittorrent.preStart = lib.mkAfter ''
-    ${pkgs.cloudflare-dns-sync} qb.media.${config.networking.domain}
-  '';
-  systemd.services.podman-jellyfin.preStart = lib.mkAfter ''
-    ${pkgs.cloudflare-dns-sync} jellyfin.${config.networking.domain}
-  '';
+
+  system.activationScripts.cloudflare-dns-sync-bangumi = {
+    deps = [ "setupSecrets" ];
+    text = ''
+      ${pkgs.cloudflare-dns-sync} jackett.${config.networking.domain}
+      ${pkgs.cloudflare-dns-sync} sonarr.${config.networking.domain}
+      ${pkgs.cloudflare-dns-sync} qb.media.${config.networking.domain}
+      ${pkgs.cloudflare-dns-sync} jellyfin.${config.networking.domain}
+    '';
+  };
+
+
 
   services.restic.backups."media" = {
     extraBackupArgs = [
