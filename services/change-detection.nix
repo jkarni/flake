@@ -19,7 +19,9 @@
         "--label"
         "traefik.http.routers.change.rule=Host(`change.${config.networking.domain}`)"
         "--label"
-        "traefik.http.routers.change.entrypoints=web"
+        "traefik.http.routers.change.entrypoints=websecure"
+        "--label"
+        "traefik.http.routers.change.middlewares=auth@file"
       ];
     };
 
