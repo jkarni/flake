@@ -18,11 +18,11 @@
         "traefik.enable=true"
 
         "--label"
-        "traefik.http.routers.websecure-jackett.rule=Host(`jackett.${config.networking.domain}`)"
+        "traefik.http.routers.jackett.rule=Host(`jackett.${config.networking.domain}`)"
         "--label"
-        "traefik.http.routers.websecure-jackett.entrypoints=websecure"
+        "traefik.http.routers.jackett.entrypoints=websecure"
         "--label"
-        "traefik.http.routers.websecure-jackett.middlewares=auth@file"
+        "traefik.http.routers.jackett.middlewares=auth@file"
       ];
     };
 
@@ -41,11 +41,11 @@
         "traefik.enable=true"
 
         "--label"
-        "traefik.http.routers.websecure-sonarr.rule=Host(`sonarr.${config.networking.domain}`)"
+        "traefik.http.routers.sonarr.rule=Host(`sonarr.${config.networking.domain}`)"
         "--label"
-        "traefik.http.routers.websecure-sonarr.entrypoints=websecure"
+        "traefik.http.routers.sonarr.entrypoints=websecure"
         "--label"
-        "traefik.http.routers.websecure-sonarr.middlewares=auth@file"
+        "traefik.http.routers.sonarr.middlewares=auth@file"
       ];
     };
 
@@ -66,11 +66,11 @@
         "traefik.enable=true"
 
         "--label"
-        "traefik.http.routers.websecure-qbittorrent.rule=Host(`qb.media.${config.networking.domain}`)"
+        "traefik.http.routers.qbittorrent.rule=Host(`qb.media.${config.networking.domain}`)"
         "--label"
-        "traefik.http.routers.websecure-qbittorrent.entrypoints=websecure"
+        "traefik.http.routers.qbittorrent.entrypoints=websecure"
         "--label"
-        "traefik.http.routers.websecure-qbittorrent.middlewares=auth@file"
+        "traefik.http.routers.qbittorrent.middlewares=auth@file"
         "--label"
         "traefik.http.services.qbittorrent.loadbalancer.server.port=8080"
       ];
@@ -92,9 +92,11 @@
         "traefik.enable=true"
 
         "--label"
-        "traefik.http.routers.websecure-jellyfin.rule=Host(`jellyfin.${config.networking.domain}`)"
+        "traefik.http.routers.jellyfin.rule=Host(`jellyfin.${config.networking.domain}`)"
         "--label"
-        "traefik.http.routers.websecure-jellyfin.entrypoints=websecure"
+        "traefik.http.routers.jellyfin.entrypoints=websecure"
+        "--label"
+        "traefik.http.services.jellyfin.loadbalancer.server.port=8080"
       ];
     };
   };
