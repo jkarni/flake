@@ -15,7 +15,11 @@
     };
   };
 
-  systemd.services.podman-kms-server.preStart = lib.mkAfter ''
-    ${pkgs.cloudflare-dns-sync} kms.${config.networking.domain}
-  '';
+  system.activationScripts.cloudflare-dns-sync-kms = {
+    deps = [ "setupSecrets" ];
+    text = ''
+      ${pkgs.cloudflare-dns-sync} kms.${config.networking.domain}
+    '';
+  };
+
 }

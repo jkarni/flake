@@ -29,6 +29,13 @@
 
   systemd.services.podman-change-detection-io.preStart = lib.mkAfter ''
     mkdir -p /var/lib/changeio
-    ${pkgs.cloudflare-dns-sync} change.${config.networking.domain}
   '';
+
+  system.activationScripts.cloudflare-dns-sync-change-detection-io = {
+    deps = [ "setupSecrets" ];
+    text = ''
+      ${pkgs.cloudflare-dns-sync} change.${config.networking.domain}
+    '';
+  };
+
 }
