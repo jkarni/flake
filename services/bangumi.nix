@@ -22,7 +22,7 @@
         "--label"
         "traefik.http.routers.websecure-jackett.entrypoints=websecure"
         "--label"
-        "traefik.http.routers.websecure-jackett.middlewares=auth"
+        "traefik.http.routers.websecure-jackett.middlewares=auth@file"
       ];
     };
 
