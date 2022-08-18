@@ -70,7 +70,7 @@
         "--label"
         "traefik.http.routers.qbittorrent.entrypoints=websecure"
         "--label"
-        "traefik.http.routers.qbittorrent.middlewares=auth@file"
+        "traefik.http.routers.qbittorrent.middlewares=auth@file"  #qbittorrent: Bypass authentication for clients in whitelisted IP subnets -> 0.0.0.0/0
         "--label"
         "traefik.http.services.qbittorrent.loadbalancer.server.port=8080"
       ];
@@ -95,8 +95,6 @@
         "traefik.http.routers.jellyfin.rule=Host(`jellyfin.${config.networking.domain}`)"
         "--label"
         "traefik.http.routers.jellyfin.entrypoints=websecure"
-        "--label"
-        "traefik.http.routers.jellyfin.middlewares=auth@file"
       ];
     };
   };
