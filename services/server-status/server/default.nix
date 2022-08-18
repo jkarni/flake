@@ -19,13 +19,18 @@ in
         ${pkgs.wget}/bin/wget -P /var/lib/ServerStatus/ https://github.com/cokemine/hotaru_theme/releases/latest/download/hotaru-theme.zip
         ${pkgs.unzip}/bin/unzip -d /var/lib/ServerStatus/ /var/lib/ServerStatus/hotaru-theme.zip
       fi
-
-      ${pkgs.cloudflare-dns-sync} top.${config.networking.domain}
     '';
 
     serviceConfig = {
       ExecStart = "${pkgs.ServerStatus-Server}/bin/sergate  --config=${serverConfig} --web-dir=/var/lib/ServerStatus/hotaru-theme  --port 35601";
     };
+  };
+
+  system.activationScripts.cloudflare-dns-sync-serverstatus-server = {
+    deps = [ "setupSecrets" ];
+    text = ''
+      ${pkgs.cloudflare-dns-sync} top.${config.networking.domain}
+    '';
   };
 
   services.nginx.enable = true;

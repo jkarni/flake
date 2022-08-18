@@ -86,9 +86,6 @@ in
 
   systemd.services.qbittorrent-nox = {
     after = [ "local-fs.target" "network-online.target" "nss-lookup.target" ];
-    preStart = ''
-      ${pkgs.cloudflare-dns-sync} qb.${config.networking.domain}
-    '';
     serviceConfig = {
       ExecStart = "${pkgs.qbittorrent-nox}/bin/qbittorrent-nox --profile=${qbConfigDir} --relative-fastresume";
       StateDirectory = "qbittorrent-nox";
@@ -97,7 +94,12 @@ in
     wants = [ "network-online.target" ];
   };
 
-
+  system.activationScripts.cloudflare-dns-sync-qbittorrent-nox = {
+    deps = [ "setupSecrets" ];
+    text = ''
+      ${pkgs.cloudflare-dns-sync} qb.${config.networking.domain}
+    '';
+  };
 
   services.restic.backups."bt-backup" = {
     extraBackupArgs = [
