@@ -70,9 +70,9 @@
         "--label"
         "traefik.http.routers.websecure-qbittorrent.entrypoints=websecure"
         "--label"
-        "traefik.http.services.websecure-qbittorrent.loadbalancer.server.port=8080"
-        "--label"
         "traefik.http.routers.websecure-qbittorrent.middlewares=auth@file"
+        "--label"
+        "traefik.http.services.qbittorrent.loadbalancer.server.port=8080"
       ];
     };
 
