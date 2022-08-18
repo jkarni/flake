@@ -102,22 +102,18 @@ in
 
   };
 
-  systemd.services.podman-libreddit.preStart = lib.mkAfter ''
-    ${pkgs.cloudflare-dns-sync} reddit.${config.networking.domain}
-  '';
 
   systemd.services.podman-invidious-db.preStart = lib.mkAfter ''
     mkdir -p /var/lib/invidious-db
   '';
 
-  systemd.services.podman-invidious.preStart = lib.mkAfter ''
-    ${pkgs.cloudflare-dns-sync} youtube.${config.networking.domain}
-  '';
-
-  # nitter's preStart is python script
-  # use postStart instead
-  systemd.services.nitter.postStart = ''
-    ${pkgs.cloudflare-dns-sync} twitter.${config.networking.domain}
-  '';
+  system.activationScripts.cloudflare-dns-sync-libre= {
+    deps = [ "setupSecrets" ];
+    text = ''
+      ${pkgs.cloudflare-dns-sync} reddit.${config.networking.domain}
+      ${pkgs.cloudflare-dns-sync} youtube.${config.networking.domain}
+      ${pkgs.cloudflare-dns-sync} twitter.${config.networking.domain}
+    '';
+  };
 
 }
