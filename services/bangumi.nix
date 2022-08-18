@@ -45,7 +45,7 @@
         "--label"
         "traefik.http.routers.websecure-sonarr.entrypoints=websecure"
         "--label"
-        "traefik.http.routers.websecure-jackett.middlewares=auth@file"
+        "traefik.http.routers.websecure-sonarr.jackett.middlewares=auth@file"
       ];
     };
 
