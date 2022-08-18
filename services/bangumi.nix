@@ -18,13 +18,6 @@
         "traefik.enable=true"
 
         "--label"
-        "traefik.http.routers.jackett.rule=Host(`jackett.${config.networking.domain}`)"
-        "--label"
-        "traefik.http.routers.jackett.entrypoints=web"
-        "--label"
-        "traefik.http.routers.jackett.middlewares=web-redirect@file"
-
-        "--label"
         "traefik.http.routers.websecure-jackett.rule=Host(`jackett.${config.networking.domain}`)"
         "--label"
         "traefik.http.routers.websecure-jackett.entrypoints=websecure"
@@ -44,13 +37,6 @@
       extraOptions = [
         "--label"
         "traefik.enable=true"
-
-        "--label"
-        "traefik.http.routers.sonarr.rule=Host(`sonarr.${config.networking.domain}`)"
-        "--label"
-        "traefik.http.routers.sonarr.entrypoints=web"
-        "--label"
-        "traefik.http.routers.sonarr.middlewares=web-redirect@file"
 
         "--label"
         "traefik.http.routers.websecure-sonarr.rule=Host(`sonarr.${config.networking.domain}`)"
@@ -78,7 +64,7 @@
         "--label"
         "traefik.http.routers.qbittorrent.rule=Host(`qb.media.${config.networking.domain}`)"
         "--label"
-        "traefik.http.routers.qbittorrent.entrypoints=web"
+        "traefik.http.routers.qbittorrent.entrypoints=websecure"
         "--label"
         "traefik.http.services.qbittorrent.loadbalancer.server.port=8080"
       ];
@@ -98,13 +84,6 @@
       extraOptions = [
         "--label"
         "traefik.enable=true"
-
-        "--label"
-        "traefik.http.routers.jellyfin.rule=Host(`jellyfin.${config.networking.domain}`)"
-        "--label"
-        "traefik.http.routers.jellyfin.entrypoints=web"
-        "--label"
-        "traefik.http.routers.jellyfin.middlewares=web-redirect@file"
 
         "--label"
         "traefik.http.routers.websecure-jellyfin.rule=Host(`jellyfin.${config.networking.domain}`)"
