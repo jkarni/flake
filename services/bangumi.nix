@@ -44,6 +44,8 @@
         "traefik.http.routers.websecure-sonarr.rule=Host(`sonarr.${config.networking.domain}`)"
         "--label"
         "traefik.http.routers.websecure-sonarr.entrypoints=websecure"
+        "--label"
+        "traefik.http.routers.websecure-jackett.middlewares=auth@file"
       ];
     };
 
