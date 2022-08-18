@@ -3,6 +3,6 @@
     ./default.nix
     ../../services/server-status/server/default.nix #80
     ../../services/qbittorrent-nox.nix #8080
-    ../../services/unblock-netease-music.nix  #????
+    ../../services/unblock-netease-music.nix #????
   ];
 }

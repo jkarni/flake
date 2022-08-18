@@ -37,7 +37,7 @@
   };
 
   systemd.services.podman-miniflux.preStart = lib.mkAfter ''
-    [ ! -d /var/lib/miniflux-db ] && mkdir -p /var/lib/miniflux-db
+    mkdir -p /var/lib/miniflux-db
     ${pkgs.cloudflare-dns-sync} miniflux-silent.${config.networking.domain}
   '';
 

@@ -11,7 +11,6 @@
   ];
 
   home.packages = with pkgs; [
-    nixpkgs-fmt
     gh
     go
     ideviceinstaller

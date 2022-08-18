@@ -32,7 +32,7 @@
   '';
 
   systemd.services.podman-vaultwarden.preStart = lib.mkAfter ''
-    [ ! -d /var/lib/vaultwarden ] && mkdir -p /var/lib/vaultwarden
+    mkdir -p /var/lib/vaultwarden
     ${pkgs.cloudflare-dns-sync} $(cat ${config.sops.secrets.vaultwarden-domain.path})
   '';
 

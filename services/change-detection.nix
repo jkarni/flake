@@ -26,7 +26,7 @@
   };
 
   systemd.services.podman-change-detection-io.preStart = lib.mkAfter ''
-    [ ! -d /var/lib/changeio ] && mkdir -p /var/lib/changeio
+    mkdir -p /var/lib/changeio
     ${pkgs.cloudflare-dns-sync} change.${config.networking.domain}
   '';
 }

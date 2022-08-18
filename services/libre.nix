@@ -107,7 +107,7 @@ in
   '';
 
   systemd.services.podman-invidious-db.preStart = lib.mkAfter ''
-    [ ! -d /var/lib/invidious ] && mkdir -p /var/lib/invidious-db
+    mkdir -p /var/lib/invidious-db
   '';
 
   systemd.services.podman-invidious.preStart = lib.mkAfter ''
