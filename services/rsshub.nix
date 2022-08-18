@@ -14,7 +14,10 @@
     };
   };
 
-  systemd.services.podman-rsshub.preStart = lib.mkAfter ''
-    ${pkgs.cloudflare-dns-sync} rss.${config.networking.domain}
-  '';
+  system.activationScripts.cloudflare-dns-sync-rsshub = {
+    deps = [ "setupSecrets" ];
+    text = ''
+      ${pkgs.cloudflare-dns-sync} rss.${config.networking.domain}
+    '';
+  };
 }

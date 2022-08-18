@@ -41,9 +41,13 @@
 
   };
 
-  systemd.services.podman-miniflux.preStart = lib.mkAfter ''
-    ${pkgs.cloudflare-dns-sync} miniflux.${config.networking.domain}
-  '';
+
+  system.activationScripts.cloudflare-dns-sync-miniflux = {
+    deps = [ "setupSecrets" ];
+    text = ''
+      ${pkgs.cloudflare-dns-sync} miniflux.${config.networking.domain}
+    '';
+  };
 
   services.restic.backups."miniflux-db-backup" = {
     passwordFile = config.sops.secrets.restic-password.path;

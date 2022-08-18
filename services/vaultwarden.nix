@@ -33,8 +33,14 @@
 
   systemd.services.podman-vaultwarden.preStart = lib.mkAfter ''
     mkdir -p /var/lib/vaultwarden
-    ${pkgs.cloudflare-dns-sync} $(cat ${config.sops.secrets.vaultwarden-domain.path})
   '';
+
+  system.activationScripts.cloudflare-dns-sync-vaultwarden = {
+    deps = [ "setupSecrets" ];
+    text = ''
+      ${pkgs.cloudflare-dns-sync} $(cat ${config.sops.secrets.vaultwarden-domain.path})
+    '';
+  };
 
   services.restic.backups."vaultwarden-backup" = {
     passwordFile = config.sops.secrets.restic-password.path;
