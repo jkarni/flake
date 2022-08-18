@@ -96,7 +96,7 @@
         "--label"
         "traefik.http.routers.jellyfin.entrypoints=websecure"
         "--label"
-        "traefik.http.services.jellyfin.loadbalancer.server.port=8080"
+        "traefik.http.routers.jellyfin.middlewares=auth@file"
       ];
     };
   };
