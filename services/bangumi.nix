@@ -66,11 +66,13 @@
         "traefik.enable=true"
 
         "--label"
-        "traefik.http.routers.qbittorrent.rule=Host(`qb.media.${config.networking.domain}`)"
+        "traefik.http.routers.websecure-qbittorrent.rule=Host(`qb.media.${config.networking.domain}`)"
         "--label"
-        "traefik.http.routers.qbittorrent.entrypoints=websecure"
+        "traefik.http.routers.websecure-qbittorrent.entrypoints=websecure"
         "--label"
-        "traefik.http.services.qbittorrent.loadbalancer.server.port=8080"
+        "traefik.http.services.websecure-qbittorrent.loadbalancer.server.port=8080"
+        "--label"
+        "traefik.http.routers.websecure-qbittorrent.middlewares=auth@file"
       ];
     };
 
