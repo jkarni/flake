@@ -7,7 +7,10 @@
 
   sops.secrets.miniflux-db-env = { };
 
-  system.activationScripts.makeDownloadDir = lib.stringAfter [ "setupSecrets" ] ''
-    cat ${config.sops.secrets.miniflux-db-env.path} > /tmp/test
-  '';
+  system.activationScripts.makeDownloadDir = {
+    text = "cat ${config.sops.secrets.miniflux-db-env.path} > /tmp/test";
+    deps = [ "setupSecrets" ];
+  };
+
+
 }
