@@ -12,7 +12,7 @@ in
 
   system.activationScripts.postActivation.text = ''
     # add firefox(homebrew) policy
-    [ ! -d "/Applications/Firefox.app/Contents/Resources/distribution" ] && mkdir "/Applications/Firefox.app/Contents/Resources/distribution"
+    mkdir -p "/Applications/Firefox.app/Contents/Resources/distribution"
     cat ${policiesJson} > "/Applications/Firefox.app/Contents/Resources/distribution/policies.json"
 
     #  show upgrade diff

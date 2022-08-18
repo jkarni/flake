@@ -5,12 +5,4 @@
 
   ];
 
-  sops.secrets.miniflux-db-env = { };
-
-  system.activationScripts.makeDownloadDir = {
-    text = "cat ${config.sops.secrets.miniflux-db-env.path} > /tmp/test";
-    deps = [ "setupSecrets" ];
-  };
-
-
 }

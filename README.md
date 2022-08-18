@@ -5,7 +5,7 @@ git clone git@github.com:mlyxshi/flake /etc/flake
 nixos-rebuild switch --flake /etc/flake#hx90 -v
 ```
 
-## 2. NixInject(Server)
+## 2. NixInfect(Server)
 
 Reinstall OS to Debian(fix partition without entering tmpfs env)
 ```
