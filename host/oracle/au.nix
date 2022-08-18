@@ -5,9 +5,9 @@
 
   ];
 
-  sops.secrets.miniflux-env = { };
+  sops.secrets.miniflux-db-env = { };
 
-  system.activationScripts.makeDownloadDir = pkgs.lib.stringAfter [ "var" ] ''
-    cat ${config.sops.secrets.miniflux-env.path} > /tmp/test
+  system.activationScripts.makeDownloadDir = lib.stringAfter [ "setupSecrets" ] ''
+    cat ${config.sops.secrets.miniflux-db-env.path} > /tmp/test
   '';
 }
