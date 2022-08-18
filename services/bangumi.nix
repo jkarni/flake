@@ -21,6 +21,8 @@
         "traefik.http.routers.websecure-jackett.rule=Host(`jackett.${config.networking.domain}`)"
         "--label"
         "traefik.http.routers.websecure-jackett.entrypoints=websecure"
+        "--label"
+        "traefik.http.routers.websecure-jackett.middlewares=auth"
       ];
     };
 

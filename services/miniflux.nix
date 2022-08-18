@@ -21,16 +21,8 @@
         RUN_MIGRATIONS = "1";
       };
       extraOptions = [
-
         "--label"
         "traefik.enable=true"
-
-        "--label"
-        "traefik.http.routers.miniflux.rule=Host(`miniflux.${config.networking.domain}`)"
-        "--label"
-        "traefik.http.routers.miniflux.entrypoints=web"
-        "--label"
-        "traefik.http.routers.miniflux.middlewares=web-redirect@file"
 
         "--label"
         "traefik.http.routers.websecure-miniflux.rule=Host(`miniflux.${config.networking.domain}`)"
