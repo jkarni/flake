@@ -1,8 +1,8 @@
 { config, pkgs, lib, ... }: {
 
   # rss to unmuted tg bot  <-- important updates and news
+  sops.secrets.restic-env = { };
   sops.secrets.restic-password = { };
-  sops.secrets.rclone-config = { };
 
   sops.secrets.miniflux-env = { };
   sops.secrets.miniflux-db-env = { };
@@ -50,10 +50,9 @@
   };
 
   services.restic.backups."miniflux-db-backup" = {
+    environmentFile = config.sops.secrets.restic-env.path;
     passwordFile = config.sops.secrets.restic-password.path;
-    rcloneConfigFile = config.sops.secrets.rclone-config.path;
     paths = [ "/var/lib/miniflux-db" ];
-    repository = "rclone:r2:backup";
     timerConfig.OnCalendar = "04:00";
     pruneOpts = [ "--keep-last 2" ];
   };

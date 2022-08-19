@@ -1,7 +1,6 @@
 { config, pkgs, lib, ... }: {
-
+  sops.secrets.restic-env = { };
   sops.secrets.restic-password = { };
-  sops.secrets.rclone-config = { };
 
   sops.secrets.vaultwarden-domain = { };
   sops.secrets.vaultwarden-env = { };
@@ -43,10 +42,9 @@
   };
 
   services.restic.backups."vaultwarden-backup" = {
+    environmentFile = config.sops.secrets.restic-env.path;
     passwordFile = config.sops.secrets.restic-password.path;
-    rcloneConfigFile = config.sops.secrets.rclone-config.path;
     paths = [ "/var/lib/vaultwarden" ];
-    repository = "rclone:r2:backup";
     timerConfig.OnCalendar = "06:00";
     pruneOpts = [ "--keep-last 2" ];
   };

@@ -28,17 +28,16 @@
     };
   };
 
+  sops.secrets.restic-env = { };
   sops.secrets.restic-password = { };
-  sops.secrets.rclone-config = { };
 
   services.restic.backups."firefox-profile" = {
+    environmentFile = config.sops.secrets.restic-env.path;
+    passwordFile = config.sops.secrets.restic-password.path;
     extraBackupArgs = [
       "--exclude=chrome" # managed by hm soft link
     ];
-    passwordFile = config.sops.secrets.restic-password.path;
-    rcloneConfigFile = config.sops.secrets.rclone-config.path;
     paths = [ "/home/dominic/.mozilla/firefox/default" ];
-    repository = "rclone:r2:backup";
     timerConfig.OnCalendar = "03:00";
     pruneOpts = [ "--keep-last 2" ];
   };

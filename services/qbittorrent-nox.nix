@@ -69,8 +69,8 @@ let
   '';
 in
 {
+  sops.secrets.restic-env = { };
   sops.secrets.restic-password = { };
-  sops.secrets.rclone-config = { };
   sops.secrets.tg-userid = { };
   sops.secrets.tg-notify-token = { };
 
@@ -102,13 +102,12 @@ in
   };
 
   services.restic.backups."bt-backup" = {
+    environmentFile = config.sops.secrets.restic-env.path;
+    passwordFile = config.sops.secrets.restic-password.path;
     extraBackupArgs = [
       "--exclude=qBittorrent/downloads"
     ];
-    passwordFile = config.sops.secrets.restic-password.path;
-    rcloneConfigFile = config.sops.secrets.rclone-config.path;
     paths = [ "${qbConfigDir}" ];
-    repository = "rclone:r2:backup";
     timerConfig.OnCalendar = "01:00";
     pruneOpts = [ "--keep-last 2" ];
   };
