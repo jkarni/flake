@@ -1,7 +1,7 @@
 { config, pkgs, lib, ... }: {
 
   sops.secrets.restic-env = { };
-  #sops.secrets.restic-password = { };
+  sops.secrets.restic-password = { };
 
   # restic restore backup to create basic configuration tree directory structure
 
@@ -114,6 +114,7 @@
 
   services.restic.backups."media" = {
     environmentFile = config.sops.secrets.restic-env.path;
+    passwordFile = config.sops.secrets.restic-password.path;
     extraBackupArgs = [
       "--exclude=sonarr/downloads/*" # * keep directory
       "--exclude=sonarr/media/anime/*"
