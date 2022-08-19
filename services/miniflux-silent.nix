@@ -36,7 +36,7 @@
 
   };
 
-  systemd.services.podman-miniflux.serviceConfig.StateDirectory = "miniflux-db";
+  systemd.services.podman-miniflux-db.serviceConfig.StateDirectory = "miniflux-db";
 
   system.activationScripts.cloudflare-dns-sync-miniflux = {
     deps = [ "setupSecrets" ];
