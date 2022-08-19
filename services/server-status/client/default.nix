@@ -19,7 +19,6 @@ in
   services.vnstat.enable = true;
 
   systemd.services.serverstatus-client = {
-    description = "serverstatus-client";
     after = [ "network.target" ];
     wantedBy = [ "multi-user.target" ];
 

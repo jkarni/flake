@@ -9,7 +9,6 @@ in
 {
 
   systemd.services.serverstatus-server = {
-    description = "serverstatus-server";
     after = [ "network.target" ];
     wantedBy = [ "multi-user.target" ];
     preStart = ''
