@@ -50,6 +50,7 @@ in
       // lib.optionalAttrs pkgs.stdenv.isLinux {
         update = "cd /etc/flake; git pull; nixos-rebuild switch --flake /etc/flake#";
         slist = "systemctl --type=service";
+        stimer = "systemctl --type=timer";
         slog = "systemctl status";
       };
 

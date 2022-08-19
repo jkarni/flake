@@ -1,7 +1,6 @@
 { config, pkgs, lib, ... }: {
 
-  sops.secrets.restic-password = { };
-  sops.secrets.rclone-config = { };
+  sops.secrets.restic-env = { };
 
   # restic restore backup to create basic configuration tree directory structure
 
@@ -113,14 +112,12 @@
 
 
   services.restic.backups."media" = {
+    environmentFile = config.sops.secrets.restic-env.path;
     extraBackupArgs = [
       "--exclude=sonarr/downloads/*" # * keep directory
       "--exclude=sonarr/media/anime/*"
     ];
-    passwordFile = config.sops.secrets.restic-password.path;
-    rcloneConfigFile = config.sops.secrets.rclone-config.path;
     paths = [ "/download" ];
-    repository = "rclone:r2:backup";
     timerConfig.OnCalendar = "02:00";
     pruneOpts = [ "--keep-last 2" ];
   };
