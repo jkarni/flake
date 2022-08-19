@@ -1,6 +1,7 @@
 { config, pkgs, lib, ... }: {
 
   sops.secrets.restic-env = { };
+  #sops.secrets.restic-password = { };
 
   # restic restore backup to create basic configuration tree directory structure
 
