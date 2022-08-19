@@ -92,7 +92,6 @@ in
       StateDirectory = "qbittorrent-nox";
     };
     wantedBy = [ "multi-user.target" ];
-    wants = [ "network-online.target" ];
   };
 
   system.activationScripts.cloudflare-dns-sync-qbittorrent-nox = {

@@ -30,9 +30,7 @@
       vaultwarden/server
   '';
 
-  systemd.services.podman-vaultwarden.preStart = lib.mkAfter ''
-    mkdir -p /var/lib/vaultwarden
-  '';
+  systemd.services.podman-vaultwarden.serviceConfig.StateDirectory = "vaultwarden";
 
   system.activationScripts.cloudflare-dns-sync-vaultwarden = {
     deps = [ "setupSecrets" ];

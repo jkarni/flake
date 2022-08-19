@@ -36,9 +36,7 @@
 
   };
 
-  systemd.services.podman-miniflux.preStart = lib.mkAfter ''
-    mkdir -p /var/lib/miniflux-db
-  '';
+  systemd.services.podman-miniflux.serviceConfig.StateDirectory = "miniflux-db";
 
   system.activationScripts.cloudflare-dns-sync-miniflux = {
     deps = [ "setupSecrets" ];

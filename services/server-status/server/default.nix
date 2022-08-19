@@ -20,9 +20,7 @@ in
       fi
     '';
 
-    serviceConfig = {
-      ExecStart = "${pkgs.ServerStatus-Server}/bin/sergate  --config=${serverConfig} --web-dir=/var/lib/ServerStatus/hotaru-theme  --port 35601";
-    };
+    serviceConfig.ExecStart = "${pkgs.ServerStatus-Server}/bin/sergate  --config=${serverConfig} --web-dir=/var/lib/ServerStatus/hotaru-theme  --port 35601";
   };
 
   system.activationScripts.cloudflare-dns-sync-serverstatus-server = {

@@ -24,12 +24,9 @@
         "traefik.http.routers.change.middlewares=auth@file"
       ];
     };
-
   };
 
-  systemd.services.podman-change-detection-io.preStart = lib.mkAfter ''
-    mkdir -p /var/lib/changeio
-  '';
+  systemd.services.podman-change-detection-io.serviceConfig.StateDirectory = "changeio";
 
   system.activationScripts.cloudflare-dns-sync-change-detection-io = {
     deps = [ "setupSecrets" ];

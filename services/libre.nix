@@ -102,10 +102,7 @@ in
 
   };
 
-
-  systemd.services.podman-invidious-db.preStart = lib.mkAfter ''
-    mkdir -p /var/lib/invidious-db
-  '';
+  systemd.services.podman-invidious-db.serviceConfig.StateDirectory = "invidious-db";
 
   system.activationScripts.cloudflare-dns-sync-libre= {
     deps = [ "setupSecrets" ];

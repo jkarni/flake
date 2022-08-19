@@ -16,7 +16,6 @@
       dependsOn = [ "miniflux-db" ];
       environmentFiles = [ config.sops.secrets.miniflux-env.path ];
       environment = {
-        INVIDIOUS_INSTANCE = "youtube.${config.networking.domain}";
         CREATE_ADMIN = "1";
         RUN_MIGRATIONS = "1";
       };
