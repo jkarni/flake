@@ -23,5 +23,7 @@
   #   mkdir -p /var/lib/changeio
   # '';
 
+    systemd.services.podman-change-detection-io.serviceConfig.StateDirectory = "changeio";
+
 
 }
