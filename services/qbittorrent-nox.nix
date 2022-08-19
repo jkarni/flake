@@ -71,6 +71,7 @@ in
 {
   sops.secrets.restic-env = { };
   sops.secrets.restic-password = { };
+  sops.secrets.rclone-config = { };
   sops.secrets.tg-userid = { };
   sops.secrets.tg-notify-token = { };
 
