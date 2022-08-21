@@ -30,23 +30,12 @@ in
     '';
   };
 
-  # services.nginx.enable = true;
-  # services.nginx.virtualHosts."top.${config.networking.domain}" = {
-  #   root = "/var/lib/ServerStatus/hotaru-theme";
-  # };
-
   virtualisation.oci-containers.containers = {
-
     "nginx" = {
       image = "nginx";
       volumes = [
         "/var/lib/ServerStatus/hotaru-theme:/usr/share/nginx/html"
       ];
-
-      # environment = {
-      #   "PUID" = "0";
-      #   "PGID" = "0";
-      # };
       extraOptions = [
         "--label"
         "traefik.enable=true"
@@ -56,7 +45,6 @@ in
         "traefik.http.routers.serverstatus.entrypoints=web"
       ];
     };
-
   };
 
 }
