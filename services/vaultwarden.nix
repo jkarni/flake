@@ -35,7 +35,8 @@
   system.activationScripts.cloudflare-dns-sync-vaultwarden = {
     deps = [ "setupSecrets" ];
     text = ''
-      ${pkgs.cloudflare-dns-sync} $(cat ${config.sops.secrets.vaultwarden-domain.path})
+      source ${config.sops.secrets.restic-env.path}
+      ${pkgs.cloudflare-dns-sync} $DOMAIN
     '';
   };
 
