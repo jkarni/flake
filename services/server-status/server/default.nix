@@ -30,9 +30,33 @@ in
     '';
   };
 
-  services.nginx.enable = true;
-  services.nginx.virtualHosts."top.${config.networking.domain}" = {
-    root = "/var/lib/ServerStatus/hotaru-theme";
+  # services.nginx.enable = true;
+  # services.nginx.virtualHosts."top.${config.networking.domain}" = {
+  #   root = "/var/lib/ServerStatus/hotaru-theme";
+  # };
+
+  virtualisation.oci-containers.containers = {
+
+    "nginx" = {
+      image = "nginx";
+      volumes = [
+        "/var/lib/ServerStatus/hotaru-theme:/usr/share/nginx/html"
+      ];
+
+      environment = {
+        "PUID" = "0";
+        "PGID" = "0";
+      };
+      extraOptions = [
+        "--label"
+        "traefik.enable=true"
+        "--label"
+        "traefik.http.routers.websecure-libreddit.rule=Host(`top.${config.networking.domain}`)"
+        "--label"
+        "traefik.http.routers.websecure-libreddit.entrypoints=websecure"
+      ];
+    };
+
   };
 
 }
