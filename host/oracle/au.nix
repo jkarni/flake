@@ -6,7 +6,7 @@
   ];
 
 
-   virtualisation.oci-containers.containers = {
+  virtualisation.oci-containers.containers = {
 
     "change-detection-io" = {
       image = "dgtlmoon/changedetection.io";
@@ -23,7 +23,7 @@
   #   mkdir -p /var/lib/changeio
   # '';
 
-    systemd.services.podman-change-detection-io.serviceConfig.StateDirectory = "changeio";
+  systemd.services.podman-change-detection-io.serviceConfig.StateDirectory = "changeio";
 
 
 }

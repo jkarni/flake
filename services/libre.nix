@@ -104,7 +104,7 @@ in
 
   systemd.services.podman-invidious-db.serviceConfig.StateDirectory = "invidious-db";
 
-  system.activationScripts.cloudflare-dns-sync-libre= {
+  system.activationScripts.cloudflare-dns-sync-libre = {
     deps = [ "setupSecrets" ];
     text = ''
       ${pkgs.cloudflare-dns-sync} reddit.${config.networking.domain}

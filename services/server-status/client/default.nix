@@ -14,8 +14,6 @@ let
   + builtins.readFile ./serverstatus-client.py);
 in
 {
-
-
   services.vnstat.enable = true;
 
   systemd.services.serverstatus-client = {
