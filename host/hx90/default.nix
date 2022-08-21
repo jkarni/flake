@@ -27,18 +27,4 @@
       DHCP = "yes";
     };
   };
-
-  sops.secrets.restic-env = { };
-  sops.secrets.restic-password = { };
-
-  services.restic.backups."firefox-profile" = {
-    environmentFile = config.sops.secrets.restic-env.path;
-    passwordFile = config.sops.secrets.restic-password.path;
-    extraBackupArgs = [
-      "--exclude=chrome" # managed by hm soft link
-    ];
-    paths = [ "/home/dominic/.mozilla/firefox/default" ];
-    timerConfig.OnCalendar = "03:00";
-    pruneOpts = [ "--keep-last 2" ];
-  };
 }
