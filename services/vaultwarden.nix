@@ -2,7 +2,6 @@
   sops.secrets.restic-env = { };
   sops.secrets.restic-password = { };
 
-  sops.secrets.vaultwarden-domain = { };
   sops.secrets.vaultwarden-env = { };
 
   virtualisation.oci-containers.containers = {
