@@ -43,17 +43,17 @@ in
         "/var/lib/ServerStatus/hotaru-theme:/usr/share/nginx/html"
       ];
 
-      environment = {
-        "PUID" = "0";
-        "PGID" = "0";
-      };
+      # environment = {
+      #   "PUID" = "0";
+      #   "PGID" = "0";
+      # };
       extraOptions = [
         "--label"
         "traefik.enable=true"
         "--label"
-        "traefik.http.routers.websecure-libreddit.rule=Host(`top.${config.networking.domain}`)"
+        "traefik.http.routers.serverstatus.rule=Host(`top.${config.networking.domain}`)"
         "--label"
-        "traefik.http.routers.websecure-libreddit.entrypoints=websecure"
+        "traefik.http.routers.serverstatus.entrypoints=web"
       ];
     };
 
