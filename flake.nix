@@ -1,4 +1,4 @@
-{ #test1
+{
   inputs = {
     nixpkgs = {
       url = "github:nixos/nixpkgs/nixos-unstable";
