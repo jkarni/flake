@@ -116,7 +116,7 @@
           ];
         };
       }
-      // nixpkgs.lib.debug.traceVal nixpkgs.lib.genAttrs oracleServerList (hostName:
+      // nixpkgs.lib.genAttrs oracleServerList (hostName:
         nixpkgs.lib.nixosSystem {
           system = "aarch64-linux";
           modules = [
@@ -124,7 +124,7 @@
             home-manager.nixosModules.home-manager
             # https://nixos.wiki/wiki/Nix_Expression_Language
             # Coercing a relative path with interpolated variables to an absolute path (for imports)
-            (./host/oracle + "/${hostName}.nix")
+            nixpkgs.lib.debug.traceVal (./host/oracle + "/${hostName}.nix")
             ./overlay
             ./modules
 
