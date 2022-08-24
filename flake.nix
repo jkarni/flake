@@ -116,7 +116,7 @@
           ];
         };
       }
-      // nixpkgs.lib.genAttrs oracleServerList (hostName:
+      // nixpkgs.lib.debug.traceVal nixpkgs.lib.genAttrs oracleServerList (hostName:
         nixpkgs.lib.nixosSystem {
           system = "aarch64-linux";
           modules = [
