@@ -124,7 +124,7 @@
             home-manager.nixosModules.home-manager
             # https://nixos.wiki/wiki/Nix_Expression_Language
             # Coercing a relative path with interpolated variables to an absolute path (for imports)
-            nixpkgs.lib.debug.traceVal (./host/oracle + "/${hostName}.nix")
+            (./host/oracle + "/${hostName}.nix")
             ./overlay
             ./modules
 
@@ -132,7 +132,7 @@
               networking.hostName = hostName;
               networking.domain = domain;
 
-              system.stateVersion = stateVersion;
+              system.stateVersion = nixpkgs.lib.debug.traceVal stateVersion;
               hm.stateVersion = stateVersion;
               hm.nixConfigDir = "/etc/flake";
             }
