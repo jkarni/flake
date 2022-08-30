@@ -2,7 +2,7 @@
   homebrew = {
     enable = true;
     autoUpdate = true;
-    cleanup = "zap";
+    cleanup = "uninstall";
 
     taps = [
       "homebrew/cask"
@@ -50,6 +50,7 @@
       "qbittorrent"
       "google-drive"
       "istat-menus"
+      "tor-browser"
 
       # Already installed from offical website <-- Uncomment this when completely reinstall macos
       # "surge"
