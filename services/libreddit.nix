@@ -25,10 +25,7 @@
 
   };
 
-
-  systemd.services.podman-libreddit.environment = {
-    PODMAN_SYSTEMD_UNIT = "%n";
-  };
+  systemd.services.podman-libreddit.environment.PODMAN_SYSTEMD_UNIT = "%n";
 
   system.activationScripts.cloudflare-dns-sync-libre = {
     deps = [ "setupSecrets" ];
