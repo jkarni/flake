@@ -85,7 +85,6 @@
 
     #   Things = 904280696;
     #   GoodNotes = 1444383602;
-    #   PDF-Viewer = 1120099014;
     #   Cleaner-for-Xcode = 1296084683;
     #   Amphetamine = 937984704;
     #   Twilar = 1511758159;
