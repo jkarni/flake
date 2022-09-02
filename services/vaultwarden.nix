@@ -26,8 +26,13 @@
       '--label' 'traefik.http.routers.vaultwarden.entrypoints=websecure' \
       '--label' 'traefik.http.routers.vaultwarden.service=vaultwarden' \
       '--label' 'traefik.http.services.vaultwarden.loadbalancer.server.port=80'  \
+      '--label' 'io.containers.autoupdate=registry' \
       vaultwarden/server
   '';
+
+  systemd.services.podman-vaultwarden.environment = {
+    PODMAN_SYSTEMD_UNIT = "%n";
+  };
 
   systemd.services.podman-vaultwarden.serviceConfig.StateDirectory = "vaultwarden";
 

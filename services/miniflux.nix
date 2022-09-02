@@ -27,6 +27,9 @@
         "traefik.http.routers.websecure-miniflux.rule=Host(`miniflux.${config.networking.domain}`)"
         "--label"
         "traefik.http.routers.websecure-miniflux.entrypoints=websecure"
+
+        "--label"
+        "io.containers.autoupdate=registry"
       ];
     };
 
@@ -38,6 +41,11 @@
       environmentFiles = [ config.sops.secrets.miniflux-db-env.path ];
     };
 
+  };
+
+
+  systemd.services.podman-miniflux.environment = {
+    PODMAN_SYSTEMD_UNIT = "%n";
   };
 
 
