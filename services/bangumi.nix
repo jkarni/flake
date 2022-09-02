@@ -24,7 +24,7 @@
         "--label"
         "traefik.http.routers.jackett.middlewares=auth@file"
 
-        "--label" 
+        "--label"
         "io.containers.autoupdate=registry"
       ];
     };
@@ -113,6 +113,9 @@
     '';
   };
 
+  systemd.services.podman-jackett.environment = {
+    PODMAN_SYSTEMD_UNIT = "%n";
+  };
 
 
   services.restic.backups."media" = {

@@ -132,7 +132,7 @@
               networking.hostName = hostName;
               networking.domain = domain;
 
-              system.stateVersion = nixpkgs.lib.debug.traceVal stateVersion;
+              system.stateVersion = stateVersion;
               hm.stateVersion = stateVersion;
               hm.nixConfigDir = "/etc/flake";
             }
