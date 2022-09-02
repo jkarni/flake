@@ -54,7 +54,6 @@ in
       dependsOn = [ "nitter-db" ];
       volumes = [
         "/var/lib/nitter:/data"
-        "${NitterConfig}:/data/nitter.conf:ro"
       ];
       extraOptions = [
         "--label"
@@ -79,7 +78,6 @@ in
 
   };
 
-  systemd.services.podman-nitter.serviceConfig.StateDirectory = "nitter";
   systemd.services.podman-nitter-db.serviceConfig.StateDirectory = "nitter-db";
 
   systemd.services.podman-nitter.environment = {
@@ -89,6 +87,8 @@ in
   system.activationScripts.cloudflare-dns-sync-nitter = {
     deps = [ "setupSecrets" ];
     text = ''
+      mkdir -p /var/lib/nitter
+      cat ${NitterConfig} > /var/lib/nitter/nitter.conf
       ${pkgs.cloudflare-dns-sync} twitter.${config.networking.domain}
     '';
   };
