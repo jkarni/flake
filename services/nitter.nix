@@ -37,17 +37,16 @@ let
     # Change default preferences here, see src/prefs_impl.nim for a complete list
     [Preferences]
     theme = "Nitter"
-    replaceTwitter = "nitter.net"
+    replaceTwitter = "twitter.mlyxshi.com"
     replaceYouTube = "youtube.mlyxshi.com"
     replaceReddit = "reddit.mlyxshi.com"
     replaceInstagram = ""
     proxyVideos = true
-    hlsPlayback = false
+    hlsPlayback = true
     infiniteScroll = true
   '';
 in
 {
-
 
   virtualisation.oci-containers.containers = {
     "nitter" = {
@@ -55,18 +54,18 @@ in
       dependsOn = [ "nitter-db" ];
 
       volumes = [
-        #"/var/lib/nitter/nitter.conf:/data/nitter.conf"
         "/var/lib/nitter:/data"
       ];
       extraOptions = [
-        #"--no-healthcheck"
-
         "--label"
         "traefik.enable=true"
         "--label"
-        "traefik.http.routers.websecure-nitter.rule=Host(`nitter.${config.networking.domain}`)"
+        "traefik.http.routers.websecure-nitter.rule=Host(`twitter.${config.networking.domain}`)"
         "--label"
         "traefik.http.routers.websecure-nitter.entrypoints=websecure"
+
+        "--label"
+        "io.containers.autoupdate=registry"
       ];
     };
 
@@ -81,12 +80,17 @@ in
   };
 
 
+  systemd.services.podman-nitter.environment = {
+    PODMAN_SYSTEMD_UNIT = "%n";
+  };
+
+
   system.activationScripts.cloudflare-dns-sync-nitter = {
     deps = [ "setupSecrets" ];
     text = ''
       mkdir -p /var/lib/nitter
       cat ${NitterConfig} > /var/lib/nitter/nitter.conf
-      ${pkgs.cloudflare-dns-sync} nitter.${config.networking.domain}
+      ${pkgs.cloudflare-dns-sync} twitter.${config.networking.domain}
     '';
   };
 
