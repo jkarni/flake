@@ -62,14 +62,12 @@ in
         "/var/lib/nitter:/data"  
       ];
       extraOptions = [
-
-        "--net=host"
-        # "--label"
-        # "traefik.enable=true"
-        # "--label"
-        # "traefik.http.routers.websecure-nitter.rule=Host(`nitter.${config.networking.domain}`)"
-        # "--label"
-        # "traefik.http.routers.websecure-nitter.entrypoints=websecure"
+        "--label"
+        "traefik.enable=true"
+        "--label"
+        "traefik.http.routers.websecure-nitter.rule=Host(`nitter.${config.networking.domain}`)"
+        "--label"
+        "traefik.http.routers.websecure-nitter.entrypoints=websecure"
       ];
     };
 
