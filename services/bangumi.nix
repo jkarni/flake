@@ -23,6 +23,9 @@
         "traefik.http.routers.jackett.entrypoints=websecure"
         "--label"
         "traefik.http.routers.jackett.middlewares=auth@file"
+
+        "--label" 
+        "io.containers.autoupdate=registry"
       ];
     };
 
