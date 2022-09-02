@@ -54,7 +54,7 @@ in
       dependsOn = [ "nitter-db" ];
       volumes = [
         "/var/lib/nitter:/data"
-        "${NitterConfig}:/data/nitter.conf"
+        "${NitterConfig}:/data/nitter.conf:ro"
       ];
       extraOptions = [
         "--label"
