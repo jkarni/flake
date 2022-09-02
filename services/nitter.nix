@@ -63,6 +63,8 @@ in
         "/var/lib/nitter:/data"  
       ];
       extraOptions = [
+        "--no-healthcheck"
+        
         "--label"
         "traefik.enable=true"
         "--label"
