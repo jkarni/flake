@@ -3,6 +3,10 @@
   virtualisation.oci-containers.containers = {
     "playwright-chrome" = {
       image = "browserless/chrome";
+      extraOptions = [
+        "--label"
+        "io.containers.autoupdate=registry"
+      ];
     };
 
     "change-detection-io" = {
@@ -22,11 +26,21 @@
         "traefik.http.routers.change.entrypoints=websecure"
         "--label"
         "traefik.http.routers.change.middlewares=auth@file"
+
+        "--label"
+        "io.containers.autoupdate=registry"
       ];
     };
   };
 
   systemd.services.podman-change-detection-io.serviceConfig.StateDirectory = "changeio";
+
+  systemd.services.podman-playwright-chrome.environment = {
+    PODMAN_SYSTEMD_UNIT = "%n";
+  };
+  systemd.services.podman-change-detection-io.environment = {
+    PODMAN_SYSTEMD_UNIT = "%n";
+  };
 
   system.activationScripts.cloudflare-dns-sync-change-detection-io = {
     deps = [ "setupSecrets" ];
