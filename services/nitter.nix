@@ -71,7 +71,7 @@ in
     };
 
     "nitter-db" = {
-      image = "redis";
+      image = "redis:alpine";
       volumes = [
         "/var/lib/nitter-db:/data"
       ];
@@ -81,17 +81,15 @@ in
   };
 
 
-  # Fix Redis WARNING overcommit_memory is set to 0! Background save may fail under low memory condition. To fix this issue add 'vm.overcommit_memory = 1' to /etc/sysctl.conf and then reboot or run the command 'sysctl vm.overcommit_memory=1' for this to take effect.
-  # boot.kernel.sysctl = {
-  #   "vm.overcommit_memory" = "1";
-  # };
-
 
   # cat ${NitterConfig} > /var/lib/nitter/nitter.conf
-  systemd.services.podman-nitter.preStart = lib.mkAfter ''
 
-    ${pkgs.cloudflare-dns-sync} nitter.${config.networking.domain}
-  '';
+  system.activationScripts.cloudflare-dns-sync-nitter = {
+    deps = [ "setupSecrets" ];
+    text = ''
+      ${pkgs.cloudflare-dns-sync} nitter.${config.networking.domain}
+    '';
+  };
 
   systemd.services.podman-nitter.serviceConfig.StateDirectory = "nitter";
   systemd.services.podman-nitter-db.serviceConfig.StateDirectory = "nitter-db";
