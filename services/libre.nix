@@ -67,6 +67,9 @@ in
         "traefik.http.routers.websecure-libreddit.rule=Host(`reddit.${config.networking.domain}`)"
         "--label"
         "traefik.http.routers.websecure-libreddit.entrypoints=websecure"
+
+        "--label"
+        "io.containers.autoupdate=registry"
       ];
     };
 
@@ -83,6 +86,9 @@ in
         "traefik.http.routers.websecure-invidious.rule=Host(`youtube.${config.networking.domain}`)"
         "--label"
         "traefik.http.routers.websecure-invidious.entrypoints=websecure"
+
+        "--label"
+        "io.containers.autoupdate=registry"
       ];
     };
 
@@ -103,6 +109,13 @@ in
   };
 
   systemd.services.podman-invidious-db.serviceConfig.StateDirectory = "invidious-db";
+
+  systemd.services.podman-libreddit.environment = {
+    PODMAN_SYSTEMD_UNIT = "%n";
+  };
+  systemd.services.podman-invidious.environment = {
+    PODMAN_SYSTEMD_UNIT = "%n";
+  };
 
   system.activationScripts.cloudflare-dns-sync-libre = {
     deps = [ "setupSecrets" ];
