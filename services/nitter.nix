@@ -53,10 +53,6 @@ in
     "nitter" = {
       image = "quay.io/unixfox/nitter";
       dependsOn = [ "nitter-db" ];
-      environment = {
-        # "REPLACE_TWITTER" = "twitter.mlyxshi.com";
-        REDIS_HOST="nitter-db";
-      };
 
       volumes = [
         #"/var/lib/nitter/nitter.conf:/src/nitter.conf"
@@ -64,7 +60,7 @@ in
       ];
       extraOptions = [
         "--no-healthcheck"
-        
+
         "--label"
         "traefik.enable=true"
         "--label"
@@ -80,9 +76,6 @@ in
         "/var/lib/nitter-db:/data"
       ];
       cmd = [ "redis-server" "--save" "60" "1" "--loglevel" "warning" ];
-      # extraOptions = [
-      #   "--net=host"
-      # ];
     };
 
   };
