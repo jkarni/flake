@@ -111,17 +111,6 @@
     };
   };
 
-
-  system.activationScripts.cloudflare-dns-sync-bangumi = {
-    deps = [ "setupSecrets" ];
-    text = ''
-      ${pkgs.cloudflare-dns-sync} jackett.${config.networking.domain}
-      ${pkgs.cloudflare-dns-sync} sonarr.${config.networking.domain}
-      ${pkgs.cloudflare-dns-sync} qb.media.${config.networking.domain}
-      ${pkgs.cloudflare-dns-sync} jellyfin.${config.networking.domain}
-    '';
-  };
-
   systemd.services.podman-jackett.environment = {
     PODMAN_SYSTEMD_UNIT = "%n";
   };
@@ -133,6 +122,16 @@
   };
   systemd.services.podman-jellyfin.environment = {
     PODMAN_SYSTEMD_UNIT = "%n";
+  };
+
+  system.activationScripts.cloudflare-dns-sync-bangumi = {
+    deps = [ "setupSecrets" ];
+    text = ''
+      ${pkgs.cloudflare-dns-sync} jackett.${config.networking.domain}
+      ${pkgs.cloudflare-dns-sync} sonarr.${config.networking.domain}
+      ${pkgs.cloudflare-dns-sync} qb.media.${config.networking.domain}
+      ${pkgs.cloudflare-dns-sync} jellyfin.${config.networking.domain}
+    '';
   };
 
 
