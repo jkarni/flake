@@ -55,6 +55,7 @@ in
       dependsOn = [ "nitter-db" ];
       environment = {
         # "REPLACE_TWITTER" = "twitter.mlyxshi.com";
+        REDIS_HOST="nitter-db";
       };
 
       volumes = [
@@ -77,9 +78,9 @@ in
         "/var/lib/nitter-db:/data"
       ];
       cmd = [ "redis-server" "--save" "60" "1" "--loglevel" "warning" ];
-      extraOptions = [
-        "--net=host"
-      ];
+      # extraOptions = [
+      #   "--net=host"
+      # ];
     };
 
   };
