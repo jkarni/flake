@@ -49,6 +49,9 @@
         "traefik.http.routers.sonarr.entrypoints=websecure"
         "--label"
         "traefik.http.routers.sonarr.middlewares=auth@file"
+
+        "--label"
+        "io.containers.autoupdate=registry"
       ];
     };
 
@@ -76,6 +79,9 @@
         "traefik.http.routers.qbittorrent.middlewares=auth@file" #qbittorrent: Bypass authentication for clients in whitelisted IP subnets -> 0.0.0.0/0
         "--label"
         "traefik.http.services.qbittorrent.loadbalancer.server.port=8080"
+
+        "--label"
+        "io.containers.autoupdate=registry"
       ];
     };
 
@@ -98,6 +104,9 @@
         "traefik.http.routers.jellyfin.rule=Host(`jellyfin.${config.networking.domain}`)"
         "--label"
         "traefik.http.routers.jellyfin.entrypoints=websecure"
+
+        "--label"
+        "io.containers.autoupdate=registry"
       ];
     };
   };
@@ -114,6 +123,15 @@
   };
 
   systemd.services.podman-jackett.environment = {
+    PODMAN_SYSTEMD_UNIT = "%n";
+  };
+  systemd.services.podman-sonarr.environment = {
+    PODMAN_SYSTEMD_UNIT = "%n";
+  };
+  systemd.services.podman-qbittorrent.environment = {
+    PODMAN_SYSTEMD_UNIT = "%n";
+  };
+  systemd.services.podman-jellyfin.environment = {
     PODMAN_SYSTEMD_UNIT = "%n";
   };
 
