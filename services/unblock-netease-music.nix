@@ -15,8 +15,13 @@
       --name='unblock-netease-music' \
       --log-driver=journald \
       '--net=host' \
+      '--label' 'io.containers.autoupdate=registry' \
       pan93412/unblock-netease-music-enhanced -p $PORT --strict -e https://music.163.com -o ytdlp bilibili
   '';
+
+  systemd.services.podman-unblock-netease-music.environment = {
+    PODMAN_SYSTEMD_UNIT = "%n";
+  };
 
   system.activationScripts.cloudflare-dns-sync-unblock-netease-music = {
     deps = [ "setupSecrets" ];
