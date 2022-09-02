@@ -10,8 +10,15 @@
         "traefik.http.routers.websecure-rsshub.rule=Host(`rss.${config.networking.domain}`)"
         "--label"
         "traefik.http.routers.websecure-rsshub.entrypoints=websecure"
+
+        "--label"
+        "io.containers.autoupdate=registry"
       ];
     };
+  };
+
+  systemd.services.podman-rsshub.environment = {
+    PODMAN_SYSTEMD_UNIT = "%n";
   };
 
   system.activationScripts.cloudflare-dns-sync-rsshub = {
