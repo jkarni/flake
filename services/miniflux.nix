@@ -44,10 +44,7 @@
   };
 
 
-  systemd.services.podman-miniflux.environment = {
-    PODMAN_SYSTEMD_UNIT = "%n";
-  };
-
+  systemd.services.podman-miniflux.environment.PODMAN_SYSTEMD_UNIT = "%n";
 
   system.activationScripts.cloudflare-dns-sync-miniflux = {
     deps = [ "setupSecrets" ];

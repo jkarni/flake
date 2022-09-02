@@ -18,9 +18,7 @@
     };
   };
 
-  systemd.services.podman-kms-server.environment = {
-    PODMAN_SYSTEMD_UNIT = "%n";
-  };
+  systemd.services.podman-kms-server.environment.PODMAN_SYSTEMD_UNIT = "%n";
 
   system.activationScripts.cloudflare-dns-sync-kms = {
     deps = [ "setupSecrets" ];

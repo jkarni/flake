@@ -35,12 +35,8 @@
 
   systemd.services.podman-change-detection-io.serviceConfig.StateDirectory = "changeio";
 
-  systemd.services.podman-playwright-chrome.environment = {
-    PODMAN_SYSTEMD_UNIT = "%n";
-  };
-  systemd.services.podman-change-detection-io.environment = {
-    PODMAN_SYSTEMD_UNIT = "%n";
-  };
+  systemd.services.podman-playwright-chrome.environment.PODMAN_SYSTEMD_UNIT = "%n";
+  systemd.services.podman-change-detection-io.environment.PODMAN_SYSTEMD_UNIT = "%n";
 
   system.activationScripts.cloudflare-dns-sync-change-detection-io = {
     deps = [ "setupSecrets" ];

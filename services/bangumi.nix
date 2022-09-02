@@ -111,18 +111,10 @@
     };
   };
 
-  systemd.services.podman-jackett.environment = {
-    PODMAN_SYSTEMD_UNIT = "%n";
-  };
-  systemd.services.podman-sonarr.environment = {
-    PODMAN_SYSTEMD_UNIT = "%n";
-  };
-  systemd.services.podman-qbittorrent.environment = {
-    PODMAN_SYSTEMD_UNIT = "%n";
-  };
-  systemd.services.podman-jellyfin.environment = {
-    PODMAN_SYSTEMD_UNIT = "%n";
-  };
+  systemd.services.podman-jackett.environment.PODMAN_SYSTEMD_UNIT = "%n";
+  systemd.services.podman-sonarr.environment.PODMAN_SYSTEMD_UNIT = "%n";
+  systemd.services.podman-qbittorrent.environment.PODMAN_SYSTEMD_UNIT = "%n";
+  systemd.services.podman-jellyfin.environment.PODMAN_SYSTEMD_UNIT = "%n";
 
   system.activationScripts.cloudflare-dns-sync-bangumi = {
     deps = [ "setupSecrets" ];

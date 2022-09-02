@@ -17,9 +17,7 @@
     };
   };
 
-  systemd.services.podman-rsshub.environment = {
-    PODMAN_SYSTEMD_UNIT = "%n";
-  };
+  systemd.services.podman-rsshub.environment.PODMAN_SYSTEMD_UNIT = "%n";
 
   system.activationScripts.cloudflare-dns-sync-rsshub = {
     deps = [ "setupSecrets" ];
