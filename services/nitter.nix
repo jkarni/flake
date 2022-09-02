@@ -1,9 +1,10 @@
 { config, pkgs, lib, ... }:
 let
+  # https://github.com/zedeus/nitter/blob/master/nitter.example.conf
   NitterConfig = pkgs.writeText "NitterConfig" ''
     [Server]
     address = "0.0.0.0"
-    port = 9000
+    port = 8080
     https = false  # disable to enable cookies when not using https
     httpMaxConnections = 100
     staticDir = "./public"
@@ -12,7 +13,7 @@ let
     [Cache]
     listMinutes = 240  # how long to cache list info (not the tweets, so keep it high)
     rssMinutes = 10  # how long to cache rss queries
-    redisHost = "localhost"  # Change to "nitter-redis" if using docker-compose
+    redisHost = nitter-db  # Change to "nitter-redis" if using docker-compose
     redisPort = 6379
     redisPassword = ""
     redisConnections = 20  # connection pool size
@@ -37,12 +38,12 @@ let
     [Preferences]
     theme = "Nitter"
     replaceTwitter = "nitter.net"
-    replaceYouTube = "piped.kavin.rocks"
-    replaceReddit = "teddit.net"
+    replaceYouTube = "youtube.mlyxshi.com"
+    replaceReddit = "reddit.mlyxshi.com"
     replaceInstagram = ""
     proxyVideos = true
     hlsPlayback = false
-    infiniteScroll = false
+    infiniteScroll = true
   '';
 in
 {
@@ -55,8 +56,8 @@ in
       dependsOn = [ "nitter-db" ];
 
       volumes = [
-        #"/var/lib/nitter/nitter.conf:/src/nitter.conf"
-        "/var/lib/nitter:/data"  
+        #"/var/lib/nitter/nitter.conf:/data/nitter.conf"
+        "/var/lib/nitter:/data"
       ];
       extraOptions = [
         "--no-healthcheck"
@@ -81,17 +82,15 @@ in
   };
 
 
-
-  # cat ${NitterConfig} > /var/lib/nitter/nitter.conf
-
   system.activationScripts.cloudflare-dns-sync-nitter = {
     deps = [ "setupSecrets" ];
     text = ''
+      mkdir -p /var/lib/nitter
+      cat ${NitterConfig} > /var/lib/nitter/nitter.conf
       ${pkgs.cloudflare-dns-sync} nitter.${config.networking.domain}
     '';
   };
 
-  systemd.services.podman-nitter.serviceConfig.StateDirectory = "nitter";
   systemd.services.podman-nitter-db.serviceConfig.StateDirectory = "nitter-db";
 
 }
