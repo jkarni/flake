@@ -20,3 +20,5 @@ launchd:
 	launchctl load -w ~/Library/LaunchAgents/org.nixos.SKHD.plist
 	launchctl unload ~/Library/LaunchAgents/org.nixos.RcloneMount.plist
 	launchctl load -w ~/Library/LaunchAgents/org.nixos.RcloneMount.plist
+	launchctl unload ~/Library/LaunchAgents/org.nixos.SSH-ADD.plist
+	launchctl load -w ~/Library/LaunchAgents/org.nixos.SSH-ADD.plist
