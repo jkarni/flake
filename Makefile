@@ -16,9 +16,5 @@ linux-firefox-profile-restore:
 # I don't know why launchd will fail to start services and show error code 78 after reboot
 # Therefore, I have to manually unload and load services after reboot
 launchd:
-	launchctl unload ~/Library/LaunchAgents/org.nixos.SKHD.plist
-	launchctl load -w ~/Library/LaunchAgents/org.nixos.SKHD.plist
-	launchctl unload ~/Library/LaunchAgents/org.nixos.RcloneMount.plist
-	launchctl load -w ~/Library/LaunchAgents/org.nixos.RcloneMount.plist
-	launchctl unload ~/Library/LaunchAgents/org.nixos.SSH-ADD.plist
-	launchctl load -w ~/Library/LaunchAgents/org.nixos.SSH-ADD.plist
+	launchctl unload ~/Library/LaunchAgents/org.nixos.com.koekeishiya.skhd.plist
+	launchctl load -w ~/Library/LaunchAgents/org.nixos.com.koekeishiya.skhd.plist

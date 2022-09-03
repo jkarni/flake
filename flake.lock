@@ -166,17 +166,16 @@
         ]
       },
       "locked": {
-        "lastModified": 1646698896,
-        "narHash": "sha256-yiRcdYJpBmlmCsqiGTvfSZK7T0g3uc+I6bMrU0z5Kic=",
-        "owner": "4825764518",
-        "repo": "sops-nix",
-        "rev": "357053a11f398077f8ee3097c1225fd1c46090e4",
+        "lastModified": 1662196366,
+        "narHash": "sha256-3s9j97CElMuTjDV/Niq1FBJY9TCbevRV+UxidjSoFGk=",
+        "owner": "mlyxshi",
+        "repo": "sops-nix-darwin",
+        "rev": "3e2197e5213a6d6a5a918e4a617a55baff254b34",
         "type": "github"
       },
       "original": {
-        "owner": "4825764518",
-        "ref": "darwin",
-        "repo": "sops-nix",
+        "owner": "mlyxshi",
+        "repo": "sops-nix-darwin",
         "type": "github"
       }
     },

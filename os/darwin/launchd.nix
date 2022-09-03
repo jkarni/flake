@@ -1,10 +1,16 @@
-{ pkgs
-, config
-, ...
-}: {
+# http://technologeeks.com/docs/launchd.pdf
+{ pkgs, config, ... }:
+let
+  skhdConfig = pkgs.writeText "skhdrc" ''
+    ctrl - z : open -a "Firefox"
+    ctrl - x : open -a "Visual Studio Code"
+    alt - space : open -a "kitty"
+  '';
+in
+{
   launchd.agents.FirefoxEnv = {
     serviceConfig.ProgramArguments = [
-      "bash"
+      "/bin/sh"
       "-c"
       "launchctl setenv MOZ_LEGACY_PROFILES 1; launchctl setenv MOZ_ALLOW_DOWNGRADE 1"
     ];
@@ -13,7 +19,7 @@
 
   launchd.agents.resticEnv = {
     serviceConfig.ProgramArguments = [
-      "bash"
+      "/bin/sh"
       "-c"
       "launchctl setenv RESTIC_REPOSITORY rclone:r2:backup; launchctl setenv RESTIC_PASSWORD_FILE ${config.sops.secrets.restic-password.path}"
     ];
@@ -22,10 +28,15 @@
 
   # skhd
   # Important, DO NOT USE services.skhd from nix-darwin
-  # Details: https://github.com/azuwis/nix-config/commit/64a28173876aaf03f409691457e4f9500d868528
-  launchd.user.agents.SKHD = {
+  # Details: 
+  # https://github.com/azuwis/nix-config/commit/64a28173876aaf03f409691457e4f9500d868528
+  # https://github.com/LnL7/nix-darwin/issues/406
+
+  launchd.user.agents."SKHD" = {
     serviceConfig.ProgramArguments = [
-      "${pkgs.skhd}/bin/skhd"
+      "/bin/sh"
+      "-c"
+      "/bin/wait4path /nix/store; /opt/homebrew/bin/skhd -c ${skhdConfig}"
     ];
     serviceConfig.RunAtLoad = true;
     serviceConfig.KeepAlive = true;
@@ -37,20 +48,6 @@
     serviceConfig.StandardOutPath = "/tmp/launchdLogs/skhd/stdout.log";
   };
 
-  # rclone mount googleshare:Download /Users/dominic/rcloneMount <-- mpv play anime
-  launchd.user.agents.RcloneMount = {
-    serviceConfig.ProgramArguments = [
-      "${pkgs.rclone}/bin/rclone"
-      "mount"
-      "googleshare:Download"
-      "/Users/dominic/rcloneMount"
-    ];
-    serviceConfig.RunAtLoad = true;
-    serviceConfig.KeepAlive = true;
-
-    serviceConfig.StandardErrorPath = "/tmp/launchdLogs/rclone-mount/error.log";
-    serviceConfig.StandardOutPath = "/tmp/launchdLogs/rclone-mount/stdout.log";
-  };
 
   # https://unix.stackexchange.com/a/560404
   launchd.user.agents.SSH-ADD = {

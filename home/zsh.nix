@@ -46,6 +46,7 @@ in
       }
       // lib.optionalAttrs pkgs.stdenv.isDarwin {
         update = "cd ~/flake; git add .; darwin-rebuild switch --flake ~/flake#M1";
+        rclonemount = "${pkgs.rclone}/bin/rclone mount googleshare:Download /Users/dominic/rcloneMount &";
       }
       // lib.optionalAttrs pkgs.stdenv.isLinux {
         update = "cd /etc/flake; git pull; nixos-rebuild switch --flake /etc/flake#";

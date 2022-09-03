@@ -18,11 +18,11 @@
       vim
       tree
       htop
+      restic
       mediainfo
       yt-dlp
       unzip
       rclone
-      restic
       ssh-to-age
       cloudflared
       # nix

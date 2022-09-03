@@ -25,7 +25,7 @@
     };
 
     sops-nix-darwin = {
-      url = "github:4825764518/sops-nix/darwin";
+      url = "github:mlyxshi/sops-nix-darwin";
       inputs.nixpkgs.follows = "nixpkgs";
     };
 

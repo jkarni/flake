@@ -13,6 +13,7 @@
     ];
 
     brews = [
+      "skhd"
       "neofetch"
       "iproute2mac"
       "mas"

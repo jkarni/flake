@@ -14,9 +14,7 @@
     gh
     go
     ideviceinstaller
-    skhd
   ];
-
   # https://github.com/nix-community/home-manager/blob/db00b39a9abec04245486a01b236b8d9734c9ad0/modules/targets/darwin/linkapps.nix
   # home.file."Applications/Home Manager".source = let
   #   apps = pkgs.buildEnv {
@@ -25,6 +23,4 @@
   #     pathsToLink = "/Applications";
   #   };
   # in "${apps}/Applications";
-
-  home.file.".config/skhd".source = config.lib.file.mkOutOfStoreSymlink "${osConfig.hm.nixConfigDir}/config/skhd";
 }
