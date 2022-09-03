@@ -51,4 +51,13 @@
     serviceConfig.StandardErrorPath = "/tmp/launchdLogs/rclone-mount/error.log";
     serviceConfig.StandardOutPath = "/tmp/launchdLogs/rclone-mount/stdout.log";
   };
+
+  # https://unix.stackexchange.com/a/560404
+  launchd.user.agents.SSH-ADD = {
+    serviceConfig.ProgramArguments = [
+      "/usr/bin/ssh-add"
+      "/Users/dominic/.ssh/id_ed25519"
+    ];
+    serviceConfig.RunAtLoad = true;
+  };
 }

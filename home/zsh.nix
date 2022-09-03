@@ -96,8 +96,6 @@ in
         path+=~/go/bin
         path+=/Applications/Surge.app/Contents/Applications
 
-        # git sign with ssh key
-        ssh-add /Users/dominic/.ssh/id_ed25519
       '';
   };
 }
