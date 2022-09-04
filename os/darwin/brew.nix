@@ -30,7 +30,6 @@
     casks = [
       "android-platform-tools"
       "element"
-      "jellyfin-media-player"
       "input-source-pro"
       "kitty"
       "firefox"
