@@ -13,6 +13,7 @@
       environment = {
         CREATE_ADMIN = "1";
         RUN_MIGRATIONS = "1";
+        POLLING_FREQUENCY = "30";
       };
       extraOptions = [
 
