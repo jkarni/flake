@@ -1,8 +1,12 @@
 { pkgs, ... }: {
   homebrew = {
     enable = true;
-    autoUpdate = true;
-    cleanup = "uninstall";
+
+    onActivation={
+      autoUpdate = true;
+      upgrade = true;
+      cleanup = "uninstall";
+    };
 
     taps = [
       "homebrew/cask"
@@ -51,10 +55,11 @@
       "google-drive"
       "istat-menus"
       "tor-browser"
+      "neteasemusic"
 
       # Already installed from offical website <-- Uncomment this when completely reinstall macos
       # "surge"
-      # "neteasemusic"
+
 
       # "google-chrome"
 
