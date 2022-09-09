@@ -10,13 +10,13 @@ let
   TREESITTER = pkgs.vimPlugins.nvim-treesitter.withPlugins (
     plugins:
       with plugins; [
+        tree-sitter-c
+        tree-sitter-lua
+        tree-sitter-nix
         tree-sitter-bash
         tree-sitter-json
         tree-sitter-typescript
-        tree-sitter-c
         tree-sitter-cpp
-        tree-sitter-nix
-        tree-sitter-lua
         tree-sitter-rust
         tree-sitter-python
         tree-sitter-markdown
