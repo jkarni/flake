@@ -8,7 +8,6 @@
     ./systemDefaults.nix
     ./launchd.nix
     ./activationScripts.nix
-    ./pam.nix
   ];
 
   nix = {
