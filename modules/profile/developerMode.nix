@@ -8,8 +8,8 @@ in
   };
 
   config = lib.mkIf cfg.enable {
-    nixpkgs.overlays = [
-      (import ../../overlay/Nvim { inherit neovim-nightly; })
-    ];
+    # nixpkgs.overlays = [
+    #   (import ../../overlay/Nvim { inherit neovim-nightly; })
+    # ];
   };
 }

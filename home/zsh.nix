@@ -15,7 +15,6 @@ in
 
   programs.zoxide.enable = true;
   programs.starship.enable = true;
-  programs.nix-index.enable = osConfig.profile.developerMode.enable;
 
   programs.direnv = lib.optionalAttrs osConfig.profile.developerMode.enable {
     enable = true;

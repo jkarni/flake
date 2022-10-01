@@ -1,3 +1,9 @@
+## Update container image
+```
+podman auto-update
+podman image prune -f
+```
+
 ## 1. Normal[PC]
 ```
 # git clone https://github.com/mlyxshi/flake /etc/flake

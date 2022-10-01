@@ -32,6 +32,7 @@
     # '';
 
     casks = [
+      "google-cloud-sdk"
       "android-platform-tools"
       "element"
       "input-source-pro"
