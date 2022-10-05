@@ -52,7 +52,7 @@ in
         slist = "systemctl --type=service";
         stimer = "systemctl --type=timer";
         slog = "systemctl status";
-        podmanupdate = "podman auto-update&&podman image prune -f";
+        podmanupdate = "podman auto-update && podman image prune -f";
       };
 
     initExtra = ''
