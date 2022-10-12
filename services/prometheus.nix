@@ -100,7 +100,7 @@
           telegram_configs = [{
             api_url = "https://api.telegram.org";
             bot_token = "$TOKEN";
-            chat_id = "337000294";
+            chat_id = 337000294;
             # message = "";
             parse_mode = "HTML";
           }];
