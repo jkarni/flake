@@ -18,7 +18,7 @@
     };
   };
 
-  systemd.timer.podman-auto-update-self = {
+  systemd.timers.podman-auto-update-self = {
     wantedBy = [ "timers.target" ];
     timerConfig = {
       OnCalendar = "daily";
