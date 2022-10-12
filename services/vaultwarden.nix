@@ -20,7 +20,7 @@
       -e 'SIGNUPS_ALLOWED'='false' \
       -e 'SENDS_ALLOWED'='false' \
       -e 'EMERGENCY_ACCESS_ALLOWED'='false' \
-      -e 'DOMAIN'="$DOMAIN" \
+      -e 'DOMAIN'="https://$DOMAIN" \
       -v '/var/lib/vaultwarden:/data' \
       '--label' 'traefik.enable=true' \
       '--label' "traefik.http.routers.vaultwarden.rule=Host(\`$DOMAIN\`)" \
