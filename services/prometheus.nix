@@ -2,6 +2,37 @@
 
   sops.secrets.telegram-env = { };
 
+  services.traefik = {
+    dynamicConfigOptions = {
+      http = {
+        routers = {
+          prometheus = {
+            rule = "Host(`${config.networking.fqdn}`) && PathPrefix(`/prom`)";
+            entryPoints = [ "websecure" ];
+            service = "prometheus";
+          };
+
+          alertmanager = {
+            rule = "Host(`${config.networking.fqdn}`) && PathPrefix(`/alert`)";
+            entryPoints = [ "websecure" ];
+            service = "alertmanager";
+          };
+
+        };
+
+        services = {
+          prometheus.loadBalancer.servers = [{
+            url = "http://${config.services.prometheus.listenAddress}:${builtins.toString config.services.prometheus.port}";
+          }];
+          alertmanager.loadBalancer.servers = [{
+            url = "http://${config.services.prometheus.alertmanager.listenAddress}:${builtins.toString config.services.prometheus.alertmanager.port}";
+          }];
+        };
+      };
+    };
+  };
+
+
   services.prometheus = {
     enable = true;
     webExternalUrl = "https://${config.networking.fqdn}/prom";
@@ -48,68 +79,36 @@
         }];
       })
     ];
-  };
 
-  alertmanagers = [{
-    path_prefix = "/alert";
-    static_configs = [{
-      targets = [ "${config.services.prometheus.alertmanager.listenAddress}:${builtins.toString config.services.prometheus.alertmanager.port}" ];
-    }];
-  }];
-
-  alertmanager = {
-    enable = true;
-    webExternalUrl = "https://${config.networking.fqdn}/alert";
-    listenAddress = "127.0.0.1";
-    port = 9093;
-    environmentFile = [ config.sops.secrets.telegram-env.path ];
-    extraFlags = [ ''--cluster.listen-address=""'' ];
-    configuration = {
-      receivers = [{
-        name = "telegram";
-        telegram_configs = [{
-          api_url = "https://api.telegram.org";
-          bot_token = "$TOKEN";
-          chat_id = "$ID";
-          # message = "";
-          parse_mode = "HTML";
-        }];
+    alertmanagers = [{
+      path_prefix = "/alert";
+      static_configs = [{
+        targets = [ "${config.services.prometheus.alertmanager.listenAddress}:${builtins.toString config.services.prometheus.alertmanager.port}" ];
       }];
-      route = {
-        receiver = "telegram";
-      };
-    };
-  };
+    }];
 
-
-  services.traefik = {
-    dynamicConfigOptions = {
-      http = {
-        routers = {
-          prometheus = {
-            rule = "Host(`${config.networking.fqdn}`) && PathPrefix(`/prom`)";
-            entryPoints = [ "websecure" ];
-            service = "prometheus";
-          };
-
-          alertmanager = {
-            rule = "Host(`${config.networking.fqdn}`) && PathPrefix(`/alert`)";
-            entryPoints = [ "websecure" ];
-            service = "alertmanager";
-          };
-
-        };
-
-        services = {
-          prometheus.loadBalancer.servers = [{
-            url = "http://${config.services.prometheus.listenAddress}:${builtins.toString config.services.prometheus.port}";
+    alertmanager = {
+      enable = true;
+      webExternalUrl = "https://${config.networking.fqdn}/alert";
+      listenAddress = "127.0.0.1";
+      port = 9093;
+      environmentFile = [ config.sops.secrets.telegram-env.path ];
+      extraFlags = [ ''--cluster.listen-address=""'' ];
+      configuration = {
+        receivers = [{
+          name = "telegram";
+          telegram_configs = [{
+            api_url = "https://api.telegram.org";
+            bot_token = "$TOKEN";
+            chat_id = "$ID";
+            # message = "";
+            parse_mode = "HTML";
           }];
-          alertmanager.loadBalancer.servers = [{
-            url = "http://${config.services.prometheus.alertmanager.listenAddress}:${builtins.toString config.services.prometheus.alertmanager.port}";
-          }];
+        }];
+        route = {
+          receiver = "telegram";
         };
       };
     };
   };
-
 }
