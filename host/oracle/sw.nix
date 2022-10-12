@@ -5,4 +5,22 @@
     ../../services/bangumi.nix
   ];
 
+  systemd.services.podman-auto-update-self = {
+    wants = [ "network-online.target" ];
+    after = [ "network-online.target" ];
+    serviceConfig = {
+      Type = "oneshot";
+      ExecStart = "${pkgs.podman}/bin/podman auto-update";
+      ExecStartPost = "${pkgs.podman}/bin/podman image prune -f";
+    };
+  };
+
+  systemd.timers.podman-auto-update-self = {
+    wantedBy = [ "timers.target" ];
+    timerConfig = {
+      OnCalendar = "daily";
+      Persistent = true;
+    };
+  };
+
 }
