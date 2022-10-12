@@ -2,37 +2,6 @@
 
   sops.secrets.telegram-env = { };
 
-  services.traefik = {
-    dynamicConfigOptions = {
-      http = {
-        routers = {
-          prometheus = {
-            rule = "Host(`${config.networking.fqdn}`) && PathPrefix(`/prom`)";
-            entryPoints = [ "websecure" ];
-            service = "prometheus";
-          };
-
-          alertmanager = {
-            rule = "Host(`${config.networking.fqdn}`) && PathPrefix(`/alert`)";
-            entryPoints = [ "websecure" ];
-            service = "alertmanager";
-          };
-
-        };
-
-        services = {
-          prometheus.loadBalancer.servers = [{
-            url = "http://${config.services.prometheus.listenAddress}:${builtins.toString config.services.prometheus.port}";
-          }];
-          alertmanager.loadBalancer.servers = [{
-            url = "http://${config.services.prometheus.alertmanager.listenAddress}:${builtins.toString config.services.prometheus.alertmanager.port}";
-          }];
-        };
-      };
-    };
-  };
-
-
   services.prometheus = {
     enable = true;
     webExternalUrl = "https://${config.networking.fqdn}/prom";
@@ -87,6 +56,7 @@
       targets = [ "${config.services.prometheus.alertmanager.listenAddress}:${builtins.toString config.services.prometheus.alertmanager.port}" ];
     }];
   }];
+
   alertmanager = {
     enable = true;
     webExternalUrl = "https://${config.networking.fqdn}/alert";
@@ -110,4 +80,36 @@
       };
     };
   };
+
+
+  services.traefik = {
+    dynamicConfigOptions = {
+      http = {
+        routers = {
+          prometheus = {
+            rule = "Host(`${config.networking.fqdn}`) && PathPrefix(`/prom`)";
+            entryPoints = [ "websecure" ];
+            service = "prometheus";
+          };
+
+          alertmanager = {
+            rule = "Host(`${config.networking.fqdn}`) && PathPrefix(`/alert`)";
+            entryPoints = [ "websecure" ];
+            service = "alertmanager";
+          };
+
+        };
+
+        services = {
+          prometheus.loadBalancer.servers = [{
+            url = "http://${config.services.prometheus.listenAddress}:${builtins.toString config.services.prometheus.port}";
+          }];
+          alertmanager.loadBalancer.servers = [{
+            url = "http://${config.services.prometheus.alertmanager.listenAddress}:${builtins.toString config.services.prometheus.alertmanager.port}";
+          }];
+        };
+      };
+    };
+  };
+
 }
