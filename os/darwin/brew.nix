@@ -12,6 +12,7 @@
       "homebrew/cask"
       "homebrew/cask-fonts"
       "homebrew/services"
+      "homebrew/cask-drivers" #yubikey
       "majd/repo"
       "koekeishiya/formulae" #yabai/skhd
     ];
@@ -32,6 +33,7 @@
     # '';
 
     casks = [
+      "yubico-yubikey-manager"
       "google-cloud-sdk"
       "android-platform-tools"
       "element"
