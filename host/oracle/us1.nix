@@ -23,11 +23,11 @@
       serviceConfig = {
         ExecStart = [
           "" # override original
-          "${podman} auto-update"
+          "${pkgs.podman}/bin/podman auto-update"
         ];
         ExecStartPost = [
           "" # override original
-          "${podman} image prune -f"
+          "${pkgs.podman}/bin/podman image prune -f"
         ];
       };
     };
