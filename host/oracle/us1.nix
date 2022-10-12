@@ -56,12 +56,12 @@
     dynamicConfigOptions = {
       http = {
         routers.telegraf = {
-          rule = "Host(`${config.networking.fqdn}`) && Path(`${telegrafConfig.outputs.prometheus_client.path}`)";
+          rule = "Host(`${config.networking.fqdn}`) && Path(`${config.services.telegraf.extraConfig.outputs.prometheus_client.path}`)";
           entryPoints = [ "websecure" ];
           service = "telegraf";
         };
         services.telegraf.loadBalancer.servers = [{
-          url = "http://${telegrafConfig.outputs.prometheus_client.listen}";
+          url = "http://${config.services.telegraf.extraConfig.outputs.prometheus_client.listen}";
         }];
       };
     };
