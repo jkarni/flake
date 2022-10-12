@@ -61,8 +61,19 @@
           entryPoints = [ "websecure" ];
           service = "telegraf";
         };
+
+        routers.prometheus = {
+          rule = "Host(`${config.networking.fqdn}`) && PathPrefix(`/prom`)";
+          entryPoints = [ "websecure" ];
+          service = "prometheus";
+        };
+
         services.telegraf.loadBalancer.servers = [{
           url = "http://${config.services.telegraf.extraConfig.outputs.prometheus_client.listen}";
+        }];
+
+        services.prometheus.loadBalancer.servers = [{
+          url = "http://${config.services.prometheus.listenAddress}:${builtins.toString config.services.prometheus.port}";
         }];
       };
     };
