@@ -11,6 +11,7 @@
   };
 
   # hide actual domain
+  # add yubikey FIDO2 WebAuthn
   systemd.services.podman-vaultwarden.serviceConfig.EnvironmentFile = config.sops.secrets.vaultwarden-env.path;
   systemd.services.podman-vaultwarden.script = lib.mkForce ''
     exec podman run \
