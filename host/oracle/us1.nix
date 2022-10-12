@@ -16,6 +16,6 @@
       ExecStart = "${pkgs.podman}/bin/podman auto-update";
       ExecStartPost = "${pkgs.podman}/bin/podman image prune -f";
     };
-    wantedBy =[default.target];
+    wantedBy =[ "default.target" ];
   };
 }
