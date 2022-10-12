@@ -8,7 +8,7 @@
   ];
 
 
-  systemd.services.podman-auto-update2 = {
+  systemd.services.podman-auto-update-self = {
     wants = [ "network-online.target" ];
     after = [ "network-online.target" ];
     serviceConfig = {
@@ -16,6 +16,13 @@
       ExecStart = "${pkgs.podman}/bin/podman auto-update";
       ExecStartPost = "${pkgs.podman}/bin/podman image prune -f";
     };
-    wantedBy =[ "default.target" ];
+  };
+
+  systemd.timer.podman-auto-update-self = {
+    wantedBy = [ "timers.target" ];
+    timerConfig = {
+      OnCalendar = "daily";
+      Persistent = true;
+    };
   };
 }
