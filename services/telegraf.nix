@@ -1,5 +1,5 @@
 { config, pkgs, lib, ... }: {
-  
+
   services.telegraf = {
     enable = true;
     extraConfig = {

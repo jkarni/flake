@@ -3,7 +3,7 @@
 , config
 , ...
 }: {
-  
+
   imports = [
     ./systemDefaults.nix
     ./launchd.nix

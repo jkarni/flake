@@ -106,7 +106,7 @@
       listenAddress = "127.0.0.1";
       port = 9093;
       environmentFile = [ config.sops.secrets.telegram-env.path ];
-      extraFlags = [ ''--cluster.listen-address=""'' ];  # Disable Alertmanager's default high availability feature
+      extraFlags = [ ''--cluster.listen-address=""'' ]; # Disable Alertmanager's default high availability feature
       configuration = {
         receivers = [{
           name = "telegram";

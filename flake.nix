@@ -74,7 +74,7 @@
               hm.stateVersion = stateVersion;
               hm.nixConfigDir = "/Users/dominic/flake";
               profile.developerMode.enable = true;
-              security.pam.enableSudoTouchIdAuth = true; 
+              security.pam.enableSudoTouchIdAuth = true;
             }
           ];
           specialArgs = commonSpecialArgs;
@@ -142,6 +142,7 @@
 
       #############################################################################################################################
       # formatter
+      # nix fmt
 
       formatter.aarch64-darwin = nixpkgs.legacyPackages.aarch64-darwin.nixpkgs-fmt;
       #############################################################################################################################

@@ -2,7 +2,7 @@
 , lib
 , config
 , ...
-}:{
+}: {
   programs.git = {
     enable = true;
     userName = "mlyxshi";
