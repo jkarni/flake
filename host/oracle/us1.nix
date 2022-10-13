@@ -8,7 +8,6 @@
 
     ../../services/podman-auto-update.nix
     ../../services/telegraf.nix
-    ../../services/prometheus.nix
   ];
 
 }
