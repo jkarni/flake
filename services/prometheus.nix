@@ -5,18 +5,26 @@
 
   sops.secrets.telegram-env = { };
 
+  system.activationScripts.prometheus-alertmanager = {
+    deps = [ "setupSecrets" ];
+    text = ''
+      ${pkgs.cloudflare-dns-sync} metric.${config.networking.domain}
+      ${pkgs.cloudflare-dns-sync} alert.${config.networking.domain}
+    '';
+  };
+
   services.traefik = {
     dynamicConfigOptions = {
       http = {
         routers = {
           prometheus = {
-            rule = "Host(`${config.networking.fqdn}`) && PathPrefix(`/prom`)";
+            rule = "Host(`metric.${config.networking.domain}`)";
             entryPoints = [ "websecure" ];
             service = "prometheus";
           };
 
           alertmanager = {
-            rule = "Host(`${config.networking.fqdn}`) && PathPrefix(`/alert`)";
+            rule = "Host(`alert.${config.networking.domain}`)";
             entryPoints = [ "websecure" ];
             service = "alertmanager";
           };
@@ -25,10 +33,10 @@
 
         services = {
           prometheus.loadBalancer.servers = [{
-            url = "http://${config.services.prometheus.listenAddress}:${builtins.toString config.services.prometheus.port}";
+            url = "http://127.0.0.1:9090";
           }];
           alertmanager.loadBalancer.servers = [{
-            url = "http://${config.services.prometheus.alertmanager.listenAddress}:${builtins.toString config.services.prometheus.alertmanager.port}";
+            url = "http://127.0.0.1:9093";
           }];
         };
       };
@@ -38,7 +46,7 @@
 
   services.prometheus = {
     enable = true;
-    webExternalUrl = "https://${config.networking.fqdn}/prom";
+    webExternalUrl = "https://metric.${config.networking.domain}";
     listenAddress = "127.0.0.1";
     port = 9090;
     retentionTime = "7d";
@@ -87,19 +95,18 @@
     ];
 
     alertmanagers = [{
-      path_prefix = "/alert";
       static_configs = [{
-        targets = [ "${config.services.prometheus.alertmanager.listenAddress}:${builtins.toString config.services.prometheus.alertmanager.port}" ];
+        targets = [ "127.0.0.1:9093" ];
       }];
     }];
 
     alertmanager = {
       enable = true;
-      webExternalUrl = "https://${config.networking.fqdn}/alert";
+      webExternalUrl = "https://alert.${config.networking.domain}";
       listenAddress = "127.0.0.1";
       port = 9093;
       environmentFile = [ config.sops.secrets.telegram-env.path ];
-      extraFlags = [ ''--cluster.listen-address=""'' ];
+      extraFlags = [ ''--cluster.listen-address=""'' ];  # Disable Alertmanager's default high availability feature
       configuration = {
         receivers = [{
           name = "telegram";
