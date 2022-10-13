@@ -1,5 +1,8 @@
 { config, pkgs, lib, ... }: {
 
+  # https://www.youtube.com/playlist?list=PLLYW3zEOaqlKhRCWqFE7iLRSh3XEFP5gj
+  # https://github.com/NickCao/flakes/blob/master/nixos/hel0/prometheus.nix
+
   sops.secrets.telegram-env = { };
 
   services.traefik = {
@@ -67,7 +70,7 @@
               expr = "up == 0";
               for = "3m";
               annotations = {
-                summary = "node {{ $labels.host }} down for job {{ $labels.job }}";
+                summary = "node {{ $labels.instance }} down";
               };
             }
             {
@@ -104,7 +107,6 @@
             api_url = "https://api.telegram.org";
             bot_token = "$TOKEN";
             chat_id = 337000294;
-            # message = "";
             parse_mode = "HTML";
           }];
         }];
