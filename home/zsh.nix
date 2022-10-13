@@ -49,7 +49,7 @@ in
       }
       // lib.optionalAttrs pkgs.stdenv.isLinux {
         update = "cd /etc/flake; git pull; nixos-rebuild switch --flake /etc/flake#";
-        slist = "systemctl --type=service";
+        slist = "systemctl list-units --all --type=service";
         stimer = "systemctl --type=timer";
         slog = "systemctl status";
         podmanupdate = "podman auto-update && podman image prune -f";

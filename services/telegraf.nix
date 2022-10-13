@@ -29,7 +29,7 @@
     dynamicConfigOptions = {
       http = {
         routers.telegraf = {
-          rule = "Host(`${config.networking.fqdn}`) && Path(`${config.services.telegraf.extraConfig.outputs.prometheus_client.path}`)";
+          rule = "Host(`${config.networking.fqdn}`) && Path(`/metrics`)";
           entryPoints = [ "websecure" ];
           service = "telegraf";
         };
