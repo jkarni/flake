@@ -48,11 +48,10 @@ let
         fi
     }
     telegram(){
-        TOKEN=$(cat ${config.sops.secrets.tg-notify-token.path})
-        CHAT_ID=$(cat ${config.sops.secrets.tg-userid.path})
+        source ${config.sops.secrets.telegram-env.path}
         MESSAGE="$torrent_name GoogleDrive Upload Success"
         URL="https://api.telegram.org/bot$TOKEN/sendMessage"
-        ${pkgs.curl}/bin/curl -X POST $URL -d chat_id=$CHAT_ID -d text="$MESSAGE"
+        ${pkgs.curl}/bin/curl -X POST $URL -d chat_id=$ID -d text="$MESSAGE"
         echo "[$(date '+%Y-%m-%d %H:%M:%S')] Notification Success" >> $log_dir/qb.log
     }
     echo "Torrent Name：$torrent_name" >> $log_dir/qb.log
@@ -72,8 +71,7 @@ in
   sops.secrets.restic-env = { };
   sops.secrets.restic-password = { };
   sops.secrets.rclone-config = { };
-  sops.secrets.tg-userid = { };
-  sops.secrets.tg-notify-token = { };
+  sops.secrets.telegram-env = { };
 
   environment.systemPackages = with pkgs; [
     qbittorrent-nox
