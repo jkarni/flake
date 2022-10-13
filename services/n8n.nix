@@ -11,9 +11,9 @@
         "traefik.enable=true"
 
         "--label"
-        "traefik.http.routers.kms.rule=Host(`n8n.${config.networking.domain}`)"
+        "traefik.http.routers.n8n.rule=Host(`n8n.${config.networking.domain}`)"
         "--label"
-        "traefik.http.routers.kms.entrypoints=websecure"
+        "traefik.http.routers.n8n.entrypoints=websecure"
 
         "--label"
         "io.containers.autoupdate=registry"
