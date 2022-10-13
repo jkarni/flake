@@ -50,6 +50,9 @@
         static_configs = [{
           targets = [
             "us1.mlyxshi.com"
+            "jp2.mlyxshi.com"
+            "kr.mlyxshi.com"
+            "sw.mlyxshi.com"
           ];
         }];
       }

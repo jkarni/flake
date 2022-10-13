@@ -7,6 +7,7 @@
     ../../services/change-detection.nix
     ../../services/miniflux-silent.nix # miniflux-silent, miniflux should deploy to different hosts
     ../../services/podman-auto-update.nix
+    ../../services/telegraf.nix
   ];
 }
 

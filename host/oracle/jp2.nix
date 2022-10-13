@@ -7,6 +7,7 @@
     ../../services/miniflux.nix
     ../../services/vaultwarden.nix
     ../../services/podman-auto-update.nix
+    ../../services/telegraf.nix
   ];
 
 }
