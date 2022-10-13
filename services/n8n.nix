@@ -14,6 +14,8 @@
         "traefik.http.routers.n8n.rule=Host(`n8n.${config.networking.domain}`)"
         "--label"
         "traefik.http.routers.n8n.entrypoints=websecure"
+        "--label"
+        "traefik.http.routers.n8n.middlewares=auth@file"
 
         "--label"
         "io.containers.autoupdate=registry"
