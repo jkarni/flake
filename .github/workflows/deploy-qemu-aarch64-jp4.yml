@@ -18,6 +18,4 @@ jobs:
       with:
         key: '${{ secrets.SSH_PRIVATE_KEY }}'
         known_hosts: unnecessary
-    - run: |
-        nix shell nixpkgs#deploy-rs 
-        deploy --skip-checks .#jp4
+    - run: nix run github:serokell/deploy-rs -- -s .#jp4
