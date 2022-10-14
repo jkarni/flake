@@ -50,7 +50,7 @@ in
       ripgrep
     ]
     ++ lib.optionals osConfig.profile.developerMode.enable [
-      rnix-lsp #rnix-lsp
+      nil #nix-lsp
       sumneko-lua-language-server #lua-language-server
       clang-tools # clangd
       nodePackages.bash-language-server #bash

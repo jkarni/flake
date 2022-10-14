@@ -31,8 +31,8 @@ return {
     exeName = "rust-analyzer",
     config = pload("lang-config/lsp/setup/rust")
   },
-  rnix = {
-    exeName = "rnix-lsp",
+  nil_ls = {
+    exeName = "nil",
     config = pload("lang-config/lsp/setup/nix")
   }
 }
