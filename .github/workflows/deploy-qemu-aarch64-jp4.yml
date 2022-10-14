@@ -18,4 +18,6 @@ jobs:
       with:
         key: '${{ secrets.SSH_PRIVATE_KEY }}'
         known_hosts: unnecessary
-    - run: nix shell nixpkgs#deploy-rs && deploy --skip-checks .#jp4
+    - run: |
+        nix shell nixpkgs#deploy-rs 
+        deploy --skip-checks .#jp4
