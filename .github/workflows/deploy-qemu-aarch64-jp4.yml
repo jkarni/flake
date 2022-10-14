@@ -12,8 +12,7 @@ jobs:
       with:
         extra_nix_config: |
           extra-platforms = aarch64-linux
-          trusted-public-keys = mlyxshi.cachix.org-1:yc7GPiryyBn0HfiCXdmO1ECWKBhfwrjdIFnRSA4ct7s= cache.nixos.org-1:6NCHdD59X431o0gWypbMrAURkbJ16ZPMQFGspcDShjY=
-          substituters = https://mlyxshi.cachix.org https://cache.nixos.org/
+
     - uses: shimataro/ssh-key-action@v2
       with:
         key: '${{ secrets.SSH_PRIVATE_KEY }}'
