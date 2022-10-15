@@ -141,11 +141,6 @@
         });
 
       #############################################################################################################################
-      # formatter
-      # nix fmt
-
-      formatter.aarch64-darwin = nixpkgs.legacyPackages.aarch64-darwin.nixpkgs-fmt;
-      #############################################################################################################################
       # deploy-rs
 
       deploy = {
@@ -161,6 +156,12 @@
           profiles.system.path = deploy-rs.lib.aarch64-linux.activate.nixos self.nixosConfigurations.${hostName};
         });
       };
+
+      #############################################################################################################################
+      # Formatter
+      # nix fmt
+
+      formatter.aarch64-darwin = nixpkgs.legacyPackages.aarch64-darwin.nixpkgs-fmt;
 
       #############################################################################################################################
       # Packages
@@ -190,8 +191,7 @@
       packages."aarch64-darwin"."ServerStatus" = import ./pkgs/ServerStatus { inherit (nixpkgs.legacyPackages."aarch64-darwin") stdenv unzip fetchurl; };
       #############################################################################################################################
       # Shell
-
-
+      # cd test && nix develop ..#wrangler
 
       devShells."aarch64-darwin"."wrangler" = import ./shells/wrangler.nix { pkgs = nixpkgs.legacyPackages."aarch64-darwin"; };
     }; #end of outputs

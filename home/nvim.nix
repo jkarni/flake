@@ -42,10 +42,7 @@ in
   home.packages = with pkgs;
     [
       neovim-unwrapped
-
       TREESITTER
-
-      # Telescope
       fd
       ripgrep
     ]
