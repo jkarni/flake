@@ -8,6 +8,7 @@
       environment = {
         SIGNUPS_ALLOWED = "false";
         DOMAIN = "https://password.${config.networking.domain}"; #yubikey FIDO2 WebAuthn
+        WEBSOCKET_ENABLED= "true";
       };
       volumes = [
         "/var/lib/vaultwarden:/data"
@@ -15,10 +16,28 @@
       extraOptions = [
         "--label"
         "traefik.enable=true"
+
         "--label"
         "traefik.http.routers.vaultwarden.rule=Host(`password.${config.networking.domain}`)"
         "--label"
+        "traefik.http.routers.vaultwarden.service=vaultwarden"
+        "--label"
         "traefik.http.routers.vaultwarden.entrypoints=websecure"
+
+
+        "--label"
+        "traefik.http.routers.vaultwarden-websocket.rule=Host(`password.${config.networking.domain}`) && Path(`/notifications/hub`)"
+        "--label"
+        "traefik.http.routers.vaultwarden-websocket.service=vaultwarden-websocket"
+        "--label"
+        "traefik.http.routers.vaultwarden-websocket.entrypoints=websecure"
+
+
+        "--label"
+        "traefik.http.services.vaultwarden.loadbalancer.server.port=80"
+        "--label"
+        "traefik.http.services.vaultwarden-websocket.loadbalancer.server.port=3012"
+
 
         "--label"
         "io.containers.autoupdate=registry"
