@@ -167,6 +167,17 @@
       # nix build .#SF-Pro
       # cd test && nix develop ..#SF-Pro
 
+      #  ${variable:-defaultValue}
+      #  first unpackPhase is the string variable we defined
+      #  second unpackPhase is the default unpackPhase function nixpkgs defined
+      #  if we don't define unpackPhase, eval ${unpackPhase:-unpackPhase} -> eval unpackPhase   [eval function_name]
+      #  if we define unpackPhase, eval ${unpackPhase:-unpackPhase} -> eval $unpackPhase   [eval shell_command_string_variable]
+
+      # eval ${unpackPhase:-unpackPhase}
+      # eval ${configurePhase:-configurePhase}
+      # eval ${buildPhase:-buildPhase}
+      # eval ${installPhase:-installPhase}   <-- Not working
+
       packages."x86_64-linux"."PingFang" = import ./pkgs/fonts/PingFang { inherit (nixpkgs.legacyPackages."x86_64-linux") stdenvNoCC unzip fetchurl; };
       packages."aarch64-darwin"."PingFang" = import ./pkgs/fonts/PingFang { inherit (nixpkgs.legacyPackages."aarch64-darwin") stdenvNoCC unzip fetchurl; };
 
@@ -180,17 +191,8 @@
       #############################################################################################################################
       # Shell
 
-      #  ${variable:-defaultValue}
-      #  first unpackPhase is the string variable we defined
-      #  second unpackPhase is the default unpackPhase function nixpkgs defined
-      #  if we don't define unpackPhase, eval ${unpackPhase:-unpackPhase} -> eval unpackPhase   [eval function_name]
-      #  if we define unpackPhase, eval ${unpackPhase:-unpackPhase} -> eval $unpackPhase   [eval shell_command_string_variable]
 
-      # eval ${unpackPhase:-unpackPhase}
-      # eval ${configurePhase:-configurePhase}
-      # eval ${buildPhase:-buildPhase}
-      # eval ${installPhase:-installPhase}   <-- Not working
 
-      devShells."aarch64-darwin"."test" = import ./shells { pkgs = nixpkgs.legacyPackages."aarch64-darwin"; };
+      devShells."aarch64-darwin"."wrangler" = import ./shells/wrangler.nix { pkgs = nixpkgs.legacyPackages."aarch64-darwin"; };
     }; #end of outputs
 }
