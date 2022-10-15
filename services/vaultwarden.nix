@@ -6,9 +6,9 @@
     "vaultwarden" = {
       image = "vaultwarden/server";
       environment = {
-        SIGNUPS_ALLOWED = "false"; #Disable signups
-        DOMAIN = "https://password.${config.networking.domain}"; # yubikey FIDO2 WebAuthn
-        WEBSOCKET_ENABLED= "true"; # websockets: real-time sync of data between server and clients (only browser and desktop Bitwarden clients)
+        SIGNUPS_ALLOWED = "false"; # Disable signups
+        DOMAIN = "https://password.${config.networking.domain}"; # Yubikey FIDO2 WebAuthn
+        WEBSOCKET_ENABLED= "true"; # Websockets: real-time sync of data between server and clients (only browser and desktop Bitwarden clients)
       };
       volumes = [
         "/var/lib/vaultwarden:/data"
