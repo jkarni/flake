@@ -60,6 +60,7 @@
       "istat-menus"
       "tor-browser"
       "neteasemusic"
+      "telegram-desktop"
 
       # Already installed from offical website <-- Uncomment this when completely reinstall macos
       # "surge"
@@ -90,7 +91,6 @@
     #   Tampermonkey = 1482490089;
 
     #   WeChat = 836500024;
-    #   Telegram = 747648890;
 
     #   Things = 904280696;
     #   GoodNotes = 1444383602;
