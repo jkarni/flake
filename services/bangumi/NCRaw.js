@@ -8,6 +8,7 @@ let the_interval = minutes * 60 * 1000;
 let ID = process.env.ID
 let TOKEN = process.env.TOKEN
 
+console.log(process.env)
 
 async function init() {
     let res = await fetch('https://nc.raws.dev/0:/', { method: 'POST', body: JSON.stringify({ page_index: 0 }) });
@@ -48,8 +49,6 @@ async function main() {
                 }
             }
         })
-
-        console.log("---------------------")
 
         if (Date.parse(newData[0].modifiedTime) > Date.parse(oldData[0].modifiedTime)) {
             oldData = newData;
