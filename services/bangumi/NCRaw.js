@@ -17,9 +17,12 @@ async function init() {
 
 async function sendTG(name) {
     //change mp4 or mkv to zip
-    tmp = name.slice(0, -3) + "zip"
-    let url = `https://nc.raws.dev/0:/` + tmp
-    await fetch(`https://api.telegram.org/bot${TOKEN}/sendMessage?chat_id=${ID}&text=mpv '${url}'`);
+    let zipName = name.slice(0, -3) + "zip"
+    let text=`
+    <b>${name}</b>%0A
+    <a href="http://bangumi.mlyxshi.com/?name=${zipName}">Open in Infuse</a>
+    `
+    await fetch(`https://api.telegram.org/bot${TOKEN}/sendMessage?chat_id=${ID}&parse_mode=html&text=${text}`)
 }
 
 async function main() {
