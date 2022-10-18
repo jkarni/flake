@@ -42,7 +42,7 @@ async function main() {
             if (newEntry) {
                 let episode = newElement.name
 
-                console.log("Result: " + episode)
+                console.log(episode)
 
                 if (regex.test(episode)) {
                     sendTG(episode)
