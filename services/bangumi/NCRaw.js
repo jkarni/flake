@@ -7,8 +7,6 @@ let minutes = 1
 let the_interval = minutes * 60 * 1000;
 let ID = process.env.ID
 let TOKEN = process.env.TOKEN
-console.log(ID)
-console.log(TOKEN)
 
 
 async function init() {
