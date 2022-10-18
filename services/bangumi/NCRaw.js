@@ -7,8 +7,9 @@ let minutes = 1
 let the_interval = minutes * 60 * 1000;
 let ID = process.env.ID
 let TOKEN = process.env.TOKEN
+console.log(ID)
+console.log(TOKEN)
 
-console.log(process.env)
 
 async function init() {
     let res = await fetch('https://nc.raws.dev/0:/', { method: 'POST', body: JSON.stringify({ page_index: 0 }) });
@@ -17,7 +18,6 @@ async function init() {
 }
 
 async function sendTG(name) {
-    await fetch(`https://api.telegram.org/bot${TOKEN}/sendMessage?chat_id=${ID}&text=${name}`);
     //change mp4 or mkv to zip
     tmp = name.slice(0, -3) + "zip"
     let url = `https://nc.raws.dev/0:/` + tmp
