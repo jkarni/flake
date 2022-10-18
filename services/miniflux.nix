@@ -21,7 +21,7 @@
         POLLING_FREQUENCY = "10";
         POLLING_PARSING_ERROR_LIMIT = "0";
         METRICS_COLLECTOR = "1";
-        METRICS_ALLOWED_NETWORKS ="0.0.0.0/0";
+        METRICS_ALLOWED_NETWORKS = "0.0.0.0/0";
       };
       extraOptions = [
         "--label"
@@ -45,15 +45,6 @@
         "traefik.http.services.miniflux.loadbalancer.server.port=8080"
         "--label"
         "traefik.http.services.miniflux-metric.loadbalancer.server.port=8080"
-
-        # # Declaring a middleware
-        # "--label"
-        # "traefik.http.middlewares.add-metric.addprefix.prefix=/metrics"
-        # # Referencing a middleware
-        # "--label"
-        # "traefik.http.routers.miniflux-metric.middlewares=add-metric"
-
-
 
         "--label"
         "io.containers.autoupdate=registry"

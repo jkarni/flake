@@ -56,14 +56,24 @@
     };
     scrapeConfigs = [
       {
-        job_name = "metrics";
+        job_name = "Node";
         scheme = "https";
         static_configs = [{
           targets = [
-            "us1.mlyxshi.com"
-            "jp2.mlyxshi.com"
-            "kr.mlyxshi.com"
-            "sw.mlyxshi.com"
+            "us1.${config.networking.domain}"
+            "jp2.${config.networking.domain}"
+            "kr.${config.networking.domain}"
+            "sw.${config.networking.domain}"
+          ];
+        }];
+      }
+
+      {
+        job_name = "Miniflux";
+        scheme = "https";
+        static_configs = [{
+          targets = [
+            "miniflux.${config.networking.domain}"
           ];
         }];
       }
