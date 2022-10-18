@@ -21,6 +21,8 @@
     "browser.theme.toolbar-theme" = 0;
     "browser.theme.content-theme" = 0;
 
+    "browser.uidensity" = 1;
+
     "browser.startup.page" = 3; # Restore previous session
     "browser.newtabpage.activity-stream.default.sites" = "";
     "browser.toolbars.bookmarks.visibility" = "always";

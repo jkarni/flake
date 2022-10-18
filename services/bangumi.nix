@@ -1,141 +1,83 @@
-{ config, pkgs, lib, ... }: {
+{ config, pkgs, lib, ... }:
+let
+  NCRaw = pkgs.writeText "NCRaw" ''
+    // 不懂为什么同一时间api返回的数据不一样
+    // 有时候返回的是最新的，有时候返回的是稍微旧的
 
-  sops.secrets.restic-env = { };
-  sops.secrets.restic-password = { };
+    let regex = new RegExp('(孤獨搖滾|电锯人)');
+    let oldData
+    let minutes = 1
+    let the_interval = minutes * 60 * 1000;
+    let ID = process.env.ID
+    let TOKEN = process.env.TOKEN
 
-  # restic restore backup to create basic configuration tree directory structure
 
-  # https://reorx.com/blog/track-and-download-shows-automatically-with-sonarr
-  virtualisation.oci-containers.containers = {
+    async function init() {
+        let res = await fetch('https://nc.raws.dev/0:/', { method: 'POST', body: JSON.stringify({ page_index: 0 }) });
+        let json = await res.json();
+        oldData = json.data.files
+    }
 
-    "jackett" = {
-      image = "linuxserver/jackett";
-      volumes = [
-        "/download/jackett/config:/config"
-      ];
-      extraOptions = [
-        "--label"
-        "traefik.enable=true"
+    async function sendTG(name) {
+        await fetch(`https://api.telegram.org/bot${TOKEN}/sendMessage?chat_id=${ID}&text=${name}`);
+        //change mp4 or mkv to zip
+        tmp = name.slice(0, -3) + "zip"
+        let url = `https://nc.raws.dev/0:/` + tmp
+        await fetch(`https://api.telegram.org/bot${TOKEN}/sendMessage?chat_id=${ID}&text=mpv '${url}'`);
+    }
 
-        "--label"
-        "traefik.http.routers.jackett.rule=Host(`jackett.${config.networking.domain}`)"
-        "--label"
-        "traefik.http.routers.jackett.entrypoints=websecure"
-        "--label"
-        "traefik.http.routers.jackett.middlewares=auth@file"
+    async function main() {
+        await init();
+        setInterval(async () => {
+            let res = await fetch('https://nc.raws.dev/0:/', { method: 'POST', body: JSON.stringify({ page_index: 0 }) });
+            let json = await res.json();
+            let newData = json.data.files
+            newData.forEach(newElement => {
+                let newEntry = true
 
-        "--label"
-        "io.containers.autoupdate=registry"
-      ];
+                oldData.forEach(oldElement => {
+                    if (Date.parse(newElement.modifiedTime) <= Date.parse(oldElement.modifiedTime)) {
+                        newEntry = false
+                    }
+                })
+
+                if (newEntry) {
+                    let episode = newElement.name
+
+                    console.log("Result: " + episode)
+
+                    if (regex.test(episode)) {
+                        sendTG(episode)
+                    }
+                }
+            })
+
+            console.log("---------------------")
+
+            if (Date.parse(newData[0].modifiedTime) > Date.parse(oldData[0].modifiedTime)) {
+                oldData = newData;
+            }
+
+        }, the_interval);
+
+    }
+
+    main();
+
+
+  '';
+in
+{
+
+  sops.secrets.telegram-env = { };
+
+  systemd.services.bangumi = {
+    after = [ "network-online.target" ];
+    serviceConfig = {
+      ExecStart = "${pkgs.nodejs}/bin/node ${NCRaw}";
+      EnvironmentFile = [ config.sops.secrets.telegram-env.path ];
     };
-
-    "sonarr" = {
-      image = "linuxserver/sonarr";
-      volumes = [
-        "/download/sonarr:/data"
-        "/download/sonarr/config:/config"
-      ];
-      environment = {
-        "PUID" = "0";
-        "PGID" = "0";
-      };
-      extraOptions = [
-        "--label"
-        "traefik.enable=true"
-
-        "--label"
-        "traefik.http.routers.sonarr.rule=Host(`sonarr.${config.networking.domain}`)"
-        "--label"
-        "traefik.http.routers.sonarr.entrypoints=websecure"
-        "--label"
-        "traefik.http.routers.sonarr.middlewares=auth@file"
-
-        "--label"
-        "io.containers.autoupdate=registry"
-      ];
-    };
-
-    "qbittorrent" = {
-      image = "linuxserver/qbittorrent";
-
-      volumes = [
-        "/download/qbittorrent/config:/config"
-        "/download/sonarr:/data" #change default save path to: /data/downloads/  [hacky way: from sonarr's view, use the same download location path as qb]
-      ];
-
-      environment = {
-        "PUID" = "0";
-        "PGID" = "0";
-      };
-      extraOptions = [
-        "--label"
-        "traefik.enable=true"
-
-        "--label"
-        "traefik.http.routers.qbittorrent.rule=Host(`qb.media.${config.networking.domain}`)"
-        "--label"
-        "traefik.http.routers.qbittorrent.entrypoints=websecure"
-        "--label"
-        "traefik.http.routers.qbittorrent.middlewares=auth@file" #qbittorrent: Bypass authentication for clients in whitelisted IP subnets -> 0.0.0.0/0
-        "--label"
-        "traefik.http.services.qbittorrent.loadbalancer.server.port=8080"
-
-        "--label"
-        "io.containers.autoupdate=registry"
-      ];
-    };
-
-    "jellyfin" = {
-      image = "linuxserver/jellyfin";
-      volumes = [
-        "/download/jellyfin/config:/config"
-        "/download/sonarr/media/anime:/data/anime"
-      ];
-
-      environment = {
-        "PUID" = "0";
-        "PGID" = "0";
-      };
-      extraOptions = [
-        "--label"
-        "traefik.enable=true"
-
-        "--label"
-        "traefik.http.routers.jellyfin.rule=Host(`jellyfin.${config.networking.domain}`)"
-        "--label"
-        "traefik.http.routers.jellyfin.entrypoints=websecure"
-
-        "--label"
-        "io.containers.autoupdate=registry"
-      ];
-    };
+    wantedBy = [ "multi-user.target" ];
   };
 
-  systemd.services.podman-jackett.environment.PODMAN_SYSTEMD_UNIT = "%n";
-  systemd.services.podman-sonarr.environment.PODMAN_SYSTEMD_UNIT = "%n";
-  systemd.services.podman-qbittorrent.environment.PODMAN_SYSTEMD_UNIT = "%n";
-  systemd.services.podman-jellyfin.environment.PODMAN_SYSTEMD_UNIT = "%n";
-
-  system.activationScripts.cloudflare-dns-sync-bangumi = {
-    deps = [ "setupSecrets" ];
-    text = ''
-      ${pkgs.cloudflare-dns-sync} jackett.${config.networking.domain}
-      ${pkgs.cloudflare-dns-sync} sonarr.${config.networking.domain}
-      ${pkgs.cloudflare-dns-sync} qb.media.${config.networking.domain}
-      ${pkgs.cloudflare-dns-sync} jellyfin.${config.networking.domain}
-    '';
-  };
-
-
-  services.restic.backups."media" = {
-    environmentFile = config.sops.secrets.restic-env.path;
-    passwordFile = config.sops.secrets.restic-password.path;
-    extraBackupArgs = [
-      "--exclude=sonarr/downloads/*" # * keep directory
-      "--exclude=sonarr/media/anime/*"
-    ];
-    paths = [ "/download" ];
-    timerConfig.OnCalendar = "02:00";
-    pruneOpts = [ "--keep-last 2" ];
-  };
 }
