@@ -27,6 +27,23 @@ in
     wantedBy = [ "multi-user.target" ];
   };
 
+
+  services.traefik = {
+    dynamicConfigOptions = {
+      http = {
+        routers.infuseRedirect = {
+          rule = "Host(`bangumi.${config.networking.domain}`)";
+          entryPoints = [ "web" ];
+          service = "infuseRedirect";
+        };
+
+        services.infuseRedirect.loadBalancer.servers = [{
+          url = "http://127.0.0.1:4666/";
+        }];
+      };
+    };
+  };
+
   system.activationScripts.cloudflare-dns-sync-bangumi = {
     deps = [ "setupSecrets" ];
     text = ''
