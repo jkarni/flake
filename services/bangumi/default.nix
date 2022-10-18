@@ -11,6 +11,8 @@ in
     serviceConfig = {
       ExecStart = "${pkgs.nodejs}/bin/node ${NCRaw}";
       EnvironmentFile = [ config.sops.secrets.telegram-env.path ];
+      Restart="always";
+      RestartSec=10;
     };
     wantedBy = [ "multi-user.target" ];
   };
