@@ -40,10 +40,12 @@
         "--label"
         "traefik.http.routers.miniflux-metric.entrypoints=websecure"
 
+        # Declaring a middleware
         "--label"
-        "traefik.http.services.miniflux.loadbalancer.server.port=8080"
+        "traefik.http.middlewares.add-metric.addprefix.prefix=/metrics"
+        # Referencing a middleware
         "--label"
-        "traefik.http.services.miniflux-metric.loadbalancer.server.url=`http://miniflux:8080/metrics`"
+        "traefik.http.routers.miniflux-metric.middlewares=add-metric"
 
 
 
