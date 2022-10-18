@@ -1,6 +1,6 @@
 { config, pkgs, lib, ... }:
 let
-  NCRaw = builtins.readFile ./NCRaw.js;
+  NCRaw = pkgs.writeText "NCRaw.js" (builtins.readFile ./NCRaw.js);
 in
 {
 
