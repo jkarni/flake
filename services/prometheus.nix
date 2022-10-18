@@ -99,6 +99,15 @@
                 summary = "unit {{ $labels.name }} on {{ $labels.host }} failed";
               };
             }
+            {
+              alert = "Miniflux Broken Feed";
+              expr = "miniflux_broken_feeds > 0";
+              for = "600m";
+              annotations = {
+                summary = "Miniflux Broken Feed";
+              };
+            }
+           
           ];
         }];
       })
