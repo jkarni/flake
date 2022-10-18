@@ -20,15 +20,32 @@
         RUN_MIGRATIONS = "1";
         POLLING_FREQUENCY = "10";
         POLLING_PARSING_ERROR_LIMIT = "0";
+        METRICS_COLLECTOR = "1";
       };
       extraOptions = [
         "--label"
         "traefik.enable=true"
 
         "--label"
-        "traefik.http.routers.websecure-miniflux.rule=Host(`miniflux.${config.networking.domain}`)"
+        "traefik.http.routers.miniflux.rule=Host(`miniflux.${config.networking.domain}`)"
         "--label"
-        "traefik.http.routers.websecure-miniflux.entrypoints=websecure"
+        "traefik.http.routers.miniflux.service=miniflux"
+        "--label"
+        "traefik.http.routers.miniflux.entrypoints=websecure"
+
+        "--label"
+        "traefik.http.routers.miniflux-metric.rule=Host(`miniflux.${config.networking.domain}`) && Path(`/metrics`)"
+        "--label"
+        "traefik.http.routers.miniflux-metric.service=miniflux-metric"
+        "--label"
+        "traefik.http.routers.miniflux-metric.entrypoints=websecure"
+
+        "--label"
+        "traefik.http.services.miniflux.loadbalancer.server.port=8080"
+        "--label"
+        "traefik.http.services.miniflux-metric.loadbalancer.server.url=http://miniflux:8080/metrics"
+
+
 
         "--label"
         "io.containers.autoupdate=registry"
