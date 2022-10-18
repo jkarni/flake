@@ -1,12 +1,13 @@
 { config, pkgs, lib, ... }:
 let
   NCRaw = pkgs.writeText "NCRaw.js" (builtins.readFile ./NCRaw.js);
+  InfuseRedirect = pkgs.writeText "InfuseRedirect.js" (builtins.readFile ./InfuseRedirect.js);
 in
 {
 
   sops.secrets.telegram-env = { };
 
-  systemd.services.bangumi = {
+  systemd.services.bangumi-ncraw = {
     after = [ "network-online.target" ];
     serviceConfig = {
       ExecStart = "${pkgs.nodejs}/bin/node ${NCRaw}";
@@ -15,6 +16,22 @@ in
       # RestartSec=10;
     };
     wantedBy = [ "multi-user.target" ];
+  };
+
+  # port 4666
+  systemd.services.bangumi-infuseRedirect = {
+    after = [ "network-online.target" ];
+    serviceConfig = {
+      ExecStart = "${pkgs.nodejs}/bin/node ${InfuseRedirect}";
+    };
+    wantedBy = [ "multi-user.target" ];
+  };
+
+  system.activationScripts.cloudflare-dns-sync-bangumi = {
+    deps = [ "setupSecrets" ];
+    text = ''
+      ${pkgs.cloudflare-dns-sync} bangumi.${config.networking.domain}
+    '';
   };
 
 }
