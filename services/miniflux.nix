@@ -43,7 +43,7 @@
         "--label"
         "traefik.http.services.miniflux.loadbalancer.server.port=8080"
         "--label"
-        "traefik.http.services.miniflux-metric.loadbalancer.server.url=http://miniflux:8080/metrics"
+        "traefik.http.services.miniflux-metric.loadbalancer.server.url=`http://miniflux:8080/metrics`"
 
 
 
