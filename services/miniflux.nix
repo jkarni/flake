@@ -21,6 +21,7 @@
         POLLING_FREQUENCY = "10";
         POLLING_PARSING_ERROR_LIMIT = "0";
         METRICS_COLLECTOR = "1";
+        METRICS_ALLOWED_NETWORKS ="0.0.0.0/0";
       };
       extraOptions = [
         "--label"
