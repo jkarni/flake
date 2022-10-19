@@ -107,7 +107,7 @@
                 summary = "Miniflux Broken Feed";
               };
             }
-           
+
           ];
         }];
       })
