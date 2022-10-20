@@ -29,7 +29,7 @@ async function main() {
     await init();
     setInterval(async () => {
         let res = await fetch('https://nc.raws.dev/0:/', { method: 'POST', body: JSON.stringify({ page_index: 0 }) });
-        if (res.status == 200) {
+        if (res.ok && res.status == 200) {
             let json = await res.json();
             let newData = json.data.files
             newData.forEach(newElement => {
