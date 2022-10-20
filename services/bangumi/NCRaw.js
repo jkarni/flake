@@ -8,13 +8,6 @@ let the_interval = minutes * 60 * 1000;
 let ID = process.env.ID
 let TOKEN = process.env.TOKEN
 
-
-async function init() {
-    let res = await fetch('https://nc.raws.dev/0:/', { method: 'POST', body: JSON.stringify({ page_index: 0 }) });
-    let json = await res.json();
-    oldData = json.data.files
-}
-
 async function sendTG(name) {
     //change mp4 or mkv to zip
     let zipName = name.slice(0, -3) + "zip"
@@ -23,6 +16,20 @@ async function sendTG(name) {
     <a href="http://bangumi.mlyxshi.com/?name=${zipName}">Open in Infuse</a>
     `
     await fetch(`https://api.telegram.org/bot${TOKEN}/sendMessage?chat_id=${ID}&parse_mode=html&text=${text}`)
+}
+
+async function init() {
+    let res = await fetch('https://nc.raws.dev/0:/', { method: 'POST', body: JSON.stringify({ page_index: 0 }) });
+    let json = await res.json();
+    oldData = json.data.files
+
+    oldData.forEach(element => {
+        let episode = element.name
+        console.log(episode)
+        if (regex.test(episode)) {
+            sendTG(episode)
+        }
+    })
 }
 
 async function main() {
