@@ -18,7 +18,7 @@ async function init() {
 async function sendTG(name) {
     //change mp4 or mkv to zip
     let zipName = name.slice(0, -3) + "zip"
-    let text=`
+    let text = `
     <b>${name}</b>%0A
     <a href="http://bangumi.mlyxshi.com/?name=${zipName}">Open in Infuse</a>
     `
@@ -54,6 +54,9 @@ async function main() {
                 oldData = newData;
             }
 
+        } else {
+            // Handle errors
+            console.log(response.status, response.statusText);
         }
 
 
