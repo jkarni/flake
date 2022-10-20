@@ -11,10 +11,7 @@ let TOKEN = process.env.TOKEN
 async function sendTG(name) {
     //change mp4 or mkv to zip
     let zipName = name.slice(0, -3) + "zip"
-    let text = `
-    <b>${name}</b>%0A
-    <a href="http://bangumi.mlyxshi.com/?name=${zipName}">Open in Infuse</a>
-    `
+    let text = `<b>${name}</b>%0A<a href="http://bangumi.mlyxshi.com/?name=${zipName}">Open in Infuse</a>`
     await fetch(`https://api.telegram.org/bot${TOKEN}/sendMessage?chat_id=${ID}&parse_mode=html&text=${text}`)
 }
 
