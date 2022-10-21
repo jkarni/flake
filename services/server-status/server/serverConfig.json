@@ -59,6 +59,16 @@
       "location": "Sydney",
       "disabled": false,
       "region": "AU"
+    },
+    {
+      "username": "az-hk",
+      "password": "az-hk",
+      "name": "Azure-HK",
+      "type": "KVM",
+      "host": "None",
+      "location": "HK",
+      "disabled": false,
+      "region": "HK"
     }
   ]
 }
