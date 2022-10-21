@@ -61,6 +61,7 @@
       "tor-browser"
       "neteasemusic"
       "telegram-desktop"
+      "postman"
 
       # Already installed from offical website <-- Uncomment this when completely reinstall macos
       # "surge"
@@ -78,7 +79,6 @@
       # "suspicious-package"
 
       # "snipaste"
-      # "paw"
     ];
 
     # Only for fresh installation

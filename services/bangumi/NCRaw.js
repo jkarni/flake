@@ -60,7 +60,7 @@ async function main() {
 
         } else {
             // Handle errors
-            console.log(response.status, response.statusText);
+            console.log(res.status, res.statusText);
         }
 
 
