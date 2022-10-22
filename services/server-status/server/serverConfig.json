@@ -11,6 +11,16 @@
       "region": "US"
     },
     {
+      "username": "jp1",
+      "password": "jp1",
+      "name": "Oracle-JP1",
+      "type": "KVM",
+      "host": "None",
+      "location": "Tokyo",
+      "disabled": false,
+      "region": "JP"
+    },
+    {
       "username": "jp2",
       "password": "jp2",
       "name": "Oracle-JP2",
