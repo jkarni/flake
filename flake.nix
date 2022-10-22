@@ -84,6 +84,7 @@
       # nixosConfigurations
 
       nixosConfigurations = {
+        
         "hx90" = nixpkgs.lib.nixosSystem {
           system = "x86_64-linux";
           modules = [

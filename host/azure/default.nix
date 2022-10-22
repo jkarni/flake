@@ -4,8 +4,8 @@
     ../../os/nixos/server.nix
     ../../home/home-manager.nix
 
-    ../../services/server-status/client
-    ../../services/shadowsocks-rust.nix
+    # ../../services/server-status/client
+    # ../../services/shadowsocks-rust.nix
     ../../services/ssh-config.nix
   ];
 
