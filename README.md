@@ -59,7 +59,7 @@ mount /dev/nvme0n1p2 /mnt
 mkdir /mnt/boot
 mount /dev/nvme0n1p1 /mnt/boot
 
- 
+# nixos-generate-config --show-hardware-config
 # nixos-generate-config --root /mnt
 # vim /mnt/etc/nixos/configuration.nix 
 
