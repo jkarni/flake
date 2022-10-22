@@ -16,6 +16,10 @@
   boot.kernelModules = [ "kvm-amd" ];
   boot.extraModulePackages = [ ];
 
+  boot.loader.systemd-boot.enable = true;
+  boot.loader.timeout = 5;
+  boot.loader.efi.canTouchEfiVariables = true;
+
   fileSystems."/" = {
     device = "/dev/nvme0n1p2";
     fsType = "ext4";
@@ -25,8 +29,6 @@
     device = "/dev/nvme0n1p1";
     fsType = "vfat";
   };
-
-  swapDevices = [ ];
 
   hardware.cpu.amd.updateMicrocode = lib.mkDefault config.hardware.enableRedistributableFirmware;
   # high-resolution display

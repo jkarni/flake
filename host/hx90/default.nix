@@ -10,10 +10,6 @@
   home-manager.users.root = import ../../home;
   home-manager.users.dominic = import ../../home/sway.nix;
 
-  boot.loader.systemd-boot.enable = true;
-  boot.loader.timeout = 5;
-  boot.loader.efi.canTouchEfiVariables = true;
-
   networking = {
     useNetworkd = true;
     useDHCP = false;

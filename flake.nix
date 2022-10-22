@@ -114,6 +114,17 @@
             }
           ];
         };
+
+        "azure" = nixpkgs.lib.nixosSystem {
+          system = "x86_64-linux";
+          modules = [
+            ./host/azure
+            {
+              system.stateVersion = stateVersion;
+              networking.hostName = "AzureTest";
+            }
+          ];
+        };
       }
       // nixpkgs.lib.genAttrs oracleServerList (hostName:
         nixpkgs.lib.nixosSystem {

@@ -11,13 +11,7 @@
   ];
 
   home-manager.users.root = import ../../home;
-
-  boot.loader.systemd-boot.enable = true;
-  boot.loader.timeout = 3;
-  boot.loader.efi.canTouchEfiVariables = true;
-
-  boot.tmpOnTmpfs = true;
-
+  
   virtualisation.podman.enable = true;
   # unlike docker, to enable dns resolution between different containers, we need enable dnsname plugin under podman --> https://github.com/containers/dnsname 
   virtualisation.podman.defaultNetwork.dnsname.enable = true;
