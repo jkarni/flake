@@ -1,4 +1,4 @@
-{
+{pkgs,config,...}:{
   imports = [
     ./hardware.nix
     ../../os/nixos/server.nix
@@ -25,6 +25,13 @@
       name = "eth0";
       DHCP = "yes";
     };
+  };
+
+  system.activationScripts.cloudflare-dns-sync-host = {
+    deps = [ "setupSecrets" ];
+    text = ''
+      ${pkgs.cloudflare-dns-sync} ${config.networking.fqdn}
+    '';
   };
 
 }
