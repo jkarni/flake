@@ -27,11 +27,4 @@
     };
   };
 
-  system.activationScripts.cloudflare-dns-sync-host = {
-    deps = [ "setupSecrets" ];
-    text = ''
-      ${pkgs.cloudflare-dns-sync} ${config.networking.fqdn}
-    '';
-  };
-
 }
