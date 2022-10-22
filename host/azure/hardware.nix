@@ -15,12 +15,12 @@
   boot.growPartition = true;
 
   fileSystems."/boot" = {
-    device = "/dev/disk/by-label/ESP";
+    device = "/dev/sda1";
     fsType = "vfat";
   };
 
   fileSystems."/" = {
-    device = "/dev/disk/by-label/nixos";
+    device = "/dev/sda2";
     fsType = "ext4";
     autoResize = true;
   };
