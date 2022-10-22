@@ -69,6 +69,16 @@
       "location": "HongKong",
       "disabled": false,
       "region": "HK"
+    },
+    {
+      "username": "az-jp",
+      "password": "az-jp",
+      "name": "Azure-JP",
+      "type": "KVM",
+      "host": "None",
+      "location": "Japan",
+      "disabled": false,
+      "region": "JP"
     }
   ]
 }
