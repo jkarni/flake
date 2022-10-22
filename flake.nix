@@ -111,7 +111,7 @@
           modules = [
             sops-nix.nixosModules.sops
             home-manager.nixosModules.home-manager
-            ./host/azure/jp3
+            ./host/azure/jp3.nix
             ./overlay
             ./modules
             {    
