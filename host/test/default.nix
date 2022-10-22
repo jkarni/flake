@@ -16,7 +16,7 @@
   systemd.network.wait-online.anyInterface = true;
   systemd.network.networks = {
     dhcp = {
-      name = "eno0";
+      name = "eth0";
       DHCP = "yes";
     };
   };
