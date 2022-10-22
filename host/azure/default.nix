@@ -4,6 +4,8 @@
     ../../os/nixos/server.nix
     ../../home/home-manager.nix
 
+    ../../script/cloudflare-dns-sync.nix
+
     ../../services/server-status/client
     ../../services/shadowsocks-rust.nix
     ../../services/ssh-config.nix
@@ -27,4 +29,10 @@
     };
   };
 
+  system.activationScripts.cloudflare-dns-sync-host = {
+    deps = [ "setupSecrets" ];
+    text = ''
+      ${pkgs.cloudflare-dns-sync} ${config.networking.fqdn}
+    '';
+  };
 }
