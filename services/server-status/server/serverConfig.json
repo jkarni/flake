@@ -91,8 +91,8 @@
       "region": "HK"
     },
     {
-      "username": "az-jp",
-      "password": "az-jp",
+      "username": "jp3",
+      "password": "jp3",
       "name": "Azure-JP3",
       "type": "KVM",
       "host": "None",
