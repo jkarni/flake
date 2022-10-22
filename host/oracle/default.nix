@@ -1,7 +1,7 @@
 {
   imports = [
     ./hardware.nix
-    ../../os/nixos
+    ../../os/nixos/server.nix
     ../../home/home-manager.nix
 
     ../../script/cloudflare-dns-sync.nix

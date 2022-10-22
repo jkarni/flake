@@ -1,7 +1,6 @@
 { config, ... }: {
   imports = [
     ./hardware.nix
-    ../../os/nixos
     ../../os/nixos/desktop.nix
     ../../home/home-manager.nix
 

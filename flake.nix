@@ -108,7 +108,6 @@
           system = "x86_64-linux";
           modules = [
             ./host/test
-            sops-nix.nixosModules.sops
             {
               system.stateVersion = stateVersion;
               networking.hostName = "test";

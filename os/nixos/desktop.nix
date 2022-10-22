@@ -1,5 +1,9 @@
 { pkgs, lib, config, ... }: {
 
+   imports = [
+    ./server.nix
+  ];
+
   users.users.dominic = {
     isNormalUser = true;
     description = "mlyxshi";
