@@ -63,7 +63,27 @@
     {
       "username": "az-hk",
       "password": "az-hk",
-      "name": "Azure-HK",
+      "name": "Azure-HK1",
+      "type": "KVM",
+      "host": "None",
+      "location": "HongKong",
+      "disabled": false,
+      "region": "HK"
+    },
+    {
+      "username": "az-hk2",
+      "password": "az-hk2",
+      "name": "Azure-HK2",
+      "type": "KVM",
+      "host": "None",
+      "location": "HongKong",
+      "disabled": false,
+      "region": "HK"
+    },
+    {
+      "username": "az-hk3",
+      "password": "az-hk3",
+      "name": "Azure-HK3",
       "type": "KVM",
       "host": "None",
       "location": "HongKong",
