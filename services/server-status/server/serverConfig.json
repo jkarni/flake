@@ -76,7 +76,7 @@
       "name": "Azure-JP",
       "type": "KVM",
       "host": "None",
-      "location": "Japan",
+      "location": "Tokyo",
       "disabled": false,
       "region": "JP"
     }
