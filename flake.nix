@@ -84,7 +84,7 @@
       # nixosConfigurations
 
       nixosConfigurations = {
-        
+
         "hx90" = nixpkgs.lib.nixosSystem {
           system = "x86_64-linux";
           modules = [
@@ -115,7 +115,7 @@
             ./host/azure/jp3.nix
             ./overlay
             ./modules
-            {    
+            {
               networking.hostName = "jp3";
               networking.domain = domain;
 
@@ -128,7 +128,7 @@
         };
 
         #####################
-    
+
         "test" = nixpkgs.lib.nixosSystem {
           system = "x86_64-linux";
           modules = [
@@ -186,20 +186,20 @@
       # nix fmt
 
       formatter.aarch64-darwin = nixpkgs.legacyPackages.aarch64-darwin.nixpkgs-fmt;
-      
+
       #############################################################################################################################
       # Azure Image
       # nix build .#azure-image
 
-      packages."x86_64-linux"."azure-image" = nixos.lib.nixosSystem {
-	        system = "x86_64-linux";
-          modules = [ 
-            ./image/azure.nix
-            {
-              system.stateVersion = stateVersion;
-              networking.hostName = "Azure-TMP";
-            }             
-          ];
+      packages."x86_64-linux"."azure-image" = nixpkgs.lib.nixosSystem {
+        system = "x86_64-linux";
+        modules = [
+          ./image/azure.nix
+          {
+            system.stateVersion = stateVersion;
+            networking.hostName = "Azure-TMP";
+          }
+        ];
       }.config.system.build.azureImage;
 
 

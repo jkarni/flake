@@ -5,9 +5,9 @@
   imports = [
     (modulesPath + "/profiles/headless.nix")
   ];
-  
+
   # hyper-v: https://github.com/NixOS/nixpkgs/blob/master/nixos/modules/virtualisation/hyperv-guest.nix
-  virtualisation.hypervGuest.enable = true;  
+  virtualisation.hypervGuest.enable = true;
 
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;

@@ -1,4 +1,4 @@
-{pkgs,config,...}:{
+{ pkgs, config, ... }: {
   imports = [
     ./hardware.nix
     ../../os/nixos/server.nix
@@ -14,7 +14,7 @@
   home-manager.users.root = import ../../home;
 
   networking.usePredictableInterfaceNames = false;
-  
+
   networking = {
     useNetworkd = true;
     useDHCP = false;
