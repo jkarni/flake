@@ -176,11 +176,12 @@
         magicRollback = false;
         autoRollback = false;
 
-        nodes = nixpkgs.lib.genAttrs oracleServerList (hostName: {
-          hostname = "${hostName}.${domain}";
-          profiles.system.path = deploy-rs.lib.aarch64-linux.activate.nixos self.nixosConfigurations.${hostName};
-        }) 
-        
+        nodes = nixpkgs.lib.genAttrs oracleServerList
+          (hostName: {
+            hostname = "${hostName}.${domain}";
+            profiles.system.path = deploy-rs.lib.aarch64-linux.activate.nixos self.nixosConfigurations.${hostName};
+          })
+
         // nixpkgs.lib.genAttrs azureServerList (hostName: {
           hostname = "${hostName}.${domain}";
           profiles.system.path = deploy-rs.lib.x86_64-linux.activate.nixos self.nixosConfigurations.${hostName};

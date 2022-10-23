@@ -8,11 +8,11 @@
 final: prev: {
   ################################################################################################
   # Linux
-  firefox =prev.wrapFirefox prev.firefox-unwrapped{
+  firefox = prev.wrapFirefox prev.firefox-unwrapped {
     forceWayland = true;
     extraPolicies = import ../../config/firefox/app/policy.nix;
   };
- 
+
   # Darwin
   firefox-bin-darwin = prev.callPackage ../../pkgs/darwin/Firefox { };
 }
