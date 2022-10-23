@@ -1,4 +1,4 @@
-name: "deploy kr"
+name: "deploy hk1"
 on:
   workflow_dispatch
 
