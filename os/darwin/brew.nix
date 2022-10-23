@@ -28,11 +28,6 @@
       "imagemagick" #kitty image dependency
     ];
 
-    # use launchd config from homebrew(original github config)
-    # extraConfig = ''
-    #   brew "skhd", restart_service: true
-    # '';
-
     casks = [
       "yubico-yubikey-manager"
       "google-cloud-sdk"
@@ -40,7 +35,6 @@
       "element"
       "input-source-pro"
       "kitty"
-      "firefox"
       "macfuse" # rclone mount
       "utm"
       "font-roboto-mono-nerd-font"
