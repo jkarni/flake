@@ -1,7 +1,10 @@
 { pkgs, modulesPath, lib, config, ... }: {
   imports = [
     (modulesPath + "/profiles/headless.nix")
+    (modulesPath + "/virtualisation/azure-agent.nix")
   ];
+
+  virtualisation.azure.agent.enable = true;
 
   # hyper-v: https://github.com/NixOS/nixpkgs/blob/master/nixos/modules/virtualisation/hyperv-guest.nix
   virtualisation.hypervGuest.enable = true;
