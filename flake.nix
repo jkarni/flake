@@ -107,28 +107,6 @@
         };
 
         #####################
-        #Azure
-        # "jp3" = nixpkgs.lib.nixosSystem {
-        #   system = "x86_64-linux";
-        #   modules = [
-        #     sops-nix.nixosModules.sops
-        #     home-manager.nixosModules.home-manager
-        #     ./host/azure/jp3.nix
-        #     ./overlay
-        #     ./modules
-        #     {
-        #       networking.hostName = "jp3";
-        #       networking.domain = domain;
-
-        #       system.stateVersion = stateVersion;
-        #       hm.stateVersion = stateVersion;
-        #       hm.nixConfigDir = "/etc/flake";
-        #     }
-        #   ];
-        #   specialArgs = commonSpecialArgs;
-        # };
-
-        #####################
 
         "test" = nixpkgs.lib.nixosSystem {
           system = "x86_64-linux";
