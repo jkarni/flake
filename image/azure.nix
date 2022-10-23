@@ -52,16 +52,13 @@
 
   environment.systemPackages = [ pkgs.git ];
 
-  config.system.build.azureImage = lib.mkForce (
-    import "${modulesPath}/../lib/make-disk-image.nix" {
-      inherit pkgs lib config;
-      partitionTableType = "efi";
-      postVM = ''
-        ${pkgs.vmTools.qemu}/bin/qemu-img convert -f raw -o subformat=fixed,force_size -O vpc $diskImage $out/nixos.vhd
-        rm $diskImage
-      '';
-      diskSize = "auto";
-      format = "raw";
-    }
-  );
+  system.build.azureImage = import "${modulesPath}/../lib/make-disk-image.nix" {
+    inherit pkgs lib config;
+    partitionTableType = "efi";
+    postVM = ''
+      ${pkgs.vmTools.qemu}/bin/qemu-img convert -f raw -o subformat=fixed,force_size -O vpc $diskImage $out/nixos.vhd
+      rm $diskImage
+    '';
+    format = "raw";
+  };
 }
