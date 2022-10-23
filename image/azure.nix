@@ -1,4 +1,4 @@
-{ pkgs, modulesPath, lib, ... }: {
+{ pkgs, modulesPath, lib, config, ... }: {
   imports = [
     (modulesPath + "/profiles/headless.nix")
   ];
@@ -52,7 +52,7 @@
 
   environment.systemPackages = [ pkgs.git ];
 
-  system.build.azureImage = lib.mkForce (
+  config.system.build.azureImage = lib.mkForce (
     import "${modulesPath}/../lib/make-disk-image.nix" {
       inherit pkgs lib config;
       partitionTableType = "efi";

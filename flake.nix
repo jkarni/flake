@@ -191,17 +191,20 @@
       # Azure Image
       # nix build .#azure-image
 
-      packages."x86_64-linux"."azure-image" = nixpkgs.lib.nixosSystem {
-        system = "x86_64-linux";
-        modules = [
-          ./image/azure.nix
-          {
-            system.stateVersion = stateVersion;
-            networking.hostName = "Azure-TMP";
-          }
-        ];
-      }.config.system.build.azureImage;
-
+      packages."x86_64-linux"."azure-image" = 
+      let 
+        os = nixpkgs.lib.nixosSystem {
+          system = "x86_64-linux";
+          modules = [
+            ./image/azure.nix
+            {
+              system.stateVersion = stateVersion;
+              networking.hostName = "Azure-TMP";
+            }
+          ];
+       };
+      in
+      os.config.system.build.azureImage;
 
       #############################################################################################################################
       # Packages
