@@ -49,6 +49,7 @@
     let
       stateVersion = "22.05";
       oracleServerList = [ "jp2" "jp4" "sw" "us1" "kr" "au" ];
+      azureServerList = [ "hk1" "jp3" ];
       domain = "mlyxshi.com";
       commonSpecialArgs = {
         inherit (args) neovim-nightly;
@@ -107,25 +108,25 @@
 
         #####################
         #Azure
-        "jp3" = nixpkgs.lib.nixosSystem {
-          system = "x86_64-linux";
-          modules = [
-            sops-nix.nixosModules.sops
-            home-manager.nixosModules.home-manager
-            ./host/azure/jp3.nix
-            ./overlay
-            ./modules
-            {
-              networking.hostName = "jp3";
-              networking.domain = domain;
+        # "jp3" = nixpkgs.lib.nixosSystem {
+        #   system = "x86_64-linux";
+        #   modules = [
+        #     sops-nix.nixosModules.sops
+        #     home-manager.nixosModules.home-manager
+        #     ./host/azure/jp3.nix
+        #     ./overlay
+        #     ./modules
+        #     {
+        #       networking.hostName = "jp3";
+        #       networking.domain = domain;
 
-              system.stateVersion = stateVersion;
-              hm.stateVersion = stateVersion;
-              hm.nixConfigDir = "/etc/flake";
-            }
-          ];
-          specialArgs = commonSpecialArgs;
-        };
+        #       system.stateVersion = stateVersion;
+        #       hm.stateVersion = stateVersion;
+        #       hm.nixConfigDir = "/etc/flake";
+        #     }
+        #   ];
+        #   specialArgs = commonSpecialArgs;
+        # };
 
         #####################
 
@@ -148,6 +149,28 @@
             home-manager.nixosModules.home-manager
             # https://nixos.wiki/wiki/Nix_Expression_Language
             # Coercing a relative path with interpolated variables to an absolute path (for imports)
+            (./host/oracle + "/${hostName}.nix")
+            ./overlay
+            ./modules
+
+            {
+              networking.hostName = hostName;
+              networking.domain = domain;
+
+              system.stateVersion = stateVersion;
+              hm.stateVersion = stateVersion;
+              hm.nixConfigDir = "/etc/flake";
+            }
+          ];
+          specialArgs = commonSpecialArgs;
+        })
+
+      // nixpkgs.lib.genAttrs azureServerList (hostName:
+        nixpkgs.lib.nixosSystem {
+          system = "x86_64-linux";
+          modules = [
+            sops-nix.nixosModules.sops
+            home-manager.nixosModules.home-manager
             (./host/oracle + "/${hostName}.nix")
             ./overlay
             ./modules
