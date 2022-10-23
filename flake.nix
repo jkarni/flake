@@ -149,7 +149,7 @@
           modules = [
             sops-nix.nixosModules.sops
             home-manager.nixosModules.home-manager
-            (./host/oracle + "/${hostName}.nix")
+            (./host/azure + "/${hostName}.nix")
             ./overlay
             ./modules
 
