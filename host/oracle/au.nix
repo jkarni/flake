@@ -4,6 +4,5 @@
     ../../services/traefik-cloudflare.nix #80,443
     ../../services/server-status/server
     ../../services/prometheus.nix
-    ../../services/azure-web.nix
   ];
 }
