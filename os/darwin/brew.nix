@@ -26,6 +26,7 @@
       "qemu"
       "mpv"
       "imagemagick" #kitty image dependency
+      "azure-cli"
     ];
 
     casks = [
