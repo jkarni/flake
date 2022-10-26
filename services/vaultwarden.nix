@@ -45,7 +45,7 @@
     };
   };
 
-  systemd.services.podman-vaultwarden.environment.PODMAN_SYSTEMD_UNIT = "%n";
+  #systemd.services.podman-vaultwarden.environment.PODMAN_SYSTEMD_UNIT = "%n";
 
   systemd.services.podman-vaultwarden.serviceConfig.StateDirectory = "vaultwarden";
 
