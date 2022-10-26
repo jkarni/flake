@@ -2,7 +2,7 @@
 
   virtualisation.oci-containers.containers = {
     "rsshub" = {
-      image = "diygod/rsshub";
+      image = "docker.io/diygod/rsshub";
       extraOptions = [
         "--label"
         "traefik.enable=true"
