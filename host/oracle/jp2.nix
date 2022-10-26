@@ -3,7 +3,7 @@
   imports = [
     ./default.nix
     ../../services/traefik-cloudflare.nix #80,443
-    # ../../services/rsshub.nix
+    ../../services/rsshub.nix
     # ../../services/miniflux.nix
     #../../services/n8n.nix
 
