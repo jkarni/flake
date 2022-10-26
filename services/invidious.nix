@@ -59,8 +59,6 @@ in
 
   systemd.services.podman-invidious-db.serviceConfig.StateDirectory = "invidious-db";
 
-  systemd.services.podman-invidious.environment.PODMAN_SYSTEMD_UNIT = "%n";
-
   system.activationScripts.cloudflare-dns-sync-libre = {
     deps = [ "setupSecrets" ];
     text = ''

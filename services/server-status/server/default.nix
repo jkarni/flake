@@ -32,7 +32,7 @@ in
 
   virtualisation.oci-containers.containers = {
     "nginx" = {
-      image = "nginx";
+      image = "docker.io/library/nginx";
       volumes = [
         "/var/lib/ServerStatus/hotaru-theme:/usr/share/nginx/html"
       ];

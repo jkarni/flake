@@ -7,7 +7,7 @@
   virtualisation.oci-containers.containers = {
 
     "miniflux" = {
-      image = "miniflux/miniflux";
+      image = "docker.io/miniflux/miniflux";
       dependsOn = [ "miniflux-db" ];
       environmentFiles = [ config.sops.secrets.miniflux-env.path ];
       environment = {

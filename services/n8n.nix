@@ -23,7 +23,6 @@
     };
   };
 
-  systemd.services.podman-n8n.environment.PODMAN_SYSTEMD_UNIT = "%n";
   systemd.services.podman-n8n.serviceConfig.StateDirectory = "n8n";
 
   system.activationScripts.cloudflare-dns-sync-n8n = {

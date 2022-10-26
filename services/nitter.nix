@@ -80,8 +80,6 @@ in
 
   systemd.services.podman-nitter-db.serviceConfig.StateDirectory = "nitter-db";
 
-  systemd.services.podman-nitter.environment.PODMAN_SYSTEMD_UNIT = "%n";
-
   system.activationScripts.cloudflare-dns-sync-nitter = {
     deps = [ "setupSecrets" ];
     text = ''

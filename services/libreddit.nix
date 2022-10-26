@@ -3,7 +3,7 @@
   virtualisation.oci-containers.containers = {
 
     "libreddit" = {
-      image = "spikecodes/libreddit:arm";
+      image = "docker.io/spikecodes/libreddit:arm";
       environment = {
         LIBREDDIT_DEFAULT_WIDE = "on";
         LIBREDDIT_DEFAULT_SHOW_NSFW = "on";
@@ -25,7 +25,6 @@
 
   };
 
-  systemd.services.podman-libreddit.environment.PODMAN_SYSTEMD_UNIT = "%n";
 
   system.activationScripts.cloudflare-dns-sync-libre = {
     deps = [ "setupSecrets" ];

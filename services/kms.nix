@@ -2,7 +2,7 @@
 
   virtualisation.oci-containers.containers = {
     "kms-server" = {
-      image = "mikolatero/vlmcsd";
+      image = "docker.io/mikolatero/vlmcsd";
       extraOptions = [
         "--label"
         "traefik.enable=true"
@@ -17,8 +17,6 @@
       ];
     };
   };
-
-  systemd.services.podman-kms-server.environment.PODMAN_SYSTEMD_UNIT = "%n";
 
   system.activationScripts.cloudflare-dns-sync-kms = {
     deps = [ "setupSecrets" ];
