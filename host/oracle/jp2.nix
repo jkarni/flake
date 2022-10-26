@@ -3,10 +3,11 @@
   imports = [
     ./default.nix
     ../../services/traefik-cloudflare.nix #80,443
-    ../../services/rsshub.nix
-    ../../services/miniflux.nix
+    # ../../services/rsshub.nix
+    # ../../services/miniflux.nix
     #../../services/n8n.nix
-    ../../services/vaultwarden.nix
+
+    # ../../services/vaultwarden.nix
     ../../services/podman-auto-update.nix
     ../../services/telegraf.nix
   ];
