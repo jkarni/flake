@@ -1,7 +1,7 @@
 {
   inputs = {
     nixpkgs = {
-      url = "github:mlyxbot/nixpkgs/nixos-unstable";
+      url = "github:nixos/nixpkgs/nixos-unstable";
     };
 
     home-manager = {
