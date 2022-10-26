@@ -4,7 +4,7 @@
 
   virtualisation.oci-containers.containers = {
     "vaultwarden" = {
-      image = "vaultwarden/server";
+      image = "docker.io/vaultwarden/server";
       environment = {
         SIGNUPS_ALLOWED = "false"; # Disable signups
         DOMAIN = "https://password.${config.networking.domain}"; # Yubikey FIDO2 WebAuthn
@@ -44,8 +44,6 @@
       ];
     };
   };
-
-  #systemd.services.podman-vaultwarden.environment.PODMAN_SYSTEMD_UNIT = "%n";
 
   systemd.services.podman-vaultwarden.serviceConfig.StateDirectory = "vaultwarden";
 

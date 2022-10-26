@@ -2,7 +2,7 @@
 
   virtualisation.oci-containers.containers = {
     "n8n" = {
-      image = "n8nio/n8n";
+      image = "docker.io/n8nio/n8n ";
       volumes = [
         "/var/lib/n8n:/home/node/.n8n"
       ];
