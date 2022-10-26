@@ -20,7 +20,7 @@ let
 
     if [ "$result" = "null" ]; then
       echo -e "$YELLOW $domain DNS Not Registered, Create DNS Record Now $NOCOLOR"
-      requestData=$(jq --null-input --arg domain $domain --arg content $localIP '{"type":"A","name": $domain,"content": $content,"ttl":1,"proxied":false}')
+      requestData=$(jq --null-input --arg domain "$domain" --arg content "$localIP" '{"type":"A","name": $domain,"content": $content,"ttl":1,"proxied":false}')
       curl --silent -X POST "https://api.cloudflare.com/client/v4/zones/$zoneid/dns_records" \
          -H "Content-Type: application/json" \
          -H "Authorization: Bearer $token" \
@@ -31,7 +31,7 @@ let
       recordIP=$(echo $result | jq .content | tr -d '"')
       if [ $localIP != $recordIP ]; then
         echo -e "$YELLOW IP Not Match, Update DNS Record $NOCOLOR"
-        requestData=$(jq --null-input --arg domain $domain --arg content $localIP '{"type":"A","name": $domain,"content": $content,"ttl":1,"proxied":false}')
+        requestData=$(jq --null-input --arg domain "$domain" --arg content "$localIP" '{"type":"A","name": $domain,"content": $content,"ttl":1,"proxied":false}')
         curl --silent -X PUT "https://api.cloudflare.com/client/v4/zones/$zoneid/dns_records/$dnsID" \
          -H "Content-Type: application/json" \
          -H "Authorization: Bearer $token" \
