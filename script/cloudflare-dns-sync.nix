@@ -33,7 +33,7 @@ let
         echo -e "$YELLOW IP Not Match, Update DNS Record $NOCOLOR"
         requestData=$(jq --null-input --arg domain "$domain" --arg content "$localIP" '{"type":"A","name": $domain,"content": $content,"ttl":1,"proxied":false}')
         curl --silent -X PUT "https://api.cloudflare.com/client/v4/zones/$zoneid/dns_records/$dnsID" \
-         -H "Content-Type: application/json" \
+          -H "Content-Type: application/json" \
          -H "Authorization: Bearer $token" \
          --data "$requestData"
       fi
