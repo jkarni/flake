@@ -8,8 +8,8 @@
   system.activationScripts.prometheus-alertmanager = {
     deps = [ "setupSecrets" ];
     text = ''
-      ${pkgs.cloudflare-dns-sync} metric.${config.networking.domain}
-      ${pkgs.cloudflare-dns-sync} alert.${config.networking.domain}
+      ${pkgs.cloudflare-dns-sync}/bin/cloudflare-dns-sync metric.${config.networking.domain}
+      ${pkgs.cloudflare-dns-sync}/bin/cloudflare-dns-sync alert.${config.networking.domain}
     '';
   };
 

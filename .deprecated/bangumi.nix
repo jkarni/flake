@@ -119,10 +119,10 @@
   system.activationScripts.cloudflare-dns-sync-bangumi = {
     deps = [ "setupSecrets" ];
     text = ''
-      ${pkgs.cloudflare-dns-sync} jackett.${config.networking.domain}
-      ${pkgs.cloudflare-dns-sync} sonarr.${config.networking.domain}
-      ${pkgs.cloudflare-dns-sync} qb.media.${config.networking.domain}
-      ${pkgs.cloudflare-dns-sync} jellyfin.${config.networking.domain}
+      ${pkgs.cloudflare-dns-sync}/bin/cloudflare-dns-sync jackett.${config.networking.domain}
+      ${pkgs.cloudflare-dns-sync}/bin/cloudflare-dns-sync sonarr.${config.networking.domain}
+      ${pkgs.cloudflare-dns-sync}/bin/cloudflare-dns-sync qb.media.${config.networking.domain}
+      ${pkgs.cloudflare-dns-sync}/bin/cloudflare-dns-sync jellyfin.${config.networking.domain}
     '';
   };
 

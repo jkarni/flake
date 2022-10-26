@@ -24,7 +24,7 @@
   system.activationScripts.cloudflare-dns-sync-unblock-netease-music = {
     deps = [ "setupSecrets" ];
     text = ''
-      ${pkgs.cloudflare-dns-sync} netease.${config.networking.domain}
+      ${pkgs.cloudflare-dns-sync}/bin/cloudflare-dns-sync netease.${config.networking.domain}
     '';
   };
 

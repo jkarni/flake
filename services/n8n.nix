@@ -29,7 +29,7 @@
   system.activationScripts.cloudflare-dns-sync-n8n = {
     deps = [ "setupSecrets" ];
     text = ''
-      ${pkgs.cloudflare-dns-sync} n8n.${config.networking.domain}
+      ${pkgs.cloudflare-dns-sync}/bin/cloudflare-dns-sync n8n.${config.networking.domain}
     '';
   };
 

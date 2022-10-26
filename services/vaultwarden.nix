@@ -52,7 +52,7 @@
   system.activationScripts.cloudflare-dns-sync-vaultwarden = {
     deps = [ "setupSecrets" ];
     text = ''
-      ${pkgs.cloudflare-dns-sync} password.${config.networking.domain}
+      ${pkgs.cloudflare-dns-sync}/bin/cloudflare-dns-sync password.${config.networking.domain}
     '';
   };
 

@@ -95,7 +95,7 @@ in
   system.activationScripts.cloudflare-dns-sync-qbittorrent-nox = {
     deps = [ "setupSecrets" ];
     text = ''
-      ${pkgs.cloudflare-dns-sync} qb.${config.networking.domain}
+      ${pkgs.cloudflare-dns-sync}/bin/cloudflare-dns-sync qb.${config.networking.domain}
     '';
   };
 

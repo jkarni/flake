@@ -87,7 +87,7 @@ in
     text = ''
       mkdir -p /var/lib/nitter
       cat ${NitterConfig} > /var/lib/nitter/nitter.conf
-      ${pkgs.cloudflare-dns-sync} twitter.${config.networking.domain}
+      ${pkgs.cloudflare-dns-sync}/bin/cloudflare-dns-sync twitter.${config.networking.domain}
     '';
   };
 

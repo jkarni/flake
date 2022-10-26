@@ -26,7 +26,7 @@ in
   system.activationScripts.cloudflare-dns-sync-serverstatus-server = {
     deps = [ "setupSecrets" ];
     text = ''
-      ${pkgs.cloudflare-dns-sync} top.${config.networking.domain}
+      ${pkgs.cloudflare-dns-sync}/bin/cloudflare-dns-sync top.${config.networking.domain}
     '';
   };
 

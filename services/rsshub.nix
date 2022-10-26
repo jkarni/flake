@@ -22,7 +22,7 @@
   system.activationScripts.cloudflare-dns-sync-rsshub = {
     deps = [ "setupSecrets" ];
     text = ''
-      ${pkgs.cloudflare-dns-sync} rss.${config.networking.domain}
+      ${pkgs.cloudflare-dns-sync}/bin/cloudflare-dns-sync rss.${config.networking.domain}
     '';
   };
 }

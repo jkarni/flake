@@ -67,7 +67,7 @@
   system.activationScripts.cloudflare-dns-sync-miniflux = {
     deps = [ "setupSecrets" ];
     text = ''
-      ${pkgs.cloudflare-dns-sync} miniflux.${config.networking.domain}
+      ${pkgs.cloudflare-dns-sync}/bin/cloudflare-dns-sync miniflux.${config.networking.domain}
     '';
   };
 

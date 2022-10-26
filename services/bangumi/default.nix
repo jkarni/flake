@@ -47,7 +47,7 @@ in
   system.activationScripts.cloudflare-dns-sync-bangumi = {
     deps = [ "setupSecrets" ];
     text = ''
-      ${pkgs.cloudflare-dns-sync} bangumi.${config.networking.domain}
+      ${pkgs.cloudflare-dns-sync}/bin/cloudflare-dns-sync bangumi.${config.networking.domain}
     '';
   };
 

@@ -41,7 +41,7 @@
   system.activationScripts.cloudflare-dns-sync-change-detection-io = {
     deps = [ "setupSecrets" ];
     text = ''
-      ${pkgs.cloudflare-dns-sync} change.${config.networking.domain}
+      ${pkgs.cloudflare-dns-sync}/bin/cloudflare-dns-sync change.${config.networking.domain}
     '';
   };
 

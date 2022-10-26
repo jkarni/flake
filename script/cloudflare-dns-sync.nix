@@ -13,8 +13,8 @@ let
     zoneid=$(cat ${config.sops.secrets.cloudflare-zone-id.path})
 
     result=$(curl --silent "https://api.cloudflare.com/client/v4/zones/$zoneid/dns_records?name=$domain" \
-         -H "Content-Type: application/json" \
-         -H "Authorization: Bearer $token" | jq ".result[0]")
+      -H "Content-Type: application/json" \
+      -H "Authorization: Bearer $token" | jq ".result[0]")
 
     localIP=$(curl --silent -4 ip.sb)
 

@@ -23,7 +23,7 @@
   system.activationScripts.cloudflare-dns-sync-kms = {
     deps = [ "setupSecrets" ];
     text = ''
-      ${pkgs.cloudflare-dns-sync} kms.${config.networking.domain}
+      ${pkgs.cloudflare-dns-sync}/bin/cloudflare-dns-sync kms.${config.networking.domain}
     '';
   };
 
