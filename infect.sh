@@ -1,9 +1,7 @@
 #! /usr/bin/env bash
-
 # More info at: https://github.com/elitak/nixos-infect
 
 set -e -o pipefail
-
 
 checkExistingSwap() {
   SWAPSHOW=$(swapon --show --noheadings --raw)
@@ -96,7 +94,7 @@ infect() {
     --profile /nix/var/nix/profiles/system \
     --option trusted-public-keys "mlyxshi.cachix.org-1:yc7GPiryyBn0HfiCXdmO1ECWKBhfwrjdIFnRSA4ct7s=" \
     --option substituters "https://mlyxshi.cachix.org"  \
-    "${FLAKE_URL}#nixosConfigurations.${NIXOS_CONFIG_NAME}.config.system.build.toplevel"
+    "${FLAKE_URL}#nixosConfigurations.${NIXOS_CONFIG_NAME}.config.system.build.toplevel" -v -L
 
   # Remove nix installed with curl | bash
   rm -fv /nix/var/nix/profiles/default*
