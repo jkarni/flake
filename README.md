@@ -25,12 +25,6 @@ Reinstall OS to NixOS
 apt install -y wget
 wget -qO- https://raw.githubusercontent.com/mlyxshi/flake/main/infect.sh | FLAKE_URL="github:mlyxshi/flake" NIXOS_CONFIG_NAME="jp2" bash -x
 ```
-
-End
-```
-git clone git@github.com:mlyxshi/flake /etc/flake 
-```
-
 ## 3. First Install[PC]
 ```
 #nixos@nixos

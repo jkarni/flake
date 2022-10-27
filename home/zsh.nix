@@ -53,8 +53,7 @@ in
         rclonemount = "${pkgs.rclone}/bin/rclone mount googleshare:Download /Users/dominic/rcloneMount &";
       }
       // lib.optionalAttrs pkgs.stdenv.isLinux {
-        update = "cd /etc/flake; git pull; nixos-rebuild switch --flake /etc/flake#";
-        u = "nixos-rebuild switch --flake github:mlyxshi/flake#$(hostnamectl hostname) -v -L";
+        update = "if [ ! -d "/etc/flake" ]; then git clone git@github.com:mlyxshi/flake /etc/flake; fi && cd /etc/flake; git pull; nixos-rebuild switch --flake /etc/flake#";
         slist = "systemctl list-units --all --type=service";
         stimer = "systemctl --type=timer";
         slog = "systemctl status";
