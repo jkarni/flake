@@ -25,7 +25,7 @@ Reinstall OS to NixOS
 # remove old debian grub boot entry
 rm -rf /boot/*
 
-wget -qO- https://github.com/ykis-0-0/nixos-config/raw/master/infect-oci.sh | sudo FLAKE_URL="<Your flake_ref here>" NIXOS_CONFIG_NAME="<flake output to use>" bash -x
+wget -qO- https://github.com/ykis-0-0/nixos-config/raw/master/infect-oci.sh | sudo FLAKE_URL="github:mlyxshi/flake" NIXOS_CONFIG_NAME="us0" bash -x
 ```
 
 End
