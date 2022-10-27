@@ -121,7 +121,7 @@ infect() {
     mount "$esp" /boot
     find /boot -depth ! -path /boot -exec rm -rf {} +
   fi
-  /nix/var/nix/profiles/system/bin/switch-to-configuration boot
+  NIXOS_INSTALL_BOOTLOADER=1 /nix/var/nix/profiles/system/bin/switch-to-configuration boot
 }
 
 
