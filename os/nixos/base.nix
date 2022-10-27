@@ -71,8 +71,7 @@
   };
 
 
-  system.activationScripts.postActivation.text = ''
-    #  show upgrade diff
+  system.activationScripts."diff-closures".text = ''
     ${pkgs.nix}/bin/nix store  diff-closures /run/current-system "$systemConfig"
   '';
 
