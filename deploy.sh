@@ -1,6 +1,6 @@
 #!/bin/bash
 
-for i in $(ls .github/workflows|grep deploy|sed '/deploy-rs/d')
+for i in $(ls .github/workflows|grep deploy)
 do
     gh workflow run ${i}
 done
