@@ -18,7 +18,7 @@ in
 
 
   home.file.".config/lf/lfrc".source =     
-  if osConfig.hm.nixConfigDir == ""
+  if osConfig.hm.nixConfigDir == null
     then ../config/lf/lfrc
     else config.lib.file.mkOutOfStoreSymlink "${osConfig.hm.nixConfigDir}/config/lf/lfrc";
 }

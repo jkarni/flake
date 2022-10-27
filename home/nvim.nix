@@ -37,7 +37,13 @@ in
     '';
   };
 
-  home.file.".config/nvim/lua".source = config.lib.file.mkOutOfStoreSymlink "${osConfig.hm.nixConfigDir}/config/nvim/lua";
+  home.file.".config/nvim/lua".source = 
+  if osConfig.hm.nixConfigDir == null
+    then ../config/nvim/lua
+    else config.lib.file.mkOutOfStoreSymlink "${osConfig.hm.nixConfigDir}/config/nvim/lua";
+  
+  
+
 
   home.packages = with pkgs;
     [
