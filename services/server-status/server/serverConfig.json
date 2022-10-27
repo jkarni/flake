@@ -83,7 +83,7 @@
     {
       "username": "az-hk2",
       "password": "az-hk2",
-      "name": "Azure-HK2-test",
+      "name": "Azure-HK2",
       "type": "KVM",
       "host": "None",
       "location": "HongKong",
