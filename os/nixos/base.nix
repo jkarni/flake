@@ -70,4 +70,10 @@
     "net.ipv4.tcp_fastopen" = "3"; # shadowsocks tcp fastopen
   };
 
+
+  system.activationScripts.postActivation.text = ''
+    #  show upgrade diff
+    ${pkgs.nix}/bin/nix store  diff-closures /run/current-system "$systemConfig"
+  '';
+
 }
