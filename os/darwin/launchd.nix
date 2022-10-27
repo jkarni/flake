@@ -2,7 +2,7 @@
 { pkgs, config, ... }:
 let
   skhdConfig = pkgs.writeText "skhdrc" ''
-    ctrl - z : open -a "Firefox"
+    ctrl - z : open -a "${pkgs.firefox-bin-darwin}/Applications/Firefox.app"
     ctrl - x : open -a "Visual Studio Code"
     alt - space : open -a "kitty"
   '';
