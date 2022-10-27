@@ -1,5 +1,6 @@
 #! /usr/bin/env bash
 # More info at: https://github.com/elitak/nixos-infect
+# Please Run on Ubuntu/Debian
 
 set -e -o pipefail
 
@@ -51,6 +52,7 @@ findESP() {
 prepareEnv() {
 
   apt install -y curl wget xz-utils sudo bzip2
+  
   # $esp and $grubdev are used in makeConf()
   if isEFI; then
     esp="$(findESP)"

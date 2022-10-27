@@ -1,11 +1,4 @@
-## 1. Normal[PC]
-```
-# git clone https://github.com/mlyxshi/flake /etc/flake
-git clone git@github.com:mlyxshi/flake /etc/flake 
-nixos-rebuild switch --flake /etc/flake#hx90 -v
-```
-
-## 2. NixInfect(Server)
+## NixInfect(Server)
 
 Reinstall OS to Debian(fix partition without entering tmpfs env)
 ```
@@ -25,7 +18,7 @@ Reinstall OS to NixOS
 apt install -y wget
 wget -qO- https://raw.githubusercontent.com/mlyxshi/flake/main/infect.sh | FLAKE_URL="github:mlyxshi/flake" NIXOS_CONFIG_NAME="jp2" bash -x
 ```
-## 3. First Install[PC]
+## First Install[Local PC]
 ```
 #nixos@nixos
 passwd 
@@ -91,12 +84,10 @@ xcode-select --install
 # https://nixos.org/manual/nix/stable/installation/installing-binary.html
 sh <(curl -L https://nixos.org/nix/install)
 
-nix-env -iA nixpkgs.nixUnstable
-
 # bootstrap darwin-nix
 # nix build <Flake Floder PATH>#darwinConfigurations.<HOSTNAME>.system
 cd ~/flake
-nix build ~/flake#darwinConfigurations.M1.system
+nix build --extra-experimental-features "nix-command flakes" ~/flake#darwinConfigurations.M1.system
 ./result/sw/bin/darwin-rebuild switch --flake ~/flake#M1
 
 # https://github.com/LnL7/nix-darwin/issues/458
