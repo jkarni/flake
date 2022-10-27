@@ -14,13 +14,13 @@ bash <(wget -qO- https://raw.githubusercontent.com/bohanyang/debi/master/debi.sh
 
 Reinstall OS to NixOS
 ```
-#Oracle(Qemu)
+# Oracle(Qemu)
 apt install -y wget 
-wget -qO- https://raw.githubusercontent.com/mlyxshi/nixos-infect/master/nixos-infect | NIX_CHANNEL=nixos-unstable  bash -x
+wget -qO- https://raw.githubusercontent.com/mlyxshi/flake/main/infect/qemu.sh | NIX_CHANNEL=nixos-unstable  bash -x
 
-#Azure(Hyper-v)
+# Azure(Hyper-v)
 apt install -y wget 
-wget -qO- https://raw.githubusercontent.com/mlyxshi/nixos-infect/azure/nixos-infect | NIX_CHANNEL=nixos-unstable  bash -x
+wget -qO- https://raw.githubusercontent.com/mlyxshi/flake/main/infect/hyperv.sh | NIX_CHANNEL=nixos-unstable  bash -x
 ```
 Refresh Sops Settings
 ```
