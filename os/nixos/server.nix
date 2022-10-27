@@ -1,11 +1,8 @@
-{ config, pkgs, lib, ... }: {
+{ config, pkgs, lib, modulesPath, ... }: {
 
   imports = [
-    ./minimal.nix
+    "${modulesPath}/profiles/minimal.nix"
+    ./base.nix
+    ./sops.nix
   ];
-
-  sops.defaultSopsFile = ../../secrets/key.yaml;
-  # This will automatically import SSH keys as age keys
-  sops.age.sshKeyPaths = [ "/etc/ssh/ssh_host_ed25519_key" ];
-
 }

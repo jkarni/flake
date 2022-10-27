@@ -1,7 +1,8 @@
 { pkgs, lib, config, ... }: {
 
   imports = [
-    ./server.nix
+    ./base.nix
+    ./sops.nix
   ];
 
   users.users.dominic = {
