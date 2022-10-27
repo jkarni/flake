@@ -54,7 +54,7 @@ in
       }
       // lib.optionalAttrs pkgs.stdenv.isLinux {
         update = "cd /etc/flake; git pull; nixos-rebuild switch --flake /etc/flake#";
-        u = "nixos-rebuild switch --flake github:mlyxshi/flake#nixosConfigurations.$(hostnamectl hostname).config.system.build.toplevel -v -L";
+        u = "nixos-rebuild switch --flake github:mlyxshi/flake#$(hostnamectl hostname) -v -L";
         slist = "systemctl list-units --all --type=service";
         stimer = "systemctl --type=timer";
         slog = "systemctl status";
