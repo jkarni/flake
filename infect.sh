@@ -1,4 +1,102 @@
-infect() { 
+#! /usr/bin/env bash
+
+# Usage: curl -L https://github.com/ykis-0-0/nixos-config/raw/master/infect-oci.sh | sudo FLAKE_URL="<Your flake_ref here>" NIXOS_CONFIG_NAME="<flake output to use>" bash -x
+
+set -e -o pipefail
+
+# region Swap related
+# From https://github.com/elitak/nixos-infect/blob/master/nixos-infect#L145-L170
+checkExistingSwap() {
+  SWAPSHOW=$(swapon --show --noheadings --raw)
+  zramswap=true
+  swapcfg=""
+  if [[ -n "$SWAPSHOW" ]]; then
+    SWAP_DEVICE="${SWAPSHOW%% *}"
+    if [[ "$SWAP_DEVICE" == "/dev/"* ]]; then
+      zramswap=false
+      swapcfg="swapDevices = [ { device = \"${SWAP_DEVICE}\"; } ];"
+      NO_SWAP=true
+    fi
+  fi
+}
+
+makeSwap() {
+  swapFile=$(mktemp /tmp/nixos-infect.XXXXX.swp)
+  dd if=/dev/zero "of=$swapFile" bs=1M count=$((1*1024))
+  chmod 0600 "$swapFile"
+  mkswap "$swapFile"
+  swapon -v "$swapFile"
+}
+
+removeSwap() {
+  swapoff -a
+  rm -vf /tmp/nixos-infect.*.swp
+}
+#endregion
+
+# region EFI detection
+# From https://github.com/elitak/nixos-infect/blob/master/nixos-infect#L172-L188
+isEFI() {
+  [ -d /sys/firmware/efi ]
+}
+
+findESP() {
+  esp=""
+  for d in /boot/EFI /boot/efi /boot; do
+    [[ ! -d "$d" ]] && continue
+    [[ "$d" == "$(df "$d" --output=target | sed 1d)" ]] \
+      && esp="$(df "$d" --output=source | sed 1d)" \
+      && break
+  done
+  [[ -z "$esp" ]] && { echo "ERROR: No ESP mount point found"; return 1; }
+  for uuid in /dev/disk/by-uuid/*; do
+    [[ $(readlink -f "$uuid") == "$esp" ]] && echo $uuid && return 0
+  done
+}
+# endregion
+
+# region Prerequisite checks <MODIFIED>
+# From https://github.com/elitak/nixos-infect/blob/master/nixos-infect#L241-L269
+
+prepareEnv() {
+  if isEFI; then
+    esp="$(findESP)"
+  else
+    for grubdev in /dev/vda /dev/sda /dev/xvda /dev/nvme0n1 ; do [[ -e $grubdev ]] && break; done
+  fi
+
+  # REST OMITTED
+
+  # DigitalOcean doesn't seem to set USER while running user data
+  # Also the case for Oracle
+  export USER="root"
+  export HOME="/root"
+
+  # REST OMITTED
+}
+
+
+req() {
+  type "$1" > /dev/null 2>&1 || which "$1" > /dev/null 2>&1
+}
+
+checkEnv() {
+  apt install -y curl xz-utils sudo bzip2
+
+  req curl || req wget || { echo "ERROR: Missing both curl and wget";  return 1; }
+  req bzcat            || { echo "ERROR: Missing bzcat";               return 1; }
+  req xzcat            || { echo "ERROR: Missing xzcat";               return 1; }
+  req groupadd         || { echo "ERROR: Missing groupadd";            return 1; }
+  req useradd          || { echo "ERROR: Missing useradd";             return 1; }
+  req ip               || { echo "ERROR: Missing ip";                  return 1; }
+  req awk              || { echo "ERROR: Missing awk";                 return 1; }
+  req cut || req df    || { echo "ERROR: Missing coreutils (cut, df)"; return 1; }
+}
+#endregion
+
+infect() { # HEAVILY MODIFIED
+  # region Get Nix into the system
+  # From https://github.com/elitak/nixos-infect/blob/master/nixos-infect#L274-L285
 
   groupadd nixbld -g 30000 || true
   for i in {1..10}; do
@@ -7,7 +105,7 @@ infect() {
 
   curl -L https://nixos.org/nix/install | sh
   source ~/.nix-profile/etc/profile.d/nix.sh
-
+  # endregion
 
   # Flake adaptations
   nix \
@@ -43,14 +141,12 @@ infect() {
     mount "$esp" /boot
     find /boot -depth ! -path /boot -exec rm -rf {} +
   fi
-  
-  NIXOS_INSTALL_BOOTLOADER=1 /nix/var/nix/profiles/system/bin/switch-to-configuration boot
+  /nix/var/nix/profiles/system/bin/switch-to-configuration boot
+  # endregion
 }
 
-
-
-
-
+# region Main Infect Flow <MODIFIED>
+# From https://github.com/elitak/nixos-infect/blob/master/nixos-infect#L330-L333
 if [[ -z "${FLAKE_URL:=$1}" ]]; then
   echo "Flake URL required!"
   exit 1
@@ -60,4 +156,15 @@ if [[ -z "${NIXOS_CONFIG_NAME:=$2}" ]]; then
   exit 1
 fi
 
+checkEnv
+prepareEnv
+checkExistingSwap
+if [[ -z "$NO_SWAP" ]]; then
+    makeSwap # smallest (512MB) droplet needs extra memory!
+fi
+# makeConf
 infect
+if [[ -z "$NO_SWAP" ]]; then
+    removeSwap
+fi
+#endregion

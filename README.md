@@ -23,7 +23,7 @@ sops updatekeys key.yaml
 Reinstall OS to NixOS
 ```
 apt install -y wget
-wget -qO- https://github.com/ykis-0-0/nixos-config/raw/master/infect-oci.sh | FLAKE_URL="github:mlyxshi/flake" NIXOS_CONFIG_NAME="us0" bash -x
+wget -qO- https://github.com/mlyxshi/flake/raw/master/infect-oci.sh | FLAKE_URL="github:mlyxshi/flake" NIXOS_CONFIG_NAME="us0" bash -x
 ```
 
 End
@@ -117,14 +117,3 @@ darwin-rebuild switch --flake ~/flake#M1 -v
 ```
 Darwin is my main OS. 
 ```
-
-
-
-
-
-
-nix \
-    --extra-experimental-features "nix-command flakes" \
-  build \
-    --profile /nix/var/nix/profiles/system \
-    "github:mlyxshi/flake#nixosConfigurations.us0.config.system.build.toplevel"
