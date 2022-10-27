@@ -8,7 +8,7 @@ bash <(wget -qO- https://raw.githubusercontent.com/bohanyang/debi/master/debi.sh
 Refresh Sops Settings
 ```
 # SSH login
-ssh-keyscan xxx.mlyxshi.com | ssh-to-age
+ssh-keyscan IP | ssh-to-age
 # write to secrets/.sops.yaml
 sops updatekeys key.yaml
 ```
