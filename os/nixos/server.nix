@@ -21,7 +21,7 @@
     
         cd /etc/flake 
         git pull 
-        nixos-rebuild switch --flake /etc/flake#
+        nixos-rebuild switch --flake /etc/flake# -v -L
       '';
     })
 
