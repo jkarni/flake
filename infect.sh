@@ -1,11 +1,10 @@
 #! /usr/bin/env bash
 
-# Usage: curl -L https://github.com/ykis-0-0/nixos-config/raw/master/infect-oci.sh | sudo FLAKE_URL="<Your flake_ref here>" NIXOS_CONFIG_NAME="<flake output to use>" bash -x
+# More info at: https://github.com/elitak/nixos-infect
 
 set -e -o pipefail
 
-# region Swap related
-# From https://github.com/elitak/nixos-infect/blob/master/nixos-infect#L145-L170
+
 checkExistingSwap() {
   SWAPSHOW=$(swapon --show --noheadings --raw)
   zramswap=true
@@ -15,7 +14,7 @@ checkExistingSwap() {
     if [[ "$SWAP_DEVICE" == "/dev/"* ]]; then
       zramswap=false
       swapcfg="swapDevices = [ { device = \"${SWAP_DEVICE}\"; } ];"
-      NO_SWAP=true
+      NO_SWAP=true 
     fi
   fi
 }
@@ -32,10 +31,7 @@ removeSwap() {
   swapoff -a
   rm -vf /tmp/nixos-infect.*.swp
 }
-#endregion
 
-# region EFI detection
-# From https://github.com/elitak/nixos-infect/blob/master/nixos-infect#L172-L188
 isEFI() {
   [ -d /sys/firmware/efi ]
 }
@@ -53,54 +49,52 @@ findESP() {
     [[ $(readlink -f "$uuid") == "$esp" ]] && echo $uuid && return 0
   done
 }
-# endregion
-
-# region Prerequisite checks <MODIFIED>
-# From https://github.com/elitak/nixos-infect/blob/master/nixos-infect#L241-L269
 
 prepareEnv() {
+
+  apt install -y curl xz-utils sudo bzip2
+  # $esp and $grubdev are used in makeConf()
   if isEFI; then
     esp="$(findESP)"
   else
     for grubdev in /dev/vda /dev/sda /dev/xvda /dev/nvme0n1 ; do [[ -e $grubdev ]] && break; done
   fi
 
-  # REST OMITTED
+  # Retrieve root fs block device
+  #                   (get root mount)  (get partition or logical volume)
+  rootfsdev=$(mount | grep "on / type" | awk '{print $1;}')
+  rootfstype=$(df $rootfsdev --output=fstype | sed 1d)
 
   # DigitalOcean doesn't seem to set USER while running user data
-  # Also the case for Oracle
   export USER="root"
   export HOME="/root"
 
-  apt install -y curl wget xz-utils sudo bzip2
-
-  # REST OMITTED
+  # Nix installer tries to use sudo regardless of whether we're already uid 0
+  #which sudo || { sudo() { eval "$@"; }; export -f sudo; }
+  # shellcheck disable=SC2174
+  mkdir -p -m 0755 /nix
 }
-#endregion
 
-infect() { # HEAVILY MODIFIED
-  # region Get Nix into the system
-  # From https://github.com/elitak/nixos-infect/blob/master/nixos-infect#L274-L285
 
+infect() {
+  # Add nix build users
+  # FIXME run only if necessary, rather than defaulting true
   groupadd nixbld -g 30000 || true
   for i in {1..10}; do
     useradd -c "Nix build user $i" -d /var/empty -g nixbld -G nixbld -M -N -r -s "$(which nologin)" "nixbld$i" || true
   done
+  # TODO use addgroup and adduser as fallbacks
+  #addgroup nixbld -g 30000 || true
+  #for i in {1..10}; do adduser -DH -G nixbld nixbld$i || true; done
 
   curl -L https://nixos.org/nix/install | sh
-  source ~/.nix-profile/etc/profile.d/nix.sh
-  # endregion
 
-  # Flake adaptations
-  nix \
-    --extra-experimental-features "nix-command flakes" \
-  build \
+  # shellcheck disable=SC1090
+  source ~/.nix-profile/etc/profile.d/nix.sh
+
+  nix --extra-experimental-features "nix-command flakes" build \
     --profile /nix/var/nix/profiles/system \
     "${FLAKE_URL}#nixosConfigurations.${NIXOS_CONFIG_NAME}.config.system.build.toplevel"
-  : # Code folding really suck
-
-  # region Activate everything
-  # From https://github.com/elitak/nixos-infect/blob/master/nixos-infect#L300-L323
 
   # Remove nix installed with curl | bash
   rm -fv /nix/var/nix/profiles/default*
@@ -126,28 +120,20 @@ infect() { # HEAVILY MODIFIED
     find /boot -depth ! -path /boot -exec rm -rf {} +
   fi
   /nix/var/nix/profiles/system/bin/switch-to-configuration boot
-  # endregion
 }
 
-# region Main Infect Flow <MODIFIED>
-# From https://github.com/elitak/nixos-infect/blob/master/nixos-infect#L330-L333
-if [[ -z "${FLAKE_URL:=$1}" ]]; then
-  echo "Flake URL required!"
-  exit 1
-fi
-if [[ -z "${NIXOS_CONFIG_NAME:=$2}" ]]; then
-  echo "Desired NixOS Configuration Name required"
-  exit 1
-fi
 
 prepareEnv
 checkExistingSwap
 if [[ -z "$NO_SWAP" ]]; then
     makeSwap # smallest (512MB) droplet needs extra memory!
 fi
-# makeConf
+makeConf
 infect
 if [[ -z "$NO_SWAP" ]]; then
     removeSwap
 fi
-#endregion
+
+if [[ -z "$NO_REBOOT" ]]; then
+  reboot
+fi
