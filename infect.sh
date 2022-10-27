@@ -133,3 +133,5 @@ infect
 if [[ -z "$NO_SWAP" ]]; then
     removeSwap
 fi
+
+echo "Please Reboot Manually"
