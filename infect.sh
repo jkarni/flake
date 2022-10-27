@@ -128,12 +128,9 @@ checkExistingSwap
 if [[ -z "$NO_SWAP" ]]; then
     makeSwap # smallest (512MB) droplet needs extra memory!
 fi
-makeConf
+
 infect
 if [[ -z "$NO_SWAP" ]]; then
     removeSwap
 fi
 
-if [[ -z "$NO_REBOOT" ]]; then
-  reboot
-fi
