@@ -12,25 +12,11 @@
     extraGroups = [ "wheel" ];
   };
 
-
-  fonts = {
-    fonts = [
-      pkgs.SF-Pro # English
-      pkgs.PingFang # Chinese/Japanese
-    ];
-    # fc-list
-    fontconfig = {
-      defaultFonts = {
-        sansSerif = [ "SF Pro" ];
-        serif = [ "SF Pro" ];
-      };
-    };
-  };
-
-
   fonts = {
     fonts = [
       (pkgs.nerdfonts.override { fonts = [ "RobotoMono" ]; }) # Terminal Font
+      pkgs.SF-Pro # English
+      pkgs.PingFang # Chinese/Japanese
     ];
     enableDefaultFonts = false; # If Sway is enabled, enableDefaultFonts is true by default <-- I don't need extra default fonts
     # fc-list
@@ -38,6 +24,8 @@
       enable = true;
       defaultFonts = {
         monospace = [ "RobotoMono Nerd Font" ];
+        sansSerif = [ "SF Pro" ];
+        serif = [ "SF Pro" ];
       };
     };
   };

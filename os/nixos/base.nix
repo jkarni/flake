@@ -46,21 +46,6 @@
     PAGER = "bat";
   };
 
-  # fonts = {
-  #   fonts = [
-  #     (pkgs.nerdfonts.override { fonts = [ "RobotoMono" ]; }) # Terminal Font
-  #   ];
-  #   enableDefaultFonts = false; # If Sway is enabled, enableDefaultFonts is true by default <-- I don't need extra default fonts
-  #   # fc-list
-  #   fontconfig = {
-  #     enable = true;
-  #     defaultFonts = {
-  #       monospace = [ "RobotoMono Nerd Font" ];
-  #     };
-  #   };
-  # };
-
-
   boot.kernelPackages = pkgs.linuxPackages_latest;
   # https://wiki.archlinux.org/title/sysctl
   # https://www.starduster.me/2020/03/02/linux-network-tuning-kernel-parameter/
