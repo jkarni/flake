@@ -23,7 +23,7 @@ sops updatekeys key.yaml
 Reinstall OS to NixOS
 ```
 apt install -y wget
-wget -qO- https://raw.githubusercontent.com/mlyxshi/flake/main/infect.sh | FLAKE_URL="github:mlyxshi/flake" NIXOS_CONFIG_NAME="us0" bash -x
+wget -qO- https://raw.githubusercontent.com/mlyxshi/flake/main/infect.sh | FLAKE_URL="github:mlyxshi/flake" NIXOS_CONFIG_NAME="jp2" bash -x
 ```
 
 End
