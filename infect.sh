@@ -52,7 +52,7 @@ findESP() {
 
 prepareEnv() {
 
-  apt install -y curl xz-utils sudo bzip2
+  apt install -y curl wget xz-utils sudo bzip2
   # $esp and $grubdev are used in makeConf()
   if isEFI; then
     esp="$(findESP)"
@@ -94,6 +94,8 @@ infect() {
 
   nix --extra-experimental-features "nix-command flakes" build \
     --profile /nix/var/nix/profiles/system \
+    --trusted-public-keys = mlyxshi.cachix.org-1:yc7GPiryyBn0HfiCXdmO1ECWKBhfwrjdIFnRSA4ct7s= \
+    --substituters = https://mlyxshi.cachix.org  \
     "${FLAKE_URL}#nixosConfigurations.${NIXOS_CONFIG_NAME}.config.system.build.toplevel"
 
   # Remove nix installed with curl | bash
