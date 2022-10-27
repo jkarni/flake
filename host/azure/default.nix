@@ -7,9 +7,17 @@
     ../../services/server-status/client
     ../../services/shadowsocks-rust.nix
     ../../services/ssh-config.nix
+    ../../script/cloudflare-dns-sync.nix
   ];
 
   home-manager.users.root = import ../../home;
+
+  system.activationScripts.cloudflare-dns-sync-host = {
+    deps = [ "setupSecrets" ];
+    text = ''
+      ${pkgs.cloudflare-dns-sync}/bin/cloudflare-dns-sync ${config.networking.fqdn}
+    '';
+  };
 
   networking.usePredictableInterfaceNames = false;
 
