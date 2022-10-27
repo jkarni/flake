@@ -72,25 +72,9 @@ prepareEnv() {
   export USER="root"
   export HOME="/root"
 
+  apt install -y curl wget xz-utils sudo bzip2
+
   # REST OMITTED
-}
-
-
-req() {
-  type "$1" > /dev/null 2>&1 || which "$1" > /dev/null 2>&1
-}
-
-checkEnv() {
-  apt install -y curl xz-utils sudo bzip2
-
-  req curl || req wget || { echo "ERROR: Missing both curl and wget";  return 1; }
-  req bzcat            || { echo "ERROR: Missing bzcat";               return 1; }
-  req xzcat            || { echo "ERROR: Missing xzcat";               return 1; }
-  req groupadd         || { echo "ERROR: Missing groupadd";            return 1; }
-  req useradd          || { echo "ERROR: Missing useradd";             return 1; }
-  req ip               || { echo "ERROR: Missing ip";                  return 1; }
-  req awk              || { echo "ERROR: Missing awk";                 return 1; }
-  req cut || req df    || { echo "ERROR: Missing coreutils (cut, df)"; return 1; }
 }
 #endregion
 
@@ -156,7 +140,6 @@ if [[ -z "${NIXOS_CONFIG_NAME:=$2}" ]]; then
   exit 1
 fi
 
-checkEnv
 prepareEnv
 checkExistingSwap
 if [[ -z "$NO_SWAP" ]]; then
