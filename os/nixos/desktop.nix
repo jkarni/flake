@@ -27,6 +27,21 @@
     };
   };
 
+
+  fonts = {
+    fonts = [
+      (pkgs.nerdfonts.override { fonts = [ "RobotoMono" ]; }) # Terminal Font
+    ];
+    enableDefaultFonts = false; # If Sway is enabled, enableDefaultFonts is true by default <-- I don't need extra default fonts
+    # fc-list
+    fontconfig = {
+      enable = true;
+      defaultFonts = {
+        monospace = [ "RobotoMono Nerd Font" ];
+      };
+    };
+  };
+
   programs.sway = {
     enable = true;
     wrapperFeatures.gtk = true;

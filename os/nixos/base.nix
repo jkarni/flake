@@ -46,19 +46,19 @@
     PAGER = "bat";
   };
 
-  fonts = {
-    fonts = [
-      (pkgs.nerdfonts.override { fonts = [ "RobotoMono" ]; }) # Terminal Font
-    ];
-    enableDefaultFonts = false; # If Sway is enabled, enableDefaultFonts is true by default <-- I don't need extra default fonts
-    # fc-list
-    fontconfig = {
-      enable = true;
-      defaultFonts = {
-        monospace = [ "RobotoMono Nerd Font" ];
-      };
-    };
-  };
+  # fonts = {
+  #   fonts = [
+  #     (pkgs.nerdfonts.override { fonts = [ "RobotoMono" ]; }) # Terminal Font
+  #   ];
+  #   enableDefaultFonts = false; # If Sway is enabled, enableDefaultFonts is true by default <-- I don't need extra default fonts
+  #   # fc-list
+  #   fontconfig = {
+  #     enable = true;
+  #     defaultFonts = {
+  #       monospace = [ "RobotoMono Nerd Font" ];
+  #     };
+  #   };
+  # };
 
 
   boot.kernelPackages = pkgs.linuxPackages_latest;
