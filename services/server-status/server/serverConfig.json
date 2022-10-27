@@ -81,8 +81,8 @@
       "region": "HK"
     },
     {
-      "username": "az-hk2",
-      "password": "az-hk2",
+      "username": "hk2",
+      "password": "hk2",
       "name": "Azure-HK2",
       "type": "KVM",
       "host": "None",
