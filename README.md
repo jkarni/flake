@@ -15,11 +15,9 @@ bash <(wget -qO- https://raw.githubusercontent.com/bohanyang/debi/master/debi.sh
 Reinstall OS to NixOS
 ```
 # Oracle(Qemu)
-apt install -y wget 
 wget -qO- https://raw.githubusercontent.com/mlyxshi/flake/main/infect/qemu.sh | NIX_CHANNEL=nixos-unstable  bash -x
 
 # Azure(Hyper-v)
-apt install -y wget 
 wget -qO- https://raw.githubusercontent.com/mlyxshi/flake/main/infect/hyperv.sh | NIX_CHANNEL=nixos-unstable  bash -x
 ```
 Refresh Sops Settings
@@ -32,7 +30,7 @@ sops updatekeys key.yaml
 
 Rebuild NixOS
 ```
-nix profile install nixpkgs#git
+# nix profile install nixpkgs#git
 git clone https://github.com/mlyxshi/flake /etc/flake
 
 # If EFI, delete default grub boot, use systemd-boot instead

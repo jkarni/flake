@@ -26,6 +26,8 @@ makeConf() {
     $network_import
     $NIXOS_IMPORT
   ];
+
+  environment.systemPackages = with pkgs; [ git ]
   
   nix = {
     extraOptions = ''

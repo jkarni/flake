@@ -28,6 +28,7 @@ makeConf() {
   ];
 
   virtualisation.hypervGuest.enable = true;
+  environment.systemPackages = with pkgs; [ git ]
   
   nix = {
     extraOptions = ''
