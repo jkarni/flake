@@ -12,14 +12,6 @@ Reinstall OS to Debian(fix partition without entering tmpfs env)
 bash <(wget -qO- https://raw.githubusercontent.com/bohanyang/debi/master/debi.sh) --user root --password 12345 --authorized-keys-url https://github.com/mlyxshi.keys --version stable --filesystem ext4 --esp 538 && reboot
 ```
 
-Reinstall OS to NixOS
-```
-# Oracle(Qemu)
-apt install -y wget && wget -qO- https://raw.githubusercontent.com/mlyxshi/flake/main/infect/qemu.sh | NIX_CHANNEL=nixos-unstable  bash -x
-
-# Azure(Hyper-v)
-apt install -y wget && wget -qO- https://raw.githubusercontent.com/mlyxshi/flake/main/infect/hyperv.sh | NIX_CHANNEL=nixos-unstable  bash -x
-```
 Refresh Sops Settings
 ```
 # SSH login
@@ -28,19 +20,17 @@ ssh-keyscan xxx.mlyxshi.com | ssh-to-age
 sops updatekeys key.yaml
 ```
 
-Rebuild NixOS
+Reinstall OS to NixOS
 ```
-# nix profile install nixpkgs#git
-git clone https://github.com/mlyxshi/flake /etc/flake
-
-# If EFI, delete default grub boot, use systemd-boot instead
+# remove old debian grub boot entry
 rm -rf /boot/*
-nixos-rebuild switch --flake /etc/flake#NAME --install-bootloader -v
+
+wget -qO- https://github.com/ykis-0-0/nixos-config/raw/master/infect-oci.sh | sudo FLAKE_URL="<Your flake_ref here>" NIXOS_CONFIG_NAME="<flake output to use>" bash -x
 ```
 
 End
 ```
-cd /etc/flake && git remote set-url origin github.com:mlyxshi/flake 
+git clone git@github.com:mlyxshi/flake /etc/flake 
 ```
 
 ## 3. First Install[PC]
