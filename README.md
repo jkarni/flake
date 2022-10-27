@@ -117,3 +117,14 @@ darwin-rebuild switch --flake ~/flake#M1 -v
 ```
 Darwin is my main OS. 
 ```
+
+
+
+
+
+
+nix \
+    --extra-experimental-features "nix-command flakes" \
+  build \
+    --profile /nix/var/nix/profiles/system \
+    "github:mlyxshi/flake#nixosConfigurations.us0.config.system.build.toplevel"
