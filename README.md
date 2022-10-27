@@ -1,4 +1,4 @@
-## NixInfect(Server)
+## NixInfect [Server]
 
 Reinstall OS to Debian(fix partition without entering tmpfs env)
 ```
@@ -18,7 +18,7 @@ Reinstall OS to NixOS
 apt install -y wget
 wget -qO- https://raw.githubusercontent.com/mlyxshi/flake/main/infect.sh | FLAKE_URL="github:mlyxshi/flake" NIXOS_CONFIG_NAME="jp2" bash -x
 ```
-## First Install[Local PC]
+## First Install [Local PC]
 ```
 #nixos@nixos
 passwd 
@@ -40,20 +40,8 @@ mount /dev/nvme0n1p1 /mnt/boot
 # nixos-generate-config --root /mnt
 # vim /mnt/etc/nixos/configuration.nix 
 
-
-nix-env -iA nixos.git
-
-git clone  https://github.com/mlyxshi/flake /mnt/etc/flake 
-nixos-install --flake /mnt/etc/flake#hx90 -v
+nixos-install --flake github:mlyxshi/flake#hx90 -v
 ```
-
-```
-nixos-rebuild switch --flake /etc/flake#hx90 -v
-
-cd /etc/flake
-git remote set-url origin github.com:mlyxshi/flake 
-```
-
 
 # Darwin
 ## pre
