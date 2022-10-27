@@ -135,7 +135,6 @@
 
               system.stateVersion = stateVersion;
               hm.stateVersion = stateVersion;
-              hm.nixConfigDir = "/etc/flake";
             }
           ];
           specialArgs = commonSpecialArgs;
@@ -157,7 +156,6 @@
 
               system.stateVersion = stateVersion;
               hm.stateVersion = stateVersion;
-              # hm.nixConfigDir = "/etc/flake";
             }
           ];
           specialArgs = commonSpecialArgs;
