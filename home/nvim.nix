@@ -38,7 +38,7 @@ in
   };
 
   home.file.".config/nvim/lua".source = 
-  if osConfig.hm.nixConfigDir == null
+  if osConfig.hm.nixConfigDir == ""
     then ../config/nvim/lua
     else config.lib.file.mkOutOfStoreSymlink "${osConfig.hm.nixConfigDir}/config/nvim/lua";
   

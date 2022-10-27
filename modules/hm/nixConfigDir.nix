@@ -10,7 +10,7 @@ in
   options = {
     hm.nixConfigDir = lib.mkOption {
       type = lib.types.str;
-      default = null;
+      default = "";
     };
   };
 }
