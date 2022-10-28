@@ -10,13 +10,22 @@ let
       HOST_NAME=$2
       KEY_URL=$3
 
-      sfdisk /dev/vda <<EOT
+      sfdisk /dev/sda <<EOT
       label: gpt
       type="BIOS boot",        name="BOOT",  size=512M
       type="Linux filesystem", name="NIXOS", size=+
       EOT
-      sleep 2
+      sleep 3
 
+      mkfs.fat -F32 /dev/sda1
+      mkfs.ext4 /dev/sda2
+
+      mkdir /mnt
+      mount /dev/sda2 /mnt
+      mkdir /mnt/boot
+      mount /dev/sda1 /mnt/boot
+
+      mkdir -p /mnt/var/lib/sops/
       curl -s "$KEY_URL" -o /mnt/var/lib/sops/age.key
 
       nixos-install --root /mnt --flake "$FLAKE_URL"#"$HOST_NAME" \
@@ -29,7 +38,7 @@ in
 {
   imports = [
       (modulesPath + "/profiles/minimal.nix")
-      (modulesPath + "/profiles/qemu-guest.nix") # Most VPS
+      (modulesPath + "/profiles/qemu-guest.nix") # Most VPS, like oracle
       (modulesPath + "/installer/netboot/netboot.nix")
   ];
 

@@ -8,3 +8,9 @@ for i in $kexec_files
 do
     wget ${i}
 done
+
+
+nixos-install --root /mnt --flake github:mlyxshi/flake#us0 \
+--no-channel-copy --no-root-passwd \
+--option trusted-public-keys "mlyxshi.cachix.org-1:yc7GPiryyBn0HfiCXdmO1ECWKBhfwrjdIFnRSA4ct7s=" \
+--option substituters "https://mlyxshi.cachix.org" -v
