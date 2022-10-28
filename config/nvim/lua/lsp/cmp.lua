@@ -10,11 +10,6 @@ if not status then
   return
 end
 
-local status, lua_dev = pcall(require, "lua-dev")
-if not status then
-  vim.notify("lua-dev Not Found")
-  return
-end
 
 local status, luasnip = pcall(require, "luasnip")
 if not status then
@@ -25,6 +20,12 @@ end
 local status, navic = pcall(require, "nvim-navic")
 if not status then
   vim.notify("navic Not Found")
+  return
+end
+
+local status, _ = pcall(require, "neodev")
+if not status then
+  vim.notify("neodev Not Found")
   return
 end
 
@@ -66,6 +67,7 @@ cmp.setup.cmdline(":", {
 })
 
 
+
 --lua don't have continue, so we have to use strange 'repeat until' way to simulate it.
 for server_name, lang_config in pairs(require("lang-config.lsp.servers")) do
 
@@ -87,16 +89,10 @@ for server_name, lang_config in pairs(require("lang-config.lsp.servers")) do
         end     
         require("keybindings").LSP_on_attach(client, bufnr)
       end,
-      capabilities = require('cmp_nvim_lsp').update_capabilities(vim.lsp.protocol.make_client_capabilities()),
+      capabilities = require('cmp_nvim_lsp').default_capabilities(),
     }
     config.settings = lang_config.config
-
-    --lua extra config for nvim api
-    if (server_name == "sumneko_lua") then
-      lspconfig[server_name].setup(lua_dev.setup({ lspconfig = config }))
-    else
-      lspconfig[server_name].setup(config)
-    end
+    lspconfig[server_name].setup(config)
     -------------------------------------------------------------------------------
   until true
 

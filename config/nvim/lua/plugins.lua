@@ -74,7 +74,7 @@ packer.startup(
       use 'saadparwaiz1/cmp_luasnip'
 
       --Language Enhancement
-      use 'folke/lua-dev.nvim'
+      use 'folke/neodev.nvim'
 
       --Code
       use 'windwp/nvim-autopairs'
