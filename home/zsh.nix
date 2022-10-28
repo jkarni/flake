@@ -22,6 +22,7 @@ in
     };
   };
 
+  programs.nix-index.enable = osConfig.profile.developerMode.enable;
 
   programs.direnv = lib.optionalAttrs osConfig.profile.developerMode.enable {
     enable = true;

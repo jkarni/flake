@@ -7,5 +7,6 @@
     (import ./Anime4k)
     (import ./Firefox)
     (import ./ServerStatus)
+    (import ./snell)
   ];
 }

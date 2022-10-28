@@ -1,4 +1,4 @@
-{ config, ... }: {
+{ config, pkgs, ... }: {
   imports = [
     ./hardware.nix
     ../../os/nixos/desktop.nix
@@ -9,6 +9,17 @@
 
   home-manager.users.root = import ../../home;
   home-manager.users.dominic = import ../../home/sway.nix;
+
+  environment.systemPackages = [
+    (pkgs.buildFHSUserEnv {
+      name = "snell";
+      targetPkgs = pkgs: with pkgs;  [
+        glibc
+        snell-static
+      ];
+      runScript = "/snell-server";
+    })
+  ];
 
   networking = {
     useNetworkd = true;
