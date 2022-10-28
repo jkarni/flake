@@ -1,6 +1,6 @@
 ## NixInfect [Server]
 
-Reinstall OS to Debian(fix partition without entering tmpfs env)
+Reinstall OS to Debian(resize partition without entering tmpfs env)
 ```
 bash <(wget -qO- https://raw.githubusercontent.com/bohanyang/debi/master/debi.sh) --user root --password 12345 --authorized-keys-url https://github.com/mlyxshi.keys --version stable --filesystem ext4 --esp 538 && reboot
 ```
