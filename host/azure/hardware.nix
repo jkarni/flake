@@ -4,7 +4,7 @@
   ];
 
   # hyper-v
-  initrd.kernelModules = [ "hv_storvsc" ];
+  boot.initrd.kernelModules = [ "hv_storvsc" ];
 
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
