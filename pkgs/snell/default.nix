@@ -20,7 +20,7 @@ stdenvNoCC.mkDerivation{
   '';
 
   installPhase = ''
-    mkdir -p $out
-    cp snell-server $out
+    mkdir -p $out/usr/bin
+    cp snell-server $out/usr/bin
   '';
 }

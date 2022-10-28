@@ -17,7 +17,7 @@
         glibc
         snell
       ];
-      runScript = "/snell-server";
+      runScript = "/usr/bin/snell-server";
     })
   ];
 
