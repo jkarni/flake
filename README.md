@@ -58,7 +58,7 @@ sudo mdutil -a -i off
 
 xcode-select --install
 
-#insatll homebrew
+# insatll homebrew
 /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install.sh)"
 
 # login appstore and uncomment brew mas section
