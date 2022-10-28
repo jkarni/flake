@@ -61,6 +61,6 @@ in
 
   environment.systemPackages = [
     install
-    htop
+    pkgs.htop
   ];
 }
