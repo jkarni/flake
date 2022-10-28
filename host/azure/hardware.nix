@@ -3,7 +3,7 @@
     (modulesPath + "/profiles/headless.nix")
   ];
 
-  # hyper-v
+  # important for azure(hyper-v)
   boot.initrd.kernelModules = [ "hv_storvsc" ];
 
   boot.loader.systemd-boot.enable = true;
