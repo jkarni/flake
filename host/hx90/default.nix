@@ -11,15 +11,7 @@
   home-manager.users.dominic = import ../../home/sway.nix;
 
   environment.systemPackages = [
-    (pkgs.buildFHSUserEnv {
-      name = "snell";
-      targetPkgs = pkgs: with pkgs;  [
-        # glibc
-      ];
-      runScript = pkgs.writeShellScript "snell-run" ''
-        exec -a "''${0}" ${pkgs.snell}/snell-server "$@" 
-      '';
-    })
+    pkgs.snell
   ];
 
   networking = {

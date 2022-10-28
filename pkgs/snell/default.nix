@@ -1,8 +1,11 @@
 { stdenvNoCC
 , fetchurl
 , unzip
+, buildFHSUserEnv
+, writeShellScript
 }:
-stdenvNoCC.mkDerivation{
+let 
+snell-static=stdenvNoCC.mkDerivation{
   pname = "snell-static";
   version = "4.0";
 
@@ -22,5 +25,13 @@ stdenvNoCC.mkDerivation{
   installPhase = ''
     mkdir -p $out
     cp snell-server $out
+  '';
+};
+in
+buildFHSUserEnv {
+  name = "snell";
+  runScript = writeShellScript "snell-run" ''
+    echo $0
+    exec -a "''${0}" ${snell-static}/snell-server "$@" 
   '';
 }
