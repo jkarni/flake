@@ -31,7 +31,6 @@ in
 buildFHSUserEnv {
   name = "snell";
   runScript = writeShellScript "snell-run" ''
-    echo $0
-    exec -a "''${0}" ${snell-static}/snell-server "$@" 
+    exec ${snell-static}/snell-server "$@" 
   '';
 }
