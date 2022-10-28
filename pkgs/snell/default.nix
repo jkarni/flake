@@ -16,7 +16,7 @@ let
         else "https://dl.nssurge.com/snell/snell-server-v4.0.0-linux-aarch64.zip";
       sha256 =
         if stdenvNoCC.hostPlatform == "x86_64-linux"
-        then "sha256-jljuTqPC/7M6E/okiBaKz2xhykUH0nKoAYVdmwo0sLs="
+        then "jljuTqPC/7M6E/okiBaKz2xhykUH0nKoAYVdmwo0sLs="
         else "1ym2dlvvm7vjhjzkq5d3k8l1j42mz4q6plzj5m1xavindqmw6dqb";
     };
 
