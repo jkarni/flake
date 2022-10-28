@@ -1,5 +1,5 @@
 { pkgs, lib, config, ... }: {
-  sops.secrets.snell = { };
+  sops.secrets.snell-config = { };
 
   environment.systemPackages = with pkgs; [
     snell
@@ -11,7 +11,7 @@
 
     serviceConfig = {
       Restart = "always";
-      ExecStart = "snell -c ${config.sops.secrets.snell.path}";
+      ExecStart = "snell -c ${config.sops.secrets.snell-config.path}";
     };
   };
 }
