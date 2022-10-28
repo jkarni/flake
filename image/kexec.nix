@@ -27,9 +27,7 @@ let
 in
 {
   imports = [
-      (modulesPath + "/profiles/minimal.nix")
-      (modulesPath + "/profiles/qemu-guest.nix")
-      (modulesPath + "/installer/netboot/netboot.nix")
+      (modulesPath + "/installer/netboot/netboot-minimal.nix")
   ];
 
   # important for azure(hyper-v)
