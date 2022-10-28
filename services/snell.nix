@@ -11,7 +11,7 @@
 
     serviceConfig = {
       Restart = "always";
-      ExecStart = "snell -c ${config.sops.secrets.snell-config.path}";
+      ExecStart = "${pkgs.snell}/bin/snell -c ${config.sops.secrets.snell-config.path}";
     };
   };
 }
