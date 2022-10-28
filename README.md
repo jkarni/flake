@@ -1,3 +1,8 @@
+## TODO
+- rewrite kexec install method
+  - install script
+  - sops key 
+
 ## NixInfect [Server]
 
 Reinstall OS to Debian(resize partition without entering tmpfs env)
