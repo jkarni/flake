@@ -41,6 +41,7 @@
     , nixpkgs
     , darwin
     , home-manager
+    , nixos-generators
     , deploy-rs
     , sops-nix
     , sops-nix-darwin
@@ -114,6 +115,13 @@
               system.stateVersion = stateVersion;
               networking.hostName = "test";
             }
+          ];
+        };
+
+        "netboot" = nixpkgs.lib.nixosSystem {
+          system = "x86_64-linux";
+          modules = [
+            ./image/kexec.nix
           ];
         };
       }
@@ -215,7 +223,7 @@
       packages."aarch64-darwin"."Anime4k" = import ./pkgs/Anime4k { inherit (nixpkgs.legacyPackages."aarch64-darwin") stdenvNoCC unzip fetchurl; };
 
       packages."aarch64-linux"."ServerStatus" = import ./pkgs/ServerStatus { inherit (nixpkgs.legacyPackages."aarch64-linux") stdenv unzip fetchurl; };
-      packages."aarch64-darwin"."ServerStatus" = import ./pkgs/ServerStatus { inherit (nixpkgs.legacyPackages."aarch64-darwin") stdenv unzip fetchurl; };
+      packages."aarch64-darwin"."ServerStatus" = import ./pkgs/ServerStatus { inherit (nixpkgs.legacyPackages."aarch64-darwin") stdenv unzip fetchurl; };   
       #############################################################################################################################
       # Shell
       # cd test && nix develop ..#wrangler
