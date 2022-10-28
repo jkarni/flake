@@ -15,7 +15,7 @@
       name = "snell";
       targetPkgs = pkgs: with pkgs;  [
         glibc
-        snell-static
+        snell
       ];
       runScript = "/snell-server";
     })
