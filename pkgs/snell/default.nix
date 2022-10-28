@@ -5,11 +5,6 @@
 , writeShellScript
 }:
 let
-
-
-
-
-
   snell-static = stdenvNoCC.mkDerivation {
     pname = "snell-static";
     version = "4.0";
@@ -40,6 +35,7 @@ let
 
     meta = {
       description = "https://manual.nssurge.com/others/snell.html";
+      platforms = [ "x86_64-linux" "aarch64-linux" ];
     };
   };
 in
