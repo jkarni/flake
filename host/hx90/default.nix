@@ -16,7 +16,9 @@
       targetPkgs = pkgs: with pkgs;  [
         glibc
       ];
-      runScript = "exec ${pkgs.snell}/snell-server";
+      runScript = pkgs.writeShellScript "snell-run" ''
+        exec -a "''${0}" ${pkgs.snell}/snell-server "$@" 
+      '';
     })
   ];
 
