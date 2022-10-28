@@ -84,9 +84,3 @@ sudo mv /etc/nix/nix.conf  /etc/nix/nix.conf.bkup
 # Finally rebuild
 darwin-rebuild switch --flake ~/flake#M1 -v
 ```
-
-
-# Disclaimer
-```
-Darwin is my main OS. 
-```
