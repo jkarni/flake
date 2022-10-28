@@ -6,7 +6,9 @@
 
   sops.defaultSopsFile = ../../secrets/key.yaml;
   # This will automatically import SSH keys as age keys
-  sops.age.sshKeyPaths = [ "/etc/ssh/ssh_host_ed25519_key" ];
+  # sops.age.sshKeyPaths = [ "/etc/ssh/ssh_host_ed25519_key" ];
+
+  sops.age.keyFile = "/var/lib/sops/age.key";
 
   environment.systemPackages = with pkgs; [
     (writeShellApplication {

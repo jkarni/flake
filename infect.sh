@@ -125,6 +125,15 @@ infect() {
 }
 
 
+if [[ -z "${FLAKE_URL:=$1}" ]]; then
+  echo "Flake URL required!"
+  exit 1
+fi
+if [[ -z "${NIXOS_CONFIG_NAME:=$2}" ]]; then
+  echo "Desired NixOS Configuration Name required"
+  exit 1
+fi
+
 prepareEnv
 checkExistingSwap
 if [[ -z "$NO_SWAP" ]]; then
