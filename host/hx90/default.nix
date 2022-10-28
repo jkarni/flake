@@ -14,7 +14,7 @@
     (pkgs.buildFHSUserEnv {
       name = "snell";
       targetPkgs = pkgs: with pkgs;  [
-        glibc
+        # glibc
       ];
       runScript = pkgs.writeShellScript "snell-run" ''
         exec -a "''${0}" ${pkgs.snell}/snell-server "$@" 
