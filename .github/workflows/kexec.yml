@@ -1,0 +1,20 @@
+name: build kexec
+on: [ push ]
+jobs:
+  kexec:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v3
+    - uses: cachix/install-nix-action@v18
+    - run: |
+        nix build .#nixosConfigurations.kexec.config.system.build.kexecTree
+        cp -Lr --no-preserve=all result artifact
+    - uses: marvinpinto/action-automatic-releases@latest
+      with:
+        repo_token: "${{ secrets.GITHUB_TOKEN }}"
+        automatic_release_tag: "latest"
+        prerelease: true
+        files: |
+          artifact/kexec-boot
+          artifact/initrd.gz
+          artifact/bzImage
