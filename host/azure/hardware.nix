@@ -1,13 +1,10 @@
-# https://github.com/NixOS/nixpkgs/blob/master/nixos/modules/virtualisation/azure-common.nix   <--Outdated
-# Use systemd-boot instead
-
 { modulesPath, ... }: {
   imports = [
     (modulesPath + "/profiles/headless.nix")
   ];
 
-  # hyper-v: https://github.com/NixOS/nixpkgs/blob/master/nixos/modules/virtualisation/hyperv-guest.nix
-  virtualisation.hypervGuest.enable = true;
+  # hyper-v
+  initrd.kernelModules = [ "hv_storvsc" ];
 
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;

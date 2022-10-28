@@ -117,10 +117,14 @@
           ];
         };
 
+        # nix build .#nixosConfigurations.netboot.config.system.build.kexecTree
         "netboot" = nixpkgs.lib.nixosSystem {
           system = "x86_64-linux";
           modules = [
             ./image/kexec.nix
+            {
+              system.stateVersion = stateVersion;
+            }
           ];
         };
       }
