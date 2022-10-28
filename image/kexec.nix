@@ -30,8 +30,15 @@ in
       (modulesPath + "/installer/netboot/netboot-minimal.nix")
   ];
 
-  # important for azure(hyper-v)
-  boot.initrd.kernelModules = [ "hv_storvsc" ];
+  boot = {
+    # important for azure(hyper-v)
+    initrd.kernelModules = [ "hv_storvsc" ];
+    kernelPackages = pkgs.linuxPackages_latest;
+    supportedFilesystems = [ "btrfs" ];
+  };
+
+  networking.useNetworkd = true;
+  networking.firewall.enable = false;
 
   services.openssh.enable = true;
   users.users.root.openssh.authorizedKeys.keys = [
