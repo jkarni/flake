@@ -6,7 +6,7 @@
 
     ../../script/cloudflare-dns-sync.nix
     ../../services/server-status/client
-    ../../services/shadowsocks-rust.nix
+    ../../services/proxy/shadowsocks-rust.nix
     ../../services/ssh-config.nix
   ];
 
