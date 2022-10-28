@@ -41,7 +41,6 @@
     , nixpkgs
     , darwin
     , home-manager
-    , nixos-generators
     , deploy-rs
     , sops-nix
     , sops-nix-darwin
