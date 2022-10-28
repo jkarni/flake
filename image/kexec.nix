@@ -5,9 +5,9 @@ let
   install = pkgs.writeShellApplication {
     name = "install";
     text = ''
-      FLAKE_URL = $1
-      HOST_NAME = $2
-      KEY_URL = $3
+      FLAKE_URL=$1
+      HOST_NAME=$2
+      KEY_URL=$3
 
       sfdisk /dev/vda <<EOT
       label: gpt
