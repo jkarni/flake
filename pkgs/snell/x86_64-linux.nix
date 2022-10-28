@@ -26,6 +26,10 @@ snell-static=stdenvNoCC.mkDerivation{
     mkdir -p $out
     cp snell-server $out
   '';
+
+  meta = {
+    description = "https://manual.nssurge.com/others/snell.html";
+  };
 };
 in
 buildFHSUserEnv {

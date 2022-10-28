@@ -228,8 +228,9 @@
       packages."aarch64-linux"."ServerStatus" = import ./pkgs/ServerStatus { inherit (nixpkgs.legacyPackages."aarch64-linux") stdenv unzip fetchurl; };
       packages."aarch64-darwin"."ServerStatus" = import ./pkgs/ServerStatus { inherit (nixpkgs.legacyPackages."aarch64-darwin") stdenv unzip fetchurl; };   
       
-      packages."x86_64-linux"."snell" = import ./pkgs/snell { inherit (nixpkgs.legacyPackages."x86_64-linux") stdenvNoCC unzip fetchurl buildFHSUserEnv writeShellScript; };
-     
+      packages."x86_64-linux"."snell" = import ./pkgs/snell/x86_64-linux.nix { inherit (nixpkgs.legacyPackages."x86_64-linux") stdenvNoCC unzip fetchurl buildFHSUserEnv writeShellScript; };
+      
+      packages."aarch64-darwin"."snell" = import ./pkgs/snell/aarch64-linux.nix { inherit (nixpkgs.legacyPackages."aarch64-darwin") stdenvNoCC unzip fetchurl buildFHSUserEnv writeShellScript; };
       #############################################################################################################################
       # Shell
       # cd test && nix develop ..#wrangler
