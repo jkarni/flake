@@ -1,3 +1,4 @@
+# https://github.com/NickCao/netboot/blob/master/flake.nix
 { pkgs, modulesPath, ... }:
 let
   # Usage: 
@@ -27,12 +28,13 @@ let
 in
 {
   imports = [
-      (modulesPath + "/installer/netboot/netboot-minimal.nix")
+      (modulesPath + "/profiles/minimal.nix")
+      (modulesPath + "/profiles/qemu-guest.nix") # Most VPS
+      (modulesPath + "/installer/netboot/netboot.nix")
   ];
 
   boot = {
-    # important for azure(hyper-v)
-    initrd.kernelModules = [ "hv_storvsc" ];
+    initrd.kernelModules = [ "hv_storvsc" ];     # important for azure(hyper-v)
     kernelPackages = pkgs.linuxPackages_latest;
     supportedFilesystems = [ "btrfs" ];
   };
@@ -41,6 +43,8 @@ in
   networking.firewall.enable = false;
 
   services.openssh.enable = true;
+  services.getty.autologinUser = "root";
+
   users.users.root.openssh.authorizedKeys.keys = [
     "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIMpaY3LyCW4HHqbp4SA4tnA+1Bkgwrtro2s/DEsBcPDe"
   ];
