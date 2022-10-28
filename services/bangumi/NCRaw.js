@@ -32,37 +32,38 @@ async function init() {
 async function main() {
     await init();
     setInterval(async () => {
-        try{
+        try {
             let res = await fetch('https://nc.raws.dev/0:/', { method: 'POST', body: JSON.stringify({ page_index: 0 }) });
-        }catch(err){
-            console.log(err)
-        }
-        
-        if (res.status == 200) {
-            let json = await res.json();
-            let newData = json.data.files
-            newData.forEach(newElement => {
-                let newEntry = true
 
-                oldData.forEach(oldElement => {
-                    if (Date.parse(newElement.modifiedTime) <= Date.parse(oldElement.modifiedTime)) {
-                        newEntry = false
+            if (res.status == 200) {
+                let json = await res.json();
+                let newData = json.data.files
+                newData.forEach(newElement => {
+                    let newEntry = true
+
+                    oldData.forEach(oldElement => {
+                        if (Date.parse(newElement.modifiedTime) <= Date.parse(oldElement.modifiedTime)) {
+                            newEntry = false
+                        }
+                    })
+
+                    if (newEntry) {
+                        let episode = newElement.name
+                        console.log(episode)
+                        if (regex.test(episode)) {
+                            sendTG(episode)
+                        }
                     }
                 })
 
-                if (newEntry) {
-                    let episode = newElement.name
-                    console.log(episode)
-                    if (regex.test(episode)) {
-                        sendTG(episode)
-                    }
+                if (Date.parse(newData[0].modifiedTime) > Date.parse(oldData[0].modifiedTime)) {
+                    oldData = newData;
                 }
-            })
 
-            if (Date.parse(newData[0].modifiedTime) > Date.parse(oldData[0].modifiedTime)) {
-                oldData = newData;
             }
 
+        } catch (err) {
+            console.log(err)
         }
 
     }, the_interval);
