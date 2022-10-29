@@ -28,31 +28,6 @@ install FLAKE_URL HOST_NAME AGE_KEY_URL
 /nix/var/nix/profiles/system/bin/switch-to-configuration switch
 ```
 ---
-## First Install [Local PC]
-```
-#nixos@nixos
-passwd 
-> 12345
-
-ssh nixos@ip
-sudo -i
-
-fdisk /dev/nvme0n1
-
-mkfs.fat -F32 /dev/nvme0n1p1
-mkfs.ext4 /dev/nvme0n1p2
-
-mount /dev/nvme0n1p2 /mnt
-mkdir /mnt/boot
-mount /dev/nvme0n1p1 /mnt/boot
-
-# nixos-generate-config --show-hardware-config
-# nixos-generate-config --root /mnt
-# vim /mnt/etc/nixos/configuration.nix 
-
-nixos-install --flake github:mlyxshi/flake#hx90 -v
-```
----
 # Darwin
 ## pre
 ```
