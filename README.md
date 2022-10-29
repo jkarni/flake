@@ -13,10 +13,15 @@ nix build .#nixosConfigurations.HOST.config.system.build.toplevel
 bash <(curl -sL https://raw.githubusercontent.com/mlyxshi/kexec/main/prekexec.sh)
 ```
 #### Enter kexec environment. Use your own AGE key
+1. 1C 512M need pre build
 ```
 bash <(curl -sL https://github.com/mlyxshi/flake/releases/download/latest/install.sh)  AGE_KEY_URL
-reboot
 ```
+2. 4C 24G install directly
+```
+install github:mlyxshi/flake jp2 AGE_KEY_URL
+```
+`reboot`
 #### Fix
 ```
 # after reboot, activate sops-nix manually
@@ -78,7 +83,6 @@ xcode-select --install
 sh <(curl -L https://nixos.org/nix/install)
 
 # bootstrap darwin-nix
-# nix build <Flake Floder PATH>#darwinConfigurations.<HOSTNAME>.system
 cd ~/flake
 nix build --extra-experimental-features "nix-command flakes" ~/flake#darwinConfigurations.M1.system
 ./result/sw/bin/darwin-rebuild switch --flake ~/flake#M1
