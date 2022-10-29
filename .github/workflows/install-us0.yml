@@ -1,4 +1,4 @@
-name: "us0-install"
+name: "install-us0"
 on:
   push:
     branches:
