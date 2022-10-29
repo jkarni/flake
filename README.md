@@ -1,10 +1,11 @@
 ## Server
-#### Github Action pre-build and cache
-- cachix: build install script
+#### Github Action Get System Closure drvPath
+- create install script and upload to release
 ```
-nix build .#nixosConfigurations.HOST.config.system.build.install
+SYSTEM_CLOSURE=$(nix eval --raw .#nixosConfigurations.us0.config.system.build.toplevel)
+sed "6iSYSTEM_CLOSURE=$SYSTEM_CLOSURE"  install-template.sh > install-us0.sh  
 ```
-- garnix: build nixos system
+- garnix: build NixOS System and cache System Closure
 ```
 nix build .#nixosConfigurations.HOST.config.system.build.toplevel
 ```
@@ -15,13 +16,15 @@ bash <(curl -sL https://raw.githubusercontent.com/mlyxshi/kexec/main/prekexec.sh
 #### Enter kexec environment. Use your own AGE key
 - 1C 512M need pre build
 ```
-bash <(curl -sL https://github.com/mlyxshi/flake/releases/download/latest/install.sh)  AGE_KEY_URL
+bash <(curl -sL https://github.com/mlyxshi/flake/releases/download/latest/install-HOST.sh)  AGE_KEY_URL
 ```
 - 4C 24G install directly
 ```
-install github:mlyxshi/flake jp2 AGE_KEY_URL
+install FLAKE_URL HOST_NAME AGE_KEY_URL
 ```
-`reboot`
+```
+reboot
+```
 #### Fix
 ```
 # after reboot, activate sops-nix manually
