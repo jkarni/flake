@@ -1,4 +1,5 @@
 ## Server
+#### github action pre-build and cachix nixos config
 #### Use your own ssh key and age key
 ```
 bash <(wget -qO- https://raw.githubusercontent.com/mlyxshi/flake/main/prekexec.sh)
