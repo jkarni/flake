@@ -29,10 +29,10 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
-    neovim-nightly = {
-      url = "github:neovim/neovim";
-      flake = false;
-    };
+    # neovim-nightly = {
+    #   url = "github:neovim/neovim";
+    #   flake = false;
+    # };
 
   };
 
@@ -52,7 +52,7 @@
       azureServerList = [ "hk1" "hk2" "jp3" "us0" ];
       domain = "mlyxshi.com";
       commonSpecialArgs = {
-        inherit (args) neovim-nightly;
+        # inherit (args) neovim-nightly;
       };
     in
     {

@@ -79,22 +79,6 @@
         "type": "github"
       }
     },
-    "neovim-nightly": {
-      "flake": false,
-      "locked": {
-        "lastModified": 1667065330,
-        "narHash": "sha256-gUoFAfqhlnia0DI1k7uUQfxRb0nYaf4n6U+mAvQF8ws=",
-        "owner": "neovim",
-        "repo": "neovim",
-        "rev": "1d625a3cf794f49661af3f0d7cdb80c11d35c807",
-        "type": "github"
-      },
-      "original": {
-        "owner": "neovim",
-        "repo": "neovim",
-        "type": "github"
-      }
-    },
     "nixpkgs": {
       "locked": {
         "lastModified": 1666959691,
@@ -132,7 +116,6 @@
         "darwin": "darwin",
         "deploy-rs": "deploy-rs",
         "home-manager": "home-manager",
-        "neovim-nightly": "neovim-nightly",
         "nixpkgs": "nixpkgs",
         "sops-nix": "sops-nix",
         "sops-nix-darwin": "sops-nix-darwin"
