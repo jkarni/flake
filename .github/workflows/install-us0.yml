@@ -9,20 +9,13 @@ jobs:
     steps:
     - uses: actions/checkout@v3
     - uses: cachix/install-nix-action@v18
-      with:
-        extra_nix_config: |
-          trusted-public-keys = cache.garnix.io:CTFPyKSLcx5RMJKfLo5EEPUObbA78b0YQ2DTCJXqr9g=
-          substituters = https://cache.garnix.io
     - run: |
-        nix build .#nixosConfigurations.us0.config.system.build.install
-        # remove hardcoded bash path
-        echo "#! /usr/bin/env bash" > install.sh
-        sed '1d' result/bin/install >> install.sh
-    
+        SYSTEM_CLOSURE=$(nix eval --raw .#nixosConfigurations.us0.config.system.build.toplevel)
+        sed "s/YOUR_SYSTEM_CLOSURE/$SYSTEM_CLOSURE/g" install-template.sh > install-us0.sh
     - uses: marvinpinto/action-automatic-releases@latest
       with:
         repo_token: "${{ secrets.GITHUB_TOKEN }}"
         automatic_release_tag: "latest"
         prerelease: true
         files: |
-          install.sh
+          install-us0.sh
