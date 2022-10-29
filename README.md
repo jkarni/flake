@@ -1,8 +1,8 @@
 ## Server
-#### Github Action Instantiate/Evaluation System Closure drvPath
-<details><summary></summary>
+
+<details><summary>#### Github Action Instantiate/Evaluation System Closure drvPath</summary>
 <p>
-```
+```sh
 # create install script and upload to release
 SYSTEM_CLOSURE=$(nix eval --raw .#nixosConfigurations.us0.config.system.build.toplevel)
 sed "6iSYSTEM_CLOSURE=$SYSTEM_CLOSURE"  install-template.sh > install-us0.sh  
@@ -10,11 +10,6 @@ sed "6iSYSTEM_CLOSURE=$SYSTEM_CLOSURE"  install-template.sh > install-us0.sh
 </p>
 </details>
 
-```
-# create install script and upload to release
-SYSTEM_CLOSURE=$(nix eval --raw .#nixosConfigurations.us0.config.system.build.toplevel)
-sed "6iSYSTEM_CLOSURE=$SYSTEM_CLOSURE"  install-template.sh > install-us0.sh  
-```
 #### garnix: Realise/Build NixOS System and cache System Closure
 ```
 nix build .#nixosConfigurations.HOST.config.system.build.toplevel
