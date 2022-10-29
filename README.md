@@ -1,5 +1,5 @@
 ## Server
-<details><summary>Github Action Instantiate/Evaluation System Closure drvPath</summary>
+<details><summary>Github Action Instantiate/Evaluation System Closure outPath </summary>
 
 #### create install script and upload to release
 
