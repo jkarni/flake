@@ -2,11 +2,11 @@
 #### github action pre-build and cachix nixos config
 #### Use your own ssh key and age key
 ```
-bash <(wget -qO- https://raw.githubusercontent.com/mlyxshi/kexec/main/prekexec.sh)
+bash <(curl -sL https://raw.githubusercontent.com/mlyxshi/kexec/main/prekexec.sh)
 ```
 #### Enter kexec environment
 ```
-bash <(wget -qO- https://github.com/mlyxshi/flake/releases/download/latest/install) AGE_KEY_URL
+bash <(curl -sL https://github.com/mlyxshi/flake/releases/download/latest/install.sh)  AGE_KEY_URL
 reboot
 ```
 ## First Install [Local PC]
