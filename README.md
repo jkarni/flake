@@ -11,6 +11,18 @@ sed "6iSYSTEM_CLOSURE=$SYSTEM_CLOSURE"  install-template.sh > install-us0.sh
 </p>
 </details>
 
+<details><summary>CLICK ME</summary>
+<p>
+
+#### We can hide anything, even code!
+
+```ruby
+   puts "Hello World"
+```
+
+</p>
+</details>
+
 #### garnix: Realise/Build NixOS System and cache System Closure
 ```
 nix build .#nixosConfigurations.HOST.config.system.build.toplevel
