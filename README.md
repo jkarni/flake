@@ -9,11 +9,11 @@ sed "6iSYSTEM_CLOSURE=$SYSTEM_CLOSURE"  install-template.sh > install-us0.sh
 ```
 nix build .#nixosConfigurations.HOST.config.system.build.toplevel
 ```
-#### Use your own SSH key
+#### Enter kexec environment. Use your own SSH key
 ```
 bash <(curl -sL https://raw.githubusercontent.com/mlyxshi/kexec/main/prekexec.sh)
 ```
-#### Enter kexec environment. Use your own AGE key
+#### Install NixOS. Use your own AGE key
 - 1C 512M need pre build
 ```
 bash <(curl -sL https://github.com/mlyxshi/flake/releases/download/latest/install-HOST.sh)  AGE_KEY_URL
