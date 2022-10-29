@@ -31,7 +31,7 @@ let
       nixos-install --root /mnt --flake "$FLAKE_URL"#"$HOST_NAME" \
       --no-channel-copy --no-root-passwd \
       --option trusted-public-keys "mlyxshi.cachix.org-1:yc7GPiryyBn0HfiCXdmO1ECWKBhfwrjdIFnRSA4ct7s=" \
-      --option substituters "https://mlyxshi.cachix.org" 
+      --option substituters "https://mlyxshi.cachix.org" -v
     '';
   };
 in
