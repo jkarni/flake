@@ -8,10 +8,11 @@ jobs:
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v3
-    # - uses: cachix/install-nix-action@v18
+    - uses: cachix/install-nix-action@v18
     - run: |
         # nix build .#nixosConfigurations.kexec.config.system.build.kexecTree
         # cp -Lr --no-preserve=all result artifact
+    # Settings -> Actions -> General and give "Read and write permissions" to the Github Actions workflows.
     - uses: marvinpinto/action-automatic-releases@latest
       with:
         repo_token: "${{ secrets.GITHUB_TOKEN }}"
@@ -19,3 +20,6 @@ jobs:
         prerelease: true
         files: |
           prekexec.sh
+          artifact/kexec-boot
+          artifact/initrd.gz
+          artifact/bzImag
