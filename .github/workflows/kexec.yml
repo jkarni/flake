@@ -1,8 +1,7 @@
 name: build kexec
 on:
-  push:
-    branches:
-    - main
+  workflow_dispatch
+  
 jobs:
   CI:
     runs-on: ubuntu-latest
