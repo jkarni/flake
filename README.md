@@ -1,28 +1,10 @@
-## TODO
-- rewrite kexec install method
-  - install script
-  - sops key 
+## Server
+- Use your own ssh key and age key
+bash <(wget -qO- https://github.com/mlyxshi/flake/releases/download/latest/prekexec.sh)
+- Enter kexec environment
+install github:mlyxshi/flake us0 https://linkto/sops/key
+reboot
 
-## NixInfect [Server]
-
-Reinstall OS to Debian(resize partition without entering tmpfs env)
-```
-bash <(wget -qO- https://raw.githubusercontent.com/bohanyang/debi/master/debi.sh) --user root --password 12345 --authorized-keys-url https://github.com/mlyxshi.keys --version stable --filesystem ext4 --esp 538 && reboot
-```
-
-Refresh Sops Settings
-```
-# SSH login
-ssh-keyscan IP | ssh-to-age
-# write to secrets/.sops.yaml
-sops updatekeys key.yaml
-```
-
-Reinstall OS to NixOS
-```
-apt install -y wget
-wget -qO- https://raw.githubusercontent.com/mlyxshi/flake/main/infect.sh | FLAKE_URL="github:mlyxshi/flake" NIXOS_CONFIG_NAME="jp2" bash -x
-```
 ## First Install [Local PC]
 ```
 #nixos@nixos
