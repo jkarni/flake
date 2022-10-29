@@ -1,6 +1,6 @@
 ## Server
 - Use your own ssh key and age key
-bash <(wget -qO- https://github.com/mlyxshi/flake/releases/download/latest/prekexec.sh)
+bash <(wget -qO- https://raw.githubusercontent.com/mlyxshi/flake/main/prekexec.sh)
 - Enter kexec environment
 install github:mlyxshi/flake us0 https://linkto/sops/key
 reboot
