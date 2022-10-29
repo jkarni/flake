@@ -9,5 +9,5 @@ do
     wget ${i}  # install /bzImage /initrd.gz /kexec-boot
 done
 
-chmod +x kexec-boot
+chmod +x ./kexec-boot
 ./kexec-boot
