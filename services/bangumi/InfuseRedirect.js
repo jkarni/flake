@@ -10,6 +10,7 @@ const port = 4666;
 
 const server = http.createServer((req, res) => {
   let episode = url.parse(req.url, true).query.name
+  console.log(episode)
   let encoded = encodeURIComponent(episode)
   res.statusCode = 302;
   res.setHeader('Location', `infuse://x-callback-url/play?url=https://nc.raws.dev/0:/${encoded}`);
