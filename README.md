@@ -9,6 +9,11 @@ bash <(curl -sL https://raw.githubusercontent.com/mlyxshi/kexec/main/prekexec.sh
 bash <(curl -sL https://github.com/mlyxshi/flake/releases/download/latest/install.sh)  AGE_KEY_URL
 reboot
 ```
+#### Fix
+```
+# after reboot, activate sops-nix manually
+/nix/var/nix/profiles/system/bin/switch-to-configuration switch
+```
 ## First Install [Local PC]
 ```
 #nixos@nixos
