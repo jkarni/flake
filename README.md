@@ -22,8 +22,7 @@ bash <(curl -sL https://github.com/mlyxshi/flake/releases/download/latest/instal
 ```
 install FLAKE_URL HOST_NAME AGE_KEY_URL
 ```
-#### Reboot
-#### Fix
+#### Reboot and Fix
 ```
 # after reboot, activate sops-nix manually
 /nix/var/nix/profiles/system/bin/switch-to-configuration switch
