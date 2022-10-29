@@ -1,9 +1,13 @@
 ## Server
 #### Github Action pre-build and cache
-- cachix: build install script 
-    `nix build .#nixosConfigurations.HOST.config.system.build.install`
-- garnix: build nixos system  
-    `nix build .#nixosConfigurations.HOST.config.system.build.toplevel`
+- cachix: build install script
+```
+nix build .#nixosConfigurations.HOST.config.system.build.install
+```
+- garnix: build nixos system
+```
+nix build .#nixosConfigurations.HOST.config.system.build.toplevel
+```
 #### Use your own ssh key and age key
 ```
 bash <(curl -sL https://raw.githubusercontent.com/mlyxshi/kexec/main/prekexec.sh)
