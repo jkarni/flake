@@ -7,7 +7,7 @@
 
       sfdisk /dev/sda <<EOT
       label: gpt
-      type="BIOS boot",        name="BOOT",  size=512M
+      type="EFI System",        name="BOOT",  size=512M
       type="Linux filesystem", name="NIXOS", size=+
       EOT
       sleep 3
@@ -25,8 +25,8 @@
 
       nixos-install --root /mnt --system ${config.system.build.toplevel} \
       --no-channel-copy --no-root-passwd \
-      --option trusted-public-keys "mlyxshi.cachix.org-1:yc7GPiryyBn0HfiCXdmO1ECWKBhfwrjdIFnRSA4ct7s=" \
-      --option substituters "https://mlyxshi.cachix.org" -v
+      --option trusted-public-keys "cache.garnix.io:CTFPyKSLcx5RMJKfLo5EEPUObbA78b0YQ2DTCJXqr9g=" \
+      --option substituters "https://cache.garnix.io" -v
     '';
   };
 }
