@@ -8,11 +8,11 @@ nix build .#nixosConfigurations.HOST.config.system.build.install
 ```
 nix build .#nixosConfigurations.HOST.config.system.build.toplevel
 ```
-#### Use your own ssh key and age key
+#### Use your own SSH key
 ```
 bash <(curl -sL https://raw.githubusercontent.com/mlyxshi/kexec/main/prekexec.sh)
 ```
-#### Enter kexec environment
+#### Enter kexec environment. Use your own AGE key
 ```
 bash <(curl -sL https://github.com/mlyxshi/flake/releases/download/latest/install.sh)  AGE_KEY_URL
 reboot
