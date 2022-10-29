@@ -13,11 +13,11 @@ nix build .#nixosConfigurations.HOST.config.system.build.toplevel
 bash <(curl -sL https://raw.githubusercontent.com/mlyxshi/kexec/main/prekexec.sh)
 ```
 #### Enter kexec environment. Use your own AGE key
-1. 1C 512M need pre build
+- 1C 512M need pre build
 ```
 bash <(curl -sL https://github.com/mlyxshi/flake/releases/download/latest/install.sh)  AGE_KEY_URL
 ```
-2. 4C 24G install directly
+- 4C 24G install directly
 ```
 install github:mlyxshi/flake jp2 AGE_KEY_URL
 ```
