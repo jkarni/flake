@@ -18,3 +18,11 @@ jobs:
         name: mlyxshi
         authToken: '${{ secrets.CACHIX_AUTH_TOKEN }}'
     - run: nix build .#nixosConfigurations.us0.config.system.build.install
+    
+    - uses: marvinpinto/action-automatic-releases@latest
+      with:
+        repo_token: "${{ secrets.GITHUB_TOKEN }}"
+        automatic_release_tag: "latest"
+        prerelease: true
+        files: |
+          result/bin/install
