@@ -11,7 +11,7 @@ jobs:
     - uses: cachix/install-nix-action@v18
     - run: |
         SYSTEM_CLOSURE=$(nix eval --raw .#nixosConfigurations.us0.config.system.build.toplevel)
-        sed "6i$SYSTEM_CLOSURE"  install-template.sh > install-us0.sh
+        sed "6iSYSTEM_CLOSURE=$SYSTEM_CLOSURE"  install-template.sh > install-us0.sh  
     - uses: marvinpinto/action-automatic-releases@latest
       with:
         repo_token: "${{ secrets.GITHUB_TOKEN }}"

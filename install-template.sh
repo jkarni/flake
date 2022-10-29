@@ -3,7 +3,6 @@ set -o errexit
 set -o nounset
 set -o pipefail
 
-
 KEY_URL=$1
 
 sfdisk /dev/sda <<EOT
