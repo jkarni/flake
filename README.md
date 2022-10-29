@@ -6,7 +6,7 @@ bash <(wget -qO- https://raw.githubusercontent.com/mlyxshi/kexec/main/prekexec.s
 ```
 #### Enter kexec environment
 ```
-install github:mlyxshi/flake us0 https://linkto/sops/key
+bash <(wget -qO- https://github.com/mlyxshi/flake/releases/download/latest/install) AGE_KEY_URL
 reboot
 ```
 ## First Install [Local PC]

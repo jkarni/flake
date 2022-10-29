@@ -17,7 +17,11 @@ jobs:
       with:
         name: mlyxshi
         authToken: '${{ secrets.CACHIX_AUTH_TOKEN }}'
-    - run: nix build .#nixosConfigurations.us0.config.system.build.install
+    - run: |
+        nix build .#nixosConfigurations.us0.config.system.build.install
+        # remove hardcoded bash path
+        echo "#! /usr/bin/env bash" > install.sh
+        sed '1d' result/bin/install >> install.sh
     
     - uses: marvinpinto/action-automatic-releases@latest
       with:
@@ -25,4 +29,4 @@ jobs:
         automatic_release_tag: "latest"
         prerelease: true
         files: |
-          result/bin/install
+          install.sh
