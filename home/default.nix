@@ -45,7 +45,6 @@
     ]
     ++ lib.optionals pkgs.stdenv.isLinux [
       neofetch
-      ookla-speedtest
     ];
 
   home.stateVersion = osConfig.hm.stateVersion;
