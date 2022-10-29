@@ -2,6 +2,7 @@
 
 <details><summary>Github Action Instantiate/Evaluation System Closure drvPath</summary>
 <p>
+#### We can hide anything, even code!
 ```
 # create install script and upload to release
 SYSTEM_CLOSURE=$(nix eval --raw .#nixosConfigurations.us0.config.system.build.toplevel)
