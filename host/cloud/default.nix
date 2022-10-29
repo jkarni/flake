@@ -3,9 +3,7 @@
   system.build.install = pkgs.writeShellApplication {
     name = "install";
     text = ''
-      FLAKE_URL=$1
-      HOST_NAME=$2
-      KEY_URL=$3
+      KEY_URL=$1
 
       sfdisk /dev/sda <<EOT
       label: gpt
