@@ -10,8 +10,8 @@ const port = 4666;
 
 const server = http.createServer((req, res) => {
   let episode = url.parse(req.url, true).query.name
-  console.log(episode)
-  let encoded = encodeURIComponent(episode)
+  let tmp = decodeURI(episode) // decodeURI 会把 %20 转换成空格, 为了解决Safari，Firefox行为不一致的问题
+  let encoded = encodeURIComponent(tmp)
   res.statusCode = 302;
   res.setHeader('Location', `infuse://x-callback-url/play?url=https://nc.raws.dev/0:/${encoded}`);
   res.end();
