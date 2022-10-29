@@ -1,5 +1,5 @@
 builds:
   include:
-    - nixosConfigurations.us0.config.system.build.toplevel
+    - nixosConfigurations.us0
   exclude:
 
