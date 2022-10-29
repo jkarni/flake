@@ -1,13 +1,10 @@
 #! /usr/bin/env bash
 
-apt install -y jq wget curl kexec-tools
+apt install -y wget kexec-tools
 
-kexec_files=$(curl --silent "https://api.github.com/repos/mlyxshi/flake/releases/latest"| jq ."assets[].browser_download_url" | tr -d '"')
-
-for i in $kexec_files
-do
-    wget ${i}  # install /bzImage /initrd.gz /kexec-boot
-done
+wget https://github.com/mlyxshi/flake/releases/download/latest/kexec-boot
+wget https://github.com/mlyxshi/flake/releases/download/latest/initrd.gz
+wget https://github.com/mlyxshi/flake/releases/download/latest/bzImage
 
 chmod +x ./kexec-boot
 ./kexec-boot
