@@ -1,7 +1,6 @@
 builds:
   include:
     - nixosConfigurations.us0
-    - nixosConfigurations.jp2
   exclude:
     - nixosConfigurations.hx90
 
