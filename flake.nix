@@ -117,16 +117,6 @@
           ];
         };
 
-        # nix build .#nixosConfigurations.kexec.config.system.build.kexecTree
-        "kexec" = nixpkgs.lib.nixosSystem {
-          system = "x86_64-linux";
-          modules = [
-            ./image/kexec.nix
-            {
-              system.stateVersion = stateVersion;
-            }
-          ];
-        };
       }
       // nixpkgs.lib.genAttrs oracleServerList (hostName:
         nixpkgs.lib.nixosSystem {
