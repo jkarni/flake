@@ -22,6 +22,7 @@ reboot
 # after reboot, activate sops-nix manually
 /nix/var/nix/profiles/system/bin/switch-to-configuration switch
 ```
+---
 ## First Install [Local PC]
 ```
 #nixos@nixos
@@ -46,7 +47,7 @@ mount /dev/nvme0n1p1 /mnt/boot
 
 nixos-install --flake github:mlyxshi/flake#hx90 -v
 ```
-
+---
 # Darwin
 ## pre
 ```
