@@ -1,11 +1,13 @@
 ## Server
 
 <details><summary>Github Action Instantiate/Evaluation System Closure drvPath</summary>
+<p>
 ```
 # create install script and upload to release
 SYSTEM_CLOSURE=$(nix eval --raw .#nixosConfigurations.us0.config.system.build.toplevel)
 sed "6iSYSTEM_CLOSURE=$SYSTEM_CLOSURE"  install-template.sh > install-us0.sh  
 ```
+</p>
 </details>
 
 #### garnix: Realise/Build NixOS System and cache System Closure
