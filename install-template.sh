@@ -14,7 +14,7 @@ EOT
 sleep 3
 
 mkfs.fat -F32 /dev/sda1
-mkfs.ext4 /dev/sda2
+mkfs.ext4 -F /dev/sda2
 
 mkdir /mnt
 mount /dev/sda2 /mnt
