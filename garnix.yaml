@@ -1,6 +1,6 @@
 builds:
   include:
-    - nixosConfigurations.us0
+    - nixosConfigurations.hk1
     - nixosConfigurations.example
   exclude:
     - nixosConfigurations.hx90
