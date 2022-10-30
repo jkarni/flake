@@ -12,9 +12,7 @@ sed "6iSYSTEM_CLOSURE=$SYSTEM_CLOSURE"  install-template.sh > install-us0.sh
 
 <details><summary>garnix: Realise/Build NixOS System and cache System Closure</summary>
 
-```sh
-nix build .#nixosConfigurations.HOST.config.system.build.toplevel
-```
+[garnix](https://garnix.io/)
 
 </details>
 
