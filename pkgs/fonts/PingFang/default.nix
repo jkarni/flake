@@ -5,7 +5,7 @@
 }:
 stdenvNoCC.mkDerivation rec {
   pname = "PingFang";
-  version = "apple";
+  version = "1.0";
 
   src = fetchurl {
     name = "PingFang";

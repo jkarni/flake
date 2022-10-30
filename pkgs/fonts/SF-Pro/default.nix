@@ -5,7 +5,7 @@
 }:
 stdenvNoCC.mkDerivation rec {
   pname = "SF-Pro";
-  version = "apple";
+  version = "1.0";
 
   src = fetchurl {
     name = "SF-Pro";
