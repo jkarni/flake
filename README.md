@@ -18,8 +18,10 @@ sed "6iSYSTEM_CLOSURE=$SYSTEM_CLOSURE"  install-template.sh > install-us0.sh
 
 #### Enter kexec environment. Use your own SSH key
 ```sh
-bash <(curl -sL https://raw.githubusercontent.com/mlyxshi/kexec/main/prekexec.sh) SSH_KEY AUTO_RUN_SCRIPT_URL
+# bash <(curl -sL https://raw.githubusercontent.com/mlyxshi/kexec/main/prekexec.sh) SSH_KEY
 bash <(curl -sL https://raw.githubusercontent.com/mlyxshi/kexec/main/prekexec.sh) "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIMpaY3LyCW4HHqbp4SA4tnA+1Bkgwrtro2s/DEsBcPDe"
+# bash <(curl -sL https://raw.githubusercontent.com/mlyxshi/kexec/main/prekexec.sh) SSH_KEY AUTO_RUN_SHELL_COMMAND
+bash <(curl -sL https://raw.githubusercontent.com/mlyxshi/kexec/main/prekexec.sh) "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIMpaY3LyCW4HHqbp4SA4tnA+1Bkgwrtro2s/DEsBcPDe" "bash <(curl -sL https://github.com/mlyxshi/flake/releases/download/latest/install-HOST.sh)  AGE_KEY_URL"
 ```
 #### Install NixOS. Use your own AGE key
 - 1C 512M need pre build
