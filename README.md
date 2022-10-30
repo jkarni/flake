@@ -16,14 +16,13 @@ sed "6iSYSTEM_CLOSURE=$SYSTEM_CLOSURE"  install-template.sh > install-us0.sh
 
 </details>
 
-#### Enter kexec environment. Use your own SSH key
+#### Enter kexec environment. Use your own SSH/AGE key
+1.1 Install Manually. 
 ```sh
 # bash <(curl -sL https://raw.githubusercontent.com/mlyxshi/kexec/main/prekexec.sh) SSH_KEY
 bash <(curl -sL https://raw.githubusercontent.com/mlyxshi/kexec/main/prekexec.sh) "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIMpaY3LyCW4HHqbp4SA4tnA+1Bkgwrtro2s/DEsBcPDe"
-# bash <(curl -sL https://raw.githubusercontent.com/mlyxshi/kexec/main/prekexec.sh) SSH_KEY AUTO_RUN_SHELL_COMMAND
-bash <(curl -sL https://raw.githubusercontent.com/mlyxshi/kexec/main/prekexec.sh) "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIMpaY3LyCW4HHqbp4SA4tnA+1Bkgwrtro2s/DEsBcPDe" "bash <(curl -sL https://github.com/mlyxshi/flake/releases/download/latest/install-HOST.sh)  AGE_KEY_URL"
 ```
-#### Install NixOS. Use your own AGE key
+1.2  Install NixOS
 - 1C 512M need pre build
 ```sh
 bash <(curl -sL https://github.com/mlyxshi/flake/releases/download/latest/install-HOST.sh)  AGE_KEY_URL
@@ -32,6 +31,23 @@ bash <(curl -sL https://github.com/mlyxshi/flake/releases/download/latest/instal
 ```sh
 install FLAKE_URL HOST_NAME AGE_KEY_URL
 ```
+
+2 Install Automatically
+
+
+- 1C 512M need pre build
+```sh
+# bash <(curl -sL https://raw.githubusercontent.com/mlyxshi/kexec/main/prekexec.sh) SSH_KEY AUTO_RUN_SHELL_COMMAND
+bash <(curl -sL https://raw.githubusercontent.com/mlyxshi/kexec/main/prekexec.sh) "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIMpaY3LyCW4HHqbp4SA4tnA+1Bkgwrtro2s/DEsBcPDe" "bash <(curl -sL https://github.com/mlyxshi/flake/releases/download/latest/install-HOST.sh)  AGE_KEY_URL"
+```
+- 4C 24G install directly
+```sh
+install FLAKE_URL HOST_NAME AGE_KEY_URL
+# bash <(curl -sL https://raw.githubusercontent.com/mlyxshi/kexec/main/prekexec.sh) SSH_KEY AUTO_RUN_SHELL_COMMAND
+bash <(curl -sL https://raw.githubusercontent.com/mlyxshi/kexec/main/prekexec.sh) "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIMpaY3LyCW4HHqbp4SA4tnA+1Bkgwrtro2s/DEsBcPDe" "install FLAKE_URL HOST_NAME AGE_KEY_URL"
+```
+
+
 #### Reboot
 
 ---
