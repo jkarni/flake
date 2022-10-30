@@ -16,23 +16,22 @@ sed "6iSYSTEM_CLOSURE=$SYSTEM_CLOSURE"  install-template.sh > install-us0.sh
 
 </details>
 
-#### Enter kexec environment. Use your own SSH/AGE key
-1.1 Install Manually. 
+### Install Manually. 
 ```sh
 # bash <(curl -sL https://raw.githubusercontent.com/mlyxshi/kexec/main/prekexec.sh) SSH_KEY
 bash <(curl -sL https://raw.githubusercontent.com/mlyxshi/kexec/main/prekexec.sh) "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIMpaY3LyCW4HHqbp4SA4tnA+1Bkgwrtro2s/DEsBcPDe"
 ```
-1.2  Install NixOS
+1. Enter kexec environment, Install NixOS
 - 1C 512M need pre build
 ```sh
-bash <(curl -sL https://github.com/mlyxshi/flake/releases/download/latest/install-HOST.sh)  AGE_KEY_URL
+bash <(curl -sL https://github.com/mlyxshi/flake/releases/download/latest/install-HOST.sh)  AGE_KEY_URL TG_TOKEN TG_ID
 ```
 - 4C 24G install directly
 ```sh
-install FLAKE_URL HOST_NAME AGE_KEY_URL
+install FLAKE_URL HOST_NAME AGE_KEY_URL TG_TOKEN TG_ID
 ```
 
-2 Install Automatically
+### Install Automatically
 
 
 - 1C 512M need pre build
@@ -48,7 +47,7 @@ bash <(curl -sL https://raw.githubusercontent.com/mlyxshi/kexec/main/prekexec.sh
 ```
 
 
-#### Reboot
+### Reboot
 
 ---
 # Darwin
