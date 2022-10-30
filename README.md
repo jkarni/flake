@@ -31,11 +31,12 @@ bash <(curl -sL https://github.com/mlyxshi/flake/releases/download/latest/instal
 ```sh
 install FLAKE_URL HOST_NAME AGE_KEY_URL
 ```
-#### Reboot and Fix
+#### Manually Activate
 ```sh
-# after reboot, activate sops-nix manually
+# nixos-install only operate `chroot` then `switch-to-configuration boot`, some services depend on sops keys will fail
 /nix/var/nix/profiles/system/bin/switch-to-configuration switch
 ```
+#### Reboot
 ---
 # Darwin
 ## pre
