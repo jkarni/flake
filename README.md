@@ -18,32 +18,20 @@ sed "6iSYSTEM_CLOSURE=$SYSTEM_CLOSURE"  install-template.sh > install-us0.sh
 
 ### Install Manually. 
 ```sh
-# bash <(curl -sL https://raw.githubusercontent.com/mlyxshi/kexec/main/prekexec.sh) SSH_KEY
-bash <(curl -sL https://raw.githubusercontent.com/mlyxshi/kexec/main/prekexec.sh) "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIMpaY3LyCW4HHqbp4SA4tnA+1Bkgwrtro2s/DEsBcPDe"
+# curl -sL https://raw.githubusercontent.com/mlyxshi/kexec/main/prekexec.sh | bash -s SSH_KEY
+curl -sL https://raw.githubusercontent.com/mlyxshi/kexec/main/prekexec.sh | bash -s "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIMpaY3LyCW4HHqbp4SA4tnA+1Bkgwrtro2s/DEsBcPDe"
 ```
-1. Enter kexec environment, Install NixOS
-- 1C 512M need pre build
+
 ```sh
-bash <(curl -sL https://github.com/mlyxshi/flake/releases/download/latest/install-HOST.sh)  AGE_KEY_URL TG_TOKEN TG_ID
-```
-- 4C 24G install directly
-```sh
-install FLAKE_URL HOST_NAME AGE_KEY_URL TG_TOKEN TG_ID
+# Enter kexec environment, Install NixOS
+curl -sL https://github.com/mlyxshi/flake/releases/download/latest/install-example.sh | bash -s  AGE_KEY_URL TG_TOKEN TG_ID
 ```
 
 ### Install Automatically
 
-
-- 1C 512M need pre build
 ```sh
-# bash <(curl -sL https://raw.githubusercontent.com/mlyxshi/kexec/main/prekexec.sh) SSH_KEY AUTO_RUN_SHELL_COMMAND
-bash <(curl -sL https://raw.githubusercontent.com/mlyxshi/kexec/main/prekexec.sh) "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIMpaY3LyCW4HHqbp4SA4tnA+1Bkgwrtro2s/DEsBcPDe" "bash <(curl -sL https://github.com/mlyxshi/flake/releases/download/latest/install-HOST.sh)  AGE_KEY_URL"
-```
-- 4C 24G install directly
-```sh
-install FLAKE_URL HOST_NAME AGE_KEY_URL
-# bash <(curl -sL https://raw.githubusercontent.com/mlyxshi/kexec/main/prekexec.sh) SSH_KEY AUTO_RUN_SHELL_COMMAND
-bash <(curl -sL https://raw.githubusercontent.com/mlyxshi/kexec/main/prekexec.sh) "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIMpaY3LyCW4HHqbp4SA4tnA+1Bkgwrtro2s/DEsBcPDe" "install FLAKE_URL HOST_NAME AGE_KEY_URL"
+# curl -sL https://raw.githubusercontent.com/mlyxshi/kexec/main/prekexec.sh) | bash -s SSH_KEY  INSTALL_SCRIPT_URL SOPS_KEY_URL TG_TOKEN TG_ID
+curl -sL https://raw.githubusercontent.com/mlyxshi/kexec/main/prekexec.sh | bash -s  "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIMpaY3LyCW4HHqbp4SA4tnA+1Bkgwrtro2s/DEsBcPDe" https://github.com/mlyxshi/flake/releases/download/latest/install-example.sh  SOPS_KEY_URL TG_TOKEN TG_ID
 ```
 
 
