@@ -4,8 +4,8 @@
 #### create install script and upload to release
 
 ```sh
-SYSTEM_CLOSURE=$(nix eval --raw .#nixosConfigurations.us0.config.system.build.toplevel)
-sed "6iSYSTEM_CLOSURE=$SYSTEM_CLOSURE"  install-template.sh > install-us0.sh  
+SYSTEM_CLOSURE=$(nix eval --raw .#nixosConfigurations.example.config.system.build.toplevel)
+sed "6iSYSTEM_CLOSURE=$SYSTEM_CLOSURE"  install-template.sh > install-example.sh  
 ```
 
 </details>
