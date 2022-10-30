@@ -4,11 +4,11 @@
     ./base.nix
   ];
 
-  sops.defaultSopsFile = ../../secrets/key.yaml;
+  # Fix fresh install error
   sops.age.sshKeyPaths = [ ];
-  # This will automatically import SSH keys as age keys
-  # sops.age.sshKeyPaths = [ "/etc/ssh/ssh_host_ed25519_key" ];
+  sops.gnupg.sshKeyPaths = [ ];
 
+  sops.defaultSopsFile = ../../secrets/key.yaml;
   sops.age.keyFile = "/var/lib/sops/age.key";
 
   environment.systemPackages = with pkgs; [
