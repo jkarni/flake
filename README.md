@@ -31,7 +31,6 @@ install FLAKE_URL HOST_NAME AGE_KEY_URL
 ```
 #### Reboot
 
-```
 ---
 # Darwin
 ## pre
