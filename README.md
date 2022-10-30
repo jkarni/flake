@@ -29,9 +29,8 @@ bash <(curl -sL https://github.com/mlyxshi/flake/releases/download/latest/instal
 ```sh
 install FLAKE_URL HOST_NAME AGE_KEY_URL
 ```
-#### Reboot and Manually Activate Sops
-```sh
-/run/current-system/activate
+#### Reboot
+
 ```
 ---
 # Darwin

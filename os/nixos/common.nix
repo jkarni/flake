@@ -4,7 +4,7 @@
     ./base.nix
   ];
 
-  # Fix fresh install error
+  # Fix sops fresh install activation failure
   sops.age.sshKeyPaths = [ ];
   sops.gnupg.sshKeyPaths = [ ];
 
