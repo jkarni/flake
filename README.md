@@ -27,6 +27,7 @@ curl -sL https://raw.githubusercontent.com/mlyxshi/kexec/main/prekexec.sh \
 # Enter kexec environment, Install NixOS
 curl -sL https://github.com/mlyxshi/flake/releases/download/latest/install-example.sh \
 | bash -s  AGE_KEY_URL TELEGRAM_TOKEN TELEGRAM_ID
+
 # high-end machine can also build system closure directly
 install FLAKE_URL HOST_NAME AGE_KEY_URL TELEGRAM_TOKEN TELEGRAM_ID
 ```
