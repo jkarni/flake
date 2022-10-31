@@ -30,7 +30,7 @@ nixos-install --root /mnt --system $SYSTEM_CLOSURE \
 --option substituters "https://cache.garnix.io" -v
 
 
-if [[ ! -z "$2" && ! -z "$3" ]]; then
+if [[ -n "$2" && -n "$3" ]]; then
    MESSAGE="<b>Install NixOS Completed</b>%0A$SYSTEM_CLOSURE"
    URL="https://api.telegram.org/bot$2/sendMessage"
    curl -X POST $URL -d chat_id=$3 -d text="$MESSAGE" -d parse_mode=html
