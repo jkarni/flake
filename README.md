@@ -16,7 +16,7 @@ sed "6iSYSTEM_CLOSURE=$SYSTEM_CLOSURE"  install-template.sh > install-example.sh
 
 </details>
 
-### Install Manually. 
+### Install Manually
 ```sh
 # curl -sL https://raw.githubusercontent.com/mlyxshi/kexec/main/prekexec.sh | bash -s SSH_KEY
 curl -sL https://raw.githubusercontent.com/mlyxshi/kexec/main/prekexec.sh \
