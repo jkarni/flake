@@ -34,10 +34,7 @@ install FLAKE_URL HOST_NAME AGE_KEY_URL TELEGRAM_TOKEN TELEGRAM_ID
 ### Install Automatically
 
 ```sh
-# curl -sL https://raw.githubusercontent.com/mlyxshi/kexec/main/prekexec.sh) \
-# | bash -s SSH_KEY  \
-# INSTALL_SCRIPT_URL \
-# AGE_KEY_URL TELEGRAM_TOKEN TELEGRAM_ID
+# curl -sL https://raw.githubusercontent.com/mlyxshi/kexec/main/prekexec.sh) | bash -s SSH_KEY  INSTALL_SCRIPT_URL AGE_KEY_URL TELEGRAM_TOKEN TELEGRAM_ID
 curl -sL https://raw.githubusercontent.com/mlyxshi/kexec/main/prekexec.sh \
 | bash -s  "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIMpaY3LyCW4HHqbp4SA4tnA+1Bkgwrtro2s/DEsBcPDe" \
 https://github.com/mlyxshi/flake/releases/download/latest/install-example.sh  \
