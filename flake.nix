@@ -49,7 +49,7 @@
     let
       stateVersion = "22.05";
       oracleServerList = [ "jp2" "jp4" "sw" "us1" "kr" "au" ];
-      azureServerList = [ "hk1" "hk2" "jp3" "example"];
+      azureServerList = [ "hk1" "hk2" "jp3" "example" ];
       domain = "mlyxshi.com";
       commonSpecialArgs = {
         # inherit (args) neovim-nightly;

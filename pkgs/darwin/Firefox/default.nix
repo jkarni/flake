@@ -23,7 +23,7 @@ let
 in
 stdenvNoCC.mkDerivation rec {
   AppName = "Firefox.app";
-  
+
   pname = "Firefox";
   version = metaData.version;
 
