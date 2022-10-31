@@ -16,30 +16,13 @@ sed "6iSYSTEM_CLOSURE=$SYSTEM_CLOSURE"  install-template.sh > install-example.sh
 
 </details>
 
-### Install Manually
-```sh
-# curl -sL https://raw.githubusercontent.com/mlyxshi/kexec/main/prekexec.sh | bash -s SSH_KEY
-curl -sL https://raw.githubusercontent.com/mlyxshi/kexec/main/prekexec.sh \
-| bash -s "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIMpaY3LyCW4HHqbp4SA4tnA+1Bkgwrtro2s/DEsBcPDe"
-```
-
-```sh
-# Enter kexec environment, Install NixOS
-curl -sL https://github.com/mlyxshi/flake/releases/download/latest/install-example.sh \
-| bash -s  AGE_KEY_URL TELEGRAM_TOKEN TELEGRAM_ID
-
-# high-end machine can also build system closure directly
-# install FLAKE_URL HOST_NAME AGE_KEY_URL TELEGRAM_TOKEN TELEGRAM_ID
-```
 
 ### Install Automatically
 
 ```sh
-# curl -sL https://raw.githubusercontent.com/mlyxshi/kexec/main/prekexec.sh) | bash -s SSH_KEY  INSTALL_SCRIPT_URL AGE_KEY_URL TELEGRAM_TOKEN TELEGRAM_ID
-curl -sL https://raw.githubusercontent.com/mlyxshi/kexec/main/prekexec.sh \
-| bash -s  "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIMpaY3LyCW4HHqbp4SA4tnA+1Bkgwrtro2s/DEsBcPDe" \
-https://github.com/mlyxshi/flake/releases/download/latest/install-example.sh  \
-AGE_KEY_URL TELEGRAM_TOKEN TELEGRAM_ID
+# curl -sL https://github.com/mlyxshi/kexec/releases/download/latest/kexec-boot | bash -s sshkey="ssh-ed25519 XXXXX" script_url=AUTORUN_SCRIPT_URL  script_arg1=SCRIPT_ARG1 script_arg2=SCRIPT_ARG2 script_arg3=SCRIPT_ARG3
+# Example:
+curl -sL https://github.com/mlyxshi/kexec/releases/download/latest/kexec-boot | bash -s sshkey="ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIMpaY3LyCW4HHqbp4SA4tnA+1Bkgwrtro2s/DEsBcPDe" script_url=https://github.com/mlyxshi/flake/releases/download/latest/install-example.sh  script_arg1=AGE_KEY_URL script_arg2=TG_TOKEN script_arg3=TG_ID
 ```
 
 ---
