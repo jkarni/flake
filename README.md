@@ -29,7 +29,7 @@ curl -sL https://github.com/mlyxshi/flake/releases/download/latest/install-examp
 | bash -s  AGE_KEY_URL TELEGRAM_TOKEN TELEGRAM_ID
 
 # high-end machine can also build system closure directly
-install FLAKE_URL HOST_NAME AGE_KEY_URL TELEGRAM_TOKEN TELEGRAM_ID
+# install FLAKE_URL HOST_NAME AGE_KEY_URL TELEGRAM_TOKEN TELEGRAM_ID
 ```
 
 ### Install Automatically
