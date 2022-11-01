@@ -1,8 +1,8 @@
 {
-  "version": "106.0.2",
+  "version": "106.0.3",
   "darwin": {
-    "url": "https://download-installer.cdn.mozilla.net/pub/firefox/releases/106.0.2/mac/en-US/Firefox%20106.0.2.dmg",
-    "sha256": "1p931wm85lfj00g155qiyjr5bh6nvfm6g0mj8iqf970z9vb7zdcs"
+    "url": "https://download-installer.cdn.mozilla.net/pub/firefox/releases/106.0.3/mac/en-US/Firefox%20106.0.3.dmg",
+    "sha256": "1kx23m5iqxg74vy5zb0137fgda7l8xwpb4nhj92kdx5ip64zvgwz"
   },
   "description": "[Auto-Generated] Firefox Stable Version"
 }
