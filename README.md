@@ -20,9 +20,9 @@ sed "6iSYSTEM_CLOSURE=$SYSTEM_CLOSURE"  install-template.sh > install-example.sh
 ### [Install Automatically](https://github.com/mlyxshi/kexec)
 
 ```sh
-# curl -sL https://github.com/mlyxshi/kexec/releases/download/latest/kexec-boot | bash -s script_url=AUTORUN_SCRIPT_URL  script_arg1=SCRIPT_ARG1 script_arg2=SCRIPT_ARG2 script_arg3=SCRIPT_ARG3
+# curl -sL https://github.com/mlyxshi/kexec/releases/download/latest/kexec-x86_64-linux | bash -s script_url=AUTORUN_SCRIPT_URL  script_arg1=SCRIPT_ARG1 script_arg2=SCRIPT_ARG2 script_arg3=SCRIPT_ARG3
 # Example:
-curl -sL https://github.com/mlyxshi/kexec/releases/download/latest/kexec-boot | bash -s script_url=https://github.com/mlyxshi/flake/releases/download/latest/install-example.sh  script_arg1=AGE_KEY_URL script_arg2=TG_TOKEN script_arg3=TG_ID
+curl -sL https://github.com/mlyxshi/kexec/releases/download/latest/kexec-x86_64-linux | bash -s script_url=https://github.com/mlyxshi/flake/releases/download/latest/install-example.sh  script_arg1=AGE_KEY_URL script_arg2=TG_TOKEN script_arg3=TG_ID
 ```
 
 ---
