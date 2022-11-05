@@ -1,4 +1,5 @@
 #! /usr/bin/env bash
+set -e
 
 FLAKE_URL=$1
 HOST_NAME=$2
