@@ -55,16 +55,16 @@ in
     ++ lib.optionals osConfig.profile.developerMode.enable [
       nil #nix-lsp
       sumneko-lua-language-server #lua-language-server
-      clang-tools # clangd
-      nodePackages.bash-language-server #bash
-      nodePackages.pyright #python
-      rust-analyzer #rust
+      # clang-tools # clangd
+      # nodePackages.bash-language-server #bash
+      # nodePackages.pyright #python
+      # rust-analyzer #rust
 
-      nodePackages.typescript #Typescript
-      nodePackages.typescript-language-server
+      # nodePackages.typescript #Typescript
+      # nodePackages.typescript-language-server
 
-      cargo #Rust
-      rustc
+      # cargo #Rust
+      # rustc
 
       nodejs # JavaScript
     ];
