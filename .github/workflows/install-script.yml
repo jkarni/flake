@@ -9,25 +9,16 @@ jobs:
     steps:
     - uses: actions/checkout@v3
     - uses: cachix/install-nix-action@v18
+    - run: mkdir install-script
     - run: |
-        SYSTEM_CLOSURE=$(nix eval --raw .#nixosConfigurations.hk1.config.system.build.toplevel)
-        sed "6iSYSTEM_CLOSURE=$SYSTEM_CLOSURE"  install-template.sh > install-hk1.sh  
-    - run: |
-        SYSTEM_CLOSURE=$(nix eval --raw .#nixosConfigurations.example.config.system.build.toplevel)
-        sed "6iSYSTEM_CLOSURE=$SYSTEM_CLOSURE"  install-template.sh > install-example.sh  
-    - run: |
-        SYSTEM_CLOSURE=$(nix eval --raw .#nixosConfigurations.sw2.config.system.build.toplevel)
-        sed "6iSYSTEM_CLOSURE=$SYSTEM_CLOSURE"  install-template.sh > install-sw2.sh  
-    - run: |
-        SYSTEM_CLOSURE=$(nix eval --raw .#nixosConfigurations.sw3.config.system.build.toplevel)
-        sed "6iSYSTEM_CLOSURE=$SYSTEM_CLOSURE"  install-template.sh > install-sw3.sh  
+        for host in $(nix flake show --json | jq '.nixosConfigurations|keys[]' | tr -d '"'); do
+          SYSTEM_CLOSURE=$(nix eval --raw .#nixosConfigurations.$host.config.system.build.toplevel)
+          sed "6iSYSTEM_CLOSURE=$SYSTEM_CLOSURE"  install-template.sh > install-script/install-$host.sh
+        done
     - uses: marvinpinto/action-automatic-releases@latest
       with:
         repo_token: "${{ secrets.GITHUB_TOKEN }}"
         automatic_release_tag: "latest"
         prerelease: true
         files: |
-          install-hk1.sh
-          install-example.sh
-          install-sw2.sh
-          install-sw3.sh
+          install-script/*
