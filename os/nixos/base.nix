@@ -8,9 +8,11 @@
     settings = {
       substituters = [
         "https://mlyxshi.cachix.org"
+        "https://cache.garnix.io"
       ];
       trusted-public-keys = [
         "mlyxshi.cachix.org-1:yc7GPiryyBn0HfiCXdmO1ECWKBhfwrjdIFnRSA4ct7s="
+        "cache.garnix.io:CTFPyKSLcx5RMJKfLo5EEPUObbA78b0YQ2DTCJXqr9g="
       ];
       auto-optimise-store = true;
     };

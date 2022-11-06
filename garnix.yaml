@@ -3,6 +3,7 @@ builds:
     - nixosConfigurations.hk1
     - nixosConfigurations.example
     - nixosConfigurations.sw
+    - nixosConfigurations.sw2
   exclude:
     - nixosConfigurations.hx90
 

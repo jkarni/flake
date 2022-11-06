@@ -1,7 +1,7 @@
 {
   inputs = {
     nixpkgs = {
-      url = "github:nixos/nixpkgs/nixos-unstable";
+      url = "github:nixos/nixpkgs/nixos-unstable-small";
     };
 
     home-manager = {
@@ -48,8 +48,9 @@
     } @ args:
     let
       stateVersion = "22.11";
-      oracleServerList = [ "jp2" "jp4" "sw" "us1" "kr" "au" ];
-      azureServerList = [ "hk1" "hk2" "jp3" "example" ];
+      oracle-arm64-serverlist = [ "jp2" "jp4" "sw" "us1" "kr" "au" ];
+      oracle-x64-serverlist =[ "sw2" "sw3"];
+      azure-x64-serverlist = [ "hk1" "hk2" "jp3" "example" ];
       domain = "mlyxshi.com";
       commonSpecialArgs = {
         # inherit (args) neovim-nightly;
@@ -118,7 +119,7 @@
         };
 
       }
-      // nixpkgs.lib.genAttrs oracleServerList (hostName:
+      // nixpkgs.lib.genAttrs oracle-arm64-serverlist (hostName:
         nixpkgs.lib.nixosSystem {
           system = "aarch64-linux";
           modules = [
@@ -141,7 +142,28 @@
           specialArgs = commonSpecialArgs;
         })
 
-      // nixpkgs.lib.genAttrs azureServerList (hostName:
+         // nixpkgs.lib.genAttrs oracle-x64-serverlist (hostName:
+        nixpkgs.lib.nixosSystem {
+          system = "x86_64-linux";
+          modules = [
+            sops-nix.nixosModules.sops
+            home-manager.nixosModules.home-manager
+            (./host/oracle + "/${hostName}.nix")
+            ./overlay
+            ./modules
+
+            {
+              networking.hostName = hostName;
+              networking.domain = domain;
+
+              system.stateVersion = stateVersion;
+              hm.stateVersion = stateVersion;
+            }
+          ];
+          specialArgs = commonSpecialArgs;
+        })
+
+      // nixpkgs.lib.genAttrs azure-x64-serverlist (hostName:
         nixpkgs.lib.nixosSystem {
           system = "x86_64-linux";
           modules = [
@@ -173,13 +195,13 @@
         magicRollback = false;
         autoRollback = false;
 
-        nodes = nixpkgs.lib.genAttrs oracleServerList
+        nodes = nixpkgs.lib.genAttrs oracle-arm64-serverlist
           (hostName: {
             hostname = "${hostName}.${domain}";
             profiles.system.path = deploy-rs.lib.aarch64-linux.activate.nixos self.nixosConfigurations.${hostName};
           })
 
-        // nixpkgs.lib.genAttrs azureServerList (hostName: {
+        // nixpkgs.lib.genAttrs azure-x64-serverlist (hostName: {
           hostname = "${hostName}.${domain}";
           profiles.system.path = deploy-rs.lib.x86_64-linux.activate.nixos self.nixosConfigurations.${hostName};
         });
