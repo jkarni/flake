@@ -99,6 +99,26 @@
       "location": "Tokyo",
       "disabled": false,
       "region": "JP"
+    },
+    {
+      "username": "sw2",
+      "password": "sw2",
+      "name": "Oracle-SW2",
+      "type": "KVM",
+      "host": "None",
+      "location": "Zurich",
+      "disabled": false,
+      "region": "CH"
+    },
+    {
+      "username": "sw3",
+      "password": "sw3",
+      "name": "Oracle-SW3",
+      "type": "KVM",
+      "host": "None",
+      "location": "Zurich",
+      "disabled": false,
+      "region": "CH"
     }
   ]
 }
