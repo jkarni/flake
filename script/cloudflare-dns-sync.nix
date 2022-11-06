@@ -57,4 +57,8 @@ in
     })
   ];
 
+  environment.systemPackages = [
+    pkgs.cloudflare-dns-sync
+  ];
+
 }
