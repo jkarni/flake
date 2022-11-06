@@ -11,8 +11,8 @@
   sops.defaultSopsFile = ../../secrets/key.yaml;
   sops.age.keyFile = "/var/lib/sops/age.key";
 
-  environment.systemPackages = with pkgs; [
-    (writeShellApplication {
+  environment.systemPackages =  [
+    (pkgs.writeShellApplication {
       name = "update";
       runtimeInputs = with pkgs; [ git ];
       text = ''
