@@ -4,7 +4,6 @@
     ../../os/nixos/server.nix
     ../../home/home-manager.nix
 
-    ../../script/cloudflare-dns-sync.nix
     ../../services/server-status/client
     ../../services/proxy/shadowsocks-rust.nix
     ../../services/ssh-config.nix

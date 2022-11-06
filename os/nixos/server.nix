@@ -2,6 +2,7 @@
 
   imports = [
     ./common.nix
+    ../../script/cloudflare-dns-sync.nix
   ];
 
   documentation.enable = false;
