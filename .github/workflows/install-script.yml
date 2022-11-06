@@ -15,6 +15,12 @@ jobs:
     - run: |
         SYSTEM_CLOSURE=$(nix eval --raw .#nixosConfigurations.example.config.system.build.toplevel)
         sed "6iSYSTEM_CLOSURE=$SYSTEM_CLOSURE"  install-template.sh > install-example.sh  
+    - run: |
+        SYSTEM_CLOSURE=$(nix eval --raw .#nixosConfigurations.sw2.config.system.build.toplevel)
+        sed "6iSYSTEM_CLOSURE=$SYSTEM_CLOSURE"  install-template.sh > install-example.sh  
+    - run: |
+        SYSTEM_CLOSURE=$(nix eval --raw .#nixosConfigurations.sw3.config.system.build.toplevel)
+        sed "6iSYSTEM_CLOSURE=$SYSTEM_CLOSURE"  install-template.sh > install-example.sh  
     - uses: marvinpinto/action-automatic-releases@latest
       with:
         repo_token: "${{ secrets.GITHUB_TOKEN }}"
