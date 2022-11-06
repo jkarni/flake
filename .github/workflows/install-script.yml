@@ -29,3 +29,5 @@ jobs:
         files: |
           install-hk1.sh
           install-example.sh
+          install-sw2.sh
+          install-sw3.sh
