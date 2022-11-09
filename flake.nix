@@ -49,7 +49,7 @@
     let
       stateVersion = "22.11";
       oracle-arm64-serverlist = [ "jp2" "jp4" "sw" "us1" "kr" "au" ];
-      oracle-x64-serverlist =[ "sw2" "sw3"];
+      oracle-x64-serverlist = [ "sw2" "sw3" ];
       azure-x64-serverlist = [ "hk1" "hk2" "jp3" "example" ];
       domain = "mlyxshi.com";
       commonSpecialArgs = {
@@ -142,7 +142,7 @@
           specialArgs = commonSpecialArgs;
         })
 
-         // nixpkgs.lib.genAttrs oracle-x64-serverlist (hostName:
+      // nixpkgs.lib.genAttrs oracle-x64-serverlist (hostName:
         nixpkgs.lib.nixosSystem {
           system = "x86_64-linux";
           modules = [
@@ -206,12 +206,6 @@
           profiles.system.path = deploy-rs.lib.x86_64-linux.activate.nixos self.nixosConfigurations.${hostName};
         });
       };
-
-      #############################################################################################################################
-      # Formatter
-      # nix fmt
-
-      formatter.aarch64-darwin = nixpkgs.legacyPackages.aarch64-darwin.nixpkgs-fmt;
 
       #############################################################################################################################
       # Packages

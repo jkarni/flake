@@ -40,6 +40,7 @@
       pistol
     ]
     ++ lib.optionals osConfig.profile.developerMode.enable [
+      nixpkgs-fmt
       jq
       lazygit
     ]
