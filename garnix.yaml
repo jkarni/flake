@@ -1,11 +1,11 @@
 builds:
   include:
-    # - nixosConfigurations.hk1
-    # - nixosConfigurations.example
-    # - nixosConfigurations.sw
-    # - nixosConfigurations.sw2
-    # - nixosConfigurations.sw3
-    - nixosConfigurations.*
+    - nixosConfigurations.hk1
+    - nixosConfigurations.example
+    - nixosConfigurations.sw
+    - nixosConfigurations.sw2
+    - nixosConfigurations.sw3
+    # - nixosConfigurations.*
   exclude:
     - nixosConfigurations.hx90
 
