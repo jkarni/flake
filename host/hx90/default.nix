@@ -10,9 +10,9 @@
   home-manager.users.root = import ../../home;
   home-manager.users.dominic = import ../../home/sway.nix;
 
-  environment.systemPackages = [
-    pkgs.snell
-  ];
+  # environment.systemPackages = [
+  #   pkgs.snell
+  # ];
 
   networking = {
     useNetworkd = true;
