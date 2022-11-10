@@ -5,6 +5,7 @@ builds:
     - nixosConfigurations.sw
     - nixosConfigurations.sw2
     - nixosConfigurations.sw3
+    - packages.*.*
   exclude:
     - nixosConfigurations.hx90
 
